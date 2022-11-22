@@ -1,0 +1,15 @@
+{
+  "layout": {
+    "sidebar": {
+      "home": "Home",
+      "document": "Documents",
+      "template": "Templates",
+      "signDocument": "Sign Document"
+    }
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Dashboard"
+    }
+  }
+}
