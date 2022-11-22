@@ -1,0 +1,78 @@
+{
+  "pages": {
+    "auth": {
+      "pages": {
+        "login": {
+          "pageTitle": "Login",
+          "title": "Hi! Welcome back",
+          "subtitle": "Login to your E-Contract account",
+          "form": {
+            "email": {
+              "label": "Email",
+              "invalid": "Your email is invalid.",
+              "required": "Please enter your email."
+            },
+            "password": {
+              "label": "Password",
+              "required": "Please enter your password."
+            },
+            "forgotPassword": "Forgot password?",
+            "loginButton": "Login"
+          },
+          "footer": {
+            "doneHaveAccount": "Don't have an account?",
+            "createNow": "Create now"
+          },
+          "error": {
+            "title": "Login Error!",
+            "unknown": "Something went wrong. Please try again later.",
+            "notFound": "The account with email {{email}} does not exist. You can create a new account with this email to continue."
+          }
+        }
+      }
+    },
+    "errors": {
+      "pages": {
+        "notFound": {
+          "title": "Not Found"
+        }
+      }
+    }
+  },
+  "table": {
+    "header": {
+      "search": {
+        "placeholder": "Search"
+      },
+      "filter": {
+        "clearSelection": "Clear Selection",
+        "search": {
+          "placeholder": "Search"
+        }
+      }
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "counting": "Showing {{from}} - {{to}} of {{total}}",
+      "emptyData": "No Data"
+    }
+  },
+  "confirmationModal": {
+    "cancelButtonText": "Cancel",
+    "confirmButtonText": "Confirm"
+  },
+  "modal": {
+    "close": "Cancel",
+    "confirm": "Confirm"
+  },
+  "fileReader": {
+    "pdfReader": {
+      "error": {
+        "failed": "Failed to load your file. Please try again later!",
+        "tryInLocal": "Or you can download the file and open it in your local.",
+        "download": "Download"
+      }
+    }
+  }
+}
