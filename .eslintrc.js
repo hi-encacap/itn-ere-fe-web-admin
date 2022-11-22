@@ -9,6 +9,7 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'plugin:prettier/recommended',
   ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -20,7 +21,13 @@ module.exports = {
       version: 'detect',
     },
   },
-  ignorePatterns: ['src/reportWebVitals.*', 'src/*.test.*', 'src/**/*Test*.*', 'src/**/*.d.ts'],
+  ignorePatterns: [
+    'src/reportWebVitals.*',
+    'src/*.test.*',
+    'src/**/*Test*.*',
+    'src/**/*.d.ts',
+    '.eslintrc.js',
+  ],
   overrides: [
     {
       files: ['*Slice.{ts,tsx,js,jsx}'],
