@@ -56,7 +56,7 @@ const refreshAccessToken = async (refreshToken: AuthTokensType['refreshToken']):
   });
 };
 
-const loginWithEmailAndPassword = async (email: string, password: string): Promise<UserDataType> =>
+const loginWithEmailAndPassword = async (_email: string, _password: string): Promise<UserDataType> =>
   await new Promise((resolve) => setTimeout(() => resolve(userData), 1000));
 
 const logOut = async () => await new Promise((resolve) => setTimeout(() => resolve({}), 1000));

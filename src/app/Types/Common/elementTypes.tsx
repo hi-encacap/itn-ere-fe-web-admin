@@ -4,11 +4,9 @@ export type AlertType = 'default' | 'success' | 'warning' | 'error';
 
 export type ContentWrapperHeaderActionType = Record<string, unknown>;
 
-export type TableStatusTagStatusType = 'default' | 'success' | 'warning' | 'error';
-
-export interface SelectOptionType {
-  value?: string | number;
-  label?: string;
+export interface SelectOptionItemType {
+  value: string | number;
+  label: string;
 }
 
 export type ConfirmationModalStatusType = 'success' | 'danger';

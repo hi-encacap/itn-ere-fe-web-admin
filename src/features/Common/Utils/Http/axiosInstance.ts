@@ -23,7 +23,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (request) => {
-    if (request.headers != null) {
+    if (request.headers !== null && request.headers !== undefined) {
       const accessToken = AuthService.getAccessTokens().accessToken as string;
       request.headers.Authorization = `Bearer ${accessToken}`;
     }
