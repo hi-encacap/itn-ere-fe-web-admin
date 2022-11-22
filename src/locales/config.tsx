@@ -22,5 +22,5 @@ i18n
     resources,
   })
   .catch((error) => {
-    console.error(error);
+    throw new Error(error);
   });
