@@ -1,11 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 
-import DashboardRoutes from '../../features/Dashboard/Routes/DashboardRoutes';
+import AdminRoutes from '../../features/Admin/Routes/AdminRoutes';
 
 const CommonRoutes = () => {
   return (
     <Routes>
-      <Route path="*" element={<DashboardRoutes />} />
+      <Route path="*" element={<AdminRoutes />} />
     </Routes>
   );
 };

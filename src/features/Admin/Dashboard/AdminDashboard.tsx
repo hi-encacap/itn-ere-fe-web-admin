@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-const Dashboard = () => {
+const AdminDashboard = () => {
   const { t } = useTranslation('admin', {
     keyPrefix: 'admin:pages.dashboard',
   });
@@ -8,4 +8,4 @@ const Dashboard = () => {
   return <div className="flex h-screen w-full items-center justify-center">{t('title')}</div>;
 };
 
-export default Dashboard;
+export default AdminDashboard;
