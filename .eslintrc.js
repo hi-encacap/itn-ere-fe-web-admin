@@ -27,6 +27,7 @@ module.exports = {
     'src/**/*Test*.*',
     'src/**/*.d.ts',
     '.eslintrc.js',
+    'tailwind.config.js',
   ],
   overrides: [
     {
