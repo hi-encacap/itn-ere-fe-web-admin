@@ -49,12 +49,7 @@ module.exports = {
         groups: ['builtin', 'external', 'internal', ['parent', 'index', 'sibling'], 'object'],
         pathGroups: [
           {
-            pattern: '**/app/Slices',
-            group: 'external',
-            position: 'after',
-          },
-          {
-            pattern: '**/app/Services',
+            pattern: '**Slices/**',
             group: 'external',
             position: 'after',
           },
