@@ -15,7 +15,7 @@ export const userSlice = createSlice({
       }
     },
     clearUser: (state) => {
-      Object.assign(state, initialState);
+      state = {} as unknown as UserDataType;
     },
   },
 });

@@ -1,3 +1,5 @@
+import axiosInstance from '../../../features/Common/Utils/Http/axiosInstance';
+import { AUTHENTICATION_API_PATH } from '../../Constants/apis';
 import { AuthTokensType } from '../../Types/Common/authTypes';
 import { UserDataType, UserRoleDataType, UserWebsiteDataType } from '../../Types/Common/userTypes';
 
@@ -25,12 +27,11 @@ const userData: UserDataType = {
   website: websiteData,
 };
 
-const getMe = async (): Promise<UserDataType> =>
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(userData);
-    }, 1000);
-  });
+const getMe = async (): Promise<UserDataType> => {
+  const response = await axiosInstance.get(AUTHENTICATION_API_PATH.ME_PATH);
+
+  return response.data.data;
+};
 
 const getAccessTokens = () => ({
   accessToken: window.localStorage.getItem('accessToken') !== null || '',
