@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { ADMIN_PATH } from '../../../../app/Constants/urls';
-import { AuthService } from '../../../../app/Services';
+import { authService } from '../../../../app/Services';
 import { setUser } from '../../../../app/Slices/userSlice';
 import { AuthLoginFormDataType } from '../../../../app/Types/Common/authTypes';
 import { AxiosErrorType } from '../../../../app/Types/Common/commonTypes';
@@ -31,7 +31,8 @@ const Login = () => {
   const handleSubmit = useFormSubmit((data) => {
     console.log('Submit');
     setIsSubmitting(true);
-    AuthService.loginWithEmailAndPassword(data.email, data.password)
+    authService
+      .loginWithEmailAndPassword(data.email, data.password)
       .then((user) => {
         dispatch(setUser(user));
         navigate(ADMIN_PATH.HOME_PATH);

@@ -8,7 +8,7 @@ import useDispatch from '../../features/Common/Hooks/useDispatch';
 import useSelector from '../../features/Common/Hooks/useSelector';
 import { USER_ROLE_ENUM } from '../Constants/enums';
 import { AUTHENTICATION_PATH } from '../Constants/urls';
-import { AuthService } from '../Services';
+import { authService } from '../Services';
 import { setUser } from '../Slices/userSlice';
 import PrivateRoutes from './PrivateRoutes';
 
@@ -42,7 +42,8 @@ const CommonRoutes = () => {
       return;
     }
 
-    AuthService.getMe()
+    authService
+      .getMe()
       .then((data) => {
         return dispatch(setUser(data));
       })
