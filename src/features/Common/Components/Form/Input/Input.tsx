@@ -8,28 +8,28 @@ export interface InputProps extends UncontrolledInputProps {
 }
 
 const Input = ({ control, name, ...inputProps }: InputProps) => {
-  if (!control) {
-    return <UncontrolledInput name={name} {...inputProps} />;
+  if (control) {
+    const {
+      field: { onChange, onBlur, value = '' },
+      formState: { errors },
+    } = useController({
+      name,
+      control,
+    });
+
+    return (
+      <UncontrolledInput
+        name={name}
+        onChange={onChange}
+        onBlur={onBlur}
+        error={errors[name]?.message as string}
+        {...(!(value === undefined || value === null) && { value })}
+        {...omit(inputProps, ['value', 'onChange', 'onBlur'])}
+      />
+    );
   }
 
-  const {
-    field: { onChange, onBlur, value = '' },
-    formState: { errors },
-  } = useController({
-    name,
-    control,
-  });
-
-  return (
-    <UncontrolledInput
-      name={name}
-      onChange={onChange}
-      onBlur={onBlur}
-      error={errors[name]?.message as string}
-      {...(!(value === undefined || value === null) && { value })}
-      {...omit(inputProps, ['value', 'onChange', 'onBlur'])}
-    />
-  );
+  return <UncontrolledInput name={name} {...inputProps} />;
 };
 
 export default Input;

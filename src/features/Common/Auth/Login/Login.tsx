@@ -61,7 +61,7 @@ const Login = () => {
             name="email"
             className="block"
             placeholder={t('form.email.placeholder') ?? ''}
-            // control={control}
+            control={control}
             disabled={isSubmitting}
           />
           <Input
