@@ -1,13 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useLayoutEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { ADMIN_PATH } from '../../../../app/Constants/urls';
 import { authService } from '../../../../app/Services';
 import { setUser } from '../../../../app/Slices/userSlice';
-import { AuthLoginFormDataType } from '../../../../app/Types/Common/authTypes';
 import { AxiosErrorType } from '../../../../app/Types/Common/commonTypes';
 import { Button, Input } from '../../Components/Form';
 import { Logo } from '../../Components/Logo';
@@ -22,7 +21,7 @@ const Login = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { control, handleSubmit: useFormSubmit } = useForm<AuthLoginFormDataType>({
+  const { control, handleSubmit: useFormSubmit } = useForm<FieldValues>({
     resolver: yupResolver(authLoginFormSchema(t)),
   });
   const dispatch = useDispatch();
@@ -39,7 +38,7 @@ const Login = () => {
       })
       .catch((error: AxiosErrorType) => {
         // TODO: Need implement error handling
-        console.log(error.response?.data.error);
+        throw error;
       });
   });
 
@@ -62,7 +61,7 @@ const Login = () => {
             name="email"
             className="block"
             placeholder={t('form.email.placeholder') ?? ''}
-            control={control}
+            // control={control}
             disabled={isSubmitting}
           />
           <Input

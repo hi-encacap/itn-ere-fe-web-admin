@@ -4,7 +4,7 @@ import { Control, useController } from 'react-hook-form';
 import UncontrolledInput, { UncontrolledInputProps } from './UncontrolledInput';
 
 export interface InputProps extends UncontrolledInputProps {
-  control?: Control<any, unknown>;
+  control?: Control;
 }
 
 const Input = ({ control, name, ...inputProps }: InputProps) => {
