@@ -29,12 +29,12 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = useFormSubmit((data) => {
-    console.log('Submit');
     setIsSubmitting(true);
     authService
       .loginWithEmailAndPassword(data.email, data.password)
-      .then((user) => {
+      .then(({ authTokens, user }) => {
         dispatch(setUser(user));
+        authService.setAuthTokens(authTokens.accessToken, authTokens.refreshToken);
         navigate(ADMIN_PATH.HOME_PATH);
       })
       .catch((error: AxiosErrorType) => {

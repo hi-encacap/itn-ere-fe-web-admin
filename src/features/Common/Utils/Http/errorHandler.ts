@@ -25,7 +25,7 @@ const errorHandler = async (
         if (refreshToken !== null) {
           try {
             const newTokens = await authService.refreshAccessToken(refreshToken);
-            authService.setAccessTokens(newTokens.accessToken, newTokens.refreshToken);
+            authService.setAuthTokens(newTokens.accessToken, newTokens.refreshToken);
             config.headers = {
               ...config.headers,
               Authorization: `Bearer ${newTokens.accessToken}`,

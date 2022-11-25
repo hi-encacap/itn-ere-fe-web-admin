@@ -1,6 +1,6 @@
 import axiosInstance from '../../../features/Common/Utils/Http/axiosInstance';
 import { AUTHENTICATION_API_PATH } from '../../Constants/apis';
-import { AuthTokensType } from '../../Types/Common/authTypes';
+import { AuthTokenAndUserDataType, AuthTokensType } from '../../Types/Common/authTypes';
 import { UserDataType } from '../../Types/Common/userTypes';
 
 // const roleData: UserRoleDataType[] = [
@@ -38,7 +38,7 @@ const getAccessTokens = () => ({
   refreshToken: window.localStorage.getItem('refreshToken') !== null || '',
 });
 
-const setAccessTokens = (
+const setAuthTokens = (
   accessToken: AuthTokensType['accessToken'],
   refreshToken: AuthTokensType['refreshToken'],
 ) => {
@@ -57,7 +57,10 @@ const refreshAccessToken = async (refreshToken: AuthTokensType['refreshToken']):
   });
 };
 
-const loginWithEmailAndPassword = async (email: string, password: string): Promise<UserDataType> => {
+const loginWithEmailAndPassword = async (
+  email: string,
+  password: string,
+): Promise<AuthTokenAndUserDataType> => {
   const response = await axiosInstance.post(
     AUTHENTICATION_API_PATH.LOGIN_PATH,
     {
@@ -74,4 +77,4 @@ const loginWithEmailAndPassword = async (email: string, password: string): Promi
 
 const logOut = async () => await new Promise((resolve) => setTimeout(() => resolve({}), 1000));
 
-export { getMe, getAccessTokens, setAccessTokens, refreshAccessToken, loginWithEmailAndPassword, logOut };
+export { getMe, getAccessTokens, setAuthTokens, refreshAccessToken, loginWithEmailAndPassword, logOut };
