@@ -2,6 +2,7 @@ import { useLayoutEffect, useState } from 'react';
 import { matchPath, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 import AdminRoutes from '../../features/Admin/Routes/AdminRoutes';
+import AuthRoutes from '../../features/Common/Auth/Routes/AuthRoutes';
 import { LoadingOverlay } from '../../features/Common/Components/Loading';
 import useDispatch from '../../features/Common/Hooks/useDispatch';
 import useSelector from '../../features/Common/Hooks/useSelector';
@@ -68,6 +69,7 @@ const CommonRoutes = () => {
           </PrivateRoutes>
         }
       />
+      <Route path="auth/*" element={<AuthRoutes />} />
     </Routes>
   );
 };

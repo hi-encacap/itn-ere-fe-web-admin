@@ -6,6 +6,9 @@ module.exports = {
       fontFamily: {
         'source-sans-pro': ['Source Sans Pro', 'sans-serif'],
       },
+      width: {
+        120: '30rem',
+      },
     },
   },
   plugins: [],

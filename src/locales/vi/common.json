@@ -3,30 +3,20 @@
     "auth": {
       "pages": {
         "login": {
-          "pageTitle": "Login",
-          "title": "Hi! Welcome back",
-          "subtitle": "Login to your E-Contract account",
+          "title": "Đăng nhập",
+          "welcomeBack": "Chào mừng bạn trở lại!",
+          "loginToContinue": "Đăng nhập bằng tài khoản Encacap của bạn để tiếp tục",
           "form": {
             "email": {
-              "label": "Email",
-              "invalid": "Your email is invalid.",
-              "required": "Please enter your email."
+              "placeholder": "Email",
+              "required": "Vui lòng nhập địa chỉ email của bạn.",
+              "invalid": "Địa chỉ email của bạn không hợp lệ."
             },
             "password": {
-              "label": "Password",
-              "required": "Please enter your password."
+              "placeholder": "Mật khẩu",
+              "required": "Vui lòng nhập mật khẩu của bạn."
             },
-            "forgotPassword": "Forgot password?",
-            "loginButton": "Login"
-          },
-          "footer": {
-            "doneHaveAccount": "Don't have an account?",
-            "createNow": "Create now"
-          },
-          "error": {
-            "title": "Login Error!",
-            "unknown": "Something went wrong. Please try again later.",
-            "notFound": "The account with email {{email}} does not exist. You can create a new account with this email to continue."
+            "submit": "Đăng nhập"
           }
         }
       }
@@ -34,7 +24,7 @@
     "errors": {
       "pages": {
         "notFound": {
-          "title": "Not Found"
+          "title": "Không tìm thấy trang"
         }
       }
     }
@@ -65,14 +55,5 @@
   "modal": {
     "close": "Cancel",
     "confirm": "Confirm"
-  },
-  "fileReader": {
-    "pdfReader": {
-      "error": {
-        "failed": "Failed to load your file. Please try again later!",
-        "tryInLocal": "Or you can download the file and open it in your local.",
-        "download": "Download"
-      }
-    }
   }
 }
