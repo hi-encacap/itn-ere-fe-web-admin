@@ -1,6 +1,8 @@
 import { InputHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
+import FormElementError from '../FormElementError';
+
 export interface UncontrolledInputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   className?: string;
@@ -46,7 +48,7 @@ const UncontrolledInput = ({
           {...inputProps}
         />
       </div>
-      {error && <div className="mt-1.5 -mb-2 text-sm text-red-500">{error}</div>}
+      {error && <FormElementError error={error} />}
     </label>
   );
 };
