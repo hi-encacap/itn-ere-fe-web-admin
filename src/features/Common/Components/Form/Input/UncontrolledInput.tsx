@@ -5,7 +5,7 @@ export interface UncontrolledInputProps extends InputHTMLAttributes<HTMLInputEle
   name: string;
   className?: string;
   error?: string;
-  label?: string | undefined | null;
+  label?: string | null;
 }
 
 const UncontrolledInput = ({
