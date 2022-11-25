@@ -2,12 +2,16 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useLayoutEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
+import { ADMIN_PATH } from '../../../../app/Constants/urls';
 import { AuthService } from '../../../../app/Services';
+import { setUser } from '../../../../app/Slices/userSlice';
 import { AuthLoginFormDataType } from '../../../../app/Types/Common/authTypes';
 import { AxiosErrorType } from '../../../../app/Types/Common/commonTypes';
 import { Button, Input } from '../../Components/Form';
 import { Logo } from '../../Components/Logo';
+import useDispatch from '../../Hooks/useDispatch';
 import { setDocumentTitle } from '../../Utils/helpers';
 import { authLoginFormSchema } from '../Schemas/authLoginFormSchema';
 
@@ -21,13 +25,16 @@ const Login = () => {
   const { control, handleSubmit: useFormSubmit } = useForm<AuthLoginFormDataType>({
     resolver: yupResolver(authLoginFormSchema(t)),
   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = useFormSubmit((data) => {
     console.log('Submit');
     setIsSubmitting(true);
     AuthService.loginWithEmailAndPassword(data.email, data.password)
-      .then(() => {
-        console.log(data);
+      .then((user) => {
+        dispatch(setUser(user));
+        navigate(ADMIN_PATH.HOME_PATH);
       })
       .catch((error: AxiosErrorType) => {
         // TODO: Need implement error handling
