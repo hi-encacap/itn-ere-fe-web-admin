@@ -37,7 +37,7 @@ const Login = () => {
         navigate(ADMIN_PATH.HOME_PATH);
       })
       .catch((error: AxiosErrorType) => {
-        // TODO: Need implement error handling
+        // Need implement error handling
         throw error;
       });
   });
