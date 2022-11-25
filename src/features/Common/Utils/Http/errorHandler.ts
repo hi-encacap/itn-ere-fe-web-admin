@@ -3,7 +3,7 @@ import { UNAUTHORIZED } from 'http-status';
 import _ from 'lodash';
 
 import { AUTHENTICATION_PATH } from '../../../../app/Constants/urls';
-import { AuthService } from '../../../../app/Services';
+import { authService } from '../../../../app/Services';
 
 const errorHandler = async (
   error: { response: AxiosResponse; config: AxiosRequestConfig },
@@ -21,11 +21,11 @@ const errorHandler = async (
 
     if (autoRefreshToken !== false) {
       if (status === UNAUTHORIZED) {
-        const refreshToken = AuthService.getAccessTokens().refreshToken as string;
+        const refreshToken = authService.getAccessTokens().refreshToken as string;
         if (refreshToken !== null) {
           try {
-            const newTokens = await AuthService.refreshAccessToken(refreshToken);
-            AuthService.setAccessTokens(newTokens.accessToken, newTokens.refreshToken);
+            const newTokens = await authService.refreshAccessToken(refreshToken);
+            authService.setAuthTokens(newTokens.accessToken, newTokens.refreshToken);
             config.headers = {
               ...config.headers,
               Authorization: `Bearer ${newTokens.accessToken}`,

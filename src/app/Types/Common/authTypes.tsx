@@ -1,3 +1,5 @@
+import { UserDataType } from './userTypes';
+
 export interface AuthTokensType {
   accessToken: string;
   refreshToken: string;
@@ -14,4 +16,9 @@ export interface AuthRegisterFormDataType {
   email: string | null;
   password: string;
   passwordConfirmation: string;
+}
+
+export interface AuthTokenAndUserDataType {
+  user: UserDataType;
+  authTokens: AuthTokensType;
 }
