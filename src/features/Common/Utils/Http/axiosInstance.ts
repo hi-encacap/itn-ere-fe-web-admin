@@ -24,7 +24,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (request) => {
     if (request.headers !== null && request.headers !== undefined) {
-      const accessToken = authService.getAccessTokens().accessToken as string;
+      const { accessToken } = authService.getAuthTokens();
       request.headers.Authorization = `Bearer ${accessToken}`;
     }
     return request;

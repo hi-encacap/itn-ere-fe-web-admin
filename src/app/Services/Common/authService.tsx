@@ -33,9 +33,9 @@ const getMe = async (): Promise<UserDataType> => {
   return response.data.data;
 };
 
-const getAccessTokens = () => ({
-  accessToken: window.localStorage.getItem('accessToken') !== null || '',
-  refreshToken: window.localStorage.getItem('refreshToken') !== null || '',
+const getAuthTokens = () => ({
+  accessToken: window.localStorage.getItem('accessToken') ?? '',
+  refreshToken: window.localStorage.getItem('refreshToken') ?? '',
 });
 
 const setAuthTokens = (
@@ -77,4 +77,4 @@ const loginWithEmailAndPassword = async (
 
 const logOut = async () => await new Promise((resolve) => setTimeout(() => resolve({}), 1000));
 
-export { getMe, getAccessTokens, setAuthTokens, refreshAccessToken, loginWithEmailAndPassword, logOut };
+export { getMe, getAuthTokens, setAuthTokens, refreshAccessToken, loginWithEmailAndPassword, logOut };

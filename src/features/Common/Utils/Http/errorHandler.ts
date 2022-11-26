@@ -21,7 +21,7 @@ const errorHandler = async (
 
     if (autoRefreshToken !== false) {
       if (status === UNAUTHORIZED) {
-        const refreshToken = authService.getAccessTokens().refreshToken as string;
+        const refreshToken = authService.getAuthTokens().refreshToken;
         if (refreshToken !== null) {
           try {
             const newTokens = await authService.refreshAccessToken(refreshToken);
