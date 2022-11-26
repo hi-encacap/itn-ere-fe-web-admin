@@ -47,14 +47,17 @@ const setAuthTokens = (
 };
 
 const refreshAccessToken = async (refreshToken: AuthTokensType['refreshToken']): Promise<AuthTokensType> => {
-  return await new Promise((resolve) => {
-    window.setTimeout(() => {
-      resolve({
-        accessToken: 'newAccessToken',
-        refreshToken,
-      });
-    }, 1000);
-  });
+  const response = await axiosInstance.post(
+    AUTHENTICATION_API_PATH.REFRESH_TOKEN_PATH,
+    {
+      token: refreshToken,
+    },
+    {
+      autoRefreshToken: false,
+    },
+  );
+
+  return response.data.data.authTokens;
 };
 
 const loginWithEmailAndPassword = async (
