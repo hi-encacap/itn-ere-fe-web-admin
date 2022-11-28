@@ -1,4 +1,4 @@
-import { HTMLAttributes, MouseEvent, ReactNode } from 'react';
+import { HTMLAttributes, MouseEvent, ReactNode, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
@@ -35,10 +35,10 @@ const Alert = ({
     warning: 'bg-yellow-50 text-yellow-700',
   };
 
-  const handleClick = (e: MouseEvent<HTMLDivElement>) => {
+  const handleClick = useCallback((e: MouseEvent<HTMLDivElement>) => {
     onClose?.();
     onClick?.(e);
-  };
+  }, []);
 
   return (
     <div
