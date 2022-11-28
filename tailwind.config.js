@@ -8,6 +8,13 @@ module.exports = {
       },
       width: {
         120: '30rem',
+        layout: 'calc(100% - 18rem)',
+      },
+      height: {
+        layout: 'calc(100vh - 5rem)',
+      },
+      minHeight: {
+        layout: 'calc(100vh - 5rem)',
       },
     },
   },
