@@ -44,7 +44,7 @@ const Alert = ({
     <div
       className={twMerge('w-full rounded-md px-5 pt-4 pb-3 font-semibold', generalColors[type], className)}
       role="button"
-      tabIndex={0}
+      tabIndex={-1}
       onClick={handleClick}
     >
       <div className="flex">
