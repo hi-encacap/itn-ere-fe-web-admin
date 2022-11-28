@@ -5,7 +5,7 @@ const AdminDashboard = () => {
     keyPrefix: 'admin:pages.dashboard',
   });
 
-  return <div className="flex h-screen w-full items-center justify-center">{t('title')}</div>;
+  return <div className="flex h-layout w-full items-center justify-center">{t('title')}</div>;
 };
 
 export default AdminDashboard;

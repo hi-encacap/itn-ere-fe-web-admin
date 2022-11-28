@@ -1,12 +1,15 @@
 import { Route, Routes } from 'react-router-dom';
 
+import AdminLayout from '../../Common/Layout/AdminLayout';
 import AdminDashboard from '../Dashboard/AdminDashboard';
 
 const AdminRoutes = () => {
   return (
-    <Routes>
-      <Route path="/" element={<AdminDashboard />} />
-    </Routes>
+    <AdminLayout>
+      <Routes>
+        <Route path="/" element={<AdminDashboard />} />
+      </Routes>
+    </AdminLayout>
   );
 };
 

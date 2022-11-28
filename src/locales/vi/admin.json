@@ -1,10 +1,9 @@
 {
   "layout": {
     "sidebar": {
-      "home": "Home",
-      "document": "Documents",
-      "template": "Templates",
-      "signDocument": "Sign Document"
+      "dashboard": "Dashboard",
+      "categories": "Categories",
+      "contacts": "Contacts"
     }
   },
   "pages": {
