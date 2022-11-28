@@ -47,7 +47,7 @@ const Login = () => {
         if (!response) {
           setGenericError({
             code: AUTH_ERROR_CODES.UNKNOWN_ERROR,
-            message: t('errors.unknownError'),
+            message: t('errors.unknown'),
           });
           return;
         }
