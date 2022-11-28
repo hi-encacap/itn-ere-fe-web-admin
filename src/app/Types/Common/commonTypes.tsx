@@ -8,7 +8,11 @@ export interface AxiosErrorMessageType {
 export interface AxiosErrorDataType {
   statusCode: number;
   message: string;
-  error: AxiosErrorMessageType[];
+  error: {
+    code: number;
+    message: string;
+    error: AxiosErrorMessageType[];
+  };
   code: string;
 }
 
@@ -44,4 +48,10 @@ export interface AxiosResponseType<T> extends AxiosResponse {
 export interface BaseQueryParamsType {
   page?: number;
   perPage?: number;
+}
+
+export interface FormGenericErrorType {
+  message: string;
+  code: string;
+  trackingCode?: string;
 }
