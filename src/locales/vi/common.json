@@ -17,6 +17,11 @@
               "required": "Vui lòng nhập mật khẩu của bạn."
             },
             "submit": "Đăng nhập"
+          },
+          "errors": {
+            "title": "Đăng nhập không thành công!",
+            "invalidCredentials": "Email hoặc mật khẩu không chính xác.",
+            "unknown": "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại sau."
           }
         }
       }
@@ -55,5 +60,8 @@
   "modal": {
     "close": "Cancel",
     "confirm": "Confirm"
+  },
+  "alert": {
+    "errorTrackingCode": "Mã lỗi"
   }
 }

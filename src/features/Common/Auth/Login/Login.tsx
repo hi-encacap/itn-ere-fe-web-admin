@@ -4,10 +4,12 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import { AUTH_ERROR_CODES } from '../../../../app/Constants/errors';
 import { ADMIN_PATH } from '../../../../app/Constants/urls';
 import { authService } from '../../../../app/Services';
 import { setUser } from '../../../../app/Slices/userSlice';
-import { AxiosErrorType } from '../../../../app/Types/Common/commonTypes';
+import { AxiosErrorType, FormGenericErrorType } from '../../../../app/Types/Common/commonTypes';
+import Alert from '../../Components/Alert/Alert';
 import { Button, Input } from '../../Components/Form';
 import { Logo } from '../../Components/Logo';
 import useDispatch from '../../Hooks/useDispatch';
@@ -20,6 +22,7 @@ const Login = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [genericError, setGenericError] = useState<FormGenericErrorType | null>(null);
 
   const { control, handleSubmit: useFormSubmit } = useForm<FieldValues>({
     resolver: yupResolver(authLoginFormSchema(t)),
@@ -37,8 +40,23 @@ const Login = () => {
         navigate(ADMIN_PATH.HOME_PATH);
       })
       .catch((error: AxiosErrorType) => {
-        // Need implement error handling
-        throw error;
+        const { response } = error;
+
+        setIsSubmitting(false);
+
+        if (!response) {
+          setGenericError({
+            code: AUTH_ERROR_CODES.UNKNOWN_ERROR,
+            message: t('errors.unknownError'),
+          });
+          return;
+        }
+
+        setGenericError({
+          code: AUTH_ERROR_CODES.UNAUTHORIZED,
+          message: t('errors.invalidCredentials'),
+          trackingCode: response.data.code,
+        });
       });
   });
 
@@ -57,6 +75,14 @@ const Login = () => {
           </div>
         </div>
         <form className="mt-12 grid gap-6" onSubmit={handleSubmit}>
+          {genericError && (
+            <Alert
+              type="error"
+              title={t('errors.title')}
+              message={genericError?.message}
+              trackingCode={genericError.trackingCode}
+            />
+          )}
           <Input
             name="email"
             className="block"
