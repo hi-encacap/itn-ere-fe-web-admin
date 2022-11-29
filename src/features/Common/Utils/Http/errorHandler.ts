@@ -2,9 +2,8 @@ import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { UNAUTHORIZED } from 'http-status';
 import _ from 'lodash';
 
+import { authService } from '@services/index';
 import { AUTHENTICATION_PATH } from '@constants/urls';
-
-import { authService } from '../../../../app/Services';
 
 const errorHandler = async (
   error: { response: AxiosResponse; config: AxiosRequestConfig },
@@ -29,7 +28,7 @@ const errorHandler = async (
             authService.setAuthTokens(newTokens.accessToken, newTokens.refreshToken);
             config.headers = {
               ...config.headers,
-              Authorization: `Bearer ${newTokens.accessToken}`,
+              Authorization: `Bearer ${String(newTokens.accessToken)}`,
             };
             config.autoRefreshToken = false;
             return await instance?.(config);

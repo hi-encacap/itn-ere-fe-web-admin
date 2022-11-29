@@ -6,15 +6,17 @@ import { useNavigate } from 'react-router-dom';
 
 import { AUTH_ERROR_CODES } from '@constants/errors';
 import { ADMIN_PATH } from '@constants/urls';
+import { AxiosErrorType, FormGenericErrorType } from '@interfaces/Common/commonTypes';
+import { authService } from '@services/index';
+import { setUser } from '@slices/userSlice';
 
-import { authService } from '../../../../app/Services';
-import { setUser } from '../../../../app/Slices/userSlice';
-import { AxiosErrorType, FormGenericErrorType } from '../../../../app/Types/Common/commonTypes';
-import Alert from '../../Components/Alert/Alert';
-import { Button, Input } from '../../Components/Form';
-import { Logo } from '../../Components/Logo';
-import useDispatch from '../../Hooks/useDispatch';
-import { setDocumentTitle } from '../../Utils/helpers';
+import Alert from '@components/Alert/Alert';
+import { Button, Input } from '@components/Form';
+import { Logo } from '@components/Logo';
+
+import useDispatch from '@hooks/useDispatch';
+import { setDocumentTitle } from '@utils/helpers';
+
 import { authLoginFormSchema } from '../Schemas/authLoginFormSchema';
 
 const Login = () => {

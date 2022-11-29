@@ -1,7 +1,7 @@
 import { IoCheckmarkCircleSharp, IoInformationCircle, IoWarning } from 'react-icons/io5';
 import { MdCancel } from 'react-icons/md';
 
-import { AlertType } from '../../../../app/Types/Common/elementTypes';
+import { AlertType } from '@interfaces/Common/elementTypes';
 
 export interface AlertIconProps {
   type: AlertType;

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-import { authService } from '../../../../app/Services';
+import { authService } from '@services/index';
+
 import errorHandler from './errorHandler';
 
 declare module 'axios' {
@@ -25,7 +26,7 @@ axiosInstance.interceptors.request.use(
   (request) => {
     if (request.headers !== null && request.headers !== undefined) {
       const { accessToken } = authService.getAuthTokens();
-      request.headers.Authorization = `Bearer ${accessToken}`;
+      request.headers.Authorization = `Bearer ${String(accessToken)}`;
     }
     return request;
   },

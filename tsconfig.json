@@ -17,7 +17,16 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@constants/*": ["./src/app/Constants/*"]
+      "@constants/*": ["./src/app/Constants/*"],
+      "@services/*": ["./src/app/Services/*"],
+      "@slices/*": ["./src/app/Slices/*"],
+      "@interfaces/*": ["./src/app/Types/*"],
+      "@components/*": ["./src/features/Common/Components/*"],
+      "@hooks/*": ["./src/features/Common/Hooks/*"],
+      "@utils/*": ["./src/features/Common/Utils/*"],
+      "@locales/*": ["./src/locales/*"],
+      "@admin/*": ["./src/features/Admin/*"],
+      "@common/*": ["./src/features/Common/*"]
     }
   },
   "include": ["src"],

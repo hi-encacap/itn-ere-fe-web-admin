@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import _ from 'lodash';
 
-import { UserDataType } from '../Types/Common/userTypes';
+import { UserDataType } from '@interfaces/Common/userTypes';
 
 const initialState: UserDataType = {} as unknown as UserDataType;
 

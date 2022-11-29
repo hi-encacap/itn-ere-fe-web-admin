@@ -2,7 +2,8 @@ import { HTMLAttributes, MouseEvent, ReactNode, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
-import { AlertType } from '../../../../app/Types/Common/elementTypes';
+import { AlertType } from '@interfaces/Common/elementTypes';
+
 import AlertIcon from './AlertIcon';
 
 export interface AlertProps extends HTMLAttributes<HTMLDivElement> {

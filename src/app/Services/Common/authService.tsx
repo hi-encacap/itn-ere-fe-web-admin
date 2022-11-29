@@ -1,8 +1,8 @@
 import { AUTHENTICATION_API_PATH } from '@constants/apis';
+import { AuthTokenAndUserDataType, AuthTokensType } from '@interfaces/Common/authTypes';
+import { UserDataType } from '@interfaces/Common/userTypes';
 
-import axiosInstance from '../../../features/Common/Utils/Http/axiosInstance';
-import { AuthTokenAndUserDataType, AuthTokensType } from '../../Types/Common/authTypes';
-import { UserDataType } from '../../Types/Common/userTypes';
+import axiosInstance from '@utils/Http/axiosInstance';
 
 // const roleData: UserRoleDataType[] = [
 //   {

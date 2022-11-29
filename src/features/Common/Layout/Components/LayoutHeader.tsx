@@ -1,4 +1,4 @@
-import { Logo } from '../../Components/Logo';
+import { Logo } from '@components/Logo';
 
 const LayoutHeader = () => {
   return (

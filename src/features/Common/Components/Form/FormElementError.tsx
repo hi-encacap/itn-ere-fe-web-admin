@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { slugify } from '../../Utils/helpers';
+import { slugify } from '@utils/helpers';
 
 interface FormElementErrorProps {
   error?: string;

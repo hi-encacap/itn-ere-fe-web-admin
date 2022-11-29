@@ -3,14 +3,18 @@ import { matchPath, Route, Routes, useLocation, useNavigate } from 'react-router
 
 import { USER_ROLE_ENUM } from '@constants/enums';
 import { AUTHENTICATION_PATH } from '@constants/urls';
+import { authService } from '@services/index';
+import { setUser } from '@slices/userSlice';
 
-import AdminRoutes from '../../features/Admin/Routes/AdminRoutes';
-import AuthRoutes from '../../features/Common/Auth/Routes/AuthRoutes';
-import { LoadingOverlay } from '../../features/Common/Components/Loading';
-import useDispatch from '../../features/Common/Hooks/useDispatch';
-import useSelector from '../../features/Common/Hooks/useSelector';
-import { authService } from '../Services';
-import { setUser } from '../Slices/userSlice';
+import { LoadingOverlay } from '@components/Loading';
+
+import AuthRoutes from '@common/Auth/Routes/AuthRoutes';
+
+import useDispatch from '@hooks/useDispatch';
+import useSelector from '@hooks/useSelector';
+
+import AdminRoutes from '@admin/Routes/AdminRoutes';
+
 import PrivateRoutes from './PrivateRoutes';
 
 const CommonRoutes = () => {

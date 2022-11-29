@@ -1,7 +1,7 @@
 import { AiOutlineGlobal } from 'react-icons/ai';
 import { MdOpenInNew } from 'react-icons/md';
 
-import useSelector from '../../Hooks/useSelector';
+import useSelector from '@hooks/useSelector';
 
 const LayoutSidebarWebsite = () => {
   const { website } = useSelector((state) => state.user);
