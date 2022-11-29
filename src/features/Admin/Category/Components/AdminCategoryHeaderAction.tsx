@@ -13,7 +13,7 @@ const AdminCategoryHeaderAction = ({ onClick }: AdminCategoryHeaderActionProps) 
   });
 
   return (
-    <Button onClick={onClick}>
+    <Button size="sm" className="pr-5" onClick={onClick}>
       <MdAdd className="mr-3" size={22} />
       {t('create')}
     </Button>

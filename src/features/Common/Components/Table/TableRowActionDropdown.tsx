@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { Key, useEffect, useRef, useState } from 'react';
 import { HiMenu } from 'react-icons/hi';
 
 import { TableRowActionDropdownItemType } from '@interfaces/Common/elementTypes';
@@ -6,8 +6,8 @@ import { TableRowActionDropdownItemType } from '@interfaces/Common/elementTypes'
 import TableRowActionDropdownMenu from './TableRowActionDropdownMenu';
 
 export interface TableRowActionDropdownProps {
-  id: number;
-  items: TableRowActionDropdownItemType[];
+  id: Key;
+  items: Array<TableRowActionDropdownItemType<Key>>;
 }
 
 const TableRowActionDropdown = ({ id, items }: TableRowActionDropdownProps) => {

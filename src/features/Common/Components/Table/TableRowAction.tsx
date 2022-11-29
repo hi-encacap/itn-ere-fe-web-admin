@@ -1,9 +1,10 @@
+import { Key } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import { TableRowActionClickHandlerType, TableRowActionStatusType } from '@interfaces/Common/elementTypes';
 
 export interface TableRowActionProps {
-  id?: number;
+  id?: Key;
   children: React.ReactNode;
   status?: TableRowActionStatusType;
   onClick?: TableRowActionClickHandlerType;

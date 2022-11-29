@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge';
 import { TableRowActionDropdownItemType } from '@interfaces/Common/elementTypes';
 
 export interface TableRowActionDropdownMenuProps {
-  id: number;
+  id: string | number;
   items: TableRowActionDropdownItemType[];
   parentRef: RefObject<HTMLDivElement>;
 }
