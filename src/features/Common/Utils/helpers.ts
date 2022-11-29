@@ -1,4 +1,4 @@
-const setDocumentTitle = (title: string) => {
+const setDocumentTitle = (title: string): void => {
   window.document.title = `${title} - ${process.env.REACT_APP_FRONTEND_WEBSITE_NAME ?? 'Encacap'}`;
   window.scrollTo({
     top: 0,
@@ -6,7 +6,7 @@ const setDocumentTitle = (title: string) => {
   });
 };
 
-const slugify = (text: string) => {
+const slugify = (text: string): string => {
   let result = text.toLowerCase();
 
   result = result.replace(/(?<id>à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/gu, 'a');
