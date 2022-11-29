@@ -69,9 +69,8 @@ const TableHeader = ({ columnFilters = [], headerGroups, onChangeFilters }: Tabl
           <Input
             name="tableGlobalFilter"
             className="z-0 w-full bg-gray-50 duration-100 hover:bg-gray-100"
-            // size="sm"
+            size="sm"
             placeholder={t('search.placeholder') ?? ''}
-            label={t('search.placeholder')}
             // labelPostfix={<BiSearch className="flex-shrink-0 pt-px text-gray-400" size={16} />}
             value={globalFilterValue}
             onChange={handleChangeGlobalFilter}

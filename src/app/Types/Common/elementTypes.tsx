@@ -41,3 +41,5 @@ export interface TableFilterOptionItemType {
   [key: string]: string;
   uuid: string;
 }
+
+export type FormElementSizeType = 'xs' | 'sm' | 'normal';

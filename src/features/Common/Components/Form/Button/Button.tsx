@@ -1,10 +1,11 @@
 import { twMerge } from 'tailwind-merge';
 
-export type ButtonSizeType = 'xs' | 'sm' | 'normal';
+import { FormElementSizeType } from '@interfaces/Common/elementTypes';
+
 export type ButtonColorType = 'primary' | 'light' | 'blue' | 'orange' | 'gray';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  size?: ButtonSizeType;
+  size?: FormElementSizeType;
   color?: ButtonColorType;
   children: React.ReactNode;
   isLoading?: boolean;
