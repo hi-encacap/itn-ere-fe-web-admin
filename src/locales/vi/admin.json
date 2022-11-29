@@ -2,13 +2,19 @@
   "layout": {
     "sidebar": {
       "dashboard": "Dashboard",
-      "categories": "Categories",
-      "contacts": "Contacts"
+      "categories": "Danh mục",
+      "contacts": "Danh bạ"
     }
   },
   "pages": {
     "dashboard": {
       "title": "Dashboard"
+    },
+    "category": {
+      "title": "Quản lý danh mục",
+      "header": {
+        "create": "Thêm danh mục"
+      }
     }
   }
 }

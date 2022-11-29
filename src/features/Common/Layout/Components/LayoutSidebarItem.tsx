@@ -18,12 +18,12 @@ const LayoutSidebarItem = ({ icon, label, to, isActive = false }: LayoutSidebarI
         isActive && 'bg-gray-100',
       )}
     >
-      {isActive && <div className="absolute left-0 top-3 h-5 w-1 rounded-r-sm bg-teal-400" />}
+      {isActive && <div className="absolute left-0 top-3 h-5 w-1 rounded-r-sm bg-teal-500" />}
       <div className="flex items-center justify-start space-x-4">
         {cloneElement(icon, {
-          className: twMerge('w-5 h-5 block flex-shrink-0', isActive && 'text-teal-400'),
+          className: twMerge('w-5 h-5 block flex-shrink-0', isActive && 'text-teal-500'),
         })}
-        <div className={twMerge(isActive && 'text-teal-400')}>{label}</div>
+        <div className={twMerge(isActive && 'text-teal-500')}>{label}</div>
       </div>
     </Link>
   );

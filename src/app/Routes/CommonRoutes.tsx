@@ -68,7 +68,7 @@ const CommonRoutes = () => {
   ) : (
     <Routes>
       <Route
-        path="*"
+        path="admin/*"
         element={
           <PrivateRoutes requiredRoles={[USER_ROLE_ENUM.ADMIN]}>
             <AdminRoutes />
