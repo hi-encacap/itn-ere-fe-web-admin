@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
 
+import { USER_ROLE_ENUM } from '@constants/enums';
+
 import NotFoundError from '../../features/Common/Errors/Components/NotFoundError';
 import useSelector from '../../features/Common/Hooks/useSelector';
-import { USER_ROLE_ENUM } from '../Constants/enums';
 
 interface PrivateRoutesProps {
   children: JSX.Element;

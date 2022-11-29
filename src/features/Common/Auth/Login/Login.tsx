@@ -4,8 +4,9 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { AUTH_ERROR_CODES } from '../../../../app/Constants/errors';
-import { ADMIN_PATH } from '../../../../app/Constants/urls';
+import { AUTH_ERROR_CODES } from '@constants/errors';
+import { ADMIN_PATH } from '@constants/urls';
+
 import { authService } from '../../../../app/Services';
 import { setUser } from '../../../../app/Slices/userSlice';
 import { AxiosErrorType, FormGenericErrorType } from '../../../../app/Types/Common/commonTypes';

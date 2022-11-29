@@ -1,5 +1,6 @@
+import { AUTHENTICATION_API_PATH } from '@constants/apis';
+
 import axiosInstance from '../../../features/Common/Utils/Http/axiosInstance';
-import { AUTHENTICATION_API_PATH } from '../../Constants/apis';
 import { AuthTokenAndUserDataType, AuthTokensType } from '../../Types/Common/authTypes';
 import { UserDataType } from '../../Types/Common/userTypes';
 

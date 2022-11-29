@@ -2,7 +2,8 @@ import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { UNAUTHORIZED } from 'http-status';
 import _ from 'lodash';
 
-import { AUTHENTICATION_PATH } from '../../../../app/Constants/urls';
+import { AUTHENTICATION_PATH } from '@constants/urls';
+
 import { authService } from '../../../../app/Services';
 
 const errorHandler = async (

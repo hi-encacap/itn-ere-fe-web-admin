@@ -52,7 +52,7 @@ module.exports = {
         groups: ['builtin', 'external', 'internal', ['parent', 'index', 'sibling'], 'object'],
         pathGroups: [
           {
-            pattern: '**Slices/**',
+            pattern: '@constants/**',
             group: 'external',
             position: 'after',
           },

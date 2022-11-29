@@ -1,13 +1,14 @@
 import { useLayoutEffect, useState } from 'react';
 import { matchPath, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
+import { USER_ROLE_ENUM } from '@constants/enums';
+import { AUTHENTICATION_PATH } from '@constants/urls';
+
 import AdminRoutes from '../../features/Admin/Routes/AdminRoutes';
 import AuthRoutes from '../../features/Common/Auth/Routes/AuthRoutes';
 import { LoadingOverlay } from '../../features/Common/Components/Loading';
 import useDispatch from '../../features/Common/Hooks/useDispatch';
 import useSelector from '../../features/Common/Hooks/useSelector';
-import { USER_ROLE_ENUM } from '../Constants/enums';
-import { AUTHENTICATION_PATH } from '../Constants/urls';
 import { authService } from '../Services';
 import { setUser } from '../Slices/userSlice';
 import PrivateRoutes from './PrivateRoutes';

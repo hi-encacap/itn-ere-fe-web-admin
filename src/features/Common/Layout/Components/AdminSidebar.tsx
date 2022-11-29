@@ -4,7 +4,8 @@ import { BiCategory } from 'react-icons/bi';
 import { TiContacts } from 'react-icons/ti';
 import { useLocation } from 'react-router-dom';
 
-import { ADMIN_PATH } from '../../../../app/Constants/urls';
+import { ADMIN_PATH } from '@constants/urls';
+
 import LayoutSidebar from './LayoutSidebar';
 import LayoutSidebarItem from './LayoutSidebarItem';
 import LayoutSidebarWebsite from './LayoutSidebarWebsite';
