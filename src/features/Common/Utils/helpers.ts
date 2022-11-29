@@ -1,3 +1,6 @@
+import { IMAGE_VARIANT_ENUM } from '@constants/enums';
+import { ImageDataType } from '@interfaces/Common/imageTypes';
+
 const setDocumentTitle = (title: string): void => {
   window.document.title = `${title} - ${process.env.REACT_APP_FRONTEND_WEBSITE_NAME ?? 'Encacap'}`;
   window.scrollTo({
@@ -28,4 +31,18 @@ const slugify = (text: string): string => {
   return result;
 };
 
-export { setDocumentTitle, slugify };
+const getImageURL = (image: ImageDataType, variant?: string): string => {
+  if (!image) {
+    return '';
+  }
+
+  const { variants } = image;
+
+  if (variant) {
+    return variants[variant];
+  }
+
+  return variants[IMAGE_VARIANT_ENUM.DEFAULT];
+};
+
+export { setDocumentTitle, slugify, getImageURL };
