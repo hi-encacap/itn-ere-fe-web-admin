@@ -46,5 +46,20 @@ module.exports = {
         checksVoidReturn: false,
       },
     ],
+    'import/order': [
+      2,
+      {
+        groups: ['builtin', 'external', 'internal', ['parent', 'index', 'sibling'], 'object'],
+        pathGroups: [
+          {
+            pattern: '**Slices/**',
+            group: 'external',
+            position: 'after',
+          },
+        ],
+        'newlines-between': 'always',
+        pathGroupsExcludedImportTypes: ['builtin'],
+      },
+    ],
   },
 };
