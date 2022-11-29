@@ -1,10 +1,11 @@
 import { SortingState } from '@tanstack/react-table';
-import { Key, useLayoutEffect, useState } from 'react';
+import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { CategoryDataType } from '@interfaces/Admin/categoryTypes';
 import { TablePaginationType } from '@interfaces/Common/commonTypes';
 import { TableColumnFiltersState } from '@interfaces/Common/elementTypes';
+import { adminCategoryService } from '@services/index';
 
 import Table from '@components/Table/Table';
 
@@ -20,14 +21,14 @@ const AdminCategory = () => {
     keyPrefix: 'admin:pages.category',
   });
 
-  const [categoryData] = useState<CategoryDataType[]>([]);
+  const [categoryData, setCategoryData] = useState<CategoryDataType[]>([]);
   const [pagination, setPagination] = useState<TablePaginationType>({
     pageIndex: 1,
     pageSize: 10,
   });
   const [columnSorting, setColumnSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<TableColumnFiltersState>([]);
-  const [isLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleClickEditButton = (code?: Key) => {
     console.log('Edit button clicked', code);
@@ -37,6 +38,24 @@ const AdminCategory = () => {
     console.log('Delete button clicked', code);
   };
 
+  const getCategoryData = useCallback(() => {
+    setIsLoading(true);
+
+    adminCategoryService
+      .getCategories()
+      .then(setCategoryData)
+      .catch(() => {
+        setCategoryData([]);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    getCategoryData();
+  }, [getCategoryData]);
+
   useLayoutEffect(() => {
     setDocumentTitle(t('title'));
   }, [t]);
@@ -45,7 +64,7 @@ const AdminCategory = () => {
     <LayoutContent title={t('title')} actions={<AdminCategoryHeaderAction />}>
       <Table
         data={categoryData}
-        columns={createCategoryTableColumns({
+        columns={createCategoryTableColumns(t, {
           onClickEdit: handleClickEditButton,
           onClickDelete: handleClickDeleteButton,
         })}

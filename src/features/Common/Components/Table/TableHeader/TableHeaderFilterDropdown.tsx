@@ -77,7 +77,7 @@ const TableHeaderFilterDropdown = ({
         {!isLoading &&
           filterOptions?.map((option) => (
             <TableHeaderFilterDropdownOptionItem
-              key={option.uuid}
+              key={option.id ?? option.code ?? option.name}
               filterBy={filterBy}
               option={option}
               selectedFilters={selectedFilters}

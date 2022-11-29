@@ -24,12 +24,12 @@ const TableContentBody = ({ rows, headers, isLoading = false }: TableContentProp
       {rows.length === 0 && !isLoading && <TableBodyEmpty columns={headers.length} />}
       {rows.length > 0 &&
         rows.map((row) => (
-          <tr key={row.id}>
+          <tr key={row.id} data-key={row.id}>
             {row.getVisibleCells().map((cell) => (
               <td
                 key={cell.id}
                 className={twMerge(
-                  'border-b border-gray-50 bg-white py-4 px-4 text-center',
+                  'border-b border-gray-100 bg-white py-4 px-4 text-center',
                   cell.column.id === 'selector' && 'sticky left-0',
                   cell.column.id === 'actions' && 'sticky right-0',
                   isLoading && 'opacity-50',

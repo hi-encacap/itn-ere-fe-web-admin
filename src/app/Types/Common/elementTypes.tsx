@@ -39,7 +39,7 @@ export type TableGenericDataType = any;
 
 export interface TableFilterOptionItemType {
   [key: string]: string;
-  uuid: string;
+  id: string;
 }
 
 export type FormElementSizeType = 'xs' | 'sm' | 'normal';

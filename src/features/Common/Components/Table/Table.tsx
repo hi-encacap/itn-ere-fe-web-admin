@@ -98,7 +98,7 @@ const Table = ({
       onChangePagination?.(state as TablePaginationType);
     },
     onRowSelectionChange: onChangeRowSelection,
-    getRowId: (row) => row.uuid || 0,
+    getRowId: (row) => row.id || row.code || 0,
   });
 
   const tableRows = useMemo(() => table.getRowModel().rows, [data]);

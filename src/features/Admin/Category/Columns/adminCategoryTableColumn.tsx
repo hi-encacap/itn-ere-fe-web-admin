@@ -1,7 +1,9 @@
 import { createColumnHelper } from '@tanstack/react-table';
+import { TFunction } from 'i18next';
 
 import { CategoryDataType } from '@interfaces/Admin/categoryTypes';
 import { ColumnDef, TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes';
+import { adminCategoryService } from '@services/index';
 
 import AdminCategoryTableImageColumn from '../Components/AdminCategoryTableImageColumn';
 import AdminCategoryTableImageColumnSkeleton from '../Components/AdminCategoryTableImageColumnSkeleton';
@@ -12,39 +14,38 @@ interface OnClickHandlers {
   onClickDelete: TableRowActionClickHandlerType;
 }
 
-const createCategoryTableColumns = ({ onClickEdit, onClickDelete }: OnClickHandlers) => {
+const createCategoryTableColumns = (t: TFunction, { onClickEdit, onClickDelete }: OnClickHandlers) => {
   const columnHelper = createColumnHelper<CategoryDataType>();
 
   const tableExampleColumns: Array<ColumnDef<CategoryDataType>> = [
     columnHelper.accessor((row) => row.thumbnail, {
       id: 'thumbnail',
-      header: 'Thumbnail',
+      header: String(t('table.columns.thumbnail')),
       enableSorting: false,
-      cell: (info) => <AdminCategoryTableImageColumn src={info.getValue()} alt={info.getValue()} />,
+      cell: (info) => (
+        <AdminCategoryTableImageColumn src={info.getValue()} alt={info.getValue().variants.public} />
+      ),
       meta: {
         skeleton: <AdminCategoryTableImageColumnSkeleton />,
       },
     }),
     columnHelper.accessor((row) => row.code, {
       id: 'code',
-      header: 'Code',
-      meta: {
-        filterBy: 'code',
-        filterLabel: 'Code',
-        // getFilterOptions: DocumentationTableExampleService.getTableExampleData,
-      },
+      header: String(t('table.columns.code')),
     }),
     columnHelper.accessor((row) => row.name, {
       id: 'name',
-      header: 'Name',
+      header: String(t('table.columns.name')),
     }),
     columnHelper.accessor((row) => row.categoryGroupCode, {
       id: 'categoryGroupCode',
-      header: 'Group',
-      // meta: {
-      //   filterBy: 'email',
-      //   getFilterOptions: DocumentationTableExampleService.getTableExampleData,
-      // },
+      header: String(t('table.columns.categoryGroupCode.title')),
+      cell: (info) => t(`table.columns.categoryGroupCode.${String(info.getValue())}`),
+      meta: {
+        filterBy: 'categoryGroupCode',
+        filterLabel: String(t('table.columns.categoryGroupCode.title')),
+        getFilterOptions: adminCategoryService.getCategories,
+      },
     }),
     columnHelper.display({
       id: 'actions',
@@ -55,9 +56,6 @@ const createCategoryTableColumns = ({ onClickEdit, onClickDelete }: OnClickHandl
           onClickDelete={onClickDelete}
         />
       ),
-      meta: {
-        // skeleton: <TableExampleRowActionsSkeleton />,
-      },
     }),
   ];
 
