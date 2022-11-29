@@ -6,10 +6,10 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'standard-with-typescript',
-    'plugin:react/jsx-runtime',
     'plugin:prettier/recommended',
+    'plugin:react/jsx-runtime',
   ],
-  parser: '@typescript-eslint/parser',
+  overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -38,29 +38,8 @@ module.exports = {
     },
   ],
   rules: {
-    'react/function-component-definition': [
-      'error',
-      {
-        namedComponents: 'arrow-function',
-      },
-    ],
-    'import/order': [
-      2,
-      {
-        groups: ['builtin', 'external', 'internal', ['parent', 'index', 'sibling'], 'object'],
-        pathGroups: [
-          {
-            pattern: '**Slices/**',
-            group: 'external',
-            position: 'after',
-          },
-        ],
-        'newlines-between': 'always',
-        pathGroupsExcludedImportTypes: ['builtin'],
-      },
-    ],
-    '@typescript-eslint/strict-boolean-expressions': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/strict-boolean-expressions': 'off',
     '@typescript-eslint/no-misused-promises': [
       'error',
       {
