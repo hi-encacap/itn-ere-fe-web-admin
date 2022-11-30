@@ -16,8 +16,8 @@ export type TableFooterProps = TableFooterPaginationProps &
   };
 
 const TableFooter = ({
-  pageIndex = 1,
-  pageSize = 10,
+  page = 1,
+  limit = 10,
   totalRows = 0,
   totalPages = 1,
   isLoading = false,
@@ -34,10 +34,10 @@ const TableFooter = ({
 
   useEffect(() => {
     let newShowingFrom = 1;
-    let newShowingTo = (pageIndex + 1) * pageSize;
+    let newShowingTo = (Number(page) + 1) * limit;
 
-    if (pageIndex > 0) {
-      newShowingFrom = pageIndex * pageSize + 1;
+    if (page > 0) {
+      newShowingFrom = page * limit + 1;
     }
 
     if (newShowingTo > totalRows) {
@@ -46,14 +46,14 @@ const TableFooter = ({
 
     setShowingFrom(newShowingFrom);
     setShowingTo(newShowingTo);
-  }, [pageIndex, totalRows, pageSize]);
+  }, [page, totalRows, limit]);
 
   return (
     <div className="relative mt-6 flex items-center justify-between">
       {(!isLoading || !!dataLength) && (
         <>
           <div className="flex flex-1 items-center space-x-4">
-            <TableFooterPageSizeSelector pageSize={pageSize} onChangePageSize={onChangePageSize} />
+            <TableFooterPageSizeSelector pageSize={page} onChangePageSize={onChangePageSize} />
             <div>
               {t('counting', {
                 from: showingFrom,
@@ -62,11 +62,7 @@ const TableFooter = ({
               })}
             </div>
           </div>
-          <TableFooterPagination
-            pageIndex={pageIndex}
-            totalPages={totalPages}
-            onChangePageIndex={onChangePage}
-          />
+          <TableFooterPagination page={page} totalPages={totalPages} onChangePageIndex={onChangePage} />
           {isLoading && <div className="absolute inset-0 bg-white bg-opacity-50" />}
         </>
       )}

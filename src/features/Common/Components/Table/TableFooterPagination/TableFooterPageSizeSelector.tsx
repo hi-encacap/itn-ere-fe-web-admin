@@ -1,7 +1,7 @@
 import { TablePaginationType } from '../../../../../app/Types/Common/commonTypes';
 
 export interface TableFooterPageSizeSelectorProps {
-  pageSize: TablePaginationType['pageSize'];
+  pageSize: TablePaginationType['page'];
   onChangePageSize: (pageSize: number) => void;
 }
 

@@ -61,8 +61,8 @@ const Table = ({
 }: TableProps) => {
   const defaultPagination = useMemo<Required<TablePaginationType>>(
     () => ({
-      pageIndex: 0,
-      pageSize: DEFAULT_PAGE_SIZE,
+      page: 0,
+      limit: DEFAULT_PAGE_SIZE,
       totalPages: 1,
       totalRows: 0,
     }),
@@ -81,7 +81,8 @@ const Table = ({
       pagination: {
         ...defaultPagination,
         ...pagination,
-        pageIndex: (pagination?.pageIndex ?? 1) - 1,
+        pageIndex: (pagination?.page ?? 1) - 1,
+        pageSize: pagination?.limit ?? DEFAULT_PAGE_SIZE,
       },
       sorting,
       rowSelection,
@@ -92,7 +93,7 @@ const Table = ({
     onPaginationChange: (state) => {
       if (typeof state === 'function') {
         const newState = state(pagination as PaginationState);
-        onChangePagination?.({ ...newState, pageIndex: newState.pageIndex + 1 });
+        onChangePagination?.({ ...newState, limit: newState.pageIndex + 1 });
         return;
       }
       onChangePagination?.(state as TablePaginationType);
@@ -117,7 +118,7 @@ const Table = ({
       ...defaultPagination,
       ...pagination,
     };
-    const newTotalPages = Math.ceil(paginationOptions.totalRows / paginationOptions.pageSize) || 1;
+    const newTotalPages = Math.ceil(paginationOptions.totalRows / paginationOptions.limit) || 1;
     setTotalPages(newTotalPages);
   }, [pagination]);
 
@@ -137,7 +138,7 @@ const Table = ({
       {(!!tableRows.length || isLoading) && (
         <TableFooter
           isLoading={isLoading}
-          pageIndex={table.getState().pagination.pageIndex}
+          page={table.getState().pagination.pageIndex}
           pageSize={table.getState().pagination.pageSize}
           dataLength={tableRows.length}
           totalRows={pagination?.totalRows ?? 0}
