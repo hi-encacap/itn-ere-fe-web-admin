@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import { Checkbox } from '@components/Form';
 
 export interface TableFilterOptionPrivateItemType {
@@ -16,10 +18,10 @@ const TableHeaderFilterDropdownOptionItem = ({
   isSelected = false,
   onChange,
 }: TableHeaderFilterDropdownOptionItemProps) => {
-  const handleChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCheckbox = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
     onChange(value, isChecked);
-  };
+  }, []);
 
   return (
     <label htmlFor={value} className="group flex items-center justify-start space-x-3 py-1">

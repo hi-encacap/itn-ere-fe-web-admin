@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
@@ -23,10 +23,14 @@ const TableFooterPageSizeSelector = ({
     return DEFAULT_PAGE_SIZE;
   }, [pageSizeProp]);
 
+  const handleChangePageSize = useCallback(() => {
+    onChangePageSize(pageSizeOptions.at(1) as number);
+  }, [pageSizeOptions]);
+
   return (
     <div
       className="flex cursor-pointer items-center space-x-2 rounded-lg bg-gray-100 py-2 pl-4 pr-3 text-sm font-semibold duration-100 hover:bg-gray-200"
-      onClick={() => onChangePageSize(pageSizeOptions.at(1) as number)}
+      onClick={handleChangePageSize}
     >
       <span>{pageSize}</span>
       <BiChevronDown />

@@ -142,6 +142,7 @@ const Table = ({
           dataLength={tableRows.length}
           totalRows={pagination?.totalRows ?? 0}
           totalPages={totalPages}
+          // #skipcq: JS-0411
           onChangePageIndex={table.setPageIndex}
           onChangePageSize={handleChangePageSize}
         />

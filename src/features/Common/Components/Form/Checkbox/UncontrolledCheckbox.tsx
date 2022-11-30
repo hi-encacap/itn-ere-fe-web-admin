@@ -10,7 +10,7 @@ export interface UncontrolledCheckboxProps extends InputHTMLAttributes<HTMLInput
   error?: string;
 }
 
-// skipcq: JS-0044
+// #skipcq: JS-0044
 const UncontrolledCheckbox = ({
   className,
   name,

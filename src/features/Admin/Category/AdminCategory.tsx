@@ -36,12 +36,12 @@ const AdminCategory = () => {
   });
 
   const handleClickEditButton = (code?: Key) => {
-    // eslint-disable-next-line no-console
+    // #skipcq: JS-0002
     console.log('Edit button clicked', code);
   };
 
   const handleClickDeleteButton = (code?: Key) => {
-    // eslint-disable-next-line no-console
+    // #skipcq: JS-0002
     console.log('Delete button clicked', code);
   };
 

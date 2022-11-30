@@ -67,7 +67,7 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
       }
 
       if (!filterValue) {
-        return undefined;
+        return;
       }
 
       options.push({
