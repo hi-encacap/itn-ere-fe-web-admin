@@ -30,6 +30,8 @@ const TableFooterPageSizeSelector = ({
   return (
     <div
       className="flex cursor-pointer items-center space-x-2 rounded-lg bg-gray-100 py-2 pl-4 pr-3 text-sm font-semibold duration-100 hover:bg-gray-200"
+      role="button"
+      tabIndex={0}
       onClick={handleChangePageSize}
     >
       <span>{pageSize}</span>
