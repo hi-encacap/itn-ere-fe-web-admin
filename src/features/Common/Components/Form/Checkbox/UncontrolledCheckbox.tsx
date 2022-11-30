@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useEffect, useState } from 'react';
+import { InputHTMLAttributes, useCallback, useEffect, useState } from 'react';
 import { BsCheck } from 'react-icons/bs';
 import { HiMinusSm } from 'react-icons/hi';
 import { twMerge } from 'tailwind-merge';
@@ -38,12 +38,12 @@ const UncontrolledCheckbox = ({
     iconTouchedClassName,
   );
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (checked === undefined || checked === null) {
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    if (checked === undefined || checked === null || !onChange) {
       setIsChecked(e.target.checked);
     }
     onChange?.(e);
-  };
+  }, []);
 
   useEffect(() => {
     if (checked !== undefined && checked !== null) {
@@ -59,10 +59,10 @@ const UncontrolledCheckbox = ({
       <div className="relative z-0 inline-block h-5 w-5 rounded-md bg-white">
         <div
           className={twMerge(
-            'group-hover:border-primary-700 absolute inset-0 -z-10 h-5 w-5 cursor-pointer rounded-md border-2 border-gray-200',
+            'absolute inset-0 -z-10 h-5 w-5 cursor-pointer rounded-md border-2 border-gray-200 group-hover:border-teal-500',
             error && 'border-red-500',
-            isChecked && !indeterminate && !disabled && 'border-primary-700 bg-primary-700',
-            indeterminate && !disabled && 'border-primary-700',
+            isChecked && !indeterminate && !disabled && 'border-teal-500 bg-teal-500',
+            indeterminate && !disabled && 'border-teal-500',
             disabled && 'cursor-not-allowed bg-gray-100 group-hover:border-gray-100',
           )}
         />

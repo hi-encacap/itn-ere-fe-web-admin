@@ -2,16 +2,15 @@ import _ from 'lodash';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { TableFilterOptionItemType } from '@interfaces/Common/elementTypes';
-
 import { LoadingSkeleton } from '@components/Loading';
 
-import TableHeaderFilterDropdownOptionItem from './TableHeaderFilterDropdownOptionItem';
+import TableHeaderFilterDropdownOptionItem, {
+  TableFilterOptionPrivateItemType,
+} from './TableHeaderFilterDropdownOptionItem';
 import TableHeaderFilterDropdownSkeleton from './TableHeaderFilterDropdownSkeleton';
 
 export interface TableHeaderFilterDropdownProps {
-  filterBy: string;
-  filterOptions: TableFilterOptionItemType[];
+  filterOptions: TableFilterOptionPrivateItemType[];
   isLoading?: boolean;
   selectedFilters: string[];
   onChangeFilters: (selectedItems: string[]) => void;
@@ -20,7 +19,6 @@ export interface TableHeaderFilterDropdownProps {
 }
 
 const TableHeaderFilterDropdown = ({
-  filterBy,
   isLoading,
   filterOptions,
   selectedFilters,
@@ -77,10 +75,9 @@ const TableHeaderFilterDropdown = ({
         {!isLoading &&
           filterOptions?.map((option) => (
             <TableHeaderFilterDropdownOptionItem
-              key={option.id ?? option.code ?? option.name}
-              filterBy={filterBy}
+              key={option.value}
               option={option}
-              selectedFilters={selectedFilters}
+              isSelected={selectedFilters.includes(option.value)}
               onChange={handleChangeSelectedFilter}
             />
           ))}

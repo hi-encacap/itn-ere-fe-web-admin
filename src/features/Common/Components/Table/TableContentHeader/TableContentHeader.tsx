@@ -1,10 +1,10 @@
 import { flexRender, HeaderGroup } from '@tanstack/react-table';
 
-import { TableGenericDataType } from '@interfaces/Common/elementTypes';
+import { TableDataType } from '@interfaces/Common/elementTypes';
 
 import TableContentHeaderColumn from './TableContentHeaderColumn';
 
-export interface TableContentHeaderProps<TData = TableGenericDataType> {
+export interface TableContentHeaderProps<TData = TableDataType> {
   headerGroups: Array<HeaderGroup<TData>>;
 }
 

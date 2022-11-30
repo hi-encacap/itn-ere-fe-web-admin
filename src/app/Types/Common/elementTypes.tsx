@@ -32,10 +32,8 @@ export interface TableColumnFilterState {
   values: string[];
 }
 
-export type TableColumnFiltersState = TableColumnFilterState[];
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type TableGenericDataType = any;
+export type TableDataType = any;
 
 export interface TableFilterOptionItemType {
   [key: string]: string;

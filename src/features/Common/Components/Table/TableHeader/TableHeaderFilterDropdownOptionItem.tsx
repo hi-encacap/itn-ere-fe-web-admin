@@ -1,24 +1,21 @@
-import { useMemo } from 'react';
-
 import { Checkbox } from '@components/Form';
 
-import { TableFilterOptionItemType } from '../../../../../app/Types/Common/elementTypes';
+export interface TableFilterOptionPrivateItemType {
+  value: string;
+  label: string;
+}
 
 interface TableHeaderFilterDropdownOptionItemProps {
-  option: TableFilterOptionItemType;
-  filterBy: string;
-  selectedFilters: string[];
+  option: TableFilterOptionPrivateItemType;
+  isSelected: boolean;
   onChange: (value: string, checked: boolean) => void;
 }
 
 const TableHeaderFilterDropdownOptionItem = ({
-  option,
-  filterBy,
-  selectedFilters,
+  option: { value, label },
+  isSelected = false,
   onChange,
 }: TableHeaderFilterDropdownOptionItemProps) => {
-  const value = useMemo(() => option[filterBy], [option, filterBy]);
-
   const handleChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
     onChange(value, isChecked);
@@ -29,11 +26,11 @@ const TableHeaderFilterDropdownOptionItem = ({
       <Checkbox
         id={value}
         name={value}
-        checked={selectedFilters.includes(value)}
+        checked={isSelected}
         className="h-5 w-5"
         onChange={handleChangeCheckbox}
       />
-      <span>{value}</span>
+      <span>{label}</span>
     </label>
   );
 };

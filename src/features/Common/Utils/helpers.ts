@@ -1,5 +1,5 @@
 import { IMAGE_VARIANT_ENUM } from '@constants/enums';
-import { TableColumnFiltersState } from '@interfaces/Common/elementTypes';
+import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { ImageDataType } from '@interfaces/Common/imageTypes';
 
 const setDocumentTitle = (title: string): void => {
@@ -46,9 +46,9 @@ const getImageURL = (image: ImageDataType, variant?: string): string => {
   return variants[IMAGE_VARIANT_ENUM.DEFAULT];
 };
 
-const generateColumnFilterObject = (filters: TableColumnFiltersState) => {
+const generateColumnFilterObject = (filters: TableColumnFilterState[]) => {
   return filters.reduce<Record<string, string[]>>((filterObject, { filterBy, values }) => {
-    filterObject[`${filterBy}s`] = values;
+    filterObject[filterBy] = values;
 
     return filterObject;
   }, {});

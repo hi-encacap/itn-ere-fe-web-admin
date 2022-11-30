@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { CategoryDataType } from '@interfaces/Admin/categoryTypes';
 import { TablePaginationType } from '@interfaces/Common/commonTypes';
-import { TableColumnFiltersState } from '@interfaces/Common/elementTypes';
+import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { adminCategoryService } from '@services/index';
 
 import Table from '@components/Table/Table';
@@ -28,7 +28,7 @@ const AdminCategory = () => {
     limit: 10,
   });
   const [columnSorting, setColumnSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<TableColumnFiltersState>([]);
+  const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [queryParams, setQueryParams] = useState({
     ...pagination,
@@ -80,12 +80,6 @@ const AdminCategory = () => {
     setQueryParams(newQueryParams);
   }, [columnFilters]);
 
-  useEffect(() => {
-    console.log(pagination);
-    console.log(columnSorting);
-    console.log(columnFilters);
-  }, [pagination, columnSorting, columnFilters]);
-
   useLayoutEffect(() => {
     setDocumentTitle(t('title'));
   }, [t]);
@@ -100,7 +94,6 @@ const AdminCategory = () => {
         })}
         pagination={pagination}
         sorting={columnSorting}
-        columnFilters={columnFilters}
         isLoading={isLoading}
         onChangePagination={setPagination}
         onChangeSorting={setColumnSorting}

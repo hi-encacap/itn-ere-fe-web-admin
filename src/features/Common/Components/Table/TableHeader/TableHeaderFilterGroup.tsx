@@ -1,10 +1,11 @@
 import { HeaderGroup } from '@tanstack/react-table';
+import { memo } from 'react';
 
-import { TableGenericDataType } from '@interfaces/Common/elementTypes';
+import { TableDataType } from '@interfaces/Common/elementTypes';
 
 import TableHeaderFilter from './TableHeaderFilter';
 
-export interface TableHeaderFilterGroupProps<TData = TableGenericDataType> {
+export interface TableHeaderFilterGroupProps<TData = TableDataType> {
   headerGroups: Array<HeaderGroup<TData>>;
   onChangeFilters?: (filterBy: string, filterValues: string[]) => void;
 }
@@ -29,4 +30,4 @@ const TableHeaderFilterGroup = ({ headerGroups, onChangeFilters }: TableHeaderFi
   );
 };
 
-export default TableHeaderFilterGroup;
+export default memo(TableHeaderFilterGroup);

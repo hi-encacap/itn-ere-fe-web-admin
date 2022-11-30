@@ -52,6 +52,8 @@ export interface BaseQueryParamsType {
   filterBy?: string;
   filterValue?: string;
   sortBy?: string;
+  search?: string;
+  searchBy?: string;
 }
 
 export interface FormGenericErrorType {

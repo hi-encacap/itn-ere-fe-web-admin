@@ -1,17 +1,18 @@
 import { flexRender, Header } from '@tanstack/react-table';
-import _ from 'lodash';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import _, { uniqBy } from 'lodash';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
 import { twMerge } from 'tailwind-merge';
 
 import { BaseQueryParamsType } from '@interfaces/Common/commonTypes';
-import { TableFilterOptionItemType, TableGenericDataType } from '@interfaces/Common/elementTypes';
+import { TableDataType, TableFilterOptionItemType } from '@interfaces/Common/elementTypes';
 
 import TableHeaderFilterDropdown from './TableHeaderFilterDropdown';
+import { TableFilterOptionPrivateItemType } from './TableHeaderFilterDropdownOptionItem';
 import TableHeaderFilterLabel from './TableHeaderFilterLabel';
 
 export interface TableHeaderFilterProps {
-  header: Header<TableGenericDataType, unknown>;
+  header: Header<TableDataType, unknown>;
   onChangeFilters?: (filterBy: string, selectedItems: string[]) => void;
 }
 
@@ -23,55 +24,60 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
     return (Array.isArray(originalFilterBy) ? _.first(originalFilterBy) : originalFilterBy) ?? '';
   }, [headerColumnDef]);
 
-  const [filterOptions, setFilterOptions] = useState<TableFilterOptionItemType[]>([]);
+  const filterKey = useMemo(() => headerColumnDef.meta?.filterKey, [headerColumnDef]);
+  const filterLabelFormatter = useMemo(() => headerColumnDef.meta?.filterLabelFormatter, [headerColumnDef]);
+
+  const [filterOptions, setFilterOptions] = useState<TableFilterOptionPrivateItemType[]>([]);
   const [filterSearchValue, setFilterSearchValue] = useState('');
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isShowDropdownMenu, setIsShowDropdownMenu] = useState(false);
   const [queryParams, setQueryParams] = useState<BaseQueryParamsType>({
-    filterBy,
-    filterValue: '',
+    search: '',
+    searchBy: '',
   });
 
   const label = useMemo(() => {
     const originalLabel =
       headerColumnDef.meta?.filterLabel ?? flexRender(headerColumnDef.header, header.getContext());
-    return <TableHeaderFilterLabel label={originalLabel} selectedFilters={selectedFilters} />;
+    return (
+      <TableHeaderFilterLabel
+        label={originalLabel}
+        selectedFilters={filterLabelFormatter ? selectedFilters.map(filterLabelFormatter) : selectedFilters}
+      />
+    );
   }, [headerColumnDef, selectedFilters]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
   const rawGetFilterOptions = useMemo(() => headerColumnDef.meta?.getFilterOptions, [headerColumnDef]);
 
-  const formatFilterOptions = useCallback(
-    (options: TableFilterOptionItemType[]): TableFilterOptionItemType[] => {
-      const originalFilterBy = headerColumnDef.meta?.filterBy;
-      return _.unionBy(
-        options
-          .map((option) => {
-            let filterValue = '';
+  const formatFilterOptions = useCallback((rawOptions: TableFilterOptionItemType[]) => {
+    const originalFilterBy = headerColumnDef.meta?.filterBy;
 
-            if (Array.isArray(originalFilterBy)) {
-              filterValue = originalFilterBy.reduce((acc, filter) => `${acc} ${option[filter]}`, '');
-            } else {
-              filterValue = _.get(option, filterBy);
-            }
+    const options: TableFilterOptionPrivateItemType[] = [];
 
-            if (!filterValue) {
-              return null;
-            }
+    rawOptions.forEach((rawOption) => {
+      let filterValue = '';
 
-            return {
-              ...option,
-              [filterBy]: filterValue,
-            };
-          })
-          .filter(Boolean) as TableFilterOptionItemType[],
-        filterBy,
-      );
-    },
-    [],
-  );
+      if (Array.isArray(originalFilterBy)) {
+        filterValue = originalFilterBy.reduce((acc, filter) => `${acc} ${rawOption[filter]}`, '');
+      } else {
+        filterValue = _.get(rawOption, filterKey ?? filterBy);
+      }
+
+      if (!filterValue) {
+        return null;
+      }
+
+      options.push({
+        value: filterValue,
+        label: filterLabelFormatter ? filterLabelFormatter(filterValue) : filterValue,
+      });
+    });
+
+    return uniqBy(options, 'value');
+  }, []);
 
   const getFilterOptions = useCallback((query?: BaseQueryParamsType) => {
     setIsLoading(true);
@@ -116,6 +122,7 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
       setIsShowDropdownMenu(false);
     };
     window.addEventListener('click', handleClickOutside);
+
     return () => {
       window.removeEventListener('click', handleClickOutside);
     };
@@ -130,8 +137,8 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
 
   useEffect(() => {
     const newQueryParams = {
-      filterBy,
-      filterValue: filterSearchValue,
+      searchBy: filterBy,
+      searchValue: filterSearchValue,
     };
     if (_.isEqual(newQueryParams, queryParams)) {
       return;
@@ -158,7 +165,6 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
       </div>
       {isShowDropdownMenu && (
         <TableHeaderFilterDropdown
-          filterBy={filterBy}
           filterOptions={filterOptions}
           isLoading={isLoading}
           selectedFilters={selectedFilters}
@@ -171,4 +177,4 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
   );
 };
 
-export default TableHeaderFilter;
+export default memo(TableHeaderFilter);

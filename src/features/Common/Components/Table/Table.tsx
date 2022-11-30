@@ -8,11 +8,11 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
 import { BaseQueryParamsType, TablePaginationType } from '@interfaces/Common/commonTypes';
-import { TableColumnFiltersState, TableGenericDataType } from '@interfaces/Common/elementTypes';
+import { TableColumnFilterState, TableDataType } from '@interfaces/Common/elementTypes';
 
 import { normalizeTableColumns } from '@utils/table';
 
@@ -27,22 +27,23 @@ declare module '@tanstack/table-core' {
   interface ColumnMeta<TData extends RowData, TValue> {
     skeleton?: JSX.Element;
     filterBy?: string | string[];
+    filterKey?: string;
     filterLabel?: string;
     getFilterOptions?: (params?: BaseQueryParamsType) => Promise<unknown[]>;
+    filterLabelFormatter?: (value: unknown) => string;
   }
 }
 
-export interface TableProps<TData = TableGenericDataType> {
+export interface TableProps<TData = TableDataType> {
   data: TData[];
   columns: Array<ColumnDef<TData>>;
   pagination?: TablePaginationType;
   sorting?: SortingState;
-  columnFilters?: TableColumnFiltersState;
   rowSelection?: RowSelectionState;
   isLoading?: boolean;
   onChangePagination?: OnChangeFn<TablePaginationType>;
   onChangeSorting?: OnChangeFn<SortingState>;
-  onChangeFilters?: OnChangeFn<TableColumnFiltersState>;
+  onChangeFilters?: OnChangeFn<TableColumnFilterState[]>;
   onChangeRowSelection?: OnChangeFn<RowSelectionState>;
 }
 
@@ -51,7 +52,6 @@ const Table = ({
   columns: columnsProp,
   pagination,
   sorting,
-  columnFilters,
   rowSelection = {},
   isLoading = false,
   onChangePagination,
@@ -105,13 +105,16 @@ const Table = ({
   const tableRows = useMemo(() => table.getRowModel().rows, [data]);
   const tableHeaderGroup = useMemo(() => table.getHeaderGroups(), [data]);
 
-  const handleChangePageSize = (pageSize: number) => {
-    table.setPagination({
-      ...pagination,
-      pageSize,
-      pageIndex: 0,
-    });
-  };
+  const handleChangePageSize = useCallback(
+    (pageSize: number) => {
+      table.setPagination({
+        ...pagination,
+        pageSize,
+        pageIndex: 0,
+      });
+    },
+    [pagination],
+  );
 
   useEffect(() => {
     const paginationOptions = {
@@ -124,11 +127,7 @@ const Table = ({
 
   return (
     <div>
-      <TableHeader
-        columnFilters={columnFilters}
-        headerGroups={tableHeaderGroup}
-        onChangeFilters={onChangeFilters}
-      />
+      <TableHeader headerGroups={tableHeaderGroup} onChangeFilters={onChangeFilters} />
       <div className="overflow-auto">
         <table className="relative min-w-full">
           <TableContentHeader headerGroups={tableHeaderGroup} />
