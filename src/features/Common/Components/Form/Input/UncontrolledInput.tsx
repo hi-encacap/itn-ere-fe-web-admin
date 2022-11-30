@@ -1,13 +1,16 @@
-import { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes, useMemo } from 'react';
 import { twMerge } from 'tailwind-merge';
+
+import { FormElementSizeType } from '@interfaces/Common/elementTypes';
 
 import FormElementError from '../FormElementError';
 
-export interface UncontrolledInputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface UncontrolledInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   name: string;
   className?: string;
   error?: string;
   label?: string | null;
+  size?: FormElementSizeType;
 }
 
 const UncontrolledInput = ({
@@ -16,10 +19,19 @@ const UncontrolledInput = ({
   type = 'text',
   className,
   label,
+  size = 'normal',
   error,
   ...inputProps
 }: UncontrolledInputProps) => {
   const inputId = id ?? name;
+
+  const inputSizeClassName = useMemo(() => {
+    if (size === 'sm') {
+      return 'h-10';
+    }
+
+    return 'h-12';
+  }, [size]);
 
   return (
     <label htmlFor={inputId}>
@@ -32,8 +44,9 @@ const UncontrolledInput = ({
       )}
       <div
         className={twMerge(
-          'group inline-block h-12 rounded-lg border-2 border-gray-100 focus-within:border-blue-500',
+          'group inline-block rounded-lg border-2 border-gray-100 focus-within:border-blue-500',
           error && 'border-red-500 focus-within:border-red-500',
+          inputSizeClassName,
           className,
         )}
       >

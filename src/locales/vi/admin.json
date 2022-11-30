@@ -2,13 +2,34 @@
   "layout": {
     "sidebar": {
       "dashboard": "Dashboard",
-      "categories": "Categories",
-      "contacts": "Contacts"
+      "categories": "Danh mục",
+      "contacts": "Danh bạ"
     }
   },
   "pages": {
     "dashboard": {
       "title": "Dashboard"
+    },
+    "category": {
+      "title": "Quản lý danh mục",
+      "header": {
+        "create": "Thêm danh mục"
+      },
+      "table": {
+        "columns": {
+          "thumbnail": "Hình ảnh",
+          "code": "Mã danh mục",
+          "name": "Tên danh mục",
+          "categoryGroupCode": {
+            "title": "Nhóm danh mục",
+            "estate": "Bất động sản",
+            "news": "Tin tức"
+          },
+          "actions": {
+            "delete": "Xóa"
+          }
+        }
+      }
     }
   }
 }

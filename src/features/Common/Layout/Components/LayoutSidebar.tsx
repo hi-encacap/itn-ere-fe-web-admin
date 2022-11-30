@@ -4,7 +4,7 @@ interface LayoutSidebarProps {
 
 const LayoutSidebar = ({ children }: LayoutSidebarProps) => {
   return (
-    <div className="fixed top-20 left-0 flex h-layout w-72 flex-col space-y-2 border-r-2 border-gray-100 px-4 py-8">
+    <div className="fixed top-20 left-0 flex h-layout w-72 flex-col space-y-2 border-r-2 border-gray-100 px-4 py-6">
       {children}
     </div>
   );

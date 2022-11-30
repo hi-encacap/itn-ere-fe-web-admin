@@ -19,16 +19,17 @@ export interface AxiosErrorDataType {
 export type AxiosErrorType = AxiosError<AxiosErrorDataType>;
 
 export interface TablePaginationType extends Omit<PaginationState, 'pageIndex' | 'pageSize'> {
-  pageIndex?: number;
-  pageSize?: number;
+  page?: number;
+  limit?: number;
   totalRows?: number;
   totalPages?: number;
 }
 
 export interface ResponseMetaType {
   page: number;
-  perPage: number;
-  total: number;
+  limit: number;
+  totalRows: number;
+  totalPages: number;
 }
 
 export interface ResponseWithMetaType<T = unknown> extends Partial<AxiosResponse> {
@@ -47,7 +48,12 @@ export interface AxiosResponseType<T> extends AxiosResponse {
 
 export interface BaseQueryParamsType {
   page?: number;
-  perPage?: number;
+  limit?: number;
+  filterBy?: string;
+  filterValue?: string;
+  sortBy?: string;
+  search?: string;
+  searchBy?: string;
 }
 
 export interface FormGenericErrorType {

@@ -1,10 +1,11 @@
 import { twMerge } from 'tailwind-merge';
 
-export type ButtonSizeType = 'xs' | 'sm' | 'normal';
+import { FormElementSizeType } from '@interfaces/Common/elementTypes';
+
 export type ButtonColorType = 'primary' | 'light' | 'blue' | 'orange' | 'gray';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  size?: ButtonSizeType;
+  size?: FormElementSizeType;
   color?: ButtonColorType;
   children: React.ReactNode;
   isLoading?: boolean;
@@ -26,7 +27,7 @@ const Button = ({
   switch (color) {
     default:
       colorClassNames +=
-        'bg-teal-400 hover:bg-teal-500 text-white ring-teal-400 disabled:ring-gray-200 disabled:bg-gray-200';
+        'bg-teal-500 hover:bg-teal-600 text-white ring-teal-500 disabled:ring-gray-200 disabled:bg-gray-200';
       spinnerColorClassNames += disabled === true ? 'border-white' : 'border-gray-400';
   }
 
@@ -40,7 +41,7 @@ const Button = ({
       break;
 
     default:
-      sizeClassNames += 'px-8 py-2';
+      sizeClassNames += 'px-6 py-2';
   }
 
   return (

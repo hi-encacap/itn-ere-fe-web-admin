@@ -4,4 +4,8 @@ const AUTHENTICATION_API_PATH = {
   REFRESH_TOKEN_PATH: '/auth/refresh',
 };
 
-export { AUTHENTICATION_API_PATH };
+const ADMIN_CATEGORY_API_PATH = {
+  CATEGORIES_PATH: '/admin/categories',
+};
+
+export { AUTHENTICATION_API_PATH, ADMIN_CATEGORY_API_PATH };

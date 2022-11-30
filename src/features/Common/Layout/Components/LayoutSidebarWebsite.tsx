@@ -7,7 +7,7 @@ const LayoutSidebarWebsite = () => {
   const { website } = useSelector((state) => state.user);
 
   return (
-    <div className="group mb-4 flex items-center justify-start space-x-4 border-b-2 border-gray-100 px-4 pb-8">
+    <div className="group mb-4 flex items-center justify-start space-x-4 border-b-2 border-gray-100 px-4 pb-6">
       <AiOutlineGlobal size={26} className="flex-shrink-0" />
       <div className="flex-1 space-y-0.5">
         <div className="break-all font-semibold line-clamp-1">{website.name}</div>
