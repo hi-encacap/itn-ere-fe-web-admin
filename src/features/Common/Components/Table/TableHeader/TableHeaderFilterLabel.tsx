@@ -10,9 +10,9 @@ const TableHeaderFilterLabel = ({ label, selectedFilters }: TableHeaderFilterLab
   return (
     <div className="flex">
       <span className="line-clamp-1">
-        <span className={twMerge(!!selectedFilters.length && 'mr-1 font-semibold')}>
+        <span className={twMerge(Boolean(selectedFilters.length) && 'mr-1 font-semibold')}>
           {label}
-          {!!selectedFilters.length && ':'}
+          {Boolean(selectedFilters.length) && ':'}
         </span>
         {selectedFilters.length > 0 && <span>{selectedFilters[0]}</span>}
       </span>

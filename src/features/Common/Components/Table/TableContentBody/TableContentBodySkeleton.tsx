@@ -9,8 +9,8 @@ interface TableContentBodySkeletonProps<T = RowData> {
 const TableContentBodySkeleton = ({ headers }: TableContentBodySkeletonProps) => {
   return (
     <tr>
-      {headers.map((header, index) => (
-        <td key={index} className="border-b border-gray-50 p-4">
+      {headers.map((header) => (
+        <td key={header.id} className="border-b border-gray-50 p-4">
           <TableContentBodySkeletonItem header={header} />
         </td>
       ))}

@@ -134,7 +134,7 @@ const Table = ({
           <TableContentBody rows={tableRows} headers={tableHeaderGroup[0].headers} isLoading={isLoading} />
         </table>
       </div>
-      {(!!tableRows.length || isLoading) && (
+      {(Boolean(tableRows.length) || isLoading) && (
         <TableFooter
           isLoading={isLoading}
           page={table.getState().pagination.pageIndex}

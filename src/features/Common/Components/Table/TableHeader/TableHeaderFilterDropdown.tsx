@@ -32,33 +32,36 @@ const TableHeaderFilterDropdown = ({
 
   const [filterSearchValue, setFilterSearchValue] = useState('');
 
-  const handleChangeSelectedFilter = (value: string, checked: boolean) => {
-    let newSelectedFilters = [...selectedFilters];
-    if (checked) {
-      newSelectedFilters.push(value);
-    } else {
-      const index = newSelectedFilters.indexOf(value);
-      if (index > -1) {
-        newSelectedFilters.splice(index, 1);
+  const handleChangeSelectedFilter = useCallback(
+    (value: string, checked: boolean) => {
+      let newSelectedFilters = [...selectedFilters];
+      if (checked) {
+        newSelectedFilters.push(value);
+      } else {
+        const index = newSelectedFilters.indexOf(value);
+        if (index > -1) {
+          newSelectedFilters.splice(index, 1);
+        }
       }
-    }
-    newSelectedFilters = _.uniq(newSelectedFilters);
-    onChangeFilters?.(newSelectedFilters);
-  };
+      newSelectedFilters = _.uniq(newSelectedFilters);
+      onChangeFilters?.(newSelectedFilters);
+    },
+    [selectedFilters, onChangeFilters],
+  );
 
   const onChangeFilterSearchValueDebounced = useCallback(_.debounce(onChangeFilterSearchValue, 500), [
     onChangeFilterSearchValue,
   ]);
 
-  const handleChangeFilterSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeFilterSearchValue = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     onChangeFilterSearchValueDebounced(value);
     setFilterSearchValue(value);
-  };
+  }, []);
 
-  const handleClearSelectedFilters = () => {
+  const handleClearSelectedFilters = useCallback(() => {
     onClearSelectedFilters?.();
-  };
+  }, []);
 
   return (
     <div className="absolute top-12 z-10 flex max-w-xs flex-col overflow-hidden rounded-lg border-2 border-gray-100 bg-white px-4 text-slate-700 shadow-lg shadow-gray-100">

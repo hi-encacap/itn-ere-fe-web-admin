@@ -36,16 +36,17 @@ const AdminCategory = () => {
   });
 
   const handleClickEditButton = (code?: Key) => {
+    // eslint-disable-next-line no-console
     console.log('Edit button clicked', code);
   };
 
   const handleClickDeleteButton = (code?: Key) => {
+    // eslint-disable-next-line no-console
     console.log('Delete button clicked', code);
   };
 
   const getCategoryData = useCallback(() => {
     setIsLoading(true);
-    console.log(queryParams);
 
     adminCategoryService
       .getCategories(queryParams)

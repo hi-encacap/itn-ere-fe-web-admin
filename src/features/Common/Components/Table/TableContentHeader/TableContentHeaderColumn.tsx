@@ -1,4 +1,5 @@
 import { SortDirection } from '@tanstack/react-table';
+import { useCallback } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import TableContentHeaderSortIcon from './TableContentHeaderSortIcon';
@@ -18,12 +19,12 @@ const TableContentHeaderColumn = ({
   children,
   toggleSorting,
 }: TableContentHeaderColumnProps) => {
-  const handleClickSortButton = () => {
+  const handleClickSortButton = useCallback(() => {
     if (isSortable) {
       const newSortDirection = isSorted === 'asc' ? 'desc' : 'asc';
       toggleSorting(newSortDirection === 'desc');
     }
-  };
+  }, [isSorted, isSortable]);
 
   return (
     <th
@@ -38,6 +39,7 @@ const TableContentHeaderColumn = ({
         className={twMerge('group relative block cursor-pointer', isSortable && 'inline-flex')}
         role="button"
         tabIndex={0}
+        aria-hidden="true"
         onClick={handleClickSortButton}
       >
         <div

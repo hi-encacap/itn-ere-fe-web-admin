@@ -12,11 +12,11 @@ interface TableContentBodySkeletonItemProps {
 const TableContentBodySkeletonItem = ({ header }: TableContentBodySkeletonItemProps): JSX.Element => {
   const columnMeta = useMemo(() => header.column.columnDef.meta, [header.column.columnDef.meta]);
 
-  if (header.id === 'actions' && columnMeta?.skeleton == null) {
+  if (header.id === 'actions' && columnMeta?.skeleton === null) {
     return <TableRowActionSkeleton />;
   }
 
-  if (columnMeta?.skeleton != null) {
+  if (columnMeta?.skeleton !== null && columnMeta?.skeleton !== undefined) {
     const element = flexRender(columnMeta.skeleton, header.getContext()) as ReactNode;
     return element as JSX.Element;
   }

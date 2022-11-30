@@ -1,4 +1,4 @@
-import { Key, useEffect, useRef, useState } from 'react';
+import { Key, useCallback, useEffect, useRef, useState } from 'react';
 import { HiMenu } from 'react-icons/hi';
 
 import { TableRowActionDropdownItemType } from '@interfaces/Common/elementTypes';
@@ -14,9 +14,9 @@ const TableRowActionDropdown = ({ id, items }: TableRowActionDropdownProps) => {
   const [isShowDropdownMenu, setIsShowDropdownMenu] = useState(false);
   const toggleButtonRef = useRef<HTMLDivElement>(null);
 
-  const handleClickToggleButton = () => {
+  const handleClickToggleButton = useCallback(() => {
     setIsShowDropdownMenu((prev) => !prev);
-  };
+  }, []);
 
   useEffect(() => {
     if (!toggleButtonRef.current) {

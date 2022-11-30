@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BiChevronRight } from 'react-icons/bi';
 
@@ -16,17 +17,17 @@ const TableFooterPagination = ({
     keyPrefix: 'table.pagination',
   });
 
-  const handleChangePage = (page: number) => {
-    onChangePageIndex(page);
-  };
+  const handleChangePage = useCallback((newPage: number) => {
+    onChangePageIndex(newPage);
+  }, []);
 
-  const handleClickPrevButton = () => {
+  const handleClickPrevButton = useCallback(() => {
     handleChangePage(page - 1);
-  };
+  }, [page]);
 
-  const handleClickNextButton = () => {
+  const handleClickNextButton = useCallback(() => {
     handleChangePage(Number(page) + 1);
-  };
+  }, [page]);
 
   return (
     <nav className="relative z-0 mx-auto inline-flex rounded-md shadow-sm">
@@ -46,9 +47,12 @@ const TableFooterPagination = ({
               ? 'relative z-10 border-teal-500 bg-teal-50 text-teal-500'
               : 'border-gray-100 bg-white text-gray-500 hover:bg-gray-50'
           }`}
+          // # skipcq: JS-0437
           key={index}
           role="button"
           tabIndex={0}
+          aria-hidden="true"
+          // # skipcq: JS-0417
           onClick={() => handleChangePage(index)}
         >
           {index + 1}

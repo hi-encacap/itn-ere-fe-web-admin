@@ -67,7 +67,7 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
       }
 
       if (!filterValue) {
-        return null;
+        return undefined;
       }
 
       options.push({
@@ -96,22 +96,22 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
       });
   }, []);
 
-  const handleToggleDropdownMenu = () => {
+  const handleToggleDropdownMenu = useCallback(() => {
     setIsShowDropdownMenu((prev) => !prev);
-  };
+  }, []);
 
-  const handleChangeFilters = (filters: string[]) => {
+  const handleChangeFilters = useCallback((filters: string[]) => {
     setSelectedFilters(filters);
     onChangeFilters?.(filterBy, filters);
-  };
+  }, []);
 
-  const handleClearFilters = () => {
+  const handleClearFilters = useCallback(() => {
     setSelectedFilters([]);
     onChangeFilters?.(filterBy, []);
-  };
+  }, []);
 
   useEffect(() => {
-    if (containerRef.current == null) {
+    if (containerRef.current === null) {
       return undefined;
     }
     const toggleButtonElement = containerRef.current;
@@ -158,6 +158,7 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
         )}
         role="button"
         tabIndex={0}
+        aria-hidden="true"
         onClick={handleToggleDropdownMenu}
       >
         <div>{label}</div>

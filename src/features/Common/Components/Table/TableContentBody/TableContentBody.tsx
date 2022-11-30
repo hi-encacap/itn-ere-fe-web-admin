@@ -19,6 +19,7 @@ const TableContentBody = ({ rows, headers, isLoading = false }: TableContentProp
       {rows.length === 0 &&
         isLoading &&
         Array.from({ length: totalSkeletonItems }).map((_, index) => (
+          // eslint-disable-next-line react/no-array-index-key
           <TableContentBodySkeleton key={index} headers={headers} />
         ))}
       {rows.length === 0 && !isLoading && <TableBodyEmpty columns={headers.length} />}

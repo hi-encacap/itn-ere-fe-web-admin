@@ -50,7 +50,7 @@ const TableFooter = ({
 
   return (
     <div className="relative mt-6 flex items-center justify-between">
-      {(!isLoading || !!dataLength) && (
+      {(!isLoading || Boolean(dataLength)) && (
         <>
           <div className="flex flex-1 items-center space-x-4">
             <TableFooterPageSizeSelector pageSize={page} onChangePageSize={onChangePageSize} />
