@@ -43,7 +43,7 @@ const TableFooterPagination = ({
         <div
           className={`relative inline-flex cursor-pointer items-center border px-4 py-2 text-sm font-medium ${
             index === page
-              ? 'border-primary-700 bg-primary-50 text-primary-700 relative z-10'
+              ? 'relative z-10 border-teal-500 bg-teal-50 text-teal-500'
               : 'border-gray-100 bg-white text-gray-500 hover:bg-gray-50'
           }`}
           key={index}

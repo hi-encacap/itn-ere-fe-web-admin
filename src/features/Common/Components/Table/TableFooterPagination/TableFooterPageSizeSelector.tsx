@@ -1,3 +1,5 @@
+import { BiChevronDown } from 'react-icons/bi';
+
 import { TablePaginationType } from '../../../../../app/Types/Common/commonTypes';
 
 export interface TableFooterPageSizeSelectorProps {
@@ -10,8 +12,9 @@ const TableFooterPageSizeSelector = ({ pageSize, onChangePageSize }: TableFooter
   const pageSizeOptions = [10, 25, 50, 100];
 
   return (
-    <div className="flex cursor-pointer items-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-semibold duration-100 hover:bg-gray-200">
-      1
+    <div className="flex cursor-pointer items-center space-x-2 rounded-lg bg-gray-100 py-2 pl-4 pr-3 text-sm font-semibold duration-100 hover:bg-gray-200">
+      <span>1</span>
+      <BiChevronDown />
     </div>
   );
 };

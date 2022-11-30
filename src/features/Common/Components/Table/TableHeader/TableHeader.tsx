@@ -1,5 +1,5 @@
 import { HeaderGroup, OnChangeFn } from '@tanstack/react-table';
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { TableColumnFilterState, TableDataType } from '@interfaces/Common/elementTypes';
@@ -54,10 +54,6 @@ const TableHeader = ({ headerGroups, onChangeFilters }: TableHeaderProps) => {
     },
     [setGlobalFilterValue, handleChangeFilterState],
   );
-
-  useEffect(() => {
-    console.log('columnFilters', columnFilters);
-  }, [columnFilters]);
 
   return (
     <div className="relative mb-2">

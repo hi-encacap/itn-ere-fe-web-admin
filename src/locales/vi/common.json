@@ -37,20 +37,20 @@
   "table": {
     "header": {
       "search": {
-        "placeholder": "Search"
+        "placeholder": "Tìm kiếm"
       },
       "filter": {
-        "clearSelection": "Clear Selection",
+        "clearSelection": "Xóa lựa chọn",
         "search": {
-          "placeholder": "Search"
+          "placeholder": "Tìm kiếm"
         }
       }
     },
     "pagination": {
       "previous": "Previous",
       "next": "Next",
-      "counting": "Showing {{from}} - {{to}} of {{total}}",
-      "emptyData": "No Data"
+      "counting": "Hiển thị {{from}} - {{to}} của {{total}}",
+      "emptyData": "Không có dữ liệu"
     }
   },
   "confirmationModal": {

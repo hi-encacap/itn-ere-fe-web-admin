@@ -93,7 +93,7 @@ const Table = ({
     onPaginationChange: (state) => {
       if (typeof state === 'function') {
         const newState = state(pagination as PaginationState);
-        onChangePagination?.({ ...newState, limit: newState.pageIndex + 1 });
+        onChangePagination?.({ ...newState, page: newState.pageIndex + 1 });
         return;
       }
       onChangePagination?.(state as TablePaginationType);

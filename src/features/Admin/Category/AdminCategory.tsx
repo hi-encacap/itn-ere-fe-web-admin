@@ -3,8 +3,9 @@ import { isEqual } from 'lodash';
 import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
 import { CategoryDataType } from '@interfaces/Admin/categoryTypes';
-import { TablePaginationType } from '@interfaces/Common/commonTypes';
+import { BaseQueryParamsType, TablePaginationType } from '@interfaces/Common/commonTypes';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { adminCategoryService } from '@services/index';
 
@@ -25,12 +26,12 @@ const AdminCategory = () => {
   const [categoryData, setCategoryData] = useState<CategoryDataType[]>([]);
   const [pagination, setPagination] = useState<TablePaginationType>({
     page: 1,
-    limit: 10,
+    limit: DEFAULT_PAGE_SIZE,
   });
   const [columnSorting, setColumnSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [queryParams, setQueryParams] = useState({
+  const [queryParams, setQueryParams] = useState<BaseQueryParamsType>({
     ...pagination,
   });
 
@@ -44,6 +45,7 @@ const AdminCategory = () => {
 
   const getCategoryData = useCallback(() => {
     setIsLoading(true);
+    console.log(queryParams);
 
     adminCategoryService
       .getCategories(queryParams)
@@ -65,12 +67,14 @@ const AdminCategory = () => {
 
   useEffect(() => {
     getCategoryData();
-  }, [getCategoryData, queryParams]);
+  }, [queryParams]);
 
   useEffect(() => {
-    const newQueryParams = {
+    const newQueryParams: BaseQueryParamsType = {
       ...queryParams,
       ...generateColumnFilterObject(columnFilters),
+      page: pagination.page,
+      limit: pagination.limit,
     };
 
     if (isEqual(newQueryParams, queryParams)) {
@@ -78,7 +82,7 @@ const AdminCategory = () => {
     }
 
     setQueryParams(newQueryParams);
-  }, [columnFilters]);
+  }, [columnFilters, pagination]);
 
   useLayoutEffect(() => {
     setDocumentTitle(t('title'));
