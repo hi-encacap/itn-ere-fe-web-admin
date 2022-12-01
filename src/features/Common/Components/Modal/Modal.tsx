@@ -63,7 +63,7 @@ const Modal = (
   };
 
   return (
-    <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
+    <AnimatePresence initial={false} mode="wait">
       {isOpen && (
         <Dialog
           ref={ref}

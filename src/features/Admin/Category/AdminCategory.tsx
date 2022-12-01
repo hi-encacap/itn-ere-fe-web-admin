@@ -59,23 +59,26 @@ const AdminCategory = () => {
       });
   }, [queryParams]);
 
-  const handleClickEditButton = (code?: Key) => {
+  const handleClickEditButton = useCallback((code?: Key) => {
     // #skipcq: JS-0002
     console.log('Edit button clicked', code);
-  };
+  }, []);
 
-  const handleClickDeleteButton = (code?: Key) => {
-    const selectedCategory = categoryData.find((category) => category.code === code);
-    setSelectedCategory(selectedCategory ?? null);
-    setIsShowDeleteConfirmationModal(true);
-  };
+  const handleClickDeleteButton = useCallback(
+    (code?: Key) => {
+      const category = categoryData.find((item) => item.code === code);
+      setSelectedCategory(category ?? null);
+      setIsShowDeleteConfirmationModal(true);
+    },
+    [categoryData],
+  );
 
-  const handleCloseDeleteConfirmationModal = () => {
+  const handleCloseDeleteConfirmationModal = useCallback(() => {
     setIsShowDeleteConfirmationModal(false);
     setSelectedCategory(null);
-  };
+  }, []);
 
-  const handleConfirmDeleteCategory = () => {
+  const handleConfirmDeleteCategory = useCallback(() => {
     if (!selectedCategory) {
       return;
     }
@@ -93,7 +96,7 @@ const AdminCategory = () => {
         setIsShowDeleteConfirmationModal(false);
         setSelectedCategory(null);
       });
-  };
+  }, [getCategoryData, selectedCategory]);
 
   useEffect(() => {
     getCategoryData();

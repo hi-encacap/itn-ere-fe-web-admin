@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiAlertTriangle } from 'react-icons/fi';
 
@@ -34,14 +34,15 @@ const ConfirmationModal = ({
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleClickConfirmButton = () => {
+  const handleClickConfirmButton = useCallback(() => {
     setIsSubmitting(true);
     onConfirm();
-  };
+  }, [onConfirm]);
 
-  const handleClickCancelButton = () => {
+  const handleClickCancelButton = useCallback(() => {
+    setIsSubmitting(false);
     onClose();
-  };
+  }, [onClose]);
 
   const getClassNameByStatus = (statusParam: ConfirmationModalStatusType) => {
     if (statusParam === 'success') {
@@ -53,15 +54,15 @@ const ConfirmationModal = ({
     return 'flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-red-100 rounded-full sm:mx-0 sm:h-10 sm:w-10';
   };
 
-  const getIconClassNameByStatus = (statusParam: ConfirmationModalStatusType) => {
-    if (statusParam === 'success') {
+  const iconClassName = useMemo(() => {
+    if (status === 'success') {
       return 'text-green-500';
     }
-    if (statusParam === 'danger') {
+    if (status === 'danger') {
       return 'text-red-500';
     }
     return 'text-red-500';
-  };
+  }, [status]);
 
   useEffect(() => {
     if (isOpen) {
@@ -80,7 +81,7 @@ const ConfirmationModal = ({
     >
       <div className="-mx-10 -my-2 pl-6 sm:flex sm:items-start">
         <div className={getClassNameByStatus(status)}>
-          <FiAlertTriangle size={18} className={getIconClassNameByStatus(status)} />
+          <FiAlertTriangle size={18} className={iconClassName} />
         </div>
         <div className="text-center sm:mx-6 sm:mt-0 sm:text-left">
           <h3 className="mt-2 text-lg font-semibold leading-6 text-gray-900">{title}</h3>
