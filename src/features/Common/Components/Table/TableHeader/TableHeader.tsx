@@ -1,7 +1,9 @@
 import { HeaderGroup, OnChangeFn } from '@tanstack/react-table';
+import { debounce } from 'lodash';
 import { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { TABLE_FILTER_GLOBAL_FILTER_ID } from '@constants/defaultValues';
 import { TableColumnFilterState, TableDataType } from '@interfaces/Common/elementTypes';
 
 import { Input } from '@components/Form';
@@ -14,14 +16,19 @@ export interface TableHeaderProps<TData = TableDataType> {
 }
 
 const TableHeader = ({ headerGroups, onChangeFilters }: TableHeaderProps) => {
-  const GLOBAL_FILTER_ID = 'search';
-
   const { t } = useTranslation(['common'], {
     keyPrefix: 'table.header',
   });
 
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
   const [globalFilterValue, setGlobalFilterValue] = useState('');
+
+  const handleChangeFilterDebounced = useCallback(
+    debounce((filters: TableColumnFilterState[]) => {
+      onChangeFilters?.(filters);
+    }, 500),
+    [],
+  );
 
   const handleChangeFilterState = useCallback(
     (filterBy: string, values: string[]) => {
@@ -40,7 +47,7 @@ const TableHeader = ({ headerGroups, onChangeFilters }: TableHeaderProps) => {
         }
       }
 
-      onChangeFilters?.(newFilters);
+      handleChangeFilterDebounced?.(newFilters);
       setColumnFilters(newFilters);
     },
     [columnFilters],
@@ -50,7 +57,7 @@ const TableHeader = ({ headerGroups, onChangeFilters }: TableHeaderProps) => {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
       setGlobalFilterValue(value);
-      handleChangeFilterState(GLOBAL_FILTER_ID, [value]);
+      handleChangeFilterState(TABLE_FILTER_GLOBAL_FILTER_ID, [value]);
     },
     [setGlobalFilterValue, handleChangeFilterState],
   );
