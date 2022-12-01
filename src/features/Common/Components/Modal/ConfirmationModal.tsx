@@ -74,7 +74,7 @@ const ConfirmationModal = ({
       isOpen={isOpen}
       isShowHeader={false}
       isShowFooter={false}
-      contentContainerClassName="max-w-md"
+      contentContainerClassName="max-w-lg"
       onClose={onClose}
       {...props}
     >
@@ -89,7 +89,7 @@ const ConfirmationModal = ({
           </div>
         </div>
       </div>
-      <div className="-mx-10 mt-9 -mb-8 flex items-center justify-end space-x-6 rounded-b-lg bg-gray-50 px-6 py-5">
+      <div className="-mx-10 mt-9 -mb-8 flex items-center justify-end space-x-6 rounded-b-lg bg-gray-50 px-8 py-6">
         <Button
           type="button"
           size="sm"
@@ -103,6 +103,7 @@ const ConfirmationModal = ({
           type="button"
           size="sm"
           className="px-12"
+          color="danger"
           disabled={isSubmitting}
           isLoading={isSubmitting}
           onClick={handleClickConfirmButton}
