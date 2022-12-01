@@ -16,6 +16,7 @@ import LayoutContent from '@common/Layout/Components/LayoutContent';
 import { generateColumnFilterObject, setDocumentTitle } from '@utils/helpers';
 
 import createCategoryTableColumns from './Columns/adminCategoryTableColumn';
+import AdminCategoryDeleteConfirmationModal from './Components/AdminCategoryDeleteConfirmationModal';
 import AdminCategoryHeaderAction from './Components/AdminCategoryHeaderAction';
 
 const AdminCategory = () => {
@@ -34,16 +35,8 @@ const AdminCategory = () => {
   const [queryParams, setQueryParams] = useState<BaseQueryParamsType>({
     ...pagination,
   });
-
-  const handleClickEditButton = (code?: Key) => {
-    // #skipcq: JS-0002
-    console.log('Edit button clicked', code);
-  };
-
-  const handleClickDeleteButton = (code?: Key) => {
-    // #skipcq: JS-0002
-    console.log('Delete button clicked', code);
-  };
+  const [isShowDeleteConfirmationModal, setIsShowDeleteConfirmationModal] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<CategoryDataType | null>(null);
 
   const getCategoryData = useCallback(() => {
     setIsLoading(true);
@@ -65,6 +58,42 @@ const AdminCategory = () => {
         setIsLoading(false);
       });
   }, [queryParams]);
+
+  const handleClickEditButton = (code?: Key) => {
+    // #skipcq: JS-0002
+    console.log('Edit button clicked', code);
+  };
+
+  const handleClickDeleteButton = (code?: Key) => {
+    const selectedCategory = categoryData.find((category) => category.code === code);
+    setSelectedCategory(selectedCategory ?? null);
+    setIsShowDeleteConfirmationModal(true);
+  };
+
+  const handleCloseDeleteConfirmationModal = () => {
+    setIsShowDeleteConfirmationModal(false);
+    setSelectedCategory(null);
+  };
+
+  const handleConfirmDeleteCategory = () => {
+    if (!selectedCategory) {
+      return;
+    }
+
+    adminCategoryService
+      .deleteCategoryByCode(selectedCategory.code)
+      .then(() => {
+        getCategoryData();
+      })
+      .catch((error) => {
+        // #skipcq: JS-0002
+        console.log('Delete category failed', error);
+      })
+      .finally(() => {
+        setIsShowDeleteConfirmationModal(false);
+        setSelectedCategory(null);
+      });
+  };
 
   useEffect(() => {
     getCategoryData();
@@ -103,6 +132,12 @@ const AdminCategory = () => {
         onChangePagination={setPagination}
         onChangeSorting={setColumnSorting}
         onChangeFilters={setColumnFilters}
+      />
+      <AdminCategoryDeleteConfirmationModal
+        isOpen={isShowDeleteConfirmationModal}
+        onClose={handleCloseDeleteConfirmationModal}
+        onConfirm={handleConfirmDeleteCategory}
+        categoryCode={selectedCategory?.code}
       />
     </LayoutContent>
   );

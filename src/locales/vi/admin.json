@@ -29,6 +29,18 @@
             "delete": "Xóa"
           }
         }
+      },
+      "modal": {
+        "delete": {
+          "title": "Xóa danh mục",
+          "message": {
+            "categoryWillBeDeleted": "Danh mục này sẽ bị xóa vĩnh viển, sau đó",
+            "cannotCreateNewPost": "Bạn sẽ không thể tạo bài viết mới với danh mục này.",
+            "oldPostWillBeUnpublished": "Tất cả bài đã xuất bản thuộc danh mục này sẽ chuyển sang trạng thái nháp.",
+            "oldDraftWillBeDeleted": "Tất cả bài nháp thuộc danh mục này sẽ bị xóa vĩnh viển.",
+            "areYouSure": "Bạn có chắc muốn tiếp tục không?"
+          }
+        }
       }
     }
   }

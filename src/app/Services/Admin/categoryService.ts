@@ -22,4 +22,8 @@ const getAllCategories = async (params?: BaseQueryParamsType): Promise<CategoryD
   return response.data;
 };
 
-export { getCategories, getAllCategories };
+const deleteCategoryByCode = async (code: string): Promise<void> => {
+  await axiosInstance.delete(`${ADMIN_CATEGORY_API_PATH.CATEGORIES_PATH}/${code}`);
+};
+
+export { getCategories, getAllCategories, deleteCategoryByCode };

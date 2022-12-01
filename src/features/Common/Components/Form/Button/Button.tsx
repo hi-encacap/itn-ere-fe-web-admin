@@ -25,6 +25,12 @@ const Button = ({
   let spinnerColorClassNames = '';
 
   switch (color) {
+    case 'light':
+      colorClassNames +=
+        'bg-white hover:bg-gray-100 text-slate-700 ring-gray-200 disabled:ring-gray-200 disabled:bg-gray-200';
+      spinnerColorClassNames += disabled === true ? 'border-white' : 'border-gray-400';
+      break;
+
     default:
       colorClassNames +=
         'bg-teal-500 hover:bg-teal-600 text-white ring-teal-500 disabled:ring-gray-200 disabled:bg-gray-200';

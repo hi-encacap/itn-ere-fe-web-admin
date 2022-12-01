@@ -10,7 +10,7 @@ import Modal, { ModalProps } from './Modal';
 
 export interface ConfirmationModalProps extends ModalProps {
   title: string;
-  message: string;
+  message: string | JSX.Element;
   status?: ConfirmationModalStatusType;
   cancelButtonText?: string;
   confirmButtonText?: string;
@@ -83,18 +83,17 @@ const ConfirmationModal = ({
           <FiAlertTriangle size={18} className={getIconClassNameByStatus(status)} />
         </div>
         <div className="text-center sm:mx-6 sm:mt-0 sm:text-left">
-          <h3 className="mt-2 text-lg font-medium leading-6 text-gray-900">{title}</h3>
+          <h3 className="mt-2 text-lg font-semibold leading-6 text-gray-900">{title}</h3>
           <div className="mt-4">
-            <p className="text-sm text-gray-500">{message}</p>
+            <p className="whitespace-pre-line text-sm text-gray-500">{message}</p>
           </div>
         </div>
       </div>
-      <div className="-mx-10 mt-9 -mb-8 flex items-center justify-end space-x-4 rounded-b-lg bg-gray-50 px-6 py-5">
+      <div className="-mx-10 mt-9 -mb-8 flex items-center justify-end space-x-6 rounded-b-lg bg-gray-50 px-6 py-5">
         <Button
           type="button"
           size="sm"
           color="light"
-          className="rounded-md border-2 border-gray-200 shadow-none ring-0"
           onClick={handleClickCancelButton}
           disabled={isSubmitting}
         >
@@ -103,7 +102,7 @@ const ConfirmationModal = ({
         <Button
           type="button"
           size="sm"
-          className="border-primary-700 rounded-md border-2 px-12 shadow-none ring-0 disabled:border-gray-300"
+          className="px-12"
           disabled={isSubmitting}
           isLoading={isSubmitting}
           onClick={handleClickConfirmButton}
