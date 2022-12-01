@@ -1,3 +1,6 @@
+import { first } from 'lodash';
+
+import { TABLE_FILTER_GLOBAL_FILTER_ID } from '@constants/defaultValues';
 import { IMAGE_VARIANT_ENUM } from '@constants/enums';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { ImageDataType } from '@interfaces/Common/imageTypes';
@@ -47,8 +50,12 @@ const getImageURL = (image: ImageDataType, variant?: string): string => {
 };
 
 const generateColumnFilterObject = (filters: TableColumnFilterState[]) => {
-  return filters.reduce<Record<string, string[]>>((filterObject, { filterBy, values }) => {
-    filterObject[filterBy] = values;
+  return filters.reduce<Record<string, string | string[]>>((filterObject, { filterBy, values }) => {
+    if (filterBy === TABLE_FILTER_GLOBAL_FILTER_ID) {
+      filterObject[filterBy] = first(values) as string;
+    } else {
+      filterObject[filterBy] = values;
+    }
 
     return filterObject;
   }, {});
