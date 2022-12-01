@@ -24,7 +24,11 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
     return (Array.isArray(originalFilterBy) ? _.first(originalFilterBy) : originalFilterBy) ?? '';
   }, [headerColumnDef]);
 
-  const filterKey = useMemo(() => headerColumnDef.meta?.filterKey, [headerColumnDef]);
+  const filterKey = useMemo(() => headerColumnDef.meta?.filterKey ?? filterBy, [headerColumnDef, filterBy]);
+  const filterSearchBy = useMemo(
+    () => headerColumnDef.meta?.filterSearchBy ?? filterBy,
+    [headerColumnDef, filterBy],
+  );
   const filterLabelFormatter = useMemo(() => headerColumnDef.meta?.filterLabelFormatter, [headerColumnDef]);
 
   const [filterOptions, setFilterOptions] = useState<TableFilterOptionPrivateItemType[]>([]);
@@ -33,9 +37,11 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
   const [isLoading, setIsLoading] = useState(true);
   const [isShowDropdownMenu, setIsShowDropdownMenu] = useState(false);
   const [queryParams, setQueryParams] = useState<BaseQueryParamsType>({
-    search: '',
-    searchBy: '',
+    searchBy: filterSearchBy,
+    searchValue: '',
   });
+
+  const isInitialMount = useRef(false);
 
   const label = useMemo(() => {
     const originalLabel =
@@ -49,8 +55,6 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
   }, [headerColumnDef, selectedFilters]);
 
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const rawGetFilterOptions = useMemo(() => headerColumnDef.meta?.getFilterOptions, [headerColumnDef]);
 
   const formatFilterOptions = useCallback((rawOptions: TableFilterOptionItemType[]) => {
     const originalFilterBy = headerColumnDef.meta?.filterBy;
@@ -79,22 +83,28 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
     return uniqBy(options, 'value');
   }, []);
 
-  const getFilterOptions = useCallback((query?: BaseQueryParamsType) => {
-    setIsLoading(true);
-    rawGetFilterOptions?.(query)
-      .then((options: unknown[]) => {
-        if ('data' in options) {
-          setFilterOptions(formatFilterOptions(options.data as TableFilterOptionItemType[]));
-          return;
-        }
-        if (Array.isArray(options)) {
-          setFilterOptions(formatFilterOptions(options));
-        }
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
+  const getFilterOptions = useCallback(
+    (customQuery?: BaseQueryParamsType) => {
+      setIsLoading(true);
+      headerColumnDef.meta
+        ?.getFilterOptions?.(customQuery ?? queryParams)
+        .then((options: unknown[]) => {
+          if ('data' in options) {
+            setFilterOptions(formatFilterOptions(options.data as TableFilterOptionItemType[]));
+            return;
+          }
+          if (Array.isArray(options)) {
+            setFilterOptions(formatFilterOptions(options));
+          }
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    },
+    [headerColumnDef, queryParams],
+  );
+
+  const getFilterOptionsDebounced = useCallback(_.debounce(getFilterOptions, 500), []);
 
   const handleToggleDropdownMenu = useCallback(() => {
     setIsShowDropdownMenu((prev) => !prev);
@@ -129,22 +139,23 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
   }, [containerRef.current]);
 
   useEffect(() => {
-    if (!isShowDropdownMenu || !(filterOptions.length === 0)) {
+    if (!isShowDropdownMenu || isInitialMount.current) {
       return;
     }
     getFilterOptions();
+    isInitialMount.current = true;
   }, [isShowDropdownMenu]);
 
   useEffect(() => {
     const newQueryParams = {
-      searchBy: filterBy,
+      ...queryParams,
       searchValue: filterSearchValue,
     };
     if (_.isEqual(newQueryParams, queryParams)) {
       return;
     }
     setQueryParams(newQueryParams);
-    getFilterOptions(newQueryParams);
+    getFilterOptionsDebounced(newQueryParams);
   }, [filterSearchValue]);
 
   return (
@@ -168,6 +179,7 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
         <TableHeaderFilterDropdown
           filterOptions={filterOptions}
           isLoading={isLoading}
+          filterSearchValue={filterSearchValue}
           selectedFilters={selectedFilters}
           onChangeFilters={handleChangeFilters}
           onChangeFilterSearchValue={setFilterSearchValue}

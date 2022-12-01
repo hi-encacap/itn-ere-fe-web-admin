@@ -29,6 +29,7 @@ declare module '@tanstack/table-core' {
     filterBy?: string | string[];
     filterKey?: string;
     filterLabel?: string;
+    filterSearchBy?: string;
     getFilterOptions?: (params?: BaseQueryParamsType) => Promise<unknown[]>;
     filterLabelFormatter?: (value: unknown) => string;
   }

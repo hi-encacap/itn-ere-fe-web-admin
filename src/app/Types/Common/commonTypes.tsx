@@ -52,7 +52,7 @@ export interface BaseQueryParamsType {
   filterBy?: string;
   filterValue?: string;
   sortBy?: string;
-  search?: string;
+  searchValue?: string;
   searchBy?: string;
 }
 
