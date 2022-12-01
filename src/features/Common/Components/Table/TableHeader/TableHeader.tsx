@@ -24,8 +24,8 @@ const TableHeader = ({ headerGroups, onChangeFilters }: TableHeaderProps) => {
   const [globalFilterValue, setGlobalFilterValue] = useState('');
 
   const handleChangeFilterDebounced = useCallback(
-    debounce((columnFilters: TableColumnFilterState[]) => {
-      onChangeFilters?.(columnFilters);
+    debounce((filters: TableColumnFilterState[]) => {
+      onChangeFilters?.(filters);
     }, 500),
     [],
   );
