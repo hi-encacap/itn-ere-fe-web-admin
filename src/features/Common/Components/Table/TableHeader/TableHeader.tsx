@@ -23,7 +23,12 @@ const TableHeader = ({ headerGroups, onChangeFilters }: TableHeaderProps) => {
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
   const [globalFilterValue, setGlobalFilterValue] = useState('');
 
-  const handleChangeFilterDebounced = onChangeFilters && useCallback(debounce(onChangeFilters, 500), []);
+  const handleChangeFilterDebounced = useCallback(
+    debounce((columnFilters: TableColumnFilterState[]) => {
+      onChangeFilters?.(columnFilters);
+    }, 500),
+    [],
+  );
 
   const handleChangeFilterState = useCallback(
     (filterBy: string, values: string[]) => {
