@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { LoadingSkeleton } from '@components/Loading';
@@ -13,6 +13,7 @@ export interface TableHeaderFilterDropdownProps {
   filterOptions: TableFilterOptionPrivateItemType[];
   isLoading?: boolean;
   selectedFilters: string[];
+  filterSearchValue: string;
   onChangeFilters: (selectedItems: string[]) => void;
   onChangeFilterSearchValue: (searchValue: string) => void;
   onClearSelectedFilters: () => void;
@@ -22,6 +23,7 @@ const TableHeaderFilterDropdown = ({
   isLoading,
   filterOptions,
   selectedFilters,
+  filterSearchValue,
   onChangeFilters,
   onChangeFilterSearchValue,
   onClearSelectedFilters,
@@ -29,8 +31,6 @@ const TableHeaderFilterDropdown = ({
   const { t } = useTranslation(['common'], {
     keyPrefix: 'common:table.header.filter',
   });
-
-  const [filterSearchValue, setFilterSearchValue] = useState('');
 
   const handleChangeSelectedFilter = useCallback(
     (value: string, checked: boolean) => {
@@ -49,14 +49,9 @@ const TableHeaderFilterDropdown = ({
     [selectedFilters, onChangeFilters],
   );
 
-  const onChangeFilterSearchValueDebounced = useCallback(_.debounce(onChangeFilterSearchValue, 500), [
-    onChangeFilterSearchValue,
-  ]);
-
   const handleChangeFilterSearchValue = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    onChangeFilterSearchValueDebounced(value);
-    setFilterSearchValue(value);
+    onChangeFilterSearchValue(value);
   }, []);
 
   const handleClearSelectedFilters = useCallback(() => {
@@ -71,6 +66,7 @@ const TableHeaderFilterDropdown = ({
         placeholder={t('search.placeholder') ?? ''}
         className="h-10 border-b-2 border-gray-50 outline-none disabled:cursor-not-allowed disabled:bg-transparent"
         disabled={isLoading}
+        autoComplete="off"
         value={filterSearchValue}
         onChange={handleChangeFilterSearchValue}
       />
