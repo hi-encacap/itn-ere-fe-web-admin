@@ -8,8 +8,10 @@ module.exports = {
     'standard-with-typescript',
     'plugin:prettier/recommended',
     'plugin:react/jsx-runtime',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
-  overrides: [],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
