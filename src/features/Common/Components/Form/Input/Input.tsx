@@ -4,7 +4,8 @@ import { Control, useController } from 'react-hook-form';
 import UncontrolledInput, { UncontrolledInputProps } from './UncontrolledInput';
 
 export interface InputProps extends UncontrolledInputProps {
-  control?: Control;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  control?: Control<any>;
 }
 
 const Input = ({ control, name, ...inputProps }: InputProps) => {

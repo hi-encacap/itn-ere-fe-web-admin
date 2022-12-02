@@ -40,6 +40,24 @@
             "oldDraftWillBeDeleted": "Tất cả bài nháp thuộc danh mục này sẽ bị xóa vĩnh viển.",
             "areYouSure": "Bạn có chắc muốn tiếp tục không?"
           }
+        },
+        "modification": {
+          "title": {
+            "create": "Thêm danh mục",
+            "edit": "Chỉnh sửa danh mục"
+          },
+          "form": {
+            "name": {
+              "label": "Tên danh mục",
+              "placeholder": "Nhập tên danh mục",
+              "required": "Tên danh mục không được phép để trống."
+            },
+            "categoryGroupCode": {
+              "label": "Nhóm danh mục",
+              "placeholder": "Chọn nhóm danh mục",
+              "required": "Nhóm danh mục không được phép để trống."
+            }
+          }
         }
       }
     }

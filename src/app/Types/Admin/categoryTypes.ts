@@ -6,3 +6,8 @@ export interface CategoryDataType {
   categoryGroupCode: string;
   thumbnail: ImageDataType;
 }
+
+export interface CategoryFormDataType {
+  name: string;
+  categoryGroupCode: string;
+}
