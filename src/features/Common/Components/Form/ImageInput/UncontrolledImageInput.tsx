@@ -46,9 +46,9 @@ const UncontrolledImageInput = ({
           }
           onChange?.(newFileData);
         })
-        .catch((error) => {
+        .catch((responseError) => {
           // #skipcq: JS-0002
-          console.log(error);
+          console.log(responseError);
           setImages((prev) => prev.filter((image) => image.id !== file.id));
         })
         .finally(() => {
