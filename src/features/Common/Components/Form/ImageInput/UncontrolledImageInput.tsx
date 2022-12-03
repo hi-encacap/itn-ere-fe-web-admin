@@ -47,6 +47,7 @@ const UncontrolledImageInput = ({
           onChange?.(newFileData);
         })
         .catch((error) => {
+          // #skipcq: JS-0002
           console.log(error);
           setImages((prev) => prev.filter((image) => image.id !== file.id));
         })
@@ -94,7 +95,6 @@ const UncontrolledImageInput = ({
             '-mt-2 block cursor-default pb-2 text-sm font-medium text-slate-500',
             error && 'text-red-500',
           )}
-          role="button"
         >
           {label}
         </label>

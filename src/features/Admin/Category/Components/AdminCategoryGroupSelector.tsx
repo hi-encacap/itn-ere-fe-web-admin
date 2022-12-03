@@ -7,10 +7,9 @@ import { adminCategoryGroupService } from '@services/index';
 import { Select } from '@components/Form';
 import { SelectProps } from '@components/Form/Select/Select';
 
-interface AdminCategoryGroupSelectorProps
-  extends Omit<SelectProps, 'options' | 'name' | 'label' | 'placeholder'> {}
-
-const AdminCategoryGroupSelector = ({ ...props }: AdminCategoryGroupSelectorProps) => {
+const AdminCategoryGroupSelector = ({
+  ...props
+}: Omit<SelectProps, 'options' | 'name' | 'label' | 'placeholder'>) => {
   const { t } = useTranslation('admin', {
     keyPrefix: 'admin:pages.category.modal.modification',
   });

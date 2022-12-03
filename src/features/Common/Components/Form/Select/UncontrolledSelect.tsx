@@ -80,7 +80,6 @@ const UncontrolledSelect = ({
             '-mt-2 block cursor-default pb-2 text-sm font-medium text-slate-500',
             error && 'text-red-500',
           )}
-          role="button"
         >
           {label}
         </label>
