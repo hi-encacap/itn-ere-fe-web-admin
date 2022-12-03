@@ -22,6 +22,16 @@ const getAllCategories = async (params?: BaseQueryParamsType): Promise<CategoryD
   return response.data;
 };
 
+const createCategory = async (data: CategoryFormDataType): Promise<CategoryDataType> => {
+  const response = await axiosInstance.post(ADMIN_CATEGORY_API_PATH.CATEGORIES_PATH, {
+    ...data,
+    code: data.name,
+    thumbnailId: data.thumbnail?.id,
+  });
+
+  return response.data.data;
+};
+
 const updateCategoryByCode = async (code: string, data: CategoryFormDataType): Promise<CategoryDataType> => {
   const response = await axiosInstance.put(ADMIN_CATEGORY_API_PATH.CATEGORY_PATH(code), data);
 
@@ -32,4 +42,4 @@ const deleteCategoryByCode = async (code: string): Promise<void> => {
   await axiosInstance.delete(`${ADMIN_CATEGORY_API_PATH.CATEGORIES_PATH}/${code}`);
 };
 
-export { getCategories, getAllCategories, updateCategoryByCode, deleteCategoryByCode };
+export { getCategories, getAllCategories, createCategory, updateCategoryByCode, deleteCategoryByCode };

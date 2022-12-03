@@ -161,6 +161,8 @@ const AdminCategory = () => {
         isOpen={isShowModificationModal}
         category={selectedCategory}
         onClose={handleCloseModificationModal}
+        onUpdated={getCategoryData}
+        onCreated={getCategoryData}
       />
     </LayoutContent>
   );

@@ -1,10 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { omit } from 'lodash';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { CategoryDataType, CategoryFormDataType } from '@interfaces/Admin/categoryTypes';
+import { adminCategoryService } from '@services/index';
 
 import { Button, Input } from '@components/Form';
 import ImageInput from '@components/Form/ImageInput/ImageInput';
@@ -17,16 +18,22 @@ import AdminCategoryGroupSelector from './AdminCategoryGroupSelector';
 
 interface AdminCategoryModificationModalProps extends ModalProps {
   category: CategoryDataType | null;
+  onCreated: () => void;
+  onUpdated: () => void;
 }
 
 const AdminCategoryModificationModal = ({
   category,
   onClose,
+  onCreated,
+  onUpdated,
   ...props
 }: AdminCategoryModificationModalProps) => {
   const { t } = useTranslation('admin', {
     keyPrefix: 'admin:pages.category.modal.modification',
   });
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const defaultValues = {
     name: '',
@@ -44,8 +51,55 @@ const AdminCategoryModificationModal = ({
     defaultValues,
   });
 
+  const updateCategory = useCallback(
+    (data: CategoryFormDataType) => {
+      if (!category) {
+        return;
+      }
+
+      setIsLoading(true);
+
+      adminCategoryService
+        .updateCategoryByCode(category?.code, data)
+        .then(() => {
+          // TODO: Adapt toast.
+          onUpdated();
+          onClose();
+        })
+        .catch(() => {
+          // TODO: Adapt toast.
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    },
+    [category],
+  );
+
+  const createCategory = useCallback((data: CategoryFormDataType) => {
+    setIsLoading(true);
+
+    adminCategoryService
+      .createCategory(data)
+      .then(() => {
+        // TODO: Adapt toast.
+        onCreated();
+        onClose();
+      })
+      .catch(() => {
+        // TODO: Adapt toast.
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
   const handleSubmit = useFormSubmit((data) => {
-    console.log(data);
+    if (category) {
+      updateCategory(data);
+      return;
+    }
+    createCategory(data);
   });
 
   const handleClose = useCallback(() => {
@@ -64,6 +118,7 @@ const AdminCategoryModificationModal = ({
   return (
     <Modal
       title={category ? t('title.edit') : t('title.create')}
+      isLoading={isLoading}
       onConfirm={handleSubmit}
       onClose={handleClose}
       {...omit(props, 'onSubmit')}
@@ -74,6 +129,7 @@ const AdminCategoryModificationModal = ({
           label={t('form.name.label')}
           placeholder={t('form.name.placeholder')}
           className="block"
+          autoComplete="off"
           control={control}
         />
         <AdminCategoryGroupSelector control={control} />
