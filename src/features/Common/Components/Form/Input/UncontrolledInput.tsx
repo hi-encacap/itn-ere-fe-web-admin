@@ -44,8 +44,9 @@ const UncontrolledInput = ({
       )}
       <div
         className={twMerge(
-          'group inline-block rounded-lg border-2 border-gray-100 focus-within:border-blue-500',
-          error && 'border-red-500 focus-within:border-red-500',
+          'group inline-block rounded-lg border-2 border-gray-100 duration-100 focus-within:border-blue-500 hover:border-gray-200 focus-within:hover:border-blue-500',
+          error &&
+            'border-red-500 focus-within:border-red-500 hover:border-red-500 focus-within:hover:border-red-500',
           inputSizeClassName,
           className,
         )}

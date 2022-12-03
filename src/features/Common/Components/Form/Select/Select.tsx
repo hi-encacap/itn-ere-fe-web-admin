@@ -1,16 +1,16 @@
 import { omit } from 'lodash';
 import { Control, useController } from 'react-hook-form';
 
-import UncontrolledInput, { UncontrolledInputProps } from './UncontrolledInput';
+import UncontrolledSelect, { UncontrolledSelectProps } from './UncontrolledSelect';
 
-export interface InputProps extends UncontrolledInputProps {
+export interface SelectProps extends UncontrolledSelectProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control?: Control<any>;
 }
 
-const Input = ({ control, name, ...inputProps }: InputProps) => {
+const Select = ({ control, name, ...inputProps }: SelectProps) => {
   if (!control) {
-    return <UncontrolledInput name={name} {...inputProps} />;
+    return <UncontrolledSelect name={name} {...inputProps} />;
   }
 
   const {
@@ -22,7 +22,7 @@ const Input = ({ control, name, ...inputProps }: InputProps) => {
   });
 
   return (
-    <UncontrolledInput
+    <UncontrolledSelect
       name={name}
       onChange={onChange}
       onBlur={onBlur}
@@ -33,4 +33,4 @@ const Input = ({ control, name, ...inputProps }: InputProps) => {
   );
 };
 
-export default Input;
+export default Select;

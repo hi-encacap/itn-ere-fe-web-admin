@@ -1,5 +1,6 @@
 import { ColumnDef as ReactTableColumnDef, RowData } from '@tanstack/react-table';
 import { Key } from 'react';
+import { AnySchema } from 'yup';
 
 export type AlertType = 'default' | 'success' | 'warning' | 'error';
 
@@ -8,6 +9,7 @@ export type ContentWrapperHeaderActionType = Record<string, unknown>;
 export interface SelectOptionItemType {
   value: string | number;
   label: string;
+  disabled?: boolean;
 }
 
 export type ConfirmationModalStatusType = 'success' | 'danger';
@@ -41,3 +43,22 @@ export interface TableFilterOptionItemType {
 }
 
 export type FormElementSizeType = 'xs' | 'sm' | 'normal';
+
+export interface FormElementBaseProps {
+  name: string;
+  className?: string;
+  error?: string;
+  label?: string;
+  placeholder?: string;
+}
+
+export interface FormImageInputDataType {
+  id: string;
+  file: File | null;
+  preview: string;
+  error?: string;
+}
+
+export type FormValidationSchemaShapeType<T> = {
+  [P in keyof T]: AnySchema;
+};

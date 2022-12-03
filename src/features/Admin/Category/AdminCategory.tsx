@@ -18,6 +18,7 @@ import { generateColumnFilterObject, setDocumentTitle } from '@utils/helpers';
 import createCategoryTableColumns from './Columns/adminCategoryTableColumn';
 import AdminCategoryDeleteConfirmationModal from './Components/AdminCategoryDeleteConfirmationModal';
 import AdminCategoryHeaderAction from './Components/AdminCategoryHeaderAction';
+import AdminCategoryModificationModal from './Components/AdminCategoryModificationModal';
 
 const AdminCategory = () => {
   const { t } = useTranslation('admin', {
@@ -36,6 +37,7 @@ const AdminCategory = () => {
     ...pagination,
   });
   const [isShowDeleteConfirmationModal, setIsShowDeleteConfirmationModal] = useState(false);
+  const [isShowModificationModal, setIsShowModificationModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<CategoryDataType | null>(null);
 
   const getCategoryData = useCallback(() => {
@@ -58,11 +60,6 @@ const AdminCategory = () => {
         setIsLoading(false);
       });
   }, [queryParams]);
-
-  const handleClickEditButton = useCallback((code?: Key) => {
-    // #skipcq: JS-0002
-    console.log('Edit button clicked', code);
-  }, []);
 
   const handleClickDeleteButton = useCallback(
     (code?: Key) => {
@@ -98,6 +95,24 @@ const AdminCategory = () => {
       });
   }, [getCategoryData, selectedCategory]);
 
+  const handleClickEditButton = useCallback(
+    (code?: Key) => {
+      setSelectedCategory(categoryData.find((item) => item.code === code) ?? null);
+      setIsShowModificationModal(true);
+    },
+    [categoryData],
+  );
+
+  const handleClickAddButton = useCallback(() => {
+    setSelectedCategory(null);
+    setIsShowModificationModal(true);
+  }, []);
+
+  const handleCloseModificationModal = useCallback(() => {
+    setIsShowModificationModal(false);
+    setSelectedCategory(null);
+  }, []);
+
   useEffect(() => {
     getCategoryData();
   }, [queryParams]);
@@ -122,7 +137,7 @@ const AdminCategory = () => {
   }, [t]);
 
   return (
-    <LayoutContent title={t('title')} actions={<AdminCategoryHeaderAction />}>
+    <LayoutContent title={t('title')} actions={<AdminCategoryHeaderAction onClick={handleClickAddButton} />}>
       <Table
         data={categoryData}
         columns={createCategoryTableColumns(t, {
@@ -141,6 +156,13 @@ const AdminCategory = () => {
         onClose={handleCloseDeleteConfirmationModal}
         onConfirm={handleConfirmDeleteCategory}
         categoryCode={selectedCategory?.code}
+      />
+      <AdminCategoryModificationModal
+        isOpen={isShowModificationModal}
+        category={selectedCategory}
+        onClose={handleCloseModificationModal}
+        onUpdated={getCategoryData}
+        onCreated={getCategoryData}
       />
     </LayoutContent>
   );

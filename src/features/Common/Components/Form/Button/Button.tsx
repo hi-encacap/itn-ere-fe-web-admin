@@ -7,7 +7,7 @@ export type ButtonColorType = 'primary' | 'light' | 'blue' | 'orange' | 'gray' |
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: FormElementSizeType;
   color?: ButtonColorType;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   isLoading?: boolean;
 }
 
@@ -64,8 +64,8 @@ const Button = ({
         sizeClassNames,
         'duration-100s font-semibold outline-none ring-2 transition-colors',
         colorClassNames,
-        className,
         'flex items-center justify-center',
+        className,
       )}
       disabled={disabled}
       {...anotherProps}

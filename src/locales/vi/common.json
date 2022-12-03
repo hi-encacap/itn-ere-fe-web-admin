@@ -63,5 +63,10 @@
   },
   "alert": {
     "errorTrackingCode": "Mã lỗi"
+  },
+  "form": {
+    "imageInput": {
+      "placeholder": "Chọn ảnh"
+    }
   }
 }

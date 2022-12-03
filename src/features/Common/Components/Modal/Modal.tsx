@@ -1,12 +1,12 @@
 import { Dialog } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { forwardRef } from 'react';
+import { forwardRef, HTMLAttributes } from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
 import { Button } from '@components/Form';
 
-export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onSubmit'> {
   isOpen: boolean;
   isShowHeader?: boolean;
   isShowFooter?: boolean;
@@ -102,17 +102,11 @@ const Modal = (
                   </div>
                   {isShowFooter && (
                     <div className="flex items-center justify-end space-x-6 rounded-b-lg bg-gray-50 px-10 py-6">
-                      <Button
-                        className="rounded-md border-2 border-gray-200 shadow-none ring-0"
-                        size="sm"
-                        color="light"
-                        disabled={isLoading}
-                        onClick={onClose}
-                      >
+                      <Button size="sm" color="light" disabled={isLoading} onClick={onClose}>
                         {t('close')}
                       </Button>
                       <Button
-                        className="border-primary-700 rounded-md border-2 px-12 shadow-none ring-0 disabled:border-gray-300"
+                        className="px-12"
                         size="sm"
                         disabled={isLoading || !isAllowSubmit}
                         isLoading={isLoading}
