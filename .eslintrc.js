@@ -42,6 +42,12 @@ module.exports = {
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off',
+    '@typescript-eslint/no-floating-promises': [
+      'error',
+      {
+        ignoreVoid: true,
+      },
+    ],
     '@typescript-eslint/no-misused-promises': [
       'error',
       {
