@@ -27,6 +27,7 @@ const ImageInputItemPlaceholder = ({ isMultiple = false, onChooseImage }: ImageI
       <BsImageAlt size={26} />
       <div className="mt-3 text-xs text-input-placeholder">{t('placeholder')}</div>
       <input
+        id="image_input"
         type="file"
         multiple={isMultiple}
         className="absolute inset-0 cursor-pointer opacity-0"

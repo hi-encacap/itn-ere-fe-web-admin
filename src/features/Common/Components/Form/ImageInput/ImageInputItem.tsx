@@ -27,7 +27,7 @@ const ImageInputItem = ({
   return (
     <div
       className={twMerge(
-        'group relative inline-block aspect-square overflow-hidden rounded-lg border-2 border-gray-100 duration-100 focus-within:border-blue-500 hover:border-gray-200',
+        'group relative inline-block aspect-square overflow-hidden rounded-lg border-2 border-gray-100 duration-100  hover:border-gray-200',
         error && 'border-red-500 hover:border-red-500',
       )}
     >

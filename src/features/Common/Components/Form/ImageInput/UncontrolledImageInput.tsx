@@ -40,6 +40,7 @@ const UncontrolledImageInput = ({
         })
         .catch((error) => {
           console.log(error);
+          setImages((prev) => prev.filter((image) => image.id !== file.id));
         })
         .finally(() => {
           setUploadingImageIds((prev) => prev.filter((id) => id !== file.id));
@@ -77,6 +78,7 @@ const UncontrolledImageInput = ({
     <div>
       {label && (
         <label
+          htmlFor="image_input"
           className={twMerge(
             '-mt-2 block cursor-default pb-2 text-sm font-medium text-slate-500',
             error && 'text-red-500',
