@@ -57,6 +57,10 @@
               "placeholder": "Chọn nhóm danh mục",
               "required": "Nhóm danh mục không được phép để trống."
             },
+            "categoryGroupName": {
+              "estate": "Bất động sản",
+              "news": "Tin tức"
+            },
             "thumbnail": {
               "label": "Hình ảnh",
               "placeholder": "Chọn hình ảnh",

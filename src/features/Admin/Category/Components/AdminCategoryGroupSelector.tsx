@@ -26,7 +26,7 @@ const AdminCategoryGroupSelector = ({ ...props }: AdminCategoryGroupSelectorProp
       .then((categoryGroups) => {
         const options = categoryGroups.map((categoryGroup) => ({
           value: categoryGroup.code,
-          label: categoryGroup.name,
+          label: t(`form.categoryGroupName.${categoryGroup.code}`),
         }));
 
         setCategoryGroupOptions(options);
