@@ -6,6 +6,7 @@ const AUTHENTICATION_API_PATH = {
 
 const ADMIN_CATEGORY_API_PATH = {
   CATEGORIES_PATH: '/admin/categories',
+  CATEGORY_PATH: (code: string) => `/admin/categories/${code}`,
   DELETE_CATEGORY_PATH: (code: string) => `/admin/categories/${code}`,
 };
 

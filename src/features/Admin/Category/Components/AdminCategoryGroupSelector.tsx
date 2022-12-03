@@ -48,6 +48,7 @@ const AdminCategoryGroupSelector = ({ ...props }: AdminCategoryGroupSelectorProp
       placeholder={t('form.categoryGroupCode.placeholder')}
       className="block"
       options={categoryGroupOptions}
+      disabled={isLoading}
       {...props}
     />
   );

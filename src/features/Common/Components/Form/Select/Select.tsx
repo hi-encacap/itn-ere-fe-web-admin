@@ -3,12 +3,12 @@ import { Control, useController } from 'react-hook-form';
 
 import UncontrolledSelect, { UncontrolledSelectProps } from './UncontrolledSelect';
 
-export interface InputProps extends UncontrolledSelectProps {
+export interface SelectProps extends UncontrolledSelectProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control?: Control<any>;
 }
 
-const Select = ({ control, name, ...inputProps }: InputProps) => {
+const Select = ({ control, name, ...inputProps }: SelectProps) => {
   if (!control) {
     return <UncontrolledSelect name={name} {...inputProps} />;
   }

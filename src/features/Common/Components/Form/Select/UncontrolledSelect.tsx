@@ -13,6 +13,7 @@ export interface UncontrolledSelectProps
     FormElementBaseProps {
   options: SelectOptionItemType[];
   value?: SelectOptionItemType['value'];
+  disabled?: boolean;
   onChange?: (value: SelectOptionItemType['value']) => void;
 }
 
@@ -23,6 +24,7 @@ const UncontrolledSelect = ({
   error,
   className,
   placeholder,
+  disabled,
   onChange,
 }: UncontrolledSelectProps) => {
   const [isShowOptions, setIsShowOptions] = useState(false);
@@ -100,6 +102,7 @@ const UncontrolledSelect = ({
           )}
           readOnly
           value={selectLabel ?? placeholder}
+          disabled={disabled}
           onFocus={handleFocusInput}
           onBlur={handleBlurInput}
         />
