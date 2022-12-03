@@ -24,9 +24,14 @@ const UncontrolledImageInput = ({
   const [images, setImages] = useState<FormImageInputDataType[]>([]);
   const [uploadingImageIds, setUploadingImageIds] = useState<string[]>([]);
   const [uploadedImages, setUploadedImages] = useState<FormImageInputDataType[]>([]);
+  const [allowForceSetImages, setAllowForceSetImages] = useState(true);
 
   const uploadImage = useCallback(
     (file: FormImageInputDataType) => {
+      if (!file.file) {
+        return;
+      }
+
       setUploadingImageIds((prev) => [...prev, file.id]);
 
       uploadService
@@ -34,7 +39,9 @@ const UncontrolledImageInput = ({
         .then((response) => {
           const newFileData = { ...file, id: response.data.id };
           if (isMultiple) {
-            setUploadedImages((prev) => [...prev, newFileData]);
+            const newUploadedImages = [...uploadedImages, newFileData];
+            onChange?.(newUploadedImages);
+            setUploadedImages(newUploadedImages);
             return;
           }
           onChange?.(newFileData);
@@ -61,26 +68,21 @@ const UncontrolledImageInput = ({
 
   const handleRemoveImage = useCallback(
     (id: FormImageInputDataType['id']) => {
+      const newUploadedImages = uploadedImages.filter((image) => image.id !== id);
       setImages((prev) => prev.filter((image) => image.id !== id));
-      setUploadedImages((prev) => prev.filter((image) => image.id !== id));
+      setUploadedImages(newUploadedImages);
+      onChange?.(newUploadedImages);
     },
-    [setImages, setUploadedImages],
+    [uploadedImages],
   );
 
   useEffect(() => {
-    if (isMultiple) {
-      onChange?.(uploadedImages);
-      return;
-    }
-    onChange?.(uploadedImages[0]);
-  }, [uploadedImages]);
-
-  useEffect(() => {
-    if (images.length || !value) {
+    if (!allowForceSetImages || !value) {
       return;
     }
 
     setImages(Array.isArray(value) ? value : [value]);
+    setAllowForceSetImages(false);
   }, [value]);
 
   return (
@@ -112,7 +114,7 @@ const UncontrolledImageInput = ({
           <ImageInputItem isMultiple={isMultiple} error={Boolean(error)} onChooseImage={handleChooseImage} />
         )}
       </div>
-      {error && <div className="mt-1 text-sm text-red-500">{error}</div>}
+      {error && <div className="mt-1.5 text-sm text-red-500">{error}</div>}
     </div>
   );
 };

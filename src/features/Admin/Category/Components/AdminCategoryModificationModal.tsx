@@ -12,10 +12,12 @@ import ImageInput from '@components/Form/ImageInput/ImageInput';
 import Select from '@components/Form/Select/Select';
 import Modal, { ModalProps } from '@components/Modal/Modal';
 
+import { generateImageFormData } from '@utils/image';
+
 import { categoryFormSchema } from '../Schemas/categoryFormSchema';
 
 interface AdminCategoryModificationModalProps extends ModalProps {
-  category?: CategoryDataType;
+  category: CategoryDataType | null;
 }
 
 const AdminCategoryModificationModal = ({
@@ -27,9 +29,15 @@ const AdminCategoryModificationModal = ({
     keyPrefix: 'admin:pages.category.modal.modification',
   });
 
+  const defaultValues = {
+    name: '',
+    categoryGroupCode: '',
+    thumbnail: null,
+  };
+
   const [categoryGroupOptions] = useState<SelectOptionItemType[]>([
     {
-      value: '1',
+      value: 'estate',
       label: 'Group 1',
     },
     {
@@ -42,25 +50,28 @@ const AdminCategoryModificationModal = ({
     control,
     handleSubmit: useFormSubmit,
     reset,
-    watch,
+    setValue,
   } = useForm<CategoryFormDataType>({
     resolver: yupResolver(categoryFormSchema(t)),
+    defaultValues,
   });
-
-  const thumbnail = watch('thumbnail');
 
   const handleSubmit = useFormSubmit((data) => {
     console.log(data);
   });
 
   const handleClose = useCallback(() => {
-    onClose();
     reset();
-  }, [onClose]);
+    onClose();
+  }, [onClose, reset]);
 
   useEffect(() => {
-    console.log(thumbnail);
-  }, [thumbnail]);
+    if (category !== null) {
+      setValue('name', category.name);
+      setValue('categoryGroupCode', category.categoryGroupCode);
+      setValue('thumbnail', generateImageFormData(category.thumbnail));
+    }
+  }, [category]);
 
   return (
     <Modal

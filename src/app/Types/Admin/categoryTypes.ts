@@ -11,5 +11,6 @@ export interface CategoryDataType {
 export interface CategoryFormDataType {
   name: string;
   categoryGroupCode: string;
-  thumbnail: FormImageInputDataType;
+  thumbnail: FormImageInputDataType | null;
+  thumbnailId?: string;
 }

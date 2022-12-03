@@ -103,6 +103,11 @@ const AdminCategory = () => {
     [categoryData],
   );
 
+  const handleClickAddButton = useCallback(() => {
+    setSelectedCategory(null);
+    setIsShowModificationModal(true);
+  }, []);
+
   const handleCloseModificationModal = useCallback(() => {
     setIsShowModificationModal(false);
     setSelectedCategory(null);
@@ -132,7 +137,7 @@ const AdminCategory = () => {
   }, [t]);
 
   return (
-    <LayoutContent title={t('title')} actions={<AdminCategoryHeaderAction />}>
+    <LayoutContent title={t('title')} actions={<AdminCategoryHeaderAction onClick={handleClickAddButton} />}>
       <Table
         data={categoryData}
         columns={createCategoryTableColumns(t, {
@@ -154,6 +159,7 @@ const AdminCategory = () => {
       />
       <AdminCategoryModificationModal
         isOpen={isShowModificationModal}
+        category={selectedCategory}
         onClose={handleCloseModificationModal}
       />
     </LayoutContent>

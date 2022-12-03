@@ -1,5 +1,6 @@
 import { ColumnDef as ReactTableColumnDef, RowData } from '@tanstack/react-table';
 import { Key } from 'react';
+import { AnySchema } from 'yup';
 
 export type AlertType = 'default' | 'success' | 'warning' | 'error';
 
@@ -53,7 +54,11 @@ export interface FormElementBaseProps {
 
 export interface FormImageInputDataType {
   id: string;
-  file: File;
+  file: File | null;
   preview: string;
   error?: string;
 }
+
+export type FormValidationSchemaShapeType<T> = {
+  [P in keyof T]: AnySchema;
+};
