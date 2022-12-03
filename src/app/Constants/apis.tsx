@@ -9,4 +9,8 @@ const ADMIN_CATEGORY_API_PATH = {
   DELETE_CATEGORY_PATH: (code: string) => `/admin/categories/${code}`,
 };
 
-export { AUTHENTICATION_API_PATH, ADMIN_CATEGORY_API_PATH };
+const UPLOAD_API_PATH = {
+  UPLOAD_IMAGE_PATH: '/admin/cloudflare/images/single',
+};
+
+export { AUTHENTICATION_API_PATH, ADMIN_CATEGORY_API_PATH, UPLOAD_API_PATH };

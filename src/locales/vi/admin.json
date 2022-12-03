@@ -56,6 +56,11 @@
               "label": "Nhóm danh mục",
               "placeholder": "Chọn nhóm danh mục",
               "required": "Nhóm danh mục không được phép để trống."
+            },
+            "thumbnail": {
+              "label": "Hình ảnh",
+              "placeholder": "Chọn hình ảnh",
+              "required": "Hình ảnh không được phép để trống."
             }
           }
         }

@@ -3,18 +3,15 @@ import { HTMLAttributes, useCallback, useMemo, useState } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
 import { twMerge } from 'tailwind-merge';
 
-import { SelectOptionItemType } from '@interfaces/Common/elementTypes';
+import { FormElementBaseProps, SelectOptionItemType } from '@interfaces/Common/elementTypes';
 
 import FormElementError from '../FormElementError';
 import SelectOptionDropdown from './SelecOptionDropdown';
 
-export interface UncontrolledSelectProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
-  name: string;
+export interface UncontrolledSelectProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>,
+    FormElementBaseProps {
   options: SelectOptionItemType[];
-  className?: string;
-  error?: string;
-  label?: string;
-  placeholder?: string;
   value?: SelectOptionItemType['value'];
   onChange?: (value: SelectOptionItemType['value']) => void;
 }

@@ -42,3 +42,18 @@ export interface TableFilterOptionItemType {
 }
 
 export type FormElementSizeType = 'xs' | 'sm' | 'normal';
+
+export interface FormElementBaseProps {
+  name: string;
+  className?: string;
+  error?: string;
+  label?: string;
+  placeholder?: string;
+}
+
+export interface FormImageInputDataType {
+  id: string;
+  file: File;
+  preview: string;
+  error?: string;
+}

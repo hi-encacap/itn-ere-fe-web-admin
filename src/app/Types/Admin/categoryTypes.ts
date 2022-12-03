@@ -1,3 +1,4 @@
+import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
 import { ImageDataType } from '@interfaces/Common/imageTypes';
 
 export interface CategoryDataType {
@@ -10,4 +11,5 @@ export interface CategoryDataType {
 export interface CategoryFormDataType {
   name: string;
   categoryGroupCode: string;
+  thumbnail: FormImageInputDataType;
 }

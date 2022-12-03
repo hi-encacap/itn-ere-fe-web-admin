@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { omit } from 'lodash';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -8,6 +8,7 @@ import { CategoryDataType, CategoryFormDataType } from '@interfaces/Admin/catego
 import { SelectOptionItemType } from '@interfaces/Common/elementTypes';
 
 import { Button, Input } from '@components/Form';
+import ImageInput from '@components/Form/ImageInput/ImageInput';
 import Select from '@components/Form/Select/Select';
 import Modal, { ModalProps } from '@components/Modal/Modal';
 
@@ -41,9 +42,12 @@ const AdminCategoryModificationModal = ({
     control,
     handleSubmit: useFormSubmit,
     reset,
+    watch,
   } = useForm<CategoryFormDataType>({
     resolver: yupResolver(categoryFormSchema(t)),
   });
+
+  const thumbnail = watch('thumbnail');
 
   const handleSubmit = useFormSubmit((data) => {
     console.log(data);
@@ -53,6 +57,10 @@ const AdminCategoryModificationModal = ({
     onClose();
     reset();
   }, [onClose]);
+
+  useEffect(() => {
+    console.log(thumbnail);
+  }, [thumbnail]);
 
   return (
     <Modal
@@ -77,6 +85,7 @@ const AdminCategoryModificationModal = ({
           control={control}
           options={categoryGroupOptions}
         />
+        <ImageInput name="thumbnail" label={t('form.thumbnail.label')} control={control} />
         <Button type="submit" className="hidden" />
       </form>
     </Modal>

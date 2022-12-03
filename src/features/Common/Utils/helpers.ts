@@ -1,4 +1,6 @@
+import dayjs from 'dayjs';
 import { first } from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 
 import { TABLE_FILTER_GLOBAL_FILTER_ID } from '@constants/defaultValues';
 import { IMAGE_VARIANT_ENUM } from '@constants/enums';
@@ -61,4 +63,11 @@ const generateColumnFilterObject = (filters: TableColumnFilterState[]) => {
   }, {});
 };
 
-export { setDocumentTitle, slugify, getImageURL, generateColumnFilterObject };
+const randomStringPrefix = (separator?: string) => {
+  const dayPrefix: string = dayjs().format('YYYYMMDD');
+  const uuidPrefix: string = uuidv4().replace(/-/g, '').toUpperCase();
+
+  return `${dayPrefix}${separator ?? ''}${uuidPrefix}`;
+};
+
+export { setDocumentTitle, slugify, getImageURL, generateColumnFilterObject, randomStringPrefix };
