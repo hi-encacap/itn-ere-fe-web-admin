@@ -9,7 +9,7 @@ import { convertToImageDataFromFiles } from '@utils/image';
 import ImageInputItem from './ImageInputItem';
 
 export interface UncontrolledImageInputProps extends FormElementBaseProps {
-  value?: FormImageInputDataType[];
+  value?: FormImageInputDataType | FormImageInputDataType[];
   isMultiple?: boolean;
   onChange?: (images: FormImageInputDataType | FormImageInputDataType[]) => void;
 }
@@ -18,6 +18,7 @@ const UncontrolledImageInput = ({
   label,
   error,
   isMultiple = false,
+  value,
   onChange,
 }: UncontrolledImageInputProps) => {
   const [images, setImages] = useState<FormImageInputDataType[]>([]);
@@ -73,6 +74,14 @@ const UncontrolledImageInput = ({
     }
     onChange?.(uploadedImages[0]);
   }, [uploadedImages]);
+
+  useEffect(() => {
+    if (images.length || !value) {
+      return;
+    }
+
+    setImages(Array.isArray(value) ? value : [value]);
+  }, [value]);
 
   return (
     <div>
