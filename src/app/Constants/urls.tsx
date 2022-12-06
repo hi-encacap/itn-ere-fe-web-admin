@@ -8,4 +8,8 @@ const ADMIN_PATH = {
   CONTACT_PATH: '/admin/contacts',
 };
 
-export { AUTHENTICATION_PATH, ADMIN_PATH };
+const ERROR_PATH = {
+  UNKNOWN_PATH: '/error/unknown',
+};
+
+export { AUTHENTICATION_PATH, ADMIN_PATH, ERROR_PATH };

@@ -21,7 +21,7 @@ import { authLoginFormSchema } from '../Schemas/authLoginFormSchema';
 
 const Login = () => {
   const { t } = useTranslation('common', {
-    keyPrefix: 'pages.auth.pages.login',
+    keyPrefix: 'page.auth.page.login',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);

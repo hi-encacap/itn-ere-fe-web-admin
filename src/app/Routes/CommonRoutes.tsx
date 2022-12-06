@@ -2,13 +2,14 @@ import { useLayoutEffect, useState } from 'react';
 import { matchPath, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 import { USER_ROLE_ENUM } from '@constants/enums';
-import { AUTHENTICATION_PATH } from '@constants/urls';
+import { AUTHENTICATION_PATH, ERROR_PATH } from '@constants/urls';
 import { authService } from '@services/index';
 import { setUser } from '@slices/userSlice';
 
 import { LoadingOverlay } from '@components/Loading';
 
 import AuthRoutes from '@common/Auth/Routes/AuthRoutes';
+import ErrorRoutes from '@common/Errors/Routes/ErrorRoutes';
 
 import useDispatch from '@hooks/useDispatch';
 import useSelector from '@hooks/useSelector';
@@ -25,6 +26,7 @@ const CommonRoutes = () => {
 
   const excludeRedirectPaths = ['error/*', 'auth/*'];
   const excludeGetUserPaths = ['auth/*'];
+  const ignoreLoadingPaths = ['error/*'];
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -41,10 +43,15 @@ const CommonRoutes = () => {
     const isMatchedGetUserExcludePath = excludeGetUserPaths.some((path) =>
       matchPath(path, location.pathname),
     );
+    const isMatchedIgnoreLoadingPath = ignoreLoadingPaths.some((path) => matchPath(path, location.pathname));
 
     if (isMatchedGetUserExcludePath) {
       setIsLoading(false);
       return;
+    }
+
+    if (isMatchedIgnoreLoadingPath) {
+      setIsLoading(false);
     }
 
     authService
@@ -52,10 +59,18 @@ const CommonRoutes = () => {
       .then((data) => {
         return dispatch(setUser(data));
       })
-      .catch(() => {
+      .catch((error) => {
         if (isMatchedExcludeRedirectPath) {
           return;
         }
+
+        const { response } = error;
+
+        if (!response) {
+          navigate(ERROR_PATH.UNKNOWN_PATH);
+          return;
+        }
+
         navigate(AUTHENTICATION_PATH.LOGIN_PATH);
       })
       .finally(() => {
@@ -76,6 +91,7 @@ const CommonRoutes = () => {
         }
       />
       <Route path="auth/*" element={<AuthRoutes />} />
+      <Route path="error/*" element={<ErrorRoutes />} />
     </Routes>
   );
 };
