@@ -5,4 +5,5 @@ export enum USER_ROLE_ENUM {
 
 export enum IMAGE_VARIANT_ENUM {
   DEFAULT = 'public',
+  SMALL = 'small',
 }

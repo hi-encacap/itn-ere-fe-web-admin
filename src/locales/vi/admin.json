@@ -74,6 +74,19 @@
       "title": "Quản lý danh bạ",
       "header": {
         "create": "Thêm liên hệ"
+      },
+      "table": {
+        "column": {
+          "avatar": "Ảnh đại diện",
+          "id": "ID",
+          "name": "Tên liên hệ",
+          "phone": "Số điện thoại",
+          "zalo": "Zalo",
+          "email": "Địa chỉ email",
+          "actions": {
+            "delete": "Xóa"
+          }
+        }
       }
     }
   }
