@@ -61,3 +61,10 @@ export interface FormGenericErrorType {
   code: string;
   trackingCode?: string;
 }
+
+export interface SidebarItemType {
+  key: string;
+  icon: JSX.Element;
+  label: string;
+  to: string;
+}

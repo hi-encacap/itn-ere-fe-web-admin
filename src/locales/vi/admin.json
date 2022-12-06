@@ -2,8 +2,8 @@
   "layout": {
     "sidebar": {
       "dashboard": "Dashboard",
-      "categories": "Danh mục",
-      "contacts": "Danh bạ"
+      "category": "Danh mục",
+      "contact": "Danh bạ"
     }
   },
   "pages": {
