@@ -22,7 +22,7 @@ import AdminCategoryModificationModal from './Components/AdminCategoryModificati
 
 const AdminCategory = () => {
   const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:pages.category',
+    keyPrefix: 'admin:page.category',
   });
 
   const [categoryData, setCategoryData] = useState<CategoryDataType[]>([]);

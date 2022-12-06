@@ -4,7 +4,7 @@ import StringDotList from '@components/List/StringDotList';
 
 const AdminCategoryDeleteConfirmationModalContent = () => {
   const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:pages.category.modal.delete.message',
+    keyPrefix: 'admin:page.category.modal.delete.message',
   });
 
   return (
