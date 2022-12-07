@@ -1,1 +1,1 @@
-export const phoneRegex = /(?<id>0[0-9])+(?<id>[0-9]{8})\b/g;
+export const phoneRegex = /(?<code>0[0-9])+(?<phone>[0-9]{8})\b/g;
