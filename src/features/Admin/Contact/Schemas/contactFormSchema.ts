@@ -10,10 +10,10 @@ const contactFormSchema = (t: TFunction) =>
     name: string().required(t('form.name.required')),
     phone: string()
       .required(t('form.phone.required'))
-      .matches(/(0[0-9])+([0-9]{8})\b/g, t('form.phone.invalid')),
+      .matches(/(?<id>0[0-9])+([0-9]{8})\b/g, t('form.phone.invalid')),
     zalo: string()
       .required(t('form.zalo.required'))
-      .matches(/(0[0-9])+([0-9]{8})\b/g, t('form.zalo.invalid')),
+      .matches(/(?<id>0[0-9])+([0-9]{8})\b/g, t('form.zalo.invalid')),
     email: string(),
     avatar: object().required(t('form.avatar.required')).nullable(),
   });

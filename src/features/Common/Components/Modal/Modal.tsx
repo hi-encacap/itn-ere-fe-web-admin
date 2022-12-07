@@ -120,7 +120,7 @@ const Modal = (
                     </div>
                   )}
                 </div>
-                <div className="h-6 w-full"></div>
+                <div className="h-6 w-full" />
               </div>
             </motion.div>
           </div>

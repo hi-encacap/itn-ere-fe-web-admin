@@ -34,7 +34,7 @@ const ImageInputItem = ({
         isDisabled && 'hover:border-gray-100',
       )}
     >
-      {isDisabled && <div className="absolute inset-0 bg-gray-50"></div>}
+      {isDisabled && <div className="absolute inset-0 bg-gray-50" />}
       {!image && (
         <ImageInputItemPlaceholder
           isMultiple={isMultiple}
