@@ -5,10 +5,11 @@ import { CategoryDataType } from '@interfaces/Admin/categoryTypes';
 import { ColumnDef, TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes';
 import { adminCategoryService } from '@services/index';
 
+import TableImageColumn from '@components/Table/TableImageColumn/TableImageColumn';
+import TableImageColumnSkeleton from '@components/Table/TableImageColumn/TableImageColumnSkeleton';
+
 import { getImageURL } from '@utils/helpers';
 
-import AdminCategoryTableImageColumn from '../Components/AdminCategoryTableImageColumn';
-import AdminCategoryTableImageColumnSkeleton from '../Components/AdminCategoryTableImageColumnSkeleton';
 import AdminCategoryTableRowActions from '../Components/AdminCategoryTableRowActions';
 
 interface OnClickHandlers {
@@ -24,9 +25,9 @@ const createCategoryTableColumns = (t: TFunction, { onClickEdit, onClickDelete }
       id: 'thumbnail',
       header: String(t('table.columns.thumbnail')),
       enableSorting: false,
-      cell: (info) => <AdminCategoryTableImageColumn src={getImageURL(info.getValue())} />,
+      cell: (info) => <TableImageColumn src={getImageURL(info.getValue())} />,
       meta: {
-        skeleton: <AdminCategoryTableImageColumnSkeleton />,
+        skeleton: <TableImageColumnSkeleton />,
       },
     }),
     columnHelper.accessor((row) => row.code, {

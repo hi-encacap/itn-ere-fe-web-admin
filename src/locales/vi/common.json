@@ -1,7 +1,7 @@
 {
-  "pages": {
+  "page": {
     "auth": {
-      "pages": {
+      "page": {
         "login": {
           "title": "Đăng nhập",
           "welcomeBack": "Chào mừng bạn trở lại!",
@@ -26,11 +26,13 @@
         }
       }
     },
-    "errors": {
-      "pages": {
-        "notFound": {
-          "title": "Không tìm thấy trang"
-        }
+    "error": {
+      "notFound": {
+        "title": "Không tìm thấy trang"
+      },
+      "unknown": {
+        "code": "ERROR",
+        "title": "Máy chủ đang bảo trì. Vui lòng quay lại sau"
       }
     }
   },

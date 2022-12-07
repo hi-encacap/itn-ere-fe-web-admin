@@ -7,10 +7,11 @@ import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
 interface ImageInputItemPreviewProps {
   image: FormImageInputDataType;
   isUploading?: boolean;
+  isDisabled?: boolean;
   onRemove?: (id: FormImageInputDataType['id']) => void;
 }
 
-const ImageInputItemPreview = ({ image, isUploading, onRemove }: ImageInputItemPreviewProps) => {
+const ImageInputItemPreview = ({ image, isUploading, isDisabled, onRemove }: ImageInputItemPreviewProps) => {
   const handleClickRemove = useCallback(() => {
     onRemove?.(image.id);
   }, [image.id]);
@@ -25,7 +26,7 @@ const ImageInputItemPreview = ({ image, isUploading, onRemove }: ImageInputItemP
       <div className="h-full w-full rounded-lg">
         <img src={image.preview} alt={image.id} className="h-full w-full object-contain" />
       </div>
-      {!isUploading && (
+      {!isUploading && !isDisabled && (
         <div
           className="absolute inset-3 flex cursor-pointer items-center justify-center bg-white bg-opacity-60 opacity-0 duration-100 group-hover:opacity-100"
           role="button"

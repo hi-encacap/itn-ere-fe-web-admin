@@ -14,8 +14,19 @@ const ADMIN_CATEGORY_GROUP_API_PATH = {
   CATEGORY_GROUPS_PATH: '/admin/category-groups',
 };
 
+const ADMIN_CONTACT_API_PATH = {
+  CONTACTS_PATH: '/admin/contacts',
+  CONTACT_PATH: (id: number) => `/admin/contacts/${id}`,
+};
+
 const UPLOAD_API_PATH = {
   UPLOAD_IMAGE_PATH: '/admin/cloudflare/images/single',
 };
 
-export { AUTHENTICATION_API_PATH, ADMIN_CATEGORY_API_PATH, UPLOAD_API_PATH, ADMIN_CATEGORY_GROUP_API_PATH };
+export {
+  AUTHENTICATION_API_PATH,
+  ADMIN_CATEGORY_API_PATH,
+  UPLOAD_API_PATH,
+  ADMIN_CATEGORY_GROUP_API_PATH,
+  ADMIN_CONTACT_API_PATH,
+};

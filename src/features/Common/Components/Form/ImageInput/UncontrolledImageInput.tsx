@@ -11,6 +11,7 @@ import ImageInputItem from './ImageInputItem';
 export interface UncontrolledImageInputProps extends FormElementBaseProps {
   value?: FormImageInputDataType | FormImageInputDataType[];
   isMultiple?: boolean;
+  disabled?: boolean;
   onChange?: (images: FormImageInputDataType | FormImageInputDataType[]) => void;
 }
 
@@ -18,6 +19,7 @@ const UncontrolledImageInput = ({
   label,
   error,
   isMultiple = false,
+  disabled = false,
   value,
   onChange,
 }: UncontrolledImageInputProps) => {
@@ -92,7 +94,7 @@ const UncontrolledImageInput = ({
         <label
           htmlFor="image_input"
           className={twMerge(
-            '-mt-2 block cursor-default pb-2 text-sm font-medium text-slate-500',
+            'relative mb-2 -mt-2 flex items-center text-sm font-semibold text-gray-400',
             error && 'text-red-500',
           )}
         >
@@ -106,12 +108,18 @@ const UncontrolledImageInput = ({
             image={image}
             error={Boolean(error)}
             isUploading={uploadingImageIds.includes(image.id)}
+            isDisabled={disabled}
             onChooseImage={handleChooseImage}
             onRemove={handleRemoveImage}
           />
         ))}
         {!isMultiple && images.length === 0 && (
-          <ImageInputItem isMultiple={isMultiple} error={Boolean(error)} onChooseImage={handleChooseImage} />
+          <ImageInputItem
+            isMultiple={isMultiple}
+            error={Boolean(error)}
+            isDisabled={disabled}
+            onChooseImage={handleChooseImage}
+          />
         )}
       </div>
       {error && <div className="mt-1.5 text-sm text-red-500">{error}</div>}

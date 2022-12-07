@@ -16,7 +16,7 @@ import { TableColumnFilterState, TableDataType } from '@interfaces/Common/elemen
 
 import { normalizeTableColumns } from '@utils/table';
 
-import { selectorColumn } from './Columns/SelectorColumn';
+import { selectorColumn } from './Columns/tableSelectorColumn';
 import TableContentBody from './TableContentBody/TableContentBody';
 import TableContentHeader from './TableContentHeader/TableContentHeader';
 import TableFooter from './TableFooter';

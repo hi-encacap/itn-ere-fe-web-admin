@@ -4,10 +4,10 @@ import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { CategoryDataType } from '@interfaces/Admin/categoryTypes';
+import { ContactDataType } from '@interfaces/Admin/contactTypes';
 import { BaseQueryParamsType, TablePaginationType } from '@interfaces/Common/commonTypes';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
-import { adminCategoryService } from '@services/index';
+import { adminContactService } from '@services/index';
 
 import Table from '@components/Table/Table';
 
@@ -15,17 +15,17 @@ import LayoutContent from '@common/Layout/Components/LayoutContent';
 
 import { generateColumnFilterObject, setDocumentTitle } from '@utils/helpers';
 
-import createCategoryTableColumns from './Columns/adminCategoryTableColumn';
-import AdminCategoryDeleteConfirmationModal from './Components/AdminCategoryDeleteConfirmationModal';
-import AdminCategoryHeaderAction from './Components/AdminCategoryHeaderAction';
-import AdminCategoryModificationModal from './Components/AdminCategoryModificationModal';
+import createContactTableColumns from './Columns/adminContactTableColumn';
+import AdminContactDeleteConfirmationModal from './Components/AdminContactDeleteConfirmationModal';
+import AdminContactHeaderAction from './Components/AdminContactHeaderAction';
+import AdminContactModificationModal from './Components/AdminContactModificationModal';
 
-const AdminCategory = () => {
+const AdminContactList = () => {
   const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.category',
+    keyPrefix: 'admin:page.contact',
   });
 
-  const [categoryData, setCategoryData] = useState<CategoryDataType[]>([]);
+  const [contactData, setContactData] = useState<ContactDataType[]>([]);
   const [pagination, setPagination] = useState<TablePaginationType>({
     page: 1,
     limit: DEFAULT_PAGE_SIZE,
@@ -38,15 +38,15 @@ const AdminCategory = () => {
   });
   const [isShowDeleteConfirmationModal, setIsShowDeleteConfirmationModal] = useState(false);
   const [isShowModificationModal, setIsShowModificationModal] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<CategoryDataType | null>(null);
+  const [selectedContact, setSelectedContact] = useState<ContactDataType | null>(null);
 
-  const getCategoryData = useCallback(() => {
+  const getContactData = useCallback(() => {
     setIsLoading(true);
 
-    adminCategoryService
-      .getCategories(queryParams)
+    adminContactService
+      .getContacts(queryParams)
       .then(({ data, meta }) => {
-        setCategoryData(data);
+        setContactData(data);
         setPagination((prev) => ({
           ...prev,
           totalPages: meta.totalPages,
@@ -54,67 +54,46 @@ const AdminCategory = () => {
         }));
       })
       .catch(() => {
-        setCategoryData([]);
+        setContactData([]);
       })
       .finally(() => {
         setIsLoading(false);
       });
   }, [queryParams]);
 
-  const handleClickDeleteButton = useCallback(
-    (code?: Key) => {
-      const category = categoryData.find((item) => item.code === code);
-      setSelectedCategory(category ?? null);
-      setIsShowDeleteConfirmationModal(true);
-    },
-    [categoryData],
-  );
-
-  const handleCloseDeleteConfirmationModal = useCallback(() => {
-    setIsShowDeleteConfirmationModal(false);
-    setSelectedCategory(null);
-  }, []);
-
-  const handleConfirmDeleteCategory = useCallback(() => {
-    if (!selectedCategory) {
-      return;
-    }
-
-    adminCategoryService
-      .deleteCategoryByCode(selectedCategory.code)
-      .then(() => {
-        getCategoryData();
-      })
-      .catch((error) => {
-        // #skipcq: JS-0002
-        console.log('Delete category failed', error);
-      })
-      .finally(() => {
-        setIsShowDeleteConfirmationModal(false);
-        setSelectedCategory(null);
-      });
-  }, [getCategoryData, selectedCategory]);
-
-  const handleClickEditButton = useCallback(
-    (code?: Key) => {
-      setSelectedCategory(categoryData.find((item) => item.code === code) ?? null);
-      setIsShowModificationModal(true);
-    },
-    [categoryData],
-  );
-
   const handleClickAddButton = useCallback(() => {
-    setSelectedCategory(null);
+    setSelectedContact(null);
     setIsShowModificationModal(true);
   }, []);
 
+  const handleClickEditButton = useCallback(
+    (id: Key) => {
+      setSelectedContact(contactData.find((item) => item.id === id) ?? null);
+      setIsShowModificationModal(true);
+    },
+    [contactData],
+  );
+
+  const handleClickDeleteButton = useCallback(
+    (id: Key) => {
+      setSelectedContact(contactData.find((item) => item.id === id) ?? null);
+      setIsShowDeleteConfirmationModal(true);
+    },
+    [contactData, setIsShowDeleteConfirmationModal],
+  );
+
   const handleCloseModificationModal = useCallback(() => {
     setIsShowModificationModal(false);
-    setSelectedCategory(null);
+    setSelectedContact(null);
+  }, []);
+
+  const handleCloseDeleteConfirmationModal = useCallback(() => {
+    setIsShowDeleteConfirmationModal(false);
+    setSelectedContact(null);
   }, []);
 
   useEffect(() => {
-    getCategoryData();
+    getContactData();
   }, [queryParams]);
 
   useEffect(() => {
@@ -137,10 +116,10 @@ const AdminCategory = () => {
   }, [t]);
 
   return (
-    <LayoutContent title={t('title')} actions={<AdminCategoryHeaderAction onClick={handleClickAddButton} />}>
+    <LayoutContent title={t('title')} actions={<AdminContactHeaderAction onClick={handleClickAddButton} />}>
       <Table
-        data={categoryData}
-        columns={createCategoryTableColumns(t, {
+        data={contactData}
+        columns={createContactTableColumns(t, {
           onClickEdit: handleClickEditButton,
           onClickDelete: handleClickDeleteButton,
         })}
@@ -151,21 +130,21 @@ const AdminCategory = () => {
         onChangeSorting={setColumnSorting}
         onChangeFilters={setColumnFilters}
       />
-      <AdminCategoryDeleteConfirmationModal
-        isOpen={isShowDeleteConfirmationModal}
-        onClose={handleCloseDeleteConfirmationModal}
-        onConfirm={handleConfirmDeleteCategory}
-        categoryCode={selectedCategory?.code}
-      />
-      <AdminCategoryModificationModal
+      <AdminContactModificationModal
         isOpen={isShowModificationModal}
-        category={selectedCategory}
+        contact={selectedContact}
         onClose={handleCloseModificationModal}
-        onUpdated={getCategoryData}
-        onCreated={getCategoryData}
+        onUpdated={getContactData}
+        onCreated={getContactData}
+      />
+      <AdminContactDeleteConfirmationModal
+        isOpen={isShowDeleteConfirmationModal}
+        contactId={selectedContact?.id}
+        onClose={handleCloseDeleteConfirmationModal}
+        onDeleted={getContactData}
       />
     </LayoutContent>
   );
 };
 
-export default AdminCategory;
+export default AdminContactList;

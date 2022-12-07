@@ -17,7 +17,7 @@ export type ConfirmationModalStatusType = 'success' | 'danger';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ColumnDef<T = RowData> = ReactTableColumnDef<T, any>;
 
-export type TableRowActionClickHandlerType<T = Key> = (id: T | undefined) => void;
+export type TableRowActionClickHandlerType<T = Key> = (id: T) => void;
 
 export type TableRowActionStatusType = 'normal' | 'danger';
 

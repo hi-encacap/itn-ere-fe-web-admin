@@ -77,7 +77,7 @@ const UncontrolledSelect = ({
         <label
           htmlFor={inputId}
           className={twMerge(
-            '-mt-2 block cursor-default pb-2 text-sm font-medium text-slate-500',
+            'relative mb-2 -mt-2 flex items-center text-sm font-semibold text-gray-400',
             error && 'text-red-500',
           )}
         >
