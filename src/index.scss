@@ -16,3 +16,9 @@ h5,
 h6 {
   @apply text-slate-700;
 }
+
+.scroll-hidden {
+  &::-webkit-scrollbar {
+    @apply hidden;
+  }
+}

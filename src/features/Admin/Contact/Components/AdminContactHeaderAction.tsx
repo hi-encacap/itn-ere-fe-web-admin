@@ -3,13 +3,13 @@ import { MdAdd } from 'react-icons/md';
 
 import { Button } from '@components/Form';
 
-interface AdminCategoryHeaderActionProps {
+interface AdminContactHeaderActionProps {
   onClick?: () => void;
 }
 
-const AdminCategoryHeaderAction = ({ onClick }: AdminCategoryHeaderActionProps) => {
+const AdminContactHeaderAction = ({ onClick }: AdminContactHeaderActionProps) => {
   const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.category.header',
+    keyPrefix: 'admin:page.contact.header',
   });
 
   return (
@@ -20,4 +20,4 @@ const AdminCategoryHeaderAction = ({ onClick }: AdminCategoryHeaderActionProps) 
   );
 };
 
-export default AdminCategoryHeaderAction;
+export default AdminContactHeaderAction;

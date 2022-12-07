@@ -11,7 +11,7 @@ const AdminCategoryGroupSelector = ({
   ...props
 }: Omit<SelectProps, 'options' | 'name' | 'label' | 'placeholder'>) => {
   const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:pages.category.modal.modification',
+    keyPrefix: 'admin:page.category.modal.modification',
   });
 
   const [categoryGroupOptions, setCategoryGroupOptions] = useState<SelectOptionItemType[]>([]);

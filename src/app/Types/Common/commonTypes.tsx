@@ -1,9 +1,6 @@
 import { PaginationState } from '@tanstack/react-table';
 import { AxiosError, AxiosResponse } from 'axios';
-
-export interface AxiosErrorMessageType {
-  [key: string]: string[];
-}
+import { FieldPath, FieldValues } from 'react-hook-form';
 
 export interface AxiosErrorDataType {
   statusCode: number;
@@ -11,7 +8,7 @@ export interface AxiosErrorDataType {
   error: {
     code: number;
     message: string;
-    error: AxiosErrorMessageType[];
+    field: Record<FieldPath<FieldValues>, string[]>;
   };
   code: string;
 }
@@ -61,3 +58,14 @@ export interface FormGenericErrorType {
   code: string;
   trackingCode?: string;
 }
+
+export interface SidebarItemType {
+  key: string;
+  icon: JSX.Element;
+  label: string;
+  to: string;
+}
+
+export type Nullable<T> = {
+  [P in keyof T]: T[P] | null;
+};

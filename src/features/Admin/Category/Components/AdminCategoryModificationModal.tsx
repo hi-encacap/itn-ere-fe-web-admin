@@ -30,7 +30,7 @@ const AdminCategoryModificationModal = ({
   ...props
 }: AdminCategoryModificationModalProps) => {
   const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:pages.category.modal.modification',
+    keyPrefix: 'admin:page.category.modal.modification',
   });
 
   const [isLoading, setIsLoading] = useState(false);

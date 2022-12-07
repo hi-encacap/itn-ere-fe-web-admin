@@ -16,7 +16,7 @@ const AdminCategoryDeleteConfirmationModal = ({
   ...props
 }: AdminCategoryDeleteConfirmationModalProps) => {
   const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:pages.category.modal.delete',
+    keyPrefix: 'admin:page.category.modal.delete',
   });
 
   return (

@@ -69,7 +69,10 @@ const Modal = (
           ref={ref}
           open={isOpen}
           as="div"
-          className={twMerge(className, 'fixed inset-0 z-50 flex justify-center overflow-y-auto')}
+          className={twMerge(
+            className,
+            'scroll-hidden fixed inset-0 z-50 flex justify-center overflow-y-auto py-6',
+          )}
           onClose={onClose}
         >
           <div className="my-auto flex max-h-full">
@@ -117,6 +120,7 @@ const Modal = (
                     </div>
                   )}
                 </div>
+                <div className="h-6 w-full" />
               </div>
             </motion.div>
           </div>
