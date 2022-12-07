@@ -10,6 +10,7 @@ interface ImageInputItemProps {
   image?: FormImageInputDataType;
   isUploading?: boolean;
   isMultiple?: boolean;
+  isDisabled?: boolean;
   error?: boolean;
   onChange?: (image: FormImageInputDataType) => void;
   onRemove?: (id: FormImageInputDataType['id']) => void;
@@ -20,6 +21,7 @@ const ImageInputItem = ({
   image,
   isUploading,
   isMultiple,
+  isDisabled,
   error,
   onChooseImage,
   onRemove,
@@ -29,10 +31,25 @@ const ImageInputItem = ({
       className={twMerge(
         'group relative inline-block aspect-square overflow-hidden rounded-lg border-2 border-gray-100 duration-100  hover:border-gray-200',
         error && 'border-red-500 hover:border-red-500',
+        isDisabled && 'hover:border-gray-100',
       )}
     >
-      {!image && <ImageInputItemPlaceholder isMultiple={isMultiple} onChooseImage={onChooseImage} />}
-      {image && <ImageInputItemPreview image={image} isUploading={isUploading} onRemove={onRemove} />}
+      {isDisabled && <div className="absolute inset-0 bg-gray-50"></div>}
+      {!image && (
+        <ImageInputItemPlaceholder
+          isMultiple={isMultiple}
+          isDisabled={isDisabled}
+          onChooseImage={onChooseImage}
+        />
+      )}
+      {image && (
+        <ImageInputItemPreview
+          image={image}
+          isUploading={isUploading}
+          isDisabled={isDisabled}
+          onRemove={onRemove}
+        />
+      )}
       {isUploading && <ImageInputItemUploading />}
     </div>
   );

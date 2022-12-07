@@ -11,6 +11,7 @@ export interface UncontrolledInputProps extends Omit<InputHTMLAttributes<HTMLInp
   error?: string;
   label?: string | null;
   size?: FormElementSizeType;
+  isRequired?: boolean;
 }
 
 const UncontrolledInput = ({
@@ -21,6 +22,8 @@ const UncontrolledInput = ({
   label,
   size = 'normal',
   error,
+  isRequired,
+  disabled,
   ...inputProps
 }: UncontrolledInputProps) => {
   const inputId = id ?? name;
@@ -36,11 +39,15 @@ const UncontrolledInput = ({
   return (
     <label htmlFor={inputId}>
       {label && (
-        <span
-          className={twMerge('mb-2 -mt-2 block text-sm font-medium text-slate-500', error && 'text-red-500')}
+        <div
+          className={twMerge(
+            'relative mb-2 -mt-2 flex items-center text-sm font-semibold text-gray-400',
+            error && 'text-red-500',
+          )}
         >
           {label}
-        </span>
+          {isRequired && <div className="ml-1 text-red-500">*</div>}
+        </div>
       )}
       <div
         className={twMerge(
@@ -48,6 +55,7 @@ const UncontrolledInput = ({
           error &&
             'border-red-500 focus-within:border-red-500 hover:border-red-500 focus-within:hover:border-red-500',
           inputSizeClassName,
+          disabled && 'border-gray-100 hover:border-gray-100',
           className,
         )}
       >
@@ -59,6 +67,7 @@ const UncontrolledInput = ({
             'block h-full w-full rounded-lg border-none px-4 outline-none',
             error && 'text-red-500',
           )}
+          disabled={disabled}
           {...inputProps}
         />
       </div>

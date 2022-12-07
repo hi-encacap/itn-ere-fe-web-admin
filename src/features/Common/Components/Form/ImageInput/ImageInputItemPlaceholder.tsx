@@ -4,10 +4,15 @@ import { BsImageAlt } from 'react-icons/bs';
 
 interface ImageInputItemPlaceholderProps {
   isMultiple?: boolean;
+  isDisabled?: boolean;
   onChooseImage: (files: FileList) => void;
 }
 
-const ImageInputItemPlaceholder = ({ isMultiple = false, onChooseImage }: ImageInputItemPlaceholderProps) => {
+const ImageInputItemPlaceholder = ({
+  isMultiple = false,
+  isDisabled = false,
+  onChooseImage,
+}: ImageInputItemPlaceholderProps) => {
   const { t } = useTranslation('common', {
     keyPrefix: 'common:form.imageInput',
   });
@@ -31,6 +36,7 @@ const ImageInputItemPlaceholder = ({ isMultiple = false, onChooseImage }: ImageI
         type="file"
         multiple={isMultiple}
         className="absolute inset-0 cursor-pointer opacity-0"
+        disabled={isDisabled}
         onChange={handleChangeImage}
       />
     </div>
