@@ -16,7 +16,9 @@ import LayoutContent from '@common/Layout/Components/LayoutContent';
 import { generateColumnFilterObject, setDocumentTitle } from '@utils/helpers';
 
 import createContactTableColumns from './Columns/adminContactTableColumn';
+import AdminContactDeleteConfirmationModal from './Components/AdminContactDeleteConfirmationModal';
 import AdminContactHeaderAction from './Components/AdminContactHeaderAction';
+import AdminContactModificationModal from './Components/AdminContactModificationModal';
 
 const AdminContactList = () => {
   const { t } = useTranslation('admin', {
@@ -34,6 +36,9 @@ const AdminContactList = () => {
   const [queryParams, setQueryParams] = useState<BaseQueryParamsType>({
     ...pagination,
   });
+  const [isShowDeleteConfirmationModal, setIsShowDeleteConfirmationModal] = useState(false);
+  const [isShowModificationModal, setIsShowModificationModal] = useState(false);
+  const [selectedContact, setSelectedContact] = useState<ContactDataType | null>(null);
 
   const getContactData = useCallback(() => {
     setIsLoading(true);
@@ -57,15 +62,34 @@ const AdminContactList = () => {
   }, [queryParams]);
 
   const handleClickAddButton = useCallback(() => {
-    console.log('Add button clicked');
+    setSelectedContact(null);
+    setIsShowModificationModal(true);
   }, []);
 
-  const handleClickEditButton = useCallback((id: Key) => {
-    console.log('Edit button clicked', id);
+  const handleClickEditButton = useCallback(
+    (id: Key) => {
+      setSelectedContact(contactData.find((item) => item.id === id) ?? null);
+      setIsShowModificationModal(true);
+    },
+    [contactData],
+  );
+
+  const handleClickDeleteButton = useCallback(
+    (id: Key) => {
+      setSelectedContact(contactData.find((item) => item.id === id) ?? null);
+      setIsShowDeleteConfirmationModal(true);
+    },
+    [contactData, setIsShowDeleteConfirmationModal],
+  );
+
+  const handleCloseModificationModal = useCallback(() => {
+    setIsShowModificationModal(false);
+    setSelectedContact(null);
   }, []);
 
-  const handleClickDeleteButton = useCallback((id: Key) => {
-    console.log('Delete button clicked', id);
+  const handleCloseDeleteConfirmationModal = useCallback(() => {
+    setIsShowDeleteConfirmationModal(false);
+    setSelectedContact(null);
   }, []);
 
   useEffect(() => {
@@ -105,6 +129,19 @@ const AdminContactList = () => {
         onChangePagination={setPagination}
         onChangeSorting={setColumnSorting}
         onChangeFilters={setColumnFilters}
+      />
+      <AdminContactModificationModal
+        isOpen={isShowModificationModal}
+        contact={selectedContact}
+        onClose={handleCloseModificationModal}
+        onUpdated={getContactData}
+        onCreated={getContactData}
+      />
+      <AdminContactDeleteConfirmationModal
+        isOpen={isShowDeleteConfirmationModal}
+        contactId={selectedContact?.id}
+        onClose={handleCloseDeleteConfirmationModal}
+        onDeleted={getContactData}
       />
     </LayoutContent>
   );

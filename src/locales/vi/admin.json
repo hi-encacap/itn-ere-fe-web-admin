@@ -82,9 +82,56 @@
           "name": "Tên liên hệ",
           "phone": "Số điện thoại",
           "zalo": "Zalo",
-          "email": "Địa chỉ email",
+          "email": "Thư điện tử",
           "actions": {
             "delete": "Xóa"
+          }
+        }
+      },
+      "modal": {
+        "modification": {
+          "title": {
+            "create": "Thêm liên hệ",
+            "edit": "Chỉnh sửa liên hệ"
+          },
+          "form": {
+            "name": {
+              "label": "Tên liên hệ",
+              "placeholder": "Nhập tên liên hệ",
+              "required": "Tên liên hệ không được phép để trống.",
+              "contactAlreadyExists": "Liên hệ đã tồn tại."
+            },
+            "phone": {
+              "label": "Số điện thoại",
+              "placeholder": "Nhập số điện thoại",
+              "required": "Số điện thoại không được phép để trống.",
+              "invalid": "Số điện thoại không hợp lệ."
+            },
+            "zalo": {
+              "label": "Zalo",
+              "placeholder": "Nhập Zalo",
+              "required": "Zalo không được phép để trống.",
+              "invalid": "Zalo không hợp lệ."
+            },
+            "email": {
+              "label": "Thư điện tử",
+              "placeholder": "Nhập địa chỉ thư điện tử"
+            },
+            "avatar": {
+              "label": "Ảnh đại diện",
+              "placeholder": "Chọn ảnh đại diện",
+              "required": "Ảnh đại diện không được phép để trống."
+            }
+          }
+        },
+        "delete": {
+          "title": "Xóa liên hệ",
+          "message": {
+            "contactWillBeDeleted": "Liên hệ này sẽ bị xóa vĩnh viển, sau đó",
+            "cannotCreateNewPost": "Bạn sẽ không thể tạo bài viết sử dụng liên hệ này.",
+            "oldPostWillBeUnpublished": "Tất cả bài đã xuất bản có liên hệ này sẽ chuyển sang trạng thái nháp.",
+            "oldDraftWillBeDeleted": "Tất cả bài nháp có liên hệ này sẽ bị xóa vĩnh viển.",
+            "areYouSure": "Bạn có chắc muốn tiếp tục không?"
           }
         }
       }

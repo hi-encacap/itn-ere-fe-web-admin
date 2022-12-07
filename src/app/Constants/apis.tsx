@@ -16,6 +16,7 @@ const ADMIN_CATEGORY_GROUP_API_PATH = {
 
 const ADMIN_CONTACT_API_PATH = {
   CONTACTS_PATH: '/admin/contacts',
+  CONTACT_PATH: (id: number) => `/admin/contacts/${id}`,
 };
 
 const UPLOAD_API_PATH = {

@@ -5,10 +5,11 @@ import { IMAGE_VARIANT_ENUM } from '@constants/enums';
 import { ContactDataType } from '@interfaces/Admin/contactTypes';
 import { ColumnDef, TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes';
 
+import TableImageColumn from '@components/Table/TableImageColumn/TableImageColumn';
+import TableImageColumnSkeleton from '@components/Table/TableImageColumn/TableImageColumnSkeleton';
+
 import { getImageURL } from '@utils/helpers';
 
-import AdminContactTableImageColumn from '../Components/AdminContactTableImageColumn';
-import AdminContactTableImageColumnSkeleton from '../Components/AdminContactTableImageColumnSkeleton';
 import AdminContactTableRowActions from '../Components/AdminContactTableRowActions';
 
 interface OnClickHandlers {
@@ -24,11 +25,9 @@ const createContactTableColumns = (t: TFunction, { onClickEdit, onClickDelete }:
       id: 'avatar',
       header: String(t('table.column.avatar')),
       enableSorting: false,
-      cell: (info) => (
-        <AdminContactTableImageColumn src={getImageURL(info.getValue(), IMAGE_VARIANT_ENUM.SMALL)} />
-      ),
+      cell: (info) => <TableImageColumn src={getImageURL(info.getValue(), IMAGE_VARIANT_ENUM.SMALL)} />,
       meta: {
-        skeleton: <AdminContactTableImageColumnSkeleton />,
+        skeleton: <TableImageColumnSkeleton />,
       },
     }),
     columnHelper.accessor((row) => row.id, {
