@@ -24,7 +24,7 @@ h6 {
 }
 
 .Toastify__toast-container.Toastify__toast-container--top-right {
-  @apply z-40 w-96 p-0 shadow-none;
+  @apply w-96 p-0 shadow-none;
 
   .Toastify__toast {
     @apply relative overflow-hidden rounded-lg p-4 shadow-center;

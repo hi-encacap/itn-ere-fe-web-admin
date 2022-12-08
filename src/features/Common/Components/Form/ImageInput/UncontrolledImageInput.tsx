@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
 import { FormElementBaseProps, FormImageInputDataType } from '@interfaces/Common/elementTypes';
 import { uploadService } from '@services/index';
 
+import useToast from '@hooks/useToast';
 import { convertToImageDataFromFiles } from '@utils/image';
 
 import ImageInputItem from './ImageInputItem';
@@ -23,6 +25,11 @@ const UncontrolledImageInput = ({
   value,
   onChange,
 }: UncontrolledImageInputProps) => {
+  const { t } = useTranslation('common', {
+    keyPrefix: 'common:form.imageInput',
+  });
+  const toast = useToast();
+
   const [images, setImages] = useState<FormImageInputDataType[]>([]);
   const [uploadingImageIds, setUploadingImageIds] = useState<string[]>([]);
   const [uploadedImages, setUploadedImages] = useState<FormImageInputDataType[]>([]);
@@ -48,9 +55,8 @@ const UncontrolledImageInput = ({
           }
           onChange?.(newFileData);
         })
-        .catch((responseError) => {
-          // #skipcq: JS-0002
-          console.log(responseError);
+        .catch(() => {
+          toast.error(t('error.uploadFailed'));
           setImages((prev) => prev.filter((image) => image.id !== file.id));
         })
         .finally(() => {
