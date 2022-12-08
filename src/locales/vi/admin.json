@@ -68,6 +68,16 @@
             }
           }
         }
+      },
+      "notification": {
+        "error": "Thất bại.",
+        "success": "Thành công.",
+        "categoryCreated": "Đã tạo danh mục mới.",
+        "categoryUpdated": "Danh mục đã được cập nhật.",
+        "categoryDeleted": "Danh mục đã bị xóa vĩnh viễn.",
+        "categoryDeleteFailed": "Đã xảy ra lỗi khi xóa danh mục.",
+        "categoryUpdateFailed": "Đã xảy ra lỗi khi cập nhật danh mục.",
+        "categoryCreateFailed": "Đã xảy ra lỗi khi tạo danh mục."
       }
     },
     "contact": {
