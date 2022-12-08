@@ -25,7 +25,6 @@ const AdminCategory = () => {
   const { t } = useTranslation('admin', {
     keyPrefix: 'admin:page.category',
   });
-
   const toast = useToast();
 
   const [categoryData, setCategoryData] = useState<CategoryDataType[]>([]);
@@ -78,27 +77,6 @@ const AdminCategory = () => {
     setSelectedCategory(null);
   }, []);
 
-  const handleConfirmDeleteCategory = useCallback(() => {
-    if (!selectedCategory) {
-      return;
-    }
-
-    adminCategoryService
-      .deleteCategoryByCode(selectedCategory.code)
-      .then(() => {
-        getCategoryData();
-      })
-      .catch((error) => {
-        // #skipcq: JS-0002
-        console.log('Delete category failed', error);
-        toast.error('Thất bại.', 'Đã xảy ra lỗi khi xóa danh mục. Vui lòng thử lại sau.');
-      })
-      .finally(() => {
-        setIsShowDeleteConfirmationModal(false);
-        setSelectedCategory(null);
-      });
-  }, [getCategoryData, selectedCategory]);
-
   const handleClickEditButton = useCallback(
     (code?: Key) => {
       setSelectedCategory(categoryData.find((item) => item.code === code) ?? null);
@@ -115,6 +93,33 @@ const AdminCategory = () => {
   const handleCloseModificationModal = useCallback(() => {
     setIsShowModificationModal(false);
     setSelectedCategory(null);
+  }, []);
+
+  const handleDeletedCategory = useCallback(() => {
+    toast.success(t('notification.success'), t('notification.categoryDeleted'));
+    getCategoryData();
+  }, [getCategoryData]);
+
+  const handleDeleteCategoryFailed = useCallback(() => {
+    toast.error(t('notification.error'), t('notification.categoryDeleteFailed'));
+  }, []);
+
+  const handleUpdatedCategory = useCallback(() => {
+    toast.success(t('notification.success'), t('notification.categoryUpdated'));
+    getCategoryData();
+  }, [getCategoryData]);
+
+  const handleUpdateCategoryFailed = useCallback(() => {
+    toast.error(t('notification.error'), t('notification.categoryUpdateFailed'));
+  }, []);
+
+  const handleCreatedCategory = useCallback(() => {
+    toast.success(t('notification.success'), t('notification.categoryCreated'));
+    getCategoryData();
+  }, [getCategoryData]);
+
+  const handleCreateCategoryFailed = useCallback(() => {
+    toast.error(t('notification.error'), t('notification.categoryCreateFailed'));
   }, []);
 
   useEffect(() => {
@@ -158,15 +163,18 @@ const AdminCategory = () => {
       <AdminCategoryDeleteConfirmationModal
         isOpen={isShowDeleteConfirmationModal}
         onClose={handleCloseDeleteConfirmationModal}
-        onConfirm={handleConfirmDeleteCategory}
         categoryCode={selectedCategory?.code}
+        onDeleted={handleDeletedCategory}
+        onDeleteFailed={handleDeleteCategoryFailed}
       />
       <AdminCategoryModificationModal
         isOpen={isShowModificationModal}
         category={selectedCategory}
         onClose={handleCloseModificationModal}
-        onUpdated={getCategoryData}
-        onCreated={getCategoryData}
+        onUpdated={handleUpdatedCategory}
+        onUpdateFailed={handleUpdateCategoryFailed}
+        onCreated={handleCreatedCategory}
+        onCreateFailed={handleCreateCategoryFailed}
       />
     </LayoutContent>
   );

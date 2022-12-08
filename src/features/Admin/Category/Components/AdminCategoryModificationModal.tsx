@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { CategoryDataType, CategoryFormDataType } from '@interfaces/Admin/categoryTypes';
+import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 import { adminCategoryService } from '@services/index';
 
 import { Button, Input } from '@components/Form';
@@ -20,13 +21,17 @@ interface AdminCategoryModificationModalProps extends ModalProps {
   category: CategoryDataType | null;
   onCreated: () => void;
   onUpdated: () => void;
+  onCreateFailed?: (error: AxiosErrorType) => void;
+  onUpdateFailed?: (error: AxiosErrorType) => void;
 }
 
 const AdminCategoryModificationModal = ({
   category,
   onClose,
   onCreated,
+  onCreateFailed,
   onUpdated,
+  onUpdateFailed,
   ...props
 }: AdminCategoryModificationModalProps) => {
   const { t } = useTranslation('admin', {
@@ -62,37 +67,34 @@ const AdminCategoryModificationModal = ({
       adminCategoryService
         .updateCategoryByCode(category?.code, data)
         .then(() => {
-          // TODO: Adapt toast.
           onUpdated();
           onClose();
         })
-        .catch(() => {
-          // TODO: Adapt toast.
-        })
+        .catch(onUpdateFailed)
         .finally(() => {
           setIsLoading(false);
         });
     },
-    [category],
+    [category, onUpdateFailed, onUpdated, onClose],
   );
 
-  const createCategory = useCallback((data: CategoryFormDataType) => {
-    setIsLoading(true);
+  const createCategory = useCallback(
+    (data: CategoryFormDataType) => {
+      setIsLoading(true);
 
-    adminCategoryService
-      .createCategory(data)
-      .then(() => {
-        // TODO: Adapt toast.
-        onCreated();
-        onClose();
-      })
-      .catch(() => {
-        // TODO: Adapt toast.
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
+      adminCategoryService
+        .createCategory(data)
+        .then(() => {
+          onCreated();
+          onClose();
+        })
+        .catch(onCreateFailed)
+        .finally(() => {
+          setIsLoading(false);
+        });
+    },
+    [onCreateFailed, onCreated, onClose],
+  );
 
   const handleSubmit = useFormSubmit((data) => {
     if (category) {
