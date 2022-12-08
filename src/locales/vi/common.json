@@ -68,7 +68,10 @@
   },
   "form": {
     "imageInput": {
-      "placeholder": "Chọn ảnh"
+      "placeholder": "Chọn ảnh",
+      "error": {
+        "uploadFailed": "Tải ảnh lên không thành công"
+      }
     }
   }
 }
