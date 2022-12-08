@@ -12,7 +12,7 @@ interface TableContentBodySkeletonItemProps {
 const TableContentBodySkeletonItem = ({ header }: TableContentBodySkeletonItemProps): JSX.Element => {
   const columnMeta = useMemo(() => header.column.columnDef.meta, [header.column.columnDef.meta]);
 
-  if (header.id === 'actions' && columnMeta?.skeleton === null) {
+  if (header.id === 'actions' && !columnMeta?.skeleton) {
     return <TableRowActionSkeleton />;
   }
 
