@@ -13,6 +13,7 @@ import Table from '@components/Table/Table';
 
 import LayoutContent from '@common/Layout/Components/LayoutContent';
 
+import useToast from '@hooks/useToast';
 import { generateColumnFilterObject, setDocumentTitle } from '@utils/helpers';
 
 import createCategoryTableColumns from './Columns/adminCategoryTableColumn';
@@ -24,6 +25,8 @@ const AdminCategory = () => {
   const { t } = useTranslation('admin', {
     keyPrefix: 'admin:page.category',
   });
+
+  const toast = useToast();
 
   const [categoryData, setCategoryData] = useState<CategoryDataType[]>([]);
   const [pagination, setPagination] = useState<TablePaginationType>({
@@ -88,6 +91,7 @@ const AdminCategory = () => {
       .catch((error) => {
         // #skipcq: JS-0002
         console.log('Delete category failed', error);
+        toast.error('Thất bại.', 'Đã xảy ra lỗi khi xóa danh mục. Vui lòng thử lại sau.');
       })
       .finally(() => {
         setIsShowDeleteConfirmationModal(false);
