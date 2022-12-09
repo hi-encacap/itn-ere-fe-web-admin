@@ -9,10 +9,12 @@ const setFormError = <T extends FieldValues>(
   error: AxiosErrorType,
   setError: UseFormSetError<T>,
   formatMessage?: FormatMessageFunction,
+  otherwise?: () => void,
 ) => {
   const { response } = error;
 
   if (!response) {
+    otherwise?.();
     return;
   }
 

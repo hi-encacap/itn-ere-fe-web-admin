@@ -144,6 +144,16 @@
             "areYouSure": "Bạn có chắc muốn tiếp tục không?"
           }
         }
+      },
+      "notification": {
+        "error": "Thất bại.",
+        "success": "Thành công.",
+        "contactCreated": "Đã tạo liên hệ mới.",
+        "contactUpdated": "Liên hệ đã được cập nhật.",
+        "contactDeleted": "Liên hệ đã bị xóa vĩnh viễn.",
+        "contactDeleteFailed": "Đã xảy ra lỗi khi xóa liên hệ.",
+        "contactUpdateFailed": "Đã xảy ra lỗi khi cập nhật liên hệ.",
+        "contactCreateFailed": "Đã xảy ra lỗi khi tạo liên hệ."
       }
     }
   }

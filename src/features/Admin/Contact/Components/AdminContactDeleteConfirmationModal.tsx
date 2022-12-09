@@ -13,6 +13,7 @@ interface AdminContactDeleteConfirmationModalProps
   extends Omit<ConfirmationModalProps, 'title' | 'message' | 'onConfirm'> {
   contactId?: number;
   onDeleted: () => void;
+  onDeleteFailed: () => void;
 }
 
 const AdminContactDeleteConfirmationModal = ({
@@ -20,6 +21,7 @@ const AdminContactDeleteConfirmationModal = ({
   contactId,
   onDeleted,
   onClose,
+  onDeleteFailed,
   ...props
 }: AdminContactDeleteConfirmationModalProps) => {
   const { t } = useTranslation('admin', {
@@ -33,10 +35,9 @@ const AdminContactDeleteConfirmationModal = ({
       .deleteContactById(contactId)
       .then(() => {
         onDeleted();
-        onClose();
       })
-      .catch(() => {
-        // TODO: Handle error
+      .catch(onDeleteFailed)
+      .finally(() => {
         onClose();
       });
   }, [contactId, onClose, onDeleted]);
