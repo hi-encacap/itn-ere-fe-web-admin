@@ -20,14 +20,18 @@ import { contactFormSchema } from '../Schemas/contactFormSchema';
 interface AdminContactModificationModalProps extends ModalProps {
   contact: ContactDataType | null;
   onCreated: () => void;
+  onCreateFailed: () => void;
   onUpdated: () => void;
+  onUpdateFailed: () => void;
 }
 
 const AdminContactModificationModal = ({
   contact,
   onClose,
   onCreated,
+  onCreateFailed,
   onUpdated,
+  onUpdateFailed,
   ...props
 }: AdminContactModificationModalProps) => {
   const { t } = useTranslation('admin', {
@@ -69,12 +73,11 @@ const AdminContactModificationModal = ({
       adminContactService
         .updateContactById(contact.id, data)
         .then(() => {
-          // TODO: Adapt toast.
           onUpdated();
           onClose();
         })
         .catch((error) => {
-          setFormError<ContactFormDataType>(error, setError, formatErrorMessage);
+          setFormError<ContactFormDataType>(error, setError, formatErrorMessage, onUpdateFailed);
         })
         .finally(() => {
           setIsLoading(false);
@@ -89,12 +92,11 @@ const AdminContactModificationModal = ({
     adminContactService
       .createContact(data)
       .then(() => {
-        // TODO: Adapt toast.
         onCreated();
         onClose();
       })
       .catch((error: AxiosErrorType) => {
-        setFormError<ContactFormDataType>(error, setError, formatErrorMessage);
+        setFormError<ContactFormDataType>(error, setError, formatErrorMessage, onCreateFailed);
       })
       .finally(() => {
         setIsLoading(false);

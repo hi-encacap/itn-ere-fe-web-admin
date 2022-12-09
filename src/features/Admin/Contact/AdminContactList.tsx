@@ -13,6 +13,7 @@ import Table from '@components/Table/Table';
 
 import LayoutContent from '@common/Layout/Components/LayoutContent';
 
+import useToast from '@hooks/useToast';
 import { generateColumnFilterObject, setDocumentTitle } from '@utils/helpers';
 
 import createContactTableColumns from './Columns/adminContactTableColumn';
@@ -24,6 +25,7 @@ const AdminContactList = () => {
   const { t } = useTranslation('admin', {
     keyPrefix: 'admin:page.contact',
   });
+  const toast = useToast();
 
   const [contactData, setContactData] = useState<ContactDataType[]>([]);
   const [pagination, setPagination] = useState<TablePaginationType>({
@@ -92,6 +94,33 @@ const AdminContactList = () => {
     setSelectedContact(null);
   }, []);
 
+  const handleUpdatedContact = useCallback(() => {
+    toast.success(t('notification.success'), t('notification.contactUpdated'));
+    getContactData();
+  }, [getContactData]);
+
+  const handleUpdateContactFailed = useCallback(() => {
+    toast.error(t('notification.error'), t('notification.contactUpdateFailed'));
+  }, []);
+
+  const handleCreatedContact = useCallback(() => {
+    toast.success(t('notification.success'), t('notification.contactCreated'));
+    getContactData();
+  }, [getContactData]);
+
+  const handleCreateContactFailed = useCallback(() => {
+    toast.error(t('notification.error'), t('notification.contactCreateFailed'));
+  }, []);
+
+  const handleDeletedContact = useCallback(() => {
+    toast.success(t('notification.success'), t('notification.contactDeleted'));
+    getContactData();
+  }, [getContactData]);
+
+  const handleDeleteContactFailed = useCallback(() => {
+    toast.error(t('notification.error'), t('notification.contactDeleteFailed'));
+  }, []);
+
   useEffect(() => {
     getContactData();
   }, [queryParams]);
@@ -134,14 +163,17 @@ const AdminContactList = () => {
         isOpen={isShowModificationModal}
         contact={selectedContact}
         onClose={handleCloseModificationModal}
-        onUpdated={getContactData}
-        onCreated={getContactData}
+        onUpdated={handleUpdatedContact}
+        onUpdateFailed={handleUpdateContactFailed}
+        onCreated={handleCreatedContact}
+        onCreateFailed={handleCreateContactFailed}
       />
       <AdminContactDeleteConfirmationModal
         isOpen={isShowDeleteConfirmationModal}
         contactId={selectedContact?.id}
         onClose={handleCloseDeleteConfirmationModal}
-        onDeleted={getContactData}
+        onDeleted={handleDeletedContact}
+        onDeleteFailed={handleDeleteContactFailed}
       />
     </LayoutContent>
   );
