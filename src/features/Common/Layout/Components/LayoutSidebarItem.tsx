@@ -59,7 +59,7 @@ const LayoutSidebarItem = ({ icon, label, to, childrenItems }: LayoutSidebarItem
   }
 
   return (
-    <div onClick={handleClick}>
+    <div role="button" tabIndex={0} aria-hidden="true" onClick={handleClick}>
       <LayoutSidebarItemContent
         icon={icon}
         label={label}
