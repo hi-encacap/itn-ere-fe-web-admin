@@ -3,7 +3,12 @@
     "sidebar": {
       "dashboard": "Dashboard",
       "category": "Danh mục",
-      "contact": "Danh bạ"
+      "contact": "Danh bạ",
+      "location": "Khu vực hoạt động",
+      "location_province": "Tỉnh/Thành phố",
+      "location_district": "Quận/Huyện",
+      "location_ward": "Xã/Phường/Thị trấn",
+      "location_address_book": "Sổ địa chỉ"
     }
   },
   "page": {

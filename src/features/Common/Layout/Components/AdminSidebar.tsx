@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { AiOutlineDashboard } from 'react-icons/ai';
 import { BiCategory } from 'react-icons/bi';
-import { FiUsers } from 'react-icons/fi';
-import { useLocation } from 'react-router-dom';
+import { FiMapPin, FiUsers } from 'react-icons/fi';
+import { HiOutlineMap } from 'react-icons/hi';
+import { TbMap2 } from 'react-icons/tb';
 
 import { ADMIN_PATH } from '@constants/urls';
 import { SidebarItemType } from '@interfaces/Common/commonTypes';
@@ -12,8 +13,6 @@ import LayoutSidebarItem from './LayoutSidebarItem';
 import LayoutSidebarWebsite from './LayoutSidebarWebsite';
 
 const AdminSidebar = () => {
-  const { pathname } = useLocation();
-
   const { t } = useTranslation('admin', {
     keyPrefix: 'layout.sidebar',
   });
@@ -37,6 +36,38 @@ const AdminSidebar = () => {
       label: t('contact'),
       to: ADMIN_PATH.CONTACT_PATH,
     },
+    {
+      key: 'location',
+      icon: <HiOutlineMap size={20} />,
+      label: t('location'),
+      to: ADMIN_PATH.LOCATION_PATH,
+      children: [
+        {
+          key: 'location_province',
+          icon: <FiMapPin size={18} />,
+          label: t('location_province'),
+          to: ADMIN_PATH.LOCATION_PROVINCE_PATH,
+        },
+        {
+          key: 'location_district',
+          icon: <FiMapPin size={18} />,
+          label: t('location_district'),
+          to: ADMIN_PATH.LOCATION_DISTRICT_PATH,
+        },
+        {
+          key: 'location_ward',
+          icon: <FiMapPin size={18} />,
+          label: t('location_ward'),
+          to: ADMIN_PATH.LOCATION_WARD_PATH,
+        },
+        {
+          key: 'location_address_book',
+          icon: <TbMap2 size={18} />,
+          label: t('location_address_book'),
+          to: ADMIN_PATH.LOCATION_ADDRESS_BOOK_PATH,
+        },
+      ],
+    },
   ];
 
   return (
@@ -48,7 +79,7 @@ const AdminSidebar = () => {
           icon={item.icon}
           label={item.label}
           to={item.to}
-          isActive={pathname === item.to}
+          childrenItems={item.children}
         />
       ))}
     </LayoutSidebar>
