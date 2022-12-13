@@ -64,6 +64,7 @@ export interface SidebarItemType {
   icon: JSX.Element;
   label: string;
   to: string;
+  children?: SidebarItemType[];
 }
 
 export type Nullable<T> = {

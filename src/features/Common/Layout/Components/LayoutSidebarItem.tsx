@@ -1,31 +1,74 @@
-import { cloneElement, ReactElement } from 'react';
-import { Link } from 'react-router-dom';
-import { twMerge } from 'tailwind-merge';
+import { MouseEventHandler, ReactElement, useCallback, useMemo, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
+import { SidebarItemType } from '@interfaces/Common/commonTypes';
+
+import LayoutSidebarItemChildren from './LayoutSidebarItemChildren';
+import LayoutSidebarItemContent from './LayoutSidebarItemContent';
 
 interface LayoutSidebarItemProps {
   icon: ReactElement;
   label: string;
   to: string;
-  isActive?: boolean;
+  childrenItems?: SidebarItemType[];
 }
 
-const LayoutSidebarItem = ({ icon, label, to, isActive = false }: LayoutSidebarItemProps) => {
+const LayoutSidebarItem = ({ icon, label, to, childrenItems }: LayoutSidebarItemProps) => {
+  const { pathname } = useLocation();
+
+  const [isShowChildren, setIsShowChildren] = useState(false);
+
+  const isActive = useMemo(() => {
+    if (pathname === to) {
+      return true;
+    }
+
+    if (childrenItems?.length) {
+      const isChildrenActive = childrenItems.some((item) => item.to === pathname);
+
+      if (isChildrenActive) {
+        setIsShowChildren(true);
+      } else {
+        setIsShowChildren(false);
+      }
+
+      return isChildrenActive;
+    }
+
+    return false;
+  }, [pathname, to, setIsShowChildren]);
+
+  const handleClick = useCallback<MouseEventHandler<HTMLDivElement>>((e) => {
+    e.preventDefault();
+    setIsShowChildren((prevState) => !prevState);
+  }, []);
+
+  if (!childrenItems?.length) {
+    return (
+      <Link to={to}>
+        <LayoutSidebarItemContent
+          icon={icon}
+          label={label}
+          hasChildren={Boolean(childrenItems?.length)}
+          isActive={isActive}
+          isShowChildren={isShowChildren}
+        />
+        {childrenItems?.length && <LayoutSidebarItemChildren items={childrenItems} isShow={isShowChildren} />}
+      </Link>
+    );
+  }
+
   return (
-    <Link
-      to={to}
-      className={twMerge(
-        'relative cursor-pointer rounded-md px-5 py-2.5 duration-100 hover:bg-gray-100',
-        isActive && 'bg-gray-100',
-      )}
-    >
-      {isActive && <div className="absolute left-0 top-3 h-5 w-1 rounded-r-sm bg-teal-500" />}
-      <div className="flex items-center justify-start space-x-4">
-        {cloneElement(icon, {
-          className: twMerge('w-5 h-5 block flex-shrink-0', isActive && 'text-teal-500'),
-        })}
-        <div className={twMerge(isActive && 'text-teal-500')}>{label}</div>
-      </div>
-    </Link>
+    <div role="button" tabIndex={0} aria-hidden="true" onClick={handleClick}>
+      <LayoutSidebarItemContent
+        icon={icon}
+        label={label}
+        hasChildren={Boolean(childrenItems?.length)}
+        isActive={isActive}
+        isShowChildren={isShowChildren}
+      />
+      {childrenItems?.length && <LayoutSidebarItemChildren items={childrenItems} isShow={isShowChildren} />}
+    </div>
   );
 };
 
