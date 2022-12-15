@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
 import { ContactDataType } from '@interfaces/Admin/contactTypes';
-import { BaseQueryParamsType, TablePaginationType } from '@interfaces/Common/commonTypes';
+import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { adminContactService } from '@services/index';
 
@@ -35,7 +35,7 @@ const AdminContactList = () => {
   const [columnSorting, setColumnSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [queryParams, setQueryParams] = useState<BaseQueryParamsType>({
+  const [queryParams, setQueryParams] = useState<BaseGetListQueryType>({
     ...pagination,
   });
   const [isShowDeleteConfirmationModal, setIsShowDeleteConfirmationModal] = useState(false);
@@ -126,7 +126,7 @@ const AdminContactList = () => {
   }, [queryParams]);
 
   useEffect(() => {
-    const newQueryParams: BaseQueryParamsType = {
+    const newQueryParams: BaseGetListQueryType = {
       ...queryParams,
       ...generateColumnFilterObject(columnFilters),
       page: pagination.page,

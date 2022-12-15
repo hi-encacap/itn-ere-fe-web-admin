@@ -43,7 +43,7 @@ export interface AxiosResponseType<T> extends AxiosResponse {
   };
 }
 
-export interface BaseQueryParamsType {
+export interface BaseGetListQueryType {
   page?: number;
   limit?: number;
   filterBy?: string;
