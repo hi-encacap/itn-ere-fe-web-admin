@@ -160,6 +160,38 @@
         "contactUpdateFailed": "Đã xảy ra lỗi khi cập nhật liên hệ.",
         "contactCreateFailed": "Đã xảy ra lỗi khi tạo liên hệ."
       }
+    },
+    "location": {
+      "province": {
+        "title": "Quản lý tỉnh/thành phố",
+        "header": {
+          "create": "Thêm tỉnh/thành phố"
+        },
+        "table": {
+          "column": {
+            "code": "Mã",
+            "name": "Tên"
+          }
+        },
+        "modal": {
+          "delete": {
+            "title": "Xóa tỉnh/thành phố",
+            "message": {
+              "provinceWillBeDeleted": "Tỉnh/thành phốphố này sẽ bị xóa vĩnh viển, sau đó",
+              "cannotCreateNewPost": "Bạn sẽ không thể tạo bài viết sử dụng tỉnh/thành phố này.",
+              "oldPostWillBeUnpublished": "Tất cả bài đã xuất bản có tỉnh/thành phố này sẽ chuyển sang trạng thái nháp.",
+              "oldDraftWillBeDeleted": "Tất cả bài nháp có tỉnh/thành phố này sẽ bị xóa vĩnh viển.",
+              "areYouSure": "Bạn có chắc muốn tiếp tục không?"
+            }
+          }
+        },
+        "notification": {
+          "delete": {
+            "provinceDeleted": "Tỉnh/thành phố đã bị xóa vĩnh viễn.",
+            "provinceDeleteFailed": "Đã xảy ra lỗi khi xóa tỉnh/thành phố."
+          }
+        }
+      }
     }
   }
 }

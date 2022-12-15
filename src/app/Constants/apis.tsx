@@ -19,6 +19,11 @@ const ADMIN_CONTACT_API_PATH = {
   CONTACT_PATH: (id: number) => `/admin/contacts/${id}`,
 };
 
+const ADMIN_LOCATION_API_PATH = {
+  PROVINCES_PATH: '/admin/locations/provinces',
+  PROVINCE_PATH: (code: string) => `/admin/locations/provinces/${code}`,
+};
+
 const UPLOAD_API_PATH = {
   UPLOAD_IMAGE_PATH: '/admin/cloudflare/images/single',
 };
@@ -26,7 +31,8 @@ const UPLOAD_API_PATH = {
 export {
   AUTHENTICATION_API_PATH,
   ADMIN_CATEGORY_API_PATH,
-  UPLOAD_API_PATH,
   ADMIN_CATEGORY_GROUP_API_PATH,
   ADMIN_CONTACT_API_PATH,
+  ADMIN_LOCATION_API_PATH,
+  UPLOAD_API_PATH,
 };
