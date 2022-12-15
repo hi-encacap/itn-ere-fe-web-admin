@@ -14,6 +14,7 @@ export interface UncontrolledSelectProps
   options: SelectOptionItemType[];
   value?: SelectOptionItemType['value'];
   disabled?: boolean;
+  isRequired?: boolean;
   onChange?: (value: SelectOptionItemType['value']) => void;
 }
 
@@ -25,6 +26,7 @@ const UncontrolledSelect = ({
   className,
   placeholder,
   disabled,
+  isRequired,
   onChange,
 }: UncontrolledSelectProps) => {
   const [isShowOptions, setIsShowOptions] = useState(false);
@@ -82,6 +84,7 @@ const UncontrolledSelect = ({
           )}
         >
           {label}
+          {isRequired && <div className="ml-1 text-red-500">*</div>}
         </label>
       )}
       <div
@@ -106,7 +109,7 @@ const UncontrolledSelect = ({
           onBlur={handleBlurInput}
         />
         <BiChevronDown className="absolute right-3 top-3" size={20} />
-        {isShowOptions && (
+        {!disabled && isShowOptions && (
           <SelectOptionDropdown
             value={value}
             options={options}

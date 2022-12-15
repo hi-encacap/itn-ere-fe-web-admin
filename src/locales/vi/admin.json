@@ -160,6 +160,53 @@
         "contactUpdateFailed": "Đã xảy ra lỗi khi cập nhật liên hệ.",
         "contactCreateFailed": "Đã xảy ra lỗi khi tạo liên hệ."
       }
+    },
+    "location": {
+      "province": {
+        "title": "Quản lý tỉnh/thành phố",
+        "header": {
+          "create": "Thêm tỉnh/thành phố"
+        },
+        "table": {
+          "column": {
+            "code": "Mã",
+            "name": "Tên"
+          }
+        },
+        "modal": {
+          "delete": {
+            "title": "Xóa tỉnh/thành phố",
+            "message": {
+              "provinceWillBeDeleted": "Tỉnh/thành phốphố này sẽ bị xóa vĩnh viển, sau đó",
+              "cannotCreateNewPost": "Bạn sẽ không thể tạo bài viết sử dụng tỉnh/thành phố này.",
+              "oldPostWillBeUnpublished": "Tất cả bài đã xuất bản có tỉnh/thành phố này sẽ chuyển sang trạng thái nháp.",
+              "oldDraftWillBeDeleted": "Tất cả bài nháp có tỉnh/thành phố này sẽ bị xóa vĩnh viển.",
+              "areYouSure": "Bạn có chắc muốn tiếp tục không?"
+            }
+          },
+          "modification": {
+            "title": "Thêm tỉnh/thành phố",
+            "form": {
+              "id": {
+                "label": "Tỉnh/thành phố",
+                "placeholder": "Chọn tỉnh/thành phố",
+                "required": "Tỉnh/thành phố không được phép để trống.",
+                "provinceAlreadyExists": "Tỉnh/thành phố đã tồn tại."
+              }
+            }
+          }
+        },
+        "notification": {
+          "delete": {
+            "provinceDeleted": "Tỉnh/thành phố đã bị xóa vĩnh viễn.",
+            "provinceDeleteFailed": "Đã xảy ra lỗi khi xóa tỉnh/thành phố."
+          },
+          "modify": {
+            "provinceCreated": "Đã tạo tỉnh/thành phố mới.",
+            "provinceCreateFailed": "Đã xảy ra lỗi khi thêm tỉnh/thành phố."
+          }
+        }
+      }
     }
   }
 }

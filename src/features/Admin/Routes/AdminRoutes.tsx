@@ -5,6 +5,7 @@ import AdminLayout from '@common/Layout/AdminLayout';
 import AdminCategoryRoutes from '@admin/Category/Routes/AdminCategoryRoutes';
 import AdminContactRoutes from '@admin/Contact/Routes/AdminContactRoutes';
 import AdminDashboard from '@admin/Dashboard/AdminDashboard';
+import AdminLocationRoutes from '@admin/Location/Routes/AdminLocationRoutes';
 
 const AdminRoutes = () => {
   return (
@@ -13,6 +14,7 @@ const AdminRoutes = () => {
         <Route path="/" element={<AdminDashboard />} />
         <Route path="categories/*" element={<AdminCategoryRoutes />} />
         <Route path="contacts/*" element={<AdminContactRoutes />} />
+        <Route path="locations/*" element={<AdminLocationRoutes />} />
       </Routes>
     </AdminLayout>
   );

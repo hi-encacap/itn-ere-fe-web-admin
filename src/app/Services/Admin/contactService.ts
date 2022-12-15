@@ -2,11 +2,11 @@ import { pick } from 'lodash';
 
 import { ADMIN_CONTACT_API_PATH } from '@constants/apis';
 import { ContactDataType, ContactFormDataType } from '@interfaces/Admin/contactTypes';
-import { BaseQueryParamsType } from '@interfaces/Common/commonTypes';
+import { BaseGetListQueryType } from '@interfaces/Common/commonTypes';
 
 import axiosInstance from '@utils/Http/axiosInstance';
 
-const getContacts = async (params?: BaseQueryParamsType) => {
+const getContacts = async (params?: BaseGetListQueryType) => {
   const response = await axiosInstance.get(ADMIN_CONTACT_API_PATH.CONTACTS_PATH, {
     params,
   });

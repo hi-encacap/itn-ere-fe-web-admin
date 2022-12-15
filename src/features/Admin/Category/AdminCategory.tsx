@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
 import { CategoryDataType } from '@interfaces/Admin/categoryTypes';
-import { BaseQueryParamsType, TablePaginationType } from '@interfaces/Common/commonTypes';
+import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { adminCategoryService } from '@services/index';
 
@@ -35,7 +35,7 @@ const AdminCategory = () => {
   const [columnSorting, setColumnSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [queryParams, setQueryParams] = useState<BaseQueryParamsType>({
+  const [queryParams, setQueryParams] = useState<BaseGetListQueryType>({
     ...pagination,
   });
   const [isShowDeleteConfirmationModal, setIsShowDeleteConfirmationModal] = useState(false);
@@ -127,7 +127,7 @@ const AdminCategory = () => {
   }, [queryParams]);
 
   useEffect(() => {
-    const newQueryParams: BaseQueryParamsType = {
+    const newQueryParams: BaseGetListQueryType = {
       ...queryParams,
       ...generateColumnFilterObject(columnFilters),
       page: pagination.page,

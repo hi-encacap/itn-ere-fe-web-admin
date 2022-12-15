@@ -11,7 +11,7 @@ import {
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { BaseQueryParamsType, TablePaginationType } from '@interfaces/Common/commonTypes';
+import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
 import { TableColumnFilterState, TableDataType } from '@interfaces/Common/elementTypes';
 
 import { normalizeTableColumns } from '@utils/table';
@@ -30,7 +30,7 @@ declare module '@tanstack/table-core' {
     filterKey?: string;
     filterLabel?: string;
     filterSearchBy?: string;
-    getFilterOptions?: (params?: BaseQueryParamsType) => Promise<unknown[]>;
+    getFilterOptions?: (params?: BaseGetListQueryType) => Promise<unknown[]>;
     filterLabelFormatter?: (value: unknown) => string;
   }
 }
@@ -100,7 +100,7 @@ const Table = ({
       onChangePagination?.(state as TablePaginationType);
     },
     onRowSelectionChange: onChangeRowSelection,
-    getRowId: (row) => row.id || row.code || 0,
+    getRowId: (row) => row.id || row.code || Math.random().toString(36).substr(2, 9),
   });
 
   const tableRows = useMemo(() => table.getRowModel().rows, [data]);
