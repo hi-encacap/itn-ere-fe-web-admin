@@ -9,7 +9,7 @@ import { ConfirmationModalProps } from '@components/Modal/ConfirmationModal';
 
 import useToast from '@hooks/useToast';
 
-import AdminLocationProvinceDeleteConfirmationModalContent from './AdminLocationProvinceDeleteConfirmationModalContent';
+import AdminLocationDistrictDeleteConfirmationModalContent from './AdminLocationDistrictDeleteConfirmationModalContent';
 
 interface AdminLocationProvinceDeleteConfirmationModalProps
   extends Omit<ConfirmationModalProps, 'title' | 'message' | 'onConfirm'> {
@@ -18,44 +18,44 @@ interface AdminLocationProvinceDeleteConfirmationModalProps
   onDeleteFailed?: () => void;
 }
 
-const AdminLocationProvinceDeleteConfirmationModal = ({
+const AdminLocationDistrictDeleteConfirmationModal = ({
   isOpen,
-  code: provinceCode,
+  code: districtCode,
   onDeleted,
   onClose,
   onDeleteFailed,
   ...props
 }: AdminLocationProvinceDeleteConfirmationModalProps) => {
   const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:page.location.province',
+    keyPrefix: 'admin:page.location.district',
   });
 
   const toast = useToast();
 
   const handleDeleteContact = useCallback(() => {
-    if (!provinceCode) return;
+    if (!districtCode) return;
 
     adminLocationService
-      .deleteProvinceByCode(provinceCode)
+      .deleteDistrictByCode(districtCode)
       .then(() => {
         onDeleted();
-        toast.success(t('notification.delete.provinceDeleted'));
+        toast.success(t('notification.delete.districtDeleted'));
       })
       .catch(() => {
         onDeleteFailed?.();
-        toast.error(t('notification.delete.provinceDeleteFailed'));
+        toast.error(t('notification.delete.districtDeleteFailed'));
       })
       .finally(() => {
         onClose();
       });
-  }, [provinceCode, onClose, onDeleted, onDeleteFailed]);
+  }, [districtCode, onClose, onDeleted, onDeleteFailed]);
 
   return (
     <ConfirmationModal
       isOpen={isOpen}
       status="danger"
       title={t('modal.delete.title')}
-      message={<AdminLocationProvinceDeleteConfirmationModalContent />}
+      message={<AdminLocationDistrictDeleteConfirmationModalContent />}
       onConfirm={handleDeleteContact}
       onClose={onClose}
       {...omit(props, 'title', 'message')}
@@ -63,4 +63,4 @@ const AdminLocationProvinceDeleteConfirmationModal = ({
   );
 };
 
-export default AdminLocationProvinceDeleteConfirmationModal;
+export default AdminLocationDistrictDeleteConfirmationModal;

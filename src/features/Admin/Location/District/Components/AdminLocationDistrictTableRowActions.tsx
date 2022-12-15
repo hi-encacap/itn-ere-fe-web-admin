@@ -5,15 +5,15 @@ import { TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes'
 
 import TableRowAction from '@components/Table/TableRowAction';
 
-interface AdminProvinceLocationTableRowActionsProps {
+interface AdminProvinceDistrictTableRowActionsProps {
   code: Key;
   onClickDelete: TableRowActionClickHandlerType<Key>;
 }
 
-const AdminLocationProvinceTableRowActions = ({
+const AdminLocationDistrictTableRowActions = ({
   code,
   onClickDelete,
-}: AdminProvinceLocationTableRowActionsProps) => {
+}: AdminProvinceDistrictTableRowActionsProps) => {
   return (
     <div className="flex items-center justify-end space-x-2">
       <TableRowAction id={code} status="danger" onClick={onClickDelete}>
@@ -23,4 +23,4 @@ const AdminLocationProvinceTableRowActions = ({
   );
 };
 
-export default AdminLocationProvinceTableRowActions;
+export default AdminLocationDistrictTableRowActions;

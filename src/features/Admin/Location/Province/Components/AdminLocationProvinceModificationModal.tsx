@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { LocationProvinceWebsiteFormDataType } from '@interfaces/Admin/locationTypes';
 import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 import { SelectOptionItemType } from '@interfaces/Common/elementTypes';
-import { adminLocationProvinceService, locationService } from '@services/index';
+import { adminLocationService, locationService } from '@services/index';
 
 import { Button, Select } from '@components/Form';
 import { Modal } from '@components/Modal';
@@ -16,7 +16,7 @@ import { ModalProps } from '@components/Modal/Modal';
 import useToast from '@hooks/useToast';
 import { formatErrorMessage, setFormError } from '@utils/error';
 
-import { locationProvinceFormSchema } from '../../Schemas/locationProvinceFormSchema';
+import { locationProvinceFormSchema } from '../../Schemas/locationFormSchema';
 
 interface AdminLocationProvinceModificationModalProps extends ModalProps {
   onCreated: () => void;
@@ -85,7 +85,7 @@ const AdminLocationProvinceModificationModal = ({
   const handleSubmit = useFormSubmit((data) => {
     setIsSubmitting(true);
 
-    adminLocationProvinceService
+    adminLocationService
       .createProvince(data)
       .then(() => {
         toast.success(tNotification('provinceCreated'));

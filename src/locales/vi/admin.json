@@ -206,6 +206,66 @@
             "provinceCreateFailed": "Đã xảy ra lỗi khi thêm tỉnh/thành phố."
           }
         }
+      },
+      "district": {
+        "title": "Quản lý quận/huyện",
+        "header": {
+          "create": "Thêm quận/huyện"
+        },
+        "table": {
+          "column": {
+            "code": "Mã",
+            "name": "Tên",
+            "provinceName": "Tỉnh/thành phố"
+          }
+        },
+        "modal": {
+          "delete": {
+            "title": "Xóa quận/huyện",
+            "message": {
+              "districtWillBeDeleted": "Quận/huyện này sẽ bị xóa vĩnh viển, sau đó",
+              "cannotCreateNewPost": "Bạn sẽ không thể tạo bài viết sử dụng quận/huyện này.",
+              "oldPostWillBeUnpublished": "Tất cả bài đã xuất bản có quận/huyện này sẽ chuyển sang trạng thái nháp.",
+              "oldDraftWillBeDeleted": "Tất cả bài nháp có quận/huyện này sẽ bị xóa vĩnh viển.",
+              "areYouSure": "Bạn có chắc muốn tiếp tục không?"
+            }
+          },
+          "modification": {
+            "title": "Thêm quận/huyện",
+            "form": {
+              "id": {
+                "label": "Quận/huyện",
+                "placeholder": "Chọn quận/huyện",
+                "required": "Tỉnh/thành phố không được phép để trống.",
+                "districtAlreadyExists": "quận/huyện đã tồn tại."
+              },
+              "provinceId": {
+                "required": "Tỉnh/thành phố không được phép để trống."
+              }
+            }
+          }
+        },
+        "notification": {
+          "delete": {
+            "districtDeleted": "Quận/huyện đã bị xóa vĩnh viễn.",
+            "districtDeleteFailed": "Đã xảy ra lỗi khi xóa quận/huyện."
+          },
+          "modify": {
+            "districtCreated": "Đã thêm quận/huyện mới.",
+            "districtCreateFailed": "Đã xảy ra lỗi khi thêm quận/huyện."
+          }
+        }
+      },
+      "modal": {
+        "modification": {
+          "form": {
+            "provinceId": {
+              "label": "Tỉnh/thành phố",
+              "placeholder": "Chọn tỉnh/thành phố",
+              "required": "Tỉnh/thành phố không được phép để trống."
+            }
+          }
+        }
       }
     }
   }

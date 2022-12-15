@@ -4,7 +4,7 @@ import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { LocationProvinceWebsiteDataType } from '@interfaces/Admin/locationTypes';
+import { LocationDistrictWebsiteDataType } from '@interfaces/Admin/locationTypes';
 import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { adminLocationService } from '@services/index';
@@ -15,17 +15,17 @@ import LayoutContent from '@common/Layout/Components/LayoutContent';
 
 import { generateColumnFilterObject, setDocumentTitle } from '@utils/helpers';
 
-import createLocationProvinceTableColumns from './Columns/adminLocationProvinceTableColumn';
-import AdminLocationProvinceDeleteConfirmationModal from './Components/AdminLocationProvinceDeleteConfirmationModal';
-import AdminLocationProvinceHeaderAction from './Components/AdminLocationProvinceHeaderAction';
-import AdminLocationProvinceModificationModal from './Components/AdminLocationProvinceModificationModal';
+import createLocationDistrictTableColumns from './Columns/adminLocationDistrictTableColumn';
+import AdminLocationDistrictDeleteConfirmationModal from './Components/AdminLocationDistrictDeleteConfirmationModal';
+import AdminLocationDistrictHeaderAction from './Components/AdminLocationDistrictHeaderAction';
+import AdminLocationDistrictModificationModal from './Components/AdminLocationDistrictModificationModal';
 
-const AdminLocationProvinceList = () => {
+const AdminLocationDistrictList = () => {
   const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.location.province',
+    keyPrefix: 'admin:page.location.district',
   });
 
-  const [provinceData, setProvinceData] = useState<LocationProvinceWebsiteDataType[]>([]);
+  const [districtData, setDistrictData] = useState<LocationDistrictWebsiteDataType[]>([]);
   const [pagination, setPagination] = useState<TablePaginationType>({
     page: 1,
     limit: DEFAULT_PAGE_SIZE,
@@ -36,17 +36,17 @@ const AdminLocationProvinceList = () => {
   const [queryParams, setQueryParams] = useState<BaseGetListQueryType>({
     ...pagination,
   });
-  const [selectedProvinceCode, setSelectedProvinceCode] = useState<string | null>(null);
+  const [selectedDistrictCode, setSelectedDistrictCode] = useState<string | null>(null);
   const [isShowDeleteConfirmationModal, setIsShowDeleteConfirmationModal] = useState(false);
   const [isShowModificationModal, setIsShowModificationModal] = useState(false);
 
-  const getProvinceData = useCallback(() => {
+  const getDistrictData = useCallback(() => {
     setIsLoading(true);
 
     adminLocationService
-      .getProvinces(queryParams)
+      .getDistricts(queryParams)
       .then(({ data, meta }) => {
-        setProvinceData(data);
+        setDistrictData(data);
         setPagination((prev) => ({
           ...prev,
           totalPages: meta.totalPages,
@@ -54,7 +54,7 @@ const AdminLocationProvinceList = () => {
         }));
       })
       .catch(() => {
-        setProvinceData([]);
+        setDistrictData([]);
       })
       .finally(() => {
         setIsLoading(false);
@@ -66,7 +66,7 @@ const AdminLocationProvinceList = () => {
   }, []);
 
   const handleClickDeleteButton = useCallback((code: Key) => {
-    setSelectedProvinceCode(code as string);
+    setSelectedDistrictCode(code as string);
     setIsShowDeleteConfirmationModal(true);
   }, []);
 
@@ -79,7 +79,7 @@ const AdminLocationProvinceList = () => {
   }, []);
 
   useEffect(() => {
-    getProvinceData();
+    getDistrictData();
   }, [queryParams]);
 
   useEffect(() => {
@@ -104,11 +104,11 @@ const AdminLocationProvinceList = () => {
   return (
     <LayoutContent
       title={t('title')}
-      actions={<AdminLocationProvinceHeaderAction onClick={handleClickAddButton} />}
+      actions={<AdminLocationDistrictHeaderAction onClick={handleClickAddButton} />}
     >
       <Table
-        data={provinceData}
-        columns={createLocationProvinceTableColumns(t, {
+        data={districtData}
+        columns={createLocationDistrictTableColumns(t, {
           onClickDelete: handleClickDeleteButton,
         })}
         pagination={pagination}
@@ -118,19 +118,19 @@ const AdminLocationProvinceList = () => {
         onChangeSorting={setColumnSorting}
         onChangeFilters={setColumnFilters}
       />
-      <AdminLocationProvinceDeleteConfirmationModal
+      <AdminLocationDistrictDeleteConfirmationModal
         isOpen={isShowDeleteConfirmationModal}
-        code={selectedProvinceCode ?? ''}
+        code={selectedDistrictCode ?? ''}
         onClose={handleCloseDeleteConfirmationModal}
-        onDeleted={getProvinceData}
+        onDeleted={getDistrictData}
       />
-      <AdminLocationProvinceModificationModal
+      <AdminLocationDistrictModificationModal
         isOpen={isShowModificationModal}
         onClose={handleCloseModificationModal}
-        onCreated={getProvinceData}
+        onCreated={getDistrictData}
       />
     </LayoutContent>
   );
 };
 
-export default AdminLocationProvinceList;
+export default AdminLocationDistrictList;
