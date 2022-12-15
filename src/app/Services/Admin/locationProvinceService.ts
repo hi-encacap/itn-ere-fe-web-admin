@@ -1,5 +1,8 @@
 import { ADMIN_LOCATION_API_PATH } from '@constants/apis';
-import { LocationProvinceWebsiteDataType } from '@interfaces/Admin/locationTypes';
+import {
+  LocationProvinceWebsiteDataType,
+  LocationProvinceWebsiteFormDataType,
+} from '@interfaces/Admin/locationTypes';
 import { BaseGetListQueryType, ResponseWithMetaType } from '@interfaces/Common/commonTypes';
 
 import axiosInstance from '@utils/Http/axiosInstance';
@@ -13,8 +16,15 @@ const getProvinces = async (
   return response.data;
 };
 
+const createProvince = async (
+  data: LocationProvinceWebsiteFormDataType,
+): Promise<LocationProvinceWebsiteDataType> => {
+  const response = await axiosInstance.post(ADMIN_LOCATION_API_PATH.PROVINCES_PATH, data);
+  return response.data.data;
+};
+
 const deleteProvinceByCode = async (code: string): Promise<void> => {
   await axiosInstance.delete(ADMIN_LOCATION_API_PATH.PROVINCE_PATH(code));
 };
 
-export { getProvinces, deleteProvinceByCode };
+export { getProvinces, deleteProvinceByCode, createProvince };

@@ -15,9 +15,10 @@ import LayoutContent from '@common/Layout/Components/LayoutContent';
 
 import { generateColumnFilterObject, setDocumentTitle } from '@utils/helpers';
 
-import createLocationProvinceTableColumns from './Columns/adminContactTableColumn';
+import createLocationProvinceTableColumns from './Columns/adminLocationProvinceTableColumn';
 import AdminContactDeleteConfirmationModal from './Components/AdminLocationProvinceDeleteConfirmationModal';
 import AdminLocationProvinceHeaderAction from './Components/AdminLocationProvinceHeaderAction';
+import AdminLocationProvinceModificationModal from './Components/AdminLocationProvinceModificationModal';
 
 const AdminLocationProvinceList = () => {
   const { t } = useTranslation('admin', {
@@ -37,6 +38,7 @@ const AdminLocationProvinceList = () => {
   });
   const [selectedProvinceCode, setSelectedProvinceCode] = useState<string | null>(null);
   const [isShowDeleteConfirmationModal, setIsShowDeleteConfirmationModal] = useState(false);
+  const [isShowModificationModal, setIsShowModificationModal] = useState(false);
 
   const getProvinceData = useCallback(() => {
     setIsLoading(true);
@@ -60,7 +62,7 @@ const AdminLocationProvinceList = () => {
   }, [queryParams]);
 
   const handleClickAddButton = useCallback(() => {
-    console.log('Add');
+    setIsShowModificationModal(true);
   }, []);
 
   const handleClickDeleteButton = useCallback((code: Key) => {
@@ -70,6 +72,10 @@ const AdminLocationProvinceList = () => {
 
   const handleCloseDeleteConfirmationModal = useCallback(() => {
     setIsShowDeleteConfirmationModal(false);
+  }, []);
+
+  const handleCloseModificationModal = useCallback(() => {
+    setIsShowModificationModal(false);
   }, []);
 
   useEffect(() => {
@@ -117,6 +123,11 @@ const AdminLocationProvinceList = () => {
         code={selectedProvinceCode ?? ''}
         onClose={handleCloseDeleteConfirmationModal}
         onDeleted={getProvinceData}
+      />
+      <AdminLocationProvinceModificationModal
+        isOpen={isShowModificationModal}
+        onClose={handleCloseModificationModal}
+        onCreated={getProvinceData}
       />
     </LayoutContent>
   );

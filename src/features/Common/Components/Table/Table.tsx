@@ -100,7 +100,7 @@ const Table = ({
       onChangePagination?.(state as TablePaginationType);
     },
     onRowSelectionChange: onChangeRowSelection,
-    getRowId: (row) => row.id || row.code || 0,
+    getRowId: (row) => row.id || row.code || Math.random().toString(36).substr(2, 9),
   });
 
   const tableRows = useMemo(() => table.getRowModel().rows, [data]);

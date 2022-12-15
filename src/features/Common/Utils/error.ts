@@ -1,9 +1,15 @@
+import { TFunction } from 'i18next';
 import { camelCase, keys, lowerCase } from 'lodash';
 import { FieldPath, FieldValues, UseFormSetError } from 'react-hook-form';
 
 import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 
 type FormatMessageFunction = (key: string, message: string) => string;
+
+const formatErrorMessage = (t: TFunction, prefix?: string) => {
+  const prefixMessage = prefix ? `${prefix}.` : '';
+  return (key: string, message: string) => t(`${prefixMessage}${key}.${message}`);
+};
 
 const setFormError = <T extends FieldValues>(
   error: AxiosErrorType,
@@ -32,4 +38,4 @@ const setFormError = <T extends FieldValues>(
   });
 };
 
-export { setFormError };
+export { setFormError, formatErrorMessage };

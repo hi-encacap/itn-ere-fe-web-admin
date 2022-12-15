@@ -9,3 +9,7 @@ export interface LocationProvinceWebsiteDataType {
   websiteId: number;
   province: LocationProvinceDataType;
 }
+
+export interface LocationProvinceWebsiteFormDataType {
+  id: number | null;
+}
