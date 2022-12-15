@@ -1,5 +1,5 @@
 import { random } from 'lodash';
-import { HTMLAttributes, useCallback, useMemo, useState } from 'react';
+import { HTMLAttributes, useCallback, useMemo, useRef, useState } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
 import { twMerge } from 'tailwind-merge';
 
@@ -47,6 +47,7 @@ const UncontrolledSelect = ({
   }, [value, options]);
 
   const inputId = useMemo(() => `select_${random(100000, 999999)}`, []);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFocusInput = useCallback(() => {
     setIsShowOptions(true);
@@ -105,6 +106,7 @@ const UncontrolledSelect = ({
           readOnly
           value={selectLabel ?? placeholder}
           disabled={disabled}
+          ref={inputRef}
           onFocus={handleFocusInput}
           onBlur={handleBlurInput}
         />
@@ -116,6 +118,7 @@ const UncontrolledSelect = ({
             onFocus={handleFocusDropdown}
             onBlur={handleBlurDropdown}
             onChange={handleChange}
+            inputRef={inputRef}
           />
         )}
       </div>
