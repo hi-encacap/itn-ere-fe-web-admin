@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useState } from 'react';
+import { RefObject, useMemo } from 'react';
 
 import { SelectOptionItemType } from '@interfaces/Common/elementTypes';
 
@@ -23,25 +23,21 @@ const SelectOptionDropdown = ({
   onBlur,
   onChange,
 }: SelectOptionDropdownProps) => {
-  const [dropdownHeight, setDropdownHeight] = useState(0);
-
   if (!options.length) {
     return null;
   }
 
-  useEffect(() => {
+  const dropdownHeight = useMemo(() => {
     const inputElement = inputRef?.current;
 
     if (!inputElement) {
-      return;
+      return 0;
     }
 
     const inputPosition = inputElement.getBoundingClientRect();
     const screenPosition = window.screen.availHeight;
 
-    const dropdownHeight = screenPosition - inputPosition.bottom - 120;
-
-    setDropdownHeight(dropdownHeight);
+    return screenPosition - inputPosition.bottom - 120;
   }, [inputRef]);
 
   return (
