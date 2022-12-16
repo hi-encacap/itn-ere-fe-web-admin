@@ -3,6 +3,7 @@ import { TFunction } from 'i18next';
 
 import { LocationDistrictWebsiteDataType } from '@interfaces/Admin/locationTypes';
 import { ColumnDef, TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes';
+import { adminLocationService } from '@services/index';
 
 import TableRowActionSkeleton from '@components/Table/TableRowActionSkeleton';
 
@@ -27,6 +28,14 @@ const createLocationDistrictTableColumns = (t: TFunction, { onClickDelete }: OnC
     columnHelper.accessor((row) => row.district.province.name, {
       id: 'provinceName',
       header: String(t('table.column.provinceName')),
+      meta: {
+        filterBy: 'provinceCodes',
+        filterValueBy: 'district.province.code',
+        filterLabelBy: 'district.province.name',
+        filterLabel: String(t('table.column.provinceName')),
+        filterSearchBy: 'provinceName',
+        getFilterOptions: adminLocationService.getAllDistricts,
+      },
     }),
     columnHelper.display({
       id: 'actions',

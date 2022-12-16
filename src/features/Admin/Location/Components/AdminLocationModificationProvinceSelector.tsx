@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { HookFormControl } from '@interfaces/Common/commonTypes';
@@ -46,7 +46,7 @@ const AdminLocationModificationProvinceSelector = ({
 
   useEffect(() => {
     getProvinces();
-  }, [getProvinces]);
+  }, []);
 
   return (
     <Select
@@ -62,4 +62,4 @@ const AdminLocationModificationProvinceSelector = ({
   );
 };
 
-export default AdminLocationModificationProvinceSelector;
+export default memo(AdminLocationModificationProvinceSelector);

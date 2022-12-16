@@ -25,7 +25,7 @@ const AdminLocationDistrictModificationDistrictSelector = ({
   const [locationProvinceOptions, setLocationProvinceOptions] = useState<SelectOptionItemType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getProvinces = useCallback(() => {
+  const getDistricts = useCallback(() => {
     if (locationProvinceOptions.length === 0) {
       setIsLoading(true);
     }
@@ -51,8 +51,8 @@ const AdminLocationDistrictModificationDistrictSelector = ({
   }, [locationProvinceOptions, provinceId]);
 
   useEffect(() => {
-    getProvinces();
-  }, [getProvinces, provinceId]);
+    getDistricts();
+  }, [provinceId]);
 
   return (
     <Select

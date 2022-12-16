@@ -17,6 +17,11 @@ const getProvinces = async (
   return response.data;
 };
 
+const getAllProvinces = async (): Promise<LocationProvinceWebsiteDataType[]> => {
+  const response = await getProvinces();
+  return response.data;
+};
+
 const createProvince = async (
   data: LocationProvinceWebsiteFormDataType,
 ): Promise<LocationProvinceWebsiteDataType> => {
@@ -29,12 +34,17 @@ const deleteProvinceByCode = async (code: string): Promise<void> => {
 };
 
 const getDistricts = async (
-  query: BaseGetListQueryType,
+  query?: BaseGetListQueryType,
 ): Promise<ResponseWithMetaType<LocationDistrictWebsiteDataType[]>> => {
   const response = await axiosInstance.get(ADMIN_LOCATION_API_PATH.DISTRICTS_PATH, {
     params: query,
   });
 
+  return response.data;
+};
+
+const getAllDistricts = async (): Promise<LocationDistrictWebsiteDataType[]> => {
+  const response = await getDistricts();
   return response.data;
 };
 
@@ -51,9 +61,11 @@ const deleteDistrictByCode = async (code: string): Promise<void> => {
 
 export {
   getProvinces,
+  getAllProvinces,
   deleteProvinceByCode,
   createProvince,
   getDistricts,
+  getAllDistricts,
   createDistrict,
   deleteDistrictByCode,
 };

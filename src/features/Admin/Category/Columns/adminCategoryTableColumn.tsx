@@ -44,7 +44,7 @@ const createCategoryTableColumns = (t: TFunction, { onClickEdit, onClickDelete }
       cell: (info) => t(`table.columns.categoryGroupCode.${String(info.getValue())}`),
       meta: {
         filterBy: 'categoryGroupCodes',
-        filterKey: 'categoryGroupCode',
+        filterValueBy: 'categoryGroupCode',
         filterLabel: String(t('table.columns.categoryGroupCode.title')),
         filterSearchBy: 'categoryGroupName',
         getFilterOptions: adminCategoryService.getAllCategories,
