@@ -68,7 +68,7 @@ const AdminLocationDistrictModificationModal = ({
   const handleSubmit = useFormSubmit((data) => {
     setIsSubmitting(true);
 
-    console.log(data);
+    
 
     adminLocationService
       .createDistrict(data)
