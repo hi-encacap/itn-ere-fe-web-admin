@@ -91,6 +91,8 @@ const UncontrolledSelect = ({
       <div
         className={twMerge(
           'group relative inline-block rounded-lg border-2 border-gray-100 focus-within:border-blue-500 hover:border-gray-200 focus-within:hover:border-blue-500',
+          isShowOptions &&
+            'border-blue-500 focus-within:border-blue-500 hover:border-blue-500 focus-within:hover:border-blue-500',
           error &&
             'border-red-500 focus-within:border-red-500 hover:border-red-500 focus-within:hover:border-red-500',
           className,
@@ -103,9 +105,9 @@ const UncontrolledSelect = ({
             error && 'text-red-500',
             !selectLabel && 'text-input-placeholder',
           )}
-          readOnly
           value={selectLabel ?? placeholder}
           disabled={disabled}
+          readOnly
           ref={inputRef}
           onFocus={handleFocusInput}
           onBlur={handleBlurInput}
