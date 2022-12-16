@@ -27,7 +27,8 @@ declare module '@tanstack/table-core' {
   interface ColumnMeta<TData extends RowData, TValue> {
     skeleton?: JSX.Element;
     filterBy?: string | string[];
-    filterKey?: string;
+    filterValueBy?: string;
+    filterLabelBy?: string;
     filterLabel?: string;
     filterSearchBy?: string;
     getFilterOptions?: (params?: BaseGetListQueryType) => Promise<unknown[]>;

@@ -24,7 +24,12 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
     return (Array.isArray(originalFilterBy) ? _.first(originalFilterBy) : originalFilterBy) ?? '';
   }, [headerColumnDef]);
 
-  const filterKey = useMemo(() => headerColumnDef.meta?.filterKey ?? filterBy, [headerColumnDef, filterBy]);
+  const filterValueBy = useMemo(
+    () => headerColumnDef.meta?.filterValueBy ?? filterBy,
+    [headerColumnDef, filterBy],
+  );
+
+  const filterLabelBy = useMemo(() => headerColumnDef.meta?.filterLabelBy, [headerColumnDef, filterBy]);
   const filterSearchBy = useMemo(
     () => headerColumnDef.meta?.filterSearchBy ?? filterBy,
     [headerColumnDef, filterBy],
@@ -46,42 +51,64 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
   const label = useMemo(() => {
     const originalLabel =
       headerColumnDef.meta?.filterLabel ?? flexRender(headerColumnDef.header, header.getContext());
-    return (
-      <TableHeaderFilterLabel
-        label={originalLabel}
-        selectedFilters={filterLabelFormatter ? selectedFilters.map(filterLabelFormatter) : selectedFilters}
-      />
-    );
+    const filterLabels: string[] = [];
+
+    selectedFilters.forEach((filter) => {
+      const filterOption = filterOptions.find((option) => option.value === filter);
+
+      if (!filterOption) {
+        return;
+      }
+
+      if (filterLabelFormatter) {
+        filterLabels.push(filterLabelFormatter(filterOption.value));
+        return;
+      }
+
+      filterLabels.push(filterOption.label);
+    });
+
+    return <TableHeaderFilterLabel label={originalLabel} selectedFilters={filterLabels} />;
   }, [headerColumnDef, selectedFilters]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const formatFilterOptions = useCallback((rawOptions: TableFilterOptionItemType[]) => {
-    const originalFilterBy = headerColumnDef.meta?.filterBy;
+  const formatFilterOptions = useCallback(
+    (rawOptions: TableFilterOptionItemType[]) => {
+      const originalFilterBy = headerColumnDef.meta?.filterBy;
 
-    const options: TableFilterOptionPrivateItemType[] = [];
+      const options: TableFilterOptionPrivateItemType[] = [];
 
-    rawOptions.forEach((rawOption) => {
-      let filterValue = '';
+      rawOptions.forEach((rawOption) => {
+        let filterValue = '';
+        let filterLabel = '';
 
-      if (Array.isArray(originalFilterBy)) {
-        filterValue = originalFilterBy.reduce((acc, filter) => `${acc} ${rawOption[filter]}`, '');
-      } else {
-        filterValue = _.get(rawOption, filterKey ?? filterBy);
-      }
+        if (Array.isArray(originalFilterBy)) {
+          filterValue = originalFilterBy.reduce((acc, filter) => `${acc} ${rawOption[filter]}`, '');
+        } else {
+          filterValue = _.get(rawOption, filterValueBy ?? filterLabelBy ?? filterBy);
+        }
 
-      if (!filterValue) {
-        return;
-      }
+        if (filterLabelBy) {
+          filterLabel = _.get(rawOption, filterLabelBy);
+        } else {
+          filterLabel = filterValue;
+        }
 
-      options.push({
-        value: filterValue,
-        label: filterLabelFormatter ? filterLabelFormatter(filterValue) : filterValue,
+        if (!filterValue) {
+          return;
+        }
+
+        options.push({
+          value: filterValue,
+          label: filterLabelFormatter ? filterLabelFormatter(filterLabel) : filterLabel,
+        });
       });
-    });
 
-    return uniqBy(options, 'value');
-  }, []);
+      return uniqBy(options, 'value');
+    },
+    [filterLabelBy],
+  );
 
   const getFilterOptions = useCallback(
     (customQuery?: BaseGetListQueryType) => {
