@@ -1,6 +1,6 @@
 import { PaginationState } from '@tanstack/react-table';
 import { AxiosError, AxiosResponse } from 'axios';
-import { FieldPath, FieldValues } from 'react-hook-form';
+import { Control, FieldPath, FieldValues } from 'react-hook-form';
 
 export interface AxiosErrorDataType {
   statusCode: number;
@@ -70,3 +70,6 @@ export interface SidebarItemType {
 export type Nullable<T> = {
   [P in keyof T]: T[P] | null;
 };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type HookFormControl = Control<any>;

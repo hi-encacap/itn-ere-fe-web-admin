@@ -28,7 +28,7 @@ const createLocationProvinceTableColumns = (t: TFunction, { onClickDelete }: OnC
       id: 'actions',
       cell: (props) => (
         <AdminLocationProvinceTableRowActions
-          id={props.row.original.provinceCode}
+          code={props.row.original.provinceCode}
           onClickDelete={onClickDelete}
         />
       ),

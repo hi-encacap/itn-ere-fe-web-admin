@@ -22,10 +22,13 @@ const ADMIN_CONTACT_API_PATH = {
 const ADMIN_LOCATION_API_PATH = {
   PROVINCES_PATH: 'admin/locations/provinces',
   PROVINCE_PATH: (code: string) => `/admin/locations/provinces/${code}`,
+  DISTRICTS_PATH: 'admin/locations/districts',
+  DISTRICT_PATH: (code: string) => `/admin/locations/districts/${code}`,
 };
 
 const LOCATION_API_PATH = {
   GHN_PROVINCES_PATH: 'locations/ghn/provinces',
+  GHN_DISTRICTS_PATH: 'locations/ghn/districts',
 };
 
 const UPLOAD_API_PATH = {
