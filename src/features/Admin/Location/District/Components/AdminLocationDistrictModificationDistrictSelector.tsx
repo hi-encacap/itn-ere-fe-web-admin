@@ -39,7 +39,7 @@ const AdminLocationDistrictModificationDistrictSelector = ({
       .then((data) => {
         setLocationProvinceOptions(
           data.map((item) => ({
-            value: Number(item.id),
+            value: Number(item.ghnRefId),
             label: String(item.name),
           })),
         );

@@ -1,7 +1,7 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import { TFunction } from 'i18next';
 
-import { LocationProvinceWebsiteDataType } from '@interfaces/Admin/locationTypes';
+import { LocationProvinceDataType } from '@interfaces/Admin/locationTypes';
 import { ColumnDef, TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes';
 
 import TableRowActionSkeleton from '@components/Table/TableRowActionSkeleton';
@@ -13,24 +13,21 @@ interface OnClickHandlers {
 }
 
 const createLocationProvinceTableColumns = (t: TFunction, { onClickDelete }: OnClickHandlers) => {
-  const columnHelper = createColumnHelper<LocationProvinceWebsiteDataType>();
+  const columnHelper = createColumnHelper<LocationProvinceDataType>();
 
-  const tableExampleColumns: Array<ColumnDef<LocationProvinceWebsiteDataType>> = [
-    columnHelper.accessor((row) => row.provinceCode, {
+  const tableExampleColumns: Array<ColumnDef<LocationProvinceDataType>> = [
+    columnHelper.accessor((row) => row.code, {
       id: 'code',
       header: String(t('table.column.code')),
     }),
-    columnHelper.accessor((row) => row.province.name, {
+    columnHelper.accessor((row) => row.name, {
       id: 'name',
       header: String(t('table.column.name')),
     }),
     columnHelper.display({
       id: 'actions',
       cell: (props) => (
-        <AdminLocationProvinceTableRowActions
-          code={props.row.original.provinceCode}
-          onClickDelete={onClickDelete}
-        />
+        <AdminLocationProvinceTableRowActions code={props.row.original.code} onClickDelete={onClickDelete} />
       ),
       meta: {
         skeleton: <TableRowActionSkeleton numberOfActions={1} />,

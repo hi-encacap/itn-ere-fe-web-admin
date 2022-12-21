@@ -43,7 +43,7 @@ const AdminLocationProvinceModificationModal = ({
   const [locationProvinceOptions, setLocationProvinceOptions] = useState<SelectOptionItemType[]>([]);
 
   const defaultValues: LocationProvinceWebsiteFormDataType = {
-    id: null,
+    ghnRefId: null,
   };
 
   const {
@@ -66,7 +66,7 @@ const AdminLocationProvinceModificationModal = ({
       .then((data) => {
         setLocationProvinceOptions(
           data.map((item) => ({
-            value: Number(item.id),
+            value: Number(item.ghnRefId),
             label: String(item.name),
           })),
         );
@@ -104,7 +104,7 @@ const AdminLocationProvinceModificationModal = ({
     if (isOpen) {
       getProvinces();
     }
-  }, [getProvinces, isOpen]);
+  }, [isOpen]);
 
   return (
     <Modal
@@ -117,7 +117,7 @@ const AdminLocationProvinceModificationModal = ({
     >
       <form className="grid gap-6" onSubmit={handleSubmit}>
         <Select
-          name="id"
+          name="ghnRefId"
           label={t('form.id.label')}
           placeholder={t('form.id.placeholder')}
           className="block"
