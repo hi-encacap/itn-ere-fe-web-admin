@@ -7,19 +7,19 @@ import { locationService } from '@services/index';
 
 import { Select } from '@components/Form';
 
-interface AdminLocationDistrictModificationDistrictSelectorProps {
+interface AdminLocationWardModificationWardSelectorProps {
   control: HookFormControl;
   disabled?: boolean;
-  provinceCode: string | null;
+  districtCode: string | null;
 }
 
-const AdminLocationDistrictModificationDistrictSelector = ({
+const AdminLocationWardModificationWardSelector = ({
   control,
   disabled,
-  provinceCode,
-}: AdminLocationDistrictModificationDistrictSelectorProps) => {
+  districtCode,
+}: AdminLocationWardModificationWardSelectorProps) => {
   const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:page.location.district.modal.modification',
+    keyPrefix: 'admin:page.location.ward.modal.modification',
   });
 
   const [locationProvinceOptions, setLocationProvinceOptions] = useState<SelectOptionItemType[]>([]);
@@ -30,12 +30,12 @@ const AdminLocationDistrictModificationDistrictSelector = ({
       setIsLoading(true);
     }
 
-    if (!provinceCode) {
+    if (!districtCode) {
       return;
     }
 
     locationService
-      .getGHNDistricts(provinceCode)
+      .getGHNWards(districtCode)
       .then((data) => {
         setLocationProvinceOptions(
           data.map((item) => ({
@@ -48,11 +48,11 @@ const AdminLocationDistrictModificationDistrictSelector = ({
       .catch(() => {
         setLocationProvinceOptions([]);
       });
-  }, [locationProvinceOptions, provinceCode]);
+  }, [locationProvinceOptions, districtCode]);
 
   useEffect(() => {
     getDistricts();
-  }, [provinceCode]);
+  }, [districtCode]);
 
   return (
     <Select
@@ -63,9 +63,9 @@ const AdminLocationDistrictModificationDistrictSelector = ({
       options={locationProvinceOptions}
       isRequired
       control={control}
-      disabled={(isLoading || disabled) ?? !provinceCode}
+      disabled={(isLoading || disabled) ?? !districtCode}
     />
   );
 };
 
-export default AdminLocationDistrictModificationDistrictSelector;
+export default AdminLocationWardModificationWardSelector;

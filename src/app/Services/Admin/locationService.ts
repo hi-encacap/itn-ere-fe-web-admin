@@ -1,8 +1,11 @@
 import { ADMIN_LOCATION_API_PATH } from '@constants/apis';
 import {
+  LocationDistrictGetListQueryType,
   LocationDistrictWebsiteDataType,
   LocationProvinceWebsiteDataType,
   LocationProvinceWebsiteFormDataType,
+  LocationWardWebsiteDataType,
+  LocationWardWebsiteFormDataType,
 } from '@interfaces/Admin/locationTypes';
 import { BaseGetListQueryType, ResponseWithMetaType } from '@interfaces/Common/commonTypes';
 
@@ -34,7 +37,7 @@ const deleteProvinceByCode = async (code: string): Promise<void> => {
 };
 
 const getDistricts = async (
-  query?: BaseGetListQueryType,
+  query?: LocationDistrictGetListQueryType,
 ): Promise<ResponseWithMetaType<LocationDistrictWebsiteDataType[]>> => {
   const response = await axiosInstance.get(ADMIN_LOCATION_API_PATH.DISTRICTS_PATH, {
     params: query,
@@ -59,6 +62,30 @@ const deleteDistrictByCode = async (code: string): Promise<void> => {
   await axiosInstance.delete(ADMIN_LOCATION_API_PATH.DISTRICT_PATH(code));
 };
 
+const getWards = async (
+  query?: BaseGetListQueryType,
+): Promise<ResponseWithMetaType<LocationWardWebsiteDataType[]>> => {
+  const response = await axiosInstance.get(ADMIN_LOCATION_API_PATH.WARDS_PATH, {
+    params: query,
+  });
+
+  return response.data;
+};
+
+const getAllWards = async (): Promise<LocationWardWebsiteDataType[]> => {
+  const response = await getWards();
+  return response.data;
+};
+
+const createWard = async (data: LocationWardWebsiteFormDataType): Promise<LocationWardWebsiteDataType> => {
+  const response = await axiosInstance.post(ADMIN_LOCATION_API_PATH.WARDS_PATH, data);
+  return response.data.data;
+};
+
+const deleteWardByCode = async (code: string): Promise<void> => {
+  await axiosInstance.delete(ADMIN_LOCATION_API_PATH.WARD_PATH(code));
+};
+
 export {
   getProvinces,
   getAllProvinces,
@@ -68,4 +95,8 @@ export {
   getAllDistricts,
   createDistrict,
   deleteDistrictByCode,
+  getWards,
+  getAllWards,
+  createWard,
+  deleteWardByCode,
 };

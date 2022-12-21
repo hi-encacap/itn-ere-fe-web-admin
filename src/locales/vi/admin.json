@@ -239,7 +239,7 @@
                 "required": "Tỉnh/thành phố không được phép để trống.",
                 "districtAlreadyExists": "quận/huyện đã tồn tại."
               },
-              "provinceId": {
+              "provinceCode": {
                 "required": "Tỉnh/thành phố không được phép để trống."
               }
             }
@@ -256,13 +256,68 @@
           }
         }
       },
+      "ward": {
+        "title": "Quản lý xã/phường/thị trấn",
+        "header": {
+          "create": "Thêm xã/phường/thị trấn"
+        },
+        "table": {
+          "column": {
+            "code": "Mã",
+            "name": "Tên",
+            "districtName": "Quận/huyện",
+            "provinceName": "Tỉnh/thành phố"
+          }
+        },
+        "modal": {
+          "delete": {
+            "title": "Xóa xã/phường/thị trấn",
+            "message": {
+              "willBeDeleted": "Xã/phường/thị trấn này sẽ bị xóa vĩnh viển, sau đó",
+              "cannotCreateNewPost": "Bạn sẽ không thể tạo bài viết sử dụng xã/phường/thị trấn này.",
+              "oldPostWillBeUnpublished": "Tất cả bài đã xuất bản có xã/phường/thị trấn này sẽ chuyển sang trạng thái nháp.",
+              "oldDraftWillBeDeleted": "Tất cả bài nháp có xã/phường/thị trấn này sẽ bị xóa vĩnh viển.",
+              "areYouSure": "Bạn có chắc muốn tiếp tục không?"
+            }
+          },
+          "modification": {
+            "title": "Thêm xã/phường/thị trấn",
+            "form": {
+              "id": {
+                "label": "Xã/phường/thị trấn",
+                "placeholder": "Chọn xã/phường/thị trấn",
+                "required": "Tỉnh/thành phố không được phép để trống.",
+                "districtAlreadyExists": "xã/phường/thị trấn đã tồn tại."
+              },
+              "provinceId": {
+                "required": "Tỉnh/thành phố không được phép để trống."
+              }
+            }
+          }
+        },
+        "notification": {
+          "delete": {
+            "deleted": "Xã/phường/thị trấn đã bị xóa vĩnh viễn.",
+            "deleteFailed": "Đã xảy ra lỗi khi xóa xã/phường/thị trấn."
+          },
+          "modify": {
+            "created": "Đã thêm xã/phường/thị trấn mới.",
+            "createFailed": "Đã xảy ra lỗi khi thêm xã/phường/thị trấn."
+          }
+        }
+      },
       "modal": {
         "modification": {
           "form": {
-            "provinceId": {
+            "provinceCode": {
               "label": "Tỉnh/thành phố",
               "placeholder": "Chọn tỉnh/thành phố",
               "required": "Tỉnh/thành phố không được phép để trống."
+            },
+            "districtCode": {
+              "label": "Quận/huyện",
+              "placeholder": "Chọn quận/huyện",
+              "required": "Quận/huyện không được phép để trống."
             }
           }
         }

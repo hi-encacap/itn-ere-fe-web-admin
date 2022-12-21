@@ -7,11 +7,18 @@ const getGHNProvinces = async (): Promise<Array<Record<'id' | 'name', unknown>>>
   return response.data.data;
 };
 
-const getGHNDistricts = async (provinceId: number): Promise<Array<Record<'id' | 'name', unknown>>> => {
+const getGHNDistricts = async (provinceCode: string): Promise<Array<Record<'id' | 'name', unknown>>> => {
   const response = await axiosInstance.get(LOCATION_API_PATH.GHN_DISTRICTS_PATH, {
-    params: { provinceId },
+    params: { provinceCode },
   });
   return response.data.data;
 };
 
-export { getGHNProvinces, getGHNDistricts };
+const getGHNWards = async (districtCode: string): Promise<Array<Record<'id' | 'name', unknown>>> => {
+  const response = await axiosInstance.get(LOCATION_API_PATH.GHN_WARDS_PATH, {
+    params: { districtCode },
+  });
+  return response.data.data;
+};
+
+export { getGHNProvinces, getGHNDistricts, getGHNWards };
