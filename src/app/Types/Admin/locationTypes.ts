@@ -13,7 +13,7 @@ export interface LocationProvinceWebsiteDataType {
 }
 
 export interface LocationProvinceWebsiteFormDataType {
-  id: number | null;
+  ghnRefId: number | null;
 }
 
 export interface LocationDistrictDataType {
@@ -31,7 +31,7 @@ export interface LocationDistrictWebsiteDataType {
 }
 
 export interface LocationDistrictWebsiteFormDataType {
-  id: number | null;
+  ghnRefId: number | null;
   provinceCode: string | null;
 }
 

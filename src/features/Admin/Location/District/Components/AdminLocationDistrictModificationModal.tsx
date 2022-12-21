@@ -43,7 +43,7 @@ const AdminLocationDistrictModificationModal = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const defaultValues: LocationDistrictWebsiteFormDataType = {
-    id: null,
+    ghnRefId: null,
     provinceCode: null,
   };
 

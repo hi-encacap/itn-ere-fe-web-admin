@@ -2,6 +2,7 @@ import { ADMIN_LOCATION_API_PATH } from '@constants/apis';
 import {
   LocationDistrictGetListQueryType,
   LocationDistrictWebsiteDataType,
+  LocationProvinceDataType,
   LocationProvinceWebsiteDataType,
   LocationProvinceWebsiteFormDataType,
   LocationWardWebsiteDataType,
@@ -13,14 +14,14 @@ import axiosInstance from '@utils/Http/axiosInstance';
 
 const getProvinces = async (
   query?: BaseGetListQueryType,
-): Promise<ResponseWithMetaType<LocationProvinceWebsiteDataType[]>> => {
+): Promise<ResponseWithMetaType<LocationProvinceDataType[]>> => {
   const response = await axiosInstance.get(ADMIN_LOCATION_API_PATH.PROVINCES_PATH, {
     params: query,
   });
   return response.data;
 };
 
-const getAllProvinces = async (): Promise<LocationProvinceWebsiteDataType[]> => {
+const getAllProvinces = async (): Promise<LocationProvinceDataType[]> => {
   const response = await getProvinces();
   return response.data;
 };

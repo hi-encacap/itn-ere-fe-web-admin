@@ -33,8 +33,8 @@ const AdminLocationModificationProvinceSelector = ({
       .then(({ data }) => {
         setLocationProvinceOptions(
           data.map((item) => ({
-            value: String(item.province.code),
-            label: String(item.province.name),
+            value: String(item.code),
+            label: String(item.name),
           })),
         );
         setIsLoading(false);

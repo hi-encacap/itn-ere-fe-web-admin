@@ -4,7 +4,7 @@ import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { LocationProvinceWebsiteDataType } from '@interfaces/Admin/locationTypes';
+import { LocationProvinceDataType } from '@interfaces/Admin/locationTypes';
 import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { adminLocationService } from '@services/index';
@@ -25,7 +25,7 @@ const AdminLocationProvinceList = () => {
     keyPrefix: 'admin:page.location.province',
   });
 
-  const [provinceData, setProvinceData] = useState<LocationProvinceWebsiteDataType[]>([]);
+  const [provinceData, setProvinceData] = useState<LocationProvinceDataType[]>([]);
   const [pagination, setPagination] = useState<TablePaginationType>({
     page: 1,
     limit: DEFAULT_PAGE_SIZE,
