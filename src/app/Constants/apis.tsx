@@ -24,11 +24,14 @@ const ADMIN_LOCATION_API_PATH = {
   PROVINCE_PATH: (code: string) => `/admin/locations/provinces/${code}`,
   DISTRICTS_PATH: 'admin/locations/districts',
   DISTRICT_PATH: (code: string) => `/admin/locations/districts/${code}`,
+  WARDS_PATH: 'admin/locations/wards',
+  WARD_PATH: (code: string) => `/admin/locations/wards/${code}`,
 };
 
 const LOCATION_API_PATH = {
   GHN_PROVINCES_PATH: 'locations/ghn/provinces',
   GHN_DISTRICTS_PATH: 'locations/ghn/districts',
+  GHN_WARDS_PATH: 'locations/ghn/wards',
 };
 
 const UPLOAD_API_PATH = {

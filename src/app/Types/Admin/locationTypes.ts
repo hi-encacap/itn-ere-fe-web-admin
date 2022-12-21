@@ -1,3 +1,5 @@
+import { BaseGetListQueryType } from '@interfaces/Common/commonTypes';
+
 export interface LocationProvinceDataType {
   code: string;
   name: string;
@@ -30,5 +32,29 @@ export interface LocationDistrictWebsiteDataType {
 
 export interface LocationDistrictWebsiteFormDataType {
   id: number | null;
-  provinceId: number | null;
+  provinceCode: string | null;
+}
+
+export interface LocationDistrictGetListQueryType extends BaseGetListQueryType {
+  provinceCode?: string;
+}
+
+export interface LocationWardDataType {
+  code: string;
+  name: string;
+  districtCode: string;
+  ghnRefId: number;
+  district: LocationDistrictDataType;
+}
+
+export interface LocationWardWebsiteDataType {
+  wardCode: string;
+  websiteId: number;
+  ward: LocationWardDataType;
+}
+
+export interface LocationWardWebsiteFormDataType {
+  id: number | null;
+  districtCode: string | null;
+  provinceCode: string | null;
 }

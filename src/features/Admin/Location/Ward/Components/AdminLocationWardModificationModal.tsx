@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { LocationDistrictWebsiteFormDataType } from '@interfaces/Admin/locationTypes';
+import { LocationWardWebsiteFormDataType } from '@interfaces/Admin/locationTypes';
 import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 import { adminLocationService } from '@services/index';
 
@@ -15,35 +15,37 @@ import { ModalProps } from '@components/Modal/Modal';
 import useToast from '@hooks/useToast';
 import { formatErrorMessage, setFormError } from '@utils/error';
 
+import AdminLocationModificationDistrictSelector from '@admin/Location/Components/AdminLocationModificationDistrictSelector';
 import AdminLocationModificationProvinceSelector from '@admin/Location/Components/AdminLocationModificationProvinceSelector';
 
 import { locationDistrictFormSchema } from '../../Schemas/locationFormSchema';
-import AdminLocationDistrictModificationDistrictSelector from './AdminLocationDistrictModificationDistrictSelector';
+import AdminLocationWardModificationWardSelector from './AdminLocationWardModificationWardSelector';
 
-interface AdminLocationDistrictModificationModalProps extends ModalProps {
+interface AdminLocationWardModificationModalProps extends ModalProps {
   onCreated: () => void;
   onCreateFailed?: () => void;
 }
 
-const AdminLocationDistrictModificationModal = ({
+const AdminLocationWardModificationModal = ({
   isOpen,
   onClose,
   onCreated,
   onCreateFailed,
   ...props
-}: AdminLocationDistrictModificationModalProps) => {
+}: AdminLocationWardModificationModalProps) => {
   const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:page.location.district.modal.modification',
+    keyPrefix: 'admin:page.location.ward.modal.modification',
   });
   const { t: tNotification } = useTranslation('admin', {
-    keyPrefix: 'admin:page.location.district.notification.modify',
+    keyPrefix: 'admin:page.location.ward.notification.modify',
   });
   const toast = useToast();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const defaultValues: LocationDistrictWebsiteFormDataType = {
+  const defaultValues: LocationWardWebsiteFormDataType = {
     id: null,
+    districtCode: null,
     provinceCode: null,
   };
 
@@ -53,12 +55,13 @@ const AdminLocationDistrictModificationModal = ({
     reset,
     setError,
     watch,
-  } = useForm<LocationDistrictWebsiteFormDataType>({
+  } = useForm<LocationWardWebsiteFormDataType>({
     resolver: yupResolver(locationDistrictFormSchema(t)),
     defaultValues,
   });
 
   const provinceCode = watch('provinceCode');
+  const districtCode = watch('districtCode');
 
   const handleClose = useCallback(() => {
     reset();
@@ -69,9 +72,9 @@ const AdminLocationDistrictModificationModal = ({
     setIsSubmitting(true);
 
     adminLocationService
-      .createDistrict(data)
+      .createWard(data)
       .then(() => {
-        toast.success(tNotification('districtCreated'));
+        toast.success(tNotification('created'));
         onCreated();
         handleClose();
         setIsSubmitting(false);
@@ -94,9 +97,14 @@ const AdminLocationDistrictModificationModal = ({
     >
       <form className="grid gap-6" onSubmit={handleSubmit}>
         <AdminLocationModificationProvinceSelector control={control} disabled={isSubmitting} />
-        <AdminLocationDistrictModificationDistrictSelector
+        <AdminLocationModificationDistrictSelector
           control={control}
-          provinceCode={provinceCode}
+          provinceCode={provinceCode ?? ''}
+          disabled={isSubmitting}
+        />
+        <AdminLocationWardModificationWardSelector
+          control={control}
+          districtCode={districtCode}
           disabled={isSubmitting}
         />
         <Button type="submit" className="hidden" />
@@ -105,4 +113,4 @@ const AdminLocationDistrictModificationModal = ({
   );
 };
 
-export default AdminLocationDistrictModificationModal;
+export default AdminLocationWardModificationModal;

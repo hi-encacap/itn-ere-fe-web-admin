@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next';
-import { number } from 'yup';
+import { number, string } from 'yup';
 
 import {
   LocationDistrictWebsiteFormDataType,
@@ -16,7 +16,7 @@ const locationProvinceFormSchema = (t: TFunction) =>
 const locationDistrictFormSchema = (t: TFunction) =>
   generateFormSchema<LocationDistrictWebsiteFormDataType>({
     id: number().required(t('form.id.required')).nullable(),
-    provinceId: number().required(t('form.provinceId.required')).nullable(),
+    provinceCode: string().required(t('form.provinceId.required')).nullable(),
   });
 
 export { locationProvinceFormSchema, locationDistrictFormSchema };

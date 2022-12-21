@@ -7,59 +7,66 @@ import { adminLocationService } from '@services/index';
 
 import { Select } from '@components/Form';
 
-interface AdminLocationModificationProvinceSelectorProps {
+interface AdminLocationModificationDistrictSelectorProps {
   control: HookFormControl;
+  provinceCode: string;
   disabled?: boolean;
 }
 
-const AdminLocationModificationProvinceSelector = ({
+const AdminLocationModificationDistrictSelector = ({
   control,
+  provinceCode,
   disabled,
-}: AdminLocationModificationProvinceSelectorProps) => {
+}: AdminLocationModificationDistrictSelectorProps) => {
   const { t } = useTranslation(['admin'], {
     keyPrefix: 'admin:page.location.modal.modification',
   });
 
-  const [locationProvinceOptions, setLocationProvinceOptions] = useState<SelectOptionItemType[]>([]);
+  const [options, setOptions] = useState<SelectOptionItemType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getProvinces = useCallback(() => {
-    if (locationProvinceOptions.length === 0) {
+  const getData = useCallback(() => {
+    if (options.length === 0) {
       setIsLoading(true);
     }
 
     adminLocationService
-      .getProvinces()
+      .getDistricts({
+        provinceCode,
+      })
       .then(({ data }) => {
-        setLocationProvinceOptions(
+        setOptions(
           data.map((item) => ({
-            value: String(item.province.code),
-            label: String(item.province.name),
+            value: String(item.district.code),
+            label: String(item.district.name),
           })),
         );
         setIsLoading(false);
       })
       .catch(() => {
-        setLocationProvinceOptions([]);
+        setOptions([]);
       });
-  }, [locationProvinceOptions]);
+  }, [options, provinceCode]);
 
   useEffect(() => {
-    getProvinces();
-  }, []);
+    if (!provinceCode) {
+      return;
+    }
+    getData();
+  }, [provinceCode]);
 
   return (
     <Select
-      name="provinceCode"
-      label={t('form.provinceCode.label')}
-      placeholder={t('form.provinceCode.placeholder')}
+      name="districtCode"
+      label={t('form.districtCode.label')}
+      placeholder={t('form.districtCode.placeholder')}
       className="block"
-      options={locationProvinceOptions}
+      options={options}
       isRequired
       control={control}
-      disabled={isLoading || disabled}
+      disabled={!provinceCode ?? isLoading ?? disabled}
     />
   );
 };
 
-export default memo(AdminLocationModificationProvinceSelector);
+export default memo(AdminLocationModificationDistrictSelector);
