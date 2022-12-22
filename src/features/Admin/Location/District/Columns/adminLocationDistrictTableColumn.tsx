@@ -1,7 +1,7 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import { TFunction } from 'i18next';
 
-import { LocationDistrictWebsiteDataType } from '@interfaces/Admin/locationTypes';
+import { LocationDistrictDataType } from '@interfaces/Admin/locationTypes';
 import { ColumnDef, TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes';
 import { adminLocationService } from '@services/index';
 
@@ -14,24 +14,24 @@ interface OnClickHandlers {
 }
 
 const createLocationDistrictTableColumns = (t: TFunction, { onClickDelete }: OnClickHandlers) => {
-  const columnHelper = createColumnHelper<LocationDistrictWebsiteDataType>();
+  const columnHelper = createColumnHelper<LocationDistrictDataType>();
 
-  const tableExampleColumns: Array<ColumnDef<LocationDistrictWebsiteDataType>> = [
-    columnHelper.accessor((row) => row.districtCode, {
+  const tableExampleColumns: Array<ColumnDef<LocationDistrictDataType>> = [
+    columnHelper.accessor((row) => row.code, {
       id: 'code',
       header: String(t('table.column.code')),
     }),
-    columnHelper.accessor((row) => row.district.name, {
+    columnHelper.accessor((row) => row.name, {
       id: 'name',
       header: String(t('table.column.name')),
     }),
-    columnHelper.accessor((row) => row.district.province.name, {
+    columnHelper.accessor((row) => row.province.name, {
       id: 'provinceName',
       header: String(t('table.column.provinceName')),
       meta: {
         filterBy: 'provinceCodes',
-        filterValueBy: 'district.province.code',
-        filterLabelBy: 'district.province.name',
+        filterValueBy: 'province.code',
+        filterLabelBy: 'province.name',
         filterLabel: String(t('table.column.provinceName')),
         filterSearchBy: 'provinceName',
         getFilterOptions: adminLocationService.getAllDistricts,
@@ -40,10 +40,7 @@ const createLocationDistrictTableColumns = (t: TFunction, { onClickDelete }: OnC
     columnHelper.display({
       id: 'actions',
       cell: (props) => (
-        <AdminLocationDistrictTableRowActions
-          code={props.row.original.districtCode}
-          onClickDelete={onClickDelete}
-        />
+        <AdminLocationDistrictTableRowActions code={props.row.original.code} onClickDelete={onClickDelete} />
       ),
       meta: {
         skeleton: <TableRowActionSkeleton numberOfActions={1} />,
