@@ -3,6 +3,7 @@ import { TFunction } from 'i18next';
 
 import { LocationWardDataType } from '@interfaces/Admin/locationTypes';
 import { ColumnDef, TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes';
+import { adminLocationService } from '@services/index';
 
 import TableRowActionSkeleton from '@components/Table/TableRowActionSkeleton';
 
@@ -27,26 +28,26 @@ const createLocationWardTableColumns = (t: TFunction, { onClickDelete }: OnClick
     columnHelper.accessor((row) => row.district.name, {
       id: 'districtName',
       header: String(t('table.column.districtName')),
-      // meta: {
-      //   filterBy: 'provinceCodes',
-      //   filterValueBy: 'district.province.code',
-      //   filterLabelBy: 'district.province.name',
-      //   filterLabel: String(t('table.column.provinceName')),
-      //   filterSearchBy: 'provinceName',
-      //   getFilterOptions: adminLocationService.getAllDistricts,
-      // },
+      meta: {
+        filterBy: 'districtCodes',
+        filterValueBy: 'district.code',
+        filterLabelBy: 'district.name',
+        filterLabel: String(t('table.column.districtName')),
+        filterSearchBy: 'districtName',
+        getFilterOptions: adminLocationService.getAllWards,
+      },
     }),
     columnHelper.accessor((row) => row.district.province.name, {
       id: 'provinceName',
       header: String(t('table.column.provinceName')),
-      // meta: {
-      //   filterBy: 'provinceCodes',
-      //   filterValueBy: 'district.province.code',
-      //   filterLabelBy: 'district.province.name',
-      //   filterLabel: String(t('table.column.provinceName')),
-      //   filterSearchBy: 'provinceName',
-      //   getFilterOptions: adminLocationService.getAllDistricts,
-      // },
+      meta: {
+        filterBy: 'provinceCodes',
+        filterValueBy: 'district.province.code',
+        filterLabelBy: 'district.province.name',
+        filterLabel: String(t('table.column.provinceName')),
+        filterSearchBy: 'provinceName',
+        getFilterOptions: adminLocationService.getAllWards,
+      },
     }),
     columnHelper.display({
       id: 'actions',
