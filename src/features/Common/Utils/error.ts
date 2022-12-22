@@ -38,4 +38,16 @@ const setFormError = <T extends FieldValues>(
   });
 };
 
-export { setFormError, formatErrorMessage };
+const commonFormErrorFactory = (t: TFunction, prefix?: string) => {
+  return (error?: string) => {
+    if (!error) {
+      return error;
+    }
+
+    const errorKey = error.split('.').at(-1);
+
+    return t(`${prefix ? `${prefix}.` : ''}${errorKey ?? error}`);
+  };
+};
+
+export { setFormError, formatErrorMessage, commonFormErrorFactory };

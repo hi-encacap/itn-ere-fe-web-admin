@@ -7,6 +7,8 @@ import { adminLocationService } from '@services/index';
 
 import { Select } from '@components/Form';
 
+import { commonFormErrorFactory } from '@utils/error';
+
 interface AdminLocationModificationProvinceSelectorProps {
   control: HookFormControl;
   disabled?: boolean;
@@ -17,7 +19,7 @@ const AdminLocationModificationProvinceSelector = ({
   disabled,
 }: AdminLocationModificationProvinceSelectorProps) => {
   const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:page.location.modal.modification',
+    keyPrefix: 'admin:page.location.modal.modification.form.provinceCode',
   });
 
   const [locationProvinceOptions, setLocationProvinceOptions] = useState<SelectOptionItemType[]>([]);
@@ -51,13 +53,14 @@ const AdminLocationModificationProvinceSelector = ({
   return (
     <Select
       name="provinceCode"
-      label={t('form.provinceCode.label')}
-      placeholder={t('form.provinceCode.placeholder')}
+      label={t('label')}
+      placeholder={t('placeholder')}
       className="block"
       options={locationProvinceOptions}
       isRequired
       control={control}
       disabled={isLoading || disabled}
+      errorFactory={commonFormErrorFactory(t)}
     />
   );
 };
