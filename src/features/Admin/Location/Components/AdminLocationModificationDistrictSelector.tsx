@@ -7,6 +7,8 @@ import { adminLocationService } from '@services/index';
 
 import { Select } from '@components/Form';
 
+import { commonFormErrorFactory } from '@utils/error';
+
 interface AdminLocationModificationDistrictSelectorProps {
   control: HookFormControl;
   provinceCode: string;
@@ -19,7 +21,7 @@ const AdminLocationModificationDistrictSelector = ({
   disabled,
 }: AdminLocationModificationDistrictSelectorProps) => {
   const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:page.location.modal.modification',
+    keyPrefix: 'admin:page.location.modal.modification.form.districtCode',
   });
 
   const [options, setOptions] = useState<SelectOptionItemType[]>([]);
@@ -37,8 +39,8 @@ const AdminLocationModificationDistrictSelector = ({
       .then(({ data }) => {
         setOptions(
           data.map((item) => ({
-            value: String(item.district.code),
-            label: String(item.district.name),
+            value: String(item.code),
+            label: String(item.name),
           })),
         );
         setIsLoading(false);
@@ -58,13 +60,14 @@ const AdminLocationModificationDistrictSelector = ({
   return (
     <Select
       name="districtCode"
-      label={t('form.districtCode.label')}
-      placeholder={t('form.districtCode.placeholder')}
+      label={t('label')}
+      placeholder={t('placeholder')}
       className="block"
       options={options}
       isRequired
       control={control}
       disabled={!provinceCode ?? isLoading ?? disabled}
+      errorFactory={commonFormErrorFactory(t)}
     />
   );
 };

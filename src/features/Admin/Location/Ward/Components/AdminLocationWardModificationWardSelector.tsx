@@ -56,7 +56,7 @@ const AdminLocationWardModificationWardSelector = ({
 
   return (
     <Select
-      name="id"
+      name="ghnRefId"
       label={t('form.id.label')}
       placeholder={t('form.id.placeholder')}
       className="block"

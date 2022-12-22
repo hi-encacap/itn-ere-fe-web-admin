@@ -54,7 +54,7 @@ export interface LocationWardWebsiteDataType {
 }
 
 export interface LocationWardWebsiteFormDataType {
-  id: number | null;
+  ghnRefId: number | null;
   districtCode: string | null;
   provinceCode: string | null;
 }

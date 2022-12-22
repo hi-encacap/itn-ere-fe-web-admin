@@ -6,9 +6,10 @@ import UncontrolledSelect, { UncontrolledSelectProps } from './UncontrolledSelec
 export interface SelectProps extends UncontrolledSelectProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control?: Control<any>;
+  errorFactory?: (error: string) => string | undefined;
 }
 
-const Select = ({ control, name, ...inputProps }: SelectProps) => {
+const Select = ({ control, name, errorFactory, ...inputProps }: SelectProps) => {
   if (!control) {
     return <UncontrolledSelect name={name} {...inputProps} />;
   }
@@ -21,12 +22,14 @@ const Select = ({ control, name, ...inputProps }: SelectProps) => {
     control,
   });
 
+  const errorMessage = errors[name]?.message as string;
+
   return (
     <UncontrolledSelect
       name={name}
       onChange={onChange}
       onBlur={onBlur}
-      error={errors[name]?.message as string}
+      error={errorFactory ? errorFactory(errorMessage) : errorMessage}
       {...(!(value === undefined || value === null) && { value })}
       {...omit(inputProps, ['value', 'onChange', 'onBlur'])}
     />
