@@ -37,8 +37,8 @@ const AdminLocationModificationDistrictSelector = ({
       .then(({ data }) => {
         setOptions(
           data.map((item) => ({
-            value: String(item.district.code),
-            label: String(item.district.name),
+            value: String(item.code),
+            label: String(item.name),
           })),
         );
         setIsLoading(false);

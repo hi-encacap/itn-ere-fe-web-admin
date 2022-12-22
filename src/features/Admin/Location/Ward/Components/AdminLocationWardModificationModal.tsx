@@ -18,7 +18,7 @@ import { formatErrorMessage, setFormError } from '@utils/error';
 import AdminLocationModificationDistrictSelector from '@admin/Location/Components/AdminLocationModificationDistrictSelector';
 import AdminLocationModificationProvinceSelector from '@admin/Location/Components/AdminLocationModificationProvinceSelector';
 
-import { locationDistrictFormSchema } from '../../Schemas/locationFormSchema';
+import { locationWardFormSchema } from '../../Schemas/locationFormSchema';
 import AdminLocationWardModificationWardSelector from './AdminLocationWardModificationWardSelector';
 
 interface AdminLocationWardModificationModalProps extends ModalProps {
@@ -44,7 +44,7 @@ const AdminLocationWardModificationModal = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const defaultValues: LocationWardWebsiteFormDataType = {
-    id: null,
+    ghnRefId: null,
     districtCode: null,
     provinceCode: null,
   };
@@ -56,7 +56,7 @@ const AdminLocationWardModificationModal = ({
     setError,
     watch,
   } = useForm<LocationWardWebsiteFormDataType>({
-    resolver: yupResolver(locationDistrictFormSchema(t)),
+    resolver: yupResolver(locationWardFormSchema(t)),
     defaultValues,
   });
 

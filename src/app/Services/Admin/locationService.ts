@@ -1,7 +1,7 @@
 import { ADMIN_LOCATION_API_PATH } from '@constants/apis';
 import {
+  LocationDistrictDataType,
   LocationDistrictGetListQueryType,
-  LocationDistrictWebsiteDataType,
   LocationProvinceDataType,
   LocationProvinceWebsiteDataType,
   LocationProvinceWebsiteFormDataType,
@@ -39,7 +39,7 @@ const deleteProvinceByCode = async (code: string): Promise<void> => {
 
 const getDistricts = async (
   query?: LocationDistrictGetListQueryType,
-): Promise<ResponseWithMetaType<LocationDistrictWebsiteDataType[]>> => {
+): Promise<ResponseWithMetaType<LocationDistrictDataType[]>> => {
   const response = await axiosInstance.get(ADMIN_LOCATION_API_PATH.DISTRICTS_PATH, {
     params: query,
   });
@@ -47,7 +47,7 @@ const getDistricts = async (
   return response.data;
 };
 
-const getAllDistricts = async (): Promise<LocationDistrictWebsiteDataType[]> => {
+const getAllDistricts = async (): Promise<LocationDistrictDataType[]> => {
   const response = await getDistricts();
   return response.data;
 };
