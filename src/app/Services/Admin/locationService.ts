@@ -1,5 +1,6 @@
 import { ADMIN_LOCATION_API_PATH } from '@constants/apis';
 import {
+  LocationAddressBookDataType,
   LocationDistrictDataType,
   LocationDistrictGetListQueryType,
   LocationProvinceDataType,
@@ -87,6 +88,25 @@ const deleteWardByCode = async (code: string): Promise<void> => {
   await axiosInstance.delete(ADMIN_LOCATION_API_PATH.WARD_PATH(code));
 };
 
+const getAddressBooks = async (
+  query?: BaseGetListQueryType,
+): Promise<ResponseWithMetaType<LocationAddressBookDataType[]>> => {
+  const response = await axiosInstance.get(ADMIN_LOCATION_API_PATH.ADDRESS_BOOKS_PATH, {
+    params: query,
+  });
+
+  return response.data;
+};
+
+const getAllAddressBooks = async (): Promise<LocationAddressBookDataType[]> => {
+  const response = await getAddressBooks();
+  return response.data;
+};
+
+const deleteAddressBookById = async (id: number): Promise<void> => {
+  await axiosInstance.delete(ADMIN_LOCATION_API_PATH.ADDRESS_BOOK_PATH(id));
+};
+
 export {
   getProvinces,
   getAllProvinces,
@@ -100,4 +120,7 @@ export {
   getAllWards,
   createWard,
   deleteWardByCode,
+  getAddressBooks,
+  getAllAddressBooks,
+  deleteAddressBookById,
 };

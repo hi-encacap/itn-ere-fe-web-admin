@@ -26,6 +26,8 @@ const ADMIN_LOCATION_API_PATH = {
   DISTRICT_PATH: (code: string) => `/admin/locations/districts/${code}`,
   WARDS_PATH: 'admin/locations/wards',
   WARD_PATH: (code: string) => `/admin/locations/wards/${code}`,
+  ADDRESS_BOOKS_PATH: 'admin/locations/address-books',
+  ADDRESS_BOOK_PATH: (id: number) => `/admin/locations/address-books/${id}`,
 };
 
 const LOCATION_API_PATH = {
