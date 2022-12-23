@@ -306,6 +306,30 @@
           }
         }
       },
+      "addressBook": {
+        "title": "Sổ địa chỉ",
+        "table": {
+          "column": {
+            "id": "Mã",
+            "address": "Địa chỉ",
+            "wardName": "Xã/phường/thị trấn",
+            "districtName": "Quận/huyện",
+            "provinceName": "Tỉnh/thành phố"
+          }
+        },
+        "modal": {
+          "delete": {
+            "title": "Xóa địa chỉ",
+            "message": "Thao tác này sẽ không tác động đến những bài viết đã được xuất bản. Bạn có chắc muốn tiếp tục không?"
+          }
+        },
+        "notification": {
+          "delete": {
+            "deleted": "Địa chỉ đã bị xóa vĩnh viễn.",
+            "deleteFailed": "Đã xảy ra lỗi khi xóa địa chỉ."
+          }
+        }
+      },
       "modal": {
         "modification": {
           "form": {

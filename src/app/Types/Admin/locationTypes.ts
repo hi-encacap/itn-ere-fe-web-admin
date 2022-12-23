@@ -58,3 +58,17 @@ export interface LocationWardWebsiteFormDataType {
   districtCode: string | null;
   provinceCode: string | null;
 }
+
+export interface LocationAddressBookDataType {
+  id: number;
+  address: string;
+  wardCode: string;
+  districtCode: string;
+  provinceCode: string;
+  ward: LocationWardDataType;
+  district: LocationDistrictDataType;
+  province: LocationProvinceDataType;
+  websiteId: number;
+  latitude: number | null;
+  longitude: number | null;
+}
