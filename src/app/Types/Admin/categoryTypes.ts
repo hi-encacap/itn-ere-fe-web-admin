@@ -2,6 +2,7 @@ import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
 import { ImageDataType } from '@interfaces/Common/imageTypes';
 
 export interface CategoryDataType {
+  id: number;
   code: string;
   name: string;
   categoryGroupCode: string;

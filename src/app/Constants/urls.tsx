@@ -7,6 +7,9 @@ const ADMIN_PATH = {
   CATEGORY_PATH: '/admin/categories',
   CONTACT_PATH: '/admin/contacts',
 
+  ESTATE_PATH: '/admin/estates',
+  ESTATE_PROPERTY_PATH: '/admin/estates/properties',
+
   LOCATION_PATH: '/admin/locations',
   LOCATION_PROVINCE_PATH: '/admin/locations/provinces',
   LOCATION_DISTRICT_PATH: '/admin/locations/districts',

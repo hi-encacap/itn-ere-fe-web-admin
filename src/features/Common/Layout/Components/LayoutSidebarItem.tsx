@@ -19,19 +19,19 @@ const LayoutSidebarItem = ({ icon, label, to, childrenItems }: LayoutSidebarItem
   const [isShowChildren, setIsShowChildren] = useState(false);
 
   const isActive = useMemo(() => {
+    const isChildrenActive = childrenItems?.some((item) => item.to === pathname) ?? false;
+
+    if (isChildrenActive) {
+      setIsShowChildren(true);
+    } else {
+      setIsShowChildren(false);
+    }
+
     if (pathname === to) {
       return true;
     }
 
     if (childrenItems?.length) {
-      const isChildrenActive = childrenItems.some((item) => item.to === pathname);
-
-      if (isChildrenActive) {
-        setIsShowChildren(true);
-      } else {
-        setIsShowChildren(false);
-      }
-
       return isChildrenActive;
     }
 

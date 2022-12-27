@@ -4,6 +4,9 @@
       "dashboard": "Dashboard",
       "category": "Danh mục",
       "contact": "Danh bạ",
+      "estate": "Bất động sản",
+      "estate_list": "Danh sách bất động sản",
+      "estate_property": "Thiết lập thuộc tính bất động sản",
       "location": "Khu vực hoạt động",
       "location_province": "Tỉnh/Thành phố",
       "location_district": "Quận/Huyện",
@@ -344,6 +347,56 @@
               "required": "Quận/huyện không được phép để trống."
             }
           }
+        }
+      }
+    },
+    "estate": {
+      "property": {
+        "title": "Thiết lập thuộc tính bất động sản",
+        "header": {
+          "create": "Thêm thuộc tính"
+        },
+        "table": {
+          "column": {
+            "id": "Mã",
+            "name": "Tên",
+            "categoryName": "Danh mục"
+          }
+        },
+        "modal": {
+          "modification": {
+            "title": {
+              "create": "Thêm thuộc tính",
+              "edit": "Chỉnh sửa thuộc tính"
+            },
+            "form": {
+              "name": {
+                "label": "Tên thuộc tính",
+                "placeholder": "Nhập tên thuộc tính",
+                "required": "Tên thuộc tính không được phép để trống."
+              }
+            }
+          },
+          "delete": {
+            "title": "Xóa thuộc tính",
+            "message": "Danh mục có thể được xóa một cách an toàn mà không ảnh hưởng đến bất kỳ bài viết nào. Bạn có muốn tiếp tục không?"
+          }
+        },
+        "notification": {
+          "created": "Đã thêm thuộc tính mới.",
+          "fetchError": "Đã xảy ra lỗi khi lấy thông tin thuộc tính. Vui lòng thử lại sau.",
+          "createFailed": "Đã xảy ra lỗi khi thêm thuộc tính.",
+          "updated": "Đã cập nhật thuộc tính.",
+          "updateFailed": "Đã xảy ra lỗi khi cập nhật thuộc tính.",
+          "deleted": "Đã xóa thuộc tính.",
+          "deleteFailed": "Đã xảy ra lỗi khi xóa thuộc tính."
+        }
+      },
+      "form": {
+        "category": {
+          "label": "Danh mục",
+          "placeholder": "Chọn danh mục",
+          "required": "Danh mục không được phép để trống."
         }
       }
     }

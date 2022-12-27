@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { twMerge } from 'tailwind-merge';
 
 import { SidebarItemType } from '@interfaces/Common/commonTypes';
 
@@ -27,7 +28,7 @@ const LayoutSidebarItemChildren = ({ items, isShow = false }: LayoutSidebarItemC
       transition={{
         duration: 0.1,
       }}
-      className="mt-1"
+      className={twMerge(isShow && 'mt-1')}
     >
       {items.map((item) => (
         <LayoutSidebarItemChildrenItem key={item.key} item={item} />

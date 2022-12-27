@@ -3,7 +3,8 @@ import { AiOutlineDashboard } from 'react-icons/ai';
 import { BiCategory } from 'react-icons/bi';
 import { FiMapPin, FiUsers } from 'react-icons/fi';
 import { HiOutlineMap } from 'react-icons/hi';
-import { TbMap2 } from 'react-icons/tb';
+import { MdOutlineHomeWork, MdOutlineRealEstateAgent } from 'react-icons/md';
+import { TbListDetails, TbMap2 } from 'react-icons/tb';
 
 import { ADMIN_PATH } from '@constants/urls';
 import { SidebarItemType } from '@interfaces/Common/commonTypes';
@@ -35,6 +36,26 @@ const AdminSidebar = () => {
       icon: <FiUsers size={20} />,
       label: t('contact'),
       to: ADMIN_PATH.CONTACT_PATH,
+    },
+    {
+      key: 'estate',
+      icon: <MdOutlineHomeWork size={20} />,
+      label: t('estate'),
+      to: ADMIN_PATH.ESTATE_PATH,
+      children: [
+        {
+          key: 'estate_list',
+          icon: <MdOutlineRealEstateAgent size={18} />,
+          label: t('estate_list'),
+          to: ADMIN_PATH.ESTATE_PATH,
+        },
+        {
+          key: 'estate_property',
+          icon: <TbListDetails size={18} />,
+          label: t('estate_property'),
+          to: ADMIN_PATH.ESTATE_PROPERTY_PATH,
+        },
+      ],
     },
     {
       key: 'location',
