@@ -68,9 +68,9 @@ const AdminEstatePropertyList = () => {
 
   const handleClickDeleteButton = useCallback(
     (id: Key) => {
-      const selectedProperty = estatePropertyData.find((item) => item.id === id);
+      const property = estatePropertyData.find((item) => item.id === id);
 
-      setSelectedProperty(selectedProperty ?? null);
+      setSelectedProperty(property ?? null);
       setIsShowDeleteConfirmationModal(true);
     },
     [estatePropertyData],
@@ -83,9 +83,9 @@ const AdminEstatePropertyList = () => {
 
   const handleClickEditButton = useCallback(
     (id: Key) => {
-      const selectedProperty = estatePropertyData.find((item) => item.id === id);
+      const property = estatePropertyData.find((item) => item.id === id);
 
-      setSelectedProperty(selectedProperty ?? null);
+      setSelectedProperty(property ?? null);
       setIsShowModificationModal(true);
     },
     [estatePropertyData],
