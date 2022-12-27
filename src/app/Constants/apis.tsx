@@ -30,6 +30,11 @@ const ADMIN_LOCATION_API_PATH = {
   ADDRESS_BOOK_PATH: (id: number) => `/admin/locations/address-books/${id}`,
 };
 
+const ADMIN_ESTATE_PROPERTY_API_PATH = {
+  ESTATE_PROPERTIES_PATH: 'admin/category-properties',
+  ESTATE_PROPERTY_PATH: (id: number) => `admin/category-properties/${id}`,
+};
+
 const LOCATION_API_PATH = {
   GHN_PROVINCES_PATH: 'locations/ghn/provinces',
   GHN_DISTRICTS_PATH: 'locations/ghn/districts',
@@ -46,6 +51,7 @@ export {
   ADMIN_CATEGORY_GROUP_API_PATH,
   ADMIN_CONTACT_API_PATH,
   ADMIN_LOCATION_API_PATH,
+  ADMIN_ESTATE_PROPERTY_API_PATH,
   UPLOAD_API_PATH,
   LOCATION_API_PATH,
 };

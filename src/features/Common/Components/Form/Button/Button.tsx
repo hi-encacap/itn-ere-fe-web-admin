@@ -1,3 +1,4 @@
+import { Ref, forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import { FormElementSizeType } from '@interfaces/Common/elementTypes';
@@ -11,15 +12,18 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   isLoading?: boolean;
 }
 
-const Button = ({
-  isLoading,
-  children,
-  className,
-  disabled,
-  color = 'primary',
-  size = 'normal',
-  ...anotherProps
-}: ButtonProps) => {
+const Button = (
+  {
+    isLoading,
+    children,
+    className,
+    disabled,
+    color = 'primary',
+    size = 'normal',
+    ...anotherProps
+  }: ButtonProps,
+  ref: Ref<HTMLButtonElement>,
+) => {
   let colorClassNames = '';
   let sizeClassNames = '';
   let spinnerColorClassNames = '';
@@ -68,6 +72,7 @@ const Button = ({
         className,
       )}
       disabled={disabled}
+      ref={ref}
       {...anotherProps}
     >
       {isLoading === true && (
@@ -84,4 +89,4 @@ const Button = ({
   );
 };
 
-export default Button;
+export default forwardRef(Button);

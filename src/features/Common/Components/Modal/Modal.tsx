@@ -1,6 +1,6 @@
 import { Dialog } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { forwardRef, HTMLAttributes } from 'react';
+import { HTMLAttributes, forwardRef, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
@@ -38,6 +38,8 @@ const Modal = (
     keyPrefix: 'common:modal',
   });
 
+  const cancelButtonRef = useRef<HTMLButtonElement>(null);
+
   const modalVariants = {
     hidden: {
       transform: 'scale(0.95)',
@@ -73,6 +75,7 @@ const Modal = (
             className,
             'scroll-hidden fixed inset-0 z-50 flex justify-center overflow-y-auto py-6',
           )}
+          initialFocus={cancelButtonRef}
           onClose={onClose}
         >
           <div className="my-auto flex max-h-full">
@@ -105,7 +108,13 @@ const Modal = (
                   </div>
                   {isShowFooter && (
                     <div className="flex items-center justify-end space-x-6 rounded-b-lg bg-gray-50 px-10 py-6">
-                      <Button size="sm" color="light" disabled={isLoading} onClick={onClose}>
+                      <Button
+                        size="sm"
+                        color="light"
+                        disabled={isLoading}
+                        ref={cancelButtonRef}
+                        onClick={onClose}
+                      >
                         {t('close')}
                       </Button>
                       <Button
