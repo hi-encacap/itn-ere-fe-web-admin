@@ -12,14 +12,14 @@ import AdminCategoryDeleteConfirmationModalContent from './AdminCategoryDeleteCo
 
 interface AdminCategoryDeleteConfirmationModalProps
   extends Omit<ConfirmationModalProps, 'title' | 'message' | 'onConfirm'> {
-  categoryCode?: string;
+  categoryId?: number;
   onDeleted?: () => void;
   onDeleteFailed?: (error: AxiosErrorType) => void;
 }
 
 const AdminCategoryDeleteConfirmationModal = ({
   isOpen,
-  categoryCode,
+  categoryId,
   onDeleted,
   onDeleteFailed,
   onClose,
@@ -30,12 +30,12 @@ const AdminCategoryDeleteConfirmationModal = ({
   });
 
   const handleConfirmDeleteCategory = useCallback(() => {
-    if (!categoryCode) {
+    if (!categoryId) {
       return;
     }
 
     adminCategoryService
-      .deleteCategoryByCode(categoryCode)
+      .deleteCategoryByCode(categoryId)
       .then(() => {
         onDeleted?.();
       })
@@ -43,7 +43,7 @@ const AdminCategoryDeleteConfirmationModal = ({
       .finally(() => {
         onClose?.();
       });
-  }, [categoryCode, onClose, onDeleted, onDeleteFailed]);
+  }, [categoryId, onClose, onDeleted, onDeleteFailed]);
 
   return (
     <ConfirmationModal

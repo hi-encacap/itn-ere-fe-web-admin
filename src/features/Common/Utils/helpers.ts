@@ -37,18 +37,12 @@ const slugify = (text: string): string => {
   return result;
 };
 
-const getImageURL = (image: ImageDataType, variant?: string): string => {
+const getImageURL = (image: ImageDataType, variant = IMAGE_VARIANT_ENUM.DEFAULT): string => {
   if (!image) {
     return '';
   }
 
-  const { variants } = image;
-
-  if (variant) {
-    return variants[variant];
-  }
-
-  return variants[IMAGE_VARIANT_ENUM.DEFAULT];
+  return image[variant] ?? image[IMAGE_VARIANT_ENUM.DEFAULT];
 };
 
 const generateColumnFilterObject = (filters: TableColumnFilterState[]) => {

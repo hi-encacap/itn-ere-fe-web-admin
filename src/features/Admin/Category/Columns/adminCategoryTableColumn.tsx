@@ -1,6 +1,7 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import { TFunction } from 'i18next';
 
+import { IMAGE_VARIANT_ENUM } from '@constants/enums';
 import { CategoryDataType } from '@interfaces/Admin/categoryTypes';
 import { ColumnDef, TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes';
 import { adminCategoryService } from '@services/index';
@@ -25,7 +26,7 @@ const createCategoryTableColumns = (t: TFunction, { onClickEdit, onClickDelete }
       id: 'thumbnail',
       header: String(t('table.columns.thumbnail')),
       enableSorting: false,
-      cell: (info) => <TableImageColumn src={getImageURL(info.getValue())} />,
+      cell: (info) => <TableImageColumn src={getImageURL(info.getValue(), IMAGE_VARIANT_ENUM.SMALL)} />,
       meta: {
         skeleton: <TableImageColumnSkeleton />,
       },

@@ -1,7 +1,3 @@
-export interface ImageDataType {
-  id: string;
-  status: string;
-  size: number;
-  extension: string;
-  variants: Record<string, string>;
-}
+import { IMAGE_VARIANT_ENUM } from '@constants/enums';
+
+export type ImageDataType = Record<IMAGE_VARIANT_ENUM, string>;
