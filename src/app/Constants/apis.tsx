@@ -45,6 +45,10 @@ const UPLOAD_API_PATH = {
   UPLOAD_IMAGE_PATH: 'admin/cloudflare/images/single',
 };
 
+const UNIT_PRICE_API_PATH = {
+  UNIT_PRICES_PATH: 'unit-prices',
+};
+
 export {
   AUTHENTICATION_API_PATH,
   ADMIN_CATEGORY_API_PATH,
@@ -54,4 +58,5 @@ export {
   ADMIN_ESTATE_PROPERTY_API_PATH,
   UPLOAD_API_PATH,
   LOCATION_API_PATH,
+  UNIT_PRICE_API_PATH,
 };

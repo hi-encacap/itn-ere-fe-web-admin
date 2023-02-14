@@ -11,3 +11,16 @@ export interface EstatePropertyDataType {
 export interface EstatePropertyFormDataType extends Nullable<Partial<EstatePropertyDataType>> {
   categoryId: number | null;
 }
+
+export interface EstateDataType {
+  id: number;
+  title: string;
+  customId: string;
+  price: number;
+  area: number;
+}
+
+export interface EstateModificationFormDataType extends Nullable<Partial<EstateDataType>> {
+  priceUnitId: number;
+  areaUnitId: number;
+}

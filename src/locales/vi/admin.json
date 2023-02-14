@@ -392,6 +392,41 @@
           "deleteFailed": "Đã xảy ra lỗi khi xóa thuộc tính."
         }
       },
+      "modification": {
+        "title": {
+          "create": "Thêm bất động sản",
+          "edit": "Chỉnh sửa bất động sản"
+        },
+        "header": {
+          "backToEstateList": "Danh sách bất động sản"
+        },
+        "form": {
+          "general": {
+            "title": "Thông tin chung",
+            "form": {
+              "title": {
+                "label": "Tiêu đề",
+                "placeholder": "Nhập tiêu đề",
+                "required": "Tiêu đề không được phép để trống."
+              },
+              "customId": {
+                "label": "Mã bất động sản",
+                "placeholder": "Nhập mã bất động sản"
+              },
+              "price": {
+                "label": "Giá bán",
+                "placeholder": "Nhập giá bán",
+                "required": "Giá bán không được phép để trống."
+              },
+              "area": {
+                "label": "Diện tích",
+                "placeholder": "Nhập diện tích",
+                "required": "Diện tích không được phép để trống."
+              }
+            }
+          }
+        }
+      },
       "form": {
         "category": {
           "label": "Danh mục",
