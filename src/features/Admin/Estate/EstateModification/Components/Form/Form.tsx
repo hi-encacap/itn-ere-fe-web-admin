@@ -1,5 +1,6 @@
 import { FormProvider, useForm } from 'react-hook-form';
 
+import AdminEstateModificationFormDetail from './Detail/Detail';
 import AdminEstateModificationFormGeneral from './General/General';
 import AdminEstateModificationFormLocation from './Location/Location';
 
@@ -11,6 +12,7 @@ const AdminEstateModificationForm = () => {
       <FormProvider control={control} {...formProperties}>
         <AdminEstateModificationFormGeneral />
         <AdminEstateModificationFormLocation />
+        <AdminEstateModificationFormDetail />
       </FormProvider>
     </div>
   );

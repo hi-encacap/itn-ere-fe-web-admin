@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge';
 
 import { FormElementSizeType } from '@interfaces/Common/elementTypes';
 
-export type ButtonColorType = 'primary' | 'light' | 'blue' | 'orange' | 'gray' | 'danger';
+export type ButtonColorType = 'primary' | 'light' | 'blue' | 'orange' | 'gray' | 'danger' | 'primary-light';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: FormElementSizeType;
@@ -39,6 +39,11 @@ const Button = (
       colorClassNames +=
         'bg-red-500 hover:bg-red-600 text-white ring-red-500 disabled:ring-gray-200 disabled:bg-gray-200';
       spinnerColorClassNames += disabled === true ? 'border-white' : 'border-gray-400';
+      break;
+
+    case 'primary-light':
+      colorClassNames +=
+        'bg-white hover:bg-teal-100 text-teal-500 ring-teal-500 disabled:ring-gray-100 disabled:bg-gray-50 disabled:text-gray-300';
       break;
 
     default:

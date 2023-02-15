@@ -28,4 +28,7 @@ export interface EstateModificationFormDataType extends Nullable<Partial<EstateD
   provinceCode: string;
   districtCode: string;
   wardCode: string;
+  quarterCode: string;
+  categoryId: number;
+  properties: Array<Record<'name' | 'value', string | number>>;
 }

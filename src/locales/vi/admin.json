@@ -437,7 +437,20 @@
                 "label": "Chi tiết vị trí",
                 "placeholder": "Nhập chi tiết hoặc ghi chú về vị trí"
               },
-              "pickOnMap": "Chọn trên bản đồ"
+              "pickOnMap": "Chọn từ bản đồ"
+            }
+          },
+          "detail": {
+            "title": "Thông tin chi tiết",
+            "form": {
+              "quarter": {
+                "label": "Hướng",
+                "placeholder": "Chọn hướng"
+              },
+              "property": {
+                "placeholder": "Nhập số {{name}}"
+              },
+              "addProperty": "Thêm thuộc tính"
             }
           }
         }

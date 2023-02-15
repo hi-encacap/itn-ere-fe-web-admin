@@ -44,9 +44,9 @@ const AdminEstateModificationFormLocation = () => {
           name="addressNote"
           placeholder={t('form.addressNote.placeholder')}
         />
-        <Button className="mt-5 h-[47px] ring-0">
-          <FiMapPin size={20} className="mr-2" />
-          {t('form.pickOnMap')}
+        <Button className="mx-0.5 mt-[22px] h-[43px]" color="primary-light">
+          <FiMapPin size={20} className="mr-2 flex-shrink-0" />
+          <span className="line-clamp-1">{t('form.pickOnMap')}</span>
         </Button>
       </div>
     </div>
