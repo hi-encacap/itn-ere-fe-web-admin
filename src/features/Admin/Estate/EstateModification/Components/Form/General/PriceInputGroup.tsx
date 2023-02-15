@@ -40,6 +40,7 @@ const AdminEstateModificationFormGeneralPriceInputGroup = () => {
       <Input
         className="block pr-10"
         control={control}
+        isRequired
         label={t('price.label')}
         name="price"
         placeholder={t('price.placeholder')}

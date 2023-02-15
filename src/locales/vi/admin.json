@@ -424,6 +424,21 @@
                 "required": "Diện tích không được phép để trống."
               }
             }
+          },
+          "location": {
+            "title": "Thông tin vị trí",
+            "form": {
+              "address": {
+                "label": "Địa chỉ",
+                "placeholder": "Nhập địa chỉ",
+                "required": "Địa chỉ không được phép để trống."
+              },
+              "addressNote": {
+                "label": "Chi tiết vị trí",
+                "placeholder": "Nhập chi tiết hoặc ghi chú về vị trí"
+              },
+              "pickOnMap": "Chọn trên bản đồ"
+            }
           }
         }
       },
@@ -433,6 +448,25 @@
           "placeholder": "Chọn danh mục",
           "required": "Danh mục không được phép để trống."
         }
+      }
+    }
+  },
+  "form": {
+    "location": {
+      "provinceCode": {
+        "label": "Tỉnh/thành phố",
+        "placeholder": "Chọn tỉnh/thành phố",
+        "required": "Tỉnh/thành phố không được phép để trống."
+      },
+      "districtCode": {
+        "label": "Quận/huyện",
+        "placeholder": "Chọn quận/huyện",
+        "required": "Quận/huyện không được phép để trống."
+      },
+      "wardCode": {
+        "label": "Xã/phường/thị trấn",
+        "placeholder": "Chọn xã/phường/thị trấn",
+        "required": "Xã/phường/thị trấn không được phép để trống."
       }
     }
   }

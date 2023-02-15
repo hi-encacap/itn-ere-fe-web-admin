@@ -40,6 +40,7 @@ const AdminEstateModificationFormGeneralAreaInputGroup = () => {
       <Input
         className="block pr-8"
         control={control}
+        isRequired
         label={t('area.label')}
         name="area"
         placeholder={t('area.placeholder')}

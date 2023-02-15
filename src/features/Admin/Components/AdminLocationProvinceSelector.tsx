@@ -9,35 +9,28 @@ import { Select } from '@components/Form';
 
 import { commonFormErrorFactory } from '@utils/error';
 
-interface AdminLocationModificationDistrictSelectorProps {
+interface AdminLocationProvinceSelectorProps {
   control: HookFormControl;
-  provinceCode: string;
   disabled?: boolean;
 }
 
-const AdminLocationModificationDistrictSelector = ({
-  control,
-  provinceCode,
-  disabled,
-}: AdminLocationModificationDistrictSelectorProps) => {
+const AdminLocationProvinceSelector = ({ control, disabled }: AdminLocationProvinceSelectorProps) => {
   const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:page.location.modal.modification.form.districtCode',
+    keyPrefix: 'admin:form.location.provinceCode',
   });
 
-  const [options, setOptions] = useState<SelectOptionItemType[]>([]);
+  const [locationProvinceOptions, setLocationProvinceOptions] = useState<SelectOptionItemType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getData = useCallback(() => {
-    if (options.length === 0) {
+  const getProvinces = useCallback(() => {
+    if (locationProvinceOptions.length === 0) {
       setIsLoading(true);
     }
 
     adminLocationService
-      .getDistricts({
-        provinceCode,
-      })
+      .getProvinces()
       .then(({ data }) => {
-        setOptions(
+        setLocationProvinceOptions(
           data.map((item) => ({
             value: String(item.code),
             label: String(item.name),
@@ -46,30 +39,27 @@ const AdminLocationModificationDistrictSelector = ({
         setIsLoading(false);
       })
       .catch(() => {
-        setOptions([]);
+        setLocationProvinceOptions([]);
       });
-  }, [options, provinceCode]);
+  }, [locationProvinceOptions]);
 
   useEffect(() => {
-    if (!provinceCode) {
-      return;
-    }
-    getData();
-  }, [provinceCode]);
+    getProvinces();
+  }, []);
 
   return (
     <Select
-      name="districtCode"
+      name="provinceCode"
       label={t('label')}
       placeholder={t('placeholder')}
       className="block"
-      options={options}
+      options={locationProvinceOptions}
       isRequired
       control={control}
-      disabled={!provinceCode ?? isLoading ?? disabled}
+      disabled={isLoading || disabled}
       errorFactory={commonFormErrorFactory(t)}
     />
   );
 };
 
-export default memo(AdminLocationModificationDistrictSelector);
+export default memo(AdminLocationProvinceSelector);

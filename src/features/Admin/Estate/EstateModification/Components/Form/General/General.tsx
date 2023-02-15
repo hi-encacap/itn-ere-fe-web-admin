@@ -21,11 +21,12 @@ const AdminEstateModificationFormGeneral = () => {
       <AdminEstateModificationFormTitle title={t('title')} />
       <div className="mt-5 grid grid-cols-1 gap-y-6 pt-0.5">
         <Input
-          name="title"
           className="block"
-          label={t('form.title.label')}
-          placeholder={t('form.title.placeholder')}
           control={control}
+          isRequired
+          label={t('form.title.label')}
+          name="title"
+          placeholder={t('form.title.placeholder')}
         />
         <div className="grid grid-cols-3 gap-x-6">
           <Input

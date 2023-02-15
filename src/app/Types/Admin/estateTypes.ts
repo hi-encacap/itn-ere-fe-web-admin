@@ -18,9 +18,14 @@ export interface EstateDataType {
   customId: string;
   price: number;
   area: number;
+  address: string;
+  addressNote?: string;
 }
 
 export interface EstateModificationFormDataType extends Nullable<Partial<EstateDataType>> {
   priceUnitId: number;
   areaUnitId: number;
+  provinceCode: string;
+  districtCode: string;
+  wardCode: string;
 }
