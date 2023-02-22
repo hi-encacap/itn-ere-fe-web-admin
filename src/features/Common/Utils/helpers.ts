@@ -7,12 +7,15 @@ import { IMAGE_VARIANT_ENUM } from '@constants/enums';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { ImageDataType } from '@interfaces/Common/imageTypes';
 
-const setDocumentTitle = (title: string): void => {
+const setDocumentTitle = (title: string, scrollToTop = true): void => {
   window.document.title = `${title} - ${process.env.REACT_APP_FRONTEND_WEBSITE_NAME ?? 'Encacap'}`;
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  });
+
+  if (scrollToTop) {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
 };
 
 const slugify = (text: string): string => {

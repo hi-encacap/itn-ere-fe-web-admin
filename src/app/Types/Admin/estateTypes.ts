@@ -31,4 +31,5 @@ export interface EstateModificationFormDataType extends Nullable<Partial<EstateD
   quarterCode: string;
   categoryId: number;
   properties: Array<Record<'name' | 'value', string | number>>;
+  contactId: number;
 }

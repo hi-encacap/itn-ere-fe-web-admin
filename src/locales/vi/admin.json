@@ -452,6 +452,17 @@
               },
               "addProperty": "Thêm thuộc tính"
             }
+          },
+          "contact": {
+            "title": "Thông tin liên hệ",
+            "phone": "Số điện thoại",
+            "zalo": "Zalo",
+            "email": "Thư điện tử",
+            "change": "Thay đổi",
+            "picker": {
+              "title": "Chọn thông tin liên hệ"
+            },
+            "pick": "Nhấn để chọn thông tin liên hệ"
           }
         }
       },
