@@ -6,6 +6,7 @@ import { EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
 import AdminCategorySelector from '@admin/Estate/Components/AdminCategorySelector';
 
 import AdminEstateModificationFormTitle from '../Title';
+import AdminEstateModificationFormDetailDescription from './Description';
 import AdminEstateModificationFormDetailPropertyInputGroup from './PropertyInputGroup';
 import AdminEstateModificationFormDetailQuarterSelector from './QuarterSelector';
 
@@ -24,6 +25,7 @@ const AdminEstateModificationFormDetail = () => {
         <AdminEstateModificationFormDetailQuarterSelector />
         <AdminEstateModificationFormDetailPropertyInputGroup />
       </div>
+      <AdminEstateModificationFormDetailDescription />
     </div>
   );
 };

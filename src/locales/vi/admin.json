@@ -450,7 +450,11 @@
               "property": {
                 "placeholder": "Nhập số {{name}}"
               },
-              "addProperty": "Thêm thuộc tính"
+              "addProperty": "Thêm thuộc tính",
+              "description": {
+                "label": "Mô tả",
+                "placeholder": "Nhập mô tả"
+              }
             }
           },
           "contact": {

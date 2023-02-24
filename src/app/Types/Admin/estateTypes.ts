@@ -20,6 +20,7 @@ export interface EstateDataType {
   area: number;
   address: string;
   addressNote?: string;
+  description: string;
 }
 
 export interface EstateModificationFormDataType extends Nullable<Partial<EstateDataType>> {
