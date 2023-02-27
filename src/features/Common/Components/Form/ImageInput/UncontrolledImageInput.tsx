@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { random } from 'lodash';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
@@ -13,6 +14,7 @@ import ImageInputItem from './ImageInputItem';
 export interface UncontrolledImageInputProps extends FormElementBaseProps {
   value?: FormImageInputDataType | FormImageInputDataType[];
   isMultiple?: boolean;
+  isRequired?: boolean;
   disabled?: boolean;
   onChange?: (images: FormImageInputDataType | FormImageInputDataType[]) => void;
 }
@@ -20,7 +22,9 @@ export interface UncontrolledImageInputProps extends FormElementBaseProps {
 const UncontrolledImageInput = ({
   label,
   error,
+  className,
   isMultiple = false,
+  isRequired = false,
   disabled = false,
   value,
   onChange,
@@ -34,6 +38,8 @@ const UncontrolledImageInput = ({
   const [uploadingImageIds, setUploadingImageIds] = useState<string[]>([]);
   const [uploadedImages, setUploadedImages] = useState<FormImageInputDataType[]>([]);
   const [allowForceSetImages, setAllowForceSetImages] = useState(true);
+
+  const inputId = useMemo(() => `image-input-${random()}`, []);
 
   const uploadImage = useCallback(
     (file: FormImageInputDataType) => {
@@ -98,18 +104,20 @@ const UncontrolledImageInput = ({
     <div>
       {label && (
         <label
-          htmlFor="image_input"
+          htmlFor={inputId}
           className={twMerge(
-            'relative mb-2 -mt-2 flex items-center text-sm font-semibold text-gray-400',
+            'relative mb-2 -mt-2 flex items-center text-sm text-stone-700',
             error && 'text-red-500',
           )}
         >
           {label}
+          {isRequired && <div className="ml-1 text-red-500">*</div>}
         </label>
       )}
-      <div className="grid grid-cols-4 gap-4">
+      <div className={twMerge('grid grid-cols-4 gap-4', className)}>
         {images.map((image) => (
           <ImageInputItem
+            inputId={inputId}
             key={image.id}
             image={image}
             error={Boolean(error)}
@@ -119,8 +127,9 @@ const UncontrolledImageInput = ({
             onRemove={handleRemoveImage}
           />
         ))}
-        {!isMultiple && images.length === 0 && (
+        {((!isMultiple && images.length === 0) || isMultiple) && (
           <ImageInputItem
+            inputId={inputId}
             isMultiple={isMultiple}
             error={Boolean(error)}
             isDisabled={disabled}

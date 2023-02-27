@@ -1,4 +1,5 @@
 import { Nullable } from '@interfaces/Common/commonTypes';
+import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
 
 import { CategoryDataType } from './categoryTypes';
 
@@ -33,4 +34,5 @@ export interface EstateModificationFormDataType extends Nullable<Partial<EstateD
   categoryId: number;
   properties: Array<Record<'name' | 'value', string | number>>;
   contactId: number;
+  avatar: FormImageInputDataType;
 }

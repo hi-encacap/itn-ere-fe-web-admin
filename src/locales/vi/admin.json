@@ -467,6 +467,23 @@
               "title": "Chọn thông tin liên hệ"
             },
             "pick": "Nhấn để chọn thông tin liên hệ"
+          },
+          "media": {
+            "title": "Thông tin khác",
+            "avatar": {
+              "label": "Ảnh đại diện",
+              "placeholder": "Chọn ảnh đại diện",
+              "required": "Ảnh đại diện không được phép để trống."
+            },
+            "youtube": {
+              "label": "Youtube",
+              "placeholder": "Nhập đường dẫn từ Youtube"
+            },
+            "image": {
+              "label": "Hình ảnh khác",
+              "placeholder": "Chọn ảnh",
+              "required": "Ảnh không được phép để trống."
+            }
           }
         }
       },

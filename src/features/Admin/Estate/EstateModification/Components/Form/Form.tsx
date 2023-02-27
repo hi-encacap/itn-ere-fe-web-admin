@@ -6,6 +6,7 @@ import AdminEstateModificationFormContact from './Contact/Contact';
 import AdminEstateModificationFormDetail from './Detail/Detail';
 import AdminEstateModificationFormGeneral from './General/General';
 import AdminEstateModificationFormLocation from './Location/Location';
+import AdminEstateModificationFormMedia from './Media/Media';
 
 const AdminEstateModificationForm = () => {
   const { control, handleSubmit: useFormSubmit, ...formProperties } = useForm();
@@ -21,6 +22,7 @@ const AdminEstateModificationForm = () => {
         <AdminEstateModificationFormLocation />
         <AdminEstateModificationFormDetail />
         <AdminEstateModificationFormContact />
+        <AdminEstateModificationFormMedia />
       </FormProvider>
       <Button className="mt-10 block w-full" onClick={handleSubmit}>
         Xác nhận
