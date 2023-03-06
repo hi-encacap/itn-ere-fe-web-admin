@@ -35,4 +35,5 @@ export interface EstateModificationFormDataType extends Nullable<Partial<EstateD
   properties: Array<Record<'name' | 'value', string | number>>;
   contactId: number;
   avatar: FormImageInputDataType;
+  images: FormImageInputDataType[];
 }

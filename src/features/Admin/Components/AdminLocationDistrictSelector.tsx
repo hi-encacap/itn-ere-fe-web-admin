@@ -52,7 +52,7 @@ const AdminLocationDistrictSelector = ({
       .catch(() => {
         setOptions([]);
       });
-  }, [options, provinceCode]);
+  }, [provinceCode]);
 
   useEffect(() => {
     getData();
@@ -67,7 +67,7 @@ const AdminLocationDistrictSelector = ({
       options={options}
       isRequired
       control={control}
-      disabled={!provinceCode ?? isLoading ?? disabled}
+      disabled={!provinceCode || isLoading || disabled}
       errorFactory={commonFormErrorFactory(t)}
     />
   );

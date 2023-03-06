@@ -1,6 +1,6 @@
 import { TFunction } from 'i18next';
 import { camelCase, keys, lowerCase } from 'lodash';
-import { FieldPath, FieldValues, UseFormSetError } from 'react-hook-form';
+import { FieldPath, FieldValues, UseFormSetError, UseFormSetFocus } from 'react-hook-form';
 
 import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 
@@ -16,6 +16,7 @@ const setFormError = <T extends FieldValues>(
   setError: UseFormSetError<T>,
   formatMessage?: FormatMessageFunction,
   otherwise?: () => void,
+  setFocus?: UseFormSetFocus<T>,
 ) => {
   const { response } = error;
 
@@ -29,13 +30,21 @@ const setFormError = <T extends FieldValues>(
       error: { field },
     },
   } = response;
+  let firstKey = '';
 
   keys(field).forEach((key) => {
     const value = field[key][0];
+
+    if (!firstKey) {
+      firstKey = key;
+    }
+
     setError(key as FieldPath<T>, {
       message: formatMessage ? formatMessage(camelCase(lowerCase(key)), camelCase(lowerCase(value))) : value,
     });
   });
+
+  setFocus?.(firstKey as FieldPath<T>);
 };
 
 const commonFormErrorFactory = (t: TFunction, prefix?: string) => {

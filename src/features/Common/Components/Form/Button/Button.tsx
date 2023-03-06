@@ -73,8 +73,9 @@ const Button = (
         sizeClassNames,
         'duration-100s font-semibold outline-none ring-2 transition-colors',
         colorClassNames,
-        'flex items-center justify-center',
+        'items-center justify-center',
         className,
+        'flex',
       )}
       disabled={disabled}
       ref={ref}

@@ -23,25 +23,25 @@ const AdminEstateModificationFormMedia = () => {
           name="youtube"
           control={control}
           className="block"
-          label={t('youtube.label')}
-          placeholder={t('youtube.placeholder')}
+          label={t('form.youtube.label')}
+          placeholder={t('form.youtube.placeholder')}
         />
         <ImageInput
           control={control}
           className="md:grid-cols-5 xl:grid-cols-7"
           isRequired
-          label={t('avatar.label')}
+          label={t('form.avatar.label')}
           name="avatar"
-          placeholder={t('avatar.placeholder')}
+          placeholder={t('form.avatar.placeholder')}
         />
         <ImageInput
           control={control}
           className="md:grid-cols-5 xl:grid-cols-7"
           isMultiple
           isRequired
-          label={t('image.label')}
+          label={t('form.image.label')}
           name="images"
-          placeholder={t('image.placeholder')}
+          placeholder={t('form.image.placeholder')}
         />
       </div>
     </div>

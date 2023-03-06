@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useMemo } from 'react';
+import { InputHTMLAttributes, Ref, forwardRef, useMemo } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import { FormElementSizeType } from '@interfaces/Common/elementTypes';
@@ -14,18 +14,21 @@ export interface UncontrolledInputProps extends Omit<InputHTMLAttributes<HTMLInp
   isRequired?: boolean;
 }
 
-const UncontrolledInput = ({
-  name,
-  id,
-  type = 'text',
-  className,
-  label,
-  size = 'normal',
-  error,
-  isRequired,
-  disabled,
-  ...inputProps
-}: UncontrolledInputProps) => {
+const UncontrolledInput = (
+  {
+    name,
+    id,
+    type = 'text',
+    className,
+    label,
+    size = 'normal',
+    error,
+    isRequired,
+    disabled,
+    ...inputProps
+  }: UncontrolledInputProps,
+  ref: Ref<HTMLInputElement>,
+) => {
   const inputId = id ?? name;
 
   const inputSizeClassName = useMemo(() => {
@@ -68,6 +71,7 @@ const UncontrolledInput = ({
             error && 'text-red-500',
           )}
           disabled={disabled}
+          ref={ref}
           {...inputProps}
         />
       </div>
@@ -76,4 +80,4 @@ const UncontrolledInput = ({
   );
 };
 
-export default UncontrolledInput;
+export default forwardRef(UncontrolledInput);

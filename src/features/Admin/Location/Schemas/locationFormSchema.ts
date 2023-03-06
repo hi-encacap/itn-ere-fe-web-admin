@@ -7,7 +7,7 @@ import {
   LocationWardWebsiteFormDataType,
 } from '@interfaces/Admin/locationTypes';
 
-import { generateFormSchema } from '@utils/Http/schema';
+import { generateFormSchema } from '@utils/schema';
 
 const locationProvinceFormSchema = (t: TFunction) =>
   generateFormSchema<LocationProvinceWebsiteFormDataType>({

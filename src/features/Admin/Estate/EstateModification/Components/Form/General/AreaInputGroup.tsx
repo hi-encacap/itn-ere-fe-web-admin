@@ -16,7 +16,7 @@ const AdminEstateModificationFormGeneralAreaInputGroup = () => {
 
   const [unitPriceOptions, setUnitPriceOptions] = useState<UnitPriceDataType[]>([]);
 
-  const { control, register } = useFormContext<EstateModificationFormDataType>();
+  const { control, register, setValue } = useFormContext<EstateModificationFormDataType>();
 
   const getUnitPriceOptions = useCallback(async () => {
     unitPriceService
@@ -25,6 +25,7 @@ const AdminEstateModificationFormGeneralAreaInputGroup = () => {
       })
       .then(({ data }) => {
         setUnitPriceOptions(data);
+        setValue('areaUnitId', data[0].id);
       })
       .catch(() => {
         setUnitPriceOptions([]);
@@ -47,7 +48,7 @@ const AdminEstateModificationFormGeneralAreaInputGroup = () => {
         type="number"
       />
       <select
-        className="absolute right-3.5 bottom-0.5 h-11 w-fit cursor-pointer rounded-r-md px-1 outline-none"
+        className="absolute right-3.5 top-6 h-10 w-fit cursor-pointer rounded-r-md px-1 outline-none"
         {...register('areaUnitId')}
       >
         {unitPriceOptions.map((option) => (

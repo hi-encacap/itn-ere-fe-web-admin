@@ -3,7 +3,7 @@ import { object, string } from 'yup';
 
 import { CategoryFormDataType } from '@interfaces/Admin/categoryTypes';
 
-import { generateFormSchema } from '@utils/Http/schema';
+import { generateFormSchema } from '@utils/schema';
 
 const categoryFormSchema = (t: TFunction) =>
   generateFormSchema<CategoryFormDataType>({

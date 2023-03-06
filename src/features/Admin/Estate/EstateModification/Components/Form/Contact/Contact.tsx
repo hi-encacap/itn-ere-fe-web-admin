@@ -1,9 +1,12 @@
 import { useCallback, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { twMerge } from 'tailwind-merge';
 
 import { ContactDataType } from '@interfaces/Admin/contactTypes';
 import { EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
+
+import FormElementError from '@components/Form/FormElementError';
 
 import AdminEstateModificationFormTitle from '../Title';
 import AdminEstateModificationFormContactDetail from './ContactDetail';
@@ -18,12 +21,17 @@ const AdminEstateModificationFormContact = () => {
   const [isShowContactPickerModal, setIsShowContactPickerModal] = useState(false);
   const [selectedContact, setSelectedContact] = useState<ContactDataType | null>(null);
 
-  const { setValue } = useFormContext<EstateModificationFormDataType>();
+  const {
+    setValue,
+    formState: { errors },
+    clearErrors,
+  } = useFormContext<EstateModificationFormDataType>();
 
   const handlePickContact = useCallback((contact: ContactDataType) => {
     setSelectedContact(contact);
     setIsShowContactPickerModal(false);
     setValue('contactId', contact.id);
+    clearErrors('contactId');
   }, []);
 
   const handleClosePicker = useCallback(() => {
@@ -36,9 +44,14 @@ const AdminEstateModificationFormContact = () => {
 
   return (
     <>
-      <div className="border-gray-100 pt-6">
+      <div className={'border-gray-100 pt-6'}>
         <AdminEstateModificationFormTitle title={t('title')} />
-        <div className="mt-5 flex items-center justify-start space-x-4 rounded-lg border-2 border-gray-100 py-4 pl-4 pr-6 hover:border-gray-200">
+        <div
+          className={twMerge(
+            'mt-5 flex items-center justify-start space-x-4 rounded-lg border-2 border-gray-100 py-4 pl-4 pr-6 hover:border-gray-200',
+            errors.contactId?.message && 'border-red-500 hover:border-red-500',
+          )}
+        >
           {!selectedContact ? (
             <AdminEstateModificationFormContactEmpty onClick={handleOpenPicker} />
           ) : (
@@ -48,6 +61,7 @@ const AdminEstateModificationFormContact = () => {
             />
           )}
         </div>
+        {errors.contactId?.message && <FormElementError error={errors.contactId?.message} />}
       </div>
       <AdminEstateModificationFormContactPicker
         data={selectedContact}
