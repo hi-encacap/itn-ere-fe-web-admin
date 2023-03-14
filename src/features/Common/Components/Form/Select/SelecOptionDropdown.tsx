@@ -44,6 +44,8 @@ const SelectOptionDropdown = ({
     <div
       className="overflow-overlay absolute -left-0.5 -right-0.5 top-14 z-10 rounded-md bg-white py-2 shadow-center"
       style={{ maxHeight: dropdownHeight }}
+      role="button"
+      tabIndex={0}
       onMouseEnter={onFocus}
       onMouseLeave={onBlur}
     >

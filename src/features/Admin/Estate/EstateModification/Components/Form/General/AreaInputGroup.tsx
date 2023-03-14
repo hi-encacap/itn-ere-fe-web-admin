@@ -18,7 +18,7 @@ const AdminEstateModificationFormGeneralAreaInputGroup = () => {
 
   const { control, register, setValue } = useFormContext<EstateModificationFormDataType>();
 
-  const getUnitPriceOptions = useCallback(async () => {
+  const getUnitPriceOptions = useCallback(() => {
     unitPriceService
       .getUnitPrices({
         type: UNIT_PRICE_TYPE_ENUM.AREA,
@@ -33,7 +33,7 @@ const AdminEstateModificationFormGeneralAreaInputGroup = () => {
   }, []);
 
   useEffect(() => {
-    void getUnitPriceOptions();
+    getUnitPriceOptions();
   }, [getUnitPriceOptions]);
 
   return (

@@ -1,5 +1,5 @@
 import { omit } from 'lodash';
-import { Control, Controller } from 'react-hook-form';
+import { Control, useController } from 'react-hook-form';
 
 import UncontrolledInput, { UncontrolledInputProps } from './UncontrolledInput';
 
@@ -13,21 +13,23 @@ const Input = ({ control, name, ...inputProps }: InputProps) => {
     return <UncontrolledInput name={name} {...inputProps} />;
   }
 
+  const {
+    field: { onChange, onBlur, value, ref },
+    fieldState: { error },
+  } = useController({
+    name,
+    control,
+  });
+
   return (
-    <Controller
+    <UncontrolledInput
       name={name}
-      control={control}
-      render={({ field, formState: { errors } }) => (
-        <UncontrolledInput
-          name={name}
-          ref={field.ref}
-          onChange={field.onChange}
-          onBlur={field.onBlur}
-          value={field.value}
-          error={errors[name]?.message as string}
-          {...omit(inputProps, ['value', 'onChange', 'onBlur'])}
-        />
-      )}
+      ref={ref}
+      onChange={onChange}
+      onBlur={onBlur}
+      value={value}
+      error={error?.message as string}
+      {...omit(inputProps, ['value', 'onChange', 'onBlur'])}
     />
   );
 };

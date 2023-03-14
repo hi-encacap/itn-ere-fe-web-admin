@@ -51,8 +51,8 @@ const AdminEstateModificationForm = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await adminEstateService.createEstate(data);
-      console.log(response);
+      await adminEstateService.createEstate(data);
+      // Handle the success case...
     } catch (error) {
       if (error instanceof AxiosError) {
         setFormError<EstateModificationFormDataType>(

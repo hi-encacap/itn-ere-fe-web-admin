@@ -14,6 +14,8 @@ const AdminEstateModificationFormContactEmpty = ({
   return (
     <div
       className="flex w-full cursor-pointer items-center justify-center py-3 text-[#BDB8C5] hover:text-slate-400"
+      role="button"
+      tabIndex={0}
       onClick={onClick}
     >
       <span>{t('pick')}</span>
