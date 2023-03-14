@@ -4,7 +4,7 @@ import { object, string } from 'yup';
 import { phoneRegex } from '@constants/regexs';
 import { ContactFormDataType } from '@interfaces/Admin/contactTypes';
 
-import { generateFormSchema } from '@utils/Http/schema';
+import { generateFormSchema } from '@utils/schema';
 
 const contactFormSchema = (t: TFunction) =>
   generateFormSchema<ContactFormDataType>({

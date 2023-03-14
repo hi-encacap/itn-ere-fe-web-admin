@@ -8,9 +8,11 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
+import { keys } from 'lodash';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
+import { TABLE_ROW_SELECTION_TYPE_ENUM } from '@constants/enums';
 import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
 import { TableColumnFilterState, TableDataType } from '@interfaces/Common/elementTypes';
 
@@ -41,8 +43,9 @@ export interface TableProps<TData = TableDataType> {
   columns: Array<ColumnDef<TData>>;
   pagination?: TablePaginationType;
   sorting?: SortingState;
-  rowSelection?: RowSelectionState;
   isLoading?: boolean;
+  rowSelection?: RowSelectionState;
+  rowSelectionType?: TABLE_ROW_SELECTION_TYPE_ENUM;
   onChangePagination?: OnChangeFn<TablePaginationType>;
   onChangeSorting?: OnChangeFn<SortingState>;
   onChangeFilters?: OnChangeFn<TableColumnFilterState[]>;
@@ -54,8 +57,9 @@ const Table = ({
   columns: columnsProp,
   pagination,
   sorting,
-  rowSelection = {},
   isLoading = false,
+  rowSelection = {},
+  rowSelectionType = TABLE_ROW_SELECTION_TYPE_ENUM.MULTIPLE,
   onChangePagination,
   onChangeSorting,
   onChangeFilters,
@@ -100,7 +104,30 @@ const Table = ({
       }
       onChangePagination?.(state as TablePaginationType);
     },
-    onRowSelectionChange: onChangeRowSelection,
+    onRowSelectionChange: (state) => {
+      if (typeof state !== 'function') {
+        onChangeRowSelection?.(state);
+        return;
+      }
+
+      if (rowSelectionType === TABLE_ROW_SELECTION_TYPE_ENUM.MULTIPLE) {
+        onChangeRowSelection?.(state);
+        return;
+      }
+
+      const newSelection = state(rowSelection);
+      let newSelectionRowKey = '';
+
+      keys(newSelection).forEach((key) => {
+        if (newSelection[key] !== rowSelection[key]) {
+          newSelectionRowKey = key;
+        }
+      });
+
+      onChangeRowSelection?.({
+        [newSelectionRowKey]: true,
+      });
+    },
     getRowId: (row) => row.id || row.code || Math.random().toString(36).substr(2, 9),
   });
 

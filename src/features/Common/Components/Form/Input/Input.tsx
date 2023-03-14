@@ -14,8 +14,8 @@ const Input = ({ control, name, ...inputProps }: InputProps) => {
   }
 
   const {
-    field: { onChange, onBlur, value = '' },
-    formState: { errors },
+    field: { onChange, onBlur, value, ref },
+    fieldState: { error },
   } = useController({
     name,
     control,
@@ -24,10 +24,11 @@ const Input = ({ control, name, ...inputProps }: InputProps) => {
   return (
     <UncontrolledInput
       name={name}
+      ref={ref}
       onChange={onChange}
       onBlur={onBlur}
-      error={errors[name]?.message as string}
-      {...(!(value === undefined || value === null) && { value })}
+      value={value}
+      error={error?.message as string}
       {...omit(inputProps, ['value', 'onChange', 'onBlur'])}
     />
   );

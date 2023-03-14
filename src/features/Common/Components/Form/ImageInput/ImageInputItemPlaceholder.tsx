@@ -3,12 +3,14 @@ import { useTranslation } from 'react-i18next';
 import { BsImageAlt } from 'react-icons/bs';
 
 interface ImageInputItemPlaceholderProps {
+  inputId: string;
   isMultiple?: boolean;
   isDisabled?: boolean;
   onChooseImage: (files: FileList) => void;
 }
 
 const ImageInputItemPlaceholder = ({
+  inputId,
   isMultiple = false,
   isDisabled = false,
   onChooseImage,
@@ -32,7 +34,7 @@ const ImageInputItemPlaceholder = ({
       <BsImageAlt size={26} />
       <div className="mt-3 text-xs text-input-placeholder">{t('placeholder')}</div>
       <input
-        id="image_input"
+        id={inputId}
         type="file"
         multiple={isMultiple}
         className="absolute inset-0 cursor-pointer opacity-0"

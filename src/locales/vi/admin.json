@@ -392,12 +392,134 @@
           "deleteFailed": "Đã xảy ra lỗi khi xóa thuộc tính."
         }
       },
+      "modification": {
+        "title": {
+          "create": "Thêm bất động sản",
+          "edit": "Chỉnh sửa bất động sản"
+        },
+        "header": {
+          "backToEstateList": "Danh sách bất động sản"
+        },
+        "form": {
+          "general": {
+            "title": "Thông tin chung",
+            "form": {
+              "title": {
+                "label": "Tiêu đề",
+                "placeholder": "Nhập tiêu đề",
+                "required": "Tiêu đề không được phép để trống."
+              },
+              "customId": {
+                "label": "Mã bất động sản",
+                "placeholder": "Nhập mã bất động sản"
+              },
+              "price": {
+                "label": "Giá bán",
+                "placeholder": "Nhập giá bán",
+                "required": "Giá bán không được phép để trống."
+              },
+              "area": {
+                "label": "Diện tích",
+                "placeholder": "Nhập diện tích",
+                "required": "Diện tích không được phép để trống."
+              }
+            }
+          },
+          "location": {
+            "title": "Thông tin vị trí",
+            "form": {
+              "address": {
+                "label": "Địa chỉ",
+                "placeholder": "Nhập địa chỉ",
+                "required": "Địa chỉ không được phép để trống."
+              },
+              "addressNote": {
+                "label": "Chi tiết vị trí",
+                "placeholder": "Nhập chi tiết hoặc ghi chú về vị trí"
+              },
+              "pickOnMap": "Chọn từ bản đồ"
+            }
+          },
+          "detail": {
+            "title": "Thông tin chi tiết",
+            "form": {
+              "quarter": {
+                "label": "Hướng",
+                "placeholder": "Chọn hướng"
+              },
+              "property": {
+                "placeholder": "Nhập số {{name}}"
+              },
+              "addProperty": "Thêm thuộc tính",
+              "description": {
+                "label": "Mô tả",
+                "placeholder": "Nhập mô tả",
+                "required": "Mô tả không được phép để trống."
+              }
+            }
+          },
+          "contact": {
+            "title": "Thông tin liên hệ",
+            "phone": "Số điện thoại",
+            "zalo": "Zalo",
+            "email": "Thư điện tử",
+            "change": "Thay đổi",
+            "picker": {
+              "title": "Chọn thông tin liên hệ"
+            },
+            "pick": "Nhấn để chọn thông tin liên hệ",
+            "required": "Thông tin liên hệ không được phép để trống."
+          },
+          "media": {
+            "title": "Thông tin khác",
+            "form": {
+              "avatar": {
+                "label": "Ảnh đại diện",
+                "placeholder": "Chọn ảnh đại diện",
+                "required": "Ảnh đại diện không được phép để trống."
+              },
+              "youtube": {
+                "label": "Youtube",
+                "placeholder": "Nhập đường dẫn từ Youtube"
+              },
+              "image": {
+                "label": "Hình ảnh khác",
+                "placeholder": "Chọn ảnh",
+                "required": "Ảnh không được phép để trống."
+              }
+            }
+          },
+          "action": {
+            "save": "Lưu nháp",
+            "publish": "Lưu và xuất bản"
+          }
+        }
+      },
       "form": {
         "category": {
           "label": "Danh mục",
           "placeholder": "Chọn danh mục",
           "required": "Danh mục không được phép để trống."
         }
+      }
+    }
+  },
+  "form": {
+    "location": {
+      "provinceCode": {
+        "label": "Tỉnh/thành phố",
+        "placeholder": "Chọn tỉnh/thành phố",
+        "required": "Tỉnh/thành phố không được phép để trống."
+      },
+      "districtCode": {
+        "label": "Quận/huyện",
+        "placeholder": "Chọn quận/huyện",
+        "required": "Quận/huyện không được phép để trống."
+      },
+      "wardCode": {
+        "label": "Xã/phường/thị trấn",
+        "placeholder": "Chọn xã/phường/thị trấn",
+        "required": "Xã/phường/thị trấn không được phép để trống."
       }
     }
   }

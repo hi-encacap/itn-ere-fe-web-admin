@@ -7,6 +7,7 @@ import ImageInputItemPreview from './ImageInputItemPreview';
 import ImageInputItemUploading from './ImageInputItemUploading';
 
 interface ImageInputItemProps {
+  inputId: string;
   image?: FormImageInputDataType;
   isUploading?: boolean;
   isMultiple?: boolean;
@@ -18,6 +19,7 @@ interface ImageInputItemProps {
 }
 
 const ImageInputItem = ({
+  inputId,
   image,
   isUploading,
   isMultiple,
@@ -37,6 +39,7 @@ const ImageInputItem = ({
       {isDisabled && <div className="absolute inset-0 bg-gray-50" />}
       {!image && (
         <ImageInputItemPlaceholder
+          inputId={inputId}
           isMultiple={isMultiple}
           isDisabled={isDisabled}
           onChooseImage={onChooseImage}

@@ -7,12 +7,15 @@ import { IMAGE_VARIANT_ENUM } from '@constants/enums';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { ImageDataType } from '@interfaces/Common/imageTypes';
 
-const setDocumentTitle = (title: string): void => {
+const setDocumentTitle = (title: string, scrollToTop = true): void => {
   window.document.title = `${title} - ${process.env.REACT_APP_FRONTEND_WEBSITE_NAME ?? 'Encacap'}`;
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  });
+
+  if (scrollToTop) {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
 };
 
 const slugify = (text: string): string => {
@@ -37,18 +40,12 @@ const slugify = (text: string): string => {
   return result;
 };
 
-const getImageURL = (image: ImageDataType, variant?: string): string => {
+const getImageURL = (image: ImageDataType, variant = IMAGE_VARIANT_ENUM.DEFAULT): string => {
   if (!image) {
     return '';
   }
 
-  const { variants } = image;
-
-  if (variant) {
-    return variants[variant];
-  }
-
-  return variants[IMAGE_VARIANT_ENUM.DEFAULT];
+  return image[variant] ?? image[IMAGE_VARIANT_ENUM.DEFAULT];
 };
 
 const generateColumnFilterObject = (filters: TableColumnFilterState[]) => {

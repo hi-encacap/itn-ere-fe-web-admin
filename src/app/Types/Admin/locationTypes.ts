@@ -48,15 +48,20 @@ export interface LocationWardDataType {
 }
 
 export interface LocationWardWebsiteDataType {
-  wardCode: string;
-  websiteId: number;
-  ward: LocationWardDataType;
+  code: string;
+  name: string;
+  districtCode: string;
+  district: LocationDistrictDataType;
 }
 
 export interface LocationWardWebsiteFormDataType {
   ghnRefId: number | null;
   districtCode: string | null;
   provinceCode: string | null;
+}
+
+export interface LocationWardGetListQueryType extends BaseGetListQueryType {
+  districtCode?: string;
 }
 
 export interface LocationAddressBookDataType {

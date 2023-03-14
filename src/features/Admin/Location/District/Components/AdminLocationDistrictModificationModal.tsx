@@ -15,7 +15,7 @@ import { ModalProps } from '@components/Modal/Modal';
 import useToast from '@hooks/useToast';
 import { formatErrorMessage, setFormError } from '@utils/error';
 
-import AdminLocationModificationProvinceSelector from '@admin/Location/Components/AdminLocationModificationProvinceSelector';
+import AdminLocationProvinceSelector from '@admin/Components/AdminLocationProvinceSelector';
 
 import { locationDistrictFormSchema } from '../../Schemas/locationFormSchema';
 import AdminLocationDistrictModificationDistrictSelector from './AdminLocationDistrictModificationDistrictSelector';
@@ -93,7 +93,7 @@ const AdminLocationDistrictModificationModal = ({
       {...omit(props, 'onSubmit')}
     >
       <form className="grid gap-6" onSubmit={handleSubmit}>
-        <AdminLocationModificationProvinceSelector control={control} disabled={isSubmitting} />
+        <AdminLocationProvinceSelector control={control} disabled={isSubmitting} />
         <AdminLocationDistrictModificationDistrictSelector
           control={control}
           provinceCode={provinceCode}

@@ -32,14 +32,16 @@ const createCategory = async (data: CategoryFormDataType): Promise<CategoryDataT
   return response.data.data;
 };
 
-const updateCategoryByCode = async (code: string, data: CategoryFormDataType): Promise<CategoryDataType> => {
-  const response = await axiosInstance.put(ADMIN_CATEGORY_API_PATH.CATEGORY_PATH(code), data);
+const updateCategoryByCode = async (id: number, data: CategoryFormDataType): Promise<CategoryDataType> => {
+  const response = await axiosInstance.put(ADMIN_CATEGORY_API_PATH.CATEGORY_PATH(id), {
+    thumbnailId: data.thumbnail?.id,
+  });
 
   return response.data.data;
 };
 
-const deleteCategoryByCode = async (code: string): Promise<void> => {
-  await axiosInstance.delete(`${ADMIN_CATEGORY_API_PATH.CATEGORIES_PATH}/${code}`);
+const deleteCategoryByCode = async (id: number): Promise<void> => {
+  await axiosInstance.delete(`${ADMIN_CATEGORY_API_PATH.CATEGORIES_PATH}/${id}`);
 };
 
 export { getCategories, getAllCategories, createCategory, updateCategoryByCode, deleteCategoryByCode };

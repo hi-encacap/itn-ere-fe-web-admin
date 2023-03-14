@@ -6,8 +6,8 @@ const AUTHENTICATION_API_PATH = {
 
 const ADMIN_CATEGORY_API_PATH = {
   CATEGORIES_PATH: 'admin/categories',
-  CATEGORY_PATH: (code: string) => `/admin/categories/${code}`,
-  DELETE_CATEGORY_PATH: (code: string) => `/admin/categories/${code}`,
+  CATEGORY_PATH: (id: number) => `/admin/categories/${id}`,
+  DELETE_CATEGORY_PATH: (id: number) => `/admin/categories/${id}`,
 };
 
 const ADMIN_CATEGORY_GROUP_API_PATH = {
@@ -35,6 +35,11 @@ const ADMIN_ESTATE_PROPERTY_API_PATH = {
   ESTATE_PROPERTY_PATH: (id: number) => `admin/category-properties/${id}`,
 };
 
+const ADMIN_ESTATE_API_PATH = {
+  ESTATES_PATH: 'admin/estates',
+  ESTATE_PATH: (id: number) => `/admin/estates/${id}`,
+};
+
 const LOCATION_API_PATH = {
   GHN_PROVINCES_PATH: 'locations/ghn/provinces',
   GHN_DISTRICTS_PATH: 'locations/ghn/districts',
@@ -45,6 +50,14 @@ const UPLOAD_API_PATH = {
   UPLOAD_IMAGE_PATH: 'admin/cloudflare/images/single',
 };
 
+const UNIT_PRICE_API_PATH = {
+  UNIT_PRICES_PATH: 'unit-prices',
+};
+
+const ESTATE_QUARTER_API_PATH = {
+  ESTATE_QUARTERS_PATH: 'estate-quarters',
+};
+
 export {
   AUTHENTICATION_API_PATH,
   ADMIN_CATEGORY_API_PATH,
@@ -52,6 +65,9 @@ export {
   ADMIN_CONTACT_API_PATH,
   ADMIN_LOCATION_API_PATH,
   ADMIN_ESTATE_PROPERTY_API_PATH,
+  ADMIN_ESTATE_API_PATH,
   UPLOAD_API_PATH,
   LOCATION_API_PATH,
+  UNIT_PRICE_API_PATH,
+  ESTATE_QUARTER_API_PATH,
 };

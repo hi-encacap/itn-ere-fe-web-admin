@@ -23,6 +23,7 @@ const AdminCategorySelector = ({ control, disabled }: AdminCategorySelectorProps
 
   const getOptions = useCallback(() => {
     setIsLoading(true);
+
     adminCategoryService
       .getCategories()
       .then(({ data }) => {

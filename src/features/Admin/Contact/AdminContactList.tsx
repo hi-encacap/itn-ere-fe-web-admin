@@ -1,9 +1,10 @@
-import { SortingState } from '@tanstack/react-table';
-import { isEqual } from 'lodash';
+import { RowSelectionState, SortingState } from '@tanstack/react-table';
+import { isEqual, keys } from 'lodash';
 import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
+import { TABLE_ROW_SELECTION_TYPE_ENUM } from '@constants/enums';
 import { ContactDataType } from '@interfaces/Admin/contactTypes';
 import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
@@ -21,7 +22,17 @@ import AdminContactDeleteConfirmationModal from './Components/AdminContactDelete
 import AdminContactHeaderAction from './Components/AdminContactHeaderAction';
 import AdminContactModificationModal from './Components/AdminContactModificationModal';
 
-const AdminContactList = () => {
+interface AdminContactListProps {
+  defaultSelection?: ContactDataType[];
+  isShowTableOnly?: boolean;
+  onChangeSelection?: (contact: ContactDataType[]) => void;
+}
+
+const AdminContactList = ({
+  defaultSelection,
+  isShowTableOnly = false,
+  onChangeSelection,
+}: AdminContactListProps) => {
   const { t } = useTranslation('admin', {
     keyPrefix: 'admin:page.contact',
   });
@@ -41,6 +52,7 @@ const AdminContactList = () => {
   const [isShowDeleteConfirmationModal, setIsShowDeleteConfirmationModal] = useState(false);
   const [isShowModificationModal, setIsShowModificationModal] = useState(false);
   const [selectedContact, setSelectedContact] = useState<ContactDataType | null>(null);
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const getContactData = useCallback(() => {
     setIsLoading(true);
@@ -140,9 +152,48 @@ const AdminContactList = () => {
     setQueryParams(newQueryParams);
   }, [columnFilters, pagination]);
 
+  useEffect(() => {
+    onChangeSelection?.(contactData.filter((item) => rowSelection[item.id]));
+  }, [rowSelection]);
+
+  useEffect(() => {
+    if (keys(rowSelection).length) {
+      return;
+    }
+
+    const newSelection: RowSelectionState = {};
+
+    defaultSelection?.forEach((item) => {
+      newSelection[item.id] = true;
+    });
+
+    setRowSelection(newSelection);
+  }, [defaultSelection]);
+
   useLayoutEffect(() => {
-    setDocumentTitle(t('title'));
-  }, [t]);
+    setDocumentTitle(t('title'), !isShowTableOnly);
+  }, [t, isShowTableOnly]);
+
+  if (isShowTableOnly) {
+    return (
+      <Table
+        columns={createContactTableColumns(t, {
+          onClickEdit: handleClickEditButton,
+          onClickDelete: handleClickDeleteButton,
+        })}
+        data={contactData}
+        isLoading={isLoading}
+        sorting={columnSorting}
+        pagination={pagination}
+        rowSelection={rowSelection}
+        rowSelectionType={TABLE_ROW_SELECTION_TYPE_ENUM.SINGLE}
+        onChangePagination={setPagination}
+        onChangeSorting={setColumnSorting}
+        onChangeFilters={setColumnFilters}
+        onChangeRowSelection={setRowSelection}
+      />
+    );
+  }
 
   return (
     <LayoutContent title={t('title')} actions={<AdminContactHeaderAction onClick={handleClickAddButton} />}>
@@ -158,6 +209,7 @@ const AdminContactList = () => {
         onChangePagination={setPagination}
         onChangeSorting={setColumnSorting}
         onChangeFilters={setColumnFilters}
+        onChangeRowSelection={setRowSelection}
       />
       <AdminContactModificationModal
         isOpen={isShowModificationModal}

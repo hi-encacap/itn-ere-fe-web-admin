@@ -1,3 +1,5 @@
+import { nanoid } from '@reduxjs/toolkit';
+
 import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
 import { ImageDataType } from '@interfaces/Common/imageTypes';
 
@@ -13,7 +15,7 @@ const convertToImageDataFromFiles = (files: FileList): FormImageInputDataType[] 
 
 const generateImageFormData = (data: ImageDataType): FormImageInputDataType => {
   return {
-    id: data.id,
+    id: nanoid(),
     preview: getImageURL(data),
     file: null,
   };

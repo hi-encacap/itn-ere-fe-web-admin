@@ -9,25 +9,29 @@ import { Select } from '@components/Form';
 
 import { commonFormErrorFactory } from '@utils/error';
 
-interface AdminLocationModificationDistrictSelectorProps {
+interface AdminLocationDistrictSelectorProps {
   control: HookFormControl;
-  provinceCode: string;
+  provinceCode?: string | null;
   disabled?: boolean;
 }
 
-const AdminLocationModificationDistrictSelector = ({
+const AdminLocationDistrictSelector = ({
   control,
   provinceCode,
   disabled,
-}: AdminLocationModificationDistrictSelectorProps) => {
+}: AdminLocationDistrictSelectorProps) => {
   const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:page.location.modal.modification.form.districtCode',
+    keyPrefix: 'admin:form.location.districtCode',
   });
 
   const [options, setOptions] = useState<SelectOptionItemType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const getData = useCallback(() => {
+    if (!provinceCode) {
+      return;
+    }
+
     if (options.length === 0) {
       setIsLoading(true);
     }
@@ -48,14 +52,11 @@ const AdminLocationModificationDistrictSelector = ({
       .catch(() => {
         setOptions([]);
       });
-  }, [options, provinceCode]);
+  }, [provinceCode]);
 
   useEffect(() => {
-    if (!provinceCode) {
-      return;
-    }
     getData();
-  }, [provinceCode]);
+  }, [getData]);
 
   return (
     <Select
@@ -66,10 +67,10 @@ const AdminLocationModificationDistrictSelector = ({
       options={options}
       isRequired
       control={control}
-      disabled={!provinceCode ?? isLoading ?? disabled}
+      disabled={!provinceCode || isLoading || disabled}
       errorFactory={commonFormErrorFactory(t)}
     />
   );
 };
 
-export default memo(AdminLocationModificationDistrictSelector);
+export default memo(AdminLocationDistrictSelector);

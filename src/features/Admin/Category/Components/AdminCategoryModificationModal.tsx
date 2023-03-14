@@ -65,7 +65,7 @@ const AdminCategoryModificationModal = ({
       setIsLoading(true);
 
       adminCategoryService
-        .updateCategoryByCode(category?.code, data)
+        .updateCategoryByCode(category?.id, data)
         .then(() => {
           onUpdated();
           onClose();

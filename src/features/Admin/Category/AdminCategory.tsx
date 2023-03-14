@@ -161,9 +161,9 @@ const AdminCategory = () => {
         onChangeFilters={setColumnFilters}
       />
       <AdminCategoryDeleteConfirmationModal
+        categoryId={selectedCategory?.id}
         isOpen={isShowDeleteConfirmationModal}
         onClose={handleCloseDeleteConfirmationModal}
-        categoryCode={selectedCategory?.code}
         onDeleted={handleDeletedCategory}
         onDeleteFailed={handleDeleteCategoryFailed}
       />

@@ -9,17 +9,14 @@ import { Select } from '@components/Form';
 
 import { commonFormErrorFactory } from '@utils/error';
 
-interface AdminLocationModificationProvinceSelectorProps {
+interface AdminLocationProvinceSelectorProps {
   control: HookFormControl;
   disabled?: boolean;
 }
 
-const AdminLocationModificationProvinceSelector = ({
-  control,
-  disabled,
-}: AdminLocationModificationProvinceSelectorProps) => {
+const AdminLocationProvinceSelector = ({ control, disabled }: AdminLocationProvinceSelectorProps) => {
   const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:page.location.modal.modification.form.provinceCode',
+    keyPrefix: 'admin:form.location.provinceCode',
   });
 
   const [locationProvinceOptions, setLocationProvinceOptions] = useState<SelectOptionItemType[]>([]);
@@ -65,4 +62,4 @@ const AdminLocationModificationProvinceSelector = ({
   );
 };
 
-export default memo(AdminLocationModificationProvinceSelector);
+export default memo(AdminLocationProvinceSelector);

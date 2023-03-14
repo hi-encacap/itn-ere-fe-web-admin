@@ -3,7 +3,7 @@ import { number, string } from 'yup';
 
 import { EstatePropertyFormDataType } from '@interfaces/Admin/estateTypes';
 
-import { generateFormSchema } from '@utils/Http/schema';
+import { generateFormSchema } from '@utils/schema';
 
 const estatePropertyFormSchema = (t: TFunction) =>
   generateFormSchema<EstatePropertyFormDataType>({

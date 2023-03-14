@@ -6,6 +6,7 @@ import {
   LocationProvinceDataType,
   LocationProvinceWebsiteDataType,
   LocationProvinceWebsiteFormDataType,
+  LocationWardGetListQueryType,
   LocationWardWebsiteDataType,
   LocationWardWebsiteFormDataType,
 } from '@interfaces/Admin/locationTypes';
@@ -65,7 +66,7 @@ const deleteDistrictByCode = async (code: string): Promise<void> => {
 };
 
 const getWards = async (
-  query?: BaseGetListQueryType,
+  query?: LocationWardGetListQueryType,
 ): Promise<ResponseWithMetaType<LocationWardWebsiteDataType[]>> => {
   const response = await axiosInstance.get(ADMIN_LOCATION_API_PATH.WARDS_PATH, {
     params: query,
