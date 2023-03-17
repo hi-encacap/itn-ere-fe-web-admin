@@ -495,6 +495,20 @@
           }
         }
       },
+      "list": {
+        "title": "Quản lý bất động sản",
+        "header": {
+          "create": "Thêm bất động sản"
+        },
+        "table": {
+          "column": {
+            "avatar": "Ảnh đại diện",
+            "province": "Tỉnh/thành phố",
+            "district": "Quận/huyện",
+            "ward": "Xã/phường/thị trấn"
+          }
+        }
+      },
       "form": {
         "category": {
           "label": "Danh mục",
