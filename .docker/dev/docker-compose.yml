@@ -16,6 +16,7 @@ services:
       - ../../.env.development
     networks:
       - encacap-re-network
+    restart: unless-stopped
 
 networks:
   encacap-re-network:

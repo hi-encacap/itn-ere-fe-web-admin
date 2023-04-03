@@ -21,3 +21,8 @@ export enum TABLE_ROW_SELECTION_TYPE_ENUM {
   SINGLE = 'single',
   MULTIPLE = 'multiple',
 }
+
+export enum DROPDOWN_MENU_TYPE_ENUM {
+  NORMAL = 'normal',
+  DIVIDER = 'divider',
+}

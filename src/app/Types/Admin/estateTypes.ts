@@ -30,6 +30,7 @@ export interface EstateDataType {
   ward?: LocationWardDataType;
   createdAt: Date;
   updatedAt: Date;
+  category: CategoryDataType;
 }
 
 export interface EstateModificationFormDataType extends Nullable<Partial<Omit<EstateDataType, 'avatar'>>> {

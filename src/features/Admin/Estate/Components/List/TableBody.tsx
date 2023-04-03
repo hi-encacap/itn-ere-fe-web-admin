@@ -12,7 +12,7 @@ const AdminEstateListTableBody = ({ data, isLoading }: CustomTableBodyProps<Esta
   if (!data.length) return <TableContentBodyEmptyContent />;
 
   return (
-    <div className="grid grid-cols-4 gap-6">
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {data.map((item) => {
         return <AdminEstateListTableBodyItem key={item.id} data={item} />;
       })}

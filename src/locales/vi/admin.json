@@ -505,7 +505,14 @@
             "avatar": "Ảnh đại diện",
             "province": "Tỉnh/thành phố",
             "district": "Quận/huyện",
-            "ward": "Xã/phường/thị trấn"
+            "ward": "Xã/phường/thị trấn",
+            "updatedAt": "Cập nhật vào {{date}}"
+          },
+          "action": {
+            "edit": "Chỉnh sửa",
+            "delete": "Xóa",
+            "moveToTop": "Đưa lên đầu",
+            "unPublish": "Huỷ xuất bản"
           }
         }
       },
