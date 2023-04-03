@@ -1,0 +1,22 @@
+version: '3.9'
+name: encacap-re-dashboard-dev
+
+services:
+  app:
+    container_name: encacap-re-dashboard-dev
+    build:
+      context: ../../.
+      dockerfile: ./.docker/dev/Dockerfile
+    image: encacapredashboard-dev
+    ports:
+      - 3012:3012
+    volumes:
+      - ../../.:/usr/src/app
+    env_file:
+      - ../../.env.development
+    networks:
+      - encacap-re-network
+
+networks:
+  encacap-re-network:
+    driver: bridge
