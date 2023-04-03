@@ -3,7 +3,6 @@ import {
   getCoreRowModel,
   OnChangeFn,
   PaginationState,
-  Row,
   RowData,
   RowSelectionState,
   SortingState,
@@ -40,7 +39,7 @@ declare module '@tanstack/table-core' {
 }
 
 export interface CustomTableBodyProps<TData = TableDataType> {
-  rows: Array<Row<TData>>;
+  data: TData[];
   isLoading: boolean;
 }
 
@@ -168,7 +167,7 @@ const Table = ({
       <div className="overflow-auto">
         {renderTableBody ? (
           renderTableBody({
-            rows: tableRows,
+            data,
             isLoading,
           })
         ) : (

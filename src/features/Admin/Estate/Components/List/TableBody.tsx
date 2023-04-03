@@ -1,12 +1,20 @@
-import { CustomTableBodyProps } from '@components/Table/Table';
+import { EstateDataType } from '@interfaces/Admin/estateTypes';
 
-const AdminEstateListTableBody = ({ rows }: CustomTableBodyProps) => {
-  if (!rows.length) return <div>Empty</div>;
+import { CustomTableBodyProps } from '@components/Table/Table';
+import TableContentBodyEmptyContent from '@components/Table/TableContentBody/TableContentBodyEmptyContent';
+
+import AdminEstateListTableBodyItem from './TableBodyItem';
+import AdminEstateListTableBodyLoading from './TableBodyLoading';
+
+const AdminEstateListTableBody = ({ data, isLoading }: CustomTableBodyProps<EstateDataType>) => {
+  if (isLoading) return <AdminEstateListTableBodyLoading />;
+
+  if (!data.length) return <TableContentBodyEmptyContent />;
 
   return (
-    <div>
-      {rows.map((row) => {
-        return <div key={row.id}>{JSON.stringify(row.original)}</div>;
+    <div className="grid grid-cols-4 gap-6">
+      {data.map((item) => {
+        return <AdminEstateListTableBodyItem key={item.id} data={item} />;
       })}
     </div>
   );

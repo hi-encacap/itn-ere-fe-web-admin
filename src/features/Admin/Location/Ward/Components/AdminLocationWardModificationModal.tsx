@@ -8,7 +8,6 @@ import { LocationWardWebsiteFormDataType } from '@interfaces/Admin/locationTypes
 import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 import { adminLocationService } from '@services/index';
 
-import { Button } from '@components/Form';
 import { Modal } from '@components/Modal';
 import { ModalProps } from '@components/Modal/Modal';
 
@@ -107,7 +106,7 @@ const AdminLocationWardModificationModal = ({
           districtCode={districtCode}
           disabled={isSubmitting}
         />
-        <Button type="submit" className="hidden" />
+        <button type="submit" className="hidden" />
       </form>
     </Modal>
   );

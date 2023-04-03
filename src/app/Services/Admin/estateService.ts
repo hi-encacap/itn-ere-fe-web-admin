@@ -1,5 +1,6 @@
 import { ADMIN_ESTATE_API_PATH } from '@constants/apis';
-import { EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
+import { EstateDataType, EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
+import { BaseGetListQueryType, ResponseWithMetaType } from '@interfaces/Common/commonTypes';
 
 import axiosInstance from '@utils/Http/axiosInstance';
 
@@ -15,4 +16,14 @@ const createEstate = async (estate: EstateModificationFormDataType) => {
   return response.data.data;
 };
 
-export { createEstate };
+const getEstates = async (
+  queryParam: BaseGetListQueryType,
+): Promise<ResponseWithMetaType<EstateDataType[]>> => {
+  const response = await axiosInstance.get(ADMIN_ESTATE_API_PATH.ESTATES_PATH, {
+    params: queryParam,
+  });
+
+  return response.data;
+};
+
+export { createEstate, getEstates };

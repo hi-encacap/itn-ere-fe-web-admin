@@ -28,6 +28,8 @@ export interface EstateDataType {
   province: LocationProvinceDataType;
   district: LocationDistrictDataType;
   ward?: LocationWardDataType;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface EstateModificationFormDataType extends Nullable<Partial<Omit<EstateDataType, 'avatar'>>> {

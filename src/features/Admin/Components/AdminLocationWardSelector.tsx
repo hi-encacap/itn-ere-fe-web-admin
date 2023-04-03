@@ -28,10 +28,6 @@ const AdminLocationWardSelector = ({ control, districtCode, disabled }: AdminLoc
       return;
     }
 
-    if (options.length === 0) {
-      setIsLoading(true);
-    }
-
     adminLocationService
       .getWards({
         districtCode,
@@ -48,7 +44,7 @@ const AdminLocationWardSelector = ({ control, districtCode, disabled }: AdminLoc
       .catch(() => {
         setOptions([]);
       });
-  }, [options, districtCode]);
+  }, [districtCode]);
 
   useEffect(() => {
     getData();

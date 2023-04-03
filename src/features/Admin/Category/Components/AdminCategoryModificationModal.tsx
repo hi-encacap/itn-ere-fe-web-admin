@@ -8,7 +8,7 @@ import { CategoryDataType, CategoryFormDataType } from '@interfaces/Admin/catego
 import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 import { adminCategoryService } from '@services/index';
 
-import { Button, Input } from '@components/Form';
+import { Input } from '@components/Form';
 import ImageInput from '@components/Form/ImageInput/ImageInput';
 import Modal, { ModalProps } from '@components/Modal/Modal';
 
@@ -136,7 +136,7 @@ const AdminCategoryModificationModal = ({
         />
         <AdminCategoryGroupSelector control={control} />
         <ImageInput name="thumbnail" label={t('form.thumbnail.label')} control={control} />
-        <Button type="submit" className="hidden" />
+        <button type="submit" className="hidden" />
       </form>
     </Modal>
   );
