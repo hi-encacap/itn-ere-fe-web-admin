@@ -1,3 +1,5 @@
+import { ESTATE_STATUS_ENUM } from 'encacap/dist/re';
+
 import { Nullable } from '@interfaces/Common/commonTypes';
 import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
 import { ImageDataType } from '@interfaces/Common/imageTypes';
@@ -31,6 +33,7 @@ export interface EstateDataType {
   createdAt: Date;
   updatedAt: Date;
   category: CategoryDataType;
+  status: ESTATE_STATUS_ENUM;
 }
 
 export interface EstateModificationFormDataType extends Nullable<Partial<Omit<EstateDataType, 'avatar'>>> {

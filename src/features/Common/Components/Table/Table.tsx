@@ -14,7 +14,11 @@ import { ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
 import { TABLE_ROW_SELECTION_TYPE_ENUM } from '@constants/enums';
 import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
-import { TableColumnFilterState, TableDataType } from '@interfaces/Common/elementTypes';
+import {
+  TableColumnFilterState,
+  TableDataType,
+  TableRowActionClickHandlerType,
+} from '@interfaces/Common/elementTypes';
 
 import { normalizeTableColumns } from '@utils/table';
 
@@ -38,9 +42,12 @@ declare module '@tanstack/table-core' {
   }
 }
 
+type TableRowActionNameType = `on${string}`;
+
 export interface CustomTableBodyProps<TData = TableDataType> {
   data: TData[];
   isLoading: boolean;
+  [key: TableRowActionNameType]: TableRowActionClickHandlerType;
 }
 
 export interface TableProps<TData = TableDataType> {
@@ -51,6 +58,7 @@ export interface TableProps<TData = TableDataType> {
   isLoading?: boolean;
   rowSelection?: RowSelectionState;
   rowSelectionType?: TABLE_ROW_SELECTION_TYPE_ENUM;
+  tableBodyProps?: Omit<CustomTableBodyProps, 'data' | 'isLoading'>;
   renderTableBody?: (props: CustomTableBodyProps) => ReactElement;
   onChangePagination?: OnChangeFn<TablePaginationType>;
   onChangeSorting?: OnChangeFn<SortingState>;
@@ -66,6 +74,7 @@ const Table = ({
   isLoading = false,
   rowSelection = {},
   rowSelectionType = TABLE_ROW_SELECTION_TYPE_ENUM.MULTIPLE,
+  tableBodyProps = {},
   renderTableBody,
   onChangePagination,
   onChangeSorting,
@@ -169,6 +178,7 @@ const Table = ({
           renderTableBody({
             data,
             isLoading,
+            ...tableBodyProps,
           })
         ) : (
           <table className="relative min-w-full">

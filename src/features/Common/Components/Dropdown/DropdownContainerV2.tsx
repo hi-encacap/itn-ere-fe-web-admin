@@ -24,6 +24,10 @@ const DropdownContainerV2 = ({ children, menu }: DropdownContainerV2Props) => {
     setIsShownMenuDropdown(false);
   }, []);
 
+  const handleInteractItem = useCallback(() => {
+    containerRef.current?.blur();
+  }, []);
+
   useEffect(() => {
     if (!containerRef.current || !isShownMenuDropdown) {
       return;
@@ -47,7 +51,10 @@ const DropdownContainerV2 = ({ children, menu }: DropdownContainerV2Props) => {
         onBlur: handleBlurContainer,
       })}
       {isShownMenuDropdown &&
-        createPortal(<DropdownContainerV2Menu menu={menu} rect={containerRect} />, dropdownProvider)}
+        createPortal(
+          <DropdownContainerV2Menu menu={menu} rect={containerRect} onInteract={handleInteractItem} />,
+          dropdownProvider,
+        )}
     </>
   );
 };

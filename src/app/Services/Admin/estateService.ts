@@ -1,3 +1,5 @@
+import { Key } from 'react';
+
 import { ADMIN_ESTATE_API_PATH } from '@constants/apis';
 import { EstateDataType, EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
 import { BaseGetListQueryType, ResponseWithMetaType } from '@interfaces/Common/commonTypes';
@@ -26,4 +28,16 @@ const getEstates = async (
   return response.data;
 };
 
-export { createEstate, getEstates };
+const unPublishEstateById = async (id: Key) => {
+  const response = await axiosInstance.post(ADMIN_ESTATE_API_PATH.ESTATE_UN_PUBLISH_PATH(id));
+
+  return response.data.data;
+};
+
+const moveEstateToTopById = async (id: Key) => {
+  const response = await axiosInstance.post(ADMIN_ESTATE_API_PATH.ESTATE_MOVE_TO_TOP_PATH(id));
+
+  return response.data.data;
+};
+
+export { createEstate, getEstates, moveEstateToTopById, unPublishEstateById };

@@ -28,7 +28,7 @@ const AdminEstateList = () => {
 
       setEstateData(response.data);
     } catch (error) {
-      console.error(error);
+      setEstateData([]);
     } finally {
       setIsLoading(false);
     }
@@ -40,7 +40,13 @@ const AdminEstateList = () => {
 
   return (
     <LayoutContent title={t('title')} actions={<AdminEstateListHeaderAction />}>
-      <AdminEstateListTable data={estateData} isLoading={isLoading} onChangeQueryParams={getData} />
+      <AdminEstateListTable
+        data={estateData}
+        isLoading={isLoading}
+        onChangeQueryParams={getData}
+        onUnPublish={adminEstateService.unPublishEstateById}
+        onMoveToTop={adminEstateService.moveEstateToTopById}
+      />
     </LayoutContent>
   );
 };

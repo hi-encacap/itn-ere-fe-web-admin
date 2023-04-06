@@ -514,6 +514,21 @@
             "moveToTop": "Đưa lên đầu",
             "unPublish": "Huỷ xuất bản"
           }
+        },
+        "notification": {
+          "unPublished": "Bài viết đã bị huỷ xuất bản.",
+          "unPublishFailed": "Hiện không thể huỷ xuất bản bài viết. Vui lòng thử lại sau.",
+          "movedToTop": "Bài viết đã được đưa lên đầu.",
+          "moveToTopFailed": "Hiện không thể đưa bài viết lên đầu. Vui lòng thử lại sau."
+        },
+        "publication": {
+          "title": {
+            "publish": "Xuất bản bài viết '{{title}}'?",
+            "unPublish": "Huỷ xuất bản bài viết '{{title}}'?"
+          },
+          "message": {
+            "unPublish": "Bạn có chắc muốn huỷ xuất bản bài viết này? Bài viết sẽ bị ẩn khỏi mọi kết quả tìm kiếm. Bạn và tất cả những thành viên có quyển khác có thể tiếp tục chỉnh sửa bài viết và xuất bản lại sau."
+          }
         }
       },
       "form": {
@@ -522,6 +537,11 @@
           "placeholder": "Chọn danh mục",
           "required": "Danh mục không được phép để trống."
         }
+      },
+      "status": {
+        "draft": "Nháp",
+        "unpublished": "Chưa xuất bản",
+        "published": "Đã xuất bản"
       }
     }
   },

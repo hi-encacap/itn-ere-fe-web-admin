@@ -5,9 +5,10 @@ import DropdownContainerV2MenuItem, { DropdownMenuItemType } from './DropdownCon
 interface DropdownContainerV2MenuProps {
   menu: DropdownMenuItemType[];
   rect: DOMRect | null;
+  onInteract: () => void;
 }
 
-const DropdownContainerV2Menu = ({ menu, rect: containerRect }: DropdownContainerV2MenuProps) => {
+const DropdownContainerV2Menu = ({ menu, rect: containerRect, onInteract }: DropdownContainerV2MenuProps) => {
   const paddingSize = 16;
   const [menuClientRect, setMenuClientRect] = useState<Record<string, number | string> | null>(null);
 
@@ -58,7 +59,7 @@ const DropdownContainerV2Menu = ({ menu, rect: containerRect }: DropdownContaine
       ref={menuRef}
     >
       {menu.map(({ id, ...props }) => (
-        <DropdownContainerV2MenuItem key={id} id={id} {...props} />
+        <DropdownContainerV2MenuItem key={id} id={id} onInteract={onInteract} {...props} />
       ))}
     </div>
   );
