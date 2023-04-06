@@ -44,10 +44,6 @@ const DropdownContainerV2Menu = ({ menu, rect: containerRect, onInteract }: Drop
     return () => setMenuClientRect(null);
   }, [containerRect, getMenuClientRect]);
 
-  if (!menuClientRect) {
-    return null;
-  }
-
   return (
     <div
       className="fixed w-48 rounded-lg bg-white py-3.5 shadow-center shadow-black/10"

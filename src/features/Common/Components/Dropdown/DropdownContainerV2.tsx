@@ -1,4 +1,4 @@
-import { ReactElement, cloneElement, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ReactElement, cloneElement, memo, useCallback, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import DropdownContainerV2Menu from './DropdownContainerV2Menu';
@@ -18,6 +18,10 @@ const DropdownContainerV2 = ({ children, menu }: DropdownContainerV2Props) => {
 
   const handleClickContainer = useCallback(() => {
     setIsShownMenuDropdown((prevState) => !prevState);
+
+    if (containerRef.current) {
+      setContainerRect(containerRef.current.getBoundingClientRect());
+    }
   }, []);
 
   const handleBlurContainer = useCallback(() => {
@@ -27,18 +31,6 @@ const DropdownContainerV2 = ({ children, menu }: DropdownContainerV2Props) => {
   const handleInteractItem = useCallback(() => {
     containerRef.current?.blur();
   }, []);
-
-  useEffect(() => {
-    if (!containerRef.current || !isShownMenuDropdown) {
-      return;
-    }
-
-    setContainerRect(containerRef.current.getBoundingClientRect());
-  }, [isShownMenuDropdown]);
-
-  if (!dropdownProvider) {
-    return children;
-  }
 
   return (
     <>
@@ -53,7 +45,7 @@ const DropdownContainerV2 = ({ children, menu }: DropdownContainerV2Props) => {
       {isShownMenuDropdown &&
         createPortal(
           <DropdownContainerV2Menu menu={menu} rect={containerRect} onInteract={handleInteractItem} />,
-          dropdownProvider,
+          dropdownProvider as Element,
         )}
     </>
   );

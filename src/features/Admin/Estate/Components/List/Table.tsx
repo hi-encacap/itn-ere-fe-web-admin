@@ -1,7 +1,9 @@
 import { SortingState, createColumnHelper } from '@tanstack/react-table';
+import { ESTATE_STATUS_ENUM } from 'encacap/dist/re';
 import { isEqual } from 'lodash';
 import { Key, useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
 import { EstateDataType } from '@interfaces/Admin/estateTypes';
@@ -45,9 +47,16 @@ const AdminEstateListTable = ({
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
   const [queryParams, setQueryParams] = useState<BaseGetListQueryType>({
     ...pagination,
+    status: ESTATE_STATUS_ENUM.PUBLISHED,
   });
   const [isShowUnPublishConfirmModal, setIsShowUnPublishConfirmModal] = useState(false);
   const [selectedEstateId, setSelectedEstateId] = useState<Key | null>(null);
+  const [searchParams] = useSearchParams();
+
+  const selectedTabIdParam = useMemo(
+    () => searchParams.get('tab_id') ?? ESTATE_STATUS_ENUM.PUBLISHED,
+    [searchParams],
+  );
 
   const selectedEstate = useMemo(
     () => data.find((estate) => estate.id === selectedEstateId),
@@ -133,7 +142,15 @@ const AdminEstateListTable = ({
     }
 
     setQueryParams(newQueryParams);
-  }, [columnFilters, pagination]);
+  }, [columnFilters, pagination, queryParams]);
+
+  useEffect(() => {
+    setQueryParams((prevQueryParams) => ({
+      ...prevQueryParams,
+      status: selectedTabIdParam,
+      page: 1,
+    }));
+  }, [selectedTabIdParam]);
 
   useEffect(() => {
     onChangeQueryParams?.(queryParams);

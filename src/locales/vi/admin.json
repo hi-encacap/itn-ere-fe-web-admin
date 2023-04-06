@@ -512,7 +512,8 @@
             "edit": "Chỉnh sửa",
             "delete": "Xóa",
             "moveToTop": "Đưa lên đầu",
-            "unPublish": "Huỷ xuất bản"
+            "unPublish": "Huỷ xuất bản",
+            "publish": "Xuất bản"
           }
         },
         "notification": {

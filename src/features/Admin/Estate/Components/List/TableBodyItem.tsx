@@ -1,7 +1,8 @@
 import dayjs from 'dayjs';
+import { ESTATE_STATUS_ENUM } from 'encacap/dist/re';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AiOutlineEyeInvisible } from 'react-icons/ai';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { FiTrash2, FiUpload } from 'react-icons/fi';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { MdAccessTime } from 'react-icons/md';
@@ -25,6 +26,7 @@ interface AdminEstateListTableBodyItemProps {
   onClickDelete?: (id: number) => void;
   onMoveToTop?: (id: number) => Promise<void>;
   onClickUnPublish?: (id: number) => void;
+  onClickPublish?: (id: number) => void;
   onInteraction?: () => void;
 }
 
@@ -33,6 +35,7 @@ const AdminEstateListTableBodyItem = ({
   onClickDelete,
   onMoveToTop,
   onClickUnPublish,
+  onClickPublish,
   onInteraction,
 }: AdminEstateListTableBodyItemProps) => {
   const { t } = useTranslation('admin', {
@@ -67,31 +70,63 @@ const AdminEstateListTableBodyItem = ({
     onClickUnPublish?.(data.id);
   }, [data, onClickUnPublish]);
 
-  const dropdownMenu = useMemo<DropdownMenuItemType[]>(
-    () => [
-      {
-        icon: <FiUpload />,
-        id: 'moveToTop',
-        label: t('table.action.moveToTop'),
-        onClick: handleClickMoveToTop,
-      },
-      {
-        icon: <AiOutlineEyeInvisible />,
-        id: 'unPublish',
-        label: t('table.action.unPublish'),
-        onClick: handleClickUnPublish,
-      },
-      { id: 'divider', type: DROPDOWN_MENU_TYPE_ENUM.DIVIDER },
-      {
-        className: 'text-red-500',
-        icon: <FiTrash2 />,
-        id: 'delete',
-        label: t('table.action.delete'),
-        onClick: handleClickDelete,
-      },
-    ],
+  const handleClickPublish = useCallback(() => {
+    onClickPublish?.(data.id);
+  }, [data, onClickPublish]);
+
+  const moveTopTopOption: DropdownMenuItemType = useMemo(
+    () => ({
+      icon: <FiUpload />,
+      id: 'moveToTop',
+      label: t('table.action.moveToTop'),
+      onClick: handleClickMoveToTop,
+    }),
+    [handleClickMoveToTop],
+  );
+
+  const unPublishOption: DropdownMenuItemType = useMemo(
+    () => ({
+      icon: <AiOutlineEyeInvisible />,
+      id: 'unPublish',
+      label: t('table.action.unPublish'),
+      onClick: handleClickUnPublish,
+    }),
+    [handleClickUnPublish],
+  );
+
+  const publishOption: DropdownMenuItemType = useMemo(
+    () => ({
+      icon: <AiOutlineEye />,
+      id: 'publish',
+      label: t('table.action.publish'),
+      onClick: handleClickPublish,
+    }),
+    [handleClickPublish],
+  );
+
+  const deleteOption: DropdownMenuItemType = useMemo(
+    () => ({
+      className: 'text-red-500',
+      icon: <FiTrash2 />,
+      id: 'delete',
+      label: t('table.action.delete'),
+      onClick: handleClickDelete,
+    }),
     [handleClickDelete],
   );
+
+  const dropdownMenu = useMemo<DropdownMenuItemType[]>(() => {
+    if (data.status === ESTATE_STATUS_ENUM.UNPUBLISHED) {
+      return [publishOption, { id: 'divider', type: DROPDOWN_MENU_TYPE_ENUM.DIVIDER }, deleteOption];
+    }
+
+    return [
+      moveTopTopOption,
+      unPublishOption,
+      { id: 'divider', type: DROPDOWN_MENU_TYPE_ENUM.DIVIDER },
+      deleteOption,
+    ];
+  }, [handleClickDelete]);
 
   return (
     <div className="relative overflow-hidden rounded-lg">
