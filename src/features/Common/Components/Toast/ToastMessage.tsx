@@ -43,6 +43,8 @@ const ToastMessage = ({ message, description, type }: ToastMessageProps) => {
 
       return t('error');
     }
+
+    return message;
   }, [message, description, type, t]);
 
   const formattedDescription = useMemo(() => {

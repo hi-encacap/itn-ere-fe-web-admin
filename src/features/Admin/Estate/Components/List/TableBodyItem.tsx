@@ -149,6 +149,7 @@ const AdminEstateListTableBodyItem = ({
           </div>
         </div>
         <div
+          // #skipcq: JS-0440
           dangerouslySetInnerHTML={{
             __html: striptags(data.description),
           }}

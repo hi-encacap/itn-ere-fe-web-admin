@@ -198,6 +198,7 @@ const AdminEstateListTable = ({
           onMoveToTop,
           onInteraction: handleInteraction,
         }}
+        // #skipcq: JS-0417
         renderTableBody={(props) => <AdminEstateListTableBody {...props} />}
         onChangePagination={setPagination}
         onChangeSorting={setColumnSorting}

@@ -36,7 +36,7 @@ const DropdownContainerV2Menu = ({ menu, rect: containerRect, onInteract }: Drop
 
   useEffect(() => {
     if (!containerRect) {
-      return;
+      return undefined;
     }
 
     setMenuClientRect(getMenuClientRect());

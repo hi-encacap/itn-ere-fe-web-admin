@@ -70,6 +70,12 @@ const AdminEstateList = () => {
     [searchParams],
   );
 
+  const handleUnPublish = useCallback(adminEstateService.unPublishEstateById, []);
+
+  const handlePublish = useCallback(adminEstateService.publishEstateById, []);
+
+  const handleMoveToTop = useCallback(adminEstateService.moveEstateToTopById, []);
+
   useLayoutEffect(() => {
     setDocumentTitle(t('list.title'));
   }, [t]);
@@ -86,9 +92,9 @@ const AdminEstateList = () => {
         data={estateData}
         isLoading={isLoading}
         onChangeQueryParams={getData}
-        onUnPublish={adminEstateService.unPublishEstateById}
-        onPublish={adminEstateService.publishEstateById}
-        onMoveToTop={adminEstateService.moveEstateToTopById}
+        onUnPublish={handleUnPublish}
+        onPublish={handlePublish}
+        onMoveToTop={handleMoveToTop}
       />
     </LayoutContent>
   );

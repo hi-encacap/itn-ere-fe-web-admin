@@ -28,19 +28,19 @@ const getEstates = async (
   return response.data;
 };
 
-const unPublishEstateById = async (id: Key) => {
+const unPublishEstateById = async (id: Key): Promise<void> => {
   const response = await axiosInstance.post(ADMIN_ESTATE_API_PATH.ESTATE_UN_PUBLISH_PATH(id));
 
   return response.data.data;
 };
 
-const publishEstateById = async (id: Key) => {
+const publishEstateById = async (id: Key): Promise<void> => {
   const response = await axiosInstance.post(ADMIN_ESTATE_API_PATH.ESTATE_PUBLISH_PATH(id));
 
   return response.data.data;
 };
 
-const moveEstateToTopById = async (id: Key) => {
+const moveEstateToTopById = async (id: Key): Promise<void> => {
   const response = await axiosInstance.post(ADMIN_ESTATE_API_PATH.ESTATE_MOVE_TO_TOP_PATH(id));
 
   return response.data.data;

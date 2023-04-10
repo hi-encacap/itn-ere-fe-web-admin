@@ -36,6 +36,8 @@ const DropdownContainerV2MenuItem = ({
         'flex cursor-pointer items-center justify-start space-x-4 px-5 py-1.5 hover:bg-gray-100',
         className,
       )}
+      role="button"
+      tabIndex={0}
       onMouseDown={handleMouseDown}
     >
       <span>{icon}</span>
