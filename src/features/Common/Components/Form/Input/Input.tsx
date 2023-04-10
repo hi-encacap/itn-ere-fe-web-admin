@@ -27,8 +27,8 @@ const Input = ({ control, name, ...inputProps }: InputProps) => {
       ref={ref}
       onChange={onChange}
       onBlur={onBlur}
-      value={value}
       error={error?.message as string}
+      {...(value ? { value } : { value: '' })}
       {...omit(inputProps, ['value', 'onChange', 'onBlur'])}
     />
   );

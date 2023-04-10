@@ -9,7 +9,7 @@ import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 import { SelectOptionItemType } from '@interfaces/Common/elementTypes';
 import { adminLocationService, locationService } from '@services/index';
 
-import { Button, Select } from '@components/Form';
+import { Select } from '@components/Form';
 import { Modal } from '@components/Modal';
 import { ModalProps } from '@components/Modal/Modal';
 
@@ -126,7 +126,7 @@ const AdminLocationProvinceModificationModal = ({
           control={control}
           disabled={isLoading || isSubmitting}
         />
-        <Button type="submit" className="hidden" />
+        <button type="submit" className="hidden" />
       </form>
     </Modal>
   );

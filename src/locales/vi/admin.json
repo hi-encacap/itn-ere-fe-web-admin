@@ -495,12 +495,57 @@
           }
         }
       },
+      "list": {
+        "title": "Quản lý bất động sản",
+        "header": {
+          "create": "Thêm bất động sản"
+        },
+        "table": {
+          "column": {
+            "avatar": "Ảnh đại diện",
+            "province": "Tỉnh/thành phố",
+            "district": "Quận/huyện",
+            "ward": "Xã/phường/thị trấn",
+            "updatedAt": "Cập nhật vào {{date}}"
+          },
+          "action": {
+            "edit": "Chỉnh sửa",
+            "delete": "Xóa",
+            "moveToTop": "Đưa lên đầu",
+            "unPublish": "Huỷ xuất bản",
+            "publish": "Xuất bản"
+          }
+        },
+        "notification": {
+          "unPublished": "Bài viết đã bị huỷ xuất bản.",
+          "unPublishFailed": "Hiện không thể huỷ xuất bản bài viết. Vui lòng thử lại sau.",
+          "published": "Bài viết đã được xuất bản.",
+          "publishFailed": "Hiện không thể xuất bản bài viết. Vui lòng thử lại sau.",
+          "movedToTop": "Bài viết đã được đưa lên đầu.",
+          "moveToTopFailed": "Hiện không thể đưa bài viết lên đầu. Vui lòng thử lại sau."
+        },
+        "publication": {
+          "title": {
+            "publish": "Xuất bản bài viết '{{title}}'?",
+            "unPublish": "Huỷ xuất bản bài viết '{{title}}'?"
+          },
+          "message": {
+            "unPublish": "Bạn có chắc muốn huỷ xuất bản bài viết này? Bài viết sẽ bị ẩn khỏi mọi kết quả tìm kiếm. Bạn có thể tiếp tục chỉnh sửa bài viết và xuất bản lại sau.",
+            "publish": "Bạn có chắc muốn xuất bản bài viết này? Bài viết sẽ hiển thị công khai trên trang và mọi người có thể tìm thấy bài viết này, bằng bất kỳ cách nào."
+          }
+        }
+      },
       "form": {
         "category": {
           "label": "Danh mục",
           "placeholder": "Chọn danh mục",
           "required": "Danh mục không được phép để trống."
         }
+      },
+      "status": {
+        "draft": "Nháp",
+        "unpublished": "Chưa xuất bản",
+        "published": "Đã xuất bản"
       }
     }
   },

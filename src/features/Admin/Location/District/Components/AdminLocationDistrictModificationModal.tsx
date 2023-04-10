@@ -8,7 +8,6 @@ import { LocationDistrictWebsiteFormDataType } from '@interfaces/Admin/locationT
 import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 import { adminLocationService } from '@services/index';
 
-import { Button } from '@components/Form';
 import { Modal } from '@components/Modal';
 import { ModalProps } from '@components/Modal/Modal';
 
@@ -99,7 +98,7 @@ const AdminLocationDistrictModificationModal = ({
           provinceCode={provinceCode}
           disabled={isSubmitting}
         />
-        <Button type="submit" className="hidden" />
+        <button type="submit" className="hidden" />
       </form>
     </Modal>
   );

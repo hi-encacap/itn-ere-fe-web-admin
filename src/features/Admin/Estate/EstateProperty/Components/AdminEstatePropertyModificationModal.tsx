@@ -8,7 +8,7 @@ import { EstatePropertyDataType, EstatePropertyFormDataType } from '@interfaces/
 import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 import { adminEstatePropertyService } from '@services/index';
 
-import { Button, Input } from '@components/Form';
+import { Input } from '@components/Form';
 import Modal, { ModalProps } from '@components/Modal/Modal';
 
 import useToast from '@hooks/useToast';
@@ -131,7 +131,7 @@ const AdminEstatePropertyModificationModal = ({
           isRequired
           disabled={isSubmitting}
         />
-        <Button type="submit" className="hidden" />
+        <button type="submit" className="hidden" />
       </form>
     </Modal>
   );

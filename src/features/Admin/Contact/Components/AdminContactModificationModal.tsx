@@ -8,7 +8,7 @@ import { ContactDataType, ContactFormDataType } from '@interfaces/Admin/contactT
 import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 import { adminContactService } from '@services/index';
 
-import { Button, Input } from '@components/Form';
+import { Input } from '@components/Form';
 import ImageInput from '@components/Form/ImageInput/ImageInput';
 import Modal, { ModalProps } from '@components/Modal/Modal';
 
@@ -164,7 +164,7 @@ const AdminContactModificationModal = ({
           disabled={isLoading}
         />
         <ImageInput name="avatar" label={t('form.avatar.label')} control={control} disabled={isLoading} />
-        <Button type="submit" className="hidden" />
+        <button type="submit" className="hidden" />
       </form>
     </Modal>
   );

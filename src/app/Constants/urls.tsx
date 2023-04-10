@@ -8,6 +8,7 @@ const ADMIN_PATH = {
   CONTACT_PATH: '/admin/contacts',
 
   ESTATE_PATH: '/admin/estates',
+  ESTATE_CREATE_PATH: '/admin/estates?action=create',
   ESTATE_PROPERTY_PATH: '/admin/estates/properties',
 
   LOCATION_PATH: '/admin/locations',
@@ -21,4 +22,4 @@ const ERROR_PATH = {
   UNKNOWN_PATH: '/error/unknown',
 };
 
-export { AUTHENTICATION_PATH, ADMIN_PATH, ERROR_PATH };
+export { ADMIN_PATH, AUTHENTICATION_PATH, ERROR_PATH };

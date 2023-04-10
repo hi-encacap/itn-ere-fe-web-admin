@@ -1,7 +1,11 @@
+import { ESTATE_STATUS_ENUM } from 'encacap/dist/re';
+
 import { Nullable } from '@interfaces/Common/commonTypes';
 import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
+import { ImageDataType } from '@interfaces/Common/imageTypes';
 
 import { CategoryDataType } from './categoryTypes';
+import { LocationDistrictDataType, LocationProvinceDataType, LocationWardDataType } from './locationTypes';
 
 export interface EstatePropertyDataType {
   id: number;
@@ -22,9 +26,17 @@ export interface EstateDataType {
   address: string;
   addressNote?: string;
   description: string;
+  avatar: ImageDataType;
+  province: LocationProvinceDataType;
+  district: LocationDistrictDataType;
+  ward?: LocationWardDataType;
+  createdAt: Date;
+  updatedAt: Date;
+  category: CategoryDataType;
+  status: ESTATE_STATUS_ENUM;
 }
 
-export interface EstateModificationFormDataType extends Nullable<Partial<EstateDataType>> {
+export interface EstateModificationFormDataType extends Nullable<Partial<Omit<EstateDataType, 'avatar'>>> {
   priceUnitId: number;
   areaUnitId: number;
   provinceCode: string;
