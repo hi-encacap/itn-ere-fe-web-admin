@@ -48,6 +48,7 @@ export interface CustomTableBodyProps<TData = TableDataType> {
   data: TData[];
   isLoading: boolean;
   [key: TableRowActionNameType]: TableRowActionClickHandlerType;
+  [key: string]: unknown;
 }
 
 export interface TableProps<TData = TableDataType> {

@@ -2,8 +2,7 @@ import dayjs from 'dayjs';
 import { ESTATE_STATUS_ENUM } from 'encacap/dist/re';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import { FiTrash2, FiUpload } from 'react-icons/fi';
+import { FiEdit2, FiTrash2, FiUpload } from 'react-icons/fi';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { MdAccessTime } from 'react-icons/md';
 import striptags from 'striptags';
@@ -23,6 +22,7 @@ import AdminEstateListTableBodyItemBadge from './TableBodyItemBadge';
 
 interface AdminEstateListTableBodyItemProps {
   data: EstateDataType;
+  status: ESTATE_STATUS_ENUM;
   onClickDelete?: (id: number) => void;
   onMoveToTop?: (id: number) => Promise<void>;
   onClickUnPublish?: (id: number) => void;
@@ -32,6 +32,7 @@ interface AdminEstateListTableBodyItemProps {
 
 const AdminEstateListTableBodyItem = ({
   data,
+  status,
   onClickDelete,
   onMoveToTop,
   onClickUnPublish,
@@ -84,24 +85,14 @@ const AdminEstateListTableBodyItem = ({
     [handleClickMoveToTop],
   );
 
-  const unPublishOption: DropdownMenuItemType = useMemo(
+  const editOption: DropdownMenuItemType = useMemo(
     () => ({
-      icon: <AiOutlineEyeInvisible />,
-      id: 'unPublish',
-      label: t('table.action.unPublish'),
-      onClick: handleClickUnPublish,
+      icon: <FiEdit2 />,
+      id: 'edit',
+      label: t('table.action.edit'),
+      onClick: handleClickMoveToTop,
     }),
-    [handleClickUnPublish],
-  );
-
-  const publishOption: DropdownMenuItemType = useMemo(
-    () => ({
-      icon: <AiOutlineEye />,
-      id: 'publish',
-      label: t('table.action.publish'),
-      onClick: handleClickPublish,
-    }),
-    [handleClickPublish],
+    [handleClickMoveToTop],
   );
 
   const deleteOption: DropdownMenuItemType = useMemo(
@@ -117,15 +108,14 @@ const AdminEstateListTableBodyItem = ({
 
   const dropdownMenu = useMemo<DropdownMenuItemType[]>(() => {
     if (data.status === ESTATE_STATUS_ENUM.UNPUBLISHED) {
-      return [publishOption, { id: 'divider', type: DROPDOWN_MENU_TYPE_ENUM.DIVIDER }, deleteOption];
+      return [editOption, { id: 'divider', type: DROPDOWN_MENU_TYPE_ENUM.DIVIDER }, deleteOption];
     }
 
-    return [
-      moveTopTopOption,
-      unPublishOption,
-      { id: 'divider', type: DROPDOWN_MENU_TYPE_ENUM.DIVIDER },
-      deleteOption,
-    ];
+    if (data.status === ESTATE_STATUS_ENUM.DRAFT) {
+      return [deleteOption];
+    }
+
+    return [moveTopTopOption, { id: 'divider', type: DROPDOWN_MENU_TYPE_ENUM.DIVIDER }, deleteOption];
   }, [handleClickDelete]);
 
   return (
@@ -170,9 +160,26 @@ const AdminEstateListTableBodyItem = ({
               <HiDotsHorizontal size={20} />
             </Button>
           </DropdownContainerV2>
-          <Button className="flex-1 rounded-sm" size="sm" disabled={isLoading}>
-            {t('table.action.edit')}
-          </Button>
+          {status === ESTATE_STATUS_ENUM.UNPUBLISHED && (
+            <Button className="flex-1 rounded-sm" size="sm" disabled={isLoading} onClick={handleClickPublish}>
+              {t('table.action.publish')}
+            </Button>
+          )}
+          {status === ESTATE_STATUS_ENUM.DRAFT && (
+            <Button className="flex-1 rounded-sm" size="sm" disabled={isLoading}>
+              {t('table.action.edit')}
+            </Button>
+          )}
+          {status === ESTATE_STATUS_ENUM.PUBLISHED && (
+            <Button
+              className="flex-1 rounded-sm"
+              size="sm"
+              disabled={isLoading}
+              onClick={handleClickUnPublish}
+            >
+              {t('table.action.unPublish')}
+            </Button>
+          )}
         </div>
       </div>
     </div>

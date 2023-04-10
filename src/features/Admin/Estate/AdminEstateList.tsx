@@ -87,6 +87,7 @@ const AdminEstateList = () => {
         isLoading={isLoading}
         onChangeQueryParams={getData}
         onUnPublish={adminEstateService.unPublishEstateById}
+        onPublish={adminEstateService.publishEstateById}
         onMoveToTop={adminEstateService.moveEstateToTopById}
       />
     </LayoutContent>

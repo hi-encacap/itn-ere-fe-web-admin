@@ -34,10 +34,16 @@ const unPublishEstateById = async (id: Key) => {
   return response.data.data;
 };
 
+const publishEstateById = async (id: Key) => {
+  const response = await axiosInstance.post(ADMIN_ESTATE_API_PATH.ESTATE_PUBLISH_PATH(id));
+
+  return response.data.data;
+};
+
 const moveEstateToTopById = async (id: Key) => {
   const response = await axiosInstance.post(ADMIN_ESTATE_API_PATH.ESTATE_MOVE_TO_TOP_PATH(id));
 
   return response.data.data;
 };
 
-export { createEstate, getEstates, moveEstateToTopById, unPublishEstateById };
+export { createEstate, getEstates, moveEstateToTopById, publishEstateById, unPublishEstateById };

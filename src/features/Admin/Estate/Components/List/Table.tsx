@@ -23,8 +23,9 @@ interface AdminEstateListTableProps {
   data: EstateDataType[];
   isLoading: boolean;
   onChangeQueryParams?: (queryParams: BaseGetListQueryType) => void;
-  onUnPublish: (estateId: Key) => Promise<void>;
   onMoveToTop: (estateId: Key) => Promise<void>;
+  onPublish: (estateId: Key) => Promise<void>;
+  onUnPublish: (estateId: Key) => Promise<void>;
 }
 
 const AdminEstateListTable = ({
@@ -32,6 +33,7 @@ const AdminEstateListTable = ({
   isLoading,
   onChangeQueryParams,
   onUnPublish,
+  onPublish,
   onMoveToTop,
 }: AdminEstateListTableProps) => {
   const { t } = useTranslation('admin', {
@@ -50,6 +52,7 @@ const AdminEstateListTable = ({
     status: ESTATE_STATUS_ENUM.PUBLISHED,
   });
   const [isShowUnPublishConfirmModal, setIsShowUnPublishConfirmModal] = useState(false);
+  const [isShowPublishConfirmModal, setIsShowPublishConfirmModal] = useState(false);
   const [selectedEstateId, setSelectedEstateId] = useState<Key | null>(null);
   const [searchParams] = useSearchParams();
 
@@ -110,8 +113,14 @@ const AdminEstateListTable = ({
     setSelectedEstateId(id);
   }, []);
 
+  const handleClickPublish = useCallback((id: Key) => {
+    setIsShowPublishConfirmModal(true);
+    setSelectedEstateId(id);
+  }, []);
+
   const handleCloseModal = useCallback(() => {
     setIsShowUnPublishConfirmModal(false);
+    setIsShowPublishConfirmModal(false);
     setSelectedEstateId(null);
   }, []);
 
@@ -122,12 +131,30 @@ const AdminEstateListTable = ({
 
     try {
       await onUnPublish(selectedEstateId);
-      handleCloseModal();
       toast.success(t('notification.unPublished'));
+      onChangeQueryParams?.(queryParams);
     } catch (error) {
       toast.error(t('notification.unPublishFailed'));
+    } finally {
+      handleCloseModal();
     }
-  }, [selectedEstateId]);
+  }, [selectedEstateId, queryParams]);
+
+  const handleConfirmPublish = useCallback(async () => {
+    if (!selectedEstateId) {
+      return;
+    }
+
+    try {
+      await onPublish(selectedEstateId);
+      toast.success(t('notification.published'));
+      onChangeQueryParams?.(queryParams);
+    } catch (error) {
+      toast.error(t('notification.publishFailed'));
+    } finally {
+      handleCloseModal();
+    }
+  }, [selectedEstateId, queryParams]);
 
   useEffect(() => {
     const newQueryParams: BaseGetListQueryType = {
@@ -165,7 +192,9 @@ const AdminEstateListTable = ({
         sorting={columnSorting}
         isLoading={isLoading}
         tableBodyProps={{
+          status: selectedTabIdParam,
           onClickUnPublish: handleClickUnPublish,
+          onClickPublish: handleClickPublish,
           onMoveToTop,
           onInteraction: handleInteraction,
         }}
@@ -180,8 +209,19 @@ const AdminEstateListTable = ({
         })}
         message={t('publication.message.unPublish')}
         isOpen={isShowUnPublishConfirmModal}
+        status="danger"
         onClose={handleCloseModal}
         onConfirm={handleConfirmUnPublish}
+      />
+      <ConfirmationModal
+        title={t('publication.title.publish', {
+          title: selectedEstate?.title,
+        })}
+        message={t('publication.message.publish')}
+        isOpen={isShowPublishConfirmModal}
+        status="danger"
+        onClose={handleCloseModal}
+        onConfirm={handleConfirmPublish}
       />
     </>
   );
