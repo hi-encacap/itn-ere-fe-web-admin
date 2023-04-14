@@ -1,4 +1,4 @@
-import { ESTATE_STATUS_ENUM } from 'encacap/dist/re';
+import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
 
 import { Nullable } from '@interfaces/Common/commonTypes';
 import { FormImageInputDataType } from '@interfaces/Common/elementTypes';

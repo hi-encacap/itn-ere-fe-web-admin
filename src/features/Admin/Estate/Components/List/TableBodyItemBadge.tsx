@@ -1,9 +1,9 @@
-import { ESTATE_STATUS_ENUM } from 'encacap/dist/re';
-import { useMemo } from 'react';
+import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
+import { ReactNode, useMemo } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface AdminEstateListTableBodyItemBadgeProps {
-  children: React.ReactNode;
+  children: ReactNode;
   status?: ESTATE_STATUS_ENUM;
 }
 

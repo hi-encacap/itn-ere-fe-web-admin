@@ -1,8 +1,8 @@
+import { UNIT_PRICE_TYPE_ENUM } from '@encacap-group/types/dist/re';
 import { useCallback, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { UNIT_PRICE_TYPE_ENUM } from '@constants/enums';
 import { EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
 import { UnitPriceDataType } from '@interfaces/Common/unitPriceTypes';
 import { unitPriceService } from '@services/index';

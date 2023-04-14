@@ -1,5 +1,5 @@
+import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
 import dayjs from 'dayjs';
-import { ESTATE_STATUS_ENUM } from 'encacap/dist/re';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiEdit2, FiTrash2, FiUpload } from 'react-icons/fi';
@@ -130,7 +130,7 @@ const AdminEstateListTableBodyItem = ({
         <div className="mb-2 flex items-center justify-start space-x-2">
           {isLoading && <LoadingSpinner className="h-5 w-5 border-teal-500" />}
           <AdminEstateListTableBodyItemBadge status={data.status}>
-            {tEstate(`status.${data.status}`)}
+            {tEstate(`status.${String(data.status)}`)}
           </AdminEstateListTableBodyItemBadge>
           {data.customId && (
             <AdminEstateListTableBodyItemBadge>#{data.customId}</AdminEstateListTableBodyItemBadge>

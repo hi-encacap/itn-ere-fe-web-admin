@@ -12,11 +12,6 @@ export enum ESTATE_PROXY_ACTION_ENUM {
   CREATE = 'create',
 }
 
-export enum UNIT_PRICE_TYPE_ENUM {
-  AREA = 'area',
-  PRICE = 'price',
-}
-
 export enum TABLE_ROW_SELECTION_TYPE_ENUM {
   SINGLE = 'single',
   MULTIPLE = 'multiple',

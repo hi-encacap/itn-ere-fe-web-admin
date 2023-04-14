@@ -1,5 +1,5 @@
+import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
 import { SortingState, createColumnHelper } from '@tanstack/react-table';
-import { ESTATE_STATUS_ENUM } from 'encacap/dist/re';
 import { isEqual } from 'lodash';
 import { Key, useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';

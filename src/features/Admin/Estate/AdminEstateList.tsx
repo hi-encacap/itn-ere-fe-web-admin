@@ -1,4 +1,4 @@
-import { ESTATE_STATUS_ENUM } from 'encacap/dist/re';
+import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
 import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
