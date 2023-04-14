@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
+import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
 
 import { Input } from '@components/Form';
 import ImageInput from '@components/Form/ImageInput/ImageInput';
@@ -13,7 +13,7 @@ const AdminEstateModificationFormMedia = () => {
     keyPrefix: 'admin:page.estate.modification.form.media',
   });
 
-  const { control } = useFormContext<EstateModificationFormDataType>();
+  const { control } = useFormContext<EstateFormDataType>();
 
   return (
     <div className="border-gray-100 pt-6">

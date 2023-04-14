@@ -119,14 +119,14 @@ const AdminEstateListTableBodyItem = ({
   }, [handleClickDelete]);
 
   return (
-    <div className="relative overflow-hidden rounded-lg">
+    <div className="relative flex flex-col overflow-hidden rounded-lg">
       {isLoading && (
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-white bg-opacity-50" />
       )}
-      <div className="aspect-video w-full">
+      <div className="aspect-video w-full bg-gray-100">
         <img src={getImageURL(data.avatar)} alt={data.title} className="h-full w-full object-cover" />
       </div>
-      <div className="rounded-b-lg border-2 border-t-0 border-gray-100 px-4 py-4">
+      <div className="flex flex-1 flex-col rounded-b-lg border-2 border-t-0 border-gray-100 px-4 py-4">
         <div className="mb-2 flex items-center justify-start space-x-2">
           {isLoading && <LoadingSpinner className="h-5 w-5 border-teal-500" />}
           <AdminEstateListTableBodyItemBadge status={data.status}>
@@ -153,7 +153,7 @@ const AdminEstateListTableBodyItem = ({
           dangerouslySetInnerHTML={{
             __html: striptags(data.description),
           }}
-          className="mt-3 mb-2.5 overflow-hidden border-t-2 border-gray-100 pt-2 line-clamp-3"
+          className="mt-3 mb-2.5 flex-1 overflow-hidden border-t-2 border-gray-100 pt-2 line-clamp-3"
         />
         <div className="flex items-center space-x-4 border-t-2 border-gray-100 pt-4">
           <DropdownContainerV2 menu={dropdownMenu}>

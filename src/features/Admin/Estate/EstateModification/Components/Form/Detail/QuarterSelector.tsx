@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
+import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
 import { SelectOptionItemType } from '@interfaces/Common/elementTypes';
 import { estateQuarterService } from '@services/index';
 
@@ -22,7 +22,7 @@ const AdminEstateModificationFormDetailQuarterSelector = ({
   const [options, setOptions] = useState<SelectOptionItemType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { control } = useFormContext<EstateModificationFormDataType>();
+  const { control } = useFormContext<EstateFormDataType>();
 
   const getOptions = useCallback(() => {
     setIsLoading(true);

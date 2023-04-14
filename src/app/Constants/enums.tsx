@@ -21,3 +21,11 @@ export enum DROPDOWN_MENU_TYPE_ENUM {
   NORMAL = 'normal',
   DIVIDER = 'divider',
 }
+
+export enum ESTATE_PUBLISHING_STEP_ENUM {
+  SAVING = 1,
+  SAVE_ERROR = 2,
+  PUBLISHING = 3,
+  PUBLISH_ERROR = 4,
+  PUBLISHED = 5,
+}

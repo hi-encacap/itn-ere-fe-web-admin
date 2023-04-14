@@ -23,6 +23,7 @@ const AdminEstateList = () => {
   const [estateData, setEstateData] = useState<EstateDataType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [totalRows, setTotalRows] = useState(0);
 
   const selectedTabIdParam = useMemo(
     () => searchParams.get('tab_id') ?? ESTATE_STATUS_ENUM.PUBLISHED,
@@ -54,6 +55,7 @@ const AdminEstateList = () => {
       const response = await adminEstateService.getEstates(queryParams);
 
       setEstateData(response.data);
+      setTotalRows(response.meta.totalRows);
     } catch (error) {
       setEstateData([]);
     } finally {
@@ -91,6 +93,7 @@ const AdminEstateList = () => {
       <AdminEstateListTable
         data={estateData}
         isLoading={isLoading}
+        totalRows={totalRows}
         onChangeQueryParams={getData}
         onUnPublish={handleUnPublish}
         onPublish={handlePublish}

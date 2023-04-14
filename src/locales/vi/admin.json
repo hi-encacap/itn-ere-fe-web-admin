@@ -493,6 +493,21 @@
             "save": "Lưu nháp",
             "publish": "Lưu và xuất bản"
           }
+        },
+        "modal": {
+          "publishing": {
+            "title": "Xuất bản bài viết '{{title}}'",
+            "message": "Bài viết đang được xuất bản. Quá trình này có thể mất vài phút, vui lòng không đóng của sổ cho đến khi hoàn tất",
+            "save": "Lưu thông tin bài viết",
+            "publish": "Xuất bản bài viết",
+            "published": "Thành công. Bài viết hiện đã được xuất bản công khai trên trang của bạn.",
+            "action": {
+              "tryAgain": "Thử lại",
+              "goToManageEstate": "Quản lý bất động sản",
+              "viewEstate": "Xem bài viết",
+              "close": "Đóng"
+            }
+          }
         }
       },
       "list": {

@@ -31,7 +31,7 @@ const Button = (
   switch (color) {
     case 'light':
       colorClassNames +=
-        'bg-white hover:bg-gray-100 text-slate-700 ring-gray-200 disabled:ring-gray-200 disabled:bg-gray-200';
+        'bg-white hover:bg-gray-100 text-slate-700 ring-gray-200 disabled:ring-gray-200 disabled:bg-gray-200 disabled:text-white';
       spinnerColorClassNames += disabled === true ? 'border-white' : 'border-gray-400';
       break;
 

@@ -36,7 +36,7 @@ export interface EstateDataType {
   status: ESTATE_STATUS_ENUM;
 }
 
-export interface EstateModificationFormDataType extends Nullable<Partial<Omit<EstateDataType, 'avatar'>>> {
+export interface EstateFormDataType extends Nullable<Partial<Omit<EstateDataType, 'avatar'>>> {
   priceUnitId: number;
   areaUnitId: number;
   provinceCode: string;

@@ -1,12 +1,12 @@
 import { Key } from 'react';
 
 import { ADMIN_ESTATE_API_PATH } from '@constants/apis';
-import { EstateDataType, EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
+import { EstateDataType, EstateFormDataType } from '@interfaces/Admin/estateTypes';
 import { BaseGetListQueryType, ResponseWithMetaType } from '@interfaces/Common/commonTypes';
 
 import axiosInstance from '@utils/Http/axiosInstance';
 
-const createEstate = async (estate: EstateModificationFormDataType) => {
+const createEstate = async (estate: EstateFormDataType) => {
   const response = await axiosInstance.post(ADMIN_ESTATE_API_PATH.ESTATES_PATH, {
     ...estate,
     avatarId: estate.avatar?.id,

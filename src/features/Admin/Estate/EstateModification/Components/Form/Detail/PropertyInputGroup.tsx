@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { MdAdd } from 'react-icons/md';
 
-import { EstateModificationFormDataType, EstatePropertyDataType } from '@interfaces/Admin/estateTypes';
+import { EstateFormDataType, EstatePropertyDataType } from '@interfaces/Admin/estateTypes';
 import { adminEstatePropertyService } from '@services/index';
 
 import { Button, Input } from '@components/Form';
@@ -16,7 +16,7 @@ const AdminEstateModificationFormDetailPropertyInputGroup = () => {
   const [estateProperties, setEstateProperties] = useState<EstatePropertyDataType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { control, watch } = useFormContext<EstateModificationFormDataType>();
+  const { control, watch } = useFormContext<EstateFormDataType>();
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'properties' as never,

@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FiMapPin } from 'react-icons/fi';
 
-import { EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
+import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
 
 import { Button, Input } from '@components/Form';
 
@@ -17,7 +17,7 @@ const AdminEstateModificationFormLocation = () => {
     keyPrefix: 'admin:page.estate.modification.form.location',
   });
 
-  const { control, watch } = useFormContext<EstateModificationFormDataType>();
+  const { control, watch } = useFormContext<EstateFormDataType>();
 
   const provinceCode = watch('provinceCode', '');
   const districtCode = watch('districtCode', '');

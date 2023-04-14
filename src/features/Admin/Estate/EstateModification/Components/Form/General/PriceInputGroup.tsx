@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
+import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
 import { UnitPriceDataType } from '@interfaces/Common/unitPriceTypes';
 import { unitPriceService } from '@services/index';
 
@@ -16,7 +16,7 @@ const AdminEstateModificationFormGeneralPriceInputGroup = () => {
 
   const [unitPriceOptions, setUnitPriceOptions] = useState<UnitPriceDataType[]>([]);
 
-  const { control, register, setValue } = useFormContext<EstateModificationFormDataType>();
+  const { control, register, setValue } = useFormContext<EstateFormDataType>();
 
   const getUnitPriceOptions = useCallback(() => {
     unitPriceService
