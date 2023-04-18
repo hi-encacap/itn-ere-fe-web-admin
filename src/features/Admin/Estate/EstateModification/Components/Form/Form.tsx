@@ -46,7 +46,7 @@ const AdminEstateModificationForm = () => {
     shouldFocusError: true,
   });
 
-  const handleSubmit = useFormSubmit(async (data) => {
+  const handleSubmit = useFormSubmit((data) => {
     setFormData(data);
     setIsShowPublishingModal(true);
     setIsSubmitting(true);

@@ -76,6 +76,8 @@ const AdminEstateModificationPublishingModal = ({
       if (error instanceof AxiosError) {
         setSaveStepError(error.response?.data?.error?.message || error.message);
       }
+
+      return null;
     }
   }, []);
 
@@ -96,10 +98,12 @@ const AdminEstateModificationPublishingModal = ({
     }
 
     if (step === ESTATE_PUBLISHING_STEP_ENUM.SAVE_ERROR) {
+      // #skipcq: JS-0098
       void processEstate(data);
     }
 
     if (step === ESTATE_PUBLISHING_STEP_ENUM.PUBLISH_ERROR && savedEstateId) {
+      // #skipcq: JS-0098
       void publishEstate(savedEstateId);
     }
   }, [step, data, savedEstateId, processEstate, publishEstate]);
@@ -109,6 +113,7 @@ const AdminEstateModificationPublishingModal = ({
       return;
     }
 
+    // #skipcq: JS-0098
     void processEstate(data);
   }, [isOpen, data, processEstate]);
 
