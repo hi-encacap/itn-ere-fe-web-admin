@@ -8,7 +8,7 @@ import { MdAccessTime } from 'react-icons/md';
 import striptags from 'striptags';
 
 import { DROPDOWN_MENU_TYPE_ENUM } from '@constants/enums';
-import { EstateDataType } from '@interfaces/Admin/estateTypes';
+import { EstateDataType, EstateDraftDataType } from '@interfaces/Admin/estateTypes';
 
 import DropdownContainerV2 from '@components/Dropdown/DropdownContainerV2';
 import { DropdownMenuItemType } from '@components/Dropdown/DropdownContainerV2MenuItem';
@@ -21,7 +21,7 @@ import { getImageURL } from '@utils/helpers';
 import AdminEstateListTableBodyItemBadge from './TableBodyItemBadge';
 
 interface AdminEstateListTableBodyItemProps {
-  data: EstateDataType;
+  data: EstateDataType | EstateDraftDataType;
   status: ESTATE_STATUS_ENUM;
   onClickDelete?: (id: number) => void;
   onMoveToTop?: (id: number) => Promise<void>;
@@ -123,8 +123,14 @@ const AdminEstateListTableBodyItem = ({
       {isLoading && (
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-white bg-opacity-50" />
       )}
-      <div className="aspect-video w-full bg-gray-100">
-        <img src={getImageURL(data.avatar)} alt={data.title} className="h-full w-full object-cover" />
+      <div className="aspect-video w-full flex-shrink-0 overflow-hidden bg-gray-100">
+        {data.avatar && (
+          <img
+            src={getImageURL(data.avatar)}
+            alt={data.title}
+            className="h-full w-full object-cover object-center"
+          />
+        )}
       </div>
       <div className="flex flex-1 flex-col rounded-b-lg border-2 border-t-0 border-gray-100 px-4 py-4">
         <div className="mb-2 flex items-center justify-start space-x-2">
@@ -135,7 +141,9 @@ const AdminEstateListTableBodyItem = ({
           {data.customId && (
             <AdminEstateListTableBodyItemBadge>#{data.customId}</AdminEstateListTableBodyItemBadge>
           )}
-          <AdminEstateListTableBodyItemBadge>{data.category.name}</AdminEstateListTableBodyItemBadge>
+          {data.category && (
+            <AdminEstateListTableBodyItemBadge>{data.category.name}</AdminEstateListTableBodyItemBadge>
+          )}
         </div>
         <div>
           <div className="font-semibold">{data.title}</div>
@@ -151,7 +159,7 @@ const AdminEstateListTableBodyItem = ({
         <div
           // #skipcq: JS-0440
           dangerouslySetInnerHTML={{
-            __html: striptags(data.description),
+            __html: data.description ? striptags(data.description) : t('notification.emptyDescription'),
           }}
           className="mt-3 mb-2.5 flex-1 overflow-hidden border-t-2 border-gray-100 pt-2 line-clamp-3"
         />

@@ -49,3 +49,9 @@ export interface EstateFormDataType extends Nullable<Partial<Omit<EstateDataType
   avatar: FormImageInputDataType;
   images: FormImageInputDataType[];
 }
+
+export interface EstateDraftDataType extends Nullable<Partial<EstateDataType>> {
+  id: number;
+  title: string;
+  status: ESTATE_STATUS_ENUM;
+}

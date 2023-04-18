@@ -1,6 +1,6 @@
 import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
 
-import { EstateDataType } from '@interfaces/Admin/estateTypes';
+import { EstateDataType, EstateDraftDataType } from '@interfaces/Admin/estateTypes';
 
 import { CustomTableBodyProps } from '@components/Table/Table';
 import TableContentBodyEmptyContent from '@components/Table/TableContentBody/TableContentBodyEmptyContent';
@@ -13,7 +13,7 @@ const AdminEstateListTableBody = ({
   isLoading,
   status,
   ...props
-}: CustomTableBodyProps<EstateDataType>) => {
+}: CustomTableBodyProps<EstateDataType | EstateDraftDataType>) => {
   if (isLoading && !data.length) return <AdminEstateListTableBodyLoading />;
 
   if (!data.length) return <TableContentBodyEmptyContent />;

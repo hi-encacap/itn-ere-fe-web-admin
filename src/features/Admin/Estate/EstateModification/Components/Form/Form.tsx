@@ -1,11 +1,17 @@
+import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
+import { ADMIN_PATH } from '@constants/urls';
 import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
+import { adminEstateService } from '@services/index';
 
 import { Button } from '@components/Form';
+
+import useToast from '@hooks/useToast';
 
 import { estateFormSchema } from '@admin/Estate/Schemas/estateFormSchema';
 
@@ -20,16 +26,20 @@ const AdminEstateModificationForm = () => {
   const { t } = useTranslation('admin', {
     keyPrefix: 'admin:page.estate.modification',
   });
+  const toast = useToast();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<EstateFormDataType | null>(null);
   const [isShowPublishingModal, setIsShowPublishingModal] = useState(false);
+
+  const navigate = useNavigate();
 
   const {
     control,
     handleSubmit: useFormSubmit,
     setError,
     setFocus,
+    getValues,
     ...formProperties
   } = useForm<EstateFormDataType>({
     resolver: yupResolver(estateFormSchema(t)),
@@ -41,6 +51,35 @@ const AdminEstateModificationForm = () => {
     setIsShowPublishingModal(true);
     setIsSubmitting(true);
   });
+
+  const handleSaveDraft = useCallback(async () => {
+    const data = getValues();
+    const { title } = data;
+
+    if (!title) {
+      setError('title', {
+        type: 'required',
+        message: t('form.general.form.title.requiredInDraft'),
+      });
+      setFocus('title');
+
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const { id } = await adminEstateService.createEstateDraft(data);
+
+      toast.success(t('notification.savedDraft'));
+
+      navigate(ADMIN_PATH.ESTATE_MODIFICATION_PATH(id, ESTATE_STATUS_ENUM.DRAFT));
+    } catch (error) {
+      toast.error(t('notification.saveDraftFailed'));
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [getValues]);
 
   const handleCloseModal = useCallback(() => {
     setIsShowPublishingModal(false);
@@ -54,6 +93,7 @@ const AdminEstateModificationForm = () => {
           control={control}
           handleSubmit={useFormSubmit}
           setError={setError}
+          getValues={getValues}
           setFocus={setFocus}
           {...formProperties}
         >
@@ -70,7 +110,7 @@ const AdminEstateModificationForm = () => {
             disabled={isSubmitting}
             isLoading={isSubmitting}
             type="button"
-            onClick={handleSubmit}
+            onClick={handleSaveDraft}
           >
             {t('form.action.save')}
           </Button>

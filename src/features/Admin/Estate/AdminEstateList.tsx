@@ -52,7 +52,13 @@ const AdminEstateList = () => {
     setIsLoading(true);
 
     try {
-      const response = await adminEstateService.getEstates(queryParams);
+      let service = adminEstateService.getEstates;
+
+      if (queryParams.status === ESTATE_STATUS_ENUM.DRAFT) {
+        service = adminEstateService.getEstateDrafts as unknown as typeof service;
+      }
+
+      const response = await service(queryParams);
 
       setEstateData(response.data);
       setTotalRows(response.meta.totalRows);
