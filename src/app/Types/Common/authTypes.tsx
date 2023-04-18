@@ -1,4 +1,4 @@
-import { UserDataType } from './userTypes';
+import { IREUser } from '@encacap-group/types/dist/re';
 
 export interface AuthTokensType {
   accessToken: string;
@@ -19,6 +19,6 @@ export interface AuthRegisterFormDataType {
 }
 
 export interface AuthTokenAndUserDataType {
-  user: UserDataType;
+  user: IREUser;
   authTokens: AuthTokensType;
 }

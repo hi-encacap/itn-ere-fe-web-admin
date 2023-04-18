@@ -1,19 +1,21 @@
+import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { AxiosError } from 'axios';
 import { useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
-import { EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
+import { ADMIN_PATH } from '@constants/urls';
+import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
 import { adminEstateService } from '@services/index';
 
 import { Button } from '@components/Form';
 
 import useToast from '@hooks/useToast';
-import { setFormError } from '@utils/error';
 
 import { estateFormSchema } from '@admin/Estate/Schemas/estateFormSchema';
 
+import AdminEstateModificationPublishingModal from '../PublishingModal/PublishingModal';
 import AdminEstateModificationFormContact from './Contact/Contact';
 import AdminEstateModificationFormDetail from './Detail/Detail';
 import AdminEstateModificationFormGeneral from './General/General';
@@ -27,87 +29,108 @@ const AdminEstateModificationForm = () => {
   const toast = useToast();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState<EstateFormDataType | null>(null);
+  const [isShowPublishingModal, setIsShowPublishingModal] = useState(false);
+
+  const navigate = useNavigate();
 
   const {
     control,
     handleSubmit: useFormSubmit,
     setError,
     setFocus,
+    getValues,
     ...formProperties
-  } = useForm<EstateModificationFormDataType>({
+  } = useForm<EstateFormDataType>({
     resolver: yupResolver(estateFormSchema(t)),
     shouldFocusError: true,
   });
 
-  const formatErrorMessage = useCallback((key: string, value: string) => {
-    return t(`form.${key}.${value}`);
-  }, []);
+  const handleSubmit = useFormSubmit((data) => {
+    setFormData(data);
+    setIsShowPublishingModal(true);
+    setIsSubmitting(true);
+  });
 
-  const handleUnknownError = useCallback(() => {
-    toast.error(t('toast.error.unknown'));
-  }, []);
+  const handleSaveDraft = useCallback(async () => {
+    const data = getValues();
+    const { title } = data;
 
-  const handleSubmit = useFormSubmit(async (data) => {
+    if (!title) {
+      setError('title', {
+        type: 'required',
+        message: t('form.general.form.title.requiredInDraft'),
+      });
+      setFocus('title');
+
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      await adminEstateService.createEstate(data);
-      // Handle the success case...
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        setFormError<EstateModificationFormDataType>(
-          error,
-          setError,
-          formatErrorMessage,
-          handleUnknownError,
-          setFocus,
-        );
-        return;
-      }
+      const { id } = await adminEstateService.createEstateDraft(data);
 
-      handleUnknownError();
+      toast.success(t('notification.savedDraft'));
+
+      navigate(ADMIN_PATH.ESTATE_MODIFICATION_PATH(id, ESTATE_STATUS_ENUM.DRAFT));
+    } catch (error) {
+      toast.error(t('notification.saveDraftFailed'));
     } finally {
       setIsSubmitting(false);
     }
-  });
+  }, [getValues]);
+
+  const handleCloseModal = useCallback(() => {
+    setIsShowPublishingModal(false);
+    setIsSubmitting(false);
+  }, []);
 
   return (
-    <div className="col-span-4">
-      <FormProvider
-        control={control}
-        handleSubmit={useFormSubmit}
-        setError={setError}
-        setFocus={setFocus}
-        {...formProperties}
-      >
-        <AdminEstateModificationFormGeneral />
-        <AdminEstateModificationFormLocation />
-        <AdminEstateModificationFormDetail />
-        <AdminEstateModificationFormContact />
-        <AdminEstateModificationFormMedia />
-      </FormProvider>
-      <div className="mt-6 flex items-center justify-center space-x-6 border-t-2 border-gray-100 pt-6">
-        <Button
-          className="block"
-          color="light"
-          disabled={isSubmitting}
-          isLoading={isSubmitting}
-          type="button"
-          onClick={handleSubmit}
+    <>
+      <div className="col-span-4">
+        <FormProvider
+          control={control}
+          handleSubmit={useFormSubmit}
+          setError={setError}
+          getValues={getValues}
+          setFocus={setFocus}
+          {...formProperties}
         >
-          {t('form.action.save')}
-        </Button>
-        <Button
-          className="block flex-1"
-          disabled={isSubmitting}
-          isLoading={isSubmitting}
-          type="submit"
-          onClick={handleSubmit}
-        >
-          {t('form.action.publish')}
-        </Button>
+          <AdminEstateModificationFormGeneral />
+          <AdminEstateModificationFormLocation />
+          <AdminEstateModificationFormDetail />
+          <AdminEstateModificationFormContact />
+          <AdminEstateModificationFormMedia />
+        </FormProvider>
+        <div className="mt-6 flex items-center justify-center space-x-6 border-t-2 border-gray-100 pt-6">
+          <Button
+            className="block"
+            color="light"
+            disabled={isSubmitting}
+            isLoading={isSubmitting}
+            type="button"
+            onClick={handleSaveDraft}
+          >
+            {t('form.action.save')}
+          </Button>
+          <Button
+            className="block flex-1"
+            disabled={isSubmitting}
+            isLoading={isSubmitting}
+            type="submit"
+            onClick={handleSubmit}
+          >
+            {t('form.action.publish')}
+          </Button>
+        </div>
       </div>
-    </div>
+      <AdminEstateModificationPublishingModal
+        isOpen={isShowPublishingModal}
+        data={formData as EstateFormDataType}
+        onClose={handleCloseModal}
+      />
+    </>
   );
 };
 

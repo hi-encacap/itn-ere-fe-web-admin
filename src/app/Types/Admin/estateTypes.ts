@@ -1,4 +1,4 @@
-import { ESTATE_STATUS_ENUM } from 'encacap/dist/re';
+import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
 
 import { Nullable } from '@interfaces/Common/commonTypes';
 import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
@@ -36,7 +36,7 @@ export interface EstateDataType {
   status: ESTATE_STATUS_ENUM;
 }
 
-export interface EstateModificationFormDataType extends Nullable<Partial<Omit<EstateDataType, 'avatar'>>> {
+export interface EstateFormDataType extends Nullable<Partial<Omit<EstateDataType, 'avatar'>>> {
   priceUnitId: number;
   areaUnitId: number;
   provinceCode: string;
@@ -48,4 +48,10 @@ export interface EstateModificationFormDataType extends Nullable<Partial<Omit<Es
   contactId: number;
   avatar: FormImageInputDataType;
   images: FormImageInputDataType[];
+}
+
+export interface EstateDraftDataType extends Nullable<Partial<EstateDataType>> {
+  id: number;
+  title: string;
+  status: ESTATE_STATUS_ENUM;
 }

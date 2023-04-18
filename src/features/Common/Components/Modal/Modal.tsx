@@ -1,18 +1,19 @@
 import { Dialog } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { HTMLAttributes, forwardRef, useRef } from 'react';
+import { HTMLAttributes, ReactNode, forwardRef, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
 import { Button } from '@components/Form';
 
 export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onSubmit'> {
+  contentContainerClassName?: string;
+  footer?: ReactNode;
   isOpen: boolean;
   isShowHeader?: boolean;
   isShowFooter?: boolean;
   isAllowSubmit?: boolean;
   isLoading?: boolean;
-  contentContainerClassName?: string;
   title?: string;
   onClose: () => void;
   onConfirm?: () => void;
@@ -20,15 +21,16 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onSubm
 
 const Modal = (
   {
-    isOpen,
-    isShowHeader = true,
-    isShowFooter = true,
-    isAllowSubmit = true,
-    isLoading = false,
-    title,
     children,
     className,
     contentContainerClassName,
+    footer,
+    isAllowSubmit = true,
+    isLoading = false,
+    isShowHeader = true,
+    isShowFooter = true,
+    isOpen,
+    title,
     onClose,
     onConfirm,
   }: ModalProps,
@@ -108,24 +110,29 @@ const Modal = (
                   </div>
                   {isShowFooter && (
                     <div className="flex items-center justify-end space-x-6 rounded-b-lg bg-gray-50 px-10 py-6">
-                      <Button
-                        size="sm"
-                        color="light"
-                        disabled={isLoading}
-                        ref={cancelButtonRef}
-                        onClick={onClose}
-                      >
-                        {t('close')}
-                      </Button>
-                      <Button
-                        className="px-12"
-                        size="sm"
-                        disabled={isLoading || !isAllowSubmit}
-                        isLoading={isLoading}
-                        onClick={onConfirm}
-                      >
-                        {t('confirm')}
-                      </Button>
+                      {footer && footer}
+                      {!footer && (
+                        <>
+                          <Button
+                            size="sm"
+                            color="light"
+                            disabled={isLoading}
+                            ref={cancelButtonRef}
+                            onClick={onClose}
+                          >
+                            {t('close')}
+                          </Button>
+                          <Button
+                            className="px-12"
+                            size="sm"
+                            disabled={isLoading || !isAllowSubmit}
+                            isLoading={isLoading}
+                            onClick={onConfirm}
+                          >
+                            {t('confirm')}
+                          </Button>
+                        </>
+                      )}
                     </div>
                   )}
                 </div>

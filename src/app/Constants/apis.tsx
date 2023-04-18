@@ -43,6 +43,8 @@ const ADMIN_ESTATE_API_PATH = {
   ESTATE_UN_PUBLISH_PATH: (id: Key) => `v1/admin/estates/${id}/un-publish`,
   ESTATE_PUBLISH_PATH: (id: Key) => `v1/admin/estates/${id}/publish`,
   ESTATE_MOVE_TO_TOP_PATH: (id: Key) => `v1/admin/estates/${id}/up-top`,
+  ESTATE_DRAFTS_PATH: 'v1/admin/estate-drafts',
+  ESTATE_DRAFT_PATH: (id: Key) => `v1/admin/estate-drafts/${id}`,
 };
 
 const LOCATION_API_PATH = {

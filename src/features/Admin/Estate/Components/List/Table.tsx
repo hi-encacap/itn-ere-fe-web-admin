@@ -1,5 +1,5 @@
+import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
 import { SortingState, createColumnHelper } from '@tanstack/react-table';
-import { ESTATE_STATUS_ENUM } from 'encacap/dist/re';
 import { isEqual } from 'lodash';
 import { Key, useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -22,6 +22,7 @@ import AdminEstateListTableBody from './TableBody';
 interface AdminEstateListTableProps {
   data: EstateDataType[];
   isLoading: boolean;
+  totalRows: number;
   onChangeQueryParams?: (queryParams: BaseGetListQueryType) => void;
   onMoveToTop: (estateId: Key) => Promise<void>;
   onPublish: (estateId: Key) => Promise<void>;
@@ -30,6 +31,7 @@ interface AdminEstateListTableProps {
 
 const AdminEstateListTable = ({
   data,
+  totalRows,
   isLoading,
   onChangeQueryParams,
   onUnPublish,
@@ -188,7 +190,10 @@ const AdminEstateListTable = ({
       <Table
         data={data}
         columns={columns}
-        pagination={pagination}
+        pagination={{
+          ...pagination,
+          totalRows,
+        }}
         sorting={columnSorting}
         isLoading={isLoading}
         tableBodyProps={{

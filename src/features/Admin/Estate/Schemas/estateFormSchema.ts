@@ -1,12 +1,12 @@
 import { TFunction } from 'i18next';
 import { array, number, object, string } from 'yup';
 
-import { EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
+import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
 
 import { generateFormSchema } from '@utils/schema';
 
 const estateFormSchema = (t: TFunction) =>
-  generateFormSchema<EstateModificationFormDataType>({
+  generateFormSchema<EstateFormDataType>({
     title: string().required(t('form.general.form.title.required')).nullable(),
     customId: string()
       .nullable()

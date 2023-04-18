@@ -1,12 +1,12 @@
 import { Key } from 'react';
 
 import { ADMIN_ESTATE_API_PATH } from '@constants/apis';
-import { EstateDataType, EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
+import { EstateDataType, EstateDraftDataType, EstateFormDataType } from '@interfaces/Admin/estateTypes';
 import { BaseGetListQueryType, ResponseWithMetaType } from '@interfaces/Common/commonTypes';
 
 import axiosInstance from '@utils/Http/axiosInstance';
 
-const createEstate = async (estate: EstateModificationFormDataType) => {
+const createEstate = async (estate: EstateFormDataType) => {
   const response = await axiosInstance.post(ADMIN_ESTATE_API_PATH.ESTATES_PATH, {
     ...estate,
     avatarId: estate.avatar?.id,
@@ -46,4 +46,28 @@ const moveEstateToTopById = async (id: Key): Promise<void> => {
   return response.data.data;
 };
 
-export { createEstate, getEstates, moveEstateToTopById, publishEstateById, unPublishEstateById };
+const createEstateDraft = async (estate: EstateFormDataType): Promise<EstateDraftDataType> => {
+  const response = await axiosInstance.post(ADMIN_ESTATE_API_PATH.ESTATE_DRAFTS_PATH, estate);
+
+  return response.data.data;
+};
+
+const getEstateDrafts = async (
+  queryParam: BaseGetListQueryType,
+): Promise<ResponseWithMetaType<EstateDraftDataType[]>> => {
+  const response = await axiosInstance.get(ADMIN_ESTATE_API_PATH.ESTATE_DRAFTS_PATH, {
+    params: queryParam,
+  });
+
+  return response.data;
+};
+
+export {
+  createEstate,
+  createEstateDraft,
+  getEstateDrafts,
+  getEstates,
+  moveEstateToTopById,
+  publishEstateById,
+  unPublishEstateById,
+};

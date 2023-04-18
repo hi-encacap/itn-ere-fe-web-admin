@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
+import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
 
 import { Input } from '@components/Form';
 
@@ -14,7 +14,7 @@ const AdminEstateModificationFormGeneral = () => {
     keyPrefix: 'admin:page.estate.modification.form.general',
   });
 
-  const { control } = useFormContext<EstateModificationFormDataType>();
+  const { control } = useFormContext<EstateFormDataType>();
 
   return (
     <div>

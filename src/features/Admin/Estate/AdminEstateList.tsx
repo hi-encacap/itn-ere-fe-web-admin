@@ -1,4 +1,4 @@
-import { ESTATE_STATUS_ENUM } from 'encacap/dist/re';
+import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
 import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
@@ -23,6 +23,7 @@ const AdminEstateList = () => {
   const [estateData, setEstateData] = useState<EstateDataType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [totalRows, setTotalRows] = useState(0);
 
   const selectedTabIdParam = useMemo(
     () => searchParams.get('tab_id') ?? ESTATE_STATUS_ENUM.PUBLISHED,
@@ -51,9 +52,16 @@ const AdminEstateList = () => {
     setIsLoading(true);
 
     try {
-      const response = await adminEstateService.getEstates(queryParams);
+      let service = adminEstateService.getEstates;
+
+      if (queryParams.status === ESTATE_STATUS_ENUM.DRAFT) {
+        service = adminEstateService.getEstateDrafts as unknown as typeof service;
+      }
+
+      const response = await service(queryParams);
 
       setEstateData(response.data);
+      setTotalRows(response.meta.totalRows);
     } catch (error) {
       setEstateData([]);
     } finally {
@@ -91,6 +99,7 @@ const AdminEstateList = () => {
       <AdminEstateListTable
         data={estateData}
         isLoading={isLoading}
+        totalRows={totalRows}
         onChangeQueryParams={getData}
         onUnPublish={handleUnPublish}
         onPublish={handlePublish}

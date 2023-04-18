@@ -5,7 +5,7 @@ import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
-import { EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
+import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
 
 import FormElementError from '@components/Form/FormElementError';
 
@@ -26,7 +26,7 @@ const AdminEstateModificationFormDetailDescriptionEditor = ({
     keyPrefix: 'admin:page.estate.modification.form.detail.form',
   });
 
-  const { control } = useFormContext<EstateModificationFormDataType>();
+  const { control } = useFormContext<EstateFormDataType>();
   const {
     field: { onChange },
     fieldState: { error },

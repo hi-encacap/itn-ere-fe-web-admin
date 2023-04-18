@@ -1,4 +1,4 @@
-import { UNIT_PRICE_TYPE_ENUM } from '@constants/enums';
+import { UNIT_PRICE_TYPE_ENUM } from '@encacap-group/types/dist/re';
 
 import { BaseGetListQueryType } from './commonTypes';
 

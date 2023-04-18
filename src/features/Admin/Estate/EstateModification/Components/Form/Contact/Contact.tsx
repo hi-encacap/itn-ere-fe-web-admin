@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
 import { ContactDataType } from '@interfaces/Admin/contactTypes';
-import { EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
+import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
 
 import FormElementError from '@components/Form/FormElementError';
 
@@ -25,7 +25,7 @@ const AdminEstateModificationFormContact = () => {
     setValue,
     formState: { errors },
     clearErrors,
-  } = useFormContext<EstateModificationFormDataType>();
+  } = useFormContext<EstateFormDataType>();
 
   const handlePickContact = useCallback((contact: ContactDataType) => {
     setSelectedContact(contact);

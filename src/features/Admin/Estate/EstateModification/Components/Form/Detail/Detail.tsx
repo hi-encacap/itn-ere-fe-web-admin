@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { EstateModificationFormDataType } from '@interfaces/Admin/estateTypes';
+import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
 
 import AdminCategorySelector from '@admin/Estate/Components/AdminCategorySelector';
 
@@ -15,7 +15,7 @@ const AdminEstateModificationFormDetail = () => {
     keyPrefix: 'admin:page.estate.modification.form.detail',
   });
 
-  const { control } = useFormContext<EstateModificationFormDataType>();
+  const { control } = useFormContext<EstateFormDataType>();
 
   return (
     <div className="border-gray-100 pt-6">

@@ -1,5 +1,5 @@
+import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
 import dayjs from 'dayjs';
-import { ESTATE_STATUS_ENUM } from 'encacap/dist/re';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiEdit2, FiTrash2, FiUpload } from 'react-icons/fi';
@@ -8,7 +8,7 @@ import { MdAccessTime } from 'react-icons/md';
 import striptags from 'striptags';
 
 import { DROPDOWN_MENU_TYPE_ENUM } from '@constants/enums';
-import { EstateDataType } from '@interfaces/Admin/estateTypes';
+import { EstateDataType, EstateDraftDataType } from '@interfaces/Admin/estateTypes';
 
 import DropdownContainerV2 from '@components/Dropdown/DropdownContainerV2';
 import { DropdownMenuItemType } from '@components/Dropdown/DropdownContainerV2MenuItem';
@@ -21,7 +21,7 @@ import { getImageURL } from '@utils/helpers';
 import AdminEstateListTableBodyItemBadge from './TableBodyItemBadge';
 
 interface AdminEstateListTableBodyItemProps {
-  data: EstateDataType;
+  data: EstateDataType | EstateDraftDataType;
   status: ESTATE_STATUS_ENUM;
   onClickDelete?: (id: number) => void;
   onMoveToTop?: (id: number) => Promise<void>;
@@ -119,23 +119,31 @@ const AdminEstateListTableBodyItem = ({
   }, [handleClickDelete]);
 
   return (
-    <div className="relative overflow-hidden rounded-lg">
+    <div className="relative flex flex-col overflow-hidden rounded-lg">
       {isLoading && (
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-white bg-opacity-50" />
       )}
-      <div className="aspect-video w-full">
-        <img src={getImageURL(data.avatar)} alt={data.title} className="h-full w-full object-cover" />
+      <div className="aspect-video w-full flex-shrink-0 overflow-hidden bg-gray-100">
+        {data.avatar && (
+          <img
+            src={getImageURL(data.avatar)}
+            alt={data.title}
+            className="h-full w-full object-cover object-center"
+          />
+        )}
       </div>
-      <div className="rounded-b-lg border-2 border-t-0 border-gray-100 px-4 py-4">
+      <div className="flex flex-1 flex-col rounded-b-lg border-2 border-t-0 border-gray-100 px-4 py-4">
         <div className="mb-2 flex items-center justify-start space-x-2">
           {isLoading && <LoadingSpinner className="h-5 w-5 border-teal-500" />}
           <AdminEstateListTableBodyItemBadge status={data.status}>
-            {tEstate(`status.${data.status}`)}
+            {tEstate(`status.${String(data.status)}`)}
           </AdminEstateListTableBodyItemBadge>
           {data.customId && (
             <AdminEstateListTableBodyItemBadge>#{data.customId}</AdminEstateListTableBodyItemBadge>
           )}
-          <AdminEstateListTableBodyItemBadge>{data.category.name}</AdminEstateListTableBodyItemBadge>
+          {data.category && (
+            <AdminEstateListTableBodyItemBadge>{data.category.name}</AdminEstateListTableBodyItemBadge>
+          )}
         </div>
         <div>
           <div className="font-semibold">{data.title}</div>
@@ -151,9 +159,9 @@ const AdminEstateListTableBodyItem = ({
         <div
           // #skipcq: JS-0440
           dangerouslySetInnerHTML={{
-            __html: striptags(data.description),
+            __html: data.description ? striptags(data.description) : t('notification.emptyDescription'),
           }}
-          className="mt-3 mb-2.5 overflow-hidden border-t-2 border-gray-100 pt-2 line-clamp-3"
+          className="mt-3 mb-2.5 flex-1 overflow-hidden border-t-2 border-gray-100 pt-2 line-clamp-3"
         />
         <div className="flex items-center space-x-4 border-t-2 border-gray-100 pt-4">
           <DropdownContainerV2 menu={dropdownMenu}>
