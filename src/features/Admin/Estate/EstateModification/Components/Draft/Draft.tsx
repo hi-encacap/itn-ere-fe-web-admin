@@ -83,7 +83,7 @@ const AdminEstateModificationDraft = () => {
         <AdminEstateModificationFormTitle title={t('modification.title.draft')} />
         <div className="mt-5">
           {!isLoading && !drafts.length && <AdminEstateModificationDraftEmpty />}
-          {!isLoading && !!drafts.length && (
+          {!isLoading && Boolean(drafts.length) && (
             <div className="flex flex-col space-y-5">
               {drafts.map((draft) => (
                 <AdminEstateModificationDraftItem
