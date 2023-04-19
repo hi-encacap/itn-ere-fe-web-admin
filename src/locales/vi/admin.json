@@ -395,7 +395,8 @@
       "modification": {
         "title": {
           "create": "Thêm bất động sản",
-          "edit": "Chỉnh sửa bất động sản"
+          "edit": "Chỉnh sửa bất động sản",
+          "draft": "Bài viết nháp"
         },
         "header": {
           "backToEstateList": "Danh sách bất động sản"
@@ -543,7 +544,9 @@
           "publishFailed": "Hiện không thể xuất bản bài viết. Vui lòng thử lại sau.",
           "movedToTop": "Bài viết đã được đưa lên đầu.",
           "moveToTopFailed": "Hiện không thể đưa bài viết lên đầu. Vui lòng thử lại sau.",
-          "emptyDescription": "Bài viết không có mô tả."
+          "emptyDescription": "Bài viết không có mô tả.",
+          "deletedDraft": "Bài viết nháp đã được xóa.",
+          "deleteDraftFailed": "Hiện không thể xóa bài viết nháp. Vui lòng thử lại sau."
         },
         "publication": {
           "title": {
@@ -554,6 +557,10 @@
             "unPublish": "Bạn có chắc muốn huỷ xuất bản bài viết này? Bài viết sẽ bị ẩn khỏi mọi kết quả tìm kiếm. Bạn có thể tiếp tục chỉnh sửa bài viết và xuất bản lại sau.",
             "publish": "Bạn có chắc muốn xuất bản bài viết này? Bài viết sẽ hiển thị công khai trên trang và mọi người có thể tìm thấy bài viết này, bằng bất kỳ cách nào."
           }
+        },
+        "deletion": {
+          "title": "Xóa bài viết '{{title}}'?",
+          "message": "Bạn có chắc muốn xóa bài viết này? Bài viết sẽ bị xóa vĩnh viễn khỏi hệ thống. Thao tác này không thể hoàn tác."
         }
       },
       "form": {

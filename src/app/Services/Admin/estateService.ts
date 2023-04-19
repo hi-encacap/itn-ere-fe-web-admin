@@ -53,7 +53,7 @@ const createEstateDraft = async (estate: EstateFormDataType): Promise<EstateDraf
 };
 
 const getEstateDrafts = async (
-  queryParam: BaseGetListQueryType,
+  queryParam?: BaseGetListQueryType,
 ): Promise<ResponseWithMetaType<EstateDraftDataType[]>> => {
   const response = await axiosInstance.get(ADMIN_ESTATE_API_PATH.ESTATE_DRAFTS_PATH, {
     params: queryParam,
@@ -62,9 +62,16 @@ const getEstateDrafts = async (
   return response.data;
 };
 
+const deleteEstateDraftById = async (id: Key): Promise<void> => {
+  const response = await axiosInstance.delete(ADMIN_ESTATE_API_PATH.ESTATE_DRAFT_PATH(id));
+
+  return response.data.data;
+};
+
 export {
   createEstate,
   createEstateDraft,
+  deleteEstateDraftById,
   getEstateDrafts,
   getEstates,
   moveEstateToTopById,

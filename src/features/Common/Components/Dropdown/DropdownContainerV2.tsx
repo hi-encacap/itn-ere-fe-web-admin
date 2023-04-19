@@ -1,4 +1,4 @@
-import { ReactElement, cloneElement, memo, useCallback, useMemo, useRef, useState } from 'react';
+import { ReactElement, cloneElement, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import DropdownContainerV2Menu from './DropdownContainerV2Menu';
@@ -7,9 +7,11 @@ import { DropdownMenuItemType } from './DropdownContainerV2MenuItem';
 interface DropdownContainerV2Props {
   children: ReactElement;
   menu: DropdownMenuItemType[];
+  onShow?: () => void;
+  onHide?: () => void;
 }
 
-const DropdownContainerV2 = ({ children, menu }: DropdownContainerV2Props) => {
+const DropdownContainerV2 = ({ children, menu, onHide, onShow }: DropdownContainerV2Props) => {
   const [containerRect, setContainerRect] = useState<DOMRect | null>(null);
   const [isShownMenuDropdown, setIsShownMenuDropdown] = useState<boolean>(false);
 
@@ -31,6 +33,14 @@ const DropdownContainerV2 = ({ children, menu }: DropdownContainerV2Props) => {
   const handleInteractItem = useCallback(() => {
     containerRef.current?.blur();
   }, []);
+
+  useEffect(() => {
+    if (isShownMenuDropdown) {
+      onShow?.();
+    } else {
+      onHide?.();
+    }
+  }, [isShownMenuDropdown, onHide, onShow]);
 
   return (
     <>

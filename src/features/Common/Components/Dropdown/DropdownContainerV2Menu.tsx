@@ -17,20 +17,40 @@ const DropdownContainerV2Menu = ({ menu, rect: containerRect, onInteract }: Drop
   const getMenuClientRect = useCallback(() => {
     const menuRect = menuRef.current?.getBoundingClientRect();
     const menuHeight = menuRect?.height ?? 0;
+    const menuWidth = menuRect?.width ?? 0;
     const containerTop = containerRect?.top ?? 0;
+    const containerLeft = containerRect?.left ?? 0;
     const containerHeight = containerRect?.height ?? 0;
+    const containerWidth = containerRect?.width ?? 0;
     const windowHeight = window.innerHeight;
+    const windowWidth = window.innerWidth;
+
+    let top: string | number = 'auto';
+    let bottom: string | number = 'auto';
+    let left: string | number = 'auto';
+    let right: string | number = 'auto';
 
     if (containerTop + menuHeight + paddingSize * 3 > windowHeight) {
-      return {
-        bottom: windowHeight - containerTop + paddingSize,
-        top: 'auto',
-      };
+      top = 'auto';
+      bottom = windowHeight - containerTop + paddingSize;
+    } else {
+      top = containerTop + containerHeight + paddingSize;
+      bottom = 'auto';
+    }
+
+    if (containerLeft + menuWidth > windowWidth) {
+      left = 'auto';
+      right = windowWidth - containerLeft - containerWidth - paddingSize;
+    } else {
+      left = containerLeft;
+      right = 'auto';
     }
 
     return {
-      top: containerTop + containerHeight + paddingSize,
-      bottom: 'auto',
+      top,
+      bottom,
+      left,
+      right,
     };
   }, [containerRect, paddingSize]);
 
@@ -49,8 +69,9 @@ const DropdownContainerV2Menu = ({ menu, rect: containerRect, onInteract }: Drop
       className="fixed w-48 rounded-lg bg-white py-3.5 shadow-center shadow-black/10"
       style={{
         top: menuClientRect?.top,
-        left: containerRect?.left,
+        left: menuClientRect?.left,
         bottom: menuClientRect?.bottom,
+        right: menuClientRect?.right,
       }}
       ref={menuRef}
     >
