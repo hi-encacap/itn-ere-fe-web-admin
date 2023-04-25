@@ -31,7 +31,7 @@ const errorHandler = async (
               Authorization: `Bearer ${String(newTokens.accessToken)}`,
             };
             config.autoRefreshToken = false;
-            // #skip-cq: JS-0379
+            // #skipcq: JS-0379
             return await instance?.(config);
           } catch (refreshError) {
             redirectURL = AUTHENTICATION_PATH.LOGIN_PATH;
