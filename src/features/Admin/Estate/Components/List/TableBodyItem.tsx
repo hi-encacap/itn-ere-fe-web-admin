@@ -183,7 +183,7 @@ const AdminEstateListTableBodyItem = ({
             </Button>
           )}
           {status === ESTATE_STATUS_ENUM.DRAFT && (
-            <Button className="flex-1 rounded-sm" size="sm" disabled={isLoading}>
+            <Button className="flex-1 rounded-sm" size="sm" disabled={isLoading} onClick={handleClickEdit}>
               {t('table.action.edit')}
             </Button>
           )}

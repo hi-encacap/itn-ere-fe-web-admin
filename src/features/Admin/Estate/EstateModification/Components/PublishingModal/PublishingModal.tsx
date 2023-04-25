@@ -1,3 +1,4 @@
+import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
 import { AxiosError } from 'axios';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -65,8 +66,9 @@ const AdminEstateModificationPublishingModal = ({
 
     try {
       let estateId = body.id;
+      const { status } = body;
 
-      if (!estateId) {
+      if (!estateId || status === ESTATE_STATUS_ENUM.DRAFT) {
         const { id: newId } = await adminEstateService.createEstate(body);
         estateId = newId;
       } else {
@@ -138,8 +140,8 @@ const AdminEstateModificationPublishingModal = ({
       title={t('title', { title: data?.title })}
       {...props}
     >
-      <div>{t('message')}</div>
-      <div className="mt-6 flex flex-col space-y-4">
+      {step <= ESTATE_PUBLISHING_STEP_ENUM.PUBLISHING && <div className="mb-6">{t('message')}</div>}
+      <div className="flex flex-col space-y-4">
         <AdminEstateModificationPublishingModalStep
           isCompleted={step > ESTATE_PUBLISHING_STEP_ENUM.SAVING}
           isPending={step < ESTATE_PUBLISHING_STEP_ENUM.SAVING}

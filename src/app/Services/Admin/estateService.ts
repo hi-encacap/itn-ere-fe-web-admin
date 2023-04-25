@@ -1,3 +1,4 @@
+import { omit } from 'lodash';
 import { Key } from 'react';
 
 import { ADMIN_ESTATE_API_PATH } from '@constants/apis';
@@ -8,7 +9,7 @@ import axiosInstance from '@utils/Http/axiosInstance';
 
 const createEstate = async (estate: EstateFormDataType) => {
   const response = await axiosInstance.post(ADMIN_ESTATE_API_PATH.ESTATES_PATH, {
-    ...estate,
+    ...omit(estate, 'id'),
     avatarId: estate.avatar?.id,
     imageIds: estate.images?.map((image) => image.id),
     latitude: 1,
@@ -47,7 +48,11 @@ const moveEstateToTopById = async (id: Key): Promise<void> => {
 };
 
 const createEstateDraft = async (estate: EstateFormDataType): Promise<EstateDraftDataType> => {
-  const response = await axiosInstance.post(ADMIN_ESTATE_API_PATH.ESTATE_DRAFTS_PATH, estate);
+  const response = await axiosInstance.post(
+    ADMIN_ESTATE_API_PATH.ESTATE_DRAFTS_PATH,
+    // Remove all empty, undefined values from the object.
+    Object.fromEntries(Object.entries(estate).filter(([_, v]) => v !== '' && v !== undefined)),
+  );
 
   return response.data.data;
 };
@@ -60,6 +65,22 @@ const getEstateDrafts = async (
   });
 
   return response.data;
+};
+
+const getEstateDraftById = async (id: Key): Promise<EstateDraftDataType> => {
+  const response = await axiosInstance.get(ADMIN_ESTATE_API_PATH.ESTATE_DRAFT_PATH(id));
+
+  return response.data.data;
+};
+
+const updateEstateDraftById = async (id: Key, estate: EstateFormDataType): Promise<EstateDraftDataType> => {
+  const response = await axiosInstance.put(
+    ADMIN_ESTATE_API_PATH.ESTATE_DRAFT_PATH(id),
+    // Remove all empty, undefined values from the object.
+    Object.fromEntries(Object.entries(estate).filter(([_, v]) => v !== '' && v !== undefined)),
+  );
+
+  return response.data.data;
 };
 
 const deleteEstateDraftById = async (id: Key): Promise<void> => {
@@ -91,10 +112,12 @@ export {
   createEstateDraft,
   deleteEstateDraftById,
   getEstateById,
+  getEstateDraftById,
   getEstateDrafts,
   getEstates,
   moveEstateToTopById,
   publishEstateById,
   unPublishEstateById,
   updateEstateById,
+  updateEstateDraftById,
 };

@@ -45,18 +45,19 @@ export interface EstateDataType {
   youtubeId?: string;
 }
 
-export interface EstateFormDataType extends Nullable<Partial<Omit<EstateDataType, 'avatar' | 'images'>>> {
-  priceUnitId: number;
-  areaUnitId: number;
+export interface EstateFormDataType extends Partial<Nullable<Omit<EstateDataType, 'avatar' | 'images'>>> {
+  priceUnitId: number | null;
+  areaUnitId: number | null;
   provinceCode: string;
   districtCode: string;
   wardCode: string;
   quarterCode: string;
-  categoryId: number;
+  categoryId: number | null;
   properties: Array<Record<'name' | 'value', string | number>>;
-  contactId: number;
+  contactId: number | null;
   avatar: FormImageInputDataType;
   images: FormImageInputDataType[];
+  draftId?: number;
 }
 
 export interface EstateDraftDataType extends Nullable<Partial<EstateDataType>> {

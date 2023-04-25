@@ -4,10 +4,10 @@ import { AxiosError } from 'axios';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { ADMIN_PATH } from '@constants/urls';
-import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
+import { EstateDataType, EstateDraftDataType, EstateFormDataType } from '@interfaces/Admin/estateTypes';
 import { adminEstateService } from '@services/index';
 
 import useToast from '@hooks/useToast';
@@ -17,6 +17,7 @@ import { generateImageFormData, generateImagesFormData } from '@utils/image';
 import { estateFormSchema } from '@admin/Estate/Schemas/estateFormSchema';
 
 import AdminEstateModificationPublishingModal from '../PublishingModal/PublishingModal';
+import AdminEstateModificationFormButtonDraft from './Button/Draft';
 import AdminEstateModificationFormButtonNew from './Button/New';
 import AdminEstateModificationFormButtonUnPublished from './Button/UnPublished';
 import AdminEstateModificationFormContact from './Contact/Contact';
@@ -40,7 +41,12 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
   const [isShowPublishingModal, setIsShowPublishingModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [estateStatus, setEstateStatus] = useState<ESTATE_STATUS_ENUM | null>(null);
+  const [searchParams] = useSearchParams();
 
+  const statusParam: ESTATE_STATUS_ENUM = useMemo(
+    () => (searchParams.get('status') as ESTATE_STATUS_ENUM) ?? ESTATE_STATUS_ENUM.DRAFT,
+    [searchParams],
+  );
   const isDisabled = useMemo(() => isSubmitting || isLoading, [isSubmitting, isLoading]);
 
   const navigate = useNavigate();
@@ -58,6 +64,38 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
     shouldFocusError: true,
   });
 
+  const setFormValue = useCallback(
+    (data: EstateDataType | EstateDraftDataType) => {
+      setValue('id', data.id);
+      setValue('title', data.title);
+      setValue('customId', data.customId);
+      setValue('price', data.price);
+      setValue('priceUnitId', data.priceUnit?.id ?? null);
+      setValue('area', data.area);
+      setValue('areaUnitId', data.areaUnit?.id ?? null);
+      setValue('provinceCode', data.province?.code ?? '');
+      setValue('districtCode', data.district?.code ?? '');
+      setValue('wardCode', data.ward?.code ?? '');
+      setValue('address', data.address);
+      setValue('addressNote', data.addressNote);
+      setValue('categoryId', data.category?.id ?? null);
+      setValue('quarterCode', data.quarter?.code ?? '');
+      setValue('description', data.description);
+      setValue('contactId', data.contact?.id ?? null);
+      setValue('youtubeId', data.youtubeId);
+      setValue('status', data.status);
+
+      if (data.avatar) {
+        setValue('avatar', generateImageFormData(data.avatar, DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL));
+      }
+
+      if (data.images) {
+        setValue('images', generateImagesFormData(data.images, DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL));
+      }
+    },
+    [setValue],
+  );
+
   const getData = useCallback(async () => {
     if (!id) {
       setIsLoading(false);
@@ -67,28 +105,25 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
     try {
       const data = await adminEstateService.getEstateById(id);
 
-      setValue('id', data.id);
-      setValue('title', data.title);
-      setValue('customId', data.customId);
-      setValue('price', data.price);
-      setValue('priceUnitId', data.priceUnit.id);
-      setValue('area', data.area);
-      setValue('areaUnitId', data.areaUnit.id);
-      setValue('provinceCode', data.province.code);
-      setValue('districtCode', data.district.code);
-      setValue('wardCode', data.ward?.code ?? '');
-      setValue('address', data.address);
-      setValue('addressNote', data.addressNote);
-      setValue('categoryId', data.category.id);
-      setValue('quarterCode', data.quarter?.code ?? '');
-      setValue('description', data.description);
-      setValue('contactId', data.contact.id);
-      setValue('youtubeId', data.youtubeId);
-      setValue('avatar', generateImageFormData(data.avatar, DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL));
-      setValue('images', generateImagesFormData(data.images, DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL));
-
+      setFormValue(data);
       setEstateStatus(data.status);
+      setIsLoading(false);
+    } catch (error) {
+      toast.error(t('notification.getEstateFailed'));
+    }
+  }, [id, toast, t]);
 
+  const getDraftData = useCallback(async () => {
+    if (!id) {
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const data = await adminEstateService.getEstateDraftById(id);
+
+      setFormValue(data);
+      setEstateStatus(data.status);
       setIsLoading(false);
     } catch (error) {
       toast.error(t('notification.getEstateFailed'));
@@ -118,10 +153,16 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
     setIsSubmitting(true);
 
     try {
+      const { id: estateDraftId } = data;
+
+      if (estateDraftId) {
+        await adminEstateService.updateEstateDraftById(estateDraftId, data);
+        toast.success(t('notification.savedDraft'));
+        return;
+      }
+
       const { id } = await adminEstateService.createEstateDraft(data);
-
       toast.success(t('notification.savedDraft'));
-
       navigate(ADMIN_PATH.ESTATE_MODIFICATION_PATH(id, ESTATE_STATUS_ENUM.DRAFT));
     } catch (error) {
       toast.error(t('notification.saveDraftFailed'));
@@ -167,15 +208,24 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
     }
   });
 
-  const handleSaveAndPublish = useFormSubmit(async (data) => {
+  const handleSaveAndPublish = useFormSubmit((data) => {
     setFormData(data);
     setIsShowPublishingModal(true);
     setIsSubmitting(true);
   });
 
   useEffect(() => {
+    if (!statusParam) {
+      return;
+    }
+
+    if (statusParam === ESTATE_STATUS_ENUM.DRAFT) {
+      void getDraftData();
+      return;
+    }
+
     void getData();
-  }, [getData]);
+  }, [statusParam, getData, getDraftData]);
 
   return (
     <>
@@ -208,6 +258,13 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
             <AdminEstateModificationFormButtonUnPublished
               isSubmitting={isSubmitting}
               onSubmit={handleUpdateEstate}
+              onSaveAndPublish={handleSaveAndPublish}
+            />
+          )}
+          {id && estateStatus === ESTATE_STATUS_ENUM.DRAFT && (
+            <AdminEstateModificationFormButtonDraft
+              isSubmitting={isSubmitting}
+              onSubmit={handleSaveDraft}
               onSaveAndPublish={handleSaveAndPublish}
             />
           )}
