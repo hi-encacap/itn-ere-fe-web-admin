@@ -1,5 +1,7 @@
 import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
 
+import { ESTATE_PROXY_ACTION_ENUM } from './enums';
+
 const AUTHENTICATION_PATH = {
   LOGIN_PATH: '/auth/login',
 };
@@ -13,7 +15,7 @@ const ADMIN_PATH = {
   ESTATE_CREATE_PATH: '/admin/estates?action=create',
   ESTATE_PROPERTY_PATH: '/admin/estates/properties',
   ESTATE_MODIFICATION_PATH: (id: number, status = ESTATE_STATUS_ENUM.DRAFT) =>
-    `/admin/estates?action=modification&id=${id}&status=${status}`,
+    `/admin/estates?action=${ESTATE_PROXY_ACTION_ENUM.MODIFY}&id=${id}&status=${status}`,
 
   LOCATION_PATH: '/admin/locations',
   LOCATION_PROVINCE_PATH: '/admin/locations/provinces',

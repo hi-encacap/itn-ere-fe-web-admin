@@ -28,7 +28,7 @@ const AdminEstateModificationFormDetailDescriptionEditor = ({
 
   const { control } = useFormContext<EstateFormDataType>();
   const {
-    field: { onChange },
+    field: { value, onChange },
     fieldState: { error },
   } = useController({
     name: 'description',
@@ -77,6 +77,7 @@ const AdminEstateModificationFormDetailDescriptionEditor = ({
         <Editor
           apiKey={process.env.REACT_APP_TINY_API_KEY ?? ''}
           ref={tinyEditorRef}
+          initialValue={value ?? ''}
           init={{
             height: 288,
             menubar: false,

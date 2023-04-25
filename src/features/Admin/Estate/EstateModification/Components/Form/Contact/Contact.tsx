@@ -1,10 +1,11 @@
-import { useCallback, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useCallback, useEffect, useState } from 'react';
+import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
 import { ContactDataType } from '@interfaces/Admin/contactTypes';
 import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
+import { adminContactService } from '@services/index';
 
 import FormElementError from '@components/Form/FormElementError';
 
@@ -22,10 +23,32 @@ const AdminEstateModificationFormContact = () => {
   const [selectedContact, setSelectedContact] = useState<ContactDataType | null>(null);
 
   const {
+    control,
     setValue,
     formState: { errors },
     clearErrors,
   } = useFormContext<EstateFormDataType>();
+
+  const {
+    field: { value },
+  } = useController({
+    name: 'contactId',
+    control,
+  });
+
+  const getContactData = useCallback(async () => {
+    if (selectedContact ?? !value) {
+      return;
+    }
+
+    try {
+      const data = await adminContactService.getContactById(value);
+
+      setSelectedContact(data);
+    } catch (error) {
+      setSelectedContact(null);
+    }
+  }, [value, selectedContact]);
 
   const handlePickContact = useCallback((contact: ContactDataType) => {
     setSelectedContact(contact);
@@ -41,6 +64,10 @@ const AdminEstateModificationFormContact = () => {
   const handleOpenPicker = useCallback(() => {
     setIsShowContactPickerModal(true);
   }, []);
+
+  useEffect(() => {
+    void getContactData();
+  }, [getContactData]);
 
   return (
     <>

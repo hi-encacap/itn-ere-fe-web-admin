@@ -1,3 +1,4 @@
+import { DEFAULT_CLOUDFLARE_VARIANT_ENUM } from '@encacap-group/types/dist/re';
 import { nanoid } from '@reduxjs/toolkit';
 
 import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
@@ -13,12 +14,22 @@ const convertToImageDataFromFiles = (files: FileList): FormImageInputDataType[] 
   }));
 };
 
-const generateImageFormData = (data: ImageDataType): FormImageInputDataType => {
+const generateImageFormData = (
+  data: ImageDataType,
+  variant = DEFAULT_CLOUDFLARE_VARIANT_ENUM.PUBLIC,
+): FormImageInputDataType => {
   return {
-    id: nanoid(),
-    preview: getImageURL(data),
+    id: data.id ?? nanoid(),
+    preview: getImageURL(data, variant),
     file: null,
   };
+};
+
+const generateImagesFormData = (
+  data: ImageDataType[],
+  variant = DEFAULT_CLOUDFLARE_VARIANT_ENUM.PUBLIC,
+): FormImageInputDataType[] => {
+  return data.map((image) => generateImageFormData(image, variant));
 };
 
 const mapImageDataToResponseData = <T>(data: T, key: string): T => {
@@ -32,7 +43,7 @@ const mapImageDataToResponseData = <T>(data: T, key: string): T => {
     if (Array.isArray(image)) {
       return {
         ...data,
-        [key]: image.map(generateImageFormData),
+        [key]: image.map((item) => generateImageFormData(item)),
       };
     }
 
@@ -45,4 +56,9 @@ const mapImageDataToResponseData = <T>(data: T, key: string): T => {
   return data;
 };
 
-export { convertToImageDataFromFiles, mapImageDataToResponseData, generateImageFormData };
+export {
+  convertToImageDataFromFiles,
+  generateImageFormData,
+  generateImagesFormData,
+  mapImageDataToResponseData,
+};

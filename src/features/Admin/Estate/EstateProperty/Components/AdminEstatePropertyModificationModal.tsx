@@ -67,7 +67,7 @@ const AdminEstatePropertyModificationModal = ({
           handleClose();
         })
         .catch((error: AxiosErrorType) => {
-          setFormError(error, setError, formatErrorMessage(t, 'form'));
+          setFormError({ error, setError, formatMessage: formatErrorMessage(t, 'form') });
         })
         .finally(() => {
           setIsSubmitting(false);
@@ -86,7 +86,7 @@ const AdminEstatePropertyModificationModal = ({
           handleClose();
         })
         .catch((error: AxiosErrorType) => {
-          setFormError(error, setError, formatErrorMessage(t, 'form'));
+          setFormError({ error, setError, formatMessage: formatErrorMessage(t, 'form') });
         })
         .finally(() => {
           setIsSubmitting(false);

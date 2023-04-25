@@ -64,12 +64,19 @@ const AdminEstateModificationPublishingModal = ({
     setSaveStepError(null);
 
     try {
-      const { id } = await adminEstateService.createEstate(body);
+      let estateId = body.id;
 
-      setSavedEstateId(id);
+      if (!estateId) {
+        const { id: newId } = await adminEstateService.createEstate(body);
+        estateId = newId;
+      } else {
+        await adminEstateService.updateEstateById(estateId, body);
+      }
+
+      setSavedEstateId(estateId as number);
       setStep(ESTATE_PUBLISHING_STEP_ENUM.PUBLISHING);
 
-      return id;
+      return estateId;
     } catch (error) {
       setStep(ESTATE_PUBLISHING_STEP_ENUM.SAVE_ERROR);
 

@@ -1,9 +1,9 @@
+import { DEFAULT_CLOUDFLARE_VARIANT_ENUM } from '@encacap-group/types/dist/re';
 import dayjs from 'dayjs';
 import { first } from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 
 import { TABLE_FILTER_GLOBAL_FILTER_ID } from '@constants/defaultValues';
-import { IMAGE_VARIANT_ENUM } from '@constants/enums';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { ImageDataType } from '@interfaces/Common/imageTypes';
 
@@ -40,12 +40,12 @@ const slugify = (text: string): string => {
   return result;
 };
 
-const getImageURL = (image: ImageDataType, variant = IMAGE_VARIANT_ENUM.DEFAULT): string => {
+const getImageURL = (image: ImageDataType, variant = DEFAULT_CLOUDFLARE_VARIANT_ENUM.PUBLIC): string => {
   if (!image) {
     return '';
   }
 
-  return image[variant] ?? image[IMAGE_VARIANT_ENUM.DEFAULT];
+  return image[variant] ?? image[DEFAULT_CLOUDFLARE_VARIANT_ENUM.PUBLIC];
 };
 
 const generateColumnFilterObject = (filters: TableColumnFilterState[]) => {
@@ -67,4 +67,4 @@ const randomStringPrefix = (separator?: string) => {
   return `${dayPrefix}${separator ?? ''}${uuidPrefix}`;
 };
 
-export { setDocumentTitle, slugify, getImageURL, generateColumnFilterObject, randomStringPrefix };
+export { generateColumnFilterObject, getImageURL, randomStringPrefix, setDocumentTitle, slugify };

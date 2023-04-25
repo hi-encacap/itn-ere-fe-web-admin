@@ -68,13 +68,33 @@ const deleteEstateDraftById = async (id: Key): Promise<void> => {
   return response.data.data;
 };
 
+const getEstateById = async (id: Key): Promise<EstateDataType> => {
+  const response = await axiosInstance.get(ADMIN_ESTATE_API_PATH.ESTATE_PATH(id));
+
+  return response.data.data;
+};
+
+const updateEstateById = async (id: Key, estate: EstateFormDataType): Promise<EstateDataType> => {
+  const response = await axiosInstance.put(ADMIN_ESTATE_API_PATH.ESTATE_PATH(id), {
+    ...estate,
+    avatarId: estate.avatar?.id,
+    imageIds: estate.images?.map((image) => image.id),
+    latitude: 1,
+    longitude: 1,
+  });
+
+  return response.data.data;
+};
+
 export {
   createEstate,
   createEstateDraft,
   deleteEstateDraftById,
+  getEstateById,
   getEstateDrafts,
   getEstates,
   moveEstateToTopById,
   publishEstateById,
   unPublishEstateById,
+  updateEstateById,
 };

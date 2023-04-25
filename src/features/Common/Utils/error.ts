@@ -6,18 +6,28 @@ import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 
 type FormatMessageFunction = (key: string, message: string) => string;
 
+interface SetFormErrorParam<T extends FieldValues> {
+  error: AxiosErrorType;
+  setError: UseFormSetError<T>;
+  formatMessage?: FormatMessageFunction;
+  otherwise?: () => void;
+  setFocus?: UseFormSetFocus<T>;
+  getField?: (field: string) => string;
+}
+
 const formatErrorMessage = (t: TFunction, prefix?: string) => {
   const prefixMessage = prefix ? `${prefix}.` : '';
   return (key: string, message: string) => t(`${prefixMessage}${key}.${message}`);
 };
 
-const setFormError = <T extends FieldValues>(
-  error: AxiosErrorType,
-  setError: UseFormSetError<T>,
-  formatMessage?: FormatMessageFunction,
-  otherwise?: () => void,
-  setFocus?: UseFormSetFocus<T>,
-) => {
+const setFormError = <T extends FieldValues>({
+  error,
+  setError,
+  formatMessage,
+  setFocus,
+  otherwise,
+  getField,
+}: SetFormErrorParam<T>) => {
   const { response } = error;
 
   if (!response) {
@@ -34,12 +44,13 @@ const setFormError = <T extends FieldValues>(
 
   keys(field).forEach((key) => {
     const value = field[key][0];
+    const formattedKey = getField?.(key) ?? key;
 
     if (!firstKey) {
       firstKey = key;
     }
 
-    setError(key as FieldPath<T>, {
+    setError(formattedKey as FieldPath<T>, {
       message: formatMessage ? formatMessage(camelCase(lowerCase(key)), camelCase(lowerCase(value))) : value,
     });
   });
@@ -59,4 +70,4 @@ const commonFormErrorFactory = (t: TFunction, prefix?: string) => {
   };
 };
 
-export { setFormError, formatErrorMessage, commonFormErrorFactory };
+export { commonFormErrorFactory, formatErrorMessage, setFormError };

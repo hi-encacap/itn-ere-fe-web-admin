@@ -492,8 +492,9 @@
             }
           },
           "action": {
-            "save": "Lưu nháp",
-            "publish": "Lưu và xuất bản"
+            "saveDraft": "Lưu nháp",
+            "publish": "Lưu và xuất bản",
+            "save": "Lưu"
           }
         },
         "modal": {
@@ -513,7 +514,10 @@
         },
         "notification": {
           "savedDraft": "Bài viết đã được lưu nháp.",
-          "saveDraftFailed": "Đã xảy ra lỗi khi lưu nháp."
+          "saveDraftFailed": "Đã xảy ra lỗi khi lưu nháp.",
+          "getEstateFailed": "Không thể lấy thông tin bài viết. Vui lòng kiểm tra đường dẫn hoặc thử lại sau.",
+          "updatedEstate": "Bài viết đã được cập nhật.",
+          "updateEstateFailed": "Cập nhật bài viết không thành công. Vui lòng kiểm tra lại biểu mẫu và thử lại sau."
         }
       },
       "list": {
