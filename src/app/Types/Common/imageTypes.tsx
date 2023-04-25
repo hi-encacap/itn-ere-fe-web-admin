@@ -1,3 +1,5 @@
-import { IMAGE_VARIANT_ENUM } from '@constants/enums';
+import { DEFAULT_CLOUDFLARE_VARIANT_ENUM } from '@encacap-group/types/dist/re';
 
-export type ImageDataType = Record<IMAGE_VARIANT_ENUM, string>;
+export interface ImageDataType extends Record<DEFAULT_CLOUDFLARE_VARIANT_ENUM, string> {
+  id: string;
+}

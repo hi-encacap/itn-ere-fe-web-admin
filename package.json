@@ -17,7 +17,7 @@
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
-    "axios": "^1.1.3",
+    "axios": "^1.3.6",
     "dayjs": "^1.11.6",
     "framer-motion": "^7.6.12",
     "http-status": "^1.5.3",
@@ -42,7 +42,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "craco --max-old-space-size=10240 start",
+    "start": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",

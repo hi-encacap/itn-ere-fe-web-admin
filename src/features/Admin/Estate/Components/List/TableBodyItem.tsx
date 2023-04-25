@@ -5,9 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { FiEdit2, FiTrash2, FiUpload } from 'react-icons/fi';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { MdAccessTime } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 import striptags from 'striptags';
 
 import { DROPDOWN_MENU_TYPE_ENUM } from '@constants/enums';
+import { ADMIN_PATH } from '@constants/urls';
 import { EstateDataType, EstateDraftDataType } from '@interfaces/Admin/estateTypes';
 
 import DropdownContainerV2 from '@components/Dropdown/DropdownContainerV2';
@@ -22,7 +24,6 @@ import AdminEstateListTableBodyItemBadge from './TableBodyItemBadge';
 
 interface AdminEstateListTableBodyItemProps {
   data: EstateDataType | EstateDraftDataType;
-  status: ESTATE_STATUS_ENUM;
   onClickDelete?: (id: number) => void;
   onMoveToTop?: (id: number) => Promise<void>;
   onClickUnPublish?: (id: number) => void;
@@ -32,7 +33,6 @@ interface AdminEstateListTableBodyItemProps {
 
 const AdminEstateListTableBodyItem = ({
   data,
-  status,
   onClickDelete,
   onMoveToTop,
   onClickUnPublish,
@@ -49,9 +49,15 @@ const AdminEstateListTableBodyItem = ({
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleClickDelete = useCallback(() => {
     onClickDelete?.(data.id);
   }, [data, onClickDelete]);
+
+  const handleClickEdit = useCallback(() => {
+    navigate(ADMIN_PATH.ESTATE_MODIFICATION_PATH(data.id, data.status));
+  }, [data, navigate]);
 
   const handleClickMoveToTop = useCallback(async () => {
     setIsLoading(true);
@@ -90,9 +96,9 @@ const AdminEstateListTableBodyItem = ({
       icon: <FiEdit2 />,
       id: 'edit',
       label: t('table.action.edit'),
-      onClick: handleClickMoveToTop,
+      onClick: handleClickEdit,
     }),
-    [handleClickMoveToTop],
+    [handleClickEdit],
   );
 
   const deleteOption: DropdownMenuItemType = useMemo(
@@ -169,17 +175,17 @@ const AdminEstateListTableBodyItem = ({
               <HiDotsHorizontal size={20} />
             </Button>
           </DropdownContainerV2>
-          {status === ESTATE_STATUS_ENUM.UNPUBLISHED && (
+          {data.status === ESTATE_STATUS_ENUM.UNPUBLISHED && (
             <Button className="flex-1 rounded-sm" size="sm" disabled={isLoading} onClick={handleClickPublish}>
               {t('table.action.publish')}
             </Button>
           )}
-          {status === ESTATE_STATUS_ENUM.DRAFT && (
-            <Button className="flex-1 rounded-sm" size="sm" disabled={isLoading}>
+          {data.status === ESTATE_STATUS_ENUM.DRAFT && (
+            <Button className="flex-1 rounded-sm" size="sm" disabled={isLoading} onClick={handleClickEdit}>
               {t('table.action.edit')}
             </Button>
           )}
-          {status === ESTATE_STATUS_ENUM.PUBLISHED && (
+          {data.status === ESTATE_STATUS_ENUM.PUBLISHED && (
             <Button
               className="flex-1 rounded-sm"
               size="sm"

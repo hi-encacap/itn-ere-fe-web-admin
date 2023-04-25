@@ -8,8 +8,8 @@ import TableRowAction from '@components/Table/TableRowAction';
 
 interface ComponentProps {
   id: Key;
-  onClickDelete: TableRowActionClickHandlerType<Key>;
-  onClickEdit: TableRowActionClickHandlerType<Key>;
+  onClickDelete: TableRowActionClickHandlerType;
+  onClickEdit: TableRowActionClickHandlerType;
 }
 
 const AdminEstatePropertyTableRowActions = ({ id, onClickDelete, onClickEdit }: ComponentProps) => {

@@ -1,5 +1,5 @@
 import { random } from 'lodash';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
@@ -36,10 +36,9 @@ const UncontrolledImageInput = ({
 
   const [images, setImages] = useState<FormImageInputDataType[]>([]);
   const [uploadingImageIds, setUploadingImageIds] = useState<string[]>([]);
-  const [uploadedImages, setUploadedImages] = useState<FormImageInputDataType[]>([]);
-  const [allowForceSetImages, setAllowForceSetImages] = useState(true);
 
   const inputId = useMemo(() => `image-input-${random()}`, []);
+  const isAllowForceSetImagesRef = useRef(true);
 
   const uploadImage = useCallback(
     (file: FormImageInputDataType) => {
@@ -52,14 +51,10 @@ const UncontrolledImageInput = ({
       uploadService
         .uploadImage(file.file)
         .then((response) => {
-          const newFileData = { ...file, id: response.data.id };
-          if (isMultiple) {
-            const newUploadedImages = [...uploadedImages, newFileData];
-            onChange?.(newUploadedImages);
-            setUploadedImages(newUploadedImages);
-            return;
-          }
-          onChange?.(newFileData);
+          const newImageId = response.data.id;
+          setImages((prev) =>
+            prev.map((image) => (image.id === file.id ? { ...image, id: newImageId } : image)),
+          );
         })
         .catch(() => {
           toast.error(t('error.uploadFailed'));
@@ -69,7 +64,7 @@ const UncontrolledImageInput = ({
           setUploadingImageIds((prev) => prev.filter((id) => id !== file.id));
         });
     },
-    [isMultiple],
+    [isMultiple, t, toast],
   );
 
   const handleChooseImage = useCallback((files: FileList) => {
@@ -81,24 +76,22 @@ const UncontrolledImageInput = ({
     setImages((prev) => [...prev, ...formattedImages]);
   }, []);
 
-  const handleRemoveImage = useCallback(
-    (id: FormImageInputDataType['id']) => {
-      const newUploadedImages = uploadedImages.filter((image) => image.id !== id);
-      setImages((prev) => prev.filter((image) => image.id !== id));
-      setUploadedImages(newUploadedImages);
-      onChange?.(newUploadedImages);
-    },
-    [uploadedImages],
-  );
+  const handleRemoveImage = useCallback((id: FormImageInputDataType['id']) => {
+    setImages((prev) => prev.filter((image) => image.id !== id));
+  }, []);
 
   useEffect(() => {
-    if (!allowForceSetImages || !value) {
+    if (!isAllowForceSetImagesRef.current || !value) {
       return;
     }
 
+    isAllowForceSetImagesRef.current = false;
     setImages(Array.isArray(value) ? value : [value]);
-    setAllowForceSetImages(false);
   }, [value]);
+
+  useEffect(() => {
+    onChange?.(isMultiple ? images : images[0]);
+  }, [images, isMultiple, onChange]);
 
   return (
     <div>

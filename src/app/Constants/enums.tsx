@@ -3,13 +3,9 @@ export enum USER_ROLE_ENUM {
   USER = 'user',
 }
 
-export enum IMAGE_VARIANT_ENUM {
-  DEFAULT = 'public',
-  SMALL = 'small',
-}
-
 export enum ESTATE_PROXY_ACTION_ENUM {
   CREATE = 'create',
+  MODIFY = 'modify',
 }
 
 export enum TABLE_ROW_SELECTION_TYPE_ENUM {

@@ -13,6 +13,11 @@ const getContacts = async (params?: BaseGetListQueryType) => {
   return response.data;
 };
 
+const getContactById = async (id: number) => {
+  const response = await axiosInstance.get(ADMIN_CONTACT_API_PATH.CONTACT_PATH(id));
+  return response.data.data;
+};
+
 const createContact = async (data: ContactFormDataType): Promise<ContactDataType> => {
   const response = await axiosInstance.post(ADMIN_CONTACT_API_PATH.CONTACTS_PATH, {
     ...data,
@@ -36,4 +41,4 @@ const deleteContactById = async (id: number) => {
   return response.data;
 };
 
-export { getContacts, createContact, updateContactById, deleteContactById };
+export { createContact, deleteContactById, getContactById, getContacts, updateContactById };

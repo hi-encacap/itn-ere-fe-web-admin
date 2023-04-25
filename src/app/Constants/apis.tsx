@@ -39,7 +39,7 @@ const ADMIN_ESTATE_PROPERTY_API_PATH = {
 
 const ADMIN_ESTATE_API_PATH = {
   ESTATES_PATH: 'v1/admin/estates',
-  ESTATE_PATH: (id: number) => `v1/admin/estates/${id}`,
+  ESTATE_PATH: (id: Key) => `v1/admin/estates/${id}`,
   ESTATE_UN_PUBLISH_PATH: (id: Key) => `v1/admin/estates/${id}/un-publish`,
   ESTATE_PUBLISH_PATH: (id: Key) => `v1/admin/estates/${id}/publish`,
   ESTATE_MOVE_TO_TOP_PATH: (id: Key) => `v1/admin/estates/${id}/up-top`,

@@ -1,5 +1,3 @@
-import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
-
 import { EstateDataType, EstateDraftDataType } from '@interfaces/Admin/estateTypes';
 
 import { CustomTableBodyProps } from '@components/Table/Table';
@@ -11,7 +9,6 @@ import AdminEstateListTableBodyLoading from './TableBodyLoading';
 const AdminEstateListTableBody = ({
   data,
   isLoading,
-  status,
   ...props
 }: CustomTableBodyProps<EstateDataType | EstateDraftDataType>) => {
   if (isLoading && !data.length) return <AdminEstateListTableBodyLoading />;
@@ -22,12 +19,7 @@ const AdminEstateListTableBody = ({
     <div className="relative grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {isLoading && <div className="absolute inset-0 bg-white bg-opacity-50" />}
       {data.map((item) => (
-        <AdminEstateListTableBodyItem
-          key={item.id}
-          data={item}
-          status={status as ESTATE_STATUS_ENUM}
-          {...props}
-        />
+        <AdminEstateListTableBodyItem key={item.id} data={item} {...props} />
       ))}
     </div>
   );

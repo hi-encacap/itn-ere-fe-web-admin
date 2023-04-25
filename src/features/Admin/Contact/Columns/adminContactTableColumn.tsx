@@ -1,7 +1,7 @@
+import { DEFAULT_CLOUDFLARE_VARIANT_ENUM } from '@encacap-group/types/dist/re';
 import { createColumnHelper } from '@tanstack/react-table';
 import { TFunction } from 'i18next';
 
-import { IMAGE_VARIANT_ENUM } from '@constants/enums';
 import { ContactDataType } from '@interfaces/Admin/contactTypes';
 import { ColumnDef, TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes';
 
@@ -25,7 +25,9 @@ const createContactTableColumns = (t: TFunction, { onClickEdit, onClickDelete }:
       id: 'avatar',
       header: String(t('table.column.avatar')),
       enableSorting: false,
-      cell: (info) => <TableImageColumn src={getImageURL(info.getValue(), IMAGE_VARIANT_ENUM.SMALL)} />,
+      cell: (info) => (
+        <TableImageColumn src={getImageURL(info.getValue(), DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL)} />
+      ),
       meta: {
         skeleton: <TableImageColumnSkeleton />,
       },

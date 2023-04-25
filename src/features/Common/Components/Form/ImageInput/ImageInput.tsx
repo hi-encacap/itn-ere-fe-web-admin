@@ -1,11 +1,12 @@
 import { omit } from 'lodash';
-import { Control, useController } from 'react-hook-form';
+import { useController } from 'react-hook-form';
+
+import { HookFormControl } from '@interfaces/Common/commonTypes';
 
 import UncontrolledImageInput, { UncontrolledImageInputProps } from './UncontrolledImageInput';
 
 export interface InputProps extends UncontrolledImageInputProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  control?: Control<any>;
+  control?: HookFormControl;
 }
 
 const ImageInput = ({ control, name, ...inputProps }: InputProps) => {

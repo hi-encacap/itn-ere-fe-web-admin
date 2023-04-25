@@ -94,7 +94,7 @@ const AdminLocationProvinceModificationModal = ({
         setIsSubmitting(false);
       })
       .catch((error: AxiosErrorType) => {
-        setFormError(error, setError, formatErrorMessage(t, 'form'));
+        setFormError({ error, setError, formatMessage: formatErrorMessage(t, 'form') });
         setIsSubmitting(false);
         onCreateFailed?.();
       });

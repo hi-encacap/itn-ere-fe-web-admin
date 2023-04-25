@@ -77,7 +77,12 @@ const AdminContactModificationModal = ({
           onClose();
         })
         .catch((error) => {
-          setFormError<ContactFormDataType>(error, setError, formatErrorMessage, onUpdateFailed);
+          setFormError<ContactFormDataType>({
+            error,
+            setError,
+            formatMessage: formatErrorMessage,
+            otherwise: onUpdateFailed,
+          });
         })
         .finally(() => {
           setIsLoading(false);
@@ -96,7 +101,12 @@ const AdminContactModificationModal = ({
         onClose();
       })
       .catch((error: AxiosErrorType) => {
-        setFormError<ContactFormDataType>(error, setError, formatErrorMessage, onCreateFailed);
+        setFormError<ContactFormDataType>({
+          error,
+          setError,
+          formatMessage: formatErrorMessage,
+          otherwise: onCreateFailed,
+        });
       })
       .finally(() => {
         setIsLoading(false);

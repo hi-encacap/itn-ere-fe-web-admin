@@ -1,6 +1,6 @@
 import { Editor } from '@tinymce/tinymce-react';
 import { EventHandler } from '@tinymce/tinymce-react/lib/cjs/main/ts/Events';
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
@@ -26,9 +26,11 @@ const AdminEstateModificationFormDetailDescriptionEditor = ({
     keyPrefix: 'admin:page.estate.modification.form.detail.form',
   });
 
+  const [isInitialized, setIsInitialized] = useState(false);
+
   const { control } = useFormContext<EstateFormDataType>();
   const {
-    field: { onChange },
+    field: { value, onChange },
     fieldState: { error },
   } = useController({
     name: 'description',
@@ -37,6 +39,25 @@ const AdminEstateModificationFormDetailDescriptionEditor = ({
   });
 
   const tinyEditorRef = useRef<Editor>(null);
+
+  const setInitialValue = useCallback(() => {
+    if (!tinyEditorRef.current || !value) {
+      return;
+    }
+
+    const { editor } = tinyEditorRef.current;
+
+    if (!editor) {
+      return;
+    }
+
+    if (editor.getContent()) {
+      return;
+    }
+
+    editor.setContent(value);
+    onChange(value);
+  }, [value]);
 
   const handleChangeEditorContent: EventHandler<unknown> = useCallback((_, editor) => {
     onChange(editor.getContent());
@@ -52,7 +73,16 @@ const AdminEstateModificationFormDetailDescriptionEditor = ({
 
   const handleInit = useCallback(() => {
     onInitialized();
-  }, [onInitialized]);
+    setIsInitialized(true);
+  }, [onInitialized, setInitialValue]);
+
+  useEffect(() => {
+    if (!isInitialized) {
+      return;
+    }
+
+    setInitialValue();
+  }, [isInitialized, setInitialValue]);
 
   return (
     <>
