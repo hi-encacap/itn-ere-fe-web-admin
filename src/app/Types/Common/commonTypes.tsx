@@ -71,5 +71,6 @@ export type Nullable<T> = {
   [P in keyof T]: T[P] | null;
 };
 
+// #skip-cq: JS-0323
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type HookFormControl = Control<any>;

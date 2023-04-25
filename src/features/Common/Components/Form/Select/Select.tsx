@@ -1,11 +1,12 @@
 import { omit } from 'lodash';
-import { Control, useController } from 'react-hook-form';
+import { useController } from 'react-hook-form';
+
+import { HookFormControl } from '@interfaces/Common/commonTypes';
 
 import UncontrolledSelect, { UncontrolledSelectProps } from './UncontrolledSelect';
 
 export interface SelectProps extends UncontrolledSelectProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  control?: Control<any>;
+  control?: HookFormControl;
   errorFactory?: (error: string) => string | undefined;
 }
 

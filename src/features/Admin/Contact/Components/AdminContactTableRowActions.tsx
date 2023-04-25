@@ -7,8 +7,8 @@ import TableRowAction from '../../../Common/Components/Table/TableRowAction';
 
 interface AdminContactTableRowActionsProps {
   id: Key;
-  onClickEdit: TableRowActionClickHandlerType<Key>;
-  onClickDelete: TableRowActionClickHandlerType<Key>;
+  onClickEdit: TableRowActionClickHandlerType;
+  onClickDelete: TableRowActionClickHandlerType;
 }
 
 const AdminContactTableRowActions = ({

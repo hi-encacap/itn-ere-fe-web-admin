@@ -7,7 +7,7 @@ import TableRowAction from '@components/Table/TableRowAction';
 
 interface AdminLocationAddressBookTableRowActionsProps {
   id: Key;
-  onClickDelete: TableRowActionClickHandlerType<Key>;
+  onClickDelete: TableRowActionClickHandlerType;
 }
 
 const AdminLocationAddressBookTableRowActions = ({

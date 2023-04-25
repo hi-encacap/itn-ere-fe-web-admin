@@ -7,7 +7,7 @@ import TableRowAction from '@components/Table/TableRowAction';
 
 interface AdminProvinceWardTableRowActionsProps {
   code: Key;
-  onClickDelete: TableRowActionClickHandlerType<Key>;
+  onClickDelete: TableRowActionClickHandlerType;
 }
 
 const AdminLocationWardTableRowActions = ({ code, onClickDelete }: AdminProvinceWardTableRowActionsProps) => {

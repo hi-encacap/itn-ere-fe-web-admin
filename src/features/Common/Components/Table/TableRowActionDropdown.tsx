@@ -7,7 +7,7 @@ import TableRowActionDropdownMenu from './TableRowActionDropdownMenu';
 
 export interface TableRowActionDropdownProps {
   id: Key;
-  items: Array<TableRowActionDropdownItemType<Key>>;
+  items: TableRowActionDropdownItemType[];
 }
 
 const TableRowActionDropdown = ({ id, items }: TableRowActionDropdownProps) => {
