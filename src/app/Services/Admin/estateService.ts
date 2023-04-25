@@ -112,16 +112,14 @@ const updateEstateById = async (id: Key, estate: EstateFormDataType): Promise<Es
 };
 
 const getEstateStatuses = async (): Promise<Array<Record<'name', string>>> => {
-  return await new Promise((resolve) => {
-    resolve([
-      {
-        name: ESTATE_STATUS_ENUM.PUBLISHED,
-      },
-      {
-        name: ESTATE_STATUS_ENUM.UNPUBLISHED,
-      },
-    ]);
-  });
+  return await Promise.resolve([
+    {
+      name: ESTATE_STATUS_ENUM.PUBLISHED,
+    },
+    {
+      name: ESTATE_STATUS_ENUM.UNPUBLISHED,
+    },
+  ]);
 };
 
 export {
