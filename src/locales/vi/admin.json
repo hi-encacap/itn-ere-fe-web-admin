@@ -525,8 +525,13 @@
         "header": {
           "create": "Thêm bất động sản"
         },
+        "tab": {
+          "completed": "Đã hoàn thiện",
+          "draft": "Nháp"
+        },
         "table": {
           "column": {
+            "status": "Trạng thái",
             "avatar": "Ảnh đại diện",
             "province": "Tỉnh/thành phố",
             "district": "Quận/huyện",

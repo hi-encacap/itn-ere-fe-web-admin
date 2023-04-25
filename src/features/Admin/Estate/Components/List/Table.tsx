@@ -1,4 +1,3 @@
-import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
 import { SortingState, createColumnHelper } from '@tanstack/react-table';
 import { isEqual } from 'lodash';
 import { Key, useCallback, useEffect, useMemo, useState } from 'react';
@@ -9,13 +8,15 @@ import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
 import { EstateDataType } from '@interfaces/Admin/estateTypes';
 import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
 import { ColumnDef, TableColumnFilterState } from '@interfaces/Common/elementTypes';
-import { adminLocationService } from '@services/index';
+import { adminEstateService, adminLocationService } from '@services/index';
 
 import { ConfirmationModal } from '@components/Modal';
 import Table from '@components/Table/Table';
 
 import useToast from '@hooks/useToast';
 import { generateColumnFilterObject } from '@utils/helpers';
+
+import { ESTATE_LIST_TAB_ENUM } from '@admin/Estate/Constants/enums';
 
 import AdminEstateListTableBody from './TableBody';
 
@@ -41,6 +42,9 @@ const AdminEstateListTable = ({
   const { t } = useTranslation('admin', {
     keyPrefix: 'admin:page.estate.list',
   });
+  const { t: tEstate } = useTranslation('admin', {
+    keyPrefix: 'admin:page.estate',
+  });
   const toast = useToast();
 
   const [pagination, setPagination] = useState<TablePaginationType>({
@@ -51,7 +55,7 @@ const AdminEstateListTable = ({
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
   const [queryParams, setQueryParams] = useState<BaseGetListQueryType>({
     ...pagination,
-    status: ESTATE_STATUS_ENUM.PUBLISHED,
+    tab: ESTATE_LIST_TAB_ENUM.COMPLETED,
   });
   const [isShowUnPublishConfirmModal, setIsShowUnPublishConfirmModal] = useState(false);
   const [isShowPublishConfirmModal, setIsShowPublishConfirmModal] = useState(false);
@@ -59,7 +63,7 @@ const AdminEstateListTable = ({
   const [searchParams] = useSearchParams();
 
   const selectedTabIdParam = useMemo(
-    () => searchParams.get('tab_id') ?? ESTATE_STATUS_ENUM.PUBLISHED,
+    () => searchParams.get('tab_id') ?? ESTATE_LIST_TAB_ENUM.COMPLETED,
     [searchParams],
   );
 
@@ -72,6 +76,17 @@ const AdminEstateListTable = ({
 
   const columns: Array<ColumnDef<EstateDataType>> = useMemo(
     () => [
+      columnHelper.accessor((row) => row.ward, {
+        id: 'status',
+        header: String(t('table.column.status')),
+        meta: {
+          filterBy: 'statuses',
+          filterValueBy: 'name',
+          filterSearchBy: 'name',
+          getFilterOptions: adminEstateService.getEstateStatuses,
+          filterLabelFormatter: (value) => tEstate(`status.${value as string}`),
+        },
+      }),
       columnHelper.accessor((row) => row.province, {
         id: 'province',
         header: String(t('table.column.province')),
@@ -162,8 +177,6 @@ const AdminEstateListTable = ({
     const newQueryParams: BaseGetListQueryType = {
       ...queryParams,
       ...generateColumnFilterObject(columnFilters),
-      page: pagination.page,
-      limit: pagination.limit,
     };
 
     if (isEqual(newQueryParams, queryParams)) {
@@ -176,7 +189,7 @@ const AdminEstateListTable = ({
   useEffect(() => {
     setQueryParams((prevQueryParams) => ({
       ...prevQueryParams,
-      status: selectedTabIdParam,
+      tab: selectedTabIdParam,
       page: 1,
     }));
   }, [selectedTabIdParam]);
@@ -197,7 +210,6 @@ const AdminEstateListTable = ({
         sorting={columnSorting}
         isLoading={isLoading}
         tableBodyProps={{
-          status: selectedTabIdParam,
           onClickUnPublish: handleClickUnPublish,
           onClickPublish: handleClickPublish,
           onMoveToTop,

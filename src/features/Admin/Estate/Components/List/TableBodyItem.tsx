@@ -24,7 +24,6 @@ import AdminEstateListTableBodyItemBadge from './TableBodyItemBadge';
 
 interface AdminEstateListTableBodyItemProps {
   data: EstateDataType | EstateDraftDataType;
-  status: ESTATE_STATUS_ENUM;
   onClickDelete?: (id: number) => void;
   onMoveToTop?: (id: number) => Promise<void>;
   onClickUnPublish?: (id: number) => void;
@@ -34,7 +33,6 @@ interface AdminEstateListTableBodyItemProps {
 
 const AdminEstateListTableBodyItem = ({
   data,
-  status,
   onClickDelete,
   onMoveToTop,
   onClickUnPublish,
@@ -177,17 +175,17 @@ const AdminEstateListTableBodyItem = ({
               <HiDotsHorizontal size={20} />
             </Button>
           </DropdownContainerV2>
-          {status === ESTATE_STATUS_ENUM.UNPUBLISHED && (
+          {data.status === ESTATE_STATUS_ENUM.UNPUBLISHED && (
             <Button className="flex-1 rounded-sm" size="sm" disabled={isLoading} onClick={handleClickPublish}>
               {t('table.action.publish')}
             </Button>
           )}
-          {status === ESTATE_STATUS_ENUM.DRAFT && (
+          {data.status === ESTATE_STATUS_ENUM.DRAFT && (
             <Button className="flex-1 rounded-sm" size="sm" disabled={isLoading} onClick={handleClickEdit}>
               {t('table.action.edit')}
             </Button>
           )}
-          {status === ESTATE_STATUS_ENUM.PUBLISHED && (
+          {data.status === ESTATE_STATUS_ENUM.PUBLISHED && (
             <Button
               className="flex-1 rounded-sm"
               size="sm"

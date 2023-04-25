@@ -1,3 +1,4 @@
+import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
 import { omit } from 'lodash';
 import { Key } from 'react';
 
@@ -23,7 +24,10 @@ const getEstates = async (
   queryParam: BaseGetListQueryType,
 ): Promise<ResponseWithMetaType<EstateDataType[]>> => {
   const response = await axiosInstance.get(ADMIN_ESTATE_API_PATH.ESTATES_PATH, {
-    params: queryParam,
+    params: {
+      ...queryParam,
+      orderBy: 'upvotedAt',
+    },
   });
 
   return response.data;
@@ -107,6 +111,19 @@ const updateEstateById = async (id: Key, estate: EstateFormDataType): Promise<Es
   return response.data.data;
 };
 
+const getEstateStatuses = async (): Promise<Array<Record<'name', string>>> => {
+  return await new Promise((resolve) => {
+    resolve([
+      {
+        name: ESTATE_STATUS_ENUM.PUBLISHED,
+      },
+      {
+        name: ESTATE_STATUS_ENUM.UNPUBLISHED,
+      },
+    ]);
+  });
+};
+
 export {
   createEstate,
   createEstateDraft,
@@ -114,6 +131,7 @@ export {
   getEstateById,
   getEstateDraftById,
   getEstateDrafts,
+  getEstateStatuses,
   getEstates,
   moveEstateToTopById,
   publishEstateById,
