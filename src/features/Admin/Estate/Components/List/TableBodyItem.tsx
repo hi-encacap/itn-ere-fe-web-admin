@@ -121,7 +121,12 @@ const AdminEstateListTableBodyItem = ({
       return [deleteOption];
     }
 
-    return [moveTopTopOption, { id: 'divider', type: DROPDOWN_MENU_TYPE_ENUM.DIVIDER }, deleteOption];
+    return [
+      moveTopTopOption,
+      editOption,
+      { id: 'divider', type: DROPDOWN_MENU_TYPE_ENUM.DIVIDER },
+      deleteOption,
+    ];
   }, [handleClickDelete]);
 
   return (

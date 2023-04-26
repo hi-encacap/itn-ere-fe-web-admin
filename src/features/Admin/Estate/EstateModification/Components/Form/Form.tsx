@@ -19,6 +19,7 @@ import { estateFormSchema } from '@admin/Estate/Schemas/estateFormSchema';
 import AdminEstateModificationPublishingModal from '../PublishingModal/PublishingModal';
 import AdminEstateModificationFormButtonDraft from './Button/Draft';
 import AdminEstateModificationFormButtonNew from './Button/New';
+import AdminEstateModificationFormButtonPublished from './Button/Published';
 import AdminEstateModificationFormButtonUnPublished from './Button/UnPublished';
 import AdminEstateModificationFormContact from './Contact/Contact';
 import AdminEstateModificationFormDetail from './Detail/Detail';
@@ -266,6 +267,12 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
               isSubmitting={isSubmitting}
               onSubmit={handleSaveDraft}
               onSaveAndPublish={handleSaveAndPublish}
+            />
+          )}
+          {id && estateStatus === ESTATE_STATUS_ENUM.PUBLISHED && (
+            <AdminEstateModificationFormButtonPublished
+              isSubmitting={isSubmitting}
+              onSubmit={handleUpdateEstate}
             />
           )}
         </div>
