@@ -122,9 +122,16 @@ const getEstateStatuses = async (): Promise<Array<Record<'name', string>>> => {
   ]);
 };
 
+const deleteEstateById = async (id: Key): Promise<void> => {
+  const response = await axiosInstance.delete(ADMIN_ESTATE_API_PATH.ESTATE_PATH(id));
+
+  return response.data.data;
+};
+
 export {
   createEstate,
   createEstateDraft,
+  deleteEstateById,
   deleteEstateDraftById,
   getEstateById,
   getEstateDraftById,
