@@ -137,7 +137,7 @@ const AdminEstateListTable = ({
     setSelectedEstateId(id);
   }, []);
 
-  const handleClickDelete = useCallback(async (id: Key) => {
+  const handleClickDelete = useCallback((id: Key) => {
     setIsShowDeleteConfirmModal(true);
     setSelectedEstateId(id);
   }, []);
