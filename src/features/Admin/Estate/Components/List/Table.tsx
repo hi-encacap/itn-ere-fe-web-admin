@@ -18,6 +18,7 @@ import { generateColumnFilterObject } from '@utils/helpers';
 
 import { ESTATE_LIST_TAB_ENUM } from '@admin/Estate/Constants/enums';
 
+import AdminEstateDeleteConfirmationModal from '../AdminEstateDeleteConfirmationModal';
 import AdminEstateListTableBody from './TableBody';
 
 interface AdminEstateListTableProps {
@@ -59,6 +60,7 @@ const AdminEstateListTable = ({
   });
   const [isShowUnPublishConfirmModal, setIsShowUnPublishConfirmModal] = useState(false);
   const [isShowPublishConfirmModal, setIsShowPublishConfirmModal] = useState(false);
+  const [isShowDeleteConfirmModal, setIsShowDeleteConfirmModal] = useState(false);
   const [selectedEstateId, setSelectedEstateId] = useState<Key | null>(null);
   const [searchParams] = useSearchParams();
 
@@ -68,7 +70,7 @@ const AdminEstateListTable = ({
   );
 
   const selectedEstate = useMemo(
-    () => data.find((estate) => estate.id === selectedEstateId),
+    () => data.find((estate) => estate.id === selectedEstateId) ?? null,
     [data, selectedEstateId],
   );
 
@@ -135,9 +137,15 @@ const AdminEstateListTable = ({
     setSelectedEstateId(id);
   }, []);
 
+  const handleClickDelete = useCallback((id: Key) => {
+    setIsShowDeleteConfirmModal(true);
+    setSelectedEstateId(id);
+  }, []);
+
   const handleCloseModal = useCallback(() => {
     setIsShowUnPublishConfirmModal(false);
     setIsShowPublishConfirmModal(false);
+    setIsShowDeleteConfirmModal(false);
     setSelectedEstateId(null);
   }, []);
 
@@ -214,6 +222,7 @@ const AdminEstateListTable = ({
           onClickPublish: handleClickPublish,
           onMoveToTop,
           onInteraction: handleInteraction,
+          onClickDelete: handleClickDelete,
         }}
         // #skipcq: JS-0417
         renderTableBody={(props) => <AdminEstateListTableBody {...props} />}
@@ -240,6 +249,12 @@ const AdminEstateListTable = ({
         status="danger"
         onClose={handleCloseModal}
         onConfirm={handleConfirmPublish}
+      />
+      <AdminEstateDeleteConfirmationModal
+        data={selectedEstate}
+        isOpen={isShowDeleteConfirmModal}
+        onClose={handleCloseModal}
+        onSuccess={handleInteraction}
       />
     </>
   );

@@ -9,7 +9,7 @@ import AlertIcon from './AlertIcon';
 export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
   type: AlertType;
   title: string;
-  message?: string;
+  message?: string | ReactNode;
   children?: ReactNode;
   trackingCode?: string;
   onClose?: () => void;

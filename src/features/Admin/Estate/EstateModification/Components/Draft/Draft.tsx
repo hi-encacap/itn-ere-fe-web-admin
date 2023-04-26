@@ -5,9 +5,8 @@ import { EstateDraftDataType } from '@interfaces/Admin/estateTypes';
 import { adminEstateService } from '@services/index';
 
 import { LoadingSkeleton } from '@components/Loading';
-import { ConfirmationModal } from '@components/Modal';
 
-import useToast from '@hooks/useToast';
+import AdminEstateDraftDeleteConfirmationModal from '@admin/Estate/Components/AdminEstateDraftDeleteConfirmationModal';
 
 import AdminEstateModificationFormTitle from '../Form/Title';
 import AdminEstateModificationDraftEmpty from './Empty';
@@ -17,7 +16,6 @@ const AdminEstateModificationDraft = () => {
   const { t } = useTranslation('admin', {
     keyPrefix: 'admin:page.estate',
   });
-  const toast = useToast();
 
   const [drafts, setDrafts] = useState<EstateDraftDataType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -55,24 +53,6 @@ const AdminEstateModificationDraft = () => {
     setIsShowDeleteModal(false);
   }, []);
 
-  const handleConfirmDelete = useCallback(async () => {
-    if (!selectedDraftId) {
-      return;
-    }
-
-    try {
-      await adminEstateService.deleteEstateDraftById(selectedDraftId);
-
-      toast.success(t('list.notification.deletedDraft'));
-
-      void getData();
-    } catch (error) {
-      toast.error(t('list.notification.deleteDraftFailed'));
-    } finally {
-      handleCloseModal();
-    }
-  }, [getData, selectedDraftId, toast, t]);
-
   useEffect(() => {
     void getData();
   }, [getData]);
@@ -97,12 +77,11 @@ const AdminEstateModificationDraft = () => {
           {isLoading && <LoadingSkeleton className="h-32" />}
         </div>
       </div>
-      <ConfirmationModal
-        title={t('list.deletion.title', { title: selectedDraft?.title })}
-        message={t('list.deletion.message')}
+      <AdminEstateDraftDeleteConfirmationModal
         isOpen={isShowDeleteModal}
-        onConfirm={handleConfirmDelete}
+        data={selectedDraft}
         onClose={handleCloseModal}
+        onSuccess={getData}
       />
     </>
   );

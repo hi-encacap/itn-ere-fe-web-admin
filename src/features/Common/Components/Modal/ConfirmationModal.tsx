@@ -83,7 +83,7 @@ const ConfirmationModal = ({
         <div className={getClassNameByStatus(status)}>
           <FiAlertTriangle size={18} className={iconClassName} />
         </div>
-        <div className="text-center sm:mx-6 sm:mt-0 sm:text-left">
+        <div className="text-center sm:ml-6 sm:mr-8 sm:mt-0 sm:text-left">
           <h3 className="mt-2 text-lg font-semibold leading-6 text-gray-900">{title}</h3>
           <div className="mt-4">
             <div className="text whitespace-pre-line text-gray-500">{message}</div>

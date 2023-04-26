@@ -555,7 +555,9 @@
           "moveToTopFailed": "Hiện không thể đưa bài viết lên đầu. Vui lòng thử lại sau.",
           "emptyDescription": "Bài viết không có mô tả.",
           "deletedDraft": "Bài viết nháp đã được xóa.",
-          "deleteDraftFailed": "Hiện không thể xóa bài viết nháp. Vui lòng thử lại sau."
+          "deleteDraftFailed": "Hiện không thể xóa bài viết nháp. Vui lòng thử lại sau.",
+          "deletedCompleted": "Bài viết đã được xóa.",
+          "deleteCompletedFailed": "Hiện không thể xóa bài viết. Vui lòng thử lại sau."
         },
         "publication": {
           "title": {
@@ -569,7 +571,14 @@
         },
         "deletion": {
           "title": "Xóa bài viết '{{title}}'?",
-          "message": "Bạn có chắc muốn xóa bài viết này? Bài viết sẽ bị xóa vĩnh viễn khỏi hệ thống. Thao tác này không thể hoàn tác."
+          "message": "Bạn có chắc muốn xóa bài viết này? Bài viết sẽ bị xóa vĩnh viễn khỏi hệ thống. Thao tác này không thể hoàn tác.",
+          "warning": {
+            "message": {
+              "published": "Tất cả tài nguyên khác thuộc bài viết này cũng sẽ bị xóa vĩnh viễn khỏi hệ thống. Nếu chỉ muốn ẩn bài viết khỏi các trang công khai của bạn, hãy chọn <strong>Huỷ xuất bản</strong>",
+              "unpublished": "Tất cả tài nguyên khác thuộc bài viết này cũng sẽ bị xóa vĩnh viễn khỏi hệ thống."
+            },
+            "title": "Cảnh báo"
+          }
         }
       },
       "form": {
