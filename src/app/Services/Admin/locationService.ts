@@ -1,9 +1,9 @@
+import { ILocationDistrict, ILocationProvince } from '@encacap-group/types/dist/re';
+
 import { ADMIN_LOCATION_API_PATH } from '@constants/apis';
 import {
   LocationAddressBookDataType,
-  LocationDistrictDataType,
   LocationDistrictGetListQueryType,
-  LocationProvinceDataType,
   LocationProvinceWebsiteDataType,
   LocationProvinceWebsiteFormDataType,
   LocationWardGetListQueryType,
@@ -16,14 +16,14 @@ import axiosInstance from '@utils/Http/axiosInstance';
 
 const getProvinces = async (
   query?: BaseGetListQueryType,
-): Promise<ResponseWithMetaType<LocationProvinceDataType[]>> => {
+): Promise<ResponseWithMetaType<ILocationProvince[]>> => {
   const response = await axiosInstance.get(ADMIN_LOCATION_API_PATH.PROVINCES_PATH, {
     params: query,
   });
   return response.data;
 };
 
-const getAllProvinces = async (): Promise<LocationProvinceDataType[]> => {
+const getAllProvinces = async (): Promise<ILocationProvince[]> => {
   const response = await getProvinces();
   return response.data;
 };
@@ -41,7 +41,7 @@ const deleteProvinceByCode = async (code: string): Promise<void> => {
 
 const getDistricts = async (
   query?: LocationDistrictGetListQueryType,
-): Promise<ResponseWithMetaType<LocationDistrictDataType[]>> => {
+): Promise<ResponseWithMetaType<ILocationDistrict[]>> => {
   const response = await axiosInstance.get(ADMIN_LOCATION_API_PATH.DISTRICTS_PATH, {
     params: query,
   });
@@ -49,7 +49,7 @@ const getDistricts = async (
   return response.data;
 };
 
-const getAllDistricts = async (): Promise<LocationDistrictDataType[]> => {
+const getAllDistricts = async (): Promise<ILocationDistrict[]> => {
   const response = await getDistricts();
   return response.data;
 };
@@ -109,19 +109,19 @@ const deleteAddressBookById = async (id: number): Promise<void> => {
 };
 
 export {
-  getProvinces,
-  getAllProvinces,
-  deleteProvinceByCode,
-  createProvince,
-  getDistricts,
-  getAllDistricts,
   createDistrict,
-  deleteDistrictByCode,
-  getWards,
-  getAllWards,
+  createProvince,
   createWard,
+  deleteAddressBookById,
+  deleteDistrictByCode,
+  deleteProvinceByCode,
   deleteWardByCode,
   getAddressBooks,
   getAllAddressBooks,
-  deleteAddressBookById,
+  getAllDistricts,
+  getAllProvinces,
+  getAllWards,
+  getDistricts,
+  getProvinces,
+  getWards,
 };

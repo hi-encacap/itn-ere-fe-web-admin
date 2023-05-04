@@ -1,4 +1,4 @@
-import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
+import { ESTATE_STATUS_ENUM, IEstate } from '@encacap-group/types/dist/re';
 import dayjs from 'dayjs';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,7 +10,7 @@ import striptags from 'striptags';
 
 import { DROPDOWN_MENU_TYPE_ENUM } from '@constants/enums';
 import { ADMIN_PATH } from '@constants/urls';
-import { EstateDataType, EstateDraftDataType } from '@interfaces/Admin/estateTypes';
+import { EstateDraftDataType } from '@interfaces/Admin/estateTypes';
 
 import DropdownContainerV2 from '@components/Dropdown/DropdownContainerV2';
 import { DropdownMenuItemType } from '@components/Dropdown/DropdownContainerV2MenuItem';
@@ -18,12 +18,12 @@ import { Button } from '@components/Form';
 import LoadingSpinner from '@components/Loading/LoadingSpinner';
 
 import useToast from '@hooks/useToast';
-import { getImageURL } from '@utils/helpers';
+import { getImageURL } from '@utils/image';
 
 import AdminEstateListTableBodyItemBadge from './TableBodyItemBadge';
 
 interface AdminEstateListTableBodyItemProps {
-  data: EstateDataType | EstateDraftDataType;
+  data: IEstate | EstateDraftDataType;
   onClickDelete?: (id: number) => void;
   onMoveToTop?: (id: number) => Promise<void>;
   onClickUnPublish?: (id: number) => void;

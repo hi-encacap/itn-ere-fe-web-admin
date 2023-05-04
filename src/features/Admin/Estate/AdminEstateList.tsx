@@ -1,9 +1,8 @@
-import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
+import { ESTATE_STATUS_ENUM, IEstate } from '@encacap-group/types/dist/re';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 
-import { EstateDataType } from '@interfaces/Admin/estateTypes';
 import { BaseGetListQueryType } from '@interfaces/Common/commonTypes';
 import { adminEstateService } from '@services/index';
 
@@ -21,7 +20,7 @@ const AdminEstateList = () => {
     keyPrefix: 'admin:page.estate',
   });
 
-  const [estateData, setEstateData] = useState<EstateDataType[]>([]);
+  const [estateData, setEstateData] = useState<IEstate[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [totalRows, setTotalRows] = useState(0);

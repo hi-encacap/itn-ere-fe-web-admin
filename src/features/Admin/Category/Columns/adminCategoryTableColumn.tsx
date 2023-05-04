@@ -1,15 +1,14 @@
-import { DEFAULT_CLOUDFLARE_VARIANT_ENUM } from '@encacap-group/types/dist/re';
+import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, ICategory } from '@encacap-group/types/dist/re';
 import { createColumnHelper } from '@tanstack/react-table';
 import { TFunction } from 'i18next';
 
-import { CategoryDataType } from '@interfaces/Admin/categoryTypes';
 import { ColumnDef, TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes';
 import { adminCategoryService } from '@services/index';
 
 import TableImageColumn from '@components/Table/TableImageColumn/TableImageColumn';
 import TableImageColumnSkeleton from '@components/Table/TableImageColumn/TableImageColumnSkeleton';
 
-import { getImageURL } from '@utils/helpers';
+import { getImageURL } from '@utils/image';
 
 import AdminCategoryTableRowActions from '../Components/AdminCategoryTableRowActions';
 
@@ -19,9 +18,9 @@ interface OnClickHandlers {
 }
 
 const createCategoryTableColumns = (t: TFunction, { onClickEdit, onClickDelete }: OnClickHandlers) => {
-  const columnHelper = createColumnHelper<CategoryDataType>();
+  const columnHelper = createColumnHelper<ICategory>();
 
-  const tableExampleColumns: Array<ColumnDef<CategoryDataType>> = [
+  const tableExampleColumns: Array<ColumnDef<ICategory>> = [
     columnHelper.accessor((row) => row.thumbnail, {
       id: 'thumbnail',
       header: String(t('table.columns.thumbnail')),

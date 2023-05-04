@@ -1,3 +1,4 @@
+import { IContact } from '@encacap-group/types/dist/re';
 import { RowSelectionState, SortingState } from '@tanstack/react-table';
 import { isEqual, keys } from 'lodash';
 import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
@@ -5,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
 import { TABLE_ROW_SELECTION_TYPE_ENUM } from '@constants/enums';
-import { ContactDataType } from '@interfaces/Admin/contactTypes';
 import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { adminContactService } from '@services/index';
@@ -23,9 +23,9 @@ import AdminContactHeaderAction from './Components/AdminContactHeaderAction';
 import AdminContactModificationModal from './Components/AdminContactModificationModal';
 
 interface AdminContactListProps {
-  defaultSelection?: ContactDataType[];
+  defaultSelection?: IContact[];
   isShowTableOnly?: boolean;
-  onChangeSelection?: (contact: ContactDataType[]) => void;
+  onChangeSelection?: (contact: IContact[]) => void;
 }
 
 const AdminContactList = ({
@@ -38,7 +38,7 @@ const AdminContactList = ({
   });
   const toast = useToast();
 
-  const [contactData, setContactData] = useState<ContactDataType[]>([]);
+  const [contactData, setContactData] = useState<IContact[]>([]);
   const [pagination, setPagination] = useState<TablePaginationType>({
     page: 1,
     limit: DEFAULT_PAGE_SIZE,
@@ -51,7 +51,7 @@ const AdminContactList = ({
   });
   const [isShowDeleteConfirmationModal, setIsShowDeleteConfirmationModal] = useState(false);
   const [isShowModificationModal, setIsShowModificationModal] = useState(false);
-  const [selectedContact, setSelectedContact] = useState<ContactDataType | null>(null);
+  const [selectedContact, setSelectedContact] = useState<IContact | null>(null);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const getContactData = useCallback(() => {

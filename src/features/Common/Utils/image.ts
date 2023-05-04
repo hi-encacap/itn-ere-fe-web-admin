@@ -1,10 +1,9 @@
-import { DEFAULT_CLOUDFLARE_VARIANT_ENUM } from '@encacap-group/types/dist/re';
+import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, ICloudflareImageResponse } from '@encacap-group/types/dist/re';
 import { nanoid } from '@reduxjs/toolkit';
 
 import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
-import { ImageDataType } from '@interfaces/Common/imageTypes';
 
-import { getImageURL, randomStringPrefix } from './helpers';
+import { randomStringPrefix } from './helpers';
 
 const convertToImageDataFromFiles = (files: FileList): FormImageInputDataType[] => {
   return Array.from(files).map((file) => ({
@@ -15,7 +14,7 @@ const convertToImageDataFromFiles = (files: FileList): FormImageInputDataType[] 
 };
 
 const generateImageFormData = (
-  data: ImageDataType,
+  data: ICloudflareImageResponse,
   variant = DEFAULT_CLOUDFLARE_VARIANT_ENUM.PUBLIC,
 ): FormImageInputDataType => {
   return {
@@ -26,7 +25,7 @@ const generateImageFormData = (
 };
 
 const generateImagesFormData = (
-  data: ImageDataType[],
+  data: ICloudflareImageResponse[],
   variant = DEFAULT_CLOUDFLARE_VARIANT_ENUM.PUBLIC,
 ): FormImageInputDataType[] => {
   return data.map((image) => generateImageFormData(image, variant));
@@ -38,7 +37,7 @@ const mapImageDataToResponseData = <T>(data: T, key: string): T => {
   }
 
   if (key in data) {
-    const image = data[key as keyof T] as ImageDataType | ImageDataType[];
+    const image = data[key as keyof T] as ICloudflareImageResponse | ICloudflareImageResponse[];
 
     if (Array.isArray(image)) {
       return {
@@ -56,9 +55,21 @@ const mapImageDataToResponseData = <T>(data: T, key: string): T => {
   return data;
 };
 
+const getImageURL = (
+  image: ICloudflareImageResponse,
+  variant = DEFAULT_CLOUDFLARE_VARIANT_ENUM.PUBLIC,
+): string => {
+  if (!image) {
+    return '';
+  }
+
+  return image[variant] ?? image[DEFAULT_CLOUDFLARE_VARIANT_ENUM.PUBLIC];
+};
+
 export {
   convertToImageDataFromFiles,
   generateImageFormData,
   generateImagesFormData,
+  getImageURL,
   mapImageDataToResponseData,
 };

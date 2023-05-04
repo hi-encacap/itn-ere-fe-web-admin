@@ -1,10 +1,9 @@
-import { UNIT_PRICE_TYPE_ENUM } from '@encacap-group/types/dist/re';
+import { IUnitPrice, UNIT_PRICE_TYPE_ENUM } from '@encacap-group/types/dist/re';
 import { useCallback, useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
-import { UnitPriceDataType } from '@interfaces/Common/unitPriceTypes';
 import { unitPriceService } from '@services/index';
 
 import { Input } from '@components/Form';
@@ -14,7 +13,7 @@ const AdminEstateModificationFormGeneralAreaInputGroup = () => {
     keyPrefix: 'admin:page.estate.modification.form.general.form',
   });
 
-  const [unitPriceOptions, setUnitPriceOptions] = useState<UnitPriceDataType[]>([]);
+  const [unitPriceOptions, setUnitPriceOptions] = useState<IUnitPrice[]>([]);
 
   const { control, register, setValue } = useFormContext<EstateFormDataType>();
 

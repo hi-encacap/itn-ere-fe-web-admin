@@ -1453,10 +1453,10 @@
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.7.4.tgz#19bf0f5af19149111c40d98bb0cf82119f5d9eeb"
   integrity sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==
 
-"@encacap-group/types@^1.2.4":
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/@encacap-group/types/-/types-1.2.4.tgz#aada342128cde628e488804aa14784921de1a8e1"
-  integrity sha512-CAm2UU1Mc0noLMukBdXLtJT+2hEDzQ073uEBPNyzjqJc+LBKqvsE5o4RMyy3/ZS9zWC7p1N/BH/jzWyTladezg==
+"@encacap-group/types@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@encacap-group/types/-/types-1.5.0.tgz#aec1df44426723a6df7330180abec77ea0ce4ff3"
+  integrity sha512-NOZrH4KC6N5Oxw17KeMETrrrSTHoRZXs6mfNVuDD59YTVepNc/idsvOlevKdgVmfFIXRpHbK5sbm0M3TmPCLIw==
 
 "@eslint/eslintrc@^1.3.3":
   version "1.3.3"

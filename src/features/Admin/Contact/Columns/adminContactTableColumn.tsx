@@ -1,14 +1,13 @@
-import { DEFAULT_CLOUDFLARE_VARIANT_ENUM } from '@encacap-group/types/dist/re';
+import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, IContact } from '@encacap-group/types/dist/re';
 import { createColumnHelper } from '@tanstack/react-table';
 import { TFunction } from 'i18next';
 
-import { ContactDataType } from '@interfaces/Admin/contactTypes';
 import { ColumnDef, TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes';
 
 import TableImageColumn from '@components/Table/TableImageColumn/TableImageColumn';
 import TableImageColumnSkeleton from '@components/Table/TableImageColumn/TableImageColumnSkeleton';
 
-import { getImageURL } from '@utils/helpers';
+import { getImageURL } from '@utils/image';
 
 import AdminContactTableRowActions from '../Components/AdminContactTableRowActions';
 
@@ -18,9 +17,9 @@ interface OnClickHandlers {
 }
 
 const createContactTableColumns = (t: TFunction, { onClickEdit, onClickDelete }: OnClickHandlers) => {
-  const columnHelper = createColumnHelper<ContactDataType>();
+  const columnHelper = createColumnHelper<IContact>();
 
-  const tableExampleColumns: Array<ColumnDef<ContactDataType>> = [
+  const tableExampleColumns: Array<ColumnDef<IContact>> = [
     columnHelper.accessor((row) => row.avatar, {
       id: 'avatar',
       header: String(t('table.column.avatar')),

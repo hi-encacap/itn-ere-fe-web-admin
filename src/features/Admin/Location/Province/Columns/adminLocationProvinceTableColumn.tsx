@@ -1,7 +1,7 @@
+import { ILocationProvince } from '@encacap-group/types/dist/re';
 import { createColumnHelper } from '@tanstack/react-table';
 import { TFunction } from 'i18next';
 
-import { LocationProvinceDataType } from '@interfaces/Admin/locationTypes';
 import { ColumnDef, TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes';
 
 import TableRowActionSkeleton from '@components/Table/TableRowActionSkeleton';
@@ -13,9 +13,9 @@ interface OnClickHandlers {
 }
 
 const createLocationProvinceTableColumns = (t: TFunction, { onClickDelete }: OnClickHandlers) => {
-  const columnHelper = createColumnHelper<LocationProvinceDataType>();
+  const columnHelper = createColumnHelper<ILocationProvince>();
 
-  const tableExampleColumns: Array<ColumnDef<LocationProvinceDataType>> = [
+  const tableExampleColumns: Array<ColumnDef<ILocationProvince>> = [
     columnHelper.accessor((row) => row.code, {
       id: 'code',
       header: String(t('table.column.code')),

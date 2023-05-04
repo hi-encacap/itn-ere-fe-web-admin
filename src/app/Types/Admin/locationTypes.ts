@@ -1,33 +1,21 @@
-import { BaseGetListQueryType } from '@interfaces/Common/commonTypes';
+import { ILocationDistrict, ILocationProvince, ILocationWard } from '@encacap-group/types/dist/re';
 
-export interface LocationProvinceDataType {
-  code: string;
-  name: string;
-  ghnRefId: number;
-}
+import { BaseGetListQueryType } from '@interfaces/Common/commonTypes';
 
 export interface LocationProvinceWebsiteDataType {
   provinceCode: string;
   websiteId: number;
-  province: LocationProvinceDataType;
+  province: ILocationProvince;
 }
 
 export interface LocationProvinceWebsiteFormDataType {
   ghnRefId: number | null;
 }
 
-export interface LocationDistrictDataType {
-  code: string;
-  name: string;
-  provinceCode: string;
-  ghnRefId: number;
-  province: LocationProvinceDataType;
-}
-
 export interface LocationDistrictWebsiteDataType {
   districtCode: string;
   websiteId: number;
-  district: LocationDistrictDataType;
+  district: ILocationDistrict;
 }
 
 export interface LocationDistrictWebsiteFormDataType {
@@ -39,19 +27,11 @@ export interface LocationDistrictGetListQueryType extends BaseGetListQueryType {
   provinceCode?: string;
 }
 
-export interface LocationWardDataType {
-  code: string;
-  name: string;
-  districtCode: string;
-  ghnRefId: number;
-  district: LocationDistrictDataType;
-}
-
 export interface LocationWardWebsiteDataType {
   code: string;
   name: string;
   districtCode: string;
-  district: LocationDistrictDataType;
+  district: ILocationDistrict;
 }
 
 export interface LocationWardWebsiteFormDataType {
@@ -70,9 +50,9 @@ export interface LocationAddressBookDataType {
   wardCode: string;
   districtCode: string;
   provinceCode: string;
-  ward: LocationWardDataType;
-  district: LocationDistrictDataType;
-  province: LocationProvinceDataType;
+  ward: ILocationWard;
+  district: ILocationDistrict;
+  province: ILocationProvince;
   websiteId: number;
   latitude: number | null;
   longitude: number | null;

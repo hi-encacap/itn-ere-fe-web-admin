@@ -11,7 +11,7 @@ import { EstateDraftDataType } from '@interfaces/Admin/estateTypes';
 import DropdownContainerV2 from '@components/Dropdown/DropdownContainerV2';
 import { DropdownMenuItemType } from '@components/Dropdown/DropdownContainerV2MenuItem';
 
-import { getImageURL } from '@utils/helpers';
+import { getImageURL } from '@utils/image';
 
 interface AdminEstateModificationDraftItemProps {
   draft: EstateDraftDataType;

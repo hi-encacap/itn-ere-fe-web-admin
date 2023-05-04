@@ -1,4 +1,4 @@
-import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
+import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, ESTATE_STATUS_ENUM, IEstate } from '@encacap-group/types/dist/re';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AxiosError } from 'axios';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { ADMIN_PATH } from '@constants/urls';
-import { EstateDataType, EstateDraftDataType, EstateFormDataType } from '@interfaces/Admin/estateTypes';
+import { EstateDraftDataType, EstateFormDataType } from '@interfaces/Admin/estateTypes';
 import { adminEstateService } from '@services/index';
 
 import useToast from '@hooks/useToast';
@@ -66,7 +66,7 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
   });
 
   const setFormValue = useCallback(
-    (data: EstateDataType | EstateDraftDataType) => {
+    (data: IEstate | EstateDraftDataType) => {
       setValue('id', data.id);
       setValue('title', data.title);
       setValue('customId', data.customId);

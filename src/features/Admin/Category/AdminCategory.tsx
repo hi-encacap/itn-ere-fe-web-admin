@@ -1,10 +1,10 @@
+import { ICategory } from '@encacap-group/types/dist/re';
 import { SortingState } from '@tanstack/react-table';
 import { isEqual } from 'lodash';
 import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { CategoryDataType } from '@interfaces/Admin/categoryTypes';
 import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { adminCategoryService } from '@services/index';
@@ -27,7 +27,7 @@ const AdminCategory = () => {
   });
   const toast = useToast();
 
-  const [categoryData, setCategoryData] = useState<CategoryDataType[]>([]);
+  const [categoryData, setCategoryData] = useState<ICategory[]>([]);
   const [pagination, setPagination] = useState<TablePaginationType>({
     page: 1,
     limit: DEFAULT_PAGE_SIZE,
@@ -40,7 +40,7 @@ const AdminCategory = () => {
   });
   const [isShowDeleteConfirmationModal, setIsShowDeleteConfirmationModal] = useState(false);
   const [isShowModificationModal, setIsShowModificationModal] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<CategoryDataType | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<ICategory | null>(null);
 
   const getCategoryData = useCallback(() => {
     setIsLoading(true);

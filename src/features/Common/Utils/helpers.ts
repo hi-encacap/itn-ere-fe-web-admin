@@ -1,11 +1,9 @@
-import { DEFAULT_CLOUDFLARE_VARIANT_ENUM } from '@encacap-group/types/dist/re';
 import dayjs from 'dayjs';
 import { first } from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 
 import { TABLE_FILTER_GLOBAL_FILTER_ID } from '@constants/defaultValues';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
-import { ImageDataType } from '@interfaces/Common/imageTypes';
 
 const setDocumentTitle = (title: string, scrollToTop = true): void => {
   window.document.title = `${title} - ${process.env.REACT_APP_FRONTEND_WEBSITE_NAME ?? 'Encacap'}`;
@@ -40,14 +38,6 @@ const slugify = (text: string): string => {
   return result;
 };
 
-const getImageURL = (image: ImageDataType, variant = DEFAULT_CLOUDFLARE_VARIANT_ENUM.PUBLIC): string => {
-  if (!image) {
-    return '';
-  }
-
-  return image[variant] ?? image[DEFAULT_CLOUDFLARE_VARIANT_ENUM.PUBLIC];
-};
-
 const generateColumnFilterObject = (filters: TableColumnFilterState[]) => {
   return filters.reduce<Record<string, string | string[]>>((filterObject, { filterBy, values }) => {
     if (filterBy === TABLE_FILTER_GLOBAL_FILTER_ID) {
@@ -67,4 +57,4 @@ const randomStringPrefix = (separator?: string) => {
   return `${dayPrefix}${separator ?? ''}${uuidPrefix}`;
 };
 
-export { generateColumnFilterObject, getImageURL, randomStringPrefix, setDocumentTitle, slugify };
+export { generateColumnFilterObject, randomStringPrefix, setDocumentTitle, slugify };
