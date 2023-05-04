@@ -1,3 +1,4 @@
+import { getImageURL } from '@encacap-group/types/dist/re';
 import dayjs from 'dayjs';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,8 +11,6 @@ import { EstateDraftDataType } from '@interfaces/Admin/estateTypes';
 
 import DropdownContainerV2 from '@components/Dropdown/DropdownContainerV2';
 import { DropdownMenuItemType } from '@components/Dropdown/DropdownContainerV2MenuItem';
-
-import { getImageURL } from '@utils/image';
 
 interface AdminEstateModificationDraftItemProps {
   draft: EstateDraftDataType;

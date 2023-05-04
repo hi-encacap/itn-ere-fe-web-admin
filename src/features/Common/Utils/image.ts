@@ -1,4 +1,8 @@
-import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, ICloudflareImageResponse } from '@encacap-group/types/dist/re';
+import {
+  DEFAULT_CLOUDFLARE_VARIANT_ENUM,
+  ICloudflareImageResponse,
+  getImageURL,
+} from '@encacap-group/types/dist/re';
 import { nanoid } from '@reduxjs/toolkit';
 
 import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
@@ -55,21 +59,9 @@ const mapImageDataToResponseData = <T>(data: T, key: string): T => {
   return data;
 };
 
-const getImageURL = (
-  image: ICloudflareImageResponse,
-  variant = DEFAULT_CLOUDFLARE_VARIANT_ENUM.PUBLIC,
-): string => {
-  if (!image) {
-    return '';
-  }
-
-  return image[variant] ?? image[DEFAULT_CLOUDFLARE_VARIANT_ENUM.PUBLIC];
-};
-
 export {
   convertToImageDataFromFiles,
   generateImageFormData,
   generateImagesFormData,
-  getImageURL,
   mapImageDataToResponseData,
 };

@@ -1,4 +1,4 @@
-import { ESTATE_STATUS_ENUM, IEstate } from '@encacap-group/types/dist/re';
+import { ESTATE_STATUS_ENUM, IEstate, getImageURL } from '@encacap-group/types/dist/re';
 import dayjs from 'dayjs';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -18,7 +18,6 @@ import { Button } from '@components/Form';
 import LoadingSpinner from '@components/Loading/LoadingSpinner';
 
 import useToast from '@hooks/useToast';
-import { getImageURL } from '@utils/image';
 
 import AdminEstateListTableBodyItemBadge from './TableBodyItemBadge';
 

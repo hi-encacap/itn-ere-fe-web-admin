@@ -1,4 +1,4 @@
-import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, ICategory } from '@encacap-group/types/dist/re';
+import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, ICategory, getImageURL } from '@encacap-group/types/dist/re';
 import { createColumnHelper } from '@tanstack/react-table';
 import { TFunction } from 'i18next';
 
@@ -7,8 +7,6 @@ import { adminCategoryService } from '@services/index';
 
 import TableImageColumn from '@components/Table/TableImageColumn/TableImageColumn';
 import TableImageColumnSkeleton from '@components/Table/TableImageColumn/TableImageColumnSkeleton';
-
-import { getImageURL } from '@utils/image';
 
 import AdminCategoryTableRowActions from '../Components/AdminCategoryTableRowActions';
 
