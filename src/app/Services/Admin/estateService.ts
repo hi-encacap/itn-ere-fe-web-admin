@@ -1,10 +1,10 @@
+import { IBaseListQuery, IResponseWithMeta } from '@encacap-group/types/dist/base';
 import { ESTATE_STATUS_ENUM, IEstate } from '@encacap-group/types/dist/re';
 import { omit } from 'lodash';
 import { Key } from 'react';
 
 import { ADMIN_ESTATE_API_PATH } from '@constants/apis';
 import { EstateDraftDataType, EstateFormDataType } from '@interfaces/Admin/estateTypes';
-import { BaseGetListQueryType, ResponseWithMetaType } from '@interfaces/Common/commonTypes';
 
 import axiosInstance from '@utils/Http/axiosInstance';
 
@@ -20,7 +20,7 @@ const createEstate = async (estate: EstateFormDataType) => {
   return response.data.data;
 };
 
-const getEstates = async (queryParam: BaseGetListQueryType): Promise<ResponseWithMetaType<IEstate[]>> => {
+const getEstates = async (queryParam: IBaseListQuery): Promise<IResponseWithMeta<IEstate[]>> => {
   const response = await axiosInstance.get(ADMIN_ESTATE_API_PATH.ESTATES_PATH, {
     params: {
       ...queryParam,
@@ -60,8 +60,8 @@ const createEstateDraft = async (estate: EstateFormDataType): Promise<EstateDraf
 };
 
 const getEstateDrafts = async (
-  queryParam?: BaseGetListQueryType,
-): Promise<ResponseWithMetaType<EstateDraftDataType[]>> => {
+  queryParam?: IBaseListQuery,
+): Promise<IResponseWithMeta<EstateDraftDataType[]>> => {
   const response = await axiosInstance.get(ADMIN_ESTATE_API_PATH.ESTATE_DRAFTS_PATH, {
     params: queryParam,
   });

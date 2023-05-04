@@ -1,8 +1,8 @@
+import { IAxiosError } from '@encacap-group/types/dist/base';
 import { omit } from 'lodash';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 import { adminCategoryService } from '@services/index';
 
 import { ConfirmationModal } from '@components/Modal';
@@ -14,7 +14,7 @@ interface AdminCategoryDeleteConfirmationModalProps
   extends Omit<ConfirmationModalProps, 'title' | 'message' | 'onConfirm'> {
   categoryId?: number;
   onDeleted?: () => void;
-  onDeleteFailed?: (error: AxiosErrorType) => void;
+  onDeleteFailed?: (error: IAxiosError) => void;
 }
 
 const AdminCategoryDeleteConfirmationModal = ({

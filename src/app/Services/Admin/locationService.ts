@@ -1,3 +1,4 @@
+import { IBaseListQuery, IResponseWithMeta } from '@encacap-group/types/dist/base';
 import { ILocationDistrict, ILocationProvince } from '@encacap-group/types/dist/re';
 
 import { ADMIN_LOCATION_API_PATH } from '@constants/apis';
@@ -10,13 +11,10 @@ import {
   LocationWardWebsiteDataType,
   LocationWardWebsiteFormDataType,
 } from '@interfaces/Admin/locationTypes';
-import { BaseGetListQueryType, ResponseWithMetaType } from '@interfaces/Common/commonTypes';
 
 import axiosInstance from '@utils/Http/axiosInstance';
 
-const getProvinces = async (
-  query?: BaseGetListQueryType,
-): Promise<ResponseWithMetaType<ILocationProvince[]>> => {
+const getProvinces = async (query?: IBaseListQuery): Promise<IResponseWithMeta<ILocationProvince[]>> => {
   const response = await axiosInstance.get(ADMIN_LOCATION_API_PATH.PROVINCES_PATH, {
     params: query,
   });
@@ -41,7 +39,7 @@ const deleteProvinceByCode = async (code: string): Promise<void> => {
 
 const getDistricts = async (
   query?: LocationDistrictGetListQueryType,
-): Promise<ResponseWithMetaType<ILocationDistrict[]>> => {
+): Promise<IResponseWithMeta<ILocationDistrict[]>> => {
   const response = await axiosInstance.get(ADMIN_LOCATION_API_PATH.DISTRICTS_PATH, {
     params: query,
   });
@@ -67,7 +65,7 @@ const deleteDistrictByCode = async (code: string): Promise<void> => {
 
 const getWards = async (
   query?: LocationWardGetListQueryType,
-): Promise<ResponseWithMetaType<LocationWardWebsiteDataType[]>> => {
+): Promise<IResponseWithMeta<LocationWardWebsiteDataType[]>> => {
   const response = await axiosInstance.get(ADMIN_LOCATION_API_PATH.WARDS_PATH, {
     params: query,
   });
@@ -90,8 +88,8 @@ const deleteWardByCode = async (code: string): Promise<void> => {
 };
 
 const getAddressBooks = async (
-  query?: BaseGetListQueryType,
-): Promise<ResponseWithMetaType<LocationAddressBookDataType[]>> => {
+  query?: IBaseListQuery,
+): Promise<IResponseWithMeta<LocationAddressBookDataType[]>> => {
   const response = await axiosInstance.get(ADMIN_LOCATION_API_PATH.ADDRESS_BOOKS_PATH, {
     params: query,
   });

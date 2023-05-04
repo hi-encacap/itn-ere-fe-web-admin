@@ -1,14 +1,14 @@
+import { IBaseListQuery, IResponseWithMeta } from '@encacap-group/types/dist/base';
 import { omit } from 'lodash';
 
 import { ADMIN_ESTATE_PROPERTY_API_PATH } from '@constants/apis';
 import { EstatePropertyDataType, EstatePropertyFormDataType } from '@interfaces/Admin/estateTypes';
-import { BaseGetListQueryType, ResponseWithMetaType } from '@interfaces/Common/commonTypes';
 
 import axiosInstance from '@utils/Http/axiosInstance';
 
 const getEstateProperties = async (
-  query: BaseGetListQueryType,
-): Promise<ResponseWithMetaType<EstatePropertyDataType[]>> => {
+  query: IBaseListQuery,
+): Promise<IResponseWithMeta<EstatePropertyDataType[]>> => {
   const response = await axiosInstance.get(ADMIN_ESTATE_PROPERTY_API_PATH.ESTATE_PROPERTIES_PATH, {
     params: query,
   });
@@ -16,7 +16,7 @@ const getEstateProperties = async (
   return response.data;
 };
 
-const getAllEstateProperties = async (query?: BaseGetListQueryType): Promise<EstatePropertyDataType[]> => {
+const getAllEstateProperties = async (query?: IBaseListQuery): Promise<EstatePropertyDataType[]> => {
   const response = await getEstateProperties(omit(query, ['page', 'perPage']));
 
   return response.data;
@@ -48,10 +48,10 @@ const deleteEstatePropertyById = async (id: number): Promise<void> => {
 };
 
 export {
-  getEstateProperties,
-  getAllEstateProperties,
-  getEstateProperty,
   createEstateProperty,
-  updateEstateProperty,
   deleteEstatePropertyById,
+  getAllEstateProperties,
+  getEstateProperties,
+  getEstateProperty,
+  updateEstateProperty,
 };

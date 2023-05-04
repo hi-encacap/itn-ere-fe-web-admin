@@ -1,3 +1,4 @@
+import { IAxiosError } from '@encacap-group/types/dist/base';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { keys, omit, pick } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
@@ -5,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { EstatePropertyDataType, EstatePropertyFormDataType } from '@interfaces/Admin/estateTypes';
-import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 import { adminEstatePropertyService } from '@services/index';
 
 import { Input } from '@components/Form';
@@ -66,7 +66,7 @@ const AdminEstatePropertyModificationModal = ({
           onCreated();
           handleClose();
         })
-        .catch((error: AxiosErrorType) => {
+        .catch((error: IAxiosError) => {
           setFormError({ error, setError, formatMessage: formatErrorMessage(t, 'form') });
         })
         .finally(() => {
@@ -85,7 +85,7 @@ const AdminEstatePropertyModificationModal = ({
           onCreated();
           handleClose();
         })
-        .catch((error: AxiosErrorType) => {
+        .catch((error: IAxiosError) => {
           setFormError({ error, setError, formatMessage: formatErrorMessage(t, 'form') });
         })
         .finally(() => {

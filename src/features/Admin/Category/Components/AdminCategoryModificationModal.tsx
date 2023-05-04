@@ -1,3 +1,4 @@
+import { IAxiosError } from '@encacap-group/types/dist/base';
 import { ICategory } from '@encacap-group/types/dist/re';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { omit } from 'lodash';
@@ -6,7 +7,6 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { CategoryFormDataType } from '@interfaces/Admin/categoryTypes';
-import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 import { adminCategoryService } from '@services/index';
 
 import { Input } from '@components/Form';
@@ -22,8 +22,8 @@ interface AdminCategoryModificationModalProps extends ModalProps {
   category: ICategory | null;
   onCreated: () => void;
   onUpdated: () => void;
-  onCreateFailed?: (error: AxiosErrorType) => void;
-  onUpdateFailed?: (error: AxiosErrorType) => void;
+  onCreateFailed?: (error: IAxiosError) => void;
+  onUpdateFailed?: (error: IAxiosError) => void;
 }
 
 const AdminCategoryModificationModal = ({

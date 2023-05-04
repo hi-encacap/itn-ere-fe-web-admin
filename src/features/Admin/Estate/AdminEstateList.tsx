@@ -1,9 +1,9 @@
+import { IBaseListQuery } from '@encacap-group/types/dist/base';
 import { ESTATE_STATUS_ENUM, IEstate } from '@encacap-group/types/dist/re';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 
-import { BaseGetListQueryType } from '@interfaces/Common/commonTypes';
 import { adminEstateService } from '@services/index';
 
 import LayoutContent from '@common/Layout/Components/LayoutContent';
@@ -44,7 +44,7 @@ const AdminEstateList = () => {
     [t],
   );
 
-  const getData = useCallback(async (queryParams: BaseGetListQueryType) => {
+  const getData = useCallback(async (queryParams: IBaseListQuery) => {
     setIsLoading(true);
 
     try {

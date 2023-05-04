@@ -1,3 +1,4 @@
+import { IBaseListQuery } from '@encacap-group/types/dist/base';
 import { IContact } from '@encacap-group/types/dist/re';
 import { RowSelectionState, SortingState } from '@tanstack/react-table';
 import { isEqual, keys } from 'lodash';
@@ -6,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
 import { TABLE_ROW_SELECTION_TYPE_ENUM } from '@constants/enums';
-import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
+import { TablePaginationType } from '@interfaces/Common/commonTypes';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { adminContactService } from '@services/index';
 
@@ -46,7 +47,7 @@ const AdminContactList = ({
   const [columnSorting, setColumnSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [queryParams, setQueryParams] = useState<BaseGetListQueryType>({
+  const [queryParams, setQueryParams] = useState<IBaseListQuery>({
     ...pagination,
   });
   const [isShowDeleteConfirmationModal, setIsShowDeleteConfirmationModal] = useState(false);
@@ -138,7 +139,7 @@ const AdminContactList = ({
   }, [queryParams]);
 
   useEffect(() => {
-    const newQueryParams: BaseGetListQueryType = {
+    const newQueryParams: IBaseListQuery = {
       ...queryParams,
       ...generateColumnFilterObject(columnFilters),
       page: pagination.page,
