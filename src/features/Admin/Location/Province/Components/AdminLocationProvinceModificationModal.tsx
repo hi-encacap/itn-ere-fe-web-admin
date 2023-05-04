@@ -1,3 +1,4 @@
+import { IAxiosError } from '@encacap-group/types/dist/base';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { omit } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
@@ -5,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { LocationProvinceWebsiteFormDataType } from '@interfaces/Admin/locationTypes';
-import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 import { SelectOptionItemType } from '@interfaces/Common/elementTypes';
 import { adminLocationService, locationService } from '@services/index';
 
@@ -93,7 +93,7 @@ const AdminLocationProvinceModificationModal = ({
         handleClose();
         setIsSubmitting(false);
       })
-      .catch((error: AxiosErrorType) => {
+      .catch((error: IAxiosError) => {
         setFormError({ error, setError, formatMessage: formatErrorMessage(t, 'form') });
         setIsSubmitting(false);
         onCreateFailed?.();

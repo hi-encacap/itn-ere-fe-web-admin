@@ -1,6 +1,5 @@
+import { IBaseListQuery } from '@encacap-group/types/dist/base';
 import { ILocationDistrict, ILocationProvince, ILocationWard } from '@encacap-group/types/dist/re';
-
-import { BaseGetListQueryType } from '@interfaces/Common/commonTypes';
 
 export interface LocationProvinceWebsiteDataType {
   provinceCode: string;
@@ -23,7 +22,7 @@ export interface LocationDistrictWebsiteFormDataType {
   provinceCode: string | null;
 }
 
-export interface LocationDistrictGetListQueryType extends BaseGetListQueryType {
+export interface LocationDistrictGetListQueryType extends IBaseListQuery {
   provinceCode?: string;
 }
 
@@ -40,7 +39,7 @@ export interface LocationWardWebsiteFormDataType {
   provinceCode: string | null;
 }
 
-export interface LocationWardGetListQueryType extends BaseGetListQueryType {
+export interface LocationWardGetListQueryType extends IBaseListQuery {
   districtCode?: string;
 }
 

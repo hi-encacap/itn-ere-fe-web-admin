@@ -1,3 +1,4 @@
+import { IBaseListQuery } from '@encacap-group/types/dist/base';
 import { IEstate } from '@encacap-group/types/dist/re';
 import { SortingState, createColumnHelper } from '@tanstack/react-table';
 import { isEqual } from 'lodash';
@@ -6,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
+import { TablePaginationType } from '@interfaces/Common/commonTypes';
 import { ColumnDef, TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { adminEstateService, adminLocationService } from '@services/index';
 
@@ -25,7 +26,7 @@ interface AdminEstateListTableProps {
   data: IEstate[];
   isLoading: boolean;
   totalRows: number;
-  onChangeQueryParams?: (queryParams: BaseGetListQueryType) => void;
+  onChangeQueryParams?: (queryParams: IBaseListQuery) => void;
   onMoveToTop: (estateId: Key) => Promise<void>;
   onPublish: (estateId: Key) => Promise<void>;
   onUnPublish: (estateId: Key) => Promise<void>;
@@ -54,7 +55,7 @@ const AdminEstateListTable = ({
   });
   const [columnSorting, setColumnSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
-  const [queryParams, setQueryParams] = useState<BaseGetListQueryType>({
+  const [queryParams, setQueryParams] = useState<IBaseListQuery>({
     ...pagination,
     tab: ESTATE_LIST_TAB_ENUM.COMPLETED,
   });
@@ -182,7 +183,7 @@ const AdminEstateListTable = ({
   }, [selectedEstateId, queryParams]);
 
   useEffect(() => {
-    const newQueryParams: BaseGetListQueryType = {
+    const newQueryParams: IBaseListQuery = {
       ...queryParams,
       ...generateColumnFilterObject(columnFilters),
     };

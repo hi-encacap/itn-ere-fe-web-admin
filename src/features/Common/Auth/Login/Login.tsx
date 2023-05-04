@@ -1,3 +1,4 @@
+import { IAxiosError } from '@encacap-group/types/dist/base';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useLayoutEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
@@ -6,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { AUTH_ERROR_CODES } from '@constants/errors';
 import { ADMIN_PATH } from '@constants/urls';
-import { AxiosErrorType, FormGenericErrorType } from '@interfaces/Common/commonTypes';
+import { FormGenericErrorType } from '@interfaces/Common/commonTypes';
 import { authService } from '@services/index';
 import { setUser } from '@slices/userSlice';
 
@@ -42,7 +43,7 @@ const Login = () => {
         authService.setAuthTokens(authTokens.accessToken, authTokens.refreshToken);
         navigate(ADMIN_PATH.HOME_PATH);
       })
-      .catch((error: AxiosErrorType) => {
+      .catch((error: IAxiosError) => {
         const { response } = error;
 
         setIsSubmitting(false);

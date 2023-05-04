@@ -1,3 +1,4 @@
+import { IBaseListQuery } from '@encacap-group/types/dist/base';
 import { ILocationProvince } from '@encacap-group/types/dist/re';
 import { SortingState } from '@tanstack/react-table';
 import { isEqual } from 'lodash';
@@ -5,7 +6,7 @@ import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
+import { TablePaginationType } from '@interfaces/Common/commonTypes';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { adminLocationService } from '@services/index';
 
@@ -33,7 +34,7 @@ const AdminLocationProvinceList = () => {
   const [columnSorting, setColumnSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [queryParams, setQueryParams] = useState<BaseGetListQueryType>({
+  const [queryParams, setQueryParams] = useState<IBaseListQuery>({
     ...pagination,
   });
   const [selectedProvinceCode, setSelectedProvinceCode] = useState<string | null>(null);
@@ -83,7 +84,7 @@ const AdminLocationProvinceList = () => {
   }, [queryParams]);
 
   useEffect(() => {
-    const newQueryParams: BaseGetListQueryType = {
+    const newQueryParams: IBaseListQuery = {
       ...queryParams,
       ...generateColumnFilterObject(columnFilters),
       page: pagination.page,

@@ -1,3 +1,4 @@
+import { IBaseListQuery } from '@encacap-group/types/dist/base';
 import {
   ColumnDef,
   getCoreRowModel,
@@ -13,7 +14,7 @@ import { ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
 import { TABLE_ROW_SELECTION_TYPE_ENUM } from '@constants/enums';
-import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
+import { TablePaginationType } from '@interfaces/Common/commonTypes';
 import {
   TableColumnFilterState,
   TableDataType,
@@ -37,7 +38,7 @@ declare module '@tanstack/table-core' {
     filterLabelBy?: string;
     filterLabel?: string;
     filterSearchBy?: string;
-    getFilterOptions?: (params?: BaseGetListQueryType) => Promise<unknown[]>;
+    getFilterOptions?: (params?: IBaseListQuery) => Promise<unknown[]>;
     filterLabelFormatter?: (value: unknown) => string;
   }
 }

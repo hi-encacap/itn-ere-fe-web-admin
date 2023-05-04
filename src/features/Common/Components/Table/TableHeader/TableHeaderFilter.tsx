@@ -1,10 +1,10 @@
+import { IBaseListQuery } from '@encacap-group/types/dist/base';
 import { flexRender, Header } from '@tanstack/react-table';
 import _, { uniqBy } from 'lodash';
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
 import { twMerge } from 'tailwind-merge';
 
-import { BaseGetListQueryType } from '@interfaces/Common/commonTypes';
 import { TableDataType, TableFilterOptionItemType } from '@interfaces/Common/elementTypes';
 
 import TableHeaderFilterDropdown from './TableHeaderFilterDropdown';
@@ -41,7 +41,7 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isShowDropdownMenu, setIsShowDropdownMenu] = useState(false);
-  const [queryParams, setQueryParams] = useState<BaseGetListQueryType>({
+  const [queryParams, setQueryParams] = useState<IBaseListQuery>({
     searchBy: filterSearchBy,
     searchValue: '',
   });
@@ -111,7 +111,7 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
   );
 
   const getFilterOptions = useCallback(
-    (customQuery?: BaseGetListQueryType) => {
+    (customQuery?: IBaseListQuery) => {
       setIsLoading(true);
       headerColumnDef.meta
         ?.getFilterOptions?.(customQuery ?? queryParams)

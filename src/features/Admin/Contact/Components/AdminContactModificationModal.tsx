@@ -1,3 +1,4 @@
+import { IAxiosError } from '@encacap-group/types/dist/base';
 import { IContact } from '@encacap-group/types/dist/re';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { omit } from 'lodash';
@@ -6,7 +7,6 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { ContactFormDataType } from '@interfaces/Admin/contactTypes';
-import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 import { adminContactService } from '@services/index';
 
 import { Input } from '@components/Form';
@@ -101,7 +101,7 @@ const AdminContactModificationModal = ({
         onCreated();
         onClose();
       })
-      .catch((error: AxiosErrorType) => {
+      .catch((error: IAxiosError) => {
         setFormError<ContactFormDataType>({
           error,
           setError,

@@ -1,3 +1,4 @@
+import { IBaseListQuery } from '@encacap-group/types/dist/base';
 import { SortingState } from '@tanstack/react-table';
 import { isEqual } from 'lodash';
 import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
@@ -5,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
 import { EstatePropertyDataType } from '@interfaces/Admin/estateTypes';
-import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
+import { TablePaginationType } from '@interfaces/Common/commonTypes';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { adminEstatePropertyService } from '@services/index';
 
@@ -33,7 +34,7 @@ const AdminEstatePropertyList = () => {
   const [columnSorting, setColumnSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [queryParams, setQueryParams] = useState<BaseGetListQueryType>({
+  const [queryParams, setQueryParams] = useState<IBaseListQuery>({
     ...pagination,
   });
   const [selectedProperty, setSelectedProperty] = useState<EstatePropertyDataType | null>(null);
@@ -101,7 +102,7 @@ const AdminEstatePropertyList = () => {
   }, [queryParams]);
 
   useEffect(() => {
-    const newQueryParams: BaseGetListQueryType = {
+    const newQueryParams: IBaseListQuery = {
       ...queryParams,
       ...generateColumnFilterObject(columnFilters),
       page: pagination.page,

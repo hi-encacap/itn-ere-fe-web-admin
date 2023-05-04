@@ -1,13 +1,13 @@
+import { IBaseListQuery } from '@encacap-group/types/dist/base';
 import { IContact } from '@encacap-group/types/dist/re';
 import { pick } from 'lodash';
 
 import { ADMIN_CONTACT_API_PATH } from '@constants/apis';
 import { ContactFormDataType } from '@interfaces/Admin/contactTypes';
-import { BaseGetListQueryType } from '@interfaces/Common/commonTypes';
 
 import axiosInstance from '@utils/Http/axiosInstance';
 
-const getContacts = async (params?: BaseGetListQueryType) => {
+const getContacts = async (params?: IBaseListQuery) => {
   const response = await axiosInstance.get(ADMIN_CONTACT_API_PATH.CONTACTS_PATH, {
     params,
   });

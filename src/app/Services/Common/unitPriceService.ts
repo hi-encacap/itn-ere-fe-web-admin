@@ -1,14 +1,12 @@
+import { IResponseWithMeta } from '@encacap-group/types/dist/base';
 import { IUnitPrice } from '@encacap-group/types/dist/re';
 
 import { UNIT_PRICE_API_PATH } from '@constants/apis';
-import { ResponseWithMetaType } from '@interfaces/Common/commonTypes';
 import { UnitPriceGetListQueryType } from '@interfaces/Common/unitPriceTypes';
 
 import axiosInstance from '@utils/Http/axiosInstance';
 
-const getUnitPrices = async (
-  query: UnitPriceGetListQueryType,
-): Promise<ResponseWithMetaType<IUnitPrice[]>> => {
+const getUnitPrices = async (query: UnitPriceGetListQueryType): Promise<IResponseWithMeta<IUnitPrice[]>> => {
   const response = await axiosInstance.get(UNIT_PRICE_API_PATH.UNIT_PRICES_PATH, { params: query });
   return response.data;
 };
