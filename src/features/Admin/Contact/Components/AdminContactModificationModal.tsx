@@ -1,10 +1,11 @@
+import { IContact } from '@encacap-group/types/dist/re';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { omit } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { ContactDataType, ContactFormDataType } from '@interfaces/Admin/contactTypes';
+import { ContactFormDataType } from '@interfaces/Admin/contactTypes';
 import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 import { adminContactService } from '@services/index';
 
@@ -18,7 +19,7 @@ import { generateImageFormData } from '@utils/image';
 import { contactFormSchema } from '../Schemas/contactFormSchema';
 
 interface AdminContactModificationModalProps extends ModalProps {
-  contact: ContactDataType | null;
+  contact: IContact | null;
   onCreated: () => void;
   onCreateFailed: () => void;
   onUpdated: () => void;

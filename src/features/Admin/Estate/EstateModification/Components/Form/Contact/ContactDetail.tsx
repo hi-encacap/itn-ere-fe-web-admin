@@ -1,14 +1,12 @@
-import { DEFAULT_CLOUDFLARE_VARIANT_ENUM } from '@encacap-group/types/dist/re';
+import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, IContact } from '@encacap-group/types/dist/re';
 import { useTranslation } from 'react-i18next';
-
-import { ContactDataType } from '@interfaces/Admin/contactTypes';
 
 import { Button } from '@components/Form';
 
-import { getImageURL } from '@utils/helpers';
+import { getImageURL } from '@utils/image';
 
 interface AdminEstateModificationFormContactDetailProps {
-  data: ContactDataType;
+  data: IContact;
   onClickChange: () => void;
 }
 

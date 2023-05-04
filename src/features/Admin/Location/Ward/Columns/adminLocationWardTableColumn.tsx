@@ -1,7 +1,7 @@
+import { ILocationWard } from '@encacap-group/types/dist/re';
 import { createColumnHelper } from '@tanstack/react-table';
 import { TFunction } from 'i18next';
 
-import { LocationWardDataType } from '@interfaces/Admin/locationTypes';
 import { ColumnDef, TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes';
 import { adminLocationService } from '@services/index';
 
@@ -14,9 +14,9 @@ interface OnClickHandlers {
 }
 
 const createLocationWardTableColumns = (t: TFunction, { onClickDelete }: OnClickHandlers) => {
-  const columnHelper = createColumnHelper<LocationWardDataType>();
+  const columnHelper = createColumnHelper<ILocationWard>();
 
-  const tableExampleColumns: Array<ColumnDef<LocationWardDataType>> = [
+  const tableExampleColumns: Array<ColumnDef<ILocationWard>> = [
     columnHelper.accessor((row) => row.code, {
       id: 'code',
       header: String(t('table.column.code')),

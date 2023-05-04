@@ -1,9 +1,9 @@
+import { IContact } from '@encacap-group/types/dist/re';
 import { useCallback, useEffect, useState } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
-import { ContactDataType } from '@interfaces/Admin/contactTypes';
 import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
 import { adminContactService } from '@services/index';
 
@@ -20,7 +20,7 @@ const AdminEstateModificationFormContact = () => {
   });
 
   const [isShowContactPickerModal, setIsShowContactPickerModal] = useState(false);
-  const [selectedContact, setSelectedContact] = useState<ContactDataType | null>(null);
+  const [selectedContact, setSelectedContact] = useState<IContact | null>(null);
 
   const {
     control,
@@ -50,7 +50,7 @@ const AdminEstateModificationFormContact = () => {
     }
   }, [value, selectedContact]);
 
-  const handlePickContact = useCallback((contact: ContactDataType) => {
+  const handlePickContact = useCallback((contact: IContact) => {
     setSelectedContact(contact);
     setIsShowContactPickerModal(false);
     setValue('contactId', contact.id);

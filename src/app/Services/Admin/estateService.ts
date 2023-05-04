@@ -1,9 +1,9 @@
-import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
+import { ESTATE_STATUS_ENUM, IEstate } from '@encacap-group/types/dist/re';
 import { omit } from 'lodash';
 import { Key } from 'react';
 
 import { ADMIN_ESTATE_API_PATH } from '@constants/apis';
-import { EstateDataType, EstateDraftDataType, EstateFormDataType } from '@interfaces/Admin/estateTypes';
+import { EstateDraftDataType, EstateFormDataType } from '@interfaces/Admin/estateTypes';
 import { BaseGetListQueryType, ResponseWithMetaType } from '@interfaces/Common/commonTypes';
 
 import axiosInstance from '@utils/Http/axiosInstance';
@@ -20,9 +20,7 @@ const createEstate = async (estate: EstateFormDataType) => {
   return response.data.data;
 };
 
-const getEstates = async (
-  queryParam: BaseGetListQueryType,
-): Promise<ResponseWithMetaType<EstateDataType[]>> => {
+const getEstates = async (queryParam: BaseGetListQueryType): Promise<ResponseWithMetaType<IEstate[]>> => {
   const response = await axiosInstance.get(ADMIN_ESTATE_API_PATH.ESTATES_PATH, {
     params: {
       ...queryParam,
@@ -93,13 +91,13 @@ const deleteEstateDraftById = async (id: Key): Promise<void> => {
   return response.data.data;
 };
 
-const getEstateById = async (id: Key): Promise<EstateDataType> => {
+const getEstateById = async (id: Key): Promise<IEstate> => {
   const response = await axiosInstance.get(ADMIN_ESTATE_API_PATH.ESTATE_PATH(id));
 
   return response.data.data;
 };
 
-const updateEstateById = async (id: Key, estate: EstateFormDataType): Promise<EstateDataType> => {
+const updateEstateById = async (id: Key, estate: EstateFormDataType): Promise<IEstate> => {
   const response = await axiosInstance.put(ADMIN_ESTATE_API_PATH.ESTATE_PATH(id), {
     ...estate,
     avatarId: estate.avatar?.id,

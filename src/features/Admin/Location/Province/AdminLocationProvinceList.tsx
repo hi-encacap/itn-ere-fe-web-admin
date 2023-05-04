@@ -1,10 +1,10 @@
+import { ILocationProvince } from '@encacap-group/types/dist/re';
 import { SortingState } from '@tanstack/react-table';
 import { isEqual } from 'lodash';
 import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { LocationProvinceDataType } from '@interfaces/Admin/locationTypes';
 import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { adminLocationService } from '@services/index';
@@ -25,7 +25,7 @@ const AdminLocationProvinceList = () => {
     keyPrefix: 'admin:page.location.province',
   });
 
-  const [provinceData, setProvinceData] = useState<LocationProvinceDataType[]>([]);
+  const [provinceData, setProvinceData] = useState<ILocationProvince[]>([]);
   const [pagination, setPagination] = useState<TablePaginationType>({
     page: 1,
     limit: DEFAULT_PAGE_SIZE,

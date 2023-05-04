@@ -1,10 +1,11 @@
+import { ICategory } from '@encacap-group/types/dist/re';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { omit } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { CategoryDataType, CategoryFormDataType } from '@interfaces/Admin/categoryTypes';
+import { CategoryFormDataType } from '@interfaces/Admin/categoryTypes';
 import { AxiosErrorType } from '@interfaces/Common/commonTypes';
 import { adminCategoryService } from '@services/index';
 
@@ -18,7 +19,7 @@ import { categoryFormSchema } from '../Schemas/categoryFormSchema';
 import AdminCategoryGroupSelector from './AdminCategoryGroupSelector';
 
 interface AdminCategoryModificationModalProps extends ModalProps {
-  category: CategoryDataType | null;
+  category: ICategory | null;
   onCreated: () => void;
   onUpdated: () => void;
   onCreateFailed?: (error: AxiosErrorType) => void;

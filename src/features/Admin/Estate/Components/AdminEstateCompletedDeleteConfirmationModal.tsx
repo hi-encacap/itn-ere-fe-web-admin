@@ -1,7 +1,8 @@
+import { IEstate } from '@encacap-group/types/dist/re';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { EstateDataType, EstateDraftDataType } from '@interfaces/Admin/estateTypes';
+import { EstateDraftDataType } from '@interfaces/Admin/estateTypes';
 import { adminEstateService } from '@services/index';
 
 import { ConfirmationModal } from '@components/Modal';
@@ -48,7 +49,7 @@ const AdminEstateCompletedDeleteConfirmationModal = ({
   return (
     <ConfirmationModal
       contentContainerClassName="max-w-xl w-[720px]"
-      message={<AdminEstateCompletedDeleteConfirmationMessage data={data as EstateDataType} />}
+      message={<AdminEstateCompletedDeleteConfirmationMessage data={data as IEstate} />}
       status="danger"
       title={t('list.deletion.title', { title: data?.title })}
       onConfirm={handleConfirmDelete}

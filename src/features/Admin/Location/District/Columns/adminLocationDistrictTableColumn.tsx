@@ -1,7 +1,7 @@
+import { ILocationDistrict } from '@encacap-group/types/dist/re';
 import { createColumnHelper } from '@tanstack/react-table';
 import { TFunction } from 'i18next';
 
-import { LocationDistrictDataType } from '@interfaces/Admin/locationTypes';
 import { ColumnDef, TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes';
 import { adminLocationService } from '@services/index';
 
@@ -14,9 +14,9 @@ interface OnClickHandlers {
 }
 
 const createLocationDistrictTableColumns = (t: TFunction, { onClickDelete }: OnClickHandlers) => {
-  const columnHelper = createColumnHelper<LocationDistrictDataType>();
+  const columnHelper = createColumnHelper<ILocationDistrict>();
 
-  const tableExampleColumns: Array<ColumnDef<LocationDistrictDataType>> = [
+  const tableExampleColumns: Array<ColumnDef<ILocationDistrict>> = [
     columnHelper.accessor((row) => row.code, {
       id: 'code',
       header: String(t('table.column.code')),

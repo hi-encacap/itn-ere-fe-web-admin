@@ -1,11 +1,10 @@
+import { IEstate } from '@encacap-group/types/dist/re';
 import { Trans, useTranslation } from 'react-i18next';
-
-import { EstateDataType } from '@interfaces/Admin/estateTypes';
 
 import Alert from '@components/Alert/Alert';
 
 interface AdminEstateCompletedDeleteConfirmationMessageProps {
-  data: EstateDataType;
+  data: IEstate;
 }
 
 const AdminEstateCompletedDeleteConfirmationMessage = ({
@@ -23,7 +22,7 @@ const AdminEstateCompletedDeleteConfirmationMessage = ({
         message={
           <Trans
             t={t}
-            i18nKey={`list.deletion.warning.message.${data.status}`}
+            i18nKey={`list.deletion.warning.message.${data.status as string}`}
             components={{
               strong: <span className="font-semibold" />,
             }}

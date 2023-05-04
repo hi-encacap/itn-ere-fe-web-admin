@@ -1,4 +1,6 @@
-import { EstateDataType, EstateDraftDataType } from '@interfaces/Admin/estateTypes';
+import { IEstate } from '@encacap-group/types/dist/re';
+
+import { EstateDraftDataType } from '@interfaces/Admin/estateTypes';
 
 import { CustomTableBodyProps } from '@components/Table/Table';
 import TableContentBodyEmptyContent from '@components/Table/TableContentBody/TableContentBodyEmptyContent';
@@ -10,7 +12,7 @@ const AdminEstateListTableBody = ({
   data,
   isLoading,
   ...props
-}: CustomTableBodyProps<EstateDataType | EstateDraftDataType>) => {
+}: CustomTableBodyProps<IEstate | EstateDraftDataType>) => {
   if (isLoading && !data.length) return <AdminEstateListTableBodyLoading />;
 
   if (!data.length) return <TableContentBodyEmptyContent />;

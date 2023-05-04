@@ -1,3 +1,4 @@
+import { IEstate } from '@encacap-group/types/dist/re';
 import { SortingState, createColumnHelper } from '@tanstack/react-table';
 import { isEqual } from 'lodash';
 import { Key, useCallback, useEffect, useMemo, useState } from 'react';
@@ -5,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { EstateDataType } from '@interfaces/Admin/estateTypes';
 import { BaseGetListQueryType, TablePaginationType } from '@interfaces/Common/commonTypes';
 import { ColumnDef, TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { adminEstateService, adminLocationService } from '@services/index';
@@ -22,7 +22,7 @@ import AdminEstateDeleteConfirmationModal from '../AdminEstateDeleteConfirmation
 import AdminEstateListTableBody from './TableBody';
 
 interface AdminEstateListTableProps {
-  data: EstateDataType[];
+  data: IEstate[];
   isLoading: boolean;
   totalRows: number;
   onChangeQueryParams?: (queryParams: BaseGetListQueryType) => void;
@@ -74,9 +74,9 @@ const AdminEstateListTable = ({
     [data, selectedEstateId],
   );
 
-  const columnHelper = useMemo(() => createColumnHelper<EstateDataType>(), []);
+  const columnHelper = useMemo(() => createColumnHelper<IEstate>(), []);
 
-  const columns: Array<ColumnDef<EstateDataType>> = useMemo(
+  const columns: Array<ColumnDef<IEstate>> = useMemo(
     () => [
       columnHelper.accessor((row) => row.ward, {
         id: 'status',

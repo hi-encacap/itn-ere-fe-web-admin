@@ -1,7 +1,6 @@
+import { IContact } from '@encacap-group/types/dist/re';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-import { ContactDataType } from '@interfaces/Admin/contactTypes';
 
 import { Modal } from '@components/Modal';
 import { ModalProps } from '@components/Modal/Modal';
@@ -9,8 +8,8 @@ import { ModalProps } from '@components/Modal/Modal';
 import AdminContactList from '@admin/Contact/AdminContactList';
 
 interface AdminEstateModificationFormContactPickerProps extends ModalProps {
-  data: ContactDataType | null;
-  onPick: (contact: ContactDataType) => void;
+  data: IContact | null;
+  onPick: (contact: IContact) => void;
 }
 
 const AdminEstateModificationFormContactPicker = ({
@@ -23,9 +22,9 @@ const AdminEstateModificationFormContactPicker = ({
   });
 
   const [isAllowSubmit, setIsAllowSubmit] = useState(false);
-  const [selectedContact, setSelectedContact] = useState<ContactDataType | null>(null);
+  const [selectedContact, setSelectedContact] = useState<IContact | null>(null);
 
-  const handleChangeContactSelection = useCallback((contact: ContactDataType[]) => {
+  const handleChangeContactSelection = useCallback((contact: IContact[]) => {
     setSelectedContact(contact[0]);
 
     if (contact.length === 1) {
