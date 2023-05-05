@@ -1,11 +1,11 @@
 import { IBaseListQuery } from '@encacap-group/types/dist/base';
+import { IEstateProperty } from '@encacap-group/types/dist/re';
 import { SortingState } from '@tanstack/react-table';
 import { isEqual } from 'lodash';
 import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { EstatePropertyDataType } from '@interfaces/Admin/estateTypes';
 import { TablePaginationType } from '@interfaces/Common/commonTypes';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 import { adminEstatePropertyService } from '@services/index';
@@ -26,7 +26,7 @@ const AdminEstatePropertyList = () => {
     keyPrefix: 'admin:page.estate.property',
   });
 
-  const [estatePropertyData, setEstatePropertyData] = useState<EstatePropertyDataType[]>([]);
+  const [estatePropertyData, setEstatePropertyData] = useState<IEstateProperty[]>([]);
   const [pagination, setPagination] = useState<TablePaginationType>({
     page: 1,
     limit: DEFAULT_PAGE_SIZE,
@@ -37,7 +37,7 @@ const AdminEstatePropertyList = () => {
   const [queryParams, setQueryParams] = useState<IBaseListQuery>({
     ...pagination,
   });
-  const [selectedProperty, setSelectedProperty] = useState<EstatePropertyDataType | null>(null);
+  const [selectedProperty, setSelectedProperty] = useState<IEstateProperty | null>(null);
   const [isShowDeleteConfirmationModal, setIsShowDeleteConfirmationModal] = useState(false);
   const [isShowModificationModal, setIsShowModificationModal] = useState(false);
 

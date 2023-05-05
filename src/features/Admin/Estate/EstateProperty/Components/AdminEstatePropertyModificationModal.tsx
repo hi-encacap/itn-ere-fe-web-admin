@@ -1,11 +1,12 @@
 import { IAxiosError } from '@encacap-group/types/dist/base';
+import { IEstateProperty } from '@encacap-group/types/dist/re';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { keys, omit, pick } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { EstatePropertyDataType, EstatePropertyFormDataType } from '@interfaces/Admin/estateTypes';
+import { EstatePropertyFormDataType } from '@interfaces/Admin/estateTypes';
 import { adminEstatePropertyService } from '@services/index';
 
 import { Input } from '@components/Form';
@@ -18,7 +19,7 @@ import AdminCategorySelector from '@admin/Estate/Components/AdminCategorySelecto
 import { estatePropertyFormSchema } from '@admin/Estate/Schemas/estatePropertyFormSchema';
 
 interface ComponentProps extends Omit<ModalProps, 'id'> {
-  estateProperty?: EstatePropertyDataType;
+  estateProperty?: IEstateProperty;
   onCreated: () => void;
 }
 
