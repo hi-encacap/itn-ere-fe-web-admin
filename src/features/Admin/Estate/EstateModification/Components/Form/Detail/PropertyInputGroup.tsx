@@ -1,9 +1,10 @@
+import { IEstateProperty } from '@encacap-group/types/dist/re';
 import { useCallback, useEffect, useState } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { MdAdd } from 'react-icons/md';
 
-import { EstateFormDataType, EstatePropertyDataType } from '@interfaces/Admin/estateTypes';
+import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
 import { adminEstatePropertyService } from '@services/index';
 
 import { Button, Input } from '@components/Form';
@@ -13,7 +14,7 @@ const AdminEstateModificationFormDetailPropertyInputGroup = () => {
     keyPrefix: 'admin:page.estate.modification.form.detail.form',
   });
 
-  const [estateProperties, setEstateProperties] = useState<EstatePropertyDataType[]>([]);
+  const [estateProperties, setEstateProperties] = useState<IEstateProperty[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const { control, watch } = useFormContext<EstateFormDataType>();

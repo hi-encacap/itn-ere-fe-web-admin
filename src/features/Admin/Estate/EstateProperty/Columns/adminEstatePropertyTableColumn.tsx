@@ -1,7 +1,7 @@
+import { IEstateProperty } from '@encacap-group/types/dist/re';
 import { createColumnHelper } from '@tanstack/react-table';
 import { TFunction } from 'i18next';
 
-import { EstatePropertyDataType } from '@interfaces/Admin/estateTypes';
 import { ColumnDef, TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes';
 import { adminEstatePropertyService } from '@services/index';
 
@@ -15,9 +15,9 @@ interface OnClickHandlers {
 }
 
 const createEstatePropertyTableColumns = (t: TFunction, { onClickDelete, onClickEdit }: OnClickHandlers) => {
-  const columnHelper = createColumnHelper<EstatePropertyDataType>();
+  const columnHelper = createColumnHelper<IEstateProperty>();
 
-  const tableExampleColumns: Array<ColumnDef<EstatePropertyDataType>> = [
+  const tableExampleColumns: Array<ColumnDef<IEstateProperty>> = [
     columnHelper.accessor((row) => row.id, {
       id: 'id',
       header: String(t('table.column.id')),

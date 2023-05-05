@@ -1,19 +1,14 @@
-import { ESTATE_STATUS_ENUM, ICategory, IEstate } from '@encacap-group/types/dist/re';
+import { ESTATE_STATUS_ENUM, IEstate, IEstateProperty } from '@encacap-group/types/dist/re';
 
 import { Nullable } from '@interfaces/Common/commonTypes';
 import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
 
-export interface EstatePropertyDataType {
-  id: number;
-  name: string;
-  category: ICategory;
-}
-
-export interface EstatePropertyFormDataType extends Nullable<Partial<EstatePropertyDataType>> {
+export interface EstatePropertyFormDataType extends Nullable<Partial<IEstateProperty>> {
   categoryId: number | null;
 }
 
-export interface EstateFormDataType extends Partial<Nullable<Omit<IEstate, 'avatar' | 'images'>>> {
+export interface EstateFormDataType
+  extends Partial<Nullable<Omit<IEstate, 'avatar' | 'images' | 'properties'>>> {
   priceUnitId: number | null;
   areaUnitId: number | null;
   provinceCode: string;
