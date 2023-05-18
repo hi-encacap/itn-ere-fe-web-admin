@@ -15,4 +15,12 @@ module.exports = {
       '@admin': path.resolve(__dirname, 'src/features/Admin'),
     },
   },
+  devServer: {
+    port: process.env.RE_DASH_APP_PORT,
+    client: {
+      webSocketURL: `wss://${process.env.RE_DASH_APP_HOST}/ws`,
+    },
+    http2: true,
+    https: true,
+  },
 };

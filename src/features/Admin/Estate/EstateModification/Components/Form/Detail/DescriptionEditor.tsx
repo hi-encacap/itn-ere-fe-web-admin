@@ -105,7 +105,7 @@ const AdminEstateModificationFormDetailDescriptionEditor = ({
         )}
       >
         <Editor
-          apiKey={process.env.REACT_APP_TINY_API_KEY ?? ''}
+          apiKey={process.env.REACT_APP_RE_DASH_APP_TINY_API_KEY ?? ''}
           ref={tinyEditorRef}
           init={{
             height: 288,

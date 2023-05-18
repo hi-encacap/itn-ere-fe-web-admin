@@ -6,7 +6,7 @@ import { TABLE_FILTER_GLOBAL_FILTER_ID } from '@constants/defaultValues';
 import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
 
 const setDocumentTitle = (title: string, scrollToTop = true): void => {
-  window.document.title = `${title} - ${process.env.REACT_APP_FRONTEND_WEBSITE_NAME ?? 'Encacap'}`;
+  window.document.title = `${title} - ${process.env.REACT_APP_RE_DASH_APP_NAME ?? 'Encacap'}`;
 
   if (scrollToTop) {
     window.scrollTo({

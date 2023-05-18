@@ -12,7 +12,7 @@ declare module 'axios' {
 }
 
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_API_URL,
+  baseURL: process.env.REACT_APP_RE_DASH_APP_API_URL,
   timeout: 30000,
   responseEncoding: 'utf8',
   headers: {
