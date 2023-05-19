@@ -1,13 +1,13 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { HookFormControl } from '@interfaces/Common/commonTypes';
-import { SelectOptionItemType } from '@interfaces/Common/elementTypes';
-import { adminCategoryService } from '@services/index';
+import { HookFormControl } from "@interfaces/Common/commonTypes";
+import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
+import { adminCategoryService } from "@services/index";
 
-import { Select } from '@components/Form';
+import { Select } from "@components/Form";
 
-import { commonFormErrorFactory } from '@utils/error';
+import { commonFormErrorFactory } from "@utils/error";
 
 interface AdminCategorySelectorProps {
   control: HookFormControl;
@@ -15,8 +15,8 @@ interface AdminCategorySelectorProps {
 }
 
 const AdminCategorySelector = ({ control, disabled }: AdminCategorySelectorProps) => {
-  const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:page.estate.form.category',
+  const { t } = useTranslation(["admin"], {
+    keyPrefix: "admin:page.estate.form.category",
   });
   const [options, setOptions] = useState<SelectOptionItemType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -46,8 +46,8 @@ const AdminCategorySelector = ({ control, disabled }: AdminCategorySelectorProps
   return (
     <Select
       name="categoryId"
-      label={t('label')}
-      placeholder={t('placeholder')}
+      label={t("label")}
+      placeholder={t("placeholder")}
       control={control}
       options={options}
       className="block"

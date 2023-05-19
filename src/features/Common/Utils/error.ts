@@ -1,7 +1,7 @@
-import { IAxiosError } from '@encacap-group/types/dist/base';
-import { TFunction } from 'i18next';
-import { camelCase, keys, lowerCase } from 'lodash';
-import { FieldPath, FieldValues, UseFormSetError, UseFormSetFocus } from 'react-hook-form';
+import { IAxiosError } from "@encacap-group/types/dist/base";
+import { TFunction } from "i18next";
+import { camelCase, keys, lowerCase } from "lodash";
+import { FieldPath, FieldValues, UseFormSetError, UseFormSetFocus } from "react-hook-form";
 
 type FormatMessageFunction = (key: string, message: string) => string;
 
@@ -15,7 +15,7 @@ interface SetFormErrorParam<T extends FieldValues> {
 }
 
 const formatErrorMessage = (t: TFunction, prefix?: string) => {
-  const prefixMessage = prefix ? `${prefix}.` : '';
+  const prefixMessage = prefix ? `${prefix}.` : "";
   return (key: string, message: string) => t(`${prefixMessage}${key}.${message}`);
 };
 
@@ -39,7 +39,7 @@ const setFormError = <T extends FieldValues>({
       error: { field },
     },
   } = response;
-  let firstKey = '';
+  let firstKey = "";
 
   keys(field).forEach((key) => {
     const value = field[key][0];
@@ -63,9 +63,9 @@ const commonFormErrorFactory = (t: TFunction, prefix?: string) => {
       return error;
     }
 
-    const errorKey = error.split('.').at(-1);
+    const errorKey = error.split(".").at(-1);
 
-    return t(`${prefix ? `${prefix}.` : ''}${errorKey ?? error}`);
+    return t(`${prefix ? `${prefix}.` : ""}${errorKey ?? error}`);
   };
 };
 

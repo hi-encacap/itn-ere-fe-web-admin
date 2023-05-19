@@ -1,18 +1,18 @@
-import { useCallback, useLayoutEffect, useState } from 'react';
+import { useCallback, useLayoutEffect, useState } from "react";
 
-import LayoutContentTabItem, { LayoutContentTabItemType } from './LayoutContentTabItem';
+import LayoutContentTabItem, { LayoutContentTabItemType } from "./LayoutContentTabItem";
 
 interface LayoutContentTabProps {
   tabs: LayoutContentTabItemType[];
-  defaultTab?: LayoutContentTabItemType['id'];
-  onChangeTab?: (id: LayoutContentTabItemType['id']) => void;
+  defaultTab?: LayoutContentTabItemType["id"];
+  onChangeTab?: (id: LayoutContentTabItemType["id"]) => void;
 }
 
 const LayoutContentTab = ({ tabs, defaultTab, onChangeTab }: LayoutContentTabProps) => {
-  const [selectedTab, setSelectedTab] = useState<LayoutContentTabItemType['id'] | null>(null);
+  const [selectedTab, setSelectedTab] = useState<LayoutContentTabItemType["id"] | null>(null);
 
   const handleSelectTab = useCallback(
-    (id: LayoutContentTabItemType['id']) => {
+    (id: LayoutContentTabItemType["id"]) => {
       setSelectedTab(id);
       onChangeTab?.(id);
     },

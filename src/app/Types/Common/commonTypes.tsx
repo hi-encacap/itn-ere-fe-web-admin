@@ -1,7 +1,7 @@
-import { PaginationState } from '@tanstack/react-table';
-import { Control } from 'react-hook-form';
+import { PaginationState } from "@tanstack/react-table";
+import { Control } from "react-hook-form";
 
-export interface TablePaginationType extends Omit<PaginationState, 'pageIndex' | 'pageSize'> {
+export interface TablePaginationType extends Omit<PaginationState, "pageIndex" | "pageSize"> {
   page?: number;
   limit?: number;
   totalRows?: number;

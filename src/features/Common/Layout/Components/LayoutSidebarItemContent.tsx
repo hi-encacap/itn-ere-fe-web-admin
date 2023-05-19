@@ -1,6 +1,6 @@
-import { cloneElement, ReactElement } from 'react';
-import { BiChevronRight } from 'react-icons/bi';
-import { twMerge } from 'tailwind-merge';
+import { cloneElement, ReactElement } from "react";
+import { BiChevronRight } from "react-icons/bi";
+import { twMerge } from "tailwind-merge";
 
 interface LayoutSidebarItemContentProps {
   icon: ReactElement;
@@ -20,22 +20,22 @@ const LayoutSidebarItemContent = ({
   return (
     <div
       className={twMerge(
-        'relative cursor-pointer rounded-md px-5 py-2.5 duration-100 hover:bg-gray-100',
-        (isActive || isShowChildren) && 'bg-gray-100',
+        "relative cursor-pointer rounded-md px-5 py-2.5 duration-100 hover:bg-gray-100",
+        (isActive || isShowChildren) && "bg-gray-100",
       )}
     >
       {isActive && <div className="absolute left-0 top-3 h-5 w-1 rounded-r-sm bg-teal-500" />}
       <div className="flex items-center justify-start space-x-4">
         {cloneElement(icon, {
-          className: twMerge('w-5 h-5 block flex-shrink-0', (isActive || isShowChildren) && 'text-teal-500'),
+          className: twMerge("w-5 h-5 block flex-shrink-0", (isActive || isShowChildren) && "text-teal-500"),
         })}
-        <div className={twMerge('flex-1', (isActive || isShowChildren) && 'text-teal-500')}>{label}</div>
+        <div className={twMerge("flex-1", (isActive || isShowChildren) && "text-teal-500")}>{label}</div>
         {hasChildren && (
           <div
             className={twMerge(
-              'absolute right-3 flex flex-shrink-0 items-center justify-center duration-100',
-              (isActive || isShowChildren) && 'text-teal-500',
-              isShowChildren && 'rotate-90 transform',
+              "absolute right-3 flex flex-shrink-0 items-center justify-center duration-100",
+              (isActive || isShowChildren) && "text-teal-500",
+              isShowChildren && "rotate-90 transform",
             )}
           >
             <BiChevronRight size={20} />

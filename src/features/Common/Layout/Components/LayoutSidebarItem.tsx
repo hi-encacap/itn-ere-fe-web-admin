@@ -1,10 +1,10 @@
-import { MouseEventHandler, ReactElement, useCallback, useMemo, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { MouseEventHandler, ReactElement, useCallback, useMemo, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
-import { SidebarItemType } from '@interfaces/Common/commonTypes';
+import { SidebarItemType } from "@interfaces/Common/commonTypes";
 
-import LayoutSidebarItemChildren from './LayoutSidebarItemChildren';
-import LayoutSidebarItemContent from './LayoutSidebarItemContent';
+import LayoutSidebarItemChildren from "./LayoutSidebarItemChildren";
+import LayoutSidebarItemContent from "./LayoutSidebarItemContent";
 
 interface LayoutSidebarItemProps {
   icon: ReactElement;

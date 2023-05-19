@@ -1,24 +1,24 @@
-import { IAxiosError } from '@encacap-group/types/dist/base';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { omit } from 'lodash';
-import { useCallback, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { IAxiosError } from "@encacap-group/types/dist/base";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { omit } from "lodash";
+import { useCallback, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
-import { LocationWardWebsiteFormDataType } from '@interfaces/Admin/locationTypes';
-import { adminLocationService } from '@services/index';
+import { LocationWardWebsiteFormDataType } from "@interfaces/Admin/locationTypes";
+import { adminLocationService } from "@services/index";
 
-import { Modal } from '@components/Modal';
-import { ModalProps } from '@components/Modal/Modal';
+import { Modal } from "@components/Modal";
+import { ModalProps } from "@components/Modal/Modal";
 
-import useToast from '@hooks/useToast';
-import { formatErrorMessage, setFormError } from '@utils/error';
+import useToast from "@hooks/useToast";
+import { formatErrorMessage, setFormError } from "@utils/error";
 
-import AdminLocationDistrictSelector from '@admin/Components/AdminLocationDistrictSelector';
-import AdminLocationProvinceSelector from '@admin/Components/AdminLocationProvinceSelector';
+import AdminLocationDistrictSelector from "@admin/Components/AdminLocationDistrictSelector";
+import AdminLocationProvinceSelector from "@admin/Components/AdminLocationProvinceSelector";
 
-import { locationWardFormSchema } from '../../Schemas/locationFormSchema';
-import AdminLocationWardModificationWardSelector from './AdminLocationWardModificationWardSelector';
+import { locationWardFormSchema } from "../../Schemas/locationFormSchema";
+import AdminLocationWardModificationWardSelector from "./AdminLocationWardModificationWardSelector";
 
 interface AdminLocationWardModificationModalProps extends ModalProps {
   onCreated: () => void;
@@ -32,11 +32,11 @@ const AdminLocationWardModificationModal = ({
   onCreateFailed,
   ...props
 }: AdminLocationWardModificationModalProps) => {
-  const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:page.location.ward.modal.modification',
+  const { t } = useTranslation(["admin"], {
+    keyPrefix: "admin:page.location.ward.modal.modification",
   });
-  const { t: tNotification } = useTranslation('admin', {
-    keyPrefix: 'admin:page.location.ward.notification.modify',
+  const { t: tNotification } = useTranslation("admin", {
+    keyPrefix: "admin:page.location.ward.notification.modify",
   });
   const toast = useToast();
 
@@ -59,8 +59,8 @@ const AdminLocationWardModificationModal = ({
     defaultValues,
   });
 
-  const provinceCode = watch('provinceCode');
-  const districtCode = watch('districtCode');
+  const provinceCode = watch("provinceCode");
+  const districtCode = watch("districtCode");
 
   const handleClose = useCallback(() => {
     reset();
@@ -73,13 +73,13 @@ const AdminLocationWardModificationModal = ({
     adminLocationService
       .createWard(data)
       .then(() => {
-        toast.success(tNotification('created'));
+        toast.success(tNotification("created"));
         onCreated();
         handleClose();
         setIsSubmitting(false);
       })
       .catch((error: IAxiosError) => {
-        setFormError({ error, setError, formatMessage: formatErrorMessage(t, 'form') });
+        setFormError({ error, setError, formatMessage: formatErrorMessage(t, "form") });
         setIsSubmitting(false);
         onCreateFailed?.();
       });
@@ -87,18 +87,18 @@ const AdminLocationWardModificationModal = ({
 
   return (
     <Modal
-      title={t('title')}
+      title={t("title")}
       isOpen={isOpen}
       isLoading={isSubmitting}
       onConfirm={handleSubmit}
       onClose={handleClose}
-      {...omit(props, 'onSubmit')}
+      {...omit(props, "onSubmit")}
     >
       <form className="grid gap-6" onSubmit={handleSubmit}>
         <AdminLocationProvinceSelector control={control} disabled={isSubmitting} />
         <AdminLocationDistrictSelector
           control={control}
-          provinceCode={provinceCode ?? ''}
+          provinceCode={provinceCode ?? ""}
           disabled={isSubmitting}
         />
         <AdminLocationWardModificationWardSelector

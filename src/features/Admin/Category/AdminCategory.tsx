@@ -1,30 +1,30 @@
-import { IBaseListQuery } from '@encacap-group/types/dist/base';
-import { ICategory } from '@encacap-group/types/dist/re';
-import { SortingState } from '@tanstack/react-table';
-import { isEqual } from 'lodash';
-import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { IBaseListQuery } from "@encacap-group/types/dist/base";
+import { ICategory } from "@encacap-group/types/dist/re";
+import { SortingState } from "@tanstack/react-table";
+import { isEqual } from "lodash";
+import { Key, useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { TablePaginationType } from '@interfaces/Common/commonTypes';
-import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
-import { adminCategoryService } from '@services/index';
+import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
+import { TablePaginationType } from "@interfaces/Common/commonTypes";
+import { TableColumnFilterState } from "@interfaces/Common/elementTypes";
+import { adminCategoryService } from "@services/index";
 
-import Table from '@components/Table/Table';
+import Table from "@components/Table/Table";
 
-import LayoutContent from '@common/Layout/Components/LayoutContent';
+import LayoutContent from "@common/Layout/Components/LayoutContent";
 
-import useToast from '@hooks/useToast';
-import { generateColumnFilterObject, setDocumentTitle } from '@utils/helpers';
+import useToast from "@hooks/useToast";
+import { generateColumnFilterObject, setDocumentTitle } from "@utils/helpers";
 
-import createCategoryTableColumns from './Columns/adminCategoryTableColumn';
-import AdminCategoryDeleteConfirmationModal from './Components/AdminCategoryDeleteConfirmationModal';
-import AdminCategoryHeaderAction from './Components/AdminCategoryHeaderAction';
-import AdminCategoryModificationModal from './Components/AdminCategoryModificationModal';
+import createCategoryTableColumns from "./Columns/adminCategoryTableColumn";
+import AdminCategoryDeleteConfirmationModal from "./Components/AdminCategoryDeleteConfirmationModal";
+import AdminCategoryHeaderAction from "./Components/AdminCategoryHeaderAction";
+import AdminCategoryModificationModal from "./Components/AdminCategoryModificationModal";
 
 const AdminCategory = () => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.category',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.category",
   });
   const toast = useToast();
 
@@ -97,30 +97,30 @@ const AdminCategory = () => {
   }, []);
 
   const handleDeletedCategory = useCallback(() => {
-    toast.success(t('notification.success'), t('notification.categoryDeleted'));
+    toast.success(t("notification.success"), t("notification.categoryDeleted"));
     getCategoryData();
   }, [getCategoryData]);
 
   const handleDeleteCategoryFailed = useCallback(() => {
-    toast.error(t('notification.error'), t('notification.categoryDeleteFailed'));
+    toast.error(t("notification.error"), t("notification.categoryDeleteFailed"));
   }, []);
 
   const handleUpdatedCategory = useCallback(() => {
-    toast.success(t('notification.success'), t('notification.categoryUpdated'));
+    toast.success(t("notification.success"), t("notification.categoryUpdated"));
     getCategoryData();
   }, [getCategoryData]);
 
   const handleUpdateCategoryFailed = useCallback(() => {
-    toast.error(t('notification.error'), t('notification.categoryUpdateFailed'));
+    toast.error(t("notification.error"), t("notification.categoryUpdateFailed"));
   }, []);
 
   const handleCreatedCategory = useCallback(() => {
-    toast.success(t('notification.success'), t('notification.categoryCreated'));
+    toast.success(t("notification.success"), t("notification.categoryCreated"));
     getCategoryData();
   }, [getCategoryData]);
 
   const handleCreateCategoryFailed = useCallback(() => {
-    toast.error(t('notification.error'), t('notification.categoryCreateFailed'));
+    toast.error(t("notification.error"), t("notification.categoryCreateFailed"));
   }, []);
 
   useEffect(() => {
@@ -143,11 +143,11 @@ const AdminCategory = () => {
   }, [columnFilters, pagination]);
 
   useLayoutEffect(() => {
-    setDocumentTitle(t('title'));
+    setDocumentTitle(t("title"));
   }, [t]);
 
   return (
-    <LayoutContent title={t('title')} actions={<AdminCategoryHeaderAction onClick={handleClickAddButton} />}>
+    <LayoutContent title={t("title")} actions={<AdminCategoryHeaderAction onClick={handleClickAddButton} />}>
       <Table
         data={categoryData}
         columns={createCategoryTableColumns(t, {

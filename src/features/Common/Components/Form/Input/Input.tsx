@@ -1,9 +1,9 @@
-import { omit } from 'lodash';
-import { useController } from 'react-hook-form';
+import { omit } from "lodash";
+import { useController } from "react-hook-form";
 
-import { HookFormControl } from '@interfaces/Common/commonTypes';
+import { HookFormControl } from "@interfaces/Common/commonTypes";
 
-import UncontrolledInput, { UncontrolledInputProps } from './UncontrolledInput';
+import UncontrolledInput, { UncontrolledInputProps } from "./UncontrolledInput";
 
 export interface InputProps extends UncontrolledInputProps {
   control?: HookFormControl;
@@ -29,8 +29,8 @@ const Input = ({ control, name, ...inputProps }: InputProps) => {
       onChange={onChange}
       onBlur={onBlur}
       error={error?.message as string}
-      {...(value ? { value } : { value: '' })}
-      {...omit(inputProps, ['value', 'onChange', 'onBlur'])}
+      {...(value ? { value } : { value: "" })}
+      {...omit(inputProps, ["value", "onChange", "onBlur"])}
     />
   );
 };

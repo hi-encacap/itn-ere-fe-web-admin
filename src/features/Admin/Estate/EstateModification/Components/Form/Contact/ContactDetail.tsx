@@ -1,7 +1,7 @@
-import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, IContact, getImageURL } from '@encacap-group/types/dist/re';
-import { useTranslation } from 'react-i18next';
+import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, IContact, getImageURL } from "@encacap-group/types/dist/re";
+import { useTranslation } from "react-i18next";
 
-import { Button } from '@components/Form';
+import { Button } from "@components/Form";
 
 interface AdminEstateModificationFormContactDetailProps {
   data: IContact;
@@ -12,8 +12,8 @@ const AdminEstateModificationFormContactDetail = ({
   data,
   onClickChange,
 }: AdminEstateModificationFormContactDetailProps) => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.estate.modification.form.contact',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.estate.modification.form.contact",
   });
 
   return (
@@ -29,24 +29,24 @@ const AdminEstateModificationFormContactDetail = ({
         <div className="font-semibold">{data.name}</div>
         <div className="mt-0.5 flex items-center space-x-2 text-sm">
           <div>
-            {t('phone')}: {data.phone}
+            {t("phone")}: {data.phone}
           </div>
           <div>-</div>
           <div>
-            {t('zalo')}: {data.zalo}
+            {t("zalo")}: {data.zalo}
           </div>
           {data.email && (
             <>
               <div>-</div>
               <div>
-                {t('email')}: {data.email}
+                {t("email")}: {data.email}
               </div>
             </>
           )}
         </div>
       </div>
       <Button size="xs" color="primary-light" className="px-4" onClick={onClickChange}>
-        {t('change')}
+        {t("change")}
       </Button>
     </>
   );

@@ -2,12 +2,12 @@ import {
   DEFAULT_CLOUDFLARE_VARIANT_ENUM,
   ICloudflareImageResponse,
   getImageURL,
-} from '@encacap-group/types/dist/re';
-import { nanoid } from '@reduxjs/toolkit';
+} from "@encacap-group/types/dist/re";
+import { nanoid } from "@reduxjs/toolkit";
 
-import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
+import { FormImageInputDataType } from "@interfaces/Common/elementTypes";
 
-import { randomStringPrefix } from './helpers';
+import { randomStringPrefix } from "./helpers";
 
 const convertToImageDataFromFiles = (files: FileList): FormImageInputDataType[] => {
   return Array.from(files).map((file) => ({
@@ -36,7 +36,7 @@ const generateImagesFormData = (
 };
 
 const mapImageDataToResponseData = <T>(data: T, key: string): T => {
-  if (typeof data !== 'object' || data === null) {
+  if (typeof data !== "object" || data === null) {
     return data;
   }
 

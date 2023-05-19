@@ -1,10 +1,10 @@
-import { RefObject, useMemo } from 'react';
+import { RefObject, useMemo } from "react";
 
-import { SelectOptionItemType } from '@interfaces/Common/elementTypes';
+import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
 
-import SelectOptionDropdownItem from './SelectOptionDropdownItem';
+import SelectOptionDropdownItem from "./SelectOptionDropdownItem";
 
-type OptionValueType = SelectOptionItemType['value'];
+type OptionValueType = SelectOptionItemType["value"];
 
 export interface SelectOptionDropdownProps {
   options: SelectOptionItemType[];

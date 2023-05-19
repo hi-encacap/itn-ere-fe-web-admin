@@ -1,6 +1,6 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
-import AdminCategory from '../AdminCategory';
+import AdminCategory from "../AdminCategory";
 
 const AdminCategoryRoutes = () => {
   return (

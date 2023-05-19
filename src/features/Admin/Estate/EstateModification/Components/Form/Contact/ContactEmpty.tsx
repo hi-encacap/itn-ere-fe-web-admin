@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 interface AdminEstateModificationFormContactEmptyProps {
   onClick: () => void;
@@ -7,8 +7,8 @@ interface AdminEstateModificationFormContactEmptyProps {
 const AdminEstateModificationFormContactEmpty = ({
   onClick,
 }: AdminEstateModificationFormContactEmptyProps) => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.estate.modification.form.contact',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.estate.modification.form.contact",
   });
 
   return (
@@ -18,7 +18,7 @@ const AdminEstateModificationFormContactEmpty = ({
       tabIndex={0}
       onClick={onClick}
     >
-      <span>{t('pick')}</span>
+      <span>{t("pick")}</span>
     </div>
   );
 };

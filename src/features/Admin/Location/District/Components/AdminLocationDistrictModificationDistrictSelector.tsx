@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { HookFormControl } from '@interfaces/Common/commonTypes';
-import { SelectOptionItemType } from '@interfaces/Common/elementTypes';
-import { locationService } from '@services/index';
+import { HookFormControl } from "@interfaces/Common/commonTypes";
+import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
+import { locationService } from "@services/index";
 
-import { Select } from '@components/Form';
+import { Select } from "@components/Form";
 
 interface AdminLocationDistrictModificationDistrictSelectorProps {
   control: HookFormControl;
@@ -18,8 +18,8 @@ const AdminLocationDistrictModificationDistrictSelector = ({
   disabled,
   provinceCode,
 }: AdminLocationDistrictModificationDistrictSelectorProps) => {
-  const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:page.location.district.modal.modification',
+  const { t } = useTranslation(["admin"], {
+    keyPrefix: "admin:page.location.district.modal.modification",
   });
 
   const [locationProvinceOptions, setLocationProvinceOptions] = useState<SelectOptionItemType[]>([]);
@@ -57,8 +57,8 @@ const AdminLocationDistrictModificationDistrictSelector = ({
   return (
     <Select
       name="ghnRefId"
-      label={t('form.id.label')}
-      placeholder={t('form.id.placeholder')}
+      label={t("form.id.label")}
+      placeholder={t("form.id.placeholder")}
       className="block"
       options={locationProvinceOptions}
       isRequired

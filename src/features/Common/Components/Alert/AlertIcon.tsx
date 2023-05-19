@@ -1,7 +1,7 @@
-import { IoCheckmarkCircleSharp, IoInformationCircle, IoWarning } from 'react-icons/io5';
-import { MdCancel } from 'react-icons/md';
+import { IoCheckmarkCircleSharp, IoInformationCircle, IoWarning } from "react-icons/io5";
+import { MdCancel } from "react-icons/md";
 
-import { AlertType } from '@interfaces/Common/elementTypes';
+import { AlertType } from "@interfaces/Common/elementTypes";
 
 export interface AlertIconProps {
   type: AlertType;
@@ -9,11 +9,11 @@ export interface AlertIconProps {
 
 const AlertIcon = ({ type }: AlertIconProps) => {
   switch (type) {
-    case 'success':
+    case "success":
       return <IoCheckmarkCircleSharp size={24} className="text-green-400" />;
-    case 'error':
+    case "error":
       return <MdCancel size={24} className="text-red-400" />;
-    case 'warning':
+    case "warning":
       return <IoWarning size={24} className="text-yellow-500" />;
     default:
       return <IoInformationCircle size={24} className="text-blue-400" />;

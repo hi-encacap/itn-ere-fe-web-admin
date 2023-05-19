@@ -1,29 +1,29 @@
-import { IBaseListQuery } from '@encacap-group/types/dist/base';
-import { ILocationDistrict } from '@encacap-group/types/dist/re';
-import { SortingState } from '@tanstack/react-table';
-import { isEqual } from 'lodash';
-import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { IBaseListQuery } from "@encacap-group/types/dist/base";
+import { ILocationDistrict } from "@encacap-group/types/dist/re";
+import { SortingState } from "@tanstack/react-table";
+import { isEqual } from "lodash";
+import { Key, useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { TablePaginationType } from '@interfaces/Common/commonTypes';
-import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
-import { adminLocationService } from '@services/index';
+import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
+import { TablePaginationType } from "@interfaces/Common/commonTypes";
+import { TableColumnFilterState } from "@interfaces/Common/elementTypes";
+import { adminLocationService } from "@services/index";
 
-import Table from '@components/Table/Table';
+import Table from "@components/Table/Table";
 
-import LayoutContent from '@common/Layout/Components/LayoutContent';
+import LayoutContent from "@common/Layout/Components/LayoutContent";
 
-import { generateColumnFilterObject, setDocumentTitle } from '@utils/helpers';
+import { generateColumnFilterObject, setDocumentTitle } from "@utils/helpers";
 
-import createLocationDistrictTableColumns from './Columns/adminLocationDistrictTableColumn';
-import AdminLocationDistrictDeleteConfirmationModal from './Components/AdminLocationDistrictDeleteConfirmationModal';
-import AdminLocationDistrictHeaderAction from './Components/AdminLocationDistrictHeaderAction';
-import AdminLocationDistrictModificationModal from './Components/AdminLocationDistrictModificationModal';
+import createLocationDistrictTableColumns from "./Columns/adminLocationDistrictTableColumn";
+import AdminLocationDistrictDeleteConfirmationModal from "./Components/AdminLocationDistrictDeleteConfirmationModal";
+import AdminLocationDistrictHeaderAction from "./Components/AdminLocationDistrictHeaderAction";
+import AdminLocationDistrictModificationModal from "./Components/AdminLocationDistrictModificationModal";
 
 const AdminLocationDistrictList = () => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.location.district',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.location.district",
   });
 
   const [districtData, setDistrictData] = useState<ILocationDistrict[]>([]);
@@ -99,12 +99,12 @@ const AdminLocationDistrictList = () => {
   }, [columnFilters, pagination]);
 
   useLayoutEffect(() => {
-    setDocumentTitle(t('title'));
+    setDocumentTitle(t("title"));
   }, [t]);
 
   return (
     <LayoutContent
-      title={t('title')}
+      title={t("title")}
       actions={<AdminLocationDistrictHeaderAction onClick={handleClickAddButton} />}
     >
       <Table
@@ -121,7 +121,7 @@ const AdminLocationDistrictList = () => {
       />
       <AdminLocationDistrictDeleteConfirmationModal
         isOpen={isShowDeleteConfirmationModal}
-        code={selectedDistrictCode ?? ''}
+        code={selectedDistrictCode ?? ""}
         onClose={handleCloseDeleteConfirmationModal}
         onDeleted={getDistrictData}
       />

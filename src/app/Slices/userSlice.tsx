@@ -1,11 +1,11 @@
-import { IREUser } from '@encacap-group/types/dist/re';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import _ from 'lodash';
+import { IREUser } from "@encacap-group/types/dist/re";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import _ from "lodash";
 
 const initialState: IREUser = {} as unknown as IREUser;
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<IREUser>) => {

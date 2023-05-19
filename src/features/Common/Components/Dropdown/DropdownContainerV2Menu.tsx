@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from "react";
 
-import DropdownContainerV2MenuItem, { DropdownMenuItemType } from './DropdownContainerV2MenuItem';
+import DropdownContainerV2MenuItem, { DropdownMenuItemType } from "./DropdownContainerV2MenuItem";
 
 interface DropdownContainerV2MenuProps {
   menu: DropdownMenuItemType[];
@@ -25,25 +25,25 @@ const DropdownContainerV2Menu = ({ menu, rect: containerRect, onInteract }: Drop
     const windowHeight = window.innerHeight;
     const windowWidth = window.innerWidth;
 
-    let top: string | number = 'auto';
-    let bottom: string | number = 'auto';
-    let left: string | number = 'auto';
-    let right: string | number = 'auto';
+    let top: string | number = "auto";
+    let bottom: string | number = "auto";
+    let left: string | number = "auto";
+    let right: string | number = "auto";
 
     if (containerTop + menuHeight + paddingSize * 3 > windowHeight) {
-      top = 'auto';
+      top = "auto";
       bottom = windowHeight - containerTop + paddingSize;
     } else {
       top = containerTop + containerHeight + paddingSize;
-      bottom = 'auto';
+      bottom = "auto";
     }
 
     if (containerLeft + menuWidth > windowWidth) {
-      left = 'auto';
+      left = "auto";
       right = windowWidth - containerLeft - containerWidth - paddingSize;
     } else {
       left = containerLeft;
-      right = 'auto';
+      right = "auto";
     }
 
     return {

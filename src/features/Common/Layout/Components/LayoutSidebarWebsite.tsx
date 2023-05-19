@@ -1,7 +1,7 @@
-import { AiOutlineGlobal } from 'react-icons/ai';
-import { MdOpenInNew } from 'react-icons/md';
+import { AiOutlineGlobal } from "react-icons/ai";
+import { MdOpenInNew } from "react-icons/md";
 
-import useSelector from '@hooks/useSelector';
+import useSelector from "@hooks/useSelector";
 
 const LayoutSidebarWebsite = () => {
   const { website } = useSelector((state) => state.user);
@@ -17,7 +17,7 @@ const LayoutSidebarWebsite = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <span>{website.url.replace('https://', '')}</span>
+          <span>{website.url.replace("https://", "")}</span>
           <MdOpenInNew className="invisible absolute right-0 top-1 flex-shrink-0 group-hover:visible" />
         </a>
       </div>

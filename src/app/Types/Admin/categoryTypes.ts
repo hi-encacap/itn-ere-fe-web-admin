@@ -1,4 +1,4 @@
-import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
+import { FormImageInputDataType } from "@interfaces/Common/elementTypes";
 
 export interface CategoryFormDataType {
   name: string;

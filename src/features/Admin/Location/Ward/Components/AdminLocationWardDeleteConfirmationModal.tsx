@@ -1,18 +1,18 @@
-import { omit } from 'lodash';
-import { useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
+import { omit } from "lodash";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
-import { adminLocationService } from '@services/index';
+import { adminLocationService } from "@services/index";
 
-import { ConfirmationModal } from '@components/Modal';
-import { ConfirmationModalProps } from '@components/Modal/ConfirmationModal';
+import { ConfirmationModal } from "@components/Modal";
+import { ConfirmationModalProps } from "@components/Modal/ConfirmationModal";
 
-import useToast from '@hooks/useToast';
+import useToast from "@hooks/useToast";
 
-import AdminLocationWardDeleteConfirmationModalContent from './AdminLocationWardDeleteConfirmationModalContent';
+import AdminLocationWardDeleteConfirmationModalContent from "./AdminLocationWardDeleteConfirmationModalContent";
 
 interface AdminLocationWardDeleteConfirmationModalProps
-  extends Omit<ConfirmationModalProps, 'title' | 'message' | 'onConfirm'> {
+  extends Omit<ConfirmationModalProps, "title" | "message" | "onConfirm"> {
   code: string;
   onDeleted: () => void;
   onDeleteFailed?: () => void;
@@ -26,8 +26,8 @@ const AdminLocationWardDeleteConfirmationModal = ({
   onDeleteFailed,
   ...props
 }: AdminLocationWardDeleteConfirmationModalProps) => {
-  const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:page.location.ward',
+  const { t } = useTranslation(["admin"], {
+    keyPrefix: "admin:page.location.ward",
   });
 
   const toast = useToast();
@@ -39,11 +39,11 @@ const AdminLocationWardDeleteConfirmationModal = ({
       .deleteWardByCode(wardCode)
       .then(() => {
         onDeleted();
-        toast.success(t('notification.delete.deleted'));
+        toast.success(t("notification.delete.deleted"));
       })
       .catch(() => {
         onDeleteFailed?.();
-        toast.error(t('notification.delete.deleteFailed'));
+        toast.error(t("notification.delete.deleteFailed"));
       })
       .finally(() => {
         onClose();
@@ -54,11 +54,11 @@ const AdminLocationWardDeleteConfirmationModal = ({
     <ConfirmationModal
       isOpen={isOpen}
       status="danger"
-      title={t('modal.delete.title')}
+      title={t("modal.delete.title")}
       message={<AdminLocationWardDeleteConfirmationModalContent />}
       onConfirm={handleDelete}
       onClose={onClose}
-      {...omit(props, 'title', 'message')}
+      {...omit(props, "title", "message")}
     />
   );
 };

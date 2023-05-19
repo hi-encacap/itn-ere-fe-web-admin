@@ -1,6 +1,6 @@
-import { FormEventHandler } from 'react';
+import { FormEventHandler } from "react";
 
-import { Checkbox } from '@components/Form';
+import { Checkbox } from "@components/Form";
 
 export interface TableSelectorColumnHeaderProps {
   isSelectedAll: boolean;

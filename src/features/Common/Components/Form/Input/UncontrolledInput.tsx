@@ -1,11 +1,11 @@
-import { InputHTMLAttributes, Ref, forwardRef, useMemo } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { InputHTMLAttributes, Ref, forwardRef, useMemo } from "react";
+import { twMerge } from "tailwind-merge";
 
-import { FormElementSizeType } from '@interfaces/Common/elementTypes';
+import { FormElementSizeType } from "@interfaces/Common/elementTypes";
 
-import FormElementError from '../FormElementError';
+import FormElementError from "../FormElementError";
 
-export interface UncontrolledInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface UncontrolledInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   name: string;
   className?: string;
   error?: string;
@@ -18,10 +18,10 @@ const UncontrolledInput = (
   {
     name,
     id,
-    type = 'text',
+    type = "text",
     className,
     label,
-    size = 'normal',
+    size = "normal",
     error,
     isRequired,
     disabled,
@@ -32,11 +32,11 @@ const UncontrolledInput = (
   const inputId = id ?? name;
 
   const inputSizeClassName = useMemo(() => {
-    if (size === 'sm') {
-      return 'h-10';
+    if (size === "sm") {
+      return "h-10";
     }
 
-    return 'h-12';
+    return "h-12";
   }, [size]);
 
   return (
@@ -44,8 +44,8 @@ const UncontrolledInput = (
       {label && (
         <div
           className={twMerge(
-            'relative mb-2 -mt-2 flex items-center text-sm text-stone-700',
-            error && 'text-red-500',
+            "relative mb-2 -mt-2 flex items-center text-sm text-stone-700",
+            error && "text-red-500",
           )}
         >
           {label}
@@ -54,11 +54,11 @@ const UncontrolledInput = (
       )}
       <div
         className={twMerge(
-          'group inline-block rounded-lg border-2 border-gray-100 duration-100 focus-within:border-blue-500 hover:border-gray-200 focus-within:hover:border-blue-500',
+          "group inline-block rounded-lg border-2 border-gray-100 duration-100 focus-within:border-blue-500 hover:border-gray-200 focus-within:hover:border-blue-500",
           error &&
-            'border-red-500 focus-within:border-red-500 hover:border-red-500 focus-within:hover:border-red-500',
+            "border-red-500 focus-within:border-red-500 hover:border-red-500 focus-within:hover:border-red-500",
           inputSizeClassName,
-          disabled && 'border-gray-100 hover:border-gray-100',
+          disabled && "border-gray-100 hover:border-gray-100",
           className,
         )}
       >
@@ -67,8 +67,8 @@ const UncontrolledInput = (
           id={inputId}
           type={type}
           className={twMerge(
-            'block h-full w-full rounded-lg border-none px-4 outline-none',
-            error && 'text-red-500',
+            "block h-full w-full rounded-lg border-none px-4 outline-none",
+            error && "text-red-500",
           )}
           disabled={disabled}
           ref={ref}

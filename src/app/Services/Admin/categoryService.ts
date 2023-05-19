@@ -1,11 +1,11 @@
-import { IBaseListQuery, IResponseWithMeta } from '@encacap-group/types/dist/base';
-import { ICategory } from '@encacap-group/types/dist/re';
-import { omit } from 'lodash';
+import { IBaseListQuery, IResponseWithMeta } from "@encacap-group/types/dist/base";
+import { ICategory } from "@encacap-group/types/dist/re";
+import { omit } from "lodash";
 
-import { ADMIN_CATEGORY_API_PATH } from '@constants/apis';
-import { CategoryFormDataType } from '@interfaces/Admin/categoryTypes';
+import { ADMIN_CATEGORY_API_PATH } from "@constants/apis";
+import { CategoryFormDataType } from "@interfaces/Admin/categoryTypes";
 
-import axiosInstance from '@utils/Http/axiosInstance';
+import axiosInstance from "@utils/Http/axiosInstance";
 
 const getCategories = async (params?: IBaseListQuery): Promise<IResponseWithMeta<ICategory[]>> => {
   const response = await axiosInstance.get(ADMIN_CATEGORY_API_PATH.CATEGORIES_PATH, {
@@ -16,7 +16,7 @@ const getCategories = async (params?: IBaseListQuery): Promise<IResponseWithMeta
 };
 
 const getAllCategories = async (params?: IBaseListQuery): Promise<ICategory[]> => {
-  const response = await getCategories(omit(params, 'page', 'limit'));
+  const response = await getCategories(omit(params, "page", "limit"));
 
   return response.data;
 };

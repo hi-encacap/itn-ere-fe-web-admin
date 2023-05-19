@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 
-import { authService } from '@services/index';
+import { authService } from "@services/index";
 
-import errorHandler from './errorHandler';
+import errorHandler from "./errorHandler";
 
-declare module 'axios' {
+declare module "axios" {
   export interface AxiosRequestConfig {
     redirectWhenError?: boolean;
     autoRefreshToken?: boolean;
@@ -14,10 +14,10 @@ declare module 'axios' {
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_RE_DASH_APP_API_URL,
   timeout: 30000,
-  responseEncoding: 'utf8',
+  responseEncoding: "utf8",
   headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
+    "Content-Type": "application/json",
+    Accept: "application/json",
   },
   withCredentials: true,
 });

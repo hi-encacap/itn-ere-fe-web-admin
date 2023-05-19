@@ -1,17 +1,17 @@
-import { UPLOAD_API_PATH } from '@constants/apis';
-import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
+import { UPLOAD_API_PATH } from "@constants/apis";
+import { FormImageInputDataType } from "@interfaces/Common/elementTypes";
 
-import axiosInstance from '@utils/Http/axiosInstance';
+import axiosInstance from "@utils/Http/axiosInstance";
 
-const uploadImage = async (file: File, id?: FormImageInputDataType['id']) => {
+const uploadImage = async (file: File, id?: FormImageInputDataType["id"]) => {
   const formData = new FormData();
 
-  formData.append('file', file);
-  formData.append('id', id ?? '');
+  formData.append("file", file);
+  formData.append("id", id ?? "");
 
   const { data } = await axiosInstance.post(UPLOAD_API_PATH.UPLOAD_IMAGE_PATH, formData, {
     headers: {
-      'Content-Type': 'multipart/form-data',
+      "Content-Type": "multipart/form-data",
     },
   });
 

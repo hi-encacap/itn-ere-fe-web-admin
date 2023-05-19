@@ -1,6 +1,6 @@
-import { Header, RowData } from '@tanstack/react-table';
+import { Header, RowData } from "@tanstack/react-table";
 
-import TableContentBodySkeletonItem from './TableContentBodySkeletonItem';
+import TableContentBodySkeletonItem from "./TableContentBodySkeletonItem";
 
 interface TableContentBodySkeletonProps<T = RowData> {
   headers: Array<Header<T, RowData>>;

@@ -1,29 +1,29 @@
-import { IBaseListQuery } from '@encacap-group/types/dist/base';
-import { ILocationProvince } from '@encacap-group/types/dist/re';
-import { SortingState } from '@tanstack/react-table';
-import { isEqual } from 'lodash';
-import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { IBaseListQuery } from "@encacap-group/types/dist/base";
+import { ILocationProvince } from "@encacap-group/types/dist/re";
+import { SortingState } from "@tanstack/react-table";
+import { isEqual } from "lodash";
+import { Key, useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { TablePaginationType } from '@interfaces/Common/commonTypes';
-import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
-import { adminLocationService } from '@services/index';
+import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
+import { TablePaginationType } from "@interfaces/Common/commonTypes";
+import { TableColumnFilterState } from "@interfaces/Common/elementTypes";
+import { adminLocationService } from "@services/index";
 
-import Table from '@components/Table/Table';
+import Table from "@components/Table/Table";
 
-import LayoutContent from '@common/Layout/Components/LayoutContent';
+import LayoutContent from "@common/Layout/Components/LayoutContent";
 
-import { generateColumnFilterObject, setDocumentTitle } from '@utils/helpers';
+import { generateColumnFilterObject, setDocumentTitle } from "@utils/helpers";
 
-import createLocationProvinceTableColumns from './Columns/adminLocationProvinceTableColumn';
-import AdminLocationProvinceDeleteConfirmationModal from './Components/AdminLocationProvinceDeleteConfirmationModal';
-import AdminLocationProvinceHeaderAction from './Components/AdminLocationProvinceHeaderAction';
-import AdminLocationProvinceModificationModal from './Components/AdminLocationProvinceModificationModal';
+import createLocationProvinceTableColumns from "./Columns/adminLocationProvinceTableColumn";
+import AdminLocationProvinceDeleteConfirmationModal from "./Components/AdminLocationProvinceDeleteConfirmationModal";
+import AdminLocationProvinceHeaderAction from "./Components/AdminLocationProvinceHeaderAction";
+import AdminLocationProvinceModificationModal from "./Components/AdminLocationProvinceModificationModal";
 
 const AdminLocationProvinceList = () => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.location.province',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.location.province",
   });
 
   const [provinceData, setProvinceData] = useState<ILocationProvince[]>([]);
@@ -99,12 +99,12 @@ const AdminLocationProvinceList = () => {
   }, [columnFilters, pagination]);
 
   useLayoutEffect(() => {
-    setDocumentTitle(t('title'));
+    setDocumentTitle(t("title"));
   }, [t]);
 
   return (
     <LayoutContent
-      title={t('title')}
+      title={t("title")}
       actions={<AdminLocationProvinceHeaderAction onClick={handleClickAddButton} />}
     >
       <Table
@@ -121,7 +121,7 @@ const AdminLocationProvinceList = () => {
       />
       <AdminLocationProvinceDeleteConfirmationModal
         isOpen={isShowDeleteConfirmationModal}
-        code={selectedProvinceCode ?? ''}
+        code={selectedProvinceCode ?? ""}
         onClose={handleCloseDeleteConfirmationModal}
         onDeleted={getProvinceData}
       />

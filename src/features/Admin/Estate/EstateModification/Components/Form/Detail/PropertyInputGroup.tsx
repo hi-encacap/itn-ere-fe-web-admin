@@ -1,17 +1,17 @@
-import { IEstateProperty } from '@encacap-group/types/dist/re';
-import { useCallback, useEffect, useState } from 'react';
-import { useFieldArray, useFormContext } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { MdAdd } from 'react-icons/md';
+import { IEstateProperty } from "@encacap-group/types/dist/re";
+import { useCallback, useEffect, useState } from "react";
+import { useFieldArray, useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { MdAdd } from "react-icons/md";
 
-import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
-import { adminEstatePropertyService } from '@services/index';
+import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
+import { adminEstatePropertyService } from "@services/index";
 
-import { Button, Input } from '@components/Form';
+import { Button, Input } from "@components/Form";
 
 const AdminEstateModificationFormDetailPropertyInputGroup = () => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.estate.modification.form.detail.form',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.estate.modification.form.detail.form",
   });
 
   const [estateProperties, setEstateProperties] = useState<IEstateProperty[]>([]);
@@ -20,10 +20,10 @@ const AdminEstateModificationFormDetailPropertyInputGroup = () => {
   const { control, watch } = useFormContext<EstateFormDataType>();
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'properties' as never,
+    name: "properties" as never,
   });
 
-  const categoryId = watch('categoryId');
+  const categoryId = watch("categoryId");
 
   const getPropertyByCategoryId = useCallback(() => {
     if (!categoryId) {
@@ -46,7 +46,7 @@ const AdminEstateModificationFormDetailPropertyInputGroup = () => {
           append({
             id: estateProperty.id,
             name: estateProperty.name,
-            value: '',
+            value: "",
           });
         });
       })
@@ -71,7 +71,7 @@ const AdminEstateModificationFormDetailPropertyInputGroup = () => {
           key={field.id}
           label={estateProperties[index]?.name}
           name={`properties.${index}.value`}
-          placeholder={t('property.placeholder', {
+          placeholder={t("property.placeholder", {
             name: estateProperties[index]?.name.toLowerCase(),
           })}
         />
@@ -83,7 +83,7 @@ const AdminEstateModificationFormDetailPropertyInputGroup = () => {
         isLoading={isLoading}
       >
         {!isLoading && <MdAdd size={22} className="mr-2 flex-shrink-0" />}
-        <span className="line-clamp-1">{t('addProperty')}</span>
+        <span className="line-clamp-1">{t("addProperty")}</span>
       </Button>
     </>
   );

@@ -1,18 +1,18 @@
-import { IEstate } from '@encacap-group/types/dist/re';
-import { useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
+import { IEstate } from "@encacap-group/types/dist/re";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
-import { EstateDraftDataType } from '@interfaces/Admin/estateTypes';
-import { adminEstateService } from '@services/index';
+import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
+import { adminEstateService } from "@services/index";
 
-import { ConfirmationModal } from '@components/Modal';
-import { ModalProps } from '@components/Modal/Modal';
+import { ConfirmationModal } from "@components/Modal";
+import { ModalProps } from "@components/Modal/Modal";
 
-import useToast from '@hooks/useToast';
+import useToast from "@hooks/useToast";
 
-import AdminEstateCompletedDeleteConfirmationMessage from './AdminEstateCompletedDeleteConfirmationMessage';
+import AdminEstateCompletedDeleteConfirmationMessage from "./AdminEstateCompletedDeleteConfirmationMessage";
 
-interface AdminEstateCompletedDeleteConfirmationModalProps extends Omit<ModalProps, 'title' | 'message'> {
+interface AdminEstateCompletedDeleteConfirmationModalProps extends Omit<ModalProps, "title" | "message"> {
   data: EstateDraftDataType | null;
   onSuccess: () => void;
 }
@@ -23,8 +23,8 @@ const AdminEstateCompletedDeleteConfirmationModal = ({
   onClose,
   ...props
 }: AdminEstateCompletedDeleteConfirmationModalProps) => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.estate',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.estate",
   });
   const toast = useToast();
 
@@ -36,11 +36,11 @@ const AdminEstateCompletedDeleteConfirmationModal = ({
     try {
       await adminEstateService.deleteEstateById(data.id);
 
-      toast.success(t('list.notification.deletedCompleted'));
+      toast.success(t("list.notification.deletedCompleted"));
 
       onSuccess();
     } catch (error) {
-      toast.error(t('list.notification.deleteCompletedFailed'));
+      toast.error(t("list.notification.deleteCompletedFailed"));
     } finally {
       onClose();
     }
@@ -51,7 +51,7 @@ const AdminEstateCompletedDeleteConfirmationModal = ({
       contentContainerClassName="max-w-xl w-[720px]"
       message={<AdminEstateCompletedDeleteConfirmationMessage data={data as IEstate} />}
       status="danger"
-      title={t('list.deletion.title', { title: data?.title })}
+      title={t("list.deletion.title", { title: data?.title })}
       onConfirm={handleConfirmDelete}
       onClose={onClose}
       {...props}

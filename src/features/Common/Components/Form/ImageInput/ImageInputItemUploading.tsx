@@ -1,4 +1,4 @@
-import LoadingSpinner from '@components/Loading/LoadingSpinner';
+import LoadingSpinner from "@components/Loading/LoadingSpinner";
 
 const ImageInputItemUploading = () => {
   return (

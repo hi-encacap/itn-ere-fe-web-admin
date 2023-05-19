@@ -1,15 +1,15 @@
-import { random } from 'lodash';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { twMerge } from 'tailwind-merge';
+import { random } from "lodash";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { twMerge } from "tailwind-merge";
 
-import { FormElementBaseProps, FormImageInputDataType } from '@interfaces/Common/elementTypes';
-import { uploadService } from '@services/index';
+import { FormElementBaseProps, FormImageInputDataType } from "@interfaces/Common/elementTypes";
+import { uploadService } from "@services/index";
 
-import useToast from '@hooks/useToast';
-import { convertToImageDataFromFiles } from '@utils/image';
+import useToast from "@hooks/useToast";
+import { convertToImageDataFromFiles } from "@utils/image";
 
-import ImageInputItem from './ImageInputItem';
+import ImageInputItem from "./ImageInputItem";
 
 export interface UncontrolledImageInputProps extends FormElementBaseProps {
   value?: FormImageInputDataType | FormImageInputDataType[];
@@ -29,8 +29,8 @@ const UncontrolledImageInput = ({
   value,
   onChange,
 }: UncontrolledImageInputProps) => {
-  const { t } = useTranslation('common', {
-    keyPrefix: 'common:form.imageInput',
+  const { t } = useTranslation("common", {
+    keyPrefix: "common:form.imageInput",
   });
   const toast = useToast();
 
@@ -57,7 +57,7 @@ const UncontrolledImageInput = ({
           );
         })
         .catch(() => {
-          toast.error(t('error.uploadFailed'));
+          toast.error(t("error.uploadFailed"));
           setImages((prev) => prev.filter((image) => image.id !== file.id));
         })
         .finally(() => {
@@ -76,7 +76,7 @@ const UncontrolledImageInput = ({
     setImages((prev) => [...prev, ...formattedImages]);
   }, []);
 
-  const handleRemoveImage = useCallback((id: FormImageInputDataType['id']) => {
+  const handleRemoveImage = useCallback((id: FormImageInputDataType["id"]) => {
     setImages((prev) => prev.filter((image) => image.id !== id));
   }, []);
 
@@ -99,15 +99,15 @@ const UncontrolledImageInput = ({
         <label
           htmlFor={inputId}
           className={twMerge(
-            'relative mb-2 -mt-2 flex items-center text-sm text-stone-700',
-            error && 'text-red-500',
+            "relative mb-2 -mt-2 flex items-center text-sm text-stone-700",
+            error && "text-red-500",
           )}
         >
           {label}
           {isRequired && <div className="ml-1 text-red-500">*</div>}
         </label>
       )}
-      <div className={twMerge('grid grid-cols-4 gap-4', className)}>
+      <div className={twMerge("grid grid-cols-4 gap-4", className)}>
         {images.map((image) => (
           <ImageInputItem
             inputId={inputId}

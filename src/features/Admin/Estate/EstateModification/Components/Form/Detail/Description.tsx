@@ -1,6 +1,6 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState } from "react";
 
-import AdminEstateModificationFormDetailDescriptionEditor from './DescriptionEditor';
+import AdminEstateModificationFormDetailDescriptionEditor from "./DescriptionEditor";
 
 const AdminEstateModificationFormDetailDescription = () => {
   const [isFocusing, setIsFocusing] = useState(false);

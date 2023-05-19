@@ -1,25 +1,25 @@
-import { ESTATE_STATUS_ENUM, IEstate, getImageURL } from '@encacap-group/types/dist/re';
-import dayjs from 'dayjs';
-import { useCallback, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { FiEdit2, FiTrash2, FiUpload } from 'react-icons/fi';
-import { HiDotsHorizontal } from 'react-icons/hi';
-import { MdAccessTime } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
-import striptags from 'striptags';
+import { ESTATE_STATUS_ENUM, IEstate, getImageURL } from "@encacap-group/types/dist/re";
+import dayjs from "dayjs";
+import { useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { FiEdit2, FiTrash2, FiUpload } from "react-icons/fi";
+import { HiDotsHorizontal } from "react-icons/hi";
+import { MdAccessTime } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import striptags from "striptags";
 
-import { DROPDOWN_MENU_TYPE_ENUM } from '@constants/enums';
-import { ADMIN_PATH } from '@constants/urls';
-import { EstateDraftDataType } from '@interfaces/Admin/estateTypes';
+import { DROPDOWN_MENU_TYPE_ENUM } from "@constants/enums";
+import { ADMIN_PATH } from "@constants/urls";
+import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
 
-import DropdownContainerV2 from '@components/Dropdown/DropdownContainerV2';
-import { DropdownMenuItemType } from '@components/Dropdown/DropdownContainerV2MenuItem';
-import { Button } from '@components/Form';
-import LoadingSpinner from '@components/Loading/LoadingSpinner';
+import DropdownContainerV2 from "@components/Dropdown/DropdownContainerV2";
+import { DropdownMenuItemType } from "@components/Dropdown/DropdownContainerV2MenuItem";
+import { Button } from "@components/Form";
+import LoadingSpinner from "@components/Loading/LoadingSpinner";
 
-import useToast from '@hooks/useToast';
+import useToast from "@hooks/useToast";
 
-import AdminEstateListTableBodyItemBadge from './TableBodyItemBadge';
+import AdminEstateListTableBodyItemBadge from "./TableBodyItemBadge";
 
 interface AdminEstateListTableBodyItemProps {
   data: IEstate | EstateDraftDataType;
@@ -38,11 +38,11 @@ const AdminEstateListTableBodyItem = ({
   onClickPublish,
   onInteraction,
 }: AdminEstateListTableBodyItemProps) => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.estate.list',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.estate.list",
   });
-  const { t: tEstate } = useTranslation('admin', {
-    keyPrefix: 'admin:page.estate',
+  const { t: tEstate } = useTranslation("admin", {
+    keyPrefix: "admin:page.estate",
   });
   const toast = useToast();
 
@@ -63,10 +63,10 @@ const AdminEstateListTableBodyItem = ({
 
     try {
       await onMoveToTop?.(data.id);
-      toast.success(t('notification.movedToTop'));
+      toast.success(t("notification.movedToTop"));
       onInteraction?.();
     } catch (error) {
-      toast.error(t('notification.moveToTopFailed'));
+      toast.error(t("notification.moveToTopFailed"));
     } finally {
       setIsLoading(false);
     }
@@ -83,8 +83,8 @@ const AdminEstateListTableBodyItem = ({
   const moveTopTopOption: DropdownMenuItemType = useMemo(
     () => ({
       icon: <FiUpload />,
-      id: 'moveToTop',
-      label: t('table.action.moveToTop'),
+      id: "moveToTop",
+      label: t("table.action.moveToTop"),
       onClick: handleClickMoveToTop,
     }),
     [handleClickMoveToTop],
@@ -93,8 +93,8 @@ const AdminEstateListTableBodyItem = ({
   const editOption: DropdownMenuItemType = useMemo(
     () => ({
       icon: <FiEdit2 />,
-      id: 'edit',
-      label: t('table.action.edit'),
+      id: "edit",
+      label: t("table.action.edit"),
       onClick: handleClickEdit,
     }),
     [handleClickEdit],
@@ -102,10 +102,10 @@ const AdminEstateListTableBodyItem = ({
 
   const deleteOption: DropdownMenuItemType = useMemo(
     () => ({
-      className: 'text-red-500',
+      className: "text-red-500",
       icon: <FiTrash2 />,
-      id: 'delete',
-      label: t('table.action.delete'),
+      id: "delete",
+      label: t("table.action.delete"),
       onClick: handleClickDelete,
     }),
     [handleClickDelete],
@@ -113,7 +113,7 @@ const AdminEstateListTableBodyItem = ({
 
   const dropdownMenu = useMemo<DropdownMenuItemType[]>(() => {
     if (data.status === ESTATE_STATUS_ENUM.UNPUBLISHED) {
-      return [editOption, { id: 'divider', type: DROPDOWN_MENU_TYPE_ENUM.DIVIDER }, deleteOption];
+      return [editOption, { id: "divider", type: DROPDOWN_MENU_TYPE_ENUM.DIVIDER }, deleteOption];
     }
 
     if (data.status === ESTATE_STATUS_ENUM.DRAFT) {
@@ -123,7 +123,7 @@ const AdminEstateListTableBodyItem = ({
     return [
       moveTopTopOption,
       editOption,
-      { id: 'divider', type: DROPDOWN_MENU_TYPE_ENUM.DIVIDER },
+      { id: "divider", type: DROPDOWN_MENU_TYPE_ENUM.DIVIDER },
       deleteOption,
     ];
   }, [handleClickDelete]);
@@ -160,8 +160,8 @@ const AdminEstateListTableBodyItem = ({
           <div className="mt-1 flex items-center justify-start space-x-2">
             <MdAccessTime />
             <span className="text-sm">
-              {t('table.column.updatedAt', {
-                date: dayjs(data.updatedAt).format('DD/MM/YYYY'),
+              {t("table.column.updatedAt", {
+                date: dayjs(data.updatedAt).format("DD/MM/YYYY"),
               })}
             </span>
           </div>
@@ -169,7 +169,7 @@ const AdminEstateListTableBodyItem = ({
         <div
           // #skipcq: JS-0440
           dangerouslySetInnerHTML={{
-            __html: data.description ? striptags(data.description) : t('notification.emptyDescription'),
+            __html: data.description ? striptags(data.description) : t("notification.emptyDescription"),
           }}
           className="mt-3 mb-2.5 flex-1 overflow-hidden border-t-2 border-gray-100 pt-2 line-clamp-3"
         />
@@ -181,12 +181,12 @@ const AdminEstateListTableBodyItem = ({
           </DropdownContainerV2>
           {data.status === ESTATE_STATUS_ENUM.UNPUBLISHED && (
             <Button className="flex-1 rounded-sm" size="sm" disabled={isLoading} onClick={handleClickPublish}>
-              {t('table.action.publish')}
+              {t("table.action.publish")}
             </Button>
           )}
           {data.status === ESTATE_STATUS_ENUM.DRAFT && (
             <Button className="flex-1 rounded-sm" size="sm" disabled={isLoading} onClick={handleClickEdit}>
-              {t('table.action.edit')}
+              {t("table.action.edit")}
             </Button>
           )}
           {data.status === ESTATE_STATUS_ENUM.PUBLISHED && (
@@ -196,7 +196,7 @@ const AdminEstateListTableBodyItem = ({
               disabled={isLoading}
               onClick={handleClickUnPublish}
             >
-              {t('table.action.unPublish')}
+              {t("table.action.unPublish")}
             </Button>
           )}
         </div>

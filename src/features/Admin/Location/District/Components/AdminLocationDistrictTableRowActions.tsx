@@ -1,9 +1,9 @@
-import { Key } from 'react';
-import { FiTrash2 } from 'react-icons/fi';
+import { Key } from "react";
+import { FiTrash2 } from "react-icons/fi";
 
-import { TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes';
+import { TableRowActionClickHandlerType } from "@interfaces/Common/elementTypes";
 
-import TableRowAction from '@components/Table/TableRowAction';
+import TableRowAction from "@components/Table/TableRowAction";
 
 interface AdminProvinceDistrictTableRowActionsProps {
   code: Key;

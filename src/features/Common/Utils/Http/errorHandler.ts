@@ -1,9 +1,9 @@
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { UNAUTHORIZED } from 'http-status';
-import _ from 'lodash';
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { UNAUTHORIZED } from "http-status";
+import _ from "lodash";
 
-import { AUTHENTICATION_PATH } from '@constants/urls';
-import { authService } from '@services/index';
+import { AUTHENTICATION_PATH } from "@constants/urls";
+import { authService } from "@services/index";
 
 const errorHandler = async (
   error: { response: AxiosResponse; config: AxiosRequestConfig },
@@ -11,7 +11,7 @@ const errorHandler = async (
 ) => {
   const { response, config } = error;
 
-  let redirectURL = '';
+  let redirectURL = "";
 
   const redirectWhenError = config?.redirectWhenError;
 
@@ -52,7 +52,7 @@ const errorHandler = async (
     }
   }
 
-  if (redirectURL !== '' && (redirectWhenError ?? false)) {
+  if (redirectURL !== "" && (redirectWhenError ?? false)) {
     const currentURL = window.location.pathname;
     if (currentURL !== redirectURL) {
       window.location.href = `${redirectURL}?from=${currentURL}`;

@@ -1,9 +1,9 @@
-import { IREUser } from '@encacap-group/types/dist/re';
+import { IREUser } from "@encacap-group/types/dist/re";
 
-import { AUTHENTICATION_API_PATH } from '@constants/apis';
-import { AuthTokenAndUserDataType, AuthTokensType } from '@interfaces/Common/authTypes';
+import { AUTHENTICATION_API_PATH } from "@constants/apis";
+import { AuthTokenAndUserDataType, AuthTokensType } from "@interfaces/Common/authTypes";
 
-import axiosInstance from '@utils/Http/axiosInstance';
+import axiosInstance from "@utils/Http/axiosInstance";
 
 const getMe = async (): Promise<IREUser> => {
   const response = await axiosInstance.get(AUTHENTICATION_API_PATH.ME_PATH);
@@ -12,19 +12,19 @@ const getMe = async (): Promise<IREUser> => {
 };
 
 const getAuthTokens = () => ({
-  accessToken: window.localStorage.getItem('accessToken') ?? '',
-  refreshToken: window.localStorage.getItem('refreshToken') ?? '',
+  accessToken: window.localStorage.getItem("accessToken") ?? "",
+  refreshToken: window.localStorage.getItem("refreshToken") ?? "",
 });
 
 const setAuthTokens = (
-  accessToken: AuthTokensType['accessToken'],
-  refreshToken: AuthTokensType['refreshToken'],
+  accessToken: AuthTokensType["accessToken"],
+  refreshToken: AuthTokensType["refreshToken"],
 ) => {
-  window.localStorage.setItem('accessToken', accessToken);
-  window.localStorage.setItem('refreshToken', refreshToken);
+  window.localStorage.setItem("accessToken", accessToken);
+  window.localStorage.setItem("refreshToken", refreshToken);
 };
 
-const refreshAccessToken = async (refreshToken: AuthTokensType['refreshToken']): Promise<AuthTokensType> => {
+const refreshAccessToken = async (refreshToken: AuthTokensType["refreshToken"]): Promise<AuthTokensType> => {
   const response = await axiosInstance.post(
     AUTHENTICATION_API_PATH.REFRESH_TOKEN_PATH,
     {

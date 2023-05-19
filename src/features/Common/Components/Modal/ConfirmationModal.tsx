@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { FiAlertTriangle } from 'react-icons/fi';
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { FiAlertTriangle } from "react-icons/fi";
 
-import { ConfirmationModalStatusType } from '@interfaces/Common/elementTypes';
+import { ConfirmationModalStatusType } from "@interfaces/Common/elementTypes";
 
-import { Button } from '@components/Form';
+import { Button } from "@components/Form";
 
-import Modal, { ModalProps } from './Modal';
+import Modal, { ModalProps } from "./Modal";
 
 export interface ConfirmationModalProps extends ModalProps {
   title: string;
@@ -19,7 +19,7 @@ export interface ConfirmationModalProps extends ModalProps {
 
 const ConfirmationModal = ({
   isOpen,
-  status = 'success',
+  status = "success",
   title,
   message,
   cancelButtonText,
@@ -28,9 +28,7 @@ const ConfirmationModal = ({
   onClose,
   ...props
 }: ConfirmationModalProps) => {
-  const { t } = useTranslation(['common'], {
-    keyPrefix: 'common:confirmationModal',
-  });
+  const { t } = useTranslation("common");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -45,23 +43,23 @@ const ConfirmationModal = ({
   }, [onClose]);
 
   const getClassNameByStatus = (statusParam: ConfirmationModalStatusType) => {
-    if (statusParam === 'success') {
-      return 'flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-green-100 rounded-full sm:mx-0 sm:h-10 sm:w-10';
+    if (statusParam === "success") {
+      return "flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-green-100 rounded-full sm:mx-0 sm:h-10 sm:w-10";
     }
-    if (statusParam === 'danger') {
-      return 'flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-red-100 rounded-full sm:mx-0 sm:h-10 sm:w-10';
+    if (statusParam === "danger") {
+      return "flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-red-100 rounded-full sm:mx-0 sm:h-10 sm:w-10";
     }
-    return 'flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-red-100 rounded-full sm:mx-0 sm:h-10 sm:w-10';
+    return "flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-red-100 rounded-full sm:mx-0 sm:h-10 sm:w-10";
   };
 
   const iconClassName = useMemo(() => {
-    if (status === 'success') {
-      return 'text-green-500';
+    if (status === "success") {
+      return "text-green-500";
     }
-    if (status === 'danger') {
-      return 'text-red-500';
+    if (status === "danger") {
+      return "text-red-500";
     }
-    return 'text-red-500';
+    return "text-red-500";
   }, [status]);
 
   useEffect(() => {
@@ -98,7 +96,7 @@ const ConfirmationModal = ({
           onClick={handleClickCancelButton}
           disabled={isSubmitting}
         >
-          {cancelButtonText ?? t('cancelButtonText')}
+          {cancelButtonText ?? t("cancel")}
         </Button>
         <Button
           type="button"
@@ -109,7 +107,7 @@ const ConfirmationModal = ({
           isLoading={isSubmitting}
           onClick={handleClickConfirmButton}
         >
-          {confirmButtonText ?? t('confirmButtonText')}
+          {confirmButtonText ?? t("confirm")}
         </Button>
       </div>
     </Modal>

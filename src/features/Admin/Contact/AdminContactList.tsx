@@ -1,27 +1,27 @@
-import { IBaseListQuery } from '@encacap-group/types/dist/base';
-import { IContact } from '@encacap-group/types/dist/re';
-import { RowSelectionState, SortingState } from '@tanstack/react-table';
-import { isEqual, keys } from 'lodash';
-import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { IBaseListQuery } from "@encacap-group/types/dist/base";
+import { IContact } from "@encacap-group/types/dist/re";
+import { RowSelectionState, SortingState } from "@tanstack/react-table";
+import { isEqual, keys } from "lodash";
+import { Key, useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { TABLE_ROW_SELECTION_TYPE_ENUM } from '@constants/enums';
-import { TablePaginationType } from '@interfaces/Common/commonTypes';
-import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
-import { adminContactService } from '@services/index';
+import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
+import { TABLE_ROW_SELECTION_TYPE_ENUM } from "@constants/enums";
+import { TablePaginationType } from "@interfaces/Common/commonTypes";
+import { TableColumnFilterState } from "@interfaces/Common/elementTypes";
+import { adminContactService } from "@services/index";
 
-import Table from '@components/Table/Table';
+import Table from "@components/Table/Table";
 
-import LayoutContent from '@common/Layout/Components/LayoutContent';
+import LayoutContent from "@common/Layout/Components/LayoutContent";
 
-import useToast from '@hooks/useToast';
-import { generateColumnFilterObject, setDocumentTitle } from '@utils/helpers';
+import useToast from "@hooks/useToast";
+import { generateColumnFilterObject, setDocumentTitle } from "@utils/helpers";
 
-import createContactTableColumns from './Columns/adminContactTableColumn';
-import AdminContactDeleteConfirmationModal from './Components/AdminContactDeleteConfirmationModal';
-import AdminContactHeaderAction from './Components/AdminContactHeaderAction';
-import AdminContactModificationModal from './Components/AdminContactModificationModal';
+import createContactTableColumns from "./Columns/adminContactTableColumn";
+import AdminContactDeleteConfirmationModal from "./Components/AdminContactDeleteConfirmationModal";
+import AdminContactHeaderAction from "./Components/AdminContactHeaderAction";
+import AdminContactModificationModal from "./Components/AdminContactModificationModal";
 
 interface AdminContactListProps {
   defaultSelection?: IContact[];
@@ -34,8 +34,8 @@ const AdminContactList = ({
   isShowTableOnly = false,
   onChangeSelection,
 }: AdminContactListProps) => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.contact',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.contact",
   });
   const toast = useToast();
 
@@ -108,30 +108,30 @@ const AdminContactList = ({
   }, []);
 
   const handleUpdatedContact = useCallback(() => {
-    toast.success(t('notification.success'), t('notification.contactUpdated'));
+    toast.success(t("notification.success"), t("notification.contactUpdated"));
     getContactData();
   }, [getContactData]);
 
   const handleUpdateContactFailed = useCallback(() => {
-    toast.error(t('notification.error'), t('notification.contactUpdateFailed'));
+    toast.error(t("notification.error"), t("notification.contactUpdateFailed"));
   }, []);
 
   const handleCreatedContact = useCallback(() => {
-    toast.success(t('notification.success'), t('notification.contactCreated'));
+    toast.success(t("notification.success"), t("notification.contactCreated"));
     getContactData();
   }, [getContactData]);
 
   const handleCreateContactFailed = useCallback(() => {
-    toast.error(t('notification.error'), t('notification.contactCreateFailed'));
+    toast.error(t("notification.error"), t("notification.contactCreateFailed"));
   }, []);
 
   const handleDeletedContact = useCallback(() => {
-    toast.success(t('notification.success'), t('notification.contactDeleted'));
+    toast.success(t("notification.success"), t("notification.contactDeleted"));
     getContactData();
   }, [getContactData]);
 
   const handleDeleteContactFailed = useCallback(() => {
-    toast.error(t('notification.error'), t('notification.contactDeleteFailed'));
+    toast.error(t("notification.error"), t("notification.contactDeleteFailed"));
   }, []);
 
   useEffect(() => {
@@ -172,7 +172,7 @@ const AdminContactList = ({
   }, [defaultSelection]);
 
   useLayoutEffect(() => {
-    setDocumentTitle(t('title'), !isShowTableOnly);
+    setDocumentTitle(t("title"), !isShowTableOnly);
   }, [t, isShowTableOnly]);
 
   if (isShowTableOnly) {
@@ -197,7 +197,7 @@ const AdminContactList = ({
   }
 
   return (
-    <LayoutContent title={t('title')} actions={<AdminContactHeaderAction onClick={handleClickAddButton} />}>
+    <LayoutContent title={t("title")} actions={<AdminContactHeaderAction onClick={handleClickAddButton} />}>
       <Table
         data={contactData}
         columns={createContactTableColumns(t, {
