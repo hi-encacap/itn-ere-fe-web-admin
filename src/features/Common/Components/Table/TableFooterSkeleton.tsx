@@ -1,4 +1,4 @@
-import { LoadingSkeleton } from '@components/Loading';
+import { LoadingSkeleton } from "@components/Loading";
 
 const TableFooterSkeleton = () => {
   return (

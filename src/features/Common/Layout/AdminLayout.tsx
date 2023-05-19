@@ -1,6 +1,6 @@
-import AdminSidebar from './Components/AdminSidebar';
-import LayoutContentWrapper from './Components/LayoutContentWrapper';
-import LayoutHeader from './Components/LayoutHeader';
+import AdminSidebar from "./Components/AdminSidebar";
+import LayoutContentWrapper from "./Components/LayoutContentWrapper";
+import LayoutHeader from "./Components/LayoutHeader";
 
 interface AdminLayoutProps {
   children: React.ReactNode;

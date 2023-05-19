@@ -1,22 +1,23 @@
-import { useLayoutEffect, useState } from 'react';
-import { matchPath, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { useLayoutEffect, useState } from "react";
+import { Route, Routes, matchPath, useLocation, useNavigate } from "react-router-dom";
+import RootRoutes from "src/features/Root/Routes/RootRoutes";
 
-import { USER_ROLE_ENUM } from '@constants/enums';
-import { AUTHENTICATION_PATH, ERROR_PATH } from '@constants/urls';
-import { authService } from '@services/index';
-import { setUser } from '@slices/userSlice';
+import { USER_ROLE_ENUM } from "@constants/enums";
+import { AUTHENTICATION_PATH, ERROR_PATH } from "@constants/urls";
+import { authService } from "@services/index";
+import { setUser } from "@slices/userSlice";
 
-import { LoadingOverlay } from '@components/Loading';
+import { LoadingOverlay } from "@components/Loading";
 
-import AuthRoutes from '@common/Auth/Routes/AuthRoutes';
-import ErrorRoutes from '@common/Errors/Routes/ErrorRoutes';
+import AuthRoutes from "@common/Auth/Routes/AuthRoutes";
+import ErrorRoutes from "@common/Errors/Routes/ErrorRoutes";
 
-import useDispatch from '@hooks/useDispatch';
-import useSelector from '@hooks/useSelector';
+import useDispatch from "@hooks/useDispatch";
+import useSelector from "@hooks/useSelector";
 
-import AdminRoutes from '@admin/Routes/AdminRoutes';
+import AdminRoutes from "@admin/Routes/AdminRoutes";
 
-import PrivateRoutes from './PrivateRoutes';
+import PrivateRoutes from "./PrivateRoutes";
 
 const CommonRoutes = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,9 +25,9 @@ const CommonRoutes = () => {
   const user = useSelector((state) => state.user);
   const location = useLocation();
 
-  const excludeRedirectPaths = ['error/*', 'auth/*'];
-  const excludeGetUserPaths = ['auth/*'];
-  const ignoreLoadingPaths = ['error/*'];
+  const excludeRedirectPaths = ["error/*", "auth/*"];
+  const excludeGetUserPaths = ["auth/*"];
+  const ignoreLoadingPaths = ["error/*"];
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -83,7 +84,15 @@ const CommonRoutes = () => {
   ) : (
     <Routes>
       <Route
-        path="admin/*"
+        path={`${USER_ROLE_ENUM.ROOT}/*`}
+        element={
+          <PrivateRoutes requiredRoles={[USER_ROLE_ENUM.ROOT]}>
+            <RootRoutes />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path={`${USER_ROLE_ENUM.ADMIN}/*`}
         element={
           <PrivateRoutes requiredRoles={[USER_ROLE_ENUM.ADMIN]}>
             <AdminRoutes />

@@ -1,4 +1,4 @@
-import TableContentBodyEmptyContent from '@components/Table/TableContentBody/TableContentBodyEmptyContent';
+import TableContentBodyEmptyContent from "@components/Table/TableContentBody/TableContentBodyEmptyContent";
 
 const AdminEstateModificationDraftEmpty = () => {
   return (

@@ -1,29 +1,29 @@
-import { IBaseListQuery } from '@encacap-group/types/dist/base';
-import { SortingState } from '@tanstack/react-table';
-import { isEqual } from 'lodash';
-import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { IBaseListQuery } from "@encacap-group/types/dist/base";
+import { SortingState } from "@tanstack/react-table";
+import { isEqual } from "lodash";
+import { Key, useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { LocationWardWebsiteDataType } from '@interfaces/Admin/locationTypes';
-import { TablePaginationType } from '@interfaces/Common/commonTypes';
-import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
-import { adminLocationService } from '@services/index';
+import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
+import { LocationWardWebsiteDataType } from "@interfaces/Admin/locationTypes";
+import { TablePaginationType } from "@interfaces/Common/commonTypes";
+import { TableColumnFilterState } from "@interfaces/Common/elementTypes";
+import { adminLocationService } from "@services/index";
 
-import Table from '@components/Table/Table';
+import Table from "@components/Table/Table";
 
-import LayoutContent from '@common/Layout/Components/LayoutContent';
+import LayoutContent from "@common/Layout/Components/LayoutContent";
 
-import { generateColumnFilterObject, setDocumentTitle } from '@utils/helpers';
+import { generateColumnFilterObject, setDocumentTitle } from "@utils/helpers";
 
-import createLocationWardTableColumns from './Columns/adminLocationWardTableColumn';
-import AdminLocationWardDeleteConfirmationModal from './Components/AdminLocationWardDeleteConfirmationModal';
-import AdminLocationWardHeaderAction from './Components/AdminLocationWardHeaderAction';
-import AdminLocationWardModificationModal from './Components/AdminLocationWardModificationModal';
+import createLocationWardTableColumns from "./Columns/adminLocationWardTableColumn";
+import AdminLocationWardDeleteConfirmationModal from "./Components/AdminLocationWardDeleteConfirmationModal";
+import AdminLocationWardHeaderAction from "./Components/AdminLocationWardHeaderAction";
+import AdminLocationWardModificationModal from "./Components/AdminLocationWardModificationModal";
 
 const AdminLocationWardList = () => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.location.ward',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.location.ward",
   });
 
   const [wardData, setWardData] = useState<LocationWardWebsiteDataType[]>([]);
@@ -99,12 +99,12 @@ const AdminLocationWardList = () => {
   }, [columnFilters, pagination]);
 
   useLayoutEffect(() => {
-    setDocumentTitle(t('title'));
+    setDocumentTitle(t("title"));
   }, [t]);
 
   return (
     <LayoutContent
-      title={t('title')}
+      title={t("title")}
       actions={<AdminLocationWardHeaderAction onClick={handleClickAddButton} />}
     >
       <Table
@@ -121,7 +121,7 @@ const AdminLocationWardList = () => {
       />
       <AdminLocationWardDeleteConfirmationModal
         isOpen={isShowDeleteConfirmationModal}
-        code={selectedWardCode ?? ''}
+        code={selectedWardCode ?? ""}
         onClose={handleCloseDeleteConfirmationModal}
         onDeleted={getWardData}
       />

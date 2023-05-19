@@ -55,17 +55,6 @@
       "emptyData": "Không có dữ liệu"
     }
   },
-  "confirmationModal": {
-    "cancelButtonText": "Cancel",
-    "confirmButtonText": "Confirm"
-  },
-  "modal": {
-    "close": "Cancel",
-    "confirm": "Confirm"
-  },
-  "alert": {
-    "errorTrackingCode": "Mã lỗi"
-  },
   "form": {
     "imageInput": {
       "placeholder": "Chọn ảnh",
@@ -74,8 +63,11 @@
       }
     }
   },
-  "toast": {
-    "success": "Thành công!",
-    "error": "Lỗi!"
-  }
+  "error": "Lỗi!",
+  "success": "Thành công!",
+  "category": "Danh mục",
+  "dashboard": "Bảng điều khiển",
+  "errorCode": "Mã lỗi",
+  "cancel": "Cancel",
+  "confirm": "Confirm"
 }

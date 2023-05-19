@@ -1,4 +1,4 @@
-import { twMerge } from 'tailwind-merge';
+import { twMerge } from "tailwind-merge";
 
 interface FormElementLabelProps {
   error?: string;
@@ -12,8 +12,8 @@ const FormElementLabel = ({ id, label, isRequired, error }: FormElementLabelProp
     <label
       htmlFor={id}
       className={twMerge(
-        'relative mb-2 -mt-2 flex items-center text-sm font-semibold text-gray-400',
-        error && 'text-red-500',
+        "relative mb-2 -mt-2 flex items-center text-sm font-semibold text-gray-400",
+        error && "text-red-500",
       )}
     >
       {label}

@@ -1,8 +1,8 @@
-import { ColumnDef as ReactTableColumnDef, RowData } from '@tanstack/react-table';
-import { Key } from 'react';
-import { AnySchema } from 'yup';
+import { ColumnDef as ReactTableColumnDef, RowData } from "@tanstack/react-table";
+import { Key } from "react";
+import { AnySchema } from "yup";
 
-export type AlertType = 'default' | 'success' | 'warning' | 'error';
+export type AlertType = "default" | "success" | "warning" | "error";
 
 export type ContentWrapperHeaderActionType = Record<string, unknown>;
 
@@ -12,14 +12,14 @@ export interface SelectOptionItemType {
   disabled?: boolean;
 }
 
-export type ConfirmationModalStatusType = 'success' | 'danger';
+export type ConfirmationModalStatusType = "success" | "danger";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ColumnDef<T = RowData> = ReactTableColumnDef<T, any>;
 
 export type TableRowActionClickHandlerType<T = Key> = (id: T) => void;
 
-export type TableRowActionStatusType = 'normal' | 'danger';
+export type TableRowActionStatusType = "normal" | "danger";
 
 export interface TableRowActionDropdownItemType<TIDData = Key> {
   key: string;
@@ -42,7 +42,7 @@ export interface TableFilterOptionItemType {
   id: string;
 }
 
-export type FormElementSizeType = 'xs' | 'sm' | 'normal';
+export type FormElementSizeType = "xs" | "sm" | "normal";
 
 export interface FormElementBaseProps {
   name: string;

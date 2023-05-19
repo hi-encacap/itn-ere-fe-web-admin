@@ -1,9 +1,9 @@
-import { useTranslation } from 'react-i18next';
-import { BsCheck } from 'react-icons/bs';
-import { IoClose } from 'react-icons/io5';
-import { twMerge } from 'tailwind-merge';
+import { useTranslation } from "react-i18next";
+import { BsCheck } from "react-icons/bs";
+import { IoClose } from "react-icons/io5";
+import { twMerge } from "tailwind-merge";
 
-import LoadingSpinner from '@components/Loading/LoadingSpinner';
+import LoadingSpinner from "@components/Loading/LoadingSpinner";
 
 interface AdminEstateModificationPublishingModalStepProps {
   completedText?: string;
@@ -24,8 +24,8 @@ const AdminEstateModificationPublishingModalStep = ({
   text,
   onTryAgain,
 }: AdminEstateModificationPublishingModalStepProps) => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.estate.modification.modal.publishing',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.estate.modification.modal.publishing",
   });
 
   return (
@@ -48,9 +48,9 @@ const AdminEstateModificationPublishingModalStep = ({
       <div className="-mt-px flex-1">
         <div
           className={twMerge(
-            'font-semibold text-slate-700',
-            error && 'text-red-500',
-            isCompleted && !error && 'text-green-500',
+            "font-semibold text-slate-700",
+            error && "text-red-500",
+            isCompleted && !error && "text-green-500",
           )}
         >
           {text}
@@ -63,7 +63,7 @@ const AdminEstateModificationPublishingModalStep = ({
             tabIndex={0}
             onClick={onTryAgain}
           >
-            {t('tryAgain')}
+            {t("tryAgain")}
           </div>
         )}
         {isCompleted && !error && completedText && (

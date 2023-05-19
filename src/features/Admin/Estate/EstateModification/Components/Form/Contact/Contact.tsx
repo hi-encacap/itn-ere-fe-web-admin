@@ -1,22 +1,22 @@
-import { IContact } from '@encacap-group/types/dist/re';
-import { useCallback, useEffect, useState } from 'react';
-import { useController, useFormContext } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { twMerge } from 'tailwind-merge';
+import { IContact } from "@encacap-group/types/dist/re";
+import { useCallback, useEffect, useState } from "react";
+import { useController, useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { twMerge } from "tailwind-merge";
 
-import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
-import { adminContactService } from '@services/index';
+import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
+import { adminContactService } from "@services/index";
 
-import FormElementError from '@components/Form/FormElementError';
+import FormElementError from "@components/Form/FormElementError";
 
-import AdminEstateModificationFormTitle from '../Title';
-import AdminEstateModificationFormContactDetail from './ContactDetail';
-import AdminEstateModificationFormContactEmpty from './ContactEmpty';
-import AdminEstateModificationFormContactPicker from './ContactPicker';
+import AdminEstateModificationFormTitle from "../Title";
+import AdminEstateModificationFormContactDetail from "./ContactDetail";
+import AdminEstateModificationFormContactEmpty from "./ContactEmpty";
+import AdminEstateModificationFormContactPicker from "./ContactPicker";
 
 const AdminEstateModificationFormContact = () => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.estate.modification.form.contact',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.estate.modification.form.contact",
   });
 
   const [isShowContactPickerModal, setIsShowContactPickerModal] = useState(false);
@@ -32,7 +32,7 @@ const AdminEstateModificationFormContact = () => {
   const {
     field: { value },
   } = useController({
-    name: 'contactId',
+    name: "contactId",
     control,
   });
 
@@ -53,8 +53,8 @@ const AdminEstateModificationFormContact = () => {
   const handlePickContact = useCallback((contact: IContact) => {
     setSelectedContact(contact);
     setIsShowContactPickerModal(false);
-    setValue('contactId', contact.id);
-    clearErrors('contactId');
+    setValue("contactId", contact.id);
+    clearErrors("contactId");
   }, []);
 
   const handleClosePicker = useCallback(() => {
@@ -71,12 +71,12 @@ const AdminEstateModificationFormContact = () => {
 
   return (
     <>
-      <div className={'border-gray-100 pt-6'}>
-        <AdminEstateModificationFormTitle title={t('title')} />
+      <div className={"border-gray-100 pt-6"}>
+        <AdminEstateModificationFormTitle title={t("title")} />
         <div
           className={twMerge(
-            'mt-5 flex items-center justify-start space-x-4 rounded-lg border-2 border-gray-100 py-4 pl-4 pr-6 hover:border-gray-200',
-            errors.contactId?.message && 'border-red-500 hover:border-red-500',
+            "mt-5 flex items-center justify-start space-x-4 rounded-lg border-2 border-gray-100 py-4 pl-4 pr-6 hover:border-gray-200",
+            errors.contactId?.message && "border-red-500 hover:border-red-500",
           )}
         >
           {!selectedContact ? (

@@ -1,7 +1,7 @@
-import { nanoid } from '@reduxjs/toolkit';
-import { FormEventHandler } from 'react';
+import { nanoid } from "@reduxjs/toolkit";
+import { FormEventHandler } from "react";
 
-import { Checkbox } from '@components/Form';
+import { Checkbox } from "@components/Form";
 
 export interface TableSelectorColumnProps {
   isSelected?: boolean;

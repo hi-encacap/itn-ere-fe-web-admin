@@ -1,4 +1,4 @@
-import { LoadingSkeleton } from '@components/Loading';
+import { LoadingSkeleton } from "@components/Loading";
 
 export interface TableRowActionSkeletonProps {
   numberOfActions?: number;

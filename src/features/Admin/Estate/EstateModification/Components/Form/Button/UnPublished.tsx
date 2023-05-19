@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
-import { Button } from '@components/Form';
+import { Button } from "@components/Form";
 
 interface AdminEstateModificationFormButtonUnPublishedProps {
   isSubmitting: boolean;
@@ -13,8 +13,8 @@ const AdminEstateModificationFormButtonUnPublished = ({
   onSaveAndPublish,
   onSubmit,
 }: AdminEstateModificationFormButtonUnPublishedProps) => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.estate.modification',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.estate.modification",
   });
 
   return (
@@ -27,7 +27,7 @@ const AdminEstateModificationFormButtonUnPublished = ({
         type="button"
         onClick={onSaveAndPublish}
       >
-        {t('form.action.publish')}
+        {t("form.action.publish")}
       </Button>
       <Button
         className="block flex-1"
@@ -36,7 +36,7 @@ const AdminEstateModificationFormButtonUnPublished = ({
         type="submit"
         onClick={onSubmit}
       >
-        {t('form.action.save')}
+        {t("form.action.save")}
       </Button>
     </>
   );

@@ -1,9 +1,9 @@
-import { flexRender, Header, Row, RowData } from '@tanstack/react-table';
-import { twMerge } from 'tailwind-merge';
+import { flexRender, Header, Row, RowData } from "@tanstack/react-table";
+import { twMerge } from "tailwind-merge";
 
-import TableContentBodyColumnContent from './TableContentBodyColumnContent';
-import TableBodyEmpty from './TableContentBodyEmpty';
-import TableContentBodySkeleton from './TableContentBodySkeleton';
+import TableContentBodyColumnContent from "./TableContentBodyColumnContent";
+import TableBodyEmpty from "./TableContentBodyEmpty";
+import TableContentBodySkeleton from "./TableContentBodySkeleton";
 
 interface TableContentProps<T = RowData> {
   rows: Array<Row<T>>;
@@ -31,10 +31,10 @@ const TableContentBody = ({ rows, headers, isLoading = false }: TableContentProp
               <td
                 key={cell.id}
                 className={twMerge(
-                  'border-b border-gray-100 bg-white py-4 px-4 text-center',
-                  cell.column.id === 'selector' && 'sticky left-0',
-                  cell.column.id === 'actions' && 'sticky right-0',
-                  isLoading && 'opacity-50',
+                  "border-b border-gray-100 bg-white py-4 px-4 text-center",
+                  cell.column.id === "selector" && "sticky left-0",
+                  cell.column.id === "actions" && "sticky right-0",
+                  isLoading && "opacity-50",
                 )}
               >
                 <TableContentBodyColumnContent

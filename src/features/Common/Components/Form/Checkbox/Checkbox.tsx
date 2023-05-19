@@ -1,7 +1,7 @@
-import { ChangeEvent, useCallback } from 'react';
-import { Control, useController } from 'react-hook-form';
+import { ChangeEvent, useCallback } from "react";
+import { Control, useController } from "react-hook-form";
 
-import UncontrolledCheckbox, { UncontrolledCheckboxProps } from './UncontrolledCheckbox';
+import UncontrolledCheckbox, { UncontrolledCheckboxProps } from "./UncontrolledCheckbox";
 
 export interface CheckboxProps extends UncontrolledCheckboxProps {
   control?: Control;

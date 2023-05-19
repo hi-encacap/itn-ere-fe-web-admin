@@ -1,12 +1,12 @@
-import { IEstate } from '@encacap-group/types/dist/re';
+import { IEstate } from "@encacap-group/types/dist/re";
 
-import { EstateDraftDataType } from '@interfaces/Admin/estateTypes';
+import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
 
-import { CustomTableBodyProps } from '@components/Table/Table';
-import TableContentBodyEmptyContent from '@components/Table/TableContentBody/TableContentBodyEmptyContent';
+import { CustomTableBodyProps } from "@components/Table/Table";
+import TableContentBodyEmptyContent from "@components/Table/TableContentBody/TableContentBodyEmptyContent";
 
-import AdminEstateListTableBodyItem from './TableBodyItem';
-import AdminEstateListTableBodyLoading from './TableBodyLoading';
+import AdminEstateListTableBodyItem from "./TableBodyItem";
+import AdminEstateListTableBodyLoading from "./TableBodyLoading";
 
 const AdminEstateListTableBody = ({
   data,

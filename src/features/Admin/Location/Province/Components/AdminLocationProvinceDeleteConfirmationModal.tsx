@@ -1,18 +1,18 @@
-import { omit } from 'lodash';
-import { useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
+import { omit } from "lodash";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
-import { adminLocationService } from '@services/index';
+import { adminLocationService } from "@services/index";
 
-import { ConfirmationModal } from '@components/Modal';
-import { ConfirmationModalProps } from '@components/Modal/ConfirmationModal';
+import { ConfirmationModal } from "@components/Modal";
+import { ConfirmationModalProps } from "@components/Modal/ConfirmationModal";
 
-import useToast from '@hooks/useToast';
+import useToast from "@hooks/useToast";
 
-import AdminLocationProvinceDeleteConfirmationModalContent from './AdminLocationProvinceDeleteConfirmationModalContent';
+import AdminLocationProvinceDeleteConfirmationModalContent from "./AdminLocationProvinceDeleteConfirmationModalContent";
 
 interface AdminLocationProvinceDeleteConfirmationModalProps
-  extends Omit<ConfirmationModalProps, 'title' | 'message' | 'onConfirm'> {
+  extends Omit<ConfirmationModalProps, "title" | "message" | "onConfirm"> {
   code: string;
   onDeleted: () => void;
   onDeleteFailed?: () => void;
@@ -26,8 +26,8 @@ const AdminLocationProvinceDeleteConfirmationModal = ({
   onDeleteFailed,
   ...props
 }: AdminLocationProvinceDeleteConfirmationModalProps) => {
-  const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:page.location.province',
+  const { t } = useTranslation(["admin"], {
+    keyPrefix: "admin:page.location.province",
   });
 
   const toast = useToast();
@@ -39,11 +39,11 @@ const AdminLocationProvinceDeleteConfirmationModal = ({
       .deleteProvinceByCode(provinceCode)
       .then(() => {
         onDeleted();
-        toast.success(t('notification.delete.provinceDeleted'));
+        toast.success(t("notification.delete.provinceDeleted"));
       })
       .catch(() => {
         onDeleteFailed?.();
-        toast.error(t('notification.delete.provinceDeleteFailed'));
+        toast.error(t("notification.delete.provinceDeleteFailed"));
       })
       .finally(() => {
         onClose();
@@ -54,11 +54,11 @@ const AdminLocationProvinceDeleteConfirmationModal = ({
     <ConfirmationModal
       isOpen={isOpen}
       status="danger"
-      title={t('modal.delete.title')}
+      title={t("modal.delete.title")}
       message={<AdminLocationProvinceDeleteConfirmationModalContent />}
       onConfirm={handleDeleteContact}
       onClose={onClose}
-      {...omit(props, 'title', 'message')}
+      {...omit(props, "title", "message")}
     />
   );
 };

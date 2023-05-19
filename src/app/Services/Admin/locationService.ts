@@ -1,7 +1,7 @@
-import { IBaseListQuery, IResponseWithMeta } from '@encacap-group/types/dist/base';
-import { ILocationDistrict, ILocationProvince } from '@encacap-group/types/dist/re';
+import { IBaseListQuery, IResponseWithMeta } from "@encacap-group/types/dist/base";
+import { ILocationDistrict, ILocationProvince } from "@encacap-group/types/dist/re";
 
-import { ADMIN_LOCATION_API_PATH } from '@constants/apis';
+import { ADMIN_LOCATION_API_PATH } from "@constants/apis";
 import {
   LocationAddressBookDataType,
   LocationDistrictGetListQueryType,
@@ -10,9 +10,9 @@ import {
   LocationWardGetListQueryType,
   LocationWardWebsiteDataType,
   LocationWardWebsiteFormDataType,
-} from '@interfaces/Admin/locationTypes';
+} from "@interfaces/Admin/locationTypes";
 
-import axiosInstance from '@utils/Http/axiosInstance';
+import axiosInstance from "@utils/Http/axiosInstance";
 
 const getProvinces = async (query?: IBaseListQuery): Promise<IResponseWithMeta<ILocationProvince[]>> => {
   const response = await axiosInstance.get(ADMIN_LOCATION_API_PATH.PROVINCES_PATH, {

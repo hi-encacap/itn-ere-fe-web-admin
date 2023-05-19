@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { ReactNode } from "react";
+import { twMerge } from "tailwind-merge";
 
 interface TableHeaderFilterLabelProps {
   label: string | number | boolean | ReactNode | null;
@@ -10,9 +10,9 @@ const TableHeaderFilterLabel = ({ label, selectedFilters }: TableHeaderFilterLab
   return (
     <div className="flex">
       <span className="line-clamp-1">
-        <span className={twMerge(Boolean(selectedFilters.length) && 'mr-1 font-semibold')}>
+        <span className={twMerge(Boolean(selectedFilters.length) && "mr-1 font-semibold")}>
           {label}
-          {Boolean(selectedFilters.length) && ':'}
+          {Boolean(selectedFilters.length) && ":"}
         </span>
         {selectedFilters.length > 0 && <span>{selectedFilters[0]}</span>}
       </span>

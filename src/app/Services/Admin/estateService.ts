@@ -1,16 +1,16 @@
-import { IBaseListQuery, IResponseWithMeta } from '@encacap-group/types/dist/base';
-import { ESTATE_STATUS_ENUM, IEstate } from '@encacap-group/types/dist/re';
-import { omit } from 'lodash';
-import { Key } from 'react';
+import { IBaseListQuery, IResponseWithMeta } from "@encacap-group/types/dist/base";
+import { ESTATE_STATUS_ENUM, IEstate } from "@encacap-group/types/dist/re";
+import { omit } from "lodash";
+import { Key } from "react";
 
-import { ADMIN_ESTATE_API_PATH } from '@constants/apis';
-import { EstateDraftDataType, EstateFormDataType } from '@interfaces/Admin/estateTypes';
+import { ADMIN_ESTATE_API_PATH } from "@constants/apis";
+import { EstateDraftDataType, EstateFormDataType } from "@interfaces/Admin/estateTypes";
 
-import axiosInstance from '@utils/Http/axiosInstance';
+import axiosInstance from "@utils/Http/axiosInstance";
 
 const createEstate = async (estate: EstateFormDataType) => {
   const response = await axiosInstance.post(ADMIN_ESTATE_API_PATH.ESTATES_PATH, {
-    ...omit(estate, 'id'),
+    ...omit(estate, "id"),
     avatarId: estate.avatar?.id,
     imageIds: estate.images?.map((image) => image.id),
     latitude: 1,
@@ -24,7 +24,7 @@ const getEstates = async (queryParam: IBaseListQuery): Promise<IResponseWithMeta
   const response = await axiosInstance.get(ADMIN_ESTATE_API_PATH.ESTATES_PATH, {
     params: {
       ...queryParam,
-      orderBy: 'upvotedAt',
+      orderBy: "upvotedAt",
     },
   });
 
@@ -53,7 +53,7 @@ const createEstateDraft = async (estate: EstateFormDataType): Promise<EstateDraf
   const response = await axiosInstance.post(
     ADMIN_ESTATE_API_PATH.ESTATE_DRAFTS_PATH,
     // Remove all empty, undefined values from the object.
-    Object.fromEntries(Object.entries(estate).filter(([_, v]) => v !== '' && v !== undefined)),
+    Object.fromEntries(Object.entries(estate).filter(([_, v]) => v !== "" && v !== undefined)),
   );
 
   return response.data.data;
@@ -79,7 +79,7 @@ const updateEstateDraftById = async (id: Key, estate: EstateFormDataType): Promi
   const response = await axiosInstance.put(
     ADMIN_ESTATE_API_PATH.ESTATE_DRAFT_PATH(id),
     // Remove all empty, undefined values from the object.
-    Object.fromEntries(Object.entries(estate).filter(([_, v]) => v !== '' && v !== undefined)),
+    Object.fromEntries(Object.entries(estate).filter(([_, v]) => v !== "" && v !== undefined)),
   );
 
   return response.data.data;
@@ -109,7 +109,7 @@ const updateEstateById = async (id: Key, estate: EstateFormDataType): Promise<IE
   return response.data.data;
 };
 
-const getEstateStatuses = async (): Promise<Array<Record<'name', string>>> => {
+const getEstateStatuses = async (): Promise<Array<Record<"name", string>>> => {
   return await Promise.resolve([
     {
       name: ESTATE_STATUS_ENUM.PUBLISHED,

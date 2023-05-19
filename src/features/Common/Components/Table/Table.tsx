@@ -1,4 +1,4 @@
-import { IBaseListQuery } from '@encacap-group/types/dist/base';
+import { IBaseListQuery } from "@encacap-group/types/dist/base";
 import {
   ColumnDef,
   getCoreRowModel,
@@ -8,28 +8,28 @@ import {
   RowSelectionState,
   SortingState,
   useReactTable,
-} from '@tanstack/react-table';
-import { keys } from 'lodash';
-import { ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
+} from "@tanstack/react-table";
+import { keys } from "lodash";
+import { ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 
-import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { TABLE_ROW_SELECTION_TYPE_ENUM } from '@constants/enums';
-import { TablePaginationType } from '@interfaces/Common/commonTypes';
+import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
+import { TABLE_ROW_SELECTION_TYPE_ENUM } from "@constants/enums";
+import { TablePaginationType } from "@interfaces/Common/commonTypes";
 import {
   TableColumnFilterState,
   TableDataType,
   TableRowActionClickHandlerType,
-} from '@interfaces/Common/elementTypes';
+} from "@interfaces/Common/elementTypes";
 
-import { normalizeTableColumns } from '@utils/table';
+import { normalizeTableColumns } from "@utils/table";
 
-import { selectorColumn } from './Columns/tableSelectorColumn';
-import TableContentBody from './TableContentBody/TableContentBody';
-import TableContentHeader from './TableContentHeader/TableContentHeader';
-import TableFooter from './TableFooter';
-import TableHeader from './TableHeader/TableHeader';
+import { selectorColumn } from "./Columns/tableSelectorColumn";
+import TableContentBody from "./TableContentBody/TableContentBody";
+import TableContentHeader from "./TableContentHeader/TableContentHeader";
+import TableFooter from "./TableFooter";
+import TableHeader from "./TableHeader/TableHeader";
 
-declare module '@tanstack/table-core' {
+declare module "@tanstack/table-core" {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
   interface ColumnMeta<TData extends RowData, TValue> {
     skeleton?: JSX.Element;
@@ -60,7 +60,7 @@ export interface TableProps<TData = TableDataType> {
   isLoading?: boolean;
   rowSelection?: RowSelectionState;
   rowSelectionType?: TABLE_ROW_SELECTION_TYPE_ENUM;
-  tableBodyProps?: Omit<CustomTableBodyProps, 'data' | 'isLoading'>;
+  tableBodyProps?: Omit<CustomTableBodyProps, "data" | "isLoading">;
   renderTableBody?: (props: CustomTableBodyProps) => ReactElement;
   onChangePagination?: OnChangeFn<TablePaginationType>;
   onChangeSorting?: OnChangeFn<SortingState>;
@@ -115,7 +115,7 @@ const Table = ({
     manualSorting: true,
     onSortingChange: onChangeSorting,
     onPaginationChange: (state) => {
-      if (typeof state === 'function') {
+      if (typeof state === "function") {
         const newState = state(pagination as PaginationState);
         onChangePagination?.({ ...newState, page: newState.pageIndex + 1 });
         return;
@@ -123,7 +123,7 @@ const Table = ({
       onChangePagination?.(state as TablePaginationType);
     },
     onRowSelectionChange: (state) => {
-      if (typeof state !== 'function') {
+      if (typeof state !== "function") {
         onChangeRowSelection?.(state);
         return;
       }
@@ -134,7 +134,7 @@ const Table = ({
       }
 
       const newSelection = state(rowSelection);
-      let newSelectionRowKey = '';
+      let newSelectionRowKey = "";
 
       keys(newSelection).forEach((key) => {
         if (newSelection[key] !== rowSelection[key]) {

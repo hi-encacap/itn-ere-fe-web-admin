@@ -1,6 +1,6 @@
-import { ChangeEvent, useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
-import { BsImageAlt } from 'react-icons/bs';
+import { ChangeEvent, useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { BsImageAlt } from "react-icons/bs";
 
 interface ImageInputItemPlaceholderProps {
   inputId: string;
@@ -15,8 +15,8 @@ const ImageInputItemPlaceholder = ({
   isDisabled = false,
   onChooseImage,
 }: ImageInputItemPlaceholderProps) => {
-  const { t } = useTranslation('common', {
-    keyPrefix: 'common:form.imageInput',
+  const { t } = useTranslation("common", {
+    keyPrefix: "common:form.imageInput",
   });
 
   const handleChangeImage = useCallback(
@@ -32,7 +32,7 @@ const ImageInputItemPlaceholder = ({
   return (
     <div className="relative flex h-full w-full cursor-pointer flex-col items-center justify-center text-input-placeholder">
       <BsImageAlt size={26} />
-      <div className="mt-3 text-xs text-input-placeholder">{t('placeholder')}</div>
+      <div className="mt-3 text-xs text-input-placeholder">{t("placeholder")}</div>
       <input
         id={inputId}
         type="file"

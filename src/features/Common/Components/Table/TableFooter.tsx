@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import TableFooterPageSizeSelector, {
   TableFooterPageSizeSelectorProps,
-} from './TableFooterPagination/TableFooterPageSizeSelector';
+} from "./TableFooterPagination/TableFooterPageSizeSelector";
 import TableFooterPagination, {
   TableFooterPaginationProps,
-} from './TableFooterPagination/TableFooterPagination';
-import TableFooterSkeleton from './TableFooterSkeleton';
+} from "./TableFooterPagination/TableFooterPagination";
+import TableFooterSkeleton from "./TableFooterSkeleton";
 
 export type TableFooterProps = TableFooterPaginationProps &
   TableFooterPageSizeSelectorProps & {
@@ -25,8 +25,8 @@ const TableFooter = ({
   onChangePageIndex: onChangePage,
   onChangePageSize,
 }: TableFooterProps) => {
-  const { t } = useTranslation(['common'], {
-    keyPrefix: 'table.pagination',
+  const { t } = useTranslation(["common"], {
+    keyPrefix: "table.pagination",
   });
 
   const [showingFrom, setShowingFrom] = useState(1);
@@ -55,7 +55,7 @@ const TableFooter = ({
           <div className="flex flex-1 items-center space-x-4">
             <TableFooterPageSizeSelector pageSize={page} onChangePageSize={onChangePageSize} />
             <div>
-              {t('counting', {
+              {t("counting", {
                 from: showingFrom,
                 to: showingTo,
                 total: totalRows,

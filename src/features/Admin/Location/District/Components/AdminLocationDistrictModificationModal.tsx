@@ -1,23 +1,23 @@
-import { IAxiosError } from '@encacap-group/types/dist/base';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { omit } from 'lodash';
-import { useCallback, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { IAxiosError } from "@encacap-group/types/dist/base";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { omit } from "lodash";
+import { useCallback, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
-import { LocationDistrictWebsiteFormDataType } from '@interfaces/Admin/locationTypes';
-import { adminLocationService } from '@services/index';
+import { LocationDistrictWebsiteFormDataType } from "@interfaces/Admin/locationTypes";
+import { adminLocationService } from "@services/index";
 
-import { Modal } from '@components/Modal';
-import { ModalProps } from '@components/Modal/Modal';
+import { Modal } from "@components/Modal";
+import { ModalProps } from "@components/Modal/Modal";
 
-import useToast from '@hooks/useToast';
-import { formatErrorMessage, setFormError } from '@utils/error';
+import useToast from "@hooks/useToast";
+import { formatErrorMessage, setFormError } from "@utils/error";
 
-import AdminLocationProvinceSelector from '@admin/Components/AdminLocationProvinceSelector';
+import AdminLocationProvinceSelector from "@admin/Components/AdminLocationProvinceSelector";
 
-import { locationDistrictFormSchema } from '../../Schemas/locationFormSchema';
-import AdminLocationDistrictModificationDistrictSelector from './AdminLocationDistrictModificationDistrictSelector';
+import { locationDistrictFormSchema } from "../../Schemas/locationFormSchema";
+import AdminLocationDistrictModificationDistrictSelector from "./AdminLocationDistrictModificationDistrictSelector";
 
 interface AdminLocationDistrictModificationModalProps extends ModalProps {
   onCreated: () => void;
@@ -31,11 +31,11 @@ const AdminLocationDistrictModificationModal = ({
   onCreateFailed,
   ...props
 }: AdminLocationDistrictModificationModalProps) => {
-  const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:page.location.district.modal.modification',
+  const { t } = useTranslation(["admin"], {
+    keyPrefix: "admin:page.location.district.modal.modification",
   });
-  const { t: tNotification } = useTranslation('admin', {
-    keyPrefix: 'admin:page.location.district.notification.modify',
+  const { t: tNotification } = useTranslation("admin", {
+    keyPrefix: "admin:page.location.district.notification.modify",
   });
   const toast = useToast();
 
@@ -57,7 +57,7 @@ const AdminLocationDistrictModificationModal = ({
     defaultValues,
   });
 
-  const provinceCode = watch('provinceCode');
+  const provinceCode = watch("provinceCode");
 
   const handleClose = useCallback(() => {
     reset();
@@ -70,13 +70,13 @@ const AdminLocationDistrictModificationModal = ({
     adminLocationService
       .createDistrict(data)
       .then(() => {
-        toast.success(tNotification('districtCreated'));
+        toast.success(tNotification("districtCreated"));
         onCreated();
         handleClose();
         setIsSubmitting(false);
       })
       .catch((error: IAxiosError) => {
-        setFormError({ error, setError, formatMessage: formatErrorMessage(t, 'form') });
+        setFormError({ error, setError, formatMessage: formatErrorMessage(t, "form") });
         setIsSubmitting(false);
         onCreateFailed?.();
       });
@@ -84,12 +84,12 @@ const AdminLocationDistrictModificationModal = ({
 
   return (
     <Modal
-      title={t('title')}
+      title={t("title")}
       isOpen={isOpen}
       isLoading={isSubmitting}
       onConfirm={handleSubmit}
       onClose={handleClose}
-      {...omit(props, 'onSubmit')}
+      {...omit(props, "onSubmit")}
     >
       <form className="grid gap-6" onSubmit={handleSubmit}>
         <AdminLocationProvinceSelector control={control} disabled={isSubmitting} />

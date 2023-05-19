@@ -1,20 +1,20 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { EstateDraftDataType } from '@interfaces/Admin/estateTypes';
-import { adminEstateService } from '@services/index';
+import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
+import { adminEstateService } from "@services/index";
 
-import { LoadingSkeleton } from '@components/Loading';
+import { LoadingSkeleton } from "@components/Loading";
 
-import AdminEstateDraftDeleteConfirmationModal from '@admin/Estate/Components/AdminEstateDraftDeleteConfirmationModal';
+import AdminEstateDraftDeleteConfirmationModal from "@admin/Estate/Components/AdminEstateDraftDeleteConfirmationModal";
 
-import AdminEstateModificationFormTitle from '../Form/Title';
-import AdminEstateModificationDraftEmpty from './Empty';
-import AdminEstateModificationDraftItem from './Item';
+import AdminEstateModificationFormTitle from "../Form/Title";
+import AdminEstateModificationDraftEmpty from "./Empty";
+import AdminEstateModificationDraftItem from "./Item";
 
 const AdminEstateModificationDraft = () => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.estate',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.estate",
   });
 
   const [drafts, setDrafts] = useState<EstateDraftDataType[]>([]);
@@ -60,7 +60,7 @@ const AdminEstateModificationDraft = () => {
   return (
     <>
       <div>
-        <AdminEstateModificationFormTitle title={t('modification.title.draft')} />
+        <AdminEstateModificationFormTitle title={t("modification.title.draft")} />
         <div className="mt-5">
           {!isLoading && !drafts.length && <AdminEstateModificationDraftEmpty />}
           {!isLoading && Boolean(drafts.length) && (

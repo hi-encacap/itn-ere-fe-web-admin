@@ -1,8 +1,8 @@
-import { pick } from 'lodash';
-import { useCallback, useMemo } from 'react';
-import { Id, toast as originalToast, ToastOptions, TypeOptions } from 'react-toastify';
+import { pick } from "lodash";
+import { useCallback, useMemo } from "react";
+import { Id, toast as originalToast, ToastOptions, TypeOptions } from "react-toastify";
 
-import ToastMessage from '@components/Toast/ToastMessage';
+import ToastMessage from "@components/Toast/ToastMessage";
 
 type ToastFunction = (message: string, description?: string, options?: ToastOptions) => Id;
 
@@ -22,7 +22,7 @@ const useToast = (defaultOptions?: ToastOptions) => {
     () => ({
       ...defaultOptions,
       position: originalToast.POSITION.TOP_RIGHT,
-      className: 'toast',
+      className: "toast",
       icon: false,
     }),
     [defaultOptions],
@@ -30,7 +30,7 @@ const useToast = (defaultOptions?: ToastOptions) => {
 
   const showToast = useCallback(
     (options: ExtendedToastOptions) =>
-      originalToast(<ToastMessage {...pick(options, ['message', 'description', 'type'])} />, {
+      originalToast(<ToastMessage {...pick(options, ["message", "description", "type"])} />, {
         ...overriddenOptions,
         ...options,
       }),

@@ -1,9 +1,9 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
-import AdminLocationAddressBookList from '../AddressBook/AdminLocationAddressBookList';
-import AdminLocationDistrictList from '../District/AdminLocationDistrictList';
-import AdminLocationProvinceList from '../Province/AdminLocationProvinceList';
-import AdminLocationWardList from '../Ward/AdminLocationWardList';
+import AdminLocationAddressBookList from "../AddressBook/AdminLocationAddressBookList";
+import AdminLocationDistrictList from "../District/AdminLocationDistrictList";
+import AdminLocationProvinceList from "../Province/AdminLocationProvinceList";
+import AdminLocationWardList from "../Ward/AdminLocationWardList";
 
 const AdminLocationRoutes = () => {
   return (

@@ -1,22 +1,22 @@
-import { IAxiosError } from '@encacap-group/types/dist/base';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { omit } from 'lodash';
-import { useCallback, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { IAxiosError } from "@encacap-group/types/dist/base";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { omit } from "lodash";
+import { useCallback, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
-import { LocationProvinceWebsiteFormDataType } from '@interfaces/Admin/locationTypes';
-import { SelectOptionItemType } from '@interfaces/Common/elementTypes';
-import { adminLocationService, locationService } from '@services/index';
+import { LocationProvinceWebsiteFormDataType } from "@interfaces/Admin/locationTypes";
+import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
+import { adminLocationService, locationService } from "@services/index";
 
-import { Select } from '@components/Form';
-import { Modal } from '@components/Modal';
-import { ModalProps } from '@components/Modal/Modal';
+import { Select } from "@components/Form";
+import { Modal } from "@components/Modal";
+import { ModalProps } from "@components/Modal/Modal";
 
-import useToast from '@hooks/useToast';
-import { formatErrorMessage, setFormError } from '@utils/error';
+import useToast from "@hooks/useToast";
+import { formatErrorMessage, setFormError } from "@utils/error";
 
-import { locationProvinceFormSchema } from '../../Schemas/locationFormSchema';
+import { locationProvinceFormSchema } from "../../Schemas/locationFormSchema";
 
 interface AdminLocationProvinceModificationModalProps extends ModalProps {
   onCreated: () => void;
@@ -30,11 +30,11 @@ const AdminLocationProvinceModificationModal = ({
   onCreateFailed,
   ...props
 }: AdminLocationProvinceModificationModalProps) => {
-  const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:page.location.province.modal.modification',
+  const { t } = useTranslation(["admin"], {
+    keyPrefix: "admin:page.location.province.modal.modification",
   });
-  const { t: tNotification } = useTranslation('admin', {
-    keyPrefix: 'admin:page.location.province.notification.modify',
+  const { t: tNotification } = useTranslation("admin", {
+    keyPrefix: "admin:page.location.province.notification.modify",
   });
   const toast = useToast();
 
@@ -88,13 +88,13 @@ const AdminLocationProvinceModificationModal = ({
     adminLocationService
       .createProvince(data)
       .then(() => {
-        toast.success(tNotification('provinceCreated'));
+        toast.success(tNotification("provinceCreated"));
         onCreated();
         handleClose();
         setIsSubmitting(false);
       })
       .catch((error: IAxiosError) => {
-        setFormError({ error, setError, formatMessage: formatErrorMessage(t, 'form') });
+        setFormError({ error, setError, formatMessage: formatErrorMessage(t, "form") });
         setIsSubmitting(false);
         onCreateFailed?.();
       });
@@ -108,18 +108,18 @@ const AdminLocationProvinceModificationModal = ({
 
   return (
     <Modal
-      title={t('title')}
+      title={t("title")}
       isOpen={isOpen}
       isLoading={isSubmitting}
       onConfirm={handleSubmit}
       onClose={handleClose}
-      {...omit(props, 'onSubmit')}
+      {...omit(props, "onSubmit")}
     >
       <form className="grid gap-6" onSubmit={handleSubmit}>
         <Select
           name="ghnRefId"
-          label={t('form.id.label')}
-          placeholder={t('form.id.placeholder')}
+          label={t("form.id.label")}
+          placeholder={t("form.id.placeholder")}
           className="block"
           options={locationProvinceOptions}
           isRequired

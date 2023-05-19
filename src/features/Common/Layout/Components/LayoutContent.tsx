@@ -1,15 +1,15 @@
-import { twMerge } from 'tailwind-merge';
+import { twMerge } from "tailwind-merge";
 
-import LayoutContentTab from './LayoutContentTab';
-import { LayoutContentTabItemType } from './LayoutContentTabItem';
+import LayoutContentTab from "./LayoutContentTab";
+import { LayoutContentTabItemType } from "./LayoutContentTabItem";
 
 interface LayoutContentProps {
   title: string;
   children: React.ReactNode;
   actions?: React.ReactNode;
-  defaultSelectedTab?: LayoutContentTabItemType['id'];
+  defaultSelectedTab?: LayoutContentTabItemType["id"];
   tabs?: LayoutContentTabItemType[];
-  onChangeTab?: (id: LayoutContentTabItemType['id']) => void;
+  onChangeTab?: (id: LayoutContentTabItemType["id"]) => void;
 }
 
 const LayoutContent = ({
@@ -31,8 +31,8 @@ const LayoutContent = ({
       )}
       <div
         className={twMerge(
-          'relative z-0 rounded-lg border-2 border-gray-100 p-6',
-          tabs?.length && 'rounded-t-none',
+          "relative z-0 rounded-lg border-2 border-gray-100 p-6",
+          tabs?.length && "rounded-t-none",
         )}
       >
         {children}

@@ -1,28 +1,28 @@
-import { IAxiosError } from '@encacap-group/types/dist/base';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useLayoutEffect, useState } from 'react';
-import { FieldValues, useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { IAxiosError } from "@encacap-group/types/dist/base";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useLayoutEffect, useState } from "react";
+import { FieldValues, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
-import { AUTH_ERROR_CODES } from '@constants/errors';
-import { ADMIN_PATH } from '@constants/urls';
-import { FormGenericErrorType } from '@interfaces/Common/commonTypes';
-import { authService } from '@services/index';
-import { setUser } from '@slices/userSlice';
+import { AUTH_ERROR_CODES } from "@constants/errors";
+import { ADMIN_PATH } from "@constants/urls";
+import { FormGenericErrorType } from "@interfaces/Common/commonTypes";
+import { authService } from "@services/index";
+import { setUser } from "@slices/userSlice";
 
-import Alert from '@components/Alert/Alert';
-import { Button, Input } from '@components/Form';
-import { Logo } from '@components/Logo';
+import Alert from "@components/Alert/Alert";
+import { Button, Input } from "@components/Form";
+import { Logo } from "@components/Logo";
 
-import useDispatch from '@hooks/useDispatch';
-import { setDocumentTitle } from '@utils/helpers';
+import useDispatch from "@hooks/useDispatch";
+import { setDocumentTitle } from "@utils/helpers";
 
-import { authLoginFormSchema } from '../Schemas/authLoginFormSchema';
+import { authLoginFormSchema } from "../Schemas/authLoginFormSchema";
 
 const Login = () => {
-  const { t } = useTranslation('common', {
-    keyPrefix: 'page.auth.page.login',
+  const { t } = useTranslation("common", {
+    keyPrefix: "page.auth.page.login",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,21 +51,21 @@ const Login = () => {
         if (!response) {
           setGenericError({
             code: AUTH_ERROR_CODES.UNKNOWN_ERROR,
-            message: t('errors.unknown'),
+            message: t("errors.unknown"),
           });
           return;
         }
 
         setGenericError({
           code: AUTH_ERROR_CODES.UNAUTHORIZED,
-          message: t('errors.invalidCredentials'),
+          message: t("errors.invalidCredentials"),
           trackingCode: response.data.code,
         });
       });
   });
 
   useLayoutEffect(() => {
-    setDocumentTitle(t('title'));
+    setDocumentTitle(t("title"));
   });
 
   return (
@@ -74,15 +74,15 @@ const Login = () => {
         <div className="flex flex-col items-center justify-center">
           <Logo className="w-16" />
           <div className="mt-10 text-center">
-            <div className="text-2xl font-semibold">{t('welcomeBack')}</div>
-            <div className="mt-2 text-sm text-gray-500">{t('loginToContinue')}</div>
+            <div className="text-2xl font-semibold">{t("welcomeBack")}</div>
+            <div className="mt-2 text-sm text-gray-500">{t("loginToContinue")}</div>
           </div>
         </div>
         <form className="mt-12 grid gap-6" onSubmit={handleSubmit}>
           {genericError && (
             <Alert
               type="error"
-              title={t('errors.title')}
+              title={t("errors.title")}
               message={genericError?.message}
               trackingCode={genericError.trackingCode}
             />
@@ -90,7 +90,7 @@ const Login = () => {
           <Input
             name="email"
             className="block"
-            placeholder={t('form.email.placeholder') ?? ''}
+            placeholder={t("form.email.placeholder") ?? ""}
             control={control}
             disabled={isSubmitting}
           />
@@ -98,12 +98,12 @@ const Login = () => {
             type="password"
             name="password"
             className="block"
-            placeholder={t('form.password.placeholder') ?? ''}
+            placeholder={t("form.password.placeholder") ?? ""}
             control={control}
             disabled={isSubmitting}
           />
           <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
-            {t('form.submit')}
+            {t("form.submit")}
           </Button>
         </form>
       </div>

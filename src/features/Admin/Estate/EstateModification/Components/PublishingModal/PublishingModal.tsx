@@ -1,19 +1,19 @@
-import { ESTATE_STATUS_ENUM } from '@encacap-group/types/dist/re';
-import { AxiosError } from 'axios';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { ESTATE_STATUS_ENUM } from "@encacap-group/types/dist/re";
+import { AxiosError } from "axios";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { ESTATE_PUBLISHING_STEP_ENUM } from '@constants/enums';
-import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
-import { adminEstateService } from '@services/index';
+import { ESTATE_PUBLISHING_STEP_ENUM } from "@constants/enums";
+import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
+import { adminEstateService } from "@services/index";
 
-import { Modal } from '@components/Modal';
-import { ModalProps } from '@components/Modal/Modal';
+import { Modal } from "@components/Modal";
+import { ModalProps } from "@components/Modal/Modal";
 
-import AdminEstateModificationPublishingModalFooter from './Footer';
-import AdminEstateModificationPublishingModalStep from './Step';
+import AdminEstateModificationPublishingModalFooter from "./Footer";
+import AdminEstateModificationPublishingModalStep from "./Step";
 
-interface AdminEstateModificationPublishingModalProps extends Omit<ModalProps, 'title'> {
+interface AdminEstateModificationPublishingModalProps extends Omit<ModalProps, "title"> {
   data: EstateFormDataType | null;
 }
 
@@ -22,8 +22,8 @@ const AdminEstateModificationPublishingModal = ({
   isOpen,
   ...props
 }: AdminEstateModificationPublishingModalProps) => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.estate.modification.modal.publishing',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.estate.modification.modal.publishing",
   });
 
   const [step, setStep] = useState<ESTATE_PUBLISHING_STEP_ENUM>(ESTATE_PUBLISHING_STEP_ENUM.SAVING);
@@ -137,26 +137,26 @@ const AdminEstateModificationPublishingModal = ({
         />
       }
       isOpen={isOpen}
-      title={t('title', { title: data?.title })}
+      title={t("title", { title: data?.title })}
       {...props}
     >
-      {step <= ESTATE_PUBLISHING_STEP_ENUM.PUBLISHING && <div className="mb-6">{t('message')}</div>}
+      {step <= ESTATE_PUBLISHING_STEP_ENUM.PUBLISHING && <div className="mb-6">{t("message")}</div>}
       <div className="flex flex-col space-y-4">
         <AdminEstateModificationPublishingModalStep
           isCompleted={step > ESTATE_PUBLISHING_STEP_ENUM.SAVING}
           isPending={step < ESTATE_PUBLISHING_STEP_ENUM.SAVING}
           isWorking={step === ESTATE_PUBLISHING_STEP_ENUM.SAVING}
           error={saveStepError}
-          text={t('save')}
+          text={t("save")}
           onTryAgain={handleTryAgain}
         />
         <AdminEstateModificationPublishingModalStep
           isCompleted={step > ESTATE_PUBLISHING_STEP_ENUM.PUBLISHING}
           isPending={step < ESTATE_PUBLISHING_STEP_ENUM.PUBLISHING}
           isWorking={step === ESTATE_PUBLISHING_STEP_ENUM.PUBLISHING}
-          completedText={t('published')}
+          completedText={t("published")}
           error={publishStepError}
-          text={t('publish')}
+          text={t("publish")}
           onTryAgain={handleTryAgain}
         />
       </div>

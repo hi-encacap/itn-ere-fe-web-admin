@@ -1,23 +1,23 @@
-import { IBaseListQuery } from '@encacap-group/types/dist/base';
-import { ESTATE_STATUS_ENUM, IEstate } from '@encacap-group/types/dist/re';
-import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSearchParams } from 'react-router-dom';
+import { IBaseListQuery } from "@encacap-group/types/dist/base";
+import { ESTATE_STATUS_ENUM, IEstate } from "@encacap-group/types/dist/re";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router-dom";
 
-import { adminEstateService } from '@services/index';
+import { adminEstateService } from "@services/index";
 
-import LayoutContent from '@common/Layout/Components/LayoutContent';
-import { LayoutContentTabItemType } from '@common/Layout/Components/LayoutContentTabItem';
+import LayoutContent from "@common/Layout/Components/LayoutContent";
+import { LayoutContentTabItemType } from "@common/Layout/Components/LayoutContentTabItem";
 
-import { setDocumentTitle } from '@utils/helpers';
+import { setDocumentTitle } from "@utils/helpers";
 
-import AdminEstateListHeaderAction from './Components/List/HeaderAction';
-import AdminEstateListTable from './Components/List/Table';
-import { ESTATE_LIST_TAB_ENUM } from './Constants/enums';
+import AdminEstateListHeaderAction from "./Components/List/HeaderAction";
+import AdminEstateListTable from "./Components/List/Table";
+import { ESTATE_LIST_TAB_ENUM } from "./Constants/enums";
 
 const AdminEstateList = () => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.estate',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.estate",
   });
 
   const [estateData, setEstateData] = useState<IEstate[]>([]);
@@ -26,7 +26,7 @@ const AdminEstateList = () => {
   const [totalRows, setTotalRows] = useState(0);
 
   const selectedTabIdParam = useMemo(
-    () => searchParams.get('tab_id') ?? ESTATE_LIST_TAB_ENUM.COMPLETED,
+    () => searchParams.get("tab_id") ?? ESTATE_LIST_TAB_ENUM.COMPLETED,
     [searchParams],
   );
 
@@ -34,11 +34,11 @@ const AdminEstateList = () => {
     () => [
       {
         id: ESTATE_LIST_TAB_ENUM.COMPLETED,
-        label: t('list.tab.completed'),
+        label: t("list.tab.completed"),
       },
       {
         id: ESTATE_LIST_TAB_ENUM.DRAFT,
-        label: t('list.tab.draft'),
+        label: t("list.tab.draft"),
       },
     ],
     [t],
@@ -71,7 +71,7 @@ const AdminEstateList = () => {
 
   const handleChangeTab = useCallback(
     (tabId: string) => {
-      searchParams.set('tab_id', tabId);
+      searchParams.set("tab_id", tabId);
 
       setSearchParams(searchParams);
     },
@@ -85,19 +85,19 @@ const AdminEstateList = () => {
   const handleMoveToTop = useCallback(adminEstateService.moveEstateToTopById, []);
 
   useLayoutEffect(() => {
-    setDocumentTitle(t('list.title'));
+    setDocumentTitle(t("list.title"));
   }, [t]);
 
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }, [estateData]);
 
   return (
     <LayoutContent
-      title={t('list.title')}
+      title={t("list.title")}
       actions={<AdminEstateListHeaderAction />}
       tabs={tabItems}
       defaultSelectedTab={selectedTabIdParam}

@@ -1,7 +1,7 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
-import AdminEstatePropertyList from '../EstateProperty/AdminEstatePropertyList';
-import AdminEstateProxy from './AdminEstateProxy';
+import AdminEstatePropertyList from "../EstateProperty/AdminEstatePropertyList";
+import AdminEstateProxy from "./AdminEstateProxy";
 
 const EstateRoutes = () => {
   return (

@@ -1,7 +1,7 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
-import NotFoundError from '../Components/NotFoundError';
-import UnknownError from '../Components/UnknownError';
+import NotFoundError from "../Components/NotFoundError";
+import UnknownError from "../Components/UnknownError";
 
 const ErrorRoutes = () => {
   return (

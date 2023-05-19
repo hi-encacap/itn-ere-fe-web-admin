@@ -1,10 +1,10 @@
-import { HTMLAttributes, MouseEvent, ReactNode, useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
-import { twMerge } from 'tailwind-merge';
+import { HTMLAttributes, MouseEvent, ReactNode, useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { twMerge } from "tailwind-merge";
 
-import { AlertType } from '@interfaces/Common/elementTypes';
+import { AlertType } from "@interfaces/Common/elementTypes";
 
-import AlertIcon from './AlertIcon';
+import AlertIcon from "./AlertIcon";
 
 export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
   type: AlertType;
@@ -18,22 +18,22 @@ export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
 const Alert = ({
   title,
   message,
-  type = 'default',
+  type = "default",
   className,
   trackingCode,
   children,
   onClose,
   onClick,
 }: AlertProps) => {
-  const { t } = useTranslation('common', {
-    keyPrefix: 'alert',
+  const { t } = useTranslation("common", {
+    keyPrefix: "alert",
   });
 
   const generalColors = {
-    default: 'bg-blue-50 text-blue-600',
-    success: 'bg-green-50 text-green-700',
-    error: 'bg-red-50 text-red-600',
-    warning: 'bg-yellow-50 text-yellow-700',
+    default: "bg-blue-50 text-blue-600",
+    success: "bg-green-50 text-green-700",
+    error: "bg-red-50 text-red-600",
+    warning: "bg-yellow-50 text-yellow-700",
   };
 
   const handleClick = useCallback((e: MouseEvent<HTMLDivElement>) => {
@@ -43,7 +43,7 @@ const Alert = ({
 
   return (
     <div
-      className={twMerge('w-full rounded-md px-5 pt-4 pb-3 font-semibold', generalColors[type], className)}
+      className={twMerge("w-full rounded-md px-5 pt-4 pb-3 font-semibold", generalColors[type], className)}
       role="button"
       tabIndex={-1}
       aria-hidden="true"
@@ -56,11 +56,11 @@ const Alert = ({
         <div className="text-base">
           <div className="my-1">{title}</div>
           {Boolean(message) && (
-            <div className={twMerge('mt-1.5 font-normal', !children && 'mb-2')}>{message}</div>
+            <div className={twMerge("mt-1.5 font-normal", !children && "mb-2")}>{message}</div>
           )}
           {trackingCode && (
             <div className="mb-1.5 mt-3 flex items-center space-x-2 text-sm font-normal">
-              <span className="flex-shrink-0 font-semibold">{t('errorTrackingCode')}: </span>
+              <span className="flex-shrink-0 font-semibold">{t("errorCode")}: </span>
               <span className="inline-block overflow-hidden break-all text-right line-clamp-1">
                 {trackingCode}
               </span>

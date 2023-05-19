@@ -1,39 +1,39 @@
-import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, ESTATE_STATUS_ENUM, IEstate } from '@encacap-group/types/dist/re';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { AxiosError } from 'axios';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, ESTATE_STATUS_ENUM, IEstate } from "@encacap-group/types/dist/re";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { AxiosError } from "axios";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-import { ADMIN_PATH } from '@constants/urls';
-import { EstateDraftDataType, EstateFormDataType } from '@interfaces/Admin/estateTypes';
-import { adminEstateService } from '@services/index';
+import { ADMIN_PATH } from "@constants/urls";
+import { EstateDraftDataType, EstateFormDataType } from "@interfaces/Admin/estateTypes";
+import { adminEstateService } from "@services/index";
 
-import useToast from '@hooks/useToast';
-import { setFormError } from '@utils/error';
-import { generateImageFormData, generateImagesFormData } from '@utils/image';
+import useToast from "@hooks/useToast";
+import { setFormError } from "@utils/error";
+import { generateImageFormData, generateImagesFormData } from "@utils/image";
 
-import { estateFormSchema } from '@admin/Estate/Schemas/estateFormSchema';
+import { estateFormSchema } from "@admin/Estate/Schemas/estateFormSchema";
 
-import AdminEstateModificationPublishingModal from '../PublishingModal/PublishingModal';
-import AdminEstateModificationFormButtonDraft from './Button/Draft';
-import AdminEstateModificationFormButtonNew from './Button/New';
-import AdminEstateModificationFormButtonPublished from './Button/Published';
-import AdminEstateModificationFormButtonUnPublished from './Button/UnPublished';
-import AdminEstateModificationFormContact from './Contact/Contact';
-import AdminEstateModificationFormDetail from './Detail/Detail';
-import AdminEstateModificationFormGeneral from './General/General';
-import AdminEstateModificationFormLocation from './Location/Location';
-import AdminEstateModificationFormMedia from './Media/Media';
+import AdminEstateModificationPublishingModal from "../PublishingModal/PublishingModal";
+import AdminEstateModificationFormButtonDraft from "./Button/Draft";
+import AdminEstateModificationFormButtonNew from "./Button/New";
+import AdminEstateModificationFormButtonPublished from "./Button/Published";
+import AdminEstateModificationFormButtonUnPublished from "./Button/UnPublished";
+import AdminEstateModificationFormContact from "./Contact/Contact";
+import AdminEstateModificationFormDetail from "./Detail/Detail";
+import AdminEstateModificationFormGeneral from "./General/General";
+import AdminEstateModificationFormLocation from "./Location/Location";
+import AdminEstateModificationFormMedia from "./Media/Media";
 
 interface AdminEstateModificationFormProps {
   id?: number;
 }
 
 const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.estate.modification',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.estate.modification",
   });
   const toast = useToast();
 
@@ -45,7 +45,7 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
   const [searchParams] = useSearchParams();
 
   const statusParam: ESTATE_STATUS_ENUM = useMemo(
-    () => (searchParams.get('status') as ESTATE_STATUS_ENUM) ?? ESTATE_STATUS_ENUM.DRAFT,
+    () => (searchParams.get("status") as ESTATE_STATUS_ENUM) ?? ESTATE_STATUS_ENUM.DRAFT,
     [searchParams],
   );
   const isDisabled = useMemo(() => isSubmitting || isLoading, [isSubmitting, isLoading]);
@@ -67,31 +67,31 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
 
   const setFormValue = useCallback(
     (data: IEstate | EstateDraftDataType) => {
-      setValue('id', data.id);
-      setValue('title', data.title);
-      setValue('customId', data.customId);
-      setValue('price', data.price);
-      setValue('priceUnitId', data.priceUnit?.id ?? null);
-      setValue('area', data.area);
-      setValue('areaUnitId', data.areaUnit?.id ?? null);
-      setValue('provinceCode', data.province?.code ?? '');
-      setValue('districtCode', data.district?.code ?? '');
-      setValue('wardCode', data.ward?.code ?? '');
-      setValue('address', data.address);
-      setValue('addressNote', data.addressNote);
-      setValue('categoryId', data.category?.id ?? null);
-      setValue('quarterCode', data.quarter?.code ?? '');
-      setValue('description', data.description);
-      setValue('contactId', data.contact?.id ?? null);
-      setValue('youtubeId', data.youtubeId);
-      setValue('status', data.status);
+      setValue("id", data.id);
+      setValue("title", data.title);
+      setValue("customId", data.customId);
+      setValue("price", data.price);
+      setValue("priceUnitId", data.priceUnit?.id ?? null);
+      setValue("area", data.area);
+      setValue("areaUnitId", data.areaUnit?.id ?? null);
+      setValue("provinceCode", data.province?.code ?? "");
+      setValue("districtCode", data.district?.code ?? "");
+      setValue("wardCode", data.ward?.code ?? "");
+      setValue("address", data.address);
+      setValue("addressNote", data.addressNote);
+      setValue("categoryId", data.category?.id ?? null);
+      setValue("quarterCode", data.quarter?.code ?? "");
+      setValue("description", data.description);
+      setValue("contactId", data.contact?.id ?? null);
+      setValue("youtubeId", data.youtubeId);
+      setValue("status", data.status);
 
       if (data.avatar) {
-        setValue('avatar', generateImageFormData(data.avatar, DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL));
+        setValue("avatar", generateImageFormData(data.avatar, DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL));
       }
 
       if (data.images) {
-        setValue('images', generateImagesFormData(data.images, DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL));
+        setValue("images", generateImagesFormData(data.images, DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL));
       }
     },
     [setValue],
@@ -110,7 +110,7 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
       setEstateStatus(data.status);
       setIsLoading(false);
     } catch (error) {
-      toast.error(t('notification.getEstateFailed'));
+      toast.error(t("notification.getEstateFailed"));
     }
   }, [id, toast, t]);
 
@@ -127,7 +127,7 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
       setEstateStatus(data.status);
       setIsLoading(false);
     } catch (error) {
-      toast.error(t('notification.getEstateFailed'));
+      toast.error(t("notification.getEstateFailed"));
     }
   }, [id, toast, t]);
 
@@ -142,11 +142,11 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
     const { title } = data;
 
     if (!title) {
-      setError('title', {
-        type: 'required',
-        message: t('form.general.form.title.requiredInDraft'),
+      setError("title", {
+        type: "required",
+        message: t("form.general.form.title.requiredInDraft"),
       });
-      setFocus('title');
+      setFocus("title");
 
       return;
     }
@@ -158,15 +158,15 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
 
       if (estateDraftId) {
         await adminEstateService.updateEstateDraftById(estateDraftId, data);
-        toast.success(t('notification.savedDraft'));
+        toast.success(t("notification.savedDraft"));
         return;
       }
 
       const { id } = await adminEstateService.createEstateDraft(data);
-      toast.success(t('notification.savedDraft'));
+      toast.success(t("notification.savedDraft"));
       navigate(ADMIN_PATH.ESTATE_MODIFICATION_PATH(id, ESTATE_STATUS_ENUM.DRAFT));
     } catch (error) {
-      toast.error(t('notification.saveDraftFailed'));
+      toast.error(t("notification.saveDraftFailed"));
     } finally {
       setIsSubmitting(false);
     }
@@ -178,8 +178,8 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
   }, []);
 
   const mapErrorFieldToFormField = useCallback((errorField: string) => {
-    if (errorField === 'imageIds') {
-      return 'images';
+    if (errorField === "imageIds") {
+      return "images";
     }
 
     return errorField;
@@ -195,11 +195,11 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
     try {
       await adminEstateService.updateEstateById(data.id, data);
 
-      toast.success(t('notification.updatedEstate'));
+      toast.success(t("notification.updatedEstate"));
 
       navigate(ADMIN_PATH.ESTATE_MODIFICATION_PATH(data.id, data.status as ESTATE_STATUS_ENUM));
     } catch (error) {
-      toast.error(t('notification.updateEstateFailed'));
+      toast.error(t("notification.updateEstateFailed"));
 
       if (error instanceof AxiosError) {
         setFormError({ error, setError, getField: mapErrorFieldToFormField });

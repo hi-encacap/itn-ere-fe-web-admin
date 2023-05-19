@@ -1,15 +1,15 @@
-import { useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
-import { EstateDraftDataType } from '@interfaces/Admin/estateTypes';
-import { adminEstateService } from '@services/index';
+import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
+import { adminEstateService } from "@services/index";
 
-import { ConfirmationModal } from '@components/Modal';
-import { ModalProps } from '@components/Modal/Modal';
+import { ConfirmationModal } from "@components/Modal";
+import { ModalProps } from "@components/Modal/Modal";
 
-import useToast from '@hooks/useToast';
+import useToast from "@hooks/useToast";
 
-interface AdminEstateDraftDeleteConfirmationModalProps extends Omit<ModalProps, 'title' | 'message'> {
+interface AdminEstateDraftDeleteConfirmationModalProps extends Omit<ModalProps, "title" | "message"> {
   data: EstateDraftDataType | null;
   onSuccess: () => void;
 }
@@ -20,8 +20,8 @@ const AdminEstateDraftDeleteConfirmationModal = ({
   onClose,
   ...props
 }: AdminEstateDraftDeleteConfirmationModalProps) => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.estate',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.estate",
   });
   const toast = useToast();
 
@@ -33,11 +33,11 @@ const AdminEstateDraftDeleteConfirmationModal = ({
     try {
       await adminEstateService.deleteEstateDraftById(data.id);
 
-      toast.success(t('list.notification.deletedDraft'));
+      toast.success(t("list.notification.deletedDraft"));
 
       onSuccess();
     } catch (error) {
-      toast.error(t('list.notification.deleteDraftFailed'));
+      toast.error(t("list.notification.deleteDraftFailed"));
     } finally {
       onClose();
     }
@@ -45,8 +45,8 @@ const AdminEstateDraftDeleteConfirmationModal = ({
 
   return (
     <ConfirmationModal
-      title={t('list.deletion.title', { title: data?.title })}
-      message={t('list.deletion.message')}
+      title={t("list.deletion.title", { title: data?.title })}
+      message={t("list.deletion.message")}
       onConfirm={handleConfirmDelete}
       onClose={onClose}
       {...props}

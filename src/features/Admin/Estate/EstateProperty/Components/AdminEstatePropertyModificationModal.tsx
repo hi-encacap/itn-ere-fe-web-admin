@@ -1,24 +1,24 @@
-import { IAxiosError } from '@encacap-group/types/dist/base';
-import { IEstateProperty } from '@encacap-group/types/dist/re';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { keys, omit, pick } from 'lodash';
-import { useCallback, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { IAxiosError } from "@encacap-group/types/dist/base";
+import { IEstateProperty } from "@encacap-group/types/dist/re";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { keys, omit, pick } from "lodash";
+import { useCallback, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
-import { EstatePropertyFormDataType } from '@interfaces/Admin/estateTypes';
-import { adminEstatePropertyService } from '@services/index';
+import { EstatePropertyFormDataType } from "@interfaces/Admin/estateTypes";
+import { adminEstatePropertyService } from "@services/index";
 
-import { Input } from '@components/Form';
-import Modal, { ModalProps } from '@components/Modal/Modal';
+import { Input } from "@components/Form";
+import Modal, { ModalProps } from "@components/Modal/Modal";
 
-import useToast from '@hooks/useToast';
-import { formatErrorMessage, setFormError } from '@utils/error';
+import useToast from "@hooks/useToast";
+import { formatErrorMessage, setFormError } from "@utils/error";
 
-import AdminCategorySelector from '@admin/Estate/Components/AdminCategorySelector';
-import { estatePropertyFormSchema } from '@admin/Estate/Schemas/estatePropertyFormSchema';
+import AdminCategorySelector from "@admin/Estate/Components/AdminCategorySelector";
+import { estatePropertyFormSchema } from "@admin/Estate/Schemas/estatePropertyFormSchema";
 
-interface ComponentProps extends Omit<ModalProps, 'id'> {
+interface ComponentProps extends Omit<ModalProps, "id"> {
   estateProperty?: IEstateProperty;
   onCreated: () => void;
 }
@@ -29,15 +29,15 @@ const AdminEstatePropertyModificationModal = ({
   onClose,
   ...props
 }: ComponentProps) => {
-  const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:page.estate.property.modal.modification',
+  const { t } = useTranslation(["admin"], {
+    keyPrefix: "admin:page.estate.property.modal.modification",
   });
-  const { t: tNoti } = useTranslation(['admin'], {
-    keyPrefix: 'admin:page.estate.property.notification',
+  const { t: tNoti } = useTranslation(["admin"], {
+    keyPrefix: "admin:page.estate.property.notification",
   });
   const toast = useToast();
   const defaultValues: EstatePropertyFormDataType = {
-    name: '',
+    name: "",
     categoryId: null,
   };
 
@@ -63,12 +63,12 @@ const AdminEstatePropertyModificationModal = ({
       adminEstatePropertyService
         .createEstateProperty(data)
         .then(() => {
-          toast.success(tNoti('created'));
+          toast.success(tNoti("created"));
           onCreated();
           handleClose();
         })
         .catch((error: IAxiosError) => {
-          setFormError({ error, setError, formatMessage: formatErrorMessage(t, 'form') });
+          setFormError({ error, setError, formatMessage: formatErrorMessage(t, "form") });
         })
         .finally(() => {
           setIsSubmitting(false);
@@ -82,12 +82,12 @@ const AdminEstatePropertyModificationModal = ({
       adminEstatePropertyService
         .updateEstateProperty(estateProperty?.id as number, data)
         .then(() => {
-          toast.success(tNoti('updated'));
+          toast.success(tNoti("updated"));
           onCreated();
           handleClose();
         })
         .catch((error: IAxiosError) => {
-          setFormError({ error, setError, formatMessage: formatErrorMessage(t, 'form') });
+          setFormError({ error, setError, formatMessage: formatErrorMessage(t, "form") });
         })
         .finally(() => {
           setIsSubmitting(false);
@@ -115,19 +115,19 @@ const AdminEstatePropertyModificationModal = ({
 
   return (
     <Modal
-      title={estateProperty ? t('title.edit') : t('title.create')}
+      title={estateProperty ? t("title.edit") : t("title.create")}
       isLoading={isSubmitting}
       onConfirm={handleSubmit}
       onClose={handleClose}
-      {...omit(props, 'onSubmit')}
+      {...omit(props, "onSubmit")}
     >
       <form className="grid gap-6" onSubmit={handleSubmit}>
         <AdminCategorySelector control={control} disabled={isSubmitting} />
         <Input
           name="name"
           control={control}
-          label={t('form.name.label')}
-          placeholder={t('form.name.placeholder')}
+          label={t("form.name.label")}
+          placeholder={t("form.name.placeholder")}
           className="block"
           isRequired
           disabled={isSubmitting}

@@ -1,6 +1,6 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
-import AdminContactList from '../AdminContactList';
+import AdminContactList from "../AdminContactList";
 
 const AdminContactRoutes = () => {
   return (

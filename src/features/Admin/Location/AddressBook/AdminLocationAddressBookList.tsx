@@ -1,27 +1,27 @@
-import { IBaseListQuery } from '@encacap-group/types/dist/base';
-import { SortingState } from '@tanstack/react-table';
-import { isEqual } from 'lodash';
-import { Key, useCallback, useEffect, useLayoutEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { IBaseListQuery } from "@encacap-group/types/dist/base";
+import { SortingState } from "@tanstack/react-table";
+import { isEqual } from "lodash";
+import { Key, useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { LocationAddressBookDataType } from '@interfaces/Admin/locationTypes';
-import { TablePaginationType } from '@interfaces/Common/commonTypes';
-import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
-import { adminLocationService } from '@services/index';
+import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
+import { LocationAddressBookDataType } from "@interfaces/Admin/locationTypes";
+import { TablePaginationType } from "@interfaces/Common/commonTypes";
+import { TableColumnFilterState } from "@interfaces/Common/elementTypes";
+import { adminLocationService } from "@services/index";
 
-import Table from '@components/Table/Table';
+import Table from "@components/Table/Table";
 
-import LayoutContent from '@common/Layout/Components/LayoutContent';
+import LayoutContent from "@common/Layout/Components/LayoutContent";
 
-import { generateColumnFilterObject, setDocumentTitle } from '@utils/helpers';
+import { generateColumnFilterObject, setDocumentTitle } from "@utils/helpers";
 
-import createLocationAddressBookTableColumns from './Columns/adminLocationAddressBookTableColumn';
-import AdminLocationAddressBookDeleteConfirmationModal from './Components/AdminLocationAddressBookDeleteConfirmationModal';
+import createLocationAddressBookTableColumns from "./Columns/adminLocationAddressBookTableColumn";
+import AdminLocationAddressBookDeleteConfirmationModal from "./Components/AdminLocationAddressBookDeleteConfirmationModal";
 
 const AdminLocationAddressBookList = () => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.location.addressBook',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.location.addressBook",
   });
 
   const [districtData, setDistrictData] = useState<LocationAddressBookDataType[]>([]);
@@ -88,11 +88,11 @@ const AdminLocationAddressBookList = () => {
   }, [columnFilters, pagination]);
 
   useLayoutEffect(() => {
-    setDocumentTitle(t('title'));
+    setDocumentTitle(t("title"));
   }, [t]);
 
   return (
-    <LayoutContent title={t('title')}>
+    <LayoutContent title={t("title")}>
       <Table
         data={districtData}
         columns={createLocationAddressBookTableColumns(t, {

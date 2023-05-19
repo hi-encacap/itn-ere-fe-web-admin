@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { useCallback, useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
-import { EstateFormDataType } from '@interfaces/Admin/estateTypes';
-import { SelectOptionItemType } from '@interfaces/Common/elementTypes';
-import { estateQuarterService } from '@services/index';
+import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
+import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
+import { estateQuarterService } from "@services/index";
 
-import { Select } from '@components/Form';
+import { Select } from "@components/Form";
 
 interface AdminEstateModificationFormDetailQuarterSelectProps {
   disabled?: boolean;
@@ -15,8 +15,8 @@ interface AdminEstateModificationFormDetailQuarterSelectProps {
 const AdminEstateModificationFormDetailQuarterSelector = ({
   disabled,
 }: AdminEstateModificationFormDetailQuarterSelectProps) => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.estate.modification.form.detail.form.quarter',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.estate.modification.form.detail.form.quarter",
   });
 
   const [options, setOptions] = useState<SelectOptionItemType[]>([]);
@@ -52,9 +52,9 @@ const AdminEstateModificationFormDetailQuarterSelector = ({
       control={control}
       disabled={disabled ?? isLoading}
       name="quarterCode"
-      label={t('label')}
+      label={t("label")}
       options={options}
-      placeholder={t('placeholder')}
+      placeholder={t("placeholder")}
     />
   );
 };

@@ -1,13 +1,13 @@
-import _ from 'lodash';
-import { useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
+import _ from "lodash";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
-import { LoadingSkeleton } from '@components/Loading';
+import { LoadingSkeleton } from "@components/Loading";
 
 import TableHeaderFilterDropdownOptionItem, {
   TableFilterOptionPrivateItemType,
-} from './TableHeaderFilterDropdownOptionItem';
-import TableHeaderFilterDropdownSkeleton from './TableHeaderFilterDropdownSkeleton';
+} from "./TableHeaderFilterDropdownOptionItem";
+import TableHeaderFilterDropdownSkeleton from "./TableHeaderFilterDropdownSkeleton";
 
 export interface TableHeaderFilterDropdownProps {
   filterOptions: TableFilterOptionPrivateItemType[];
@@ -28,8 +28,8 @@ const TableHeaderFilterDropdown = ({
   onChangeFilterSearchValue,
   onClearSelectedFilters,
 }: TableHeaderFilterDropdownProps) => {
-  const { t } = useTranslation(['common'], {
-    keyPrefix: 'common:table.header.filter',
+  const { t } = useTranslation(["common"], {
+    keyPrefix: "common:table.header.filter",
   });
 
   const handleChangeSelectedFilter = useCallback(
@@ -63,7 +63,7 @@ const TableHeaderFilterDropdown = ({
       <input
         id="filterValue"
         name="filterValue"
-        placeholder={t('search.placeholder') ?? ''}
+        placeholder={t("search.placeholder") ?? ""}
         className="h-10 border-b-2 border-gray-50 outline-none disabled:cursor-not-allowed disabled:bg-transparent"
         disabled={isLoading}
         autoComplete="off"
@@ -92,7 +92,7 @@ const TableHeaderFilterDropdown = ({
             disabled={isLoading}
             onClick={handleClearSelectedFilters}
           >
-            {t('clearSelection')}
+            {t("clearSelection")}
           </button>
         )}
       </div>

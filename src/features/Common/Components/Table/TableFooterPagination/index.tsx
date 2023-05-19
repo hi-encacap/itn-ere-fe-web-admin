@@ -1,1 +1,1 @@
-export { default } from './TableFooterPagination';
+export { default } from "./TableFooterPagination";

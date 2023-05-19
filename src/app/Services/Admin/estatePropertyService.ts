@@ -1,11 +1,11 @@
-import { IBaseListQuery, IResponseWithMeta } from '@encacap-group/types/dist/base';
-import { IEstateProperty } from '@encacap-group/types/dist/re';
-import { omit } from 'lodash';
+import { IBaseListQuery, IResponseWithMeta } from "@encacap-group/types/dist/base";
+import { IEstateProperty } from "@encacap-group/types/dist/re";
+import { omit } from "lodash";
 
-import { ADMIN_ESTATE_PROPERTY_API_PATH } from '@constants/apis';
-import { EstatePropertyFormDataType } from '@interfaces/Admin/estateTypes';
+import { ADMIN_ESTATE_PROPERTY_API_PATH } from "@constants/apis";
+import { EstatePropertyFormDataType } from "@interfaces/Admin/estateTypes";
 
-import axiosInstance from '@utils/Http/axiosInstance';
+import axiosInstance from "@utils/Http/axiosInstance";
 
 const getEstateProperties = async (query: IBaseListQuery): Promise<IResponseWithMeta<IEstateProperty[]>> => {
   const response = await axiosInstance.get(ADMIN_ESTATE_PROPERTY_API_PATH.ESTATE_PROPERTIES_PATH, {
@@ -16,7 +16,7 @@ const getEstateProperties = async (query: IBaseListQuery): Promise<IResponseWith
 };
 
 const getAllEstateProperties = async (query?: IBaseListQuery): Promise<IEstateProperty[]> => {
-  const response = await getEstateProperties(omit(query, ['page', 'perPage']));
+  const response = await getEstateProperties(omit(query, ["page", "perPage"]));
 
   return response.data;
 };

@@ -1,10 +1,10 @@
-import { Key } from 'react';
-import { FiTrash2 } from 'react-icons/fi';
-import { MdEdit } from 'react-icons/md';
+import { Key } from "react";
+import { FiTrash2 } from "react-icons/fi";
+import { MdEdit } from "react-icons/md";
 
-import { TableRowActionClickHandlerType } from '@interfaces/Common/elementTypes';
+import { TableRowActionClickHandlerType } from "@interfaces/Common/elementTypes";
 
-import TableRowAction from '@components/Table/TableRowAction';
+import TableRowAction from "@components/Table/TableRowAction";
 
 interface ComponentProps {
   id: Key;

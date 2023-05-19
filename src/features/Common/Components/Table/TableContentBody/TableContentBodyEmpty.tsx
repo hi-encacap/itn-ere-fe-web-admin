@@ -1,4 +1,4 @@
-import TableContentBodyEmptyContent from './TableContentBodyEmptyContent';
+import TableContentBodyEmptyContent from "./TableContentBodyEmptyContent";
 
 export interface TableBodyEmptyProps {
   columns: number;

@@ -1,9 +1,9 @@
-import { omit } from 'lodash';
-import { useController } from 'react-hook-form';
+import { omit } from "lodash";
+import { useController } from "react-hook-form";
 
-import { HookFormControl } from '@interfaces/Common/commonTypes';
+import { HookFormControl } from "@interfaces/Common/commonTypes";
 
-import UncontrolledSelect, { UncontrolledSelectProps } from './UncontrolledSelect';
+import UncontrolledSelect, { UncontrolledSelectProps } from "./UncontrolledSelect";
 
 export interface SelectProps extends UncontrolledSelectProps {
   control?: HookFormControl;
@@ -16,7 +16,7 @@ const Select = ({ control, name, errorFactory, ...inputProps }: SelectProps) => 
   }
 
   const {
-    field: { onChange, onBlur, value = '' },
+    field: { onChange, onBlur, value = "" },
     formState: { errors },
   } = useController({
     name,
@@ -32,7 +32,7 @@ const Select = ({ control, name, errorFactory, ...inputProps }: SelectProps) => 
       onBlur={onBlur}
       error={errorFactory ? errorFactory(errorMessage) : errorMessage}
       {...(!(value === undefined || value === null) && { value })}
-      {...omit(inputProps, ['value', 'onChange', 'onBlur'])}
+      {...omit(inputProps, ["value", "onChange", "onBlur"])}
     />
   );
 };

@@ -1,12 +1,12 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
-import AdminLayout from '@common/Layout/AdminLayout';
+import AdminLayout from "@common/Layout/AdminLayout";
 
-import AdminCategoryRoutes from '@admin/Category/Routes/AdminCategoryRoutes';
-import AdminContactRoutes from '@admin/Contact/Routes/AdminContactRoutes';
-import AdminDashboard from '@admin/Dashboard/AdminDashboard';
-import EstateRoutes from '@admin/Estate/Routes/EstateRoutes';
-import AdminLocationRoutes from '@admin/Location/Routes/AdminLocationRoutes';
+import AdminCategoryRoutes from "@admin/Category/Routes/AdminCategoryRoutes";
+import AdminContactRoutes from "@admin/Contact/Routes/AdminContactRoutes";
+import AdminDashboard from "@admin/Dashboard/AdminDashboard";
+import EstateRoutes from "@admin/Estate/Routes/EstateRoutes";
+import AdminLocationRoutes from "@admin/Location/Routes/AdminLocationRoutes";
 
 const AdminRoutes = () => {
   return (

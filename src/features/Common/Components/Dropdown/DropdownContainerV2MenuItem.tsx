@@ -1,7 +1,7 @@
-import { ReactElement, useCallback } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { ReactElement, useCallback } from "react";
+import { twMerge } from "tailwind-merge";
 
-import { DROPDOWN_MENU_TYPE_ENUM } from '@constants/enums';
+import { DROPDOWN_MENU_TYPE_ENUM } from "@constants/enums";
 
 export interface DropdownMenuItemType {
   icon?: ReactElement;
@@ -33,7 +33,7 @@ const DropdownContainerV2MenuItem = ({
   return (
     <div
       className={twMerge(
-        'flex cursor-pointer items-center justify-start space-x-4 px-5 py-1.5 hover:bg-gray-100',
+        "flex cursor-pointer items-center justify-start space-x-4 px-5 py-1.5 hover:bg-gray-100",
         className,
       )}
       role="button"

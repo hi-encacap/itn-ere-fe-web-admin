@@ -1,13 +1,13 @@
-import { memo, useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { memo, useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { HookFormControl } from '@interfaces/Common/commonTypes';
-import { SelectOptionItemType } from '@interfaces/Common/elementTypes';
-import { adminLocationService } from '@services/index';
+import { HookFormControl } from "@interfaces/Common/commonTypes";
+import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
+import { adminLocationService } from "@services/index";
 
-import { Select } from '@components/Form';
+import { Select } from "@components/Form";
 
-import { commonFormErrorFactory } from '@utils/error';
+import { commonFormErrorFactory } from "@utils/error";
 
 interface AdminLocationWardSelectorProps {
   control: HookFormControl;
@@ -16,8 +16,8 @@ interface AdminLocationWardSelectorProps {
 }
 
 const AdminLocationWardSelector = ({ control, districtCode, disabled }: AdminLocationWardSelectorProps) => {
-  const { t } = useTranslation(['admin'], {
-    keyPrefix: 'admin:form.location.wardCode',
+  const { t } = useTranslation(["admin"], {
+    keyPrefix: "admin:form.location.wardCode",
   });
 
   const [options, setOptions] = useState<SelectOptionItemType[]>([]);
@@ -53,8 +53,8 @@ const AdminLocationWardSelector = ({ control, districtCode, disabled }: AdminLoc
   return (
     <Select
       name="wardCode"
-      label={t('label')}
-      placeholder={t('placeholder')}
+      label={t("label")}
+      placeholder={t("placeholder")}
       className="block"
       options={options}
       isRequired

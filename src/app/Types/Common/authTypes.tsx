@@ -1,4 +1,4 @@
-import { IREUser } from '@encacap-group/types/dist/re';
+import { IREUser } from "@encacap-group/types/dist/re";
 
 export interface AuthTokensType {
   accessToken: string;

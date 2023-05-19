@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
-import { Button } from '@components/Form';
+import { Button } from "@components/Form";
 
 interface AdminEstateModificationFormButtonPublishedProps {
   isSubmitting: boolean;
@@ -11,8 +11,8 @@ const AdminEstateModificationFormButtonPublished = ({
   isSubmitting,
   onSubmit,
 }: AdminEstateModificationFormButtonPublishedProps) => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.estate.modification',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.estate.modification",
   });
 
   return (
@@ -23,7 +23,7 @@ const AdminEstateModificationFormButtonPublished = ({
       type="submit"
       onClick={onSubmit}
     >
-      {t('form.action.save')}
+      {t("form.action.save")}
     </Button>
   );
 };

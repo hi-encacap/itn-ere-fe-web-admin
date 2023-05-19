@@ -1,11 +1,11 @@
-import { IContact } from '@encacap-group/types/dist/re';
-import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { IContact } from "@encacap-group/types/dist/re";
+import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { Modal } from '@components/Modal';
-import { ModalProps } from '@components/Modal/Modal';
+import { Modal } from "@components/Modal";
+import { ModalProps } from "@components/Modal/Modal";
 
-import AdminContactList from '@admin/Contact/AdminContactList';
+import AdminContactList from "@admin/Contact/AdminContactList";
 
 interface AdminEstateModificationFormContactPickerProps extends ModalProps {
   data: IContact | null;
@@ -17,8 +17,8 @@ const AdminEstateModificationFormContactPicker = ({
   onPick,
   ...props
 }: AdminEstateModificationFormContactPickerProps) => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.estate.modification.form.contact.picker',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.estate.modification.form.contact.picker",
   });
 
   const [isAllowSubmit, setIsAllowSubmit] = useState(false);
@@ -53,7 +53,7 @@ const AdminEstateModificationFormContactPicker = ({
   return (
     <Modal
       contentContainerClassName="max-w-4xl w-auto"
-      title={t('title')}
+      title={t("title")}
       isAllowSubmit={isAllowSubmit}
       onConfirm={handleConfirm}
       {...props}
