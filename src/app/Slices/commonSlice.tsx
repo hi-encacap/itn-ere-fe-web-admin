@@ -25,6 +25,7 @@ export const commonSlice = createSlice({
       }
 
       state.user = action.payload;
+      return state;
     },
     clearUser: (state) => {
       state.user = null;

@@ -8,7 +8,7 @@ const CategoryParentSelectorOption = ({ data }: CategoryParentSelectorOptionProp
   return (
     <div className="flex items-center justify-start">
       {data.name}
-      {!!data.parent && <CategoryParentSelectorOption data={data.parent as ICategory} />}
+      {Boolean(data.parent) && <CategoryParentSelectorOption data={data.parent as ICategory} />}
     </div>
   );
 };
