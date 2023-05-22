@@ -8,7 +8,7 @@ export type ContentWrapperHeaderActionType = Record<string, unknown>;
 
 export interface SelectOptionItemType {
   value: string | number;
-  label: string;
+  label: string | JSX.Element;
   disabled?: boolean;
 }
 

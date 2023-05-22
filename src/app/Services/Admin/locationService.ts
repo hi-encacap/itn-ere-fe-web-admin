@@ -1,5 +1,5 @@
-import { IBaseListQuery, IResponseWithMeta } from "@encacap-group/types/dist/base";
-import { ILocationDistrict, ILocationProvince } from "@encacap-group/types/dist/re";
+import { IBaseListQuery, IResponseWithMeta } from "@encacap-group/common/dist/base";
+import { ILocationDistrict, ILocationProvince } from "@encacap-group/common/dist/re";
 
 import { ADMIN_LOCATION_API_PATH } from "@constants/apis";
 import {

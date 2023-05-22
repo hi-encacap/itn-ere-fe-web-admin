@@ -9,3 +9,5 @@ export * as estateQuarterService from "./Common/estateQuarterService";
 export * as locationService from "./Common/locationService";
 export * as unitPriceService from "./Common/unitPriceService";
 export * as uploadService from "./Common/uploadService";
+export * as rootCategoryService from "./Root/categoryService";
+export * as rootWebsiteService from "./Root/websiteService";

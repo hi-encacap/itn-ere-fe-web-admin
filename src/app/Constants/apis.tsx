@@ -8,8 +8,13 @@ const AUTHENTICATION_API_PATH = {
 
 const ADMIN_CATEGORY_API_PATH = {
   CATEGORIES_PATH: "v1/admin/categories",
-  CATEGORY_PATH: (id: number) => `v1/admin/categories/${id}`,
+  CATEGORY_PATH: (id: Key) => `v1/admin/categories/${id}`,
   DELETE_CATEGORY_PATH: (id: number) => `v1/admin/categories/${id}`,
+};
+
+const ROOT_CATEGORY_API_PATH = {
+  CATEGORIES_PATH: "v1/root/categories",
+  CATEGORY_PATH: (id: Key) => `v1/root/categories/${id}`,
 };
 
 const ADMIN_CATEGORY_GROUP_API_PATH = {
@@ -65,6 +70,11 @@ const ESTATE_QUARTER_API_PATH = {
   ESTATE_QUARTERS_PATH: "v1/estates/estate-quarters",
 };
 
+const ROOT_WEBSITE_API_PATH = {
+  WEBSITES_PATH: "v1/root/websites",
+  WEBSITE_PATH: (id: Key) => `v1/root/websites/${id}`,
+};
+
 export {
   ADMIN_CATEGORY_API_PATH,
   ADMIN_CATEGORY_GROUP_API_PATH,
@@ -75,6 +85,8 @@ export {
   AUTHENTICATION_API_PATH,
   ESTATE_QUARTER_API_PATH,
   LOCATION_API_PATH,
+  ROOT_CATEGORY_API_PATH,
+  ROOT_WEBSITE_API_PATH,
   UNIT_PRICE_API_PATH,
   UPLOAD_API_PATH,
 };

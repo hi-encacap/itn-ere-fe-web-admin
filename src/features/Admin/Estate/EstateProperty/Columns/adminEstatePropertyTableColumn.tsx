@@ -1,4 +1,4 @@
-import { IEstateProperty } from "@encacap-group/types/dist/re";
+import { IEstateProperty } from "@encacap-group/common/dist/re";
 import { createColumnHelper } from "@tanstack/react-table";
 import { TFunction } from "i18next";
 
@@ -26,7 +26,7 @@ const createEstatePropertyTableColumns = (t: TFunction, { onClickDelete, onClick
       id: "name",
       header: String(t("table.column.name")),
     }),
-    columnHelper.accessor((row) => row.category.name, {
+    columnHelper.accessor((row) => row.categoryProperty.category.name, {
       id: "categoryName",
       header: String(t("table.column.categoryName")),
       meta: {

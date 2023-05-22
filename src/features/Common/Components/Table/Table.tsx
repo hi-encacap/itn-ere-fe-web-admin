@@ -1,4 +1,4 @@
-import { IBaseListQuery } from "@encacap-group/types/dist/base";
+import { IBaseListQuery } from "@encacap-group/common/dist/base";
 import {
   ColumnDef,
   getCoreRowModel,
@@ -54,7 +54,8 @@ export interface CustomTableBodyProps<TData = TableDataType> {
 
 export interface TableProps<TData = TableDataType> {
   data: TData[];
-  columns: Array<ColumnDef<TData>>;
+  columns: Array<ColumnDef<TData, unknown>>;
+  hiddenColumns?: Array<keyof TData | boolean>;
   pagination?: TablePaginationType;
   sorting?: SortingState;
   isLoading?: boolean;
@@ -71,6 +72,7 @@ export interface TableProps<TData = TableDataType> {
 const Table = ({
   data,
   columns: columnsProp,
+  hiddenColumns = [],
   pagination,
   sorting,
   isLoading = false,
@@ -110,6 +112,9 @@ const Table = ({
       },
       sorting,
       rowSelection,
+      columnVisibility: hiddenColumns
+        .filter((column) => typeof column === "string" && !column.startsWith("_"))
+        .reduce((acc, column) => ({ ...acc, [String(column)]: false }), {}),
     },
     getCoreRowModel: getCoreRowModel(),
     manualSorting: true,

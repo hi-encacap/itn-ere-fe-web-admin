@@ -1,5 +1,5 @@
-import { IBaseListQuery } from "@encacap-group/types/dist/base";
-import { ILocationDistrict, ILocationProvince, ILocationWard } from "@encacap-group/types/dist/re";
+import { IBaseListQuery } from "@encacap-group/common/dist/base";
+import { ILocationDistrict, ILocationProvince, ILocationWard } from "@encacap-group/common/dist/re";
 
 export interface LocationProvinceWebsiteDataType {
   provinceCode: string;

@@ -1,4 +1,4 @@
-import { ESTATE_STATUS_ENUM } from "@encacap-group/types/dist/re";
+import { ESTATE_STATUS_ENUM } from "@encacap-group/common/dist/re";
 import { AxiosError } from "axios";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";

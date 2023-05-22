@@ -5,7 +5,7 @@ import RootRoutes from "src/features/Root/Routes/RootRoutes";
 import { USER_ROLE_ENUM } from "@constants/enums";
 import { AUTHENTICATION_PATH, ERROR_PATH } from "@constants/urls";
 import { authService } from "@services/index";
-import { setUser } from "@slices/userSlice";
+import { setUser } from "@slices/commonSlice";
 
 import { LoadingOverlay } from "@components/Loading";
 
@@ -22,7 +22,7 @@ import PrivateRoutes from "./PrivateRoutes";
 const CommonRoutes = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.common.user);
   const location = useLocation();
 
   const excludeRedirectPaths = ["error/*", "auth/*"];
@@ -33,7 +33,7 @@ const CommonRoutes = () => {
   const navigate = useNavigate();
 
   useLayoutEffect(() => {
-    if (user.id) {
+    if (user?.id) {
       setIsLoading(false);
       return;
     }

@@ -2,7 +2,7 @@ import {
   DEFAULT_CLOUDFLARE_VARIANT_ENUM,
   ICloudflareImageResponse,
   getImageURL,
-} from "@encacap-group/types/dist/re";
+} from "@encacap-group/common/dist/re";
 import { nanoid } from "@reduxjs/toolkit";
 
 import { FormImageInputDataType } from "@interfaces/Common/elementTypes";

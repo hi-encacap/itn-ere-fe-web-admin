@@ -1,4 +1,4 @@
-import { IEstateQuarter } from "@encacap-group/types/dist/re";
+import { IEstateQuarter } from "@encacap-group/common/dist/re";
 
 import { ESTATE_QUARTER_API_PATH } from "@constants/apis";
 

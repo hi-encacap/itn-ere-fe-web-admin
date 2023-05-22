@@ -1,4 +1,4 @@
-import { ESTATE_STATUS_ENUM, IEstate } from "@encacap-group/types/dist/re";
+import { ESTATE_STATUS_ENUM, IEstate } from "@encacap-group/common/dist/re";
 
 import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
 

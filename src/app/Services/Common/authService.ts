@@ -1,4 +1,4 @@
-import { IREUser } from "@encacap-group/types/dist/re";
+import { IREUser } from "@encacap-group/common/dist/re";
 
 import { AUTHENTICATION_API_PATH } from "@constants/apis";
 import { AuthTokenAndUserDataType, AuthTokensType } from "@interfaces/Common/authTypes";

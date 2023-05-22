@@ -1,4 +1,4 @@
-import { ILocationProvince } from "@encacap-group/types/dist/re";
+import { ILocationProvince } from "@encacap-group/common/dist/re";
 import { createColumnHelper } from "@tanstack/react-table";
 import { TFunction } from "i18next";
 

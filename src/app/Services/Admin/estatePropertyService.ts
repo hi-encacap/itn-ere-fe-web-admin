@@ -1,5 +1,5 @@
-import { IBaseListQuery, IResponseWithMeta } from "@encacap-group/types/dist/base";
-import { IEstateProperty } from "@encacap-group/types/dist/re";
+import { IBaseListQuery, IResponseWithMeta } from "@encacap-group/common/dist/base";
+import { IEstateProperty } from "@encacap-group/common/dist/re";
 import { omit } from "lodash";
 
 import { ADMIN_ESTATE_PROPERTY_API_PATH } from "@constants/apis";

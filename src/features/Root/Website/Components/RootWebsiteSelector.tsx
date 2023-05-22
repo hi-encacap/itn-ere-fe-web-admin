@@ -2,33 +2,31 @@ import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
-import { adminCategoryGroupService } from "@services/index";
+import { rootWebsiteService } from "@services/index";
 
 import { Select } from "@components/Form";
 import { SelectProps } from "@components/Form/Select/Select";
 
-const AdminCategoryGroupSelector = ({
+const RootWebsiteSelector = ({
   ...props
 }: Omit<SelectProps, "options" | "name" | "label" | "placeholder">) => {
-  const { t } = useTranslation("admin", {
-    keyPrefix: "admin:page.category.modal.modification",
-  });
+  const { t } = useTranslation();
 
-  const [categoryGroupOptions, setCategoryGroupOptions] = useState<SelectOptionItemType[]>([]);
+  const [websiteOptions, setWebsiteOptions] = useState<SelectOptionItemType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const getOptions = useCallback(() => {
     setIsLoading(true);
 
-    adminCategoryGroupService
-      .getCategoryGroups()
+    rootWebsiteService
+      .getAllWebsites()
       .then((categoryGroups) => {
         const options = categoryGroups.map((categoryGroup) => ({
-          value: categoryGroup.code,
-          label: t(`form.categoryGroupName.${categoryGroup.code}`),
+          value: categoryGroup.id,
+          label: categoryGroup.name,
         }));
 
-        setCategoryGroupOptions(options);
+        setWebsiteOptions(options);
         setIsLoading(false);
       })
       .catch(() => {
@@ -42,15 +40,15 @@ const AdminCategoryGroupSelector = ({
 
   return (
     <Select
-      name="categoryGroupCode"
-      label={t("form.categoryGroupCode.label")}
-      placeholder={t("form.categoryGroupCode.placeholder")}
+      name="websiteId"
+      label={t("website")}
+      placeholder={t("selectWebsite")}
       className="block"
-      options={categoryGroupOptions}
+      options={websiteOptions}
       disabled={isLoading}
       {...props}
     />
   );
 };
 
-export default AdminCategoryGroupSelector;
+export default RootWebsiteSelector;

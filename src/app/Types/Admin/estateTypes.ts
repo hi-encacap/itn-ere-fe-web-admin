@@ -1,10 +1,11 @@
-import { ESTATE_STATUS_ENUM, IEstate, IEstateProperty } from "@encacap-group/types/dist/re";
+import { ESTATE_STATUS_ENUM, IEstate } from "@encacap-group/common/dist/re";
 
 import { Nullable } from "@interfaces/Common/commonTypes";
 import { FormImageInputDataType } from "@interfaces/Common/elementTypes";
 
-export interface EstatePropertyFormDataType extends Nullable<Partial<IEstateProperty>> {
+export interface EstatePropertyFormDataType {
   categoryId: number | null;
+  name: string | null;
 }
 
 export interface EstateFormDataType

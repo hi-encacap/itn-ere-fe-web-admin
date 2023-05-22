@@ -1,5 +1,5 @@
-import { IResponseWithMeta } from "@encacap-group/types/dist/base";
-import { IUnitPrice } from "@encacap-group/types/dist/re";
+import { IResponseWithMeta } from "@encacap-group/common/dist/base";
+import { IUnitPrice } from "@encacap-group/common/dist/re";
 
 import { UNIT_PRICE_API_PATH } from "@constants/apis";
 import { UnitPriceGetListQueryType } from "@interfaces/Common/unitPriceTypes";

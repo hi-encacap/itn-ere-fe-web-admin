@@ -1,6 +1,7 @@
-import { IBaseListQuery, IResponseWithMeta } from "@encacap-group/types/dist/base";
-import { ICategory } from "@encacap-group/types/dist/re";
+import { IBaseListQuery, IResponseWithMeta } from "@encacap-group/common/dist/base";
+import { ICategory } from "@encacap-group/common/dist/re";
 import { omit } from "lodash";
+import { Key } from "react";
 
 import { ADMIN_CATEGORY_API_PATH } from "@constants/apis";
 import { CategoryFormDataType } from "@interfaces/Admin/categoryTypes";
@@ -31,7 +32,7 @@ const createCategory = async (data: CategoryFormDataType): Promise<ICategory> =>
   return response.data.data;
 };
 
-const updateCategoryByCode = async (id: number, data: CategoryFormDataType): Promise<ICategory> => {
+const updateCategoryByCode = async (id: Key, data: CategoryFormDataType): Promise<ICategory> => {
   const response = await axiosInstance.put(ADMIN_CATEGORY_API_PATH.CATEGORY_PATH(id), {
     thumbnailId: data.thumbnail?.id,
   });
@@ -39,7 +40,7 @@ const updateCategoryByCode = async (id: number, data: CategoryFormDataType): Pro
   return response.data.data;
 };
 
-const deleteCategoryByCode = async (id: number): Promise<void> => {
+const deleteCategoryByCode = async (id: Key): Promise<void> => {
   await axiosInstance.delete(`${ADMIN_CATEGORY_API_PATH.CATEGORIES_PATH}/${id}`);
 };
 

@@ -1,4 +1,4 @@
-import { IEstate } from "@encacap-group/types/dist/re";
+import { IEstate } from "@encacap-group/common/dist/re";
 import { Trans, useTranslation } from "react-i18next";
 
 import Alert from "@components/Alert/Alert";
