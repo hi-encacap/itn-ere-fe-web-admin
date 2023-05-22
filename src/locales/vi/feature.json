@@ -1,0 +1,9 @@
+{
+  "category": {
+    "editSuccess": "Chỉnh sửa danh mục thành công.",
+    "addSuccess": "Thêm danh mục thành công.",
+    "deleteConfirmation": "Bạn có chắc chắn muốn xóa danh mục này?",
+    "deleteSuccess": "Xóa danh mục thành công.",
+    "management": "Quản lý danh mục"
+  }
+}

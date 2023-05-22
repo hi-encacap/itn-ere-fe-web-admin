@@ -1,4 +1,4 @@
-import { IContact } from "@encacap-group/types/dist/re";
+import { IContact } from "@encacap-group/common/dist/re";
 import { useCallback, useEffect, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";

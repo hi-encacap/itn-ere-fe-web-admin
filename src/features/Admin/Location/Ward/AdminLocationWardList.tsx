@@ -1,4 +1,4 @@
-import { IBaseListQuery } from "@encacap-group/types/dist/base";
+import { IBaseListQuery } from "@encacap-group/common/dist/base";
 import { SortingState } from "@tanstack/react-table";
 import { isEqual } from "lodash";
 import { Key, useCallback, useEffect, useLayoutEffect, useState } from "react";

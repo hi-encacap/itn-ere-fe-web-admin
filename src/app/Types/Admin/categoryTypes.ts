@@ -5,4 +5,6 @@ export interface CategoryFormDataType {
   categoryGroupCode: string;
   thumbnail: FormImageInputDataType | null;
   thumbnailId?: string;
+  parentId: number | null;
+  websiteId: number | null;
 }

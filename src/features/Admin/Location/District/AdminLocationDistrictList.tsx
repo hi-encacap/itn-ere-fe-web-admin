@@ -1,5 +1,5 @@
-import { IBaseListQuery } from "@encacap-group/types/dist/base";
-import { ILocationDistrict } from "@encacap-group/types/dist/re";
+import { IBaseListQuery } from "@encacap-group/common/dist/base";
+import { ILocationDistrict } from "@encacap-group/common/dist/re";
 import { SortingState } from "@tanstack/react-table";
 import { isEqual } from "lodash";
 import { Key, useCallback, useEffect, useLayoutEffect, useState } from "react";

@@ -29,9 +29,7 @@ const UncontrolledImageInput = ({
   value,
   onChange,
 }: UncontrolledImageInputProps) => {
-  const { t } = useTranslation("common", {
-    keyPrefix: "common:form.imageInput",
-  });
+  const { t } = useTranslation("common");
   const toast = useToast();
 
   const [images, setImages] = useState<FormImageInputDataType[]>([]);
@@ -57,7 +55,7 @@ const UncontrolledImageInput = ({
           );
         })
         .catch(() => {
-          toast.error(t("error.uploadFailed"));
+          toast.error(t("uploadImageError"));
           setImages((prev) => prev.filter((image) => image.id !== file.id));
         })
         .finally(() => {

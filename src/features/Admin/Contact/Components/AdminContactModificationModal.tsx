@@ -1,5 +1,5 @@
-import { IAxiosError } from "@encacap-group/types/dist/base";
-import { IContact } from "@encacap-group/types/dist/re";
+import { IAxiosError } from "@encacap-group/common/dist/base";
+import { IContact } from "@encacap-group/common/dist/re";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { omit } from "lodash";
 import { useCallback, useEffect, useState } from "react";

@@ -1,4 +1,4 @@
-import { IBaseListQuery } from "@encacap-group/types/dist/base";
+import { IBaseListQuery } from "@encacap-group/common/dist/base";
 import { flexRender, Header } from "@tanstack/react-table";
 import _, { uniqBy } from "lodash";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";

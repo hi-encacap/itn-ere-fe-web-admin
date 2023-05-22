@@ -1,4 +1,4 @@
-import { IAxiosError } from "@encacap-group/types/dist/base";
+import { IAxiosError } from "@encacap-group/common/dist/base";
 import { TFunction } from "i18next";
 import { camelCase, keys, lowerCase } from "lodash";
 import { FieldPath, FieldValues, UseFormSetError, UseFormSetFocus } from "react-hook-form";

@@ -1,4 +1,4 @@
-import { IAxiosError } from "@encacap-group/types/dist/base";
+import { IAxiosError } from "@encacap-group/common/dist/base";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { omit } from "lodash";
 import { useCallback, useState } from "react";

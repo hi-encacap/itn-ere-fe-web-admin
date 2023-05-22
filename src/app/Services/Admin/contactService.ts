@@ -1,5 +1,5 @@
-import { IBaseListQuery } from "@encacap-group/types/dist/base";
-import { IContact } from "@encacap-group/types/dist/re";
+import { IBaseListQuery } from "@encacap-group/common/dist/base";
+import { IContact } from "@encacap-group/common/dist/re";
 import { pick } from "lodash";
 
 import { ADMIN_CONTACT_API_PATH } from "@constants/apis";

@@ -6,6 +6,7 @@ import { ConfirmationModalStatusType } from "@interfaces/Common/elementTypes";
 
 import { Button } from "@components/Form";
 
+import ConfirmationModalTitle from "./ConfirmationModalTitle";
 import Modal, { ModalProps } from "./Modal";
 
 export interface ConfirmationModalProps extends ModalProps {
@@ -82,7 +83,7 @@ const ConfirmationModal = ({
           <FiAlertTriangle size={18} className={iconClassName} />
         </div>
         <div className="text-center sm:ml-6 sm:mr-8 sm:mt-0 sm:text-left">
-          <h3 className="mt-2 text-lg font-semibold leading-6 text-gray-900">{title}</h3>
+          <ConfirmationModalTitle title={title} />
           <div className="mt-4">
             <div className="text whitespace-pre-line text-gray-500">{message}</div>
           </div>

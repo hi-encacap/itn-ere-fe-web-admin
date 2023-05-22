@@ -1,5 +1,5 @@
-import { IBaseListQuery, IResponseWithMeta } from "@encacap-group/types/dist/base";
-import { ESTATE_STATUS_ENUM, IEstate } from "@encacap-group/types/dist/re";
+import { IBaseListQuery, IResponseWithMeta } from "@encacap-group/common/dist/base";
+import { ESTATE_STATUS_ENUM, IEstate } from "@encacap-group/common/dist/re";
 import { omit } from "lodash";
 import { Key } from "react";
 

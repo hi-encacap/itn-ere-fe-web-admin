@@ -1,4 +1,4 @@
-import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, ESTATE_STATUS_ENUM, IEstate } from "@encacap-group/types/dist/re";
+import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, ESTATE_STATUS_ENUM, IEstate } from "@encacap-group/common/dist/re";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AxiosError } from "axios";
 import { useCallback, useEffect, useMemo, useState } from "react";

@@ -1,4 +1,4 @@
-import { ESTATE_STATUS_ENUM } from "@encacap-group/types/dist/re";
+import { ESTATE_STATUS_ENUM } from "@encacap-group/common/dist/re";
 import { ReactNode, useMemo } from "react";
 import { twMerge } from "tailwind-merge";
 

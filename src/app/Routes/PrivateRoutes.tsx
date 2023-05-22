@@ -12,8 +12,8 @@ interface PrivateRoutesProps {
 }
 
 const PrivateRoutes = ({ children, requiredRoles }: PrivateRoutesProps): JSX.Element => {
-  const user = useSelector((state) => state.user);
-  const userRoleSlugs = useMemo(() => user.roles?.map((role) => role.slug) ?? [], [user]);
+  const user = useSelector((state) => state.common.user);
+  const userRoleSlugs = useMemo(() => user?.roles?.map((role) => role.slug) ?? [], [user]);
 
   const hasPermissionToAccess = useMemo(() => {
     if (!requiredRoles) {

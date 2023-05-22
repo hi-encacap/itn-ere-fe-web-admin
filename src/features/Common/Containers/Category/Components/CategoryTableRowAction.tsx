@@ -2,20 +2,16 @@ import { Key } from "react";
 import { FiTrash2 } from "react-icons/fi";
 import { MdEdit } from "react-icons/md";
 
-import { TableRowActionClickHandlerType } from "../../../../app/Types/Common/elementTypes";
-import TableRowAction from "../../../Common/Components/Table/TableRowAction";
+import { TableRowActionClickHandlerType } from "../../../../../app/Types/Common/elementTypes";
+import TableRowAction from "../../../Components/Table/TableRowAction";
 
-interface AdminCategoryTableRowActionsProps {
+interface CategoryTableRowActionProps {
   id: Key;
   onClickEdit: TableRowActionClickHandlerType;
   onClickDelete: TableRowActionClickHandlerType;
 }
 
-const AdminCategoryTableRowActions = ({
-  id,
-  onClickEdit,
-  onClickDelete,
-}: AdminCategoryTableRowActionsProps) => {
+const CategoryTableRowAction = ({ id, onClickEdit, onClickDelete }: CategoryTableRowActionProps) => {
   return (
     <div className="flex items-center justify-end space-x-2">
       <TableRowAction id={id} onClick={onClickEdit}>
@@ -28,4 +24,4 @@ const AdminCategoryTableRowActions = ({
   );
 };
 
-export default AdminCategoryTableRowActions;
+export default CategoryTableRowAction;

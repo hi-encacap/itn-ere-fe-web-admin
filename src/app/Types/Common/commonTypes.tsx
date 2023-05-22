@@ -1,4 +1,6 @@
+import { IBaseListQuery, IResponseWithMeta } from "@encacap-group/common/dist/base";
 import { PaginationState } from "@tanstack/react-table";
+import { Key } from "react";
 import { Control } from "react-hook-form";
 
 export interface TablePaginationType extends Omit<PaginationState, "pageIndex" | "pageSize"> {
@@ -29,3 +31,11 @@ export type Nullable<T> = {
 // #skipcq: JS-0323
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type HookFormControl = Control<any>;
+
+export type ServiceGetManyFunctionType<T> = (query?: IBaseListQuery) => Promise<IResponseWithMeta<T[]>>;
+export type ServiceGetAllFunctionType<T> = (query?: IBaseListQuery) => Promise<T[]>;
+export type ServiceAddFunctionType<T> = (data: T) => Promise<unknown>;
+export type ServiceUpdateFunctionType<T> = (id: Key, data: T) => Promise<unknown>;
+export type ServiceDeleteFunctionType = (id: Key) => Promise<unknown>;
+
+export type TableOnclickFunctionType = (id: Key) => void;

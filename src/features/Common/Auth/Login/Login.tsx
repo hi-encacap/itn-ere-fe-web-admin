@@ -1,4 +1,4 @@
-import { IAxiosError } from "@encacap-group/types/dist/base";
+import { IAxiosError } from "@encacap-group/common/dist/base";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useLayoutEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
@@ -9,7 +9,7 @@ import { AUTH_ERROR_CODES } from "@constants/errors";
 import { ADMIN_PATH } from "@constants/urls";
 import { FormGenericErrorType } from "@interfaces/Common/commonTypes";
 import { authService } from "@services/index";
-import { setUser } from "@slices/userSlice";
+import { setUser } from "@slices/commonSlice";
 
 import Alert from "@components/Alert/Alert";
 import { Button, Input } from "@components/Form";

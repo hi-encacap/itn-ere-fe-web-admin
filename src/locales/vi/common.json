@@ -1,16 +1,38 @@
 {
+  "addCategorySuccess": "Thêm danh mục thành công.",
+  "cancel": "Cancel",
+  "category": "Danh mục",
+  "categoryGroup": "Nhóm danh mục",
+  "categoryGroupRequired": "Nhóm danh mục không được phép để trống.",
+  "categoryManagement": "Quản lý danh mục",
+  "code": "Mã",
+  "confirm": "Confirm",
+  "dashboard": "Bảng điều khiển",
+  "deleteCategory": "Xóa danh mục <span>{{name}}</span>",
+  "deleteCategoryConfirmation": "Bạn có chắc chắn muốn xóa danh mục này?",
+  "deleteCategorySuccess": "Xóa danh mục thành công.",
+  "deleteName": "Xóa <span>{{name}}</span>",
+  "editCategorySuccess": "Chỉnh sửa danh mục thành công.",
+  "error": "Lỗi!",
+  "errorCode": "Mã lỗi",
+  "estate": "Bất động sản",
+  "getError": "Đã xảy ra lỗi khi tải dữ liệu mà bạn cần. Vui lòng thử lại sau.",
+  "name": "Tên",
+  "other": "Khác",
   "page": {
     "auth": {
       "page": {
         "login": {
-          "title": "Đăng nhập",
-          "welcomeBack": "Chào mừng bạn trở lại!",
-          "loginToContinue": "Đăng nhập bằng tài khoản Encacap của bạn để tiếp tục",
+          "errors": {
+            "invalidCredentials": "Email hoặc mật khẩu không chính xác.",
+            "title": "Đăng nhập không thành công!",
+            "unknown": "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại sau."
+          },
           "form": {
             "email": {
+              "invalid": "Địa chỉ email của bạn không hợp lệ.",
               "placeholder": "Email",
-              "required": "Vui lòng nhập địa chỉ email của bạn.",
-              "invalid": "Địa chỉ email của bạn không hợp lệ."
+              "required": "Vui lòng nhập địa chỉ email của bạn."
             },
             "password": {
               "placeholder": "Mật khẩu",
@@ -18,11 +40,9 @@
             },
             "submit": "Đăng nhập"
           },
-          "errors": {
-            "title": "Đăng nhập không thành công!",
-            "invalidCredentials": "Email hoặc mật khẩu không chính xác.",
-            "unknown": "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại sau."
-          }
+          "loginToContinue": "Đăng nhập bằng tài khoản Encacap của bạn để tiếp tục",
+          "title": "Đăng nhập",
+          "welcomeBack": "Chào mừng bạn trở lại!"
         }
       }
     },
@@ -36,38 +56,35 @@
       }
     }
   },
+  "parentCategory": "Danh mục cha",
+  "parentCategoryRequired": "Danh mục cha không được phép để trống.",
+  "performActionError": "Đã xảy ra lỗi khi thực hiện hành động này. Vui lòng thử lại sau.",
+  "pickImage": "Chọn ảnh",
+  "post": "Bài viết",
+  "selectCategoryGroup": "Chọn nhóm danh mục",
+  "selectParentCategory": "Chọn danh mục cha",
+  "selectWebsite": "Chọn website",
+  "success": "Thành công!",
   "table": {
     "header": {
-      "search": {
-        "placeholder": "Tìm kiếm"
-      },
       "filter": {
         "clearSelection": "Xóa lựa chọn",
         "search": {
           "placeholder": "Tìm kiếm"
         }
+      },
+      "search": {
+        "placeholder": "Tìm kiếm"
       }
     },
     "pagination": {
-      "previous": "Previous",
-      "next": "Next",
       "counting": "Hiển thị {{from}} - {{to}} của {{total}}",
-      "emptyData": "Không có dữ liệu"
+      "emptyData": "Không có dữ liệu",
+      "next": "Next",
+      "previous": "Previous"
     }
   },
-  "form": {
-    "imageInput": {
-      "placeholder": "Chọn ảnh",
-      "error": {
-        "uploadFailed": "Tải ảnh lên không thành công"
-      }
-    }
-  },
-  "error": "Lỗi!",
-  "success": "Thành công!",
-  "category": "Danh mục",
-  "dashboard": "Bảng điều khiển",
-  "errorCode": "Mã lỗi",
-  "cancel": "Cancel",
-  "confirm": "Confirm"
+  "uploadImageError": "Tải ảnh lên không thành công",
+  "website": "Website",
+  "websiteRequired": "Website không được phép để trống."
 }

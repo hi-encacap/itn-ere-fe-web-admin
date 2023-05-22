@@ -1,5 +1,5 @@
-import { IBaseListQuery } from "@encacap-group/types/dist/base";
-import { IEstate } from "@encacap-group/types/dist/re";
+import { IBaseListQuery } from "@encacap-group/common/dist/base";
+import { IEstate } from "@encacap-group/common/dist/re";
 import { SortingState, createColumnHelper } from "@tanstack/react-table";
 import { isEqual } from "lodash";
 import { Key, useCallback, useEffect, useMemo, useState } from "react";

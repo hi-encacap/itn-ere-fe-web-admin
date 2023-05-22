@@ -1,5 +1,5 @@
-import { IAxiosError } from "@encacap-group/types/dist/base";
-import { IEstateProperty } from "@encacap-group/types/dist/re";
+import { IAxiosError } from "@encacap-group/common/dist/base";
+import { IEstateProperty } from "@encacap-group/common/dist/re";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { keys, omit, pick } from "lodash";
 import { useCallback, useEffect, useState } from "react";

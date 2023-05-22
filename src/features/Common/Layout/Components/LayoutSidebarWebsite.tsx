@@ -1,10 +1,14 @@
+import { useMemo } from "react";
 import { AiOutlineGlobal } from "react-icons/ai";
 import { MdOpenInNew } from "react-icons/md";
 
 import useSelector from "@hooks/useSelector";
 
 const LayoutSidebarWebsite = () => {
-  const { website } = useSelector((state) => state.user);
+  const user = useSelector((state) => state.common.user);
+  const website = useMemo(() => user?.website, [user]);
+
+  if (!website) return null;
 
   return (
     <div className="group mb-4 flex items-center justify-start space-x-4 border-b-2 border-gray-100 px-4 pb-6">

@@ -43,7 +43,13 @@ const UncontrolledSelect = ({
       return null;
     }
 
-    return selectedOption.label;
+    const { label } = selectedOption;
+
+    if (typeof label === "string") {
+      return label;
+    }
+
+    return label.props.data.name;
   }, [value, options]);
 
   const inputId = useMemo(() => `select_${random(100000, 999999)}`, []);

@@ -1,4 +1,4 @@
-import { ESTATE_STATUS_ENUM, IEstate, getImageURL } from "@encacap-group/types/dist/re";
+import { ESTATE_STATUS_ENUM, IEstate, getImageURL } from "@encacap-group/common/dist/re";
 import dayjs from "dayjs";
 import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";

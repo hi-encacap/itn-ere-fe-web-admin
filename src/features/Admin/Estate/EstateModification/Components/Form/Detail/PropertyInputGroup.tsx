@@ -1,4 +1,4 @@
-import { IEstateProperty } from "@encacap-group/types/dist/re";
+import { IEstateProperty } from "@encacap-group/common/dist/re";
 import { useCallback, useEffect, useState } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
