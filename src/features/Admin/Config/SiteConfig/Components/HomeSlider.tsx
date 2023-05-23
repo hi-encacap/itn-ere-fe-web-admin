@@ -36,8 +36,6 @@ const SiteConfigHomeSlider = ({ data, onChange }: SiteConfigHomeSliderProps) => 
   const handleChangeImage = useCallback(async (images: FormImageInputDataType[]) => {
     setIsSubmitting(true);
 
-    console.log(images);
-
     await onChange(CONFIG_CODE_ENUM.HOMEPAGE_SLIDER_IMAGES, JSON.stringify(images.map((item) => item.id)));
 
     setIsSubmitting(false);
