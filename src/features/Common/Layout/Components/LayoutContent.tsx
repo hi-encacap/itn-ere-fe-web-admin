@@ -8,6 +8,7 @@ interface LayoutContentProps {
   children: React.ReactNode;
   actions?: React.ReactNode;
   defaultSelectedTab?: LayoutContentTabItemType["id"];
+  isBlank?: boolean;
   tabs?: LayoutContentTabItemType[];
   onChangeTab?: (id: LayoutContentTabItemType["id"]) => void;
 }
@@ -16,6 +17,7 @@ const LayoutContent = ({
   title,
   children,
   actions,
+  isBlank = false,
   tabs,
   defaultSelectedTab,
   onChangeTab,
@@ -29,14 +31,17 @@ const LayoutContent = ({
       {tabs?.length && (
         <LayoutContentTab tabs={tabs} defaultTab={defaultSelectedTab} onChangeTab={onChangeTab} />
       )}
-      <div
-        className={twMerge(
-          "relative z-0 rounded-lg border-2 border-gray-100 p-6",
-          tabs?.length && "rounded-t-none",
-        )}
-      >
-        {children}
-      </div>
+      {isBlank && children}
+      {!isBlank && (
+        <div
+          className={twMerge(
+            "relative z-0 rounded-lg border-2 border-gray-100 p-6",
+            tabs?.length && "rounded-t-none",
+          )}
+        >
+          {children}
+        </div>
+      )}
     </div>
   );
 };

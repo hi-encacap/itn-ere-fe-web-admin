@@ -8,7 +8,7 @@ import { LoadingSkeleton } from "@components/Loading";
 
 import AdminEstateDraftDeleteConfirmationModal from "@admin/Estate/Components/AdminEstateDraftDeleteConfirmationModal";
 
-import AdminEstateModificationFormTitle from "../Form/Title";
+import FormGroupTitle from "../../../../../Common/Components/Form/GroupTitle";
 import AdminEstateModificationDraftEmpty from "./Empty";
 import AdminEstateModificationDraftItem from "./Item";
 
@@ -60,7 +60,7 @@ const AdminEstateModificationDraft = () => {
   return (
     <>
       <div>
-        <AdminEstateModificationFormTitle title={t("modification.title.draft")} />
+        <FormGroupTitle title={t("modification.title.draft")} />
         <div className="mt-5">
           {!isLoading && !drafts.length && <AdminEstateModificationDraftEmpty />}
           {!isLoading && Boolean(drafts.length) && (

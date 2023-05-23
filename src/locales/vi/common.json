@@ -86,5 +86,19 @@
   },
   "uploadImageError": "Tải ảnh lên không thành công",
   "website": "Website",
-  "websiteRequired": "Website không được phép để trống."
+  "websiteRequired": "Website không được phép để trống.",
+  "contact": "Danh bạ",
+  "estateList": "Danh sách bất động sản",
+  "estateProperty": "Thuộc tính bất động sản",
+  "location": "Khu vực",
+  "province": "Tỉnh/Thành phố",
+  "district": "Quận/Huyện",
+  "ward": "Xã/Phường/Thị trấn",
+  "addressBook": "Sổ địa chỉ",
+  "config": "Thiết lập",
+  "siteConfig": "Thiết lập trang",
+  "siteConfigManagement": "Quản lý thiết lập trang",
+  "homeSliderImage": "Ảnh trình chiếu trang chủ",
+  "homeSliderImageDescription": "Hình ảnh được sử dụng để trình chiếu ở đầu trang chủ. Chọn từ 4 đến 6 hình tỷ lệ 16:9 để đảm bảo trải nghiệm tốt trên mọi thiết bị.",
+  "updateSiteConfigSuccess": "Cập nhật thiết lập trang thành công."
 }

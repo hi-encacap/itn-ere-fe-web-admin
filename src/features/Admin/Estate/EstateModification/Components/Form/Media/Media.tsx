@@ -6,7 +6,7 @@ import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
 import { Input } from "@components/Form";
 import ImageInput from "@components/Form/ImageInput/ImageInput";
 
-import AdminEstateModificationFormTitle from "../Title";
+import FormGroupTitle from "../../../../../../Common/Components/Form/GroupTitle";
 
 const AdminEstateModificationFormMedia = () => {
   const { t } = useTranslation("admin", {
@@ -17,7 +17,7 @@ const AdminEstateModificationFormMedia = () => {
 
   return (
     <div className="border-gray-100 pt-6">
-      <AdminEstateModificationFormTitle title={t("title")} />
+      <FormGroupTitle title={t("title")} />
       <div className="mt-5 flex flex-col space-y-6 pt-0.5">
         <Input
           name="youtube"

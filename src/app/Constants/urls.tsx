@@ -22,6 +22,9 @@ const ADMIN_PATH = {
   LOCATION_DISTRICT_PATH: "/admin/locations/districts",
   LOCATION_WARD_PATH: "/admin/locations/wards",
   LOCATION_ADDRESS_BOOK_PATH: "/admin/locations/address-books",
+
+  CONFIG_PATH: "/admin/configs",
+  CONFIG_SITE_PATH: "/admin/configs/site",
 };
 
 const ROOT_PATH = {

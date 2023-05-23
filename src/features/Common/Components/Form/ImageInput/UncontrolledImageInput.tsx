@@ -11,19 +11,31 @@ import { convertToImageDataFromFiles } from "@utils/image";
 
 import ImageInputItem from "./ImageInputItem";
 
-export interface UncontrolledImageInputProps extends FormElementBaseProps {
-  value?: FormImageInputDataType | FormImageInputDataType[];
-  isMultiple?: boolean;
+interface BaseUncontrolledImageInputProps extends FormElementBaseProps {
   isRequired?: boolean;
   disabled?: boolean;
-  onChange?: (images: FormImageInputDataType | FormImageInputDataType[]) => void;
 }
+
+interface UncontrolledSingleImageInputProps {
+  isMultiple?: never;
+  value?: FormImageInputDataType;
+  onChange?: (image: FormImageInputDataType) => void;
+}
+
+interface UncontrolledMultipleImageInputProps {
+  isMultiple: true;
+  value?: FormImageInputDataType[];
+  onChange?: (images: FormImageInputDataType[]) => void;
+}
+
+export type UncontrolledImageInputProps = BaseUncontrolledImageInputProps &
+  (UncontrolledMultipleImageInputProps | UncontrolledSingleImageInputProps);
 
 const UncontrolledImageInput = ({
   label,
   error,
   className,
-  isMultiple = false,
+  isMultiple,
   isRequired = false,
   disabled = false,
   value,
@@ -34,47 +46,48 @@ const UncontrolledImageInput = ({
 
   const [images, setImages] = useState<FormImageInputDataType[]>([]);
   const [uploadingImageIds, setUploadingImageIds] = useState<string[]>([]);
+  const [handledImages, setHandledImages] = useState<FormImageInputDataType[]>([]);
 
   const inputId = useMemo(() => `image-input-${random()}`, []);
   const isAllowForceSetImagesRef = useRef(true);
+  const isTouchRef = useRef(false);
 
   const uploadImage = useCallback(
-    (file: FormImageInputDataType) => {
+    async (file: FormImageInputDataType) => {
       if (!file.file) {
-        return;
+        return null;
       }
 
       setUploadingImageIds((prev) => [...prev, file.id]);
 
-      uploadService
-        .uploadImage(file.file)
-        .then((response) => {
-          const newImageId = response.data.id;
-          setImages((prev) =>
-            prev.map((image) => (image.id === file.id ? { ...image, id: newImageId } : image)),
-          );
-        })
-        .catch(() => {
-          toast.error(t("uploadImageError"));
-          setImages((prev) => prev.filter((image) => image.id !== file.id));
-        })
-        .finally(() => {
-          setUploadingImageIds((prev) => prev.filter((id) => id !== file.id));
-        });
+      try {
+        const response = await uploadService.uploadImage(file.file);
+        return response;
+      } catch (error) {
+        toast.error(t("uploadImageError"));
+        return null;
+      } finally {
+        setUploadingImageIds((prev) => prev.filter((id) => id !== file.id));
+      }
     },
     [isMultiple, t, toast],
   );
 
-  const handleChooseImage = useCallback((files: FileList) => {
+  const handleChooseImage = useCallback(async (files: FileList) => {
     const formattedImages = convertToImageDataFromFiles(files);
 
-    formattedImages.forEach((image) => {
-      uploadImage(image);
-    });
     setImages((prev) => [...prev, ...formattedImages]);
+
+    const uploadedImages = await Promise.all(formattedImages.map(uploadImage));
+    const filteredUploadedImages = uploadedImages.filter(Boolean) as FormImageInputDataType[];
+
+    isTouchRef.current = true;
+    setHandledImages((prev) => [...prev, ...filteredUploadedImages]);
   }, []);
 
   const handleRemoveImage = useCallback((id: FormImageInputDataType["id"]) => {
+    isTouchRef.current = true;
+    setHandledImages((prev) => prev.filter((image) => image.id !== id));
     setImages((prev) => prev.filter((image) => image.id !== id));
   }, []);
 
@@ -83,13 +96,26 @@ const UncontrolledImageInput = ({
       return;
     }
 
+    const correctValue = Array.isArray(value) ? value : [value];
+
+    setHandledImages(correctValue);
+    setImages(correctValue);
+
     isAllowForceSetImagesRef.current = false;
-    setImages(Array.isArray(value) ? value : [value]);
   }, [value]);
 
   useEffect(() => {
-    onChange?.(isMultiple ? images : images[0]);
-  }, [images, isMultiple, onChange]);
+    if (!isTouchRef.current) {
+      return;
+    }
+
+    if (isMultiple) {
+      onChange?.(handledImages);
+      return;
+    }
+
+    onChange?.(handledImages[0]);
+  }, [handledImages, isMultiple, onChange]);
 
   return (
     <div>

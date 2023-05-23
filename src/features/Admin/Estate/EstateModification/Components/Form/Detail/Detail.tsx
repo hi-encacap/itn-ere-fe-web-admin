@@ -5,7 +5,7 @@ import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
 
 import AdminCategorySelector from "@admin/Estate/Components/AdminCategorySelector";
 
-import AdminEstateModificationFormTitle from "../Title";
+import FormGroupTitle from "../../../../../../Common/Components/Form/GroupTitle";
 import AdminEstateModificationFormDetailDescription from "./Description";
 import AdminEstateModificationFormDetailPropertyInputGroup from "./PropertyInputGroup";
 import AdminEstateModificationFormDetailQuarterSelector from "./QuarterSelector";
@@ -19,7 +19,7 @@ const AdminEstateModificationFormDetail = () => {
 
   return (
     <div className="border-gray-100 pt-6">
-      <AdminEstateModificationFormTitle title={t("title")} />
+      <FormGroupTitle title={t("title")} />
       <div className="mt-5 grid grid-cols-3 gap-6 pt-0.5">
         <AdminCategorySelector control={control} />
         <AdminEstateModificationFormDetailQuarterSelector />
