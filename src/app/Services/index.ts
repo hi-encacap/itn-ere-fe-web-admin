@@ -1,5 +1,6 @@
 export * as adminCategoryGroupService from "./Admin/categoryGroupService";
 export * as adminCategoryService from "./Admin/categoryService";
+export * as adminConfigService from "./Admin/configService";
 export * as adminContactService from "./Admin/contactService";
 export * as adminEstatePropertyService from "./Admin/estatePropertyService";
 export * as adminEstateService from "./Admin/estateService";

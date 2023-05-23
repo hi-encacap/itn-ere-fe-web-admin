@@ -9,7 +9,7 @@ import { adminContactService } from "@services/index";
 
 import FormElementError from "@components/Form/FormElementError";
 
-import AdminEstateModificationFormTitle from "../Title";
+import FormGroupTitle from "../../../../../../Common/Components/Form/GroupTitle";
 import AdminEstateModificationFormContactDetail from "./ContactDetail";
 import AdminEstateModificationFormContactEmpty from "./ContactEmpty";
 import AdminEstateModificationFormContactPicker from "./ContactPicker";
@@ -72,7 +72,7 @@ const AdminEstateModificationFormContact = () => {
   return (
     <>
       <div className={"border-gray-100 pt-6"}>
-        <AdminEstateModificationFormTitle title={t("title")} />
+        <FormGroupTitle title={t("title")} />
         <div
           className={twMerge(
             "mt-5 flex items-center justify-start space-x-4 rounded-lg border-2 border-gray-100 py-4 pl-4 pr-6 hover:border-gray-200",

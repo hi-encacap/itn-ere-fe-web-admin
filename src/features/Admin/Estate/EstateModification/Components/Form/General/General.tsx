@@ -5,7 +5,7 @@ import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
 
 import { Input } from "@components/Form";
 
-import AdminEstateModificationFormTitle from "../Title";
+import FormGroupTitle from "../../../../../../Common/Components/Form/GroupTitle";
 import AdminEstateModificationFormGeneralAreaInputGroup from "./AreaInputGroup";
 import AdminEstateModificationFormGeneralPriceInputGroup from "./PriceInputGroup";
 
@@ -18,7 +18,7 @@ const AdminEstateModificationFormGeneral = () => {
 
   return (
     <div>
-      <AdminEstateModificationFormTitle title={t("title")} />
+      <FormGroupTitle title={t("title")} />
       <div className="mt-5 grid grid-cols-1 gap-y-6 pt-0.5">
         <Input
           className="block"

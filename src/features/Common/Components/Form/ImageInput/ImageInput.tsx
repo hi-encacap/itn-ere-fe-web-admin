@@ -1,13 +1,12 @@
-import { omit } from "lodash";
 import { useController } from "react-hook-form";
 
 import { HookFormControl } from "@interfaces/Common/commonTypes";
 
 import UncontrolledImageInput, { UncontrolledImageInputProps } from "./UncontrolledImageInput";
 
-export interface InputProps extends UncontrolledImageInputProps {
+export type InputProps = UncontrolledImageInputProps & {
   control?: HookFormControl;
-}
+};
 
 const ImageInput = ({ control, name, ...inputProps }: InputProps) => {
   if (!control) {
@@ -28,7 +27,7 @@ const ImageInput = ({ control, name, ...inputProps }: InputProps) => {
       error={errors[name]?.message as string}
       onChange={onChange}
       {...(!(value === undefined || value === null) && { value })}
-      {...omit(inputProps, ["value", "onChange", "onBlur"])}
+      {...inputProps}
     />
   );
 };

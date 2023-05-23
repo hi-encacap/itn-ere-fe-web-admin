@@ -3,7 +3,10 @@ import { FormImageInputDataType } from "@interfaces/Common/elementTypes";
 
 import axiosInstance from "@utils/Http/axiosInstance";
 
-const uploadImage = async (file: File, id?: FormImageInputDataType["id"]) => {
+const uploadImage = async (
+  file: File,
+  id?: FormImageInputDataType["id"],
+): Promise<FormImageInputDataType> => {
   const formData = new FormData();
 
   formData.append("file", file);
@@ -15,7 +18,7 @@ const uploadImage = async (file: File, id?: FormImageInputDataType["id"]) => {
     },
   });
 
-  return data;
+  return data.data;
 };
 
 export { uploadImage };

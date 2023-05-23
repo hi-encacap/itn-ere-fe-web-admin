@@ -52,6 +52,11 @@ const ADMIN_ESTATE_API_PATH = {
   ESTATE_DRAFT_PATH: (id: Key) => `v1/admin/estate-drafts/${id}`,
 };
 
+const ADMIN_CONFIG_API_PATH = {
+  CONFIGS_PATH: "v1/admin/website-configs",
+  CONFIG_PATH: (id: Key) => `v1/admin/website-configs/${id}`,
+};
+
 const LOCATION_API_PATH = {
   GHN_PROVINCES_PATH: "v1/locations/ghn/provinces",
   GHN_DISTRICTS_PATH: "v1/locations/ghn/districts",
@@ -78,6 +83,7 @@ const ROOT_WEBSITE_API_PATH = {
 export {
   ADMIN_CATEGORY_API_PATH,
   ADMIN_CATEGORY_GROUP_API_PATH,
+  ADMIN_CONFIG_API_PATH,
   ADMIN_CONTACT_API_PATH,
   ADMIN_ESTATE_API_PATH,
   ADMIN_ESTATE_PROPERTY_API_PATH,

@@ -19,7 +19,7 @@ const convertToImageDataFromFiles = (files: FileList): FormImageInputDataType[] 
 
 const generateImageFormData = (
   data: ICloudflareImageResponse,
-  variant = DEFAULT_CLOUDFLARE_VARIANT_ENUM.PUBLIC,
+  variant = DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL,
 ): FormImageInputDataType => {
   return {
     id: data.id ?? nanoid(),
@@ -30,7 +30,7 @@ const generateImageFormData = (
 
 const generateImagesFormData = (
   data: ICloudflareImageResponse[],
-  variant = DEFAULT_CLOUDFLARE_VARIANT_ENUM.PUBLIC,
+  variant = DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL,
 ): FormImageInputDataType[] => {
   return data.map((image) => generateImageFormData(image, variant));
 };

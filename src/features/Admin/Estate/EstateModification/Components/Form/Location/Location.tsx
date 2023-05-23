@@ -10,7 +10,7 @@ import AdminLocationDistrictSelector from "@admin/Components/AdminLocationDistri
 import AdminLocationProvinceSelector from "@admin/Components/AdminLocationProvinceSelector";
 import AdminLocationWardSelector from "@admin/Components/AdminLocationWardSelector";
 
-import AdminEstateModificationFormTitle from "../Title";
+import FormGroupTitle from "../../../../../../Common/Components/Form/GroupTitle";
 
 const AdminEstateModificationFormLocation = () => {
   const { t } = useTranslation("admin", {
@@ -24,7 +24,7 @@ const AdminEstateModificationFormLocation = () => {
 
   return (
     <div className="border-gray-100 pt-6">
-      <AdminEstateModificationFormTitle title={t("title")} />
+      <FormGroupTitle title={t("title")} />
       <div className="mt-5 grid grid-cols-3 gap-6 pt-0.5">
         <AdminLocationProvinceSelector control={control} />
         <AdminLocationDistrictSelector control={control} provinceCode={provinceCode} />
