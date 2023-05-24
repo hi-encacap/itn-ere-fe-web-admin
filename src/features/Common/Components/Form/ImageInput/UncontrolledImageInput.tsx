@@ -49,7 +49,6 @@ const UncontrolledImageInput = ({
   const [handledImages, setHandledImages] = useState<FormImageInputDataType[]>([]);
 
   const inputId = useMemo(() => `image-input-${random()}`, []);
-  const isAllowForceSetImagesRef = useRef(true);
   const isTouchRef = useRef(false);
 
   const uploadImage = useCallback(
@@ -92,7 +91,7 @@ const UncontrolledImageInput = ({
   }, []);
 
   useEffect(() => {
-    if (!isAllowForceSetImagesRef.current || !value) {
+    if (isTouchRef.current || !value) {
       return;
     }
 
@@ -100,8 +99,6 @@ const UncontrolledImageInput = ({
 
     setHandledImages(correctValue);
     setImages(correctValue);
-
-    isAllowForceSetImagesRef.current = false;
   }, [value]);
 
   useEffect(() => {

@@ -11,10 +11,10 @@ const getConfigs = async (): Promise<IConfig[]> => {
   return response.data.data;
 };
 
-const updateConfigByCode = async (code: Key, value: string) => {
+const updateConfigByCode = async (code: Key, data: Omit<Partial<IConfig>, "code">) => {
   const response = await axiosInstance.put(ADMIN_CONFIG_API_PATH.CONFIG_PATH(code), {
     code,
-    value,
+    ...data,
   });
 
   return response.data.data;

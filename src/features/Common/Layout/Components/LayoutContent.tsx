@@ -10,21 +10,25 @@ interface LayoutContentProps {
   defaultSelectedTab?: LayoutContentTabItemType["id"];
   isBlank?: boolean;
   tabs?: LayoutContentTabItemType[];
+  className?: string;
+  headerClassName?: string;
   onChangeTab?: (id: LayoutContentTabItemType["id"]) => void;
 }
 
 const LayoutContent = ({
   title,
   children,
+  className,
   actions,
   isBlank = false,
   tabs,
   defaultSelectedTab,
+  headerClassName,
   onChangeTab,
 }: LayoutContentProps) => {
   return (
-    <div className="px-8">
-      <div className="flex h-18 items-center justify-between">
+    <div className={twMerge("px-8", className)}>
+      <div className={twMerge("flex h-18 items-center justify-between", headerClassName)}>
         <div className="font-semibold">{title}</div>
         {actions}
       </div>
