@@ -1,5 +1,6 @@
 import { useLayoutEffect, useState } from "react";
 import { Route, Routes, matchPath, useLocation, useNavigate } from "react-router-dom";
+import HomeRoutes from "src/features/Home/Routes/HomeRoutes";
 import RootRoutes from "src/features/Root/Routes/RootRoutes";
 
 import { USER_ROLE_ENUM } from "@constants/enums";
@@ -101,6 +102,7 @@ const CommonRoutes = () => {
       />
       <Route path="auth/*" element={<AuthRoutes />} />
       <Route path="error/*" element={<ErrorRoutes />} />
+      <Route path="*" element={<HomeRoutes />} />
     </Routes>
   );
 };

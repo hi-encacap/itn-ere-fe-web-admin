@@ -1,9 +1,9 @@
 import {
+  ACBUILDING_SITE_CONFIG_CODE_ENUM,
   CONFIG_GROUP_ENUM,
   CONFIG_TYPE_ENUM,
   ICloudflareImageResponse,
   IConfig,
-  SITE_CONFIG_CODE_ENUM,
   WEBSITE_DOMAIN_ENUM,
 } from "@encacap-group/common/dist/re";
 import { Key, useCallback, useState } from "react";
@@ -18,12 +18,12 @@ import { generateImagesFormData } from "@utils/image";
 
 import SiteConfigBlockContainer from "./BlockContainer";
 
-interface SiteConfigHomeSliderProps {
+interface SiteConfigHomeIntroduceImageProps {
   data?: IConfig;
   onChange: (code: Key, data: Omit<Partial<IConfig>, "code">) => Promise<void> | undefined;
 }
 
-const SiteConfigHomeSlider = ({ data, onChange }: SiteConfigHomeSliderProps) => {
+const SiteConfigHomeIntroduceImage = ({ data, onChange }: SiteConfigHomeIntroduceImageProps) => {
   const { t } = useTranslation();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -39,7 +39,7 @@ const SiteConfigHomeSlider = ({ data, onChange }: SiteConfigHomeSliderProps) => 
     setIsTouched(false);
     setIsSubmitting(true);
 
-    await onChange(SITE_CONFIG_CODE_ENUM.HOMEPAGE_SLIDER_IMAGE, {
+    await onChange(ACBUILDING_SITE_CONFIG_CODE_ENUM.HOMEPAGE_INTRODUCE_IMAGE, {
       value: JSON.stringify(imageData.map((item) => item.id)),
       group: CONFIG_GROUP_ENUM.SITE,
       type: CONFIG_TYPE_ENUM.IMAGE_ARRAY,
@@ -50,13 +50,13 @@ const SiteConfigHomeSlider = ({ data, onChange }: SiteConfigHomeSliderProps) => 
 
   return (
     <SiteConfigBlockContainer
-      title={t("homeSliderImage")}
-      subtitle={t("homeSliderImageDescription")}
+      title={t("introduceImage")}
+      subtitle={t("introduceImageDescription")}
       isLoading={isSubmitting}
-      websites={[WEBSITE_DOMAIN_ENUM.ACBUILDING_DEV, WEBSITE_DOMAIN_ENUM.BAOLOCRE_DEV]}
+      websites={[WEBSITE_DOMAIN_ENUM.ACBUILDING_DEV]}
     >
       <ImageInput
-        name="homeSlider"
+        name="homeIntroduce"
         className="grid-cols-3 xl:grid-cols-5"
         isMultiple
         value={generateImagesFormData((data?.value as unknown as ICloudflareImageResponse[]) ?? [])}
@@ -74,4 +74,4 @@ const SiteConfigHomeSlider = ({ data, onChange }: SiteConfigHomeSliderProps) => 
   );
 };
 
-export default SiteConfigHomeSlider;
+export default SiteConfigHomeIntroduceImage;
