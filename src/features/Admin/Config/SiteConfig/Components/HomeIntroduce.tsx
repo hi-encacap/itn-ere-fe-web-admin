@@ -30,7 +30,7 @@ const SiteConfigHomeIntroduceImage = ({ data, onChange }: SiteConfigHomeIntroduc
   const [isTouched, setIsTouched] = useState(false);
   const [imageData, setImageData] = useState<FormImageInputDataType[]>([]);
 
-  const handleChangeImage = useCallback(async (images: FormImageInputDataType[]) => {
+  const handleChangeImage = useCallback((images: FormImageInputDataType[]) => {
     setIsTouched(true);
     setImageData(images);
   }, []);

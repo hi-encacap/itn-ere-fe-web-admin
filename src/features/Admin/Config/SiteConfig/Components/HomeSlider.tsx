@@ -30,7 +30,7 @@ const SiteConfigHomeSlider = ({ data, onChange }: SiteConfigHomeSliderProps) => 
   const [isTouched, setIsTouched] = useState(false);
   const [imageData, setImageData] = useState<FormImageInputDataType[]>([]);
 
-  const handleChangeImage = useCallback(async (images: FormImageInputDataType[]) => {
+  const handleChangeImage = useCallback((images: FormImageInputDataType[]) => {
     setIsTouched(true);
     setImageData(images);
   }, []);
