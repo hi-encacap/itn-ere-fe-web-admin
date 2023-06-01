@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 
 import LoadingSpinner from "@components/Loading/LoadingSpinner";
 
-interface AdminEstateModificationPublishingModalStepProps {
+interface PostPublishingModalStepProps {
   completedText?: string;
   error?: string | null;
   isCompleted: boolean;
@@ -15,7 +15,7 @@ interface AdminEstateModificationPublishingModalStepProps {
   onTryAgain?: () => void;
 }
 
-const AdminEstateModificationPublishingModalStep = ({
+const PostPublishingModalStep = ({
   completedText,
   error = null,
   isWorking,
@@ -23,7 +23,7 @@ const AdminEstateModificationPublishingModalStep = ({
   isCompleted,
   text,
   onTryAgain,
-}: AdminEstateModificationPublishingModalStepProps) => {
+}: PostPublishingModalStepProps) => {
   const { t } = useTranslation("admin", {
     keyPrefix: "admin:page.estate.modification.modal.publishing",
   });
@@ -74,4 +74,4 @@ const AdminEstateModificationPublishingModalStep = ({
   );
 };
 
-export default AdminEstateModificationPublishingModalStep;
+export default PostPublishingModalStep;

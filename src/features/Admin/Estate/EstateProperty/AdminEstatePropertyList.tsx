@@ -123,7 +123,7 @@ const AdminEstatePropertyList = () => {
   return (
     <LayoutContent
       title={t("title")}
-      actions={<AdminEstatePropertyHeaderAction onClick={handleClickAddButton} />}
+      action={<AdminEstatePropertyHeaderAction onClick={handleClickAddButton} />}
     >
       <Table
         data={estatePropertyData}

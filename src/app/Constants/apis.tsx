@@ -52,6 +52,16 @@ const ADMIN_ESTATE_API_PATH = {
   ESTATE_DRAFT_PATH: (id: Key) => `v1/admin/estate-drafts/${id}`,
 };
 
+const ADMIN_POST_API_PATH = {
+  POSTS_PATH: "v1/admin/posts",
+  POST_PATH: (id: Key) => `v1/admin/posts/${id}`,
+  POST_UN_PUBLISH_PATH: (id: Key) => `v1/admin/posts/${id}/un-publish`,
+  POST_PUBLISH_PATH: (id: Key) => `v1/admin/posts/${id}/publish`,
+  POST_MOVE_TO_TOP_PATH: (id: Key) => `v1/admin/posts/${id}/up-top`,
+  POST_DRAFTS_PATH: "v1/admin/post-drafts",
+  POST_DRAFT_PATH: (id: Key) => `v1/admin/post-drafts/${id}`,
+};
+
 const ADMIN_CONFIG_API_PATH = {
   CONFIGS_PATH: "v1/admin/website-configs",
   CONFIG_PATH: (id: Key) => `v1/admin/website-configs/${id}`,
@@ -88,6 +98,7 @@ export {
   ADMIN_ESTATE_API_PATH,
   ADMIN_ESTATE_PROPERTY_API_PATH,
   ADMIN_LOCATION_API_PATH,
+  ADMIN_POST_API_PATH,
   AUTHENTICATION_API_PATH,
   ESTATE_QUARTER_API_PATH,
   LOCATION_API_PATH,

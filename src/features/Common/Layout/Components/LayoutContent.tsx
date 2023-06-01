@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 
 import LayoutContentTab from "./LayoutContentTab";
@@ -5,8 +6,8 @@ import { LayoutContentTabItemType } from "./LayoutContentTabItem";
 
 interface LayoutContentProps {
   title: string;
-  children: React.ReactNode;
-  actions?: React.ReactNode;
+  children: ReactNode;
+  action?: ReactNode;
   defaultSelectedTab?: LayoutContentTabItemType["id"];
   isBlank?: boolean;
   tabs?: LayoutContentTabItemType[];
@@ -19,7 +20,7 @@ const LayoutContent = ({
   title,
   children,
   className,
-  actions,
+  action,
   isBlank = false,
   tabs,
   defaultSelectedTab,
@@ -30,7 +31,7 @@ const LayoutContent = ({
     <div className={twMerge("px-8", className)}>
       <div className={twMerge("flex h-18 items-center justify-between", headerClassName)}>
         <div className="font-semibold">{title}</div>
-        {actions}
+        {action}
       </div>
       {tabs?.length && (
         <LayoutContentTab tabs={tabs} defaultTab={defaultSelectedTab} onChangeTab={onChangeTab} />

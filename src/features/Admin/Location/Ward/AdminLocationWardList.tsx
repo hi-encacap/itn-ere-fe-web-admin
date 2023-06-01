@@ -105,7 +105,7 @@ const AdminLocationWardList = () => {
   return (
     <LayoutContent
       title={t("title")}
-      actions={<AdminLocationWardHeaderAction onClick={handleClickAddButton} />}
+      action={<AdminLocationWardHeaderAction onClick={handleClickAddButton} />}
     >
       <Table
         data={wardData}

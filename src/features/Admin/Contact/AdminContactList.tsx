@@ -197,7 +197,7 @@ const AdminContactList = ({
   }
 
   return (
-    <LayoutContent title={t("title")} actions={<AdminContactHeaderAction onClick={handleClickAddButton} />}>
+    <LayoutContent title={t("title")} action={<AdminContactHeaderAction onClick={handleClickAddButton} />}>
       <Table
         data={contactData}
         columns={createContactTableColumns(t, {

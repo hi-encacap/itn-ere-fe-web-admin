@@ -16,7 +16,7 @@ const Input = ({ control, name, ...inputProps }: InputProps) => {
 
   const {
     field: { onChange, onBlur, value, ref },
-    fieldState: { error },
+    formState: { errors },
   } = useController({
     name,
     control,
@@ -28,7 +28,7 @@ const Input = ({ control, name, ...inputProps }: InputProps) => {
       ref={ref}
       onChange={onChange}
       onBlur={onBlur}
-      error={error?.message as string}
+      error={(errors[name]?.message as string) ?? ""}
       {...(value ? { value } : { value: "" })}
       {...omit(inputProps, ["value", "onChange", "onBlur"])}
     />

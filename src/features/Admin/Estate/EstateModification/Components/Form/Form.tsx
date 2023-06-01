@@ -16,7 +16,7 @@ import { generateImageFormData, generateImagesFormData } from "@utils/image";
 
 import { estateFormSchema } from "@admin/Estate/Schemas/estateFormSchema";
 
-import AdminEstateModificationPublishingModal from "../PublishingModal/PublishingModal";
+import PostPublishingModal from "../../../../../Common/Components/Post/PublishingModal/PublishingModal";
 import AdminEstateModificationFormButtonDraft from "./Button/Draft";
 import AdminEstateModificationFormButtonNew from "./Button/New";
 import AdminEstateModificationFormButtonPublished from "./Button/Published";
@@ -26,6 +26,7 @@ import AdminEstateModificationFormDetail from "./Detail/Detail";
 import AdminEstateModificationFormGeneral from "./General/General";
 import AdminEstateModificationFormLocation from "./Location/Location";
 import AdminEstateModificationFormMedia from "./Media/Media";
+import AdminEstateModificationPublishingModalFooter from "./PublishingModalFooter";
 
 interface AdminEstateModificationFormProps {
   id?: number;
@@ -277,9 +278,10 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
           )}
         </div>
       </div>
-      <AdminEstateModificationPublishingModal
+      <PostPublishingModal
         isOpen={isShowPublishingModal}
         data={formData as EstateFormDataType}
+        footer={<AdminEstateModificationPublishingModalFooter />}
         onClose={handleCloseModal}
       />
     </>

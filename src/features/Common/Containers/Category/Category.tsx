@@ -175,7 +175,7 @@ const Category = ({ onGetMany, onCreate, onUpdate, onDelete, onGetAll }: Categor
   return (
     <LayoutContent
       title={t("categoryManagement")}
-      actions={<CategoryHeaderAction onClick={handleClickAddButton} />}
+      action={<CategoryHeaderAction onClick={handleClickAddButton} />}
     >
       <CategoryTable
         data={categoryData}

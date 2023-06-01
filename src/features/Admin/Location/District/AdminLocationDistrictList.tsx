@@ -105,7 +105,7 @@ const AdminLocationDistrictList = () => {
   return (
     <LayoutContent
       title={t("title")}
-      actions={<AdminLocationDistrictHeaderAction onClick={handleClickAddButton} />}
+      action={<AdminLocationDistrictHeaderAction onClick={handleClickAddButton} />}
     >
       <Table
         data={districtData}

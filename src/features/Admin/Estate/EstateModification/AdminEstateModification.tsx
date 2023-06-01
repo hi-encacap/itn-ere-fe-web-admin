@@ -23,7 +23,7 @@ const AdminEstateModification = ({ id }: AdminEstateModificationProps) => {
   }, [t]);
 
   return (
-    <LayoutContent title={t("title.create")} actions={<AdminEstateModificationHeaderAction />}>
+    <LayoutContent title={t("title.create")} action={<AdminEstateModificationHeaderAction />}>
       <div className="grid grid-cols-6 gap-6">
         <AdminEstateModificationForm id={id} />
         <div className="col-span-2 -my-6 border-l-2 border-gray-100 py-6 pl-6">
