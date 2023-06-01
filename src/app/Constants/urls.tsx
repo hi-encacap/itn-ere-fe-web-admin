@@ -11,6 +11,11 @@ const ADMIN_PATH = {
   CATEGORY_PATH: "/admin/categories",
   CONTACT_PATH: "/admin/contacts",
 
+  POST_PATH: "/admin/posts",
+  POST_CREATE_PATH: "/admin/posts/add",
+  POST_MODIFICATION_PATH: (id: number, status = ESTATE_STATUS_ENUM.DRAFT) =>
+    `/admin/posts/modify?id=${id}&status=${status}`,
+
   ESTATE_PATH: "/admin/estates",
   ESTATE_CREATE_PATH: "/admin/estates?action=create",
   ESTATE_PROPERTY_PATH: "/admin/estates/properties",

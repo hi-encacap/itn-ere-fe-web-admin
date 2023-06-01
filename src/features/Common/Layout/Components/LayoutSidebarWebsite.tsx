@@ -16,7 +16,7 @@ const LayoutSidebarWebsite = () => {
       <div className="flex-1 space-y-0.5">
         <div className="break-all font-semibold line-clamp-1">{website.name}</div>
         <a
-          href={website.url}
+          href={`https://www.${website.url}`}
           className="relative block break-all text-sm duration-100 line-clamp-1 group-hover:underline"
           target="_blank"
           rel="noreferrer"

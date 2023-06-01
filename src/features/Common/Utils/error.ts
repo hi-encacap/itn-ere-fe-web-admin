@@ -1,4 +1,4 @@
-import { IAxiosError } from "@encacap-group/common/dist/base";
+import { isAxiosError } from "axios";
 import { TFunction } from "i18next";
 import { camelCase, keys, lowerCase } from "lodash";
 import { FieldPath, FieldValues, UseFormSetError, UseFormSetFocus } from "react-hook-form";
@@ -6,7 +6,7 @@ import { FieldPath, FieldValues, UseFormSetError, UseFormSetFocus } from "react-
 type FormatMessageFunction = (key: string, message: string) => string;
 
 interface SetFormErrorParam<T extends FieldValues> {
-  error: IAxiosError;
+  error: unknown;
   setError: UseFormSetError<T>;
   formatMessage?: FormatMessageFunction;
   otherwise?: () => void;
@@ -27,6 +27,11 @@ const setFormError = <T extends FieldValues>({
   otherwise,
   getField,
 }: SetFormErrorParam<T>) => {
+  if (!isAxiosError(error)) {
+    otherwise?.();
+    return;
+  }
+
   const { response } = error;
 
   if (!response) {

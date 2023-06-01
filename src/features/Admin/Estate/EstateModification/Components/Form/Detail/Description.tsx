@@ -1,23 +1,17 @@
-import { useCallback, useState } from "react";
+import { useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
-import AdminEstateModificationFormDetailDescriptionEditor from "./DescriptionEditor";
+import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
+
+import Editor from "@components/Form/Editor/Editor";
 
 const AdminEstateModificationFormDetailDescription = () => {
-  const [isFocusing, setIsFocusing] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleInitialized = useCallback(() => {
-    setIsLoading(false);
-  }, []);
+  const { t } = useTranslation();
+  const { control } = useFormContext<EstateFormDataType>();
 
   return (
     <div className="mt-6">
-      <AdminEstateModificationFormDetailDescriptionEditor
-        isFocusing={isFocusing}
-        isLoading={isLoading}
-        onFocusing={setIsFocusing}
-        onInitialized={handleInitialized}
-      />
+      <Editor control={control} name="description" label={t("content")} />
     </div>
   );
 };

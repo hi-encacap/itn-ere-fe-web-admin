@@ -19,6 +19,7 @@ module.exports = {
   },
   devServer: {
     port: process.env.RE_DASH_APP_PORT,
+    host: process.env.RE_DASH_APP_HOST,
     client: {
       webSocketURL: `wss://${process.env.RE_DASH_APP_HOST}/ws`,
     },

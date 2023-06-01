@@ -31,7 +31,7 @@ const SelectOptionDropdownItem = ({
     <div
       className={twMerge(
         "px-4 py-2 hover:bg-gray-100",
-        isSelected && "bg-teal-500 text-white hover:bg-teal-500",
+        isSelected && "encacap-select-option-selected bg-teal-500 text-white hover:bg-teal-500",
       )}
       tabIndex={-1}
       role="button"

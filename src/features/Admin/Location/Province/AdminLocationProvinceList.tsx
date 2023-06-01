@@ -105,7 +105,7 @@ const AdminLocationProvinceList = () => {
   return (
     <LayoutContent
       title={t("title")}
-      actions={<AdminLocationProvinceHeaderAction onClick={handleClickAddButton} />}
+      action={<AdminLocationProvinceHeaderAction onClick={handleClickAddButton} />}
     >
       <Table
         data={provinceData}

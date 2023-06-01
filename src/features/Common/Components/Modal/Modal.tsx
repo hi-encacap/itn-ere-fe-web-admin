@@ -6,17 +6,20 @@ import { twMerge } from "tailwind-merge";
 
 import { Button } from "@components/Form";
 
-export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, "onSubmit"> {
-  contentContainerClassName?: string;
-  footer?: ReactNode;
+export interface BaseModalProps {
   isOpen: boolean;
-  isShowHeader?: boolean;
-  isShowFooter?: boolean;
-  isAllowSubmit?: boolean;
-  isLoading?: boolean;
-  title?: string;
   onClose: () => void;
   onConfirm?: () => void;
+}
+
+export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, "onSubmit">, BaseModalProps {
+  contentContainerClassName?: string;
+  footer?: ReactNode;
+  isAllowSubmit?: boolean;
+  isShowHeader?: boolean;
+  isShowFooter?: boolean;
+  isLoading?: boolean;
+  title?: string;
 }
 
 const Modal = (
@@ -73,7 +76,7 @@ const Modal = (
           as="div"
           className={twMerge(
             className,
-            "scroll-hidden fixed inset-0 z-50 flex justify-center overflow-y-auto py-6",
+            "scroll-hidden fixed inset-0 z-[9999] flex justify-center overflow-y-auto py-6",
           )}
           initialFocus={cancelButtonRef}
           onClose={onClose}

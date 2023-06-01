@@ -98,7 +98,7 @@ const AdminEstateList = () => {
   return (
     <LayoutContent
       title={t("list.title")}
-      actions={<AdminEstateListHeaderAction />}
+      action={<AdminEstateListHeaderAction />}
       tabs={tabItems}
       defaultSelectedTab={selectedTabIdParam}
       onChangeTab={handleChangeTab}

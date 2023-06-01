@@ -52,7 +52,7 @@ const SiteConfigContactInformation = ({ data, onChange }: SiteConfigContactInfor
       return;
     }
 
-    reset(JSON.parse(data.value));
+    reset(data.value as unknown as Record<string, string>);
   }, [data]);
 
   return (

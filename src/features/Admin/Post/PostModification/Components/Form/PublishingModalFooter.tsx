@@ -6,48 +6,46 @@ import { ADMIN_PATH } from "@constants/urls";
 
 import { Button } from "@components/Form";
 
-interface AdminEstateModificationPublishingModalFooterProps {
-  isDisabled: boolean;
+interface AdminPostModificationPublishingModalFooterProps {
+  isDisabled?: boolean;
   isAllowClose?: boolean;
-  onClickClose: () => void;
+  onClickClose?: () => void;
 }
 
-const AdminEstateModificationPublishingModalFooter = ({
-  isDisabled,
+const AdminPostModificationPublishingModalFooter = ({
+  isDisabled = true,
   isAllowClose,
   onClickClose,
-}: AdminEstateModificationPublishingModalFooterProps) => {
-  const { t } = useTranslation("admin", {
-    keyPrefix: "admin:page.estate.modification.modal.publishing",
-  });
+}: AdminPostModificationPublishingModalFooterProps) => {
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
   const handleClickGoToManageEstate = useCallback(() => {
-    navigate(ADMIN_PATH.ESTATE_PATH);
+    navigate(ADMIN_PATH.POST_PATH);
   }, [navigate]);
 
   const handleClickViewEstate = useCallback(() => {
-    navigate(ADMIN_PATH.ESTATE_PATH);
+    navigate(ADMIN_PATH.POST_PATH);
   }, [navigate]);
 
   return (
     <div className="flex flex-1 items-center justify-between space-x-6">
       {isAllowClose && (
         <Button size="sm" color="light" onClick={onClickClose}>
-          {t("action.close")}
+          {t("close")}
         </Button>
       )}
       <div className="flex flex-1 items-center justify-end space-x-6">
         <Button size="sm" color="light" disabled={isDisabled} onClick={handleClickViewEstate}>
-          {t("action.goToManageEstate")}
+          {t("postManagement")}
         </Button>
         <Button className="px-12" size="sm" disabled={isDisabled} onClick={handleClickGoToManageEstate}>
-          {t("action.viewEstate")}
+          {t("viewPost")}
         </Button>
       </div>
     </div>
   );
 };
 
-export default AdminEstateModificationPublishingModalFooter;
+export default AdminPostModificationPublishingModalFooter;

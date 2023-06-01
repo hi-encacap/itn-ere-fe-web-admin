@@ -9,6 +9,7 @@ import { uploadService } from "@services/index";
 import useToast from "@hooks/useToast";
 import { convertToImageDataFromFiles } from "@utils/image";
 
+import FormElementLabel from "../FormElementLabel";
 import ImageInputItem from "./ImageInputItem";
 
 interface BaseUncontrolledImageInputProps extends FormElementBaseProps {
@@ -116,18 +117,7 @@ const UncontrolledImageInput = ({
 
   return (
     <div>
-      {label && (
-        <label
-          htmlFor={inputId}
-          className={twMerge(
-            "relative mb-2 -mt-2 flex items-center text-sm text-stone-700",
-            error && "text-red-500",
-          )}
-        >
-          {label}
-          {isRequired && <div className="ml-1 text-red-500">*</div>}
-        </label>
-      )}
+      {label && <FormElementLabel label={label} id={inputId} isRequired={isRequired} error={error} />}
       <div className={twMerge("grid grid-cols-4 gap-4", className)}>
         {images.map((image) => (
           <ImageInputItem

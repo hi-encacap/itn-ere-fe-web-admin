@@ -4,7 +4,7 @@ import { BiCategory } from "react-icons/bi";
 import { FiMapPin, FiUsers } from "react-icons/fi";
 import { HiOutlineMap } from "react-icons/hi";
 import { MdDisplaySettings, MdOutlineHomeWork, MdOutlineRealEstateAgent } from "react-icons/md";
-import { TbListDetails, TbMap2 } from "react-icons/tb";
+import { TbListDetails, TbMap2, TbNews } from "react-icons/tb";
 
 import { ADMIN_PATH } from "@constants/urls";
 import { SidebarItemType } from "@interfaces/Common/commonTypes";
@@ -34,6 +34,12 @@ const AdminSidebar = () => {
       icon: <FiUsers size={20} />,
       label: t("contact"),
       to: ADMIN_PATH.CONTACT_PATH,
+    },
+    {
+      key: "post",
+      icon: <TbNews size={20} />,
+      label: t("post"),
+      to: ADMIN_PATH.POST_PATH,
     },
     {
       key: "estate",

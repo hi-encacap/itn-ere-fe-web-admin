@@ -5,6 +5,7 @@ export * as adminContactService from "./Admin/contactService";
 export * as adminEstatePropertyService from "./Admin/estatePropertyService";
 export * as adminEstateService from "./Admin/estateService";
 export * as adminLocationService from "./Admin/locationService";
+export * as adminPostService from "./Admin/postService";
 export * as authService from "./Common/authService";
 export * as estateQuarterService from "./Common/estateQuarterService";
 export * as locationService from "./Common/locationService";

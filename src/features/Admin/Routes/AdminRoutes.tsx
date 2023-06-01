@@ -8,6 +8,7 @@ import AdminContactRoutes from "@admin/Contact/Routes/AdminContactRoutes";
 import AdminDashboard from "@admin/Dashboard/AdminDashboard";
 import EstateRoutes from "@admin/Estate/Routes/EstateRoutes";
 import AdminLocationRoutes from "@admin/Location/Routes/AdminLocationRoutes";
+import AdminPostRoutes from "@admin/Post/Routes/AdminPostRoutes";
 
 const AdminRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AdminRoutes = () => {
         <Route path="/" element={<AdminDashboard />} />
         <Route path="categories/*" element={<AdminCategory />} />
         <Route path="contacts/*" element={<AdminContactRoutes />} />
+        <Route path="posts/*" element={<AdminPostRoutes />} />
         <Route path="estates/*" element={<EstateRoutes />} />
         <Route path="locations/*" element={<AdminLocationRoutes />} />
         <Route path="configs/*" element={<ConfigRoutes />} />
