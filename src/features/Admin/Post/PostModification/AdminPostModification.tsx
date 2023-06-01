@@ -19,7 +19,7 @@ const AdminPostModification = () => {
     <LayoutContent title={t("addPost")} action={<PostModificationHeaderAction />}>
       <div className="grid grid-cols-6 gap-6">
         <AdminPostModificationForm className="col-span-4" />
-        <div className="col-span-2 -my-6 border-l-2 border-gray-100 py-6 pl-6"></div>
+        <div className="col-span-2 -my-6 border-l-2 border-gray-100 py-6 pl-6" />
       </div>
     </LayoutContent>
   );

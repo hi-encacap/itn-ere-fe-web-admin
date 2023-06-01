@@ -47,7 +47,7 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
     setIsShowPublishingModal(false);
   }, []);
 
-  const handleSubmit = useFormSubmit(async (data) => {
+  const handleSubmit = useFormSubmit((data) => {
     setIsSubmitting(true);
     setFormData(data);
     setIsShowPublishingModal(true);
