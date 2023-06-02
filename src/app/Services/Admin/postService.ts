@@ -43,6 +43,12 @@ const createPostDraft = async (data: PostFormDataType): Promise<PostDraftDataTyp
 const getPostDrafts = async (query: IBaseListQuery): Promise<PostDraftDataType[]> => {
   const response = await axiosInstance.get(ADMIN_POST_API_PATH.POST_DRAFTS_PATH, { params: query });
 
+  return response.data;
+};
+
+const deletePostDraftById = async (id: Key): Promise<void> => {
+  const response = await axiosInstance.delete(ADMIN_POST_API_PATH.POST_DRAFT_PATH(id));
+
   return response.data.data;
 };
 
@@ -64,9 +70,17 @@ const movePostToTopById = async (id: Key): Promise<void> => {
   return response.data.data;
 };
 
+const deletePostById = async (id: Key): Promise<void> => {
+  const response = await axiosInstance.delete(ADMIN_POST_API_PATH.POST_PATH(id));
+
+  return response.data.data;
+};
+
 export {
   createPost,
   createPostDraft,
+  deletePostById,
+  deletePostDraftById,
   getPostDrafts,
   getPosts,
   movePostToTopById,

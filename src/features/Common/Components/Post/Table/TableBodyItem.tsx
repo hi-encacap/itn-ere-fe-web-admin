@@ -142,14 +142,10 @@ const PostTableBodyItem = ({
         )}
       </div>
       <div className="flex flex-1 flex-col rounded-b-lg border-2 border-t-0 border-gray-100 px-4 py-4">
-        <div className="mb-2 flex items-center justify-start space-x-2">
-          <PostTableBodyItemBadge
-            status={data.status}
-            title={tEstate(`status.${String(data.status)}`)}
-            postId={data.id}
-          />
-          {data.customId && <PostTableBodyItemBadge title={`#${data.customId}`} postId={data.id} />}
-          {data.category && <PostTableBodyItemBadge title={data.category.name} postId={data.id} />}
+        <div className="flex flex-wrap items-center justify-start">
+          <PostTableBodyItemBadge status={data.status} title={tEstate(`status.${String(data.status)}`)} />
+          {data.customId && <PostTableBodyItemBadge title={`#${data.customId}`} />}
+          {data.category && <PostTableBodyItemBadge title={data.category.name} />}
         </div>
         <div>
           <div className="font-semibold">{data.title}</div>

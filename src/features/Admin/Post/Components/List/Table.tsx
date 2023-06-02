@@ -1,18 +1,18 @@
 import { IBaseListQuery } from "@encacap-group/common/dist/base";
-import { IEstate, IPost } from "@encacap-group/common/dist/re";
+import { IPost } from "@encacap-group/common/dist/re";
 import { SortingState, createColumnHelper } from "@tanstack/react-table";
 import { isEqual } from "lodash";
 import { Key, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
 import { TablePaginationType } from "@interfaces/Common/commonTypes";
 import { ColumnDef, TableColumnFilterState } from "@interfaces/Common/elementTypes";
-import { adminEstateService } from "@services/index";
+import { adminCategoryService, adminEstateService, adminPostService } from "@services/index";
 
 import { ConfirmationModal } from "@components/Modal";
-import PostTableBody from "@components/Post/Table/TableBody";
+import { PostDeleteConfirmationModal, PostTableBody } from "@components/Post";
 import Table from "@components/Table/Table";
 
 import useToast from "@hooks/useToast";
@@ -50,29 +50,24 @@ const AdminPostListTable = ({
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
   const [queryParams, setQueryParams] = useState<IBaseListQuery>({
     ...pagination,
-    tab: ESTATE_LIST_TAB_ENUM.COMPLETED,
   });
   const [isShowUnPublishConfirmModal, setIsShowUnPublishConfirmModal] = useState(false);
   const [isShowPublishConfirmModal, setIsShowPublishConfirmModal] = useState(false);
-  const [, setIsShowDeleteConfirmModal] = useState(false);
+  const [isShowDeleteConfirmModal, setIsShowDeleteConfirmModal] = useState(false);
   const [selectedEstateId, setSelectedEstateId] = useState<Key | null>(null);
-  const [searchParams] = useSearchParams();
 
-  const selectedTabIdParam = useMemo(
-    () => searchParams.get("tab_id") ?? ESTATE_LIST_TAB_ENUM.COMPLETED,
-    [searchParams],
-  );
+  const { tabId = ESTATE_LIST_TAB_ENUM.COMPLETED } = useParams();
 
   const selectedEstate = useMemo(
     () => data.find((estate) => estate.id === selectedEstateId) ?? null,
     [data, selectedEstateId],
   );
 
-  const columnHelper = useMemo(() => createColumnHelper<IEstate>(), []);
+  const columnHelper = useMemo(() => createColumnHelper<IPost>(), []);
 
-  const columns: Array<ColumnDef<IEstate>> = useMemo(
+  const columns: Array<ColumnDef<IPost>> = useMemo(
     () => [
-      columnHelper.accessor((row) => row.ward, {
+      columnHelper.accessor((row) => row.status, {
         id: "status",
         header: String(t("status")),
         meta: {
@@ -81,6 +76,17 @@ const AdminPostListTable = ({
           filterSearchBy: "name",
           getFilterOptions: adminEstateService.getEstateStatuses,
           filterLabelFormatter: (value) => t(value as string),
+        },
+      }),
+      columnHelper.accessor((row) => row.category.name, {
+        id: "status",
+        header: String(t("category")),
+        meta: {
+          filterBy: "categoryIds",
+          filterLabelBy: "name",
+          filterValueBy: "id",
+          filterSearchBy: "name",
+          getFilterOptions: adminCategoryService.getAllCategories,
         },
       }),
     ],
@@ -149,6 +155,7 @@ const AdminPostListTable = ({
     const newQueryParams: IBaseListQuery = {
       ...queryParams,
       ...generateColumnFilterObject(columnFilters),
+      tab: tabId,
     };
 
     if (isEqual(newQueryParams, queryParams)) {
@@ -156,15 +163,7 @@ const AdminPostListTable = ({
     }
 
     setQueryParams(newQueryParams);
-  }, [columnFilters, pagination, queryParams]);
-
-  useEffect(() => {
-    setQueryParams((prevQueryParams) => ({
-      ...prevQueryParams,
-      tab: selectedTabIdParam,
-      page: 1,
-    }));
-  }, [selectedTabIdParam]);
+  }, [columnFilters, pagination, queryParams, tabId]);
 
   useEffect(() => {
     onChangeQueryParams?.(queryParams);
@@ -212,6 +211,14 @@ const AdminPostListTable = ({
         status="danger"
         onClose={handleCloseModal}
         onConfirm={handleConfirmPublish}
+      />
+      <PostDeleteConfirmationModal
+        data={selectedEstate}
+        isOpen={isShowDeleteConfirmModal}
+        onClose={handleCloseModal}
+        onDelete={adminPostService.deletePostById}
+        onDeleteDraft={adminPostService.deletePostDraftById}
+        onSuccess={handleInteraction}
       />
     </>
   );

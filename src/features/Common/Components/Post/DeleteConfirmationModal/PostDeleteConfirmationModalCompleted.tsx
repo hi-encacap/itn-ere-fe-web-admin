@@ -1,28 +1,28 @@
-import { IEstate } from "@encacap-group/common/dist/re";
-import { useCallback } from "react";
+import { IEstate, IPost } from "@encacap-group/common/dist/re";
+import { Key, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-
-import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
-import { adminEstateService } from "@services/index";
 
 import { ConfirmationModal } from "@components/Modal";
 import { ModalProps } from "@components/Modal/Modal";
 
 import useToast from "@hooks/useToast";
 
-import AdminEstateCompletedDeleteConfirmationMessage from "./AdminEstateCompletedDeleteConfirmationMessage";
+import AdminEstateCompletedDeleteConfirmationMessage from "../../../../Admin/Estate/Components/AdminEstateCompletedDeleteConfirmationMessage";
 
-interface AdminEstateCompletedDeleteConfirmationModalProps extends Omit<ModalProps, "title" | "message"> {
-  data: EstateDraftDataType | null;
+interface PostDeleteConfirmationModalCompletedProps
+  extends Omit<ModalProps, "title" | "message" | "onConfirm"> {
+  data: IEstate | IPost | null;
+  onConfirm: (id: Key) => Promise<void>;
   onSuccess: () => void;
 }
 
-const AdminEstateCompletedDeleteConfirmationModal = ({
+const PostDeleteConfirmationModalCompleted = ({
   data,
   onSuccess,
   onClose,
+  onConfirm,
   ...props
-}: AdminEstateCompletedDeleteConfirmationModalProps) => {
+}: PostDeleteConfirmationModalCompletedProps) => {
   const { t } = useTranslation("admin", {
     keyPrefix: "admin:page.estate",
   });
@@ -34,7 +34,7 @@ const AdminEstateCompletedDeleteConfirmationModal = ({
     }
 
     try {
-      await adminEstateService.deleteEstateById(data.id);
+      await onConfirm(data.id);
 
       toast.success(t("list.notification.deletedCompleted"));
 
@@ -44,7 +44,7 @@ const AdminEstateCompletedDeleteConfirmationModal = ({
     } finally {
       onClose();
     }
-  }, [onSuccess, data, toast, t]);
+  }, [onSuccess, onConfirm, data, toast, t]);
 
   return (
     <ConfirmationModal
@@ -59,4 +59,4 @@ const AdminEstateCompletedDeleteConfirmationModal = ({
   );
 };
 
-export default AdminEstateCompletedDeleteConfirmationModal;
+export default PostDeleteConfirmationModalCompleted;

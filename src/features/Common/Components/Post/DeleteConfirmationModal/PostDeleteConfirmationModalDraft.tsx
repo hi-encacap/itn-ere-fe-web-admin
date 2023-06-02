@@ -1,25 +1,27 @@
-import { useCallback } from "react";
+import { Key, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
-import { adminEstateService } from "@services/index";
+import { PostDraftDataType } from "@interfaces/Admin/postTypes";
 
 import { ConfirmationModal } from "@components/Modal";
 import { ModalProps } from "@components/Modal/Modal";
 
 import useToast from "@hooks/useToast";
 
-interface AdminEstateDraftDeleteConfirmationModalProps extends Omit<ModalProps, "title" | "message"> {
-  data: EstateDraftDataType | null;
+interface PostDeleteConfirmationModalDraftProps extends Omit<ModalProps, "title" | "message" | "onConfirm"> {
+  data: EstateDraftDataType | PostDraftDataType | null;
+  onConfirm: (id: Key) => Promise<void>;
   onSuccess: () => void;
 }
 
-const AdminEstateDraftDeleteConfirmationModal = ({
+const PostDeleteConfirmationModalDraft = ({
   data,
   onSuccess,
   onClose,
+  onConfirm,
   ...props
-}: AdminEstateDraftDeleteConfirmationModalProps) => {
+}: PostDeleteConfirmationModalDraftProps) => {
   const { t } = useTranslation("admin", {
     keyPrefix: "admin:page.estate",
   });
@@ -31,7 +33,7 @@ const AdminEstateDraftDeleteConfirmationModal = ({
     }
 
     try {
-      await adminEstateService.deleteEstateDraftById(data.id);
+      await onConfirm(data.id);
 
       toast.success(t("list.notification.deletedDraft"));
 
@@ -41,7 +43,7 @@ const AdminEstateDraftDeleteConfirmationModal = ({
     } finally {
       onClose();
     }
-  }, [onSuccess, data, toast, t]);
+  }, [onSuccess, onConfirm, data, toast, t]);
 
   return (
     <ConfirmationModal
@@ -54,4 +56,4 @@ const AdminEstateDraftDeleteConfirmationModal = ({
   );
 };
 
-export default AdminEstateDraftDeleteConfirmationModal;
+export default PostDeleteConfirmationModalDraft;

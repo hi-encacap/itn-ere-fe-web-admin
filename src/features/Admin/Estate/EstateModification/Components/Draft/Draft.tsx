@@ -5,8 +5,7 @@ import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
 import { adminEstateService } from "@services/index";
 
 import { LoadingSkeleton } from "@components/Loading";
-
-import AdminEstateDraftDeleteConfirmationModal from "@admin/Estate/Components/AdminEstateDraftDeleteConfirmationModal";
+import { PostDeleteConfirmationModalDraft } from "@components/Post";
 
 import FormGroupTitle from "../../../../../Common/Components/Form/GroupTitle";
 import AdminEstateModificationDraftEmpty from "./Empty";
@@ -77,9 +76,10 @@ const AdminEstateModificationDraft = () => {
           {isLoading && <LoadingSkeleton className="h-32" />}
         </div>
       </div>
-      <AdminEstateDraftDeleteConfirmationModal
+      <PostDeleteConfirmationModalDraft
         isOpen={isShowDeleteModal}
         data={selectedDraft}
+        onConfirm={adminEstateService.deleteEstateDraftById}
         onClose={handleCloseModal}
         onSuccess={getData}
       />

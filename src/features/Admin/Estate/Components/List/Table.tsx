@@ -12,6 +12,7 @@ import { ColumnDef, TableColumnFilterState } from "@interfaces/Common/elementTyp
 import { adminEstateService, adminLocationService } from "@services/index";
 
 import { ConfirmationModal } from "@components/Modal";
+import { PostDeleteConfirmationModal } from "@components/Post";
 import Table from "@components/Table/Table";
 
 import useToast from "@hooks/useToast";
@@ -20,7 +21,6 @@ import { generateColumnFilterObject } from "@utils/helpers";
 import { ESTATE_LIST_TAB_ENUM } from "@admin/Estate/Constants/enums";
 
 import PostTableBody from "../../../../Common/Components/Post/Table/TableBody";
-import AdminEstateDeleteConfirmationModal from "../AdminEstateDeleteConfirmationModal";
 
 interface AdminEstateListTableProps {
   data: IEstate[];
@@ -251,9 +251,11 @@ const AdminEstateListTable = ({
         onClose={handleCloseModal}
         onConfirm={handleConfirmPublish}
       />
-      <AdminEstateDeleteConfirmationModal
+      <PostDeleteConfirmationModal
         data={selectedEstate}
         isOpen={isShowDeleteConfirmModal}
+        onDelete={adminEstateService.deleteEstateById}
+        onDeleteDraft={adminEstateService.deleteEstateDraftById}
         onClose={handleCloseModal}
         onSuccess={handleInteraction}
       />

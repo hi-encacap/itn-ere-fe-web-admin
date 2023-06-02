@@ -2,7 +2,7 @@ import { IBaseListQuery } from "@encacap-group/common/dist/base";
 import { ESTATE_STATUS_ENUM, IPost } from "@encacap-group/common/dist/re";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { ADMIN_PATH } from "@constants/urls";
 import { adminPostService } from "@services/index";
@@ -24,6 +24,8 @@ const PostList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [totalRows, setTotalRows] = useState(0);
 
+  const { tabId = ESTATE_LIST_TAB_ENUM.COMPLETED } = useParams();
+
   const tabItems = useMemo<LayoutContentTabItemType[]>(
     () => [
       {
@@ -41,7 +43,7 @@ const PostList = () => {
   const navigate = useNavigate();
 
   const handleChangeTab = useCallback((tabId: string) => {
-    navigate(ADMIN_PATH.POST_TAB_PATH(tabId));
+    navigate(tabId === ESTATE_LIST_TAB_ENUM.DRAFT ? ADMIN_PATH.POST_DRAFT_PATH : ADMIN_PATH.POST_PATH);
   }, []);
 
   const getData = useCallback(async (queryParams: IBaseListQuery) => {
@@ -82,6 +84,7 @@ const PostList = () => {
   return (
     <LayoutContent
       title={t("postManagement")}
+      defaultSelectedTab={tabId}
       action={<PostListHeaderAction />}
       tabs={tabItems}
       onChangeTab={handleChangeTab}

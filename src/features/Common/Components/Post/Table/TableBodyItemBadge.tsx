@@ -1,19 +1,13 @@
 import { ESTATE_STATUS_ENUM } from "@encacap-group/common/dist/re";
 import { useMemo } from "react";
-import { Tooltip } from "react-tooltip";
 import { twMerge } from "tailwind-merge";
-
-import { slugify } from "@utils/helpers";
 
 interface PostTableBodyItemBadgeProps {
   title: string;
-  postId: number;
   status?: ESTATE_STATUS_ENUM;
 }
 
-const PostTableBodyItemBadge = ({ title, postId, status }: PostTableBodyItemBadgeProps) => {
-  const id = useMemo(() => `${slugify(title)}-${postId}`, [title, postId]);
-
+const PostTableBodyItemBadge = ({ title, status }: PostTableBodyItemBadgeProps) => {
   const classNameByStatus = useMemo(() => {
     if (status === ESTATE_STATUS_ENUM.DRAFT) {
       return "bg-gray-100 text-gray-700 hover:bg-gray-200";
@@ -30,16 +24,12 @@ const PostTableBodyItemBadge = ({ title, postId, status }: PostTableBodyItemBadg
     <>
       <div
         className={twMerge(
-          "inline cursor-pointer rounded px-2 pb-0.5 pt-[3px] text-sm duration-100 line-clamp-1",
+          "mr-2 mb-2 inline cursor-pointer rounded px-2 pb-0.5 pt-[3px] text-sm duration-100 last:mr-0",
           classNameByStatus,
         )}
-        data-tooltip-id={id}
-        data-tooltip-place="bottom"
-        data-tooltip-position-strategy="fixed"
       >
         {title}
       </div>
-      <Tooltip id={id}>{title}</Tooltip>
     </>
   );
 };
