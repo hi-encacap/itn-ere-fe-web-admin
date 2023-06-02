@@ -17,7 +17,7 @@ const ConfirmationModalTitle = ({ title: titleProp }: ConfirmationModalTitleProp
           components={{ span: <span className="text-red-500" /> }}
         />
       )}
-      {!key && title}
+      {!title && key}
     </h3>
   );
 };
