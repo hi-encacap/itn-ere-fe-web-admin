@@ -21,16 +21,14 @@ const PostTableBodyItemBadge = ({ title, status }: PostTableBodyItemBadgeProps) 
   }, [status]);
 
   return (
-    <>
-      <div
-        className={twMerge(
-          "mr-2 mb-2 inline cursor-pointer rounded px-2 pb-0.5 pt-[3px] text-sm duration-100 last:mr-0",
-          classNameByStatus,
-        )}
-      >
-        {title}
-      </div>
-    </>
+    <div
+      className={twMerge(
+        "mr-2 mb-2 inline cursor-pointer rounded px-2 pb-0.5 pt-[3px] text-sm duration-100 last:mr-0",
+        classNameByStatus,
+      )}
+    >
+      {title}
+    </div>
   );
 };
 
