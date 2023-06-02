@@ -1476,6 +1476,18 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@floating-ui/core@^1.2.6":
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-1.2.6.tgz#d21ace437cc919cdd8f1640302fa8851e65e75c0"
+  integrity sha512-EvYTiXet5XqweYGClEmpu3BoxmsQ4hkj3QaYA6qEnigCWffTP3vNRwBReTdrwDwo7OoJ3wM8Uoe9Uk4n+d4hfg==
+
+"@floating-ui/dom@^1.0.0":
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/@floating-ui/dom/-/dom-1.2.9.tgz#b9ed1c15d30963419a6736f1b7feb350dd49c603"
+  integrity sha512-sosQxsqgxMNkV3C+3UqTS6LxP7isRLwX8WMepp843Rb3/b0Wz8+MdUkxJksByip3C2WwLugLHN1b4ibn//zKwQ==
+  dependencies:
+    "@floating-ui/core" "^1.2.6"
+
 "@headlessui/react@^1.7.4":
   version "1.7.4"
   resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.7.4.tgz#ba7f50fda20667276ee84fcd4c2a459aa26187e3"
@@ -4135,6 +4147,11 @@ class-utils@^0.3.5:
     define-property "^0.2.5"
     isobject "^3.0.0"
     static-extend "^0.1.1"
+
+classnames@^2.3.0:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
+  integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
 
 clean-css@^5.2.2:
   version "5.3.1"
@@ -10228,6 +10245,14 @@ react-toastify@^9.1.2:
   integrity sha512-PBfzXO5jMGEtdYR5jxrORlNZZe/EuOkwvwKijMatsZZm8IZwLj01YvobeJYNjFcA6uy6CVrx2fzL9GWbhWPTDA==
   dependencies:
     clsx "^1.1.1"
+
+react-tooltip@^5.13.1:
+  version "5.13.1"
+  resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-5.13.1.tgz#d0b64d6c783301fa87248b45c662299a0a1276f9"
+  integrity sha512-9NstDFdjyy6cIH9zjeT70zXTHlW/TIGCOWQmhkAyqLFeQioLg1FXvb9ec7AxSpn0zyFUkFSLdFYxZRuewti3Aw==
+  dependencies:
+    "@floating-ui/dom" "^1.0.0"
+    classnames "^2.3.0"
 
 react@^18.2.0:
   version "18.2.0"

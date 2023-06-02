@@ -12,6 +12,7 @@ const ADMIN_PATH = {
   CONTACT_PATH: "/admin/contacts",
 
   POST_PATH: "/admin/posts",
+  POST_TAB_PATH: (tab: string) => `/admin/posts/${tab}`,
   POST_CREATE_PATH: "/admin/posts/add",
   POST_MODIFICATION_PATH: (id: number, status = ESTATE_STATUS_ENUM.DRAFT) =>
     `/admin/posts/modify?id=${id}&status=${status}`,

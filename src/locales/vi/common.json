@@ -138,5 +138,14 @@
   "viewPost": "Xem bài viết",
   "ward": "Xã/Phường/Thị trấn",
   "website": "Website",
-  "websiteRequired": "Website không được phép để trống."
+  "websiteRequired": "Website không được phép để trống.",
+  "completed": "Đã hoàn thiện",
+  "draft": "Nháp",
+  "unPublishPost": "Huỷ xuất bản bài viết {{title}}",
+  "unPublishPostMessage": "Bạn có chắc muốn huỷ xuất bản bài viết này? Bài viết sẽ bị ẩn khỏi mọi kết quả tìm kiếm. Bạn có thể tiếp tục chỉnh sửa bài viết và xuất bản lại sau.",
+  "publishPost": "Xuất bản bài viết {{title}}",
+  "publishPostMessage": "Bạn có chắc muốn xuất bản bài viết này? Bài viết sẽ hiển thị công khai trên trang và mọi người có thể tìm thấy bài viết này, bằng bất kỳ cách nào.",
+  "status": "Trạng thái",
+  "published": "Đã xuất bản",
+  "unpublished": "Chưa xuất bản"
 }

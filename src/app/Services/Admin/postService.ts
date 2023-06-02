@@ -1,3 +1,4 @@
+import { IBaseListQuery } from "@encacap-group/common/dist/base";
 import { omit } from "lodash";
 import { Key } from "react";
 
@@ -13,6 +14,12 @@ const createPost = async (data: PostFormDataType) => {
   });
 
   return response.data.data;
+};
+
+const getPosts = async (query: IBaseListQuery) => {
+  const response = await axiosInstance.get(ADMIN_POST_API_PATH.POSTS_PATH, { params: query });
+
+  return response.data;
 };
 
 const updatePostById = async (id: number, data: PostFormDataType) => {
@@ -33,10 +40,37 @@ const createPostDraft = async (data: PostFormDataType): Promise<PostDraftDataTyp
   return response.data.data;
 };
 
+const getPostDrafts = async (query: IBaseListQuery): Promise<PostDraftDataType[]> => {
+  const response = await axiosInstance.get(ADMIN_POST_API_PATH.POST_DRAFTS_PATH, { params: query });
+
+  return response.data.data;
+};
+
 const publishPostById = async (id: Key): Promise<void> => {
   const response = await axiosInstance.post(ADMIN_POST_API_PATH.POST_PUBLISH_PATH(id));
 
   return response.data.data;
 };
 
-export { createPost, createPostDraft, publishPostById, updatePostById };
+const unPublishPostById = async (id: Key): Promise<void> => {
+  const response = await axiosInstance.post(ADMIN_POST_API_PATH.POST_UN_PUBLISH_PATH(id));
+
+  return response.data.data;
+};
+
+const movePostToTopById = async (id: Key): Promise<void> => {
+  const response = await axiosInstance.post(ADMIN_POST_API_PATH.POST_MOVE_TO_TOP_PATH(id));
+
+  return response.data.data;
+};
+
+export {
+  createPost,
+  createPostDraft,
+  getPostDrafts,
+  getPosts,
+  movePostToTopById,
+  publishPostById,
+  unPublishPostById,
+  updatePostById,
+};

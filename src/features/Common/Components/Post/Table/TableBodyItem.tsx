@@ -15,13 +15,12 @@ import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
 import DropdownContainerV2 from "@components/Dropdown/DropdownContainerV2";
 import { DropdownMenuItemType } from "@components/Dropdown/DropdownContainerV2MenuItem";
 import { Button } from "@components/Form";
-import LoadingSpinner from "@components/Loading/LoadingSpinner";
 
 import useToast from "@hooks/useToast";
 
-import AdminEstateListTableBodyItemBadge from "./TableBodyItemBadge";
+import PostTableBodyItemBadge from "./TableBodyItemBadge";
 
-interface AdminEstateListTableBodyItemProps {
+interface PostTableBodyItemProps {
   data: IEstate | EstateDraftDataType;
   onClickDelete?: (id: number) => void;
   onMoveToTop?: (id: number) => Promise<void>;
@@ -30,14 +29,14 @@ interface AdminEstateListTableBodyItemProps {
   onInteraction?: () => void;
 }
 
-const AdminEstateListTableBodyItem = ({
+const PostTableBodyItem = ({
   data,
   onClickDelete,
   onMoveToTop,
   onClickUnPublish,
   onClickPublish,
   onInteraction,
-}: AdminEstateListTableBodyItemProps) => {
+}: PostTableBodyItemProps) => {
   const { t } = useTranslation("admin", {
     keyPrefix: "admin:page.estate.list",
   });
@@ -144,16 +143,13 @@ const AdminEstateListTableBodyItem = ({
       </div>
       <div className="flex flex-1 flex-col rounded-b-lg border-2 border-t-0 border-gray-100 px-4 py-4">
         <div className="mb-2 flex items-center justify-start space-x-2">
-          {isLoading && <LoadingSpinner className="h-5 w-5 border-teal-500" />}
-          <AdminEstateListTableBodyItemBadge status={data.status}>
-            {tEstate(`status.${String(data.status)}`)}
-          </AdminEstateListTableBodyItemBadge>
-          {data.customId && (
-            <AdminEstateListTableBodyItemBadge>#{data.customId}</AdminEstateListTableBodyItemBadge>
-          )}
-          {data.category && (
-            <AdminEstateListTableBodyItemBadge>{data.category.name}</AdminEstateListTableBodyItemBadge>
-          )}
+          <PostTableBodyItemBadge
+            status={data.status}
+            title={tEstate(`status.${String(data.status)}`)}
+            postId={data.id}
+          />
+          {data.customId && <PostTableBodyItemBadge title={`#${data.customId}`} postId={data.id} />}
+          {data.category && <PostTableBodyItemBadge title={data.category.name} postId={data.id} />}
         </div>
         <div>
           <div className="font-semibold">{data.title}</div>
@@ -205,4 +201,4 @@ const AdminEstateListTableBodyItem = ({
   );
 };
 
-export default AdminEstateListTableBodyItem;
+export default PostTableBodyItem;

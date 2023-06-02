@@ -1,5 +1,5 @@
 import { IBaseListQuery } from "@encacap-group/common/dist/base";
-import { IEstate } from "@encacap-group/common/dist/re";
+import { IEstate, IPost } from "@encacap-group/common/dist/re";
 import { SortingState, createColumnHelper } from "@tanstack/react-table";
 import { isEqual } from "lodash";
 import { Key, useCallback, useEffect, useMemo, useState } from "react";
@@ -9,9 +9,10 @@ import { useSearchParams } from "react-router-dom";
 import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
 import { TablePaginationType } from "@interfaces/Common/commonTypes";
 import { ColumnDef, TableColumnFilterState } from "@interfaces/Common/elementTypes";
-import { adminEstateService, adminLocationService } from "@services/index";
+import { adminEstateService } from "@services/index";
 
 import { ConfirmationModal } from "@components/Modal";
+import PostTableBody from "@components/Post/Table/TableBody";
 import Table from "@components/Table/Table";
 
 import useToast from "@hooks/useToast";
@@ -19,20 +20,17 @@ import { generateColumnFilterObject } from "@utils/helpers";
 
 import { ESTATE_LIST_TAB_ENUM } from "@admin/Estate/Constants/enums";
 
-import PostTableBody from "../../../../Common/Components/Post/Table/TableBody";
-import AdminEstateDeleteConfirmationModal from "../AdminEstateDeleteConfirmationModal";
-
-interface AdminEstateListTableProps {
-  data: IEstate[];
+interface AdminPostListTableProps {
+  data: IPost[];
   isLoading: boolean;
   totalRows: number;
   onChangeQueryParams?: (queryParams: IBaseListQuery) => void;
-  onMoveToTop: (estateId: Key) => Promise<void>;
-  onPublish: (estateId: Key) => Promise<void>;
-  onUnPublish: (estateId: Key) => Promise<void>;
+  onMoveToTop: (id: Key) => Promise<void>;
+  onPublish: (id: Key) => Promise<void>;
+  onUnPublish: (id: Key) => Promise<void>;
 }
 
-const AdminEstateListTable = ({
+const AdminPostListTable = ({
   data,
   totalRows,
   isLoading,
@@ -40,13 +38,8 @@ const AdminEstateListTable = ({
   onUnPublish,
   onPublish,
   onMoveToTop,
-}: AdminEstateListTableProps) => {
-  const { t } = useTranslation("admin", {
-    keyPrefix: "admin:page.estate.list",
-  });
-  const { t: tEstate } = useTranslation("admin", {
-    keyPrefix: "admin:page.estate",
-  });
+}: AdminPostListTableProps) => {
+  const { t } = useTranslation();
   const toast = useToast();
 
   const [pagination, setPagination] = useState<TablePaginationType>({
@@ -61,7 +54,7 @@ const AdminEstateListTable = ({
   });
   const [isShowUnPublishConfirmModal, setIsShowUnPublishConfirmModal] = useState(false);
   const [isShowPublishConfirmModal, setIsShowPublishConfirmModal] = useState(false);
-  const [isShowDeleteConfirmModal, setIsShowDeleteConfirmModal] = useState(false);
+  const [, setIsShowDeleteConfirmModal] = useState(false);
   const [selectedEstateId, setSelectedEstateId] = useState<Key | null>(null);
   const [searchParams] = useSearchParams();
 
@@ -81,43 +74,13 @@ const AdminEstateListTable = ({
     () => [
       columnHelper.accessor((row) => row.ward, {
         id: "status",
-        header: String(t("table.column.status")),
+        header: String(t("status")),
         meta: {
           filterBy: "statuses",
           filterValueBy: "name",
           filterSearchBy: "name",
           getFilterOptions: adminEstateService.getEstateStatuses,
-          filterLabelFormatter: (value) => tEstate(`status.${value as string}`),
-        },
-      }),
-      columnHelper.accessor((row) => row.province, {
-        id: "province",
-        header: String(t("table.column.province")),
-        meta: {
-          filterBy: "provinceCode",
-          filterValueBy: "name",
-          filterSearchBy: "code",
-          getFilterOptions: adminLocationService.getAllProvinces,
-        },
-      }),
-      columnHelper.accessor((row) => row.district, {
-        id: "district",
-        header: String(t("table.column.district")),
-        meta: {
-          filterBy: "districtCode",
-          filterValueBy: "name",
-          filterSearchBy: "code",
-          getFilterOptions: adminLocationService.getAllDistricts,
-        },
-      }),
-      columnHelper.accessor((row) => row.ward, {
-        id: "ward",
-        header: String(t("table.column.ward")),
-        meta: {
-          filterBy: "wardCode",
-          filterValueBy: "name",
-          filterSearchBy: "code",
-          getFilterOptions: adminLocationService.getAllWards,
+          filterLabelFormatter: (value) => t(value as string),
         },
       }),
     ],
@@ -225,40 +188,33 @@ const AdminEstateListTable = ({
           onInteraction: handleInteraction,
           onClickDelete: handleClickDelete,
         }}
-        // #skipcq: JS-0417
-        renderTableBody={(props) => <PostTableBody {...props} />}
+        renderTableBody={PostTableBody}
         onChangePagination={setPagination}
         onChangeSorting={setColumnSorting}
         onChangeFilters={setColumnFilters}
       />
       <ConfirmationModal
-        title={t("publication.title.unPublish", {
+        title={t("unPublishPost", {
           title: selectedEstate?.title,
         })}
-        message={t("publication.message.unPublish")}
+        message={t("unPublishPostMessage")}
         isOpen={isShowUnPublishConfirmModal}
         status="danger"
         onClose={handleCloseModal}
         onConfirm={handleConfirmUnPublish}
       />
       <ConfirmationModal
-        title={t("publication.title.publish", {
+        title={t("publishPost", {
           title: selectedEstate?.title,
         })}
-        message={t("publication.message.publish")}
+        message={t("publishPostMessage")}
         isOpen={isShowPublishConfirmModal}
         status="danger"
         onClose={handleCloseModal}
         onConfirm={handleConfirmPublish}
       />
-      <AdminEstateDeleteConfirmationModal
-        data={selectedEstate}
-        isOpen={isShowDeleteConfirmModal}
-        onClose={handleCloseModal}
-        onSuccess={handleInteraction}
-      />
     </>
   );
 };
 
-export default AdminEstateListTable;
+export default AdminPostListTable;

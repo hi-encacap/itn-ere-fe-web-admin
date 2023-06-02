@@ -8,6 +8,8 @@ interface ConfirmationModalTitleProps {
 const ConfirmationModalTitle = ({ title: titleProp }: ConfirmationModalTitleProps) => {
   const [key, title] = useMemo(() => titleProp.split("::"), [titleProp]);
 
+  console.log("key", key);
+
   return (
     <h3 className="mt-2 text-lg font-semibold leading-6 text-gray-900">
       {key && title && (
@@ -17,7 +19,7 @@ const ConfirmationModalTitle = ({ title: titleProp }: ConfirmationModalTitleProp
           components={{ span: <span className="text-red-500" /> }}
         />
       )}
-      {!key && title}
+      {!title && key}
     </h3>
   );
 };
