@@ -7,12 +7,9 @@ import { USER_ROLE_ENUM } from "@constants/enums";
 import { AUTHENTICATION_PATH, ERROR_PATH } from "@constants/urls";
 import { authService } from "@services/index";
 import { setUser } from "@slices/commonSlice";
-
 import { LoadingOverlay } from "@components/Loading";
-
 import AuthRoutes from "@common/Auth/Routes/AuthRoutes";
 import ErrorRoutes from "@common/Errors/Routes/ErrorRoutes";
-
 import useDispatch from "@hooks/useDispatch";
 import useSelector from "@hooks/useSelector";
 

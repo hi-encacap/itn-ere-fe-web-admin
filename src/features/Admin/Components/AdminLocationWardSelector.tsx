@@ -4,9 +4,7 @@ import { useTranslation } from "react-i18next";
 import { HookFormControl } from "@interfaces/Common/commonTypes";
 import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
 import { adminLocationService } from "@services/index";
-
 import { Select } from "@components/Form";
-
 import { commonFormErrorFactory } from "@utils/error";
 
 interface AdminLocationWardSelectorProps {

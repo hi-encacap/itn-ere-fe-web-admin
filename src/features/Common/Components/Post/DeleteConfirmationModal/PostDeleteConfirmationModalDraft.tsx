@@ -3,10 +3,8 @@ import { useTranslation } from "react-i18next";
 
 import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
 import { PostDraftDataType } from "@interfaces/Admin/postTypes";
-
 import { ConfirmationModal } from "@components/Modal";
 import { ModalProps } from "@components/Modal/Modal";
-
 import useToast from "@hooks/useToast";
 
 interface PostDeleteConfirmationModalDraftProps extends Omit<ModalProps, "title" | "message" | "onConfirm"> {

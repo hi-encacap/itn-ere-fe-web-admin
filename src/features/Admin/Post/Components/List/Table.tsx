@@ -10,11 +10,9 @@ import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
 import { TablePaginationType } from "@interfaces/Common/commonTypes";
 import { ColumnDef, TableColumnFilterState } from "@interfaces/Common/elementTypes";
 import { adminCategoryService, adminEstateService, adminPostService } from "@services/index";
-
 import { ConfirmationModal } from "@components/Modal";
 import { PostDeleteConfirmationModal, PostTableBody } from "@components/Post";
 import Table from "@components/Table/Table";
-
 import useToast from "@hooks/useToast";
 import { generateColumnFilterObject } from "@utils/helpers";
 
@@ -79,7 +77,7 @@ const AdminPostListTable = ({
         },
       }),
       columnHelper.accessor((row) => row.category.name, {
-        id: "status",
+        id: "category",
         header: String(t("category")),
         meta: {
           filterBy: "categoryIds",
@@ -126,10 +124,10 @@ const AdminPostListTable = ({
 
     try {
       await onUnPublish(selectedEstateId);
-      toast.success(t("notification.unPublished"));
+      toast.success(t("unPublishSuccess"));
       onChangeQueryParams?.(queryParams);
     } catch (error) {
-      toast.error(t("notification.unPublishFailed"));
+      toast.error(t("unPublishError"));
     } finally {
       handleCloseModal();
     }
@@ -142,10 +140,10 @@ const AdminPostListTable = ({
 
     try {
       await onPublish(selectedEstateId);
-      toast.success(t("notification.published"));
+      toast.success(t("publishSuccess"));
       onChangeQueryParams?.(queryParams);
     } catch (error) {
-      toast.error(t("notification.publishFailed"));
+      toast.error(t("publishError"));
     } finally {
       handleCloseModal();
     }

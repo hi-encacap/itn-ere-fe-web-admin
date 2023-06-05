@@ -1,5 +1,4 @@
 import { LOCATION_API_PATH } from "@constants/apis";
-
 import axiosInstance from "@utils/Http/axiosInstance";
 
 const getGHNProvinces = async (): Promise<Array<Record<"ghnRefId" | "name", unknown>>> => {

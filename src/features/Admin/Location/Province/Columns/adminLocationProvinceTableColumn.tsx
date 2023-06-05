@@ -3,7 +3,6 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { TFunction } from "i18next";
 
 import { ColumnDef, TableRowActionClickHandlerType } from "@interfaces/Common/elementTypes";
-
 import TableRowActionSkeleton from "@components/Table/TableRowActionSkeleton";
 
 import AdminLocationProvinceTableRowActions from "../Components/AdminLocationProvinceTableRowActions";

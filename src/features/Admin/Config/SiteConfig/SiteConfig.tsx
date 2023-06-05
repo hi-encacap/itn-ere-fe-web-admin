@@ -7,9 +7,7 @@ import { Key, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { adminConfigService } from "@services/index";
-
 import LayoutContent from "@common/Layout/Components/LayoutContent";
-
 import useToast from "@hooks/useToast";
 
 import SiteConfigContactInformation from "./Components/ContactInformation";

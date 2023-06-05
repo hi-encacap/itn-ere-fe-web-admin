@@ -1,17 +1,24 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { IBaseListQuery, IResponseWithMeta } from "@encacap-group/common/dist/base";
+import { Key, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-
-import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
-import { adminEstateService } from "@services/index";
 
 import { LoadingSkeleton } from "@components/Loading";
 import { PostDeleteConfirmationModalDraft } from "@components/Post";
+import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
+import { PostDraftDataType } from "@interfaces/Admin/postTypes";
 
 import FormGroupTitle from "../../../../../Common/Components/Form/GroupTitle";
 import AdminEstateModificationDraftEmpty from "./Empty";
 import AdminEstateModificationDraftItem from "./Item";
 
-const AdminEstateModificationDraft = () => {
+interface AdminEstateModificationDraftProps {
+  onGetMany: (
+    queryParam?: IBaseListQuery,
+  ) => Promise<IResponseWithMeta<Array<EstateDraftDataType | PostDraftDataType>>>;
+  onConfirmDelete: (id: Key) => Promise<void>;
+}
+
+const AdminEstateModificationDraft = ({ onGetMany, onConfirmDelete }: AdminEstateModificationDraftProps) => {
   const { t } = useTranslation("admin", {
     keyPrefix: "admin:page.estate",
   });
@@ -33,7 +40,7 @@ const AdminEstateModificationDraft = () => {
     setIsLoading(true);
 
     try {
-      const response = await adminEstateService.getEstateDrafts();
+      const response = await onGetMany();
 
       setDrafts(response.data);
     } catch (error) {
@@ -41,7 +48,7 @@ const AdminEstateModificationDraft = () => {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [onGetMany]);
 
   const handleClickDelete = useCallback((id: number) => {
     setSelectedDraftId(id);
@@ -79,7 +86,7 @@ const AdminEstateModificationDraft = () => {
       <PostDeleteConfirmationModalDraft
         isOpen={isShowDeleteModal}
         data={selectedDraft}
-        onConfirm={adminEstateService.deleteEstateDraftById}
+        onConfirm={onConfirmDelete}
         onClose={handleCloseModal}
         onSuccess={getData}
       />

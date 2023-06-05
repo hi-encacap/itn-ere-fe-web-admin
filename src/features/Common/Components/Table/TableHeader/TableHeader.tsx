@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 
 import { TABLE_FILTER_GLOBAL_FILTER_ID } from "@constants/defaultValues";
 import { TableColumnFilterState, TableDataType } from "@interfaces/Common/elementTypes";
-
 import { Input } from "@components/Form";
 
 import TableHeaderFilterGroup from "./TableHeaderFilterGroup";

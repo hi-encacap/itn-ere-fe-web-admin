@@ -9,6 +9,7 @@ const AdminPostRoutes = () => {
       <Route path="/" element={<PostList />} />
       <Route path=":tabId" element={<PostList />} />
       <Route path="/add" element={<AdminPostModification />} />
+      <Route path="/edit" element={<AdminPostModification />} />
     </Routes>
   );
 };

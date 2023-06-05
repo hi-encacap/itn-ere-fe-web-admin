@@ -10,11 +10,9 @@ import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
 import { TablePaginationType } from "@interfaces/Common/commonTypes";
 import { ColumnDef, TableColumnFilterState } from "@interfaces/Common/elementTypes";
 import { adminEstateService, adminLocationService } from "@services/index";
-
 import { ConfirmationModal } from "@components/Modal";
 import { PostDeleteConfirmationModal } from "@components/Post";
 import Table from "@components/Table/Table";
-
 import useToast from "@hooks/useToast";
 import { generateColumnFilterObject } from "@utils/helpers";
 

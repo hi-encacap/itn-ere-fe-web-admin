@@ -9,11 +9,8 @@ import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
 import { TablePaginationType } from "@interfaces/Common/commonTypes";
 import { TableColumnFilterState } from "@interfaces/Common/elementTypes";
 import { adminLocationService } from "@services/index";
-
 import Table from "@components/Table/Table";
-
 import LayoutContent from "@common/Layout/Components/LayoutContent";
-
 import { generateColumnFilterObject, setDocumentTitle } from "@utils/helpers";
 
 import createLocationDistrictTableColumns from "./Columns/adminLocationDistrictTableColumn";

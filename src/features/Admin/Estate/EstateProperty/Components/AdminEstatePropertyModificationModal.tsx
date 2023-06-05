@@ -8,10 +8,8 @@ import { useTranslation } from "react-i18next";
 
 import { EstatePropertyFormDataType } from "@interfaces/Admin/estateTypes";
 import { adminEstatePropertyService } from "@services/index";
-
 import { Input } from "@components/Form";
 import Modal, { ModalProps } from "@components/Modal/Modal";
-
 import useToast from "@hooks/useToast";
 import { formatErrorMessage, setFormError } from "@utils/error";
 

@@ -5,7 +5,6 @@ import { Key } from "react";
 
 import { ADMIN_CATEGORY_API_PATH } from "@constants/apis";
 import { CategoryFormDataType } from "@interfaces/Admin/categoryTypes";
-
 import axiosInstance from "@utils/Http/axiosInstance";
 
 const getCategories = async (params?: IBaseListQuery): Promise<IResponseWithMeta<ICategory[]>> => {

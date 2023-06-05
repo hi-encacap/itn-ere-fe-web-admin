@@ -3,7 +3,6 @@ import { IWebsite } from "@encacap-group/common/dist/re";
 import { omit } from "lodash";
 
 import { ROOT_WEBSITE_API_PATH } from "@constants/apis";
-
 import axiosInstance from "@utils/Http/axiosInstance";
 
 const getWebsites = async (query?: IBaseListQuery): Promise<IResponseWithMeta<IWebsite[]>> => {

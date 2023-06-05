@@ -7,7 +7,6 @@ import { ESTATE_PUBLISHING_STEP_ENUM } from "@constants/enums";
 import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
 import { PostFormDataType } from "@interfaces/Admin/postTypes";
 import { adminEstateService } from "@services/index";
-
 import { Modal } from "@components/Modal";
 import { ModalProps } from "@components/Modal/Modal";
 

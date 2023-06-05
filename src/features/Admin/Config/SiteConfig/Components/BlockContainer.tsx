@@ -2,7 +2,6 @@ import { WEBSITE_DOMAIN_ENUM } from "@encacap-group/common/dist/re";
 import { ReactNode } from "react";
 
 import LoadingSpinner from "@components/Loading/LoadingSpinner";
-
 import useSelector from "@hooks/useSelector";
 
 interface SiteConfigBlockContainerProps {

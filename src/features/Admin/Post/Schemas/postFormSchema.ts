@@ -2,7 +2,6 @@ import { TFunction } from "i18next";
 import { number, object, string } from "yup";
 
 import { PostFormDataType } from "@interfaces/Admin/postTypes";
-
 import { generateFormSchema } from "@utils/schema";
 
 const postFormSchema = (t: TFunction) =>

@@ -2,7 +2,6 @@ import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { PostFormDataType } from "@interfaces/Admin/postTypes";
-
 import Editor from "@components/Form/Editor/Editor";
 import FormGroupTitle from "@components/Form/GroupTitle";
 import ImageInput from "@components/Form/ImageInput/ImageInput";

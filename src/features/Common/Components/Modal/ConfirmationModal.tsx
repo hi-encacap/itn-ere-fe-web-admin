@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { FiAlertTriangle } from "react-icons/fi";
 
 import { ConfirmationModalStatusType } from "@interfaces/Common/elementTypes";
-
 import { Button } from "@components/Form";
 
 import ConfirmationModalTitle from "./ConfirmationModalTitle";

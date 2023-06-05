@@ -1,4 +1,5 @@
 import { ESTATE_STATUS_ENUM } from "@encacap-group/common/dist/re";
+import { Key } from "react";
 
 import { ESTATE_PROXY_ACTION_ENUM } from "./enums";
 
@@ -14,6 +15,8 @@ const ADMIN_PATH = {
   POST_PATH: "/admin/posts",
   POST_DRAFT_PATH: "/admin/posts/draft",
   POST_CREATE_PATH: "/admin/posts/add",
+  POST_EDIT_PATH: (id: Key, status: ESTATE_STATUS_ENUM) =>
+    `/admin/posts/edit?post_id=${id}&post_status=${status}`,
   POST_MODIFICATION_PATH: (id: number, status = ESTATE_STATUS_ENUM.DRAFT) =>
     `/admin/posts/modify?id=${id}&status=${status}`,
 

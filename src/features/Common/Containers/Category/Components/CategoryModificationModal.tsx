@@ -9,11 +9,9 @@ import RootWebsiteSelector from "src/features/Root/Website/Components/RootWebsit
 
 import { CategoryFormDataType } from "@interfaces/Admin/categoryTypes";
 import { ServiceAddFunctionType, ServiceUpdateFunctionType } from "@interfaces/Common/commonTypes";
-
 import { Input } from "@components/Form";
 import ImageInput from "@components/Form/ImageInput/ImageInput";
 import Modal, { ModalProps } from "@components/Modal/Modal";
-
 import useSelector from "@hooks/useSelector";
 import { generateImageFormData } from "@utils/image";
 

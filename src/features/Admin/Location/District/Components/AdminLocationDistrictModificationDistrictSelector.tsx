@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { HookFormControl } from "@interfaces/Common/commonTypes";
 import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
 import { locationService } from "@services/index";
-
 import { Select } from "@components/Form";
 
 interface AdminLocationDistrictModificationDistrictSelectorProps {

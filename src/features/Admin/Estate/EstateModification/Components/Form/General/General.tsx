@@ -2,7 +2,6 @@ import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
-
 import { Input } from "@components/Form";
 
 import FormGroupTitle from "../../../../../../Common/Components/Form/GroupTitle";

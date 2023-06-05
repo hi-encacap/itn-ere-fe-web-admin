@@ -4,7 +4,6 @@ import { omit } from "lodash";
 
 import { ADMIN_ESTATE_PROPERTY_API_PATH } from "@constants/apis";
 import { EstatePropertyFormDataType } from "@interfaces/Admin/estateTypes";
-
 import axiosInstance from "@utils/Http/axiosInstance";
 
 const getEstateProperties = async (query: IBaseListQuery): Promise<IResponseWithMeta<IEstateProperty[]>> => {

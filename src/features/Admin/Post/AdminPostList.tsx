@@ -4,12 +4,10 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { ADMIN_PATH } from "@constants/urls";
-import { adminPostService } from "@services/index";
-
 import LayoutContent from "@common/Layout/Components/LayoutContent";
 import { LayoutContentTabItemType } from "@common/Layout/Components/LayoutContentTabItem";
-
+import { ADMIN_PATH } from "@constants/urls";
+import { adminPostService } from "@services/index";
 import { setDocumentTitle } from "@utils/helpers";
 
 import { ESTATE_LIST_TAB_ENUM } from "@admin/Estate/Constants/enums";

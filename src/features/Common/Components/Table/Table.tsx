@@ -20,7 +20,6 @@ import {
   TableDataType,
   TableRowActionClickHandlerType,
 } from "@interfaces/Common/elementTypes";
-
 import { normalizeTableColumns } from "@utils/table";
 
 import { selectorColumn } from "./Columns/tableSelectorColumn";

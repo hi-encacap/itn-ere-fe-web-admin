@@ -2,7 +2,6 @@ import { TFunction } from "i18next";
 import { array, number, object, string } from "yup";
 
 import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
-
 import { generateFormSchema } from "@utils/schema";
 
 const estateFormSchema = (t: TFunction) =>

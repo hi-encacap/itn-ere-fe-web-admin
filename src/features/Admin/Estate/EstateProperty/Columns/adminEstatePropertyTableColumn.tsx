@@ -4,7 +4,6 @@ import { TFunction } from "i18next";
 
 import { ColumnDef, TableRowActionClickHandlerType } from "@interfaces/Common/elementTypes";
 import { adminEstatePropertyService } from "@services/index";
-
 import TableRowActionSkeleton from "@components/Table/TableRowActionSkeleton";
 
 import AdminEstatePropertyTableRowActions from "../Components/AdminEstatePropertyTableRowActions";

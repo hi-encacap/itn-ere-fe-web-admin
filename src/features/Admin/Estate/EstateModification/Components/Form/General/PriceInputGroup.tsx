@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 
 import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
 import { unitPriceService } from "@services/index";
-
 import { Input } from "@components/Form";
 
 const AdminEstateModificationFormGeneralPriceInputGroup = () => {

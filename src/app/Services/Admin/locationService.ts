@@ -11,7 +11,6 @@ import {
   LocationWardWebsiteDataType,
   LocationWardWebsiteFormDataType,
 } from "@interfaces/Admin/locationTypes";
-
 import axiosInstance from "@utils/Http/axiosInstance";
 
 const getProvinces = async (query?: IBaseListQuery): Promise<IResponseWithMeta<ILocationProvince[]>> => {

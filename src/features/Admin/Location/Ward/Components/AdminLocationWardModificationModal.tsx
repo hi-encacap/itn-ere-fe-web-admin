@@ -7,10 +7,8 @@ import { useTranslation } from "react-i18next";
 
 import { LocationWardWebsiteFormDataType } from "@interfaces/Admin/locationTypes";
 import { adminLocationService } from "@services/index";
-
 import { Modal } from "@components/Modal";
 import { ModalProps } from "@components/Modal/Modal";
-
 import useToast from "@hooks/useToast";
 import { formatErrorMessage, setFormError } from "@utils/error";
 
