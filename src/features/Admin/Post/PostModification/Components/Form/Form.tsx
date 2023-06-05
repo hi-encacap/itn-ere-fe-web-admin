@@ -7,9 +7,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 
-import { ADMIN_PATH } from "@constants/urls";
-import { PostDraftDataType, PostFormDataType } from "@interfaces/Admin/postTypes";
-import { adminPostService } from "@services/index";
 import {
   PostModificationFormButtonDraft,
   PostModificationFormButtonNew,
@@ -17,7 +14,10 @@ import {
   PostModificationFormButtonUnPublished,
 } from "@components/Post";
 import PostPublishingModal from "@components/Post/PublishingModal/PublishingModal";
+import { ADMIN_PATH } from "@constants/urls";
 import useToast from "@hooks/useToast";
+import { PostDraftDataType, PostFormDataType } from "@interfaces/Admin/postTypes";
+import { adminPostService } from "@services/index";
 import { setFormError } from "@utils/error";
 import { generateImageFormData } from "@utils/image";
 
@@ -94,9 +94,9 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
 
       if (postStatusParam === ESTATE_STATUS_ENUM.DRAFT) {
         data = await adminPostService.getPostDraftById(Number(postIdParam));
+      } else {
+        data = await adminPostService.getPostById(Number(postIdParam));
       }
-
-      data = await adminPostService.getPostById(Number(postIdParam));
 
       if (!data) {
         throw new Error();

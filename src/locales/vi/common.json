@@ -157,7 +157,7 @@
   "unPublishPostMessage": "Bạn có chắc muốn huỷ xuất bản bài viết này? Bài viết sẽ bị ẩn khỏi mọi kết quả tìm kiếm. Bạn có thể tiếp tục chỉnh sửa bài viết và xuất bản lại sau.",
   "unPublishSuccess": "Huỷ xuất bản thành công.",
   "update": "Cập nhật",
-  "updatedAt": "Cập nhật",
+  "updatedAtDate": "Cập nhật vào {{date}}",
   "updateSiteConfigError": "Cập nhật thiết lập trang không thành công.",
   "updateSiteConfigSuccess": "Cập nhật thiết lập trang thành công.",
   "uploadImageError": "Tải ảnh lên không thành công",

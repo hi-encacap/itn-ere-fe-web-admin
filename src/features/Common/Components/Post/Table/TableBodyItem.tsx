@@ -7,13 +7,13 @@ import { HiDotsHorizontal } from "react-icons/hi";
 import { MdAccessTime } from "react-icons/md";
 import striptags from "striptags";
 
-import { DROPDOWN_MENU_TYPE_ENUM } from "@constants/enums";
-import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
-import { PostDraftDataType } from "@interfaces/Admin/postTypes";
 import DropdownContainerV2 from "@components/Dropdown/DropdownContainerV2";
 import { DropdownMenuItemType } from "@components/Dropdown/DropdownContainerV2MenuItem";
 import { Button } from "@components/Form";
+import { DROPDOWN_MENU_TYPE_ENUM } from "@constants/enums";
 import useToast from "@hooks/useToast";
+import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
+import { PostDraftDataType } from "@interfaces/Admin/postTypes";
 
 import PostTableBodyItemBadge from "./TableBodyItemBadge";
 
@@ -53,7 +53,7 @@ const PostTableBodyItem = ({
       return striptags(data.description);
     }
 
-    return t("notification.emptyDescription");
+    return null;
   }, [data, t]);
 
   const handleClickDelete = useCallback(() => {
@@ -159,20 +159,22 @@ const PostTableBodyItem = ({
           <div className="mt-1 flex items-center justify-start space-x-2">
             <MdAccessTime />
             <span className="text-sm">
-              {t("updatedAt", {
+              {t("updatedAtDate", {
                 date: dayjs(data.updatedAt).format("DD/MM/YYYY"),
               })}
             </span>
           </div>
         </div>
-        <div
-          // #skipcq: JS-0440
-          dangerouslySetInnerHTML={{
-            __html: content,
-          }}
-          className="mt-3 mb-2.5 flex-1 overflow-hidden border-t-2 border-gray-100 pt-2 line-clamp-3"
-        />
-        <div className="flex items-center space-x-4 border-t-2 border-gray-100 pt-4">
+        {content && (
+          <div
+            // #skipcq: JS-0440
+            dangerouslySetInnerHTML={{
+              __html: content,
+            }}
+            className="mt-3 flex-1 overflow-hidden border-t-2 border-gray-100 pt-2 line-clamp-3"
+          />
+        )}
+        <div className="mt-3 flex items-center space-x-4 border-t-2 border-gray-100 pt-4">
           <DropdownContainerV2 menu={dropdownMenu}>
             <Button className="rounded-sm py-2.5" color="light" size="sm" disabled={isLoading}>
               <HiDotsHorizontal size={20} />

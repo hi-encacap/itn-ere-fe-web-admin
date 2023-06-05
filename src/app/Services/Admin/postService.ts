@@ -1,4 +1,4 @@
-import { IBaseListQuery } from "@encacap-group/common/dist/base";
+import { IBaseListQuery, IResponseWithMeta } from "@encacap-group/common/dist/base";
 import { IPost } from "@encacap-group/common/dist/re";
 import { omit } from "lodash";
 import { Key } from "react";
@@ -46,7 +46,7 @@ const createPostDraft = async (data: PostFormDataType): Promise<PostDraftDataTyp
   return response.data.data;
 };
 
-const getPostDrafts = async (query: IBaseListQuery): Promise<PostDraftDataType[]> => {
+const getPostDrafts = async (query?: IBaseListQuery): Promise<IResponseWithMeta<PostDraftDataType[]>> => {
   const response = await axiosInstance.get(ADMIN_POST_API_PATH.POST_DRAFTS_PATH, { params: query });
 
   return response.data;
