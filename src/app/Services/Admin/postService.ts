@@ -1,10 +1,10 @@
 import { IBaseListQuery } from "@encacap-group/common/dist/base";
+import { IPost } from "@encacap-group/common/dist/re";
 import { omit } from "lodash";
 import { Key } from "react";
 
 import { ADMIN_POST_API_PATH } from "@constants/apis";
 import { PostDraftDataType, PostFormDataType } from "@interfaces/Admin/postTypes";
-
 import axiosInstance from "@utils/Http/axiosInstance";
 
 const createPost = async (data: PostFormDataType) => {
@@ -20,6 +20,12 @@ const getPosts = async (query: IBaseListQuery) => {
   const response = await axiosInstance.get(ADMIN_POST_API_PATH.POSTS_PATH, { params: query });
 
   return response.data;
+};
+
+const getPostById = async (id: number): Promise<IPost> => {
+  const response = await axiosInstance.get(ADMIN_POST_API_PATH.POST_PATH(id));
+
+  return response.data.data;
 };
 
 const updatePostById = async (id: number, data: PostFormDataType) => {
@@ -44,6 +50,18 @@ const getPostDrafts = async (query: IBaseListQuery): Promise<PostDraftDataType[]
   const response = await axiosInstance.get(ADMIN_POST_API_PATH.POST_DRAFTS_PATH, { params: query });
 
   return response.data;
+};
+
+const getPostDraftById = async (id: Key): Promise<PostDraftDataType> => {
+  const response = await axiosInstance.get(ADMIN_POST_API_PATH.POST_DRAFT_PATH(id));
+
+  return response.data.data;
+};
+
+const updatePostDraftById = async (id: Key, data: PostFormDataType): Promise<PostDraftDataType> => {
+  const response = await axiosInstance.put(ADMIN_POST_API_PATH.POST_DRAFT_PATH(id), data);
+
+  return response.data.data;
 };
 
 const deletePostDraftById = async (id: Key): Promise<void> => {
@@ -81,10 +99,13 @@ export {
   createPostDraft,
   deletePostById,
   deletePostDraftById,
+  getPostById,
+  getPostDraftById,
   getPostDrafts,
   getPosts,
   movePostToTopById,
   publishPostById,
   unPublishPostById,
   updatePostById,
+  updatePostDraftById,
 };

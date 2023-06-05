@@ -4,7 +4,6 @@ import { pick } from "lodash";
 
 import { ADMIN_CONTACT_API_PATH } from "@constants/apis";
 import { ContactFormDataType } from "@interfaces/Admin/contactTypes";
-
 import axiosInstance from "@utils/Http/axiosInstance";
 
 const getContacts = async (params?: IBaseListQuery) => {

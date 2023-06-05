@@ -14,9 +14,7 @@ import {
   TablePaginationType,
 } from "@interfaces/Common/commonTypes";
 import { TableColumnFilterState } from "@interfaces/Common/elementTypes";
-
 import LayoutContent from "@common/Layout/Components/LayoutContent";
-
 import useToast from "@hooks/useToast";
 import { generateColumnFilterObject, setDocumentTitle } from "@utils/helpers";
 

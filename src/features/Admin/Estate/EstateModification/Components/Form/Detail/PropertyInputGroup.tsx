@@ -6,7 +6,6 @@ import { MdAdd } from "react-icons/md";
 
 import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
 import { adminEstatePropertyService } from "@services/index";
-
 import { Button, Input } from "@components/Form";
 
 const AdminEstateModificationFormDetailPropertyInputGroup = () => {

@@ -3,7 +3,6 @@ import { Key } from "react";
 
 import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
 import { PostDraftDataType } from "@interfaces/Admin/postTypes";
-
 import { ModalProps } from "@components/Modal/Modal";
 
 import PostDeleteConfirmationModalCompleted from "./PostDeleteConfirmationModalCompleted";

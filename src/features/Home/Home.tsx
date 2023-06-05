@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { ADMIN_PATH, AUTHENTICATION_PATH, ROOT_PATH } from "@constants/urls";
-
 import useSelector from "@hooks/useSelector";
 
 const Home = () => {

@@ -8,11 +8,9 @@ import { useTranslation } from "react-i18next";
 import { LocationProvinceWebsiteFormDataType } from "@interfaces/Admin/locationTypes";
 import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
 import { adminLocationService, locationService } from "@services/index";
-
 import { Select } from "@components/Form";
 import { Modal } from "@components/Modal";
 import { ModalProps } from "@components/Modal/Modal";
-
 import useToast from "@hooks/useToast";
 import { formatErrorMessage, setFormError } from "@utils/error";
 

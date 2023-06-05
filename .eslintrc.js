@@ -55,32 +55,12 @@ module.exports = {
       },
     ],
     "import/order": [
-      2,
+      "error",
       {
         groups: ["builtin", "external", "internal", ["parent", "index", "sibling"], "object"],
         pathGroups: [
           {
-            pattern: "@{constants,services,slices,interfaces}/**",
-            group: "external",
-            position: "after",
-          },
-          {
-            pattern: "@components/**",
-            group: "external",
-            position: "after",
-          },
-          {
-            pattern: "@common/**",
-            group: "external",
-            position: "after",
-          },
-          {
-            pattern: "@{hooks,utils}/**",
-            group: "external",
-            position: "after",
-          },
-          {
-            pattern: "@locales/**",
+            pattern: "@{constants,services,slices,interfaces,components,common,hooks,utils,locales}/**",
             group: "external",
             position: "after",
           },

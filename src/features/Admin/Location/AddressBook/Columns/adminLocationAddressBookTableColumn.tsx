@@ -4,7 +4,6 @@ import { TFunction } from "i18next";
 import { LocationAddressBookDataType } from "@interfaces/Admin/locationTypes";
 import { ColumnDef, TableRowActionClickHandlerType } from "@interfaces/Common/elementTypes";
 import { adminLocationService } from "@services/index";
-
 import TableRowActionSkeleton from "@components/Table/TableRowActionSkeleton";
 
 import AdminLocationAddressBookTableRowActions from "../Components/AdminLocationAddressBookTableRowActions";

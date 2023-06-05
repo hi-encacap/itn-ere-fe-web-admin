@@ -2,7 +2,6 @@ import { useLayoutEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import LayoutContent from "@common/Layout/Components/LayoutContent";
-
 import { setDocumentTitle } from "@utils/helpers";
 
 import AdminEstateModificationDraft from "./Components/Draft/Draft";

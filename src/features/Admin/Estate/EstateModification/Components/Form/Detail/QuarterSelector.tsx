@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
 import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
 import { estateQuarterService } from "@services/index";
-
 import { Select } from "@components/Form";
 
 interface AdminEstateModificationFormDetailQuarterSelectProps {

@@ -9,11 +9,8 @@ import { LocationAddressBookDataType } from "@interfaces/Admin/locationTypes";
 import { TablePaginationType } from "@interfaces/Common/commonTypes";
 import { TableColumnFilterState } from "@interfaces/Common/elementTypes";
 import { adminLocationService } from "@services/index";
-
 import Table from "@components/Table/Table";
-
 import LayoutContent from "@common/Layout/Components/LayoutContent";
-
 import { generateColumnFilterObject, setDocumentTitle } from "@utils/helpers";
 
 import createLocationAddressBookTableColumns from "./Columns/adminLocationAddressBookTableColumn";

@@ -5,7 +5,6 @@ import { Key } from "react";
 
 import { ADMIN_ESTATE_API_PATH } from "@constants/apis";
 import { EstateDraftDataType, EstateFormDataType } from "@interfaces/Admin/estateTypes";
-
 import axiosInstance from "@utils/Http/axiosInstance";
 
 const createEstate = async (estate: EstateFormDataType) => {

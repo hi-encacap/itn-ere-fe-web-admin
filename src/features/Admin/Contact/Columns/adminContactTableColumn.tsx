@@ -3,7 +3,6 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { TFunction } from "i18next";
 
 import { ColumnDef, TableRowActionClickHandlerType } from "@interfaces/Common/elementTypes";
-
 import TableImageColumn from "@components/Table/TableImageColumn/TableImageColumn";
 import TableImageColumnSkeleton from "@components/Table/TableImageColumn/TableImageColumnSkeleton";
 

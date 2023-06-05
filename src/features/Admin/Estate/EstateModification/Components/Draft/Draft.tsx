@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 
 import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
 import { adminEstateService } from "@services/index";
-
 import { LoadingSkeleton } from "@components/Loading";
 import { PostDeleteConfirmationModalDraft } from "@components/Post";
 

@@ -4,7 +4,6 @@ import { MdAdd } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 import { ADMIN_PATH } from "@constants/urls";
-
 import { Button } from "@components/Form";
 
 const PostListHeaderAction = () => {

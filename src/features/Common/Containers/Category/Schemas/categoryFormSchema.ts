@@ -2,7 +2,6 @@ import { TFunction } from "i18next";
 import { number, object, string } from "yup";
 
 import { CategoryFormDataType } from "@interfaces/Admin/categoryTypes";
-
 import { generateFormSchema } from "@utils/schema";
 
 const categoryFormSchema = (t: TFunction, role: Record<string, boolean>) =>

@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { FormImageInputDataType } from "@interfaces/Common/elementTypes";
-
 import { Modal } from "@components/Modal";
 import { BaseModalProps } from "@components/Modal/Modal";
 

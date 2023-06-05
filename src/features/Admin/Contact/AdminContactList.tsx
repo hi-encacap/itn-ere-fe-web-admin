@@ -10,11 +10,8 @@ import { TABLE_ROW_SELECTION_TYPE_ENUM } from "@constants/enums";
 import { TablePaginationType } from "@interfaces/Common/commonTypes";
 import { TableColumnFilterState } from "@interfaces/Common/elementTypes";
 import { adminContactService } from "@services/index";
-
 import Table from "@components/Table/Table";
-
 import LayoutContent from "@common/Layout/Components/LayoutContent";
-
 import useToast from "@hooks/useToast";
 import { generateColumnFilterObject, setDocumentTitle } from "@utils/helpers";
 

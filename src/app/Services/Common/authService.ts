@@ -2,7 +2,6 @@ import { IREUser } from "@encacap-group/common/dist/re";
 
 import { AUTHENTICATION_API_PATH } from "@constants/apis";
 import { AuthTokenAndUserDataType, AuthTokensType } from "@interfaces/Common/authTypes";
-
 import axiosInstance from "@utils/Http/axiosInstance";
 
 const getMe = async (): Promise<IREUser> => {

@@ -5,10 +5,8 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ServiceGetAllFunctionType, TableOnclickFunctionType } from "@interfaces/Common/commonTypes";
-
 import Table, { TableProps } from "@components/Table/Table";
 import TableImageColumn from "@components/Table/TableImageColumn/TableImageColumn";
-
 import useSelector from "@hooks/useSelector";
 
 import CategoryTableRowAction from "./CategoryTableRowAction";

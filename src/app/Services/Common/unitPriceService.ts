@@ -3,7 +3,6 @@ import { IUnitPrice } from "@encacap-group/common/dist/re";
 
 import { UNIT_PRICE_API_PATH } from "@constants/apis";
 import { UnitPriceGetListQueryType } from "@interfaces/Common/unitPriceTypes";
-
 import axiosInstance from "@utils/Http/axiosInstance";
 
 const getUnitPrices = async (query: UnitPriceGetListQueryType): Promise<IResponseWithMeta<IUnitPrice[]>> => {

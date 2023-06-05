@@ -5,10 +5,8 @@ import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 
 import { adminEstateService } from "@services/index";
-
 import LayoutContent from "@common/Layout/Components/LayoutContent";
 import { LayoutContentTabItemType } from "@common/Layout/Components/LayoutContentTabItem";
-
 import { setDocumentTitle } from "@utils/helpers";
 
 import AdminEstateListHeaderAction from "./Components/List/HeaderAction";

@@ -1,6 +1,5 @@
 import { UPLOAD_API_PATH } from "@constants/apis";
 import { FormImageInputDataType } from "@interfaces/Common/elementTypes";
-
 import axiosInstance from "@utils/Http/axiosInstance";
 
 const uploadImage = async (

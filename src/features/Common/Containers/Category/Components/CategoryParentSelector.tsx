@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 
 import { CategoryFormDataType } from "@interfaces/Admin/categoryTypes";
 import { adminCategoryService } from "@services/index";
-
 import { Select } from "@components/Form";
 import { SelectProps } from "@components/Form/Select/Select";
 

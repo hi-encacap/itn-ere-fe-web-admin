@@ -9,7 +9,12 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { ADMIN_PATH } from "@constants/urls";
 import { EstateDraftDataType, EstateFormDataType } from "@interfaces/Admin/estateTypes";
 import { adminEstateService } from "@services/index";
-
+import {
+  PostModificationFormButtonDraft,
+  PostModificationFormButtonNew,
+  PostModificationFormButtonPublished,
+  PostModificationFormButtonUnPublished,
+} from "@components/Post";
 import useToast from "@hooks/useToast";
 import { setFormError } from "@utils/error";
 import { generateImageFormData, generateImagesFormData } from "@utils/image";
@@ -17,10 +22,6 @@ import { generateImageFormData, generateImagesFormData } from "@utils/image";
 import { estateFormSchema } from "@admin/Estate/Schemas/estateFormSchema";
 
 import PostPublishingModal from "../../../../../Common/Components/Post/PublishingModal/PublishingModal";
-import AdminEstateModificationFormButtonDraft from "./Button/Draft";
-import AdminEstateModificationFormButtonNew from "./Button/New";
-import AdminEstateModificationFormButtonPublished from "./Button/Published";
-import AdminEstateModificationFormButtonUnPublished from "./Button/UnPublished";
 import AdminEstateModificationFormContact from "./Contact/Contact";
 import AdminEstateModificationFormDetail from "./Detail/Detail";
 import AdminEstateModificationFormGeneral from "./General/General";
@@ -250,31 +251,28 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
         </FormProvider>
         <div className="mt-6 flex items-center justify-center space-x-6 border-t-2 border-gray-100 pt-6">
           {!id && (
-            <AdminEstateModificationFormButtonNew
+            <PostModificationFormButtonNew
               isSubmitting={isSubmitting}
               onSaveDraft={handleSaveDraft}
               onSubmit={handleSubmit}
             />
           )}
           {id && estateStatus === ESTATE_STATUS_ENUM.UNPUBLISHED && (
-            <AdminEstateModificationFormButtonUnPublished
+            <PostModificationFormButtonUnPublished
               isSubmitting={isSubmitting}
               onSubmit={handleUpdateEstate}
               onSaveAndPublish={handleSaveAndPublish}
             />
           )}
           {id && estateStatus === ESTATE_STATUS_ENUM.DRAFT && (
-            <AdminEstateModificationFormButtonDraft
+            <PostModificationFormButtonDraft
               isSubmitting={isSubmitting}
               onSubmit={handleSaveDraft}
               onSaveAndPublish={handleSaveAndPublish}
             />
           )}
           {id && estateStatus === ESTATE_STATUS_ENUM.PUBLISHED && (
-            <AdminEstateModificationFormButtonPublished
-              isSubmitting={isSubmitting}
-              onSubmit={handleUpdateEstate}
-            />
+            <PostModificationFormButtonPublished isSubmitting={isSubmitting} onSubmit={handleUpdateEstate} />
           )}
         </div>
       </div>

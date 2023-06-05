@@ -2,7 +2,6 @@ import { IConfig } from "@encacap-group/common/dist/re";
 import { Key } from "react";
 
 import { ADMIN_CONFIG_API_PATH } from "@constants/apis";
-
 import axiosInstance from "@utils/Http/axiosInstance";
 
 const getConfigs = async (): Promise<IConfig[]> => {

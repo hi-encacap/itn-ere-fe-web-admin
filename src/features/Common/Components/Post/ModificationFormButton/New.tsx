@@ -2,20 +2,18 @@ import { useTranslation } from "react-i18next";
 
 import { Button } from "@components/Form";
 
-interface AdminEstateModificationFormButtonNewProps {
+interface PostModificationFormButtonNewProps {
   isSubmitting: boolean;
   onSaveDraft: () => Promise<void>;
   onSubmit: () => Promise<void>;
 }
 
-const AdminEstateModificationFormButtonNew = ({
+const PostModificationFormButtonNew = ({
   isSubmitting,
   onSaveDraft,
   onSubmit,
-}: AdminEstateModificationFormButtonNewProps) => {
-  const { t } = useTranslation("admin", {
-    keyPrefix: "admin:page.estate.modification",
-  });
+}: PostModificationFormButtonNewProps) => {
+  const { t } = useTranslation();
 
   return (
     <>
@@ -27,7 +25,7 @@ const AdminEstateModificationFormButtonNew = ({
         type="button"
         onClick={onSaveDraft}
       >
-        {t("form.action.saveDraft")}
+        {t("saveDraft")}
       </Button>
       <Button
         className="block flex-1"
@@ -36,10 +34,10 @@ const AdminEstateModificationFormButtonNew = ({
         type="submit"
         onClick={onSubmit}
       >
-        {t("form.action.publish")}
+        {t("saveAndPublish")}
       </Button>
     </>
   );
 };
 
-export default AdminEstateModificationFormButtonNew;
+export default PostModificationFormButtonNew;

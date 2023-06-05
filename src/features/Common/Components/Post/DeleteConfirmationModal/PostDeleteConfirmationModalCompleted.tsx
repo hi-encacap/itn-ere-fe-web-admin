@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 
 import { ConfirmationModal } from "@components/Modal";
 import { ModalProps } from "@components/Modal/Modal";
-
 import useToast from "@hooks/useToast";
 
 import AdminEstateCompletedDeleteConfirmationMessage from "../../../../Admin/Estate/Components/AdminEstateCompletedDeleteConfirmationMessage";

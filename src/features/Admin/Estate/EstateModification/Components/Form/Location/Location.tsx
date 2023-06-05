@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { FiMapPin } from "react-icons/fi";
 
 import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
-
 import { Button, Input } from "@components/Form";
 
 import AdminLocationDistrictSelector from "@admin/Components/AdminLocationDistrictSelector";

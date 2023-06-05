@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 
 import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
 import { adminCategoryGroupService } from "@services/index";
-
 import { Select } from "@components/Form";
 import { SelectProps } from "@components/Form/Select/Select";
 

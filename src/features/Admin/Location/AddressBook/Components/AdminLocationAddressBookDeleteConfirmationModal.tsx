@@ -3,10 +3,8 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 import { adminLocationService } from "@services/index";
-
 import { ConfirmationModal } from "@components/Modal";
 import { ConfirmationModalProps } from "@components/Modal/ConfirmationModal";
-
 import useToast from "@hooks/useToast";
 
 interface ComponentProps extends Omit<ConfirmationModalProps, "id" | "title" | "message" | "onConfirm"> {
