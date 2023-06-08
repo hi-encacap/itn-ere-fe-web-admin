@@ -207,7 +207,7 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
           setFocus={setFocus}
           {...formProps}
         >
-          <AdminPostModificationFormGeneral isEditMode={!!postIdParam} />
+          <AdminPostModificationFormGeneral isEditMode={Boolean(postIdParam)} />
           <AdminPostModificationFormDetail />
         </FormProvider>
         {isDisabled && <div className="absolute -inset-6 z-10 bg-white opacity-50" />}
