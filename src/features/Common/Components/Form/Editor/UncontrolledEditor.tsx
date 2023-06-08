@@ -48,7 +48,7 @@ const UncontrolledEditor = ({
     let html = "";
 
     if (caption) {
-      html = `<figure>${imageHtml}<figcaption>${caption}</figcaption></figure>`;
+      html = `<p><figure>${imageHtml}<figcaption>${caption}</figcaption></figure></p>`;
     } else {
       html = imageHtml;
     }
@@ -107,7 +107,6 @@ const UncontrolledEditor = ({
                 "undo redo | formatselect | " +
                 "bold italic forecolor | alignleft aligncenter " +
                 "alignright alignjustify | bullist numlist outdent indent | " +
-                "numlist bullist | " +
                 "image | " +
                 "table tableprops | ",
               content_style:
