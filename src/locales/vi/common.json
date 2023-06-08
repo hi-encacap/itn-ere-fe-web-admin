@@ -1,16 +1,82 @@
 {
+  "addCategorySuccess": "Thêm danh mục thành công.",
+  "addPost": "Thêm bài viết",
+  "address": "Địa chỉ",
+  "addressBook": "Sổ địa chỉ",
+  "addressRequired": "Địa chỉ không được phép để trống.",
+  "avatar": "Ảnh đại diện",
+  "avatarRequired": "Ảnh đại diện không được phép để trống.",
+  "bank": "Ngân hàng",
+  "bankRequired": "Ngân hàng không được phép để trống.",
+  "cancel": "Cancel",
+  "caption": "Chú thích",
+  "category": "Danh mục",
+  "categoryGroup": "Nhóm danh mục",
+  "categoryGroupRequired": "Nhóm danh mục không được phép để trống.",
+  "categoryManagement": "Quản lý danh mục",
+  "code": "Mã",
+  "completed": "Đã hoàn thiện",
+  "config": "Thiết lập",
+  "confirm": "Confirm",
+  "contact": "Danh bạ",
+  "contactInformation": "Thông tin liên hệ",
+  "contactInformationDescription": "Thông tin liên hệ của bạn sẽ được hiển thị ở đầu và cuối trang. Thông tin liên hệ cho từng bài viết sẽ được thiết lập riêng.",
+  "content": "Nội dung",
+  "contentRequired": "Nội dung không được phép để trống.",
+  "dashboard": "Bảng điều khiển",
+  "delete": "Xóa",
+  "deleteCategory": "Xóa danh mục <span>{{name}}</span>",
+  "deleteCategoryConfirmation": "Bạn có chắc chắn muốn xóa danh mục này?",
+  "deleteCategorySuccess": "Xóa danh mục thành công.",
+  "deleteName": "Xóa <span>{{name}}</span>",
+  "detailInfo": "Thông tin chi tiết",
+  "district": "Quận/Huyện",
+  "draft": "Nháp",
+  "edit": "Chỉnh sửa",
+  "editCategorySuccess": "Chỉnh sửa danh mục thành công.",
+  "editPost": "Chỉnh sửa bài viết",
+  "editPostError": "Chỉnh sửa bài viết không thành công.",
+  "editPostSuccess": "Chỉnh sửa bài viết thành công.",
+  "email": "Email",
+  "emailInvalid": "Email không hợp lệ.",
+  "emailRequired": "Email không được phép để trống.",
+  "enterCaption": "Nhập chú thích cho hình ảnh này",
+  "enterCode": "Nhập mã",
+  "enterTitle": "Nhập tiêu đề",
+  "error": "Lỗi!",
+  "errorCode": "Mã lỗi",
+  "estate": "Bất động sản",
+  "estateList": "Danh sách bất động sản",
+  "estateProperty": "Thuộc tính bất động sản",
+  "generalInfo": "Thông tin chung",
+  "getError": "Đã xảy ra lỗi khi tải dữ liệu mà bạn cần. Vui lòng thử lại sau.",
+  "getPostError": "Lấy thông tin bài viết không thành công! Vui lòng thử lại sau.",
+  "getSiteConfigError": "Đã xảy ra lỗi khi tải thiết lập trang. Vui lòng thử lại sau.",
+  "homeSliderImage": "Ảnh trình chiếu trang chủ",
+  "homeSliderImageDescription": "Hình ảnh được sử dụng để trình chiếu ở đầu trang chủ. Chọn từ 4 đến 6 hình tỷ lệ 16:9 để đảm bảo trải nghiệm tốt trên mọi thiết bị.",
+  "insertImage": "Chèn ảnh",
+  "introduceImage": "Ảnh giới thiệu",
+  "introduceImageDescription": "Hình ảnh được sử dụng để giới thiệu về trang của bạn. Chọn hình tỷ lệ 16:9 để đảm bảo trải nghiệm tốt trên mọi thiết bị.",
+  "location": "Khu vực",
+  "moveToTop": "Đưa lên đầu",
+  "moveToTopError": "Đưa bài viết lên đầu không thành công.",
+  "moveToTopSuccess": "Đưa bài viết lên đầu thành công.",
+  "name": "Tên",
+  "other": "Khác",
   "page": {
     "auth": {
       "page": {
         "login": {
-          "title": "Đăng nhập",
-          "welcomeBack": "Chào mừng bạn trở lại!",
-          "loginToContinue": "Đăng nhập bằng tài khoản Encacap của bạn để tiếp tục",
+          "errors": {
+            "invalidCredentials": "Email hoặc mật khẩu không chính xác.",
+            "title": "Đăng nhập không thành công!",
+            "unknown": "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại sau."
+          },
           "form": {
             "email": {
+              "invalid": "Địa chỉ email của bạn không hợp lệ.",
               "placeholder": "Email",
-              "required": "Vui lòng nhập địa chỉ email của bạn.",
-              "invalid": "Địa chỉ email của bạn không hợp lệ."
+              "required": "Vui lòng nhập địa chỉ email của bạn."
             },
             "password": {
               "placeholder": "Mật khẩu",
@@ -18,11 +84,9 @@
             },
             "submit": "Đăng nhập"
           },
-          "errors": {
-            "title": "Đăng nhập không thành công!",
-            "invalidCredentials": "Email hoặc mật khẩu không chính xác.",
-            "unknown": "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại sau."
-          }
+          "loginToContinue": "Đăng nhập bằng tài khoản Encacap của bạn để tiếp tục",
+          "title": "Đăng nhập",
+          "welcomeBack": "Chào mừng bạn trở lại!"
         }
       }
     },
@@ -36,39 +100,69 @@
       }
     }
   },
+  "parentCategory": "Danh mục cha",
+  "parentCategoryRequired": "Danh mục cha không được phép để trống.",
+  "performActionError": "Đã xảy ra lỗi khi thực hiện hành động này. Vui lòng thử lại sau.",
+  "phone": "Điện thoại",
+  "phoneInvalid": "Điện thoại không hợp lệ.",
+  "phoneRequired": "Điện thoại không được phép để trống.",
+  "pickImage": "Chọn ảnh",
+  "post": "Bài viết",
+  "postManagement": "Quản lý bài viết",
+  "province": "Tỉnh/Thành phố",
+  "publish": "Xuất bản",
+  "published": "Đã xuất bản",
+  "publishError": "Đã xảy ra lỗi khi xuất bản bài viết. Vui lòng thử lại sau.",
+  "publishPost": "Xuất bản bài viết {{title}}",
+  "publishPostMessage": "Bạn có chắc muốn xuất bản bài viết này? Bài viết sẽ hiển thị công khai trên trang và mọi người có thể tìm thấy bài viết này, bằng bất kỳ cách nào.",
+  "publishSuccess": "Xuất bản bài viết thành công.",
+  "save": "Lưu",
+  "saveAndPublish": "Lưu và xuất bản",
+  "saveDraft": "Lưu nháp",
+  "saveDraftSuccess": "Lưu nháp thành công.",
+  "selectCategoryGroup": "Chọn nhóm danh mục",
+  "selectParentCategory": "Chọn danh mục cha",
+  "selectWebsite": "Chọn website",
+  "siteConfig": "Thiết lập trang",
+  "siteConfigManagement": "Quản lý thiết lập trang",
+  "status": "Trạng thái",
+  "success": "Thành công!",
   "table": {
     "header": {
-      "search": {
-        "placeholder": "Tìm kiếm"
-      },
       "filter": {
         "clearSelection": "Xóa lựa chọn",
         "search": {
           "placeholder": "Tìm kiếm"
         }
+      },
+      "search": {
+        "placeholder": "Tìm kiếm"
       }
     },
     "pagination": {
-      "previous": "Previous",
-      "next": "Next",
       "counting": "Hiển thị {{from}} - {{to}} của {{total}}",
-      "emptyData": "Không có dữ liệu"
+      "emptyData": "Không có dữ liệu",
+      "next": "Next",
+      "previous": "Previous"
     }
   },
-  "confirmationModal": {
-    "cancelButtonText": "Cancel",
-    "confirmButtonText": "Confirm"
-  },
-  "modal": {
-    "close": "Cancel",
-    "confirm": "Confirm"
-  },
-  "alert": {
-    "errorTrackingCode": "Mã lỗi"
-  },
-  "form": {
-    "imageInput": {
-      "placeholder": "Chọn ảnh"
-    }
-  }
+  "tax": "Mã số thuế",
+  "taxRequired": "Mã số thuế không được phép để trống.",
+  "title": "Tiêu đề",
+  "titleRequired": "Tiêu đề không được phép để trống.",
+  "unPublish": "Huỷ xuất bản",
+  "unpublished": "Chưa xuất bản",
+  "unPublishError": "Đã xảy ra lỗi khi huỷ xuất bản bài viết. Vui lòng thử lại sau.",
+  "unPublishPost": "Huỷ xuất bản bài viết {{title}}",
+  "unPublishPostMessage": "Bạn có chắc muốn huỷ xuất bản bài viết này? Bài viết sẽ bị ẩn khỏi mọi kết quả tìm kiếm. Bạn có thể tiếp tục chỉnh sửa bài viết và xuất bản lại sau.",
+  "unPublishSuccess": "Huỷ xuất bản thành công.",
+  "update": "Cập nhật",
+  "updatedAtDate": "Cập nhật vào {{date}}",
+  "updateSiteConfigError": "Cập nhật thiết lập trang không thành công.",
+  "updateSiteConfigSuccess": "Cập nhật thiết lập trang thành công.",
+  "uploadImageError": "Tải ảnh lên không thành công",
+  "viewPost": "Xem bài viết",
+  "ward": "Xã/Phường/Thị trấn",
+  "website": "Website",
+  "websiteRequired": "Website không được phép để trống."
 }

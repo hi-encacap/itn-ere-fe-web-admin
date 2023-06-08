@@ -1,14 +1,13 @@
-import { HeaderGroup, OnChangeFn } from '@tanstack/react-table';
-import { debounce } from 'lodash';
-import { memo, useCallback, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { HeaderGroup, OnChangeFn } from "@tanstack/react-table";
+import { debounce } from "lodash";
+import { memo, useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { TABLE_FILTER_GLOBAL_FILTER_ID } from '@constants/defaultValues';
-import { TableColumnFilterState, TableDataType } from '@interfaces/Common/elementTypes';
+import { TABLE_FILTER_GLOBAL_FILTER_ID } from "@constants/defaultValues";
+import { TableColumnFilterState, TableDataType } from "@interfaces/Common/elementTypes";
+import { Input } from "@components/Form";
 
-import { Input } from '@components/Form';
-
-import TableHeaderFilterGroup from './TableHeaderFilterGroup';
+import TableHeaderFilterGroup from "./TableHeaderFilterGroup";
 
 export interface TableHeaderProps<TData = TableDataType> {
   headerGroups: Array<HeaderGroup<TData>>;
@@ -16,12 +15,12 @@ export interface TableHeaderProps<TData = TableDataType> {
 }
 
 const TableHeader = ({ headerGroups, onChangeFilters }: TableHeaderProps) => {
-  const { t } = useTranslation(['common'], {
-    keyPrefix: 'table.header',
+  const { t } = useTranslation(["common"], {
+    keyPrefix: "table.header",
   });
 
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
-  const [globalFilterValue, setGlobalFilterValue] = useState('');
+  const [globalFilterValue, setGlobalFilterValue] = useState("");
 
   const handleChangeFilterDebounced = useCallback(
     debounce((filters: TableColumnFilterState[]) => {
@@ -70,7 +69,7 @@ const TableHeader = ({ headerGroups, onChangeFilters }: TableHeaderProps) => {
             name="tableGlobalFilter"
             className="z-0 w-full bg-gray-50 duration-100 hover:bg-gray-100"
             size="sm"
-            placeholder={t('search.placeholder') ?? ''}
+            placeholder={t("search.placeholder") ?? ""}
             value={globalFilterValue}
             onChange={handleChangeGlobalFilter}
           />

@@ -1,12 +1,12 @@
-import { useCallback, useMemo } from 'react';
-import { BiChevronDown } from 'react-icons/bi';
+import { useCallback, useMemo } from "react";
+import { BiChevronDown } from "react-icons/bi";
 
-import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
+import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
 
-import { TablePaginationType } from '../../../../../app/Types/Common/commonTypes';
+import { TablePaginationType } from "../../../../../app/Types/Common/commonTypes";
 
 export interface TableFooterPageSizeSelectorProps {
-  pageSize: TablePaginationType['page'];
+  pageSize: TablePaginationType["page"];
   onChangePageSize: (pageSize: number) => void;
 }
 

@@ -1,54 +1,41 @@
-import dayjs from 'dayjs';
-import { first } from 'lodash';
-import { v4 as uuidv4 } from 'uuid';
+import dayjs from "dayjs";
+import { first } from "lodash";
+import { v4 as uuidv4 } from "uuid";
 
-import { TABLE_FILTER_GLOBAL_FILTER_ID } from '@constants/defaultValues';
-import { IMAGE_VARIANT_ENUM } from '@constants/enums';
-import { TableColumnFilterState } from '@interfaces/Common/elementTypes';
-import { ImageDataType } from '@interfaces/Common/imageTypes';
+import { TABLE_FILTER_GLOBAL_FILTER_ID } from "@constants/defaultValues";
+import { TableColumnFilterState } from "@interfaces/Common/elementTypes";
 
-const setDocumentTitle = (title: string): void => {
-  window.document.title = `${title} - ${process.env.REACT_APP_FRONTEND_WEBSITE_NAME ?? 'Encacap'}`;
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  });
+const setDocumentTitle = (title: string, scrollToTop = true): void => {
+  window.document.title = `${title} - ${process.env.REACT_APP_RE_DASH_APP_NAME ?? "Encacap"}`;
+
+  if (scrollToTop) {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
 };
 
 const slugify = (text: string): string => {
   let result = text.toLowerCase();
 
-  result = result.replace(/(?<id>à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/gu, 'a');
-  result = result.replace(/(?<id>è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/gu, 'e');
-  result = result.replace(/(?<id>ì|í|ị|ỉ|ĩ)/gu, 'i');
-  result = result.replace(/(?<id>ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/gu, 'o');
-  result = result.replace(/(?<id>ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/gu, 'u');
-  result = result.replace(/(?<id>ỳ|ý|ỵ|ỷ|ỹ)/gu, 'y');
-  result = result.replace(/(?<id>đ)/gu, 'd');
+  result = result.replace(/(?<id>à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/gu, "a");
+  result = result.replace(/(?<id>è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/gu, "e");
+  result = result.replace(/(?<id>ì|í|ị|ỉ|ĩ)/gu, "i");
+  result = result.replace(/(?<id>ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/gu, "o");
+  result = result.replace(/(?<id>ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/gu, "u");
+  result = result.replace(/(?<id>ỳ|ý|ỵ|ỷ|ỹ)/gu, "y");
+  result = result.replace(/(?<id>đ)/gu, "d");
 
-  result = result.replace(/(?<id>[^0-9a-z-\s])/g, '');
+  result = result.replace(/(?<id>[^0-9a-z-\s])/g, "");
 
-  result = result.replace(/(?<id>\s+)/g, '-');
+  result = result.replace(/(?<id>\s+)/g, "-");
 
-  result = result.replace(/^-+/g, '');
+  result = result.replace(/^-+/g, "");
 
-  result = result.replace(/-+$/g, '');
+  result = result.replace(/-+$/g, "");
 
   return result;
-};
-
-const getImageURL = (image: ImageDataType, variant?: string): string => {
-  if (!image) {
-    return '';
-  }
-
-  const { variants } = image;
-
-  if (variant) {
-    return variants[variant];
-  }
-
-  return variants[IMAGE_VARIANT_ENUM.DEFAULT];
 };
 
 const generateColumnFilterObject = (filters: TableColumnFilterState[]) => {
@@ -64,10 +51,10 @@ const generateColumnFilterObject = (filters: TableColumnFilterState[]) => {
 };
 
 const randomStringPrefix = (separator?: string) => {
-  const dayPrefix: string = dayjs().format('YYYYMMDD');
-  const uuidPrefix: string = uuidv4().replace(/-/g, '').toUpperCase();
+  const dayPrefix: string = dayjs().format("YYYYMMDD");
+  const uuidPrefix: string = uuidv4().replace(/-/g, "").toUpperCase();
 
-  return `${dayPrefix}${separator ?? ''}${uuidPrefix}`;
+  return `${dayPrefix}${separator ?? ""}${uuidPrefix}`;
 };
 
-export { setDocumentTitle, slugify, getImageURL, generateColumnFilterObject, randomStringPrefix };
+export { generateColumnFilterObject, randomStringPrefix, setDocumentTitle, slugify };

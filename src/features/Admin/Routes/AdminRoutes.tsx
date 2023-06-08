@@ -1,18 +1,26 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
-import AdminLayout from '@common/Layout/AdminLayout';
+import AdminLayout from "@common/Layout/AdminLayout";
 
-import AdminCategoryRoutes from '@admin/Category/Routes/AdminCategoryRoutes';
-import AdminContactRoutes from '@admin/Contact/Routes/AdminContactRoutes';
-import AdminDashboard from '@admin/Dashboard/AdminDashboard';
+import AdminCategory from "@admin/Category/AdminCategory";
+import ConfigRoutes from "@admin/Config/Routes/ConfigRoutes";
+import AdminContactRoutes from "@admin/Contact/Routes/AdminContactRoutes";
+import AdminDashboard from "@admin/Dashboard/AdminDashboard";
+import EstateRoutes from "@admin/Estate/Routes/EstateRoutes";
+import AdminLocationRoutes from "@admin/Location/Routes/AdminLocationRoutes";
+import AdminPostRoutes from "@admin/Post/Routes/AdminPostRoutes";
 
 const AdminRoutes = () => {
   return (
     <AdminLayout>
       <Routes>
         <Route path="/" element={<AdminDashboard />} />
-        <Route path="categories/*" element={<AdminCategoryRoutes />} />
+        <Route path="categories/*" element={<AdminCategory />} />
         <Route path="contacts/*" element={<AdminContactRoutes />} />
+        <Route path="posts/*" element={<AdminPostRoutes />} />
+        <Route path="estates/*" element={<EstateRoutes />} />
+        <Route path="locations/*" element={<AdminLocationRoutes />} />
+        <Route path="configs/*" element={<ConfigRoutes />} />
       </Routes>
     </AdminLayout>
   );

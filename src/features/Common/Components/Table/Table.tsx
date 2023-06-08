@@ -1,3 +1,4 @@
+import { IBaseListQuery } from "@encacap-group/common/dist/base";
 import {
   ColumnDef,
   getCoreRowModel,
@@ -7,41 +8,60 @@ import {
   RowSelectionState,
   SortingState,
   useReactTable,
-} from '@tanstack/react-table';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+} from "@tanstack/react-table";
+import { keys } from "lodash";
+import { ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 
-import { DEFAULT_PAGE_SIZE } from '@constants/defaultValues';
-import { BaseQueryParamsType, TablePaginationType } from '@interfaces/Common/commonTypes';
-import { TableColumnFilterState, TableDataType } from '@interfaces/Common/elementTypes';
+import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
+import { TABLE_ROW_SELECTION_TYPE_ENUM } from "@constants/enums";
+import { TablePaginationType } from "@interfaces/Common/commonTypes";
+import {
+  TableColumnFilterState,
+  TableDataType,
+  TableRowActionClickHandlerType,
+} from "@interfaces/Common/elementTypes";
+import { normalizeTableColumns } from "@utils/table";
 
-import { normalizeTableColumns } from '@utils/table';
+import { selectorColumn } from "./Columns/tableSelectorColumn";
+import TableContentBody from "./TableContentBody/TableContentBody";
+import TableContentHeader from "./TableContentHeader/TableContentHeader";
+import TableFooter from "./TableFooter";
+import TableHeader from "./TableHeader/TableHeader";
 
-import { selectorColumn } from './Columns/tableSelectorColumn';
-import TableContentBody from './TableContentBody/TableContentBody';
-import TableContentHeader from './TableContentHeader/TableContentHeader';
-import TableFooter from './TableFooter';
-import TableHeader from './TableHeader/TableHeader';
-
-declare module '@tanstack/table-core' {
+declare module "@tanstack/table-core" {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
   interface ColumnMeta<TData extends RowData, TValue> {
     skeleton?: JSX.Element;
     filterBy?: string | string[];
-    filterKey?: string;
+    filterValueBy?: string;
+    filterLabelBy?: string;
     filterLabel?: string;
     filterSearchBy?: string;
-    getFilterOptions?: (params?: BaseQueryParamsType) => Promise<unknown[]>;
+    getFilterOptions?: (params?: IBaseListQuery) => Promise<unknown[]>;
     filterLabelFormatter?: (value: unknown) => string;
   }
 }
 
+type TableRowActionNameType = `on${string}`;
+
+export interface CustomTableBodyProps<TData = TableDataType> {
+  data: TData[];
+  isLoading: boolean;
+  [key: TableRowActionNameType]: TableRowActionClickHandlerType;
+  [key: string]: unknown;
+}
+
 export interface TableProps<TData = TableDataType> {
   data: TData[];
-  columns: Array<ColumnDef<TData>>;
+  columns: Array<ColumnDef<TData, unknown>>;
+  hiddenColumns?: Array<keyof TData | boolean>;
   pagination?: TablePaginationType;
   sorting?: SortingState;
-  rowSelection?: RowSelectionState;
   isLoading?: boolean;
+  rowSelection?: RowSelectionState;
+  rowSelectionType?: TABLE_ROW_SELECTION_TYPE_ENUM;
+  tableBodyProps?: Omit<CustomTableBodyProps, "data" | "isLoading">;
+  renderTableBody?: (props: CustomTableBodyProps) => ReactElement;
   onChangePagination?: OnChangeFn<TablePaginationType>;
   onChangeSorting?: OnChangeFn<SortingState>;
   onChangeFilters?: OnChangeFn<TableColumnFilterState[]>;
@@ -51,10 +71,14 @@ export interface TableProps<TData = TableDataType> {
 const Table = ({
   data,
   columns: columnsProp,
+  hiddenColumns = [],
   pagination,
   sorting,
-  rowSelection = {},
   isLoading = false,
+  rowSelection = {},
+  rowSelectionType = TABLE_ROW_SELECTION_TYPE_ENUM.MULTIPLE,
+  tableBodyProps = {},
+  renderTableBody,
   onChangePagination,
   onChangeSorting,
   onChangeFilters,
@@ -87,20 +111,46 @@ const Table = ({
       },
       sorting,
       rowSelection,
+      columnVisibility: hiddenColumns
+        .filter((column) => typeof column === "string" && !column.startsWith("_"))
+        .reduce((acc, column) => ({ ...acc, [String(column)]: false }), {}),
     },
     getCoreRowModel: getCoreRowModel(),
     manualSorting: true,
     onSortingChange: onChangeSorting,
     onPaginationChange: (state) => {
-      if (typeof state === 'function') {
+      if (typeof state === "function") {
         const newState = state(pagination as PaginationState);
         onChangePagination?.({ ...newState, page: newState.pageIndex + 1 });
         return;
       }
       onChangePagination?.(state as TablePaginationType);
     },
-    onRowSelectionChange: onChangeRowSelection,
-    getRowId: (row) => row.id || row.code || 0,
+    onRowSelectionChange: (state) => {
+      if (typeof state !== "function") {
+        onChangeRowSelection?.(state);
+        return;
+      }
+
+      if (rowSelectionType === TABLE_ROW_SELECTION_TYPE_ENUM.MULTIPLE) {
+        onChangeRowSelection?.(state);
+        return;
+      }
+
+      const newSelection = state(rowSelection);
+      let newSelectionRowKey = "";
+
+      keys(newSelection).forEach((key) => {
+        if (newSelection[key] !== rowSelection[key]) {
+          newSelectionRowKey = key;
+        }
+      });
+
+      onChangeRowSelection?.({
+        [newSelectionRowKey]: true,
+      });
+    },
+    getRowId: (row) => row.id || row.code || Math.random().toString(36).substr(2, 9),
   });
 
   const tableRows = useMemo(() => table.getRowModel().rows, [data]);
@@ -130,10 +180,18 @@ const Table = ({
     <div>
       <TableHeader headerGroups={tableHeaderGroup} onChangeFilters={onChangeFilters} />
       <div className="overflow-auto">
-        <table className="relative min-w-full">
-          <TableContentHeader headerGroups={tableHeaderGroup} />
-          <TableContentBody rows={tableRows} headers={tableHeaderGroup[0].headers} isLoading={isLoading} />
-        </table>
+        {renderTableBody ? (
+          renderTableBody({
+            data,
+            isLoading,
+            ...tableBodyProps,
+          })
+        ) : (
+          <table className="relative min-w-full">
+            <TableContentHeader headerGroups={tableHeaderGroup} />
+            <TableContentBody rows={tableRows} headers={tableHeaderGroup[0].headers} isLoading={isLoading} />
+          </table>
+        )}
       </div>
       {(Boolean(tableRows.length) || isLoading) && (
         <TableFooter

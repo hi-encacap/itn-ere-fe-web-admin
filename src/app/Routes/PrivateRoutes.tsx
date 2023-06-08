@@ -1,10 +1,8 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
-import { USER_ROLE_ENUM } from '@constants/enums';
-
-import NotFoundError from '@common/Errors/Components/NotFoundError';
-
-import useSelector from '@hooks/useSelector';
+import { USER_ROLE_ENUM } from "@constants/enums";
+import NotFoundError from "@common/Errors/Components/NotFoundError";
+import useSelector from "@hooks/useSelector";
 
 interface PrivateRoutesProps {
   children: JSX.Element;
@@ -12,8 +10,8 @@ interface PrivateRoutesProps {
 }
 
 const PrivateRoutes = ({ children, requiredRoles }: PrivateRoutesProps): JSX.Element => {
-  const user = useSelector((state) => state.user);
-  const userRoleSlugs = useMemo(() => user.roles?.map((role) => role.slug) ?? [], [user]);
+  const user = useSelector((state) => state.common.user);
+  const userRoleSlugs = useMemo(() => user?.roles?.map((role) => role.slug) ?? [], [user]);
 
   const hasPermissionToAccess = useMemo(() => {
     if (!requiredRoles) {

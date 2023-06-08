@@ -14,7 +14,94 @@ h3,
 h4,
 h5,
 h6 {
-  @apply text-slate-700;
+  @apply scroll-smooth text-slate-700;
+}
+
+.encacap-select-option-selected {
+  * {
+    @apply text-white;
+  }
+}
+
+.overflow-overlay {
+  @apply overflow-auto;
+
+  &::-webkit-scrollbar {
+    @apply w-2 rounded-br-md rounded-tr-md border-2 border-gray-100 bg-transparent;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply rounded-t-full rounded-b-full border-4 border-black bg-transparent bg-clip-padding duration-100;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      @apply bg-gray-200;
+    }
+  }
+}
+
+.scroll-hidden {
+  &::-webkit-scrollbar {
+    @apply hidden;
+  }
+}
+
+.scroll-transparent {
+  &::-webkit-scrollbar {
+    @apply w-2 rounded-br-md rounded-tr-md border-2 border-gray-100 bg-transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply w-1 rounded-t-md rounded-b-md bg-gray-100;
+  }
+}
+
+.Toastify__toast-container.Toastify__toast-container--top-right {
+  @apply w-96 p-0 shadow-none;
+
+  .Toastify__toast {
+    @apply relative overflow-hidden rounded-lg px-4 py-2 shadow-center;
+  }
+
+  .Toastify__toast-body {
+    @apply pr-8;
+  }
+
+  .Toastify__close-button {
+    @apply absolute right-4 top-5 z-0 flex h-6 w-6 items-center justify-center rounded-full pl-px text-slate-700;
+
+    svg {
+      @apply w-3;
+    }
+  }
+
+  .Toastify__progress-bar.Toastify__progress-bar--animated {
+    @apply absolute top-0 bottom-0 right-0 -z-10 h-full;
+
+    &.Toastify__progress-bar--success {
+      @apply bg-green-50;
+    }
+
+    &.Toastify__progress-bar--error {
+      @apply bg-red-100;
+    }
+  }
+}
+
+.tox {
+  &-tinymce {
+    border: none !important;
+  }
+
+  &-fullscreen {
+    top: 80px !important;
+    height: calc(100vh - 80px) !important;
+  }
 }
 
 .scroll-hidden {

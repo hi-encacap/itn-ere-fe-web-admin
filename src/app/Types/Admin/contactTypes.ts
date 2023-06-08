@@ -1,17 +1,8 @@
-import { Nullable } from '@interfaces/Common/commonTypes';
-import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
-import { ImageDataType } from '@interfaces/Common/imageTypes';
+import { IContact } from "@encacap-group/common/dist/re";
 
-export interface ContactDataType {
-  id: number;
-  name: string;
-  phone: string;
-  zalo: string;
-  email: string;
-  avatarId: string;
-  avatar: ImageDataType;
-}
+import { Nullable } from "@interfaces/Common/commonTypes";
+import { FormImageInputDataType } from "@interfaces/Common/elementTypes";
 
-export interface ContactFormDataType extends Omit<Nullable<ContactDataType>, 'avatar' | 'id' | 'avatarId'> {
+export interface ContactFormDataType extends Omit<Nullable<IContact>, "avatar" | "id" | "avatarId"> {
   avatar: FormImageInputDataType | null;
 }

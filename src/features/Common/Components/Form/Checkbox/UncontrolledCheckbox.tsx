@@ -1,7 +1,7 @@
-import { InputHTMLAttributes, useCallback, useEffect, useState } from 'react';
-import { BsCheck } from 'react-icons/bs';
-import { HiMinusSm } from 'react-icons/hi';
-import { twMerge } from 'tailwind-merge';
+import { InputHTMLAttributes, useCallback, useEffect, useState } from "react";
+import { BsCheck } from "react-icons/bs";
+import { HiMinusSm } from "react-icons/hi";
+import { twMerge } from "tailwind-merge";
 
 export interface UncontrolledCheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   indeterminate?: boolean;
@@ -18,7 +18,7 @@ const UncontrolledCheckbox = ({
   checked,
   indeterminate = false,
   disabled = false,
-  type = 'checkbox',
+  type = "checkbox",
   label,
   error,
   onChange,
@@ -27,15 +27,15 @@ const UncontrolledCheckbox = ({
   const [isChecked, setIsChecked] = useState(false);
 
   const iconTouchedClassName = twMerge(
-    !indeterminate && !isChecked && 'text-white group-hover:text-primary-700',
-    !indeterminate && isChecked && 'text-white group-hover:text-white',
-    indeterminate && 'text-primary-700 group-hover:text-primary-700',
-    disabled && isChecked && 'text-white group-hover:text-white',
-    disabled && !isChecked && 'text-gray-100 group-hover:text-gray-100',
+    !indeterminate && !isChecked && "text-white group-hover:text-primary-700",
+    !indeterminate && isChecked && "text-white group-hover:text-white",
+    indeterminate && "text-primary-700 group-hover:text-primary-700",
+    disabled && isChecked && "text-white group-hover:text-white",
+    disabled && !isChecked && "text-gray-100 group-hover:text-gray-100",
   );
 
   const iconClassName = twMerge(
-    'absolute top-1/2 left-1/2 z-0 mt-px -translate-x-1/2 -translate-y-1/2 text-white group-hover:text-primary-700',
+    "absolute top-1/2 left-1/2 z-0 mt-px -translate-x-1/2 -translate-y-1/2 text-white group-hover:text-primary-700",
     iconTouchedClassName,
   );
 
@@ -55,16 +55,16 @@ const UncontrolledCheckbox = ({
   return (
     <label
       htmlFor={id ?? name}
-      className={twMerge('inline-flex space-x-4', className, 'group items-center justify-start')}
+      className={twMerge("inline-flex space-x-4", className, "group items-center justify-start")}
     >
       <div className="relative z-0 inline-block h-5 w-5 rounded-md bg-white">
         <div
           className={twMerge(
-            'absolute inset-0 -z-10 h-5 w-5 cursor-pointer rounded-md border-2 border-gray-200 group-hover:border-teal-500',
-            error && 'border-red-500',
-            isChecked && !indeterminate && !disabled && 'border-teal-500 bg-teal-500',
-            indeterminate && !disabled && 'border-teal-500',
-            disabled && 'cursor-not-allowed bg-gray-100 group-hover:border-gray-100',
+            "absolute inset-0 -z-10 h-5 w-5 cursor-pointer rounded-md border-2 border-gray-200 group-hover:border-teal-500",
+            error && "border-red-500",
+            isChecked && !indeterminate && !disabled && "border-teal-500 bg-teal-500",
+            indeterminate && !disabled && "border-teal-500",
+            disabled && "cursor-not-allowed bg-gray-100 group-hover:border-gray-100",
           )}
         />
         {indeterminate ? (

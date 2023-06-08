@@ -1,18 +1,18 @@
-import { omit } from 'lodash';
-import { useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
+import { omit } from "lodash";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
-import { adminContactService } from '@services/index';
+import { ConfirmationModal } from "@components/Modal";
+import { ConfirmationModalProps } from "@components/Modal/ConfirmationModal";
+import { adminContactService } from "@services/index";
 
-import { ConfirmationModal } from '@components/Modal';
-import { ConfirmationModalProps } from '@components/Modal/ConfirmationModal';
-
-import AdminContactDeleteConfirmationModalContent from './AdminContactDeleteConfirmationModalContent';
+import AdminContactDeleteConfirmationModalContent from "./AdminContactDeleteConfirmationModalContent";
 
 interface AdminContactDeleteConfirmationModalProps
-  extends Omit<ConfirmationModalProps, 'title' | 'message' | 'onConfirm'> {
+  extends Omit<ConfirmationModalProps, "title" | "message" | "onConfirm"> {
   contactId?: number;
   onDeleted: () => void;
+  onDeleteFailed: () => void;
 }
 
 const AdminContactDeleteConfirmationModal = ({
@@ -20,10 +20,11 @@ const AdminContactDeleteConfirmationModal = ({
   contactId,
   onDeleted,
   onClose,
+  onDeleteFailed,
   ...props
 }: AdminContactDeleteConfirmationModalProps) => {
-  const { t } = useTranslation('admin', {
-    keyPrefix: 'admin:page.contact.modal.delete',
+  const { t } = useTranslation("admin", {
+    keyPrefix: "admin:page.contact.modal.delete",
   });
 
   const handleDeleteContact = useCallback(() => {
@@ -33,10 +34,9 @@ const AdminContactDeleteConfirmationModal = ({
       .deleteContactById(contactId)
       .then(() => {
         onDeleted();
-        onClose();
       })
-      .catch(() => {
-        // TODO: Handle error
+      .catch(onDeleteFailed)
+      .finally(() => {
         onClose();
       });
   }, [contactId, onClose, onDeleted]);
@@ -45,11 +45,11 @@ const AdminContactDeleteConfirmationModal = ({
     <ConfirmationModal
       isOpen={isOpen}
       status="danger"
-      title={t('title')}
+      title={t("title")}
       message={<AdminContactDeleteConfirmationModalContent />}
       onConfirm={handleDeleteContact}
       onClose={onClose}
-      {...omit(props, 'title', 'message')}
+      {...omit(props, "title", "message")}
     />
   );
 };

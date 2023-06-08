@@ -1,9 +1,9 @@
-import { flexRender, Header } from '@tanstack/react-table';
-import { ReactNode, useMemo } from 'react';
+import { flexRender, Header } from "@tanstack/react-table";
+import { ReactNode, useMemo } from "react";
 
-import { LoadingSkeleton } from '@components/Loading';
+import { LoadingSkeleton } from "@components/Loading";
 
-import TableRowActionSkeleton from '../TableRowActionSkeleton';
+import TableRowActionSkeleton from "../TableRowActionSkeleton";
 
 interface TableContentBodySkeletonItemProps {
   header: Header<unknown, unknown>;
@@ -12,7 +12,7 @@ interface TableContentBodySkeletonItemProps {
 const TableContentBodySkeletonItem = ({ header }: TableContentBodySkeletonItemProps): JSX.Element => {
   const columnMeta = useMemo(() => header.column.columnDef.meta, [header.column.columnDef.meta]);
 
-  if (header.id === 'actions' && columnMeta?.skeleton === null) {
+  if (header.id === "actions" && !columnMeta?.skeleton) {
     return <TableRowActionSkeleton />;
   }
 

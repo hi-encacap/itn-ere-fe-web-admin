@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { useEffect } from "react";
+import { twMerge } from "tailwind-merge";
 
 export interface DropdownContainerProps {
   children: React.ReactNode;
@@ -23,16 +23,16 @@ const DropdownContainer = ({ children, className, parentRef, onClickOutside }: D
       onClickOutside?.();
     };
 
-    window.addEventListener('click', handleClickOutside);
+    window.addEventListener("click", handleClickOutside);
 
     return () => {
-      window.removeEventListener('click', handleClickOutside);
+      window.removeEventListener("click", handleClickOutside);
     };
   }, [parentRef.current]);
 
   return (
     <div
-      className={twMerge('flex flex-col rounded-lg bg-white text-base shadow-xl shadow-black/10', className)}
+      className={twMerge("flex flex-col rounded-lg bg-white text-base shadow-xl shadow-black/10", className)}
     >
       {children}
     </div>

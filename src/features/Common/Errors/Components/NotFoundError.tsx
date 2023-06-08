@@ -1,9 +1,9 @@
-import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 const NotFoundError: FC = () => {
-  const { t } = useTranslation(['common'], {
-    keyPrefix: 'common:page.error.notFound',
+  const { t } = useTranslation(["common"], {
+    keyPrefix: "common:page.error.notFound",
   });
 
   return (
@@ -11,7 +11,7 @@ const NotFoundError: FC = () => {
       <div className="flex items-center justify-center">
         <div>404</div>
         <div className="mx-4 h-6 w-px bg-gray-200" />
-        <div>{t('title')}</div>
+        <div>{t("title")}</div>
       </div>
     </div>
   );

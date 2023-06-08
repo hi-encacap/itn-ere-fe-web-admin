@@ -1,7 +1,7 @@
-import { ColumnDef } from '@tanstack/react-table';
+import { ColumnDef } from "@tanstack/react-table";
 
 const normalizeTableColumn = <TData = unknown>(column: ColumnDef<TData>): ColumnDef<TData> => {
-  const defaultCellColumn: ColumnDef<TData>['cell'] = (info) => info.getValue() ?? '-';
+  const defaultCellColumn: ColumnDef<TData>["cell"] = (info) => info.getValue() ?? "-";
   return {
     cell: defaultCellColumn,
     ...column,

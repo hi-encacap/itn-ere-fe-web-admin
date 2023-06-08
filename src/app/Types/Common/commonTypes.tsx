@@ -1,56 +1,13 @@
-import { PaginationState } from '@tanstack/react-table';
-import { AxiosError, AxiosResponse } from 'axios';
-import { FieldPath, FieldValues } from 'react-hook-form';
+import { IBaseListQuery, IResponseWithMeta } from "@encacap-group/common/dist/base";
+import { PaginationState } from "@tanstack/react-table";
+import { Key } from "react";
+import { Control } from "react-hook-form";
 
-export interface AxiosErrorDataType {
-  statusCode: number;
-  message: string;
-  error: {
-    code: number;
-    message: string;
-    field: Record<FieldPath<FieldValues>, string[]>;
-  };
-  code: string;
-}
-
-export type AxiosErrorType = AxiosError<AxiosErrorDataType>;
-
-export interface TablePaginationType extends Omit<PaginationState, 'pageIndex' | 'pageSize'> {
+export interface TablePaginationType extends Omit<PaginationState, "pageIndex" | "pageSize"> {
   page?: number;
   limit?: number;
   totalRows?: number;
   totalPages?: number;
-}
-
-export interface ResponseMetaType {
-  page: number;
-  limit: number;
-  totalRows: number;
-  totalPages: number;
-}
-
-export interface ResponseWithMetaType<T = unknown> extends Partial<AxiosResponse> {
-  data: T;
-  meta: ResponseMetaType;
-}
-
-export interface AxiosResponseType<T> extends AxiosResponse {
-  statusCode: number;
-  message: string;
-  meta: ResponseMetaType;
-  data: {
-    data: T;
-  };
-}
-
-export interface BaseQueryParamsType {
-  page?: number;
-  limit?: number;
-  filterBy?: string;
-  filterValue?: string;
-  sortBy?: string;
-  searchValue?: string;
-  searchBy?: string;
 }
 
 export interface FormGenericErrorType {
@@ -64,8 +21,21 @@ export interface SidebarItemType {
   icon: JSX.Element;
   label: string;
   to: string;
+  children?: SidebarItemType[];
 }
 
 export type Nullable<T> = {
   [P in keyof T]: T[P] | null;
 };
+
+// #skipcq: JS-0323
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type HookFormControl = Control<any>;
+
+export type ServiceGetManyFunctionType<T> = (query?: IBaseListQuery) => Promise<IResponseWithMeta<T[]>>;
+export type ServiceGetAllFunctionType<T> = (query?: IBaseListQuery) => Promise<T[]>;
+export type ServiceAddFunctionType<T> = (data: T) => Promise<unknown>;
+export type ServiceUpdateFunctionType<T> = (id: Key, data: T) => Promise<unknown>;
+export type ServiceDeleteFunctionType = (id: Key) => Promise<unknown>;
+
+export type TableOnclickFunctionType = (id: Key) => void;

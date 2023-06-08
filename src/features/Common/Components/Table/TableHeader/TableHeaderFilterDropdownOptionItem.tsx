@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
+import { useCallback } from "react";
 
-import { Checkbox } from '@components/Form';
+import { Checkbox } from "@components/Form";
 
 export interface TableFilterOptionPrivateItemType {
   value: string;

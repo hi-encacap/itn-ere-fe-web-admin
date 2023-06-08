@@ -1,13 +1,13 @@
-import { Key, useCallback, useEffect, useRef, useState } from 'react';
-import { HiMenu } from 'react-icons/hi';
+import { Key, useCallback, useEffect, useRef, useState } from "react";
+import { HiMenu } from "react-icons/hi";
 
-import { TableRowActionDropdownItemType } from '@interfaces/Common/elementTypes';
+import { TableRowActionDropdownItemType } from "@interfaces/Common/elementTypes";
 
-import TableRowActionDropdownMenu from './TableRowActionDropdownMenu';
+import TableRowActionDropdownMenu from "./TableRowActionDropdownMenu";
 
 export interface TableRowActionDropdownProps {
   id: Key;
-  items: Array<TableRowActionDropdownItemType<Key>>;
+  items: TableRowActionDropdownItemType[];
 }
 
 const TableRowActionDropdown = ({ id, items }: TableRowActionDropdownProps) => {
@@ -29,9 +29,9 @@ const TableRowActionDropdown = ({ id, items }: TableRowActionDropdownProps) => {
       }
       setIsShowDropdownMenu(false);
     };
-    window.addEventListener('click', handleClickOutside);
+    window.addEventListener("click", handleClickOutside);
     return () => {
-      window.removeEventListener('click', handleClickOutside);
+      window.removeEventListener("click", handleClickOutside);
     };
   }, [toggleButtonRef.current]);
 

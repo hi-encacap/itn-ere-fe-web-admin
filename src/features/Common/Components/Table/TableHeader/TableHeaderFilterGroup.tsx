@@ -1,9 +1,9 @@
-import { HeaderGroup } from '@tanstack/react-table';
-import { memo } from 'react';
+import { HeaderGroup } from "@tanstack/react-table";
+import { memo } from "react";
 
-import { TableDataType } from '@interfaces/Common/elementTypes';
+import { TableDataType } from "@interfaces/Common/elementTypes";
 
-import TableHeaderFilter from './TableHeaderFilter';
+import TableHeaderFilter from "./TableHeaderFilter";
 
 export interface TableHeaderFilterGroupProps<TData = TableDataType> {
   headerGroups: Array<HeaderGroup<TData>>;

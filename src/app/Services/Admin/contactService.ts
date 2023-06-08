@@ -1,19 +1,24 @@
-import { pick } from 'lodash';
+import { IBaseListQuery } from "@encacap-group/common/dist/base";
+import { IContact } from "@encacap-group/common/dist/re";
+import { pick } from "lodash";
 
-import { ADMIN_CONTACT_API_PATH } from '@constants/apis';
-import { ContactDataType, ContactFormDataType } from '@interfaces/Admin/contactTypes';
-import { BaseQueryParamsType } from '@interfaces/Common/commonTypes';
+import { ADMIN_CONTACT_API_PATH } from "@constants/apis";
+import { ContactFormDataType } from "@interfaces/Admin/contactTypes";
+import axiosInstance from "@utils/Http/axiosInstance";
 
-import axiosInstance from '@utils/Http/axiosInstance';
-
-const getContacts = async (params?: BaseQueryParamsType) => {
+const getContacts = async (params?: IBaseListQuery) => {
   const response = await axiosInstance.get(ADMIN_CONTACT_API_PATH.CONTACTS_PATH, {
     params,
   });
   return response.data;
 };
 
-const createContact = async (data: ContactFormDataType): Promise<ContactDataType> => {
+const getContactById = async (id: number) => {
+  const response = await axiosInstance.get(ADMIN_CONTACT_API_PATH.CONTACT_PATH(id));
+  return response.data.data;
+};
+
+const createContact = async (data: ContactFormDataType): Promise<IContact> => {
   const response = await axiosInstance.post(ADMIN_CONTACT_API_PATH.CONTACTS_PATH, {
     ...data,
     avatarId: data.avatar?.id,
@@ -22,9 +27,9 @@ const createContact = async (data: ContactFormDataType): Promise<ContactDataType
   return response.data.data;
 };
 
-const updateContactById = async (id: number, data: ContactFormDataType): Promise<ContactDataType> => {
+const updateContactById = async (id: number, data: ContactFormDataType): Promise<IContact> => {
   const response = await axiosInstance.put(ADMIN_CONTACT_API_PATH.CONTACT_PATH(id), {
-    ...pick(data, ['name', 'phone', 'zalo', 'email']),
+    ...pick(data, ["name", "phone", "zalo", "email"]),
     avatarId: data.avatar?.id,
   });
 
@@ -36,4 +41,4 @@ const deleteContactById = async (id: number) => {
   return response.data;
 };
 
-export { getContacts, createContact, updateContactById, deleteContactById };
+export { createContact, deleteContactById, getContactById, getContacts, updateContactById };

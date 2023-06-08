@@ -3,7 +3,15 @@
     "sidebar": {
       "dashboard": "Dashboard",
       "category": "Danh mục",
-      "contact": "Danh bạ"
+      "contact": "Danh bạ",
+      "estate": "Bất động sản",
+      "estate_list": "Danh sách bất động sản",
+      "estate_property": "Thiết lập thuộc tính bất động sản",
+      "location": "Khu vực hoạt động",
+      "location_province": "Tỉnh/Thành phố",
+      "location_district": "Quận/Huyện",
+      "location_ward": "Xã/Phường/Thị trấn",
+      "location_address_book": "Sổ địa chỉ"
     }
   },
   "page": {
@@ -68,6 +76,541 @@
             }
           }
         }
+      },
+      "notification": {
+        "error": "Thất bại.",
+        "success": "Thành công.",
+        "categoryCreated": "Đã tạo danh mục mới.",
+        "categoryUpdated": "Danh mục đã được cập nhật.",
+        "categoryDeleted": "Danh mục đã bị xóa vĩnh viễn.",
+        "categoryDeleteFailed": "Đã xảy ra lỗi khi xóa danh mục.",
+        "categoryUpdateFailed": "Đã xảy ra lỗi khi cập nhật danh mục.",
+        "categoryCreateFailed": "Đã xảy ra lỗi khi tạo danh mục."
+      }
+    },
+    "contact": {
+      "title": "Quản lý danh bạ",
+      "header": {
+        "create": "Thêm liên hệ"
+      },
+      "table": {
+        "column": {
+          "avatar": "Ảnh đại diện",
+          "id": "ID",
+          "name": "Tên liên hệ",
+          "phone": "Số điện thoại",
+          "zalo": "Zalo",
+          "email": "Thư điện tử",
+          "actions": {
+            "delete": "Xóa"
+          }
+        }
+      },
+      "modal": {
+        "modification": {
+          "title": {
+            "create": "Thêm liên hệ",
+            "edit": "Chỉnh sửa liên hệ"
+          },
+          "form": {
+            "name": {
+              "label": "Tên liên hệ",
+              "placeholder": "Nhập tên liên hệ",
+              "required": "Tên liên hệ không được phép để trống.",
+              "contactAlreadyExists": "Liên hệ đã tồn tại."
+            },
+            "phone": {
+              "label": "Số điện thoại",
+              "placeholder": "Nhập số điện thoại",
+              "required": "Số điện thoại không được phép để trống.",
+              "invalid": "Số điện thoại không hợp lệ."
+            },
+            "zalo": {
+              "label": "Zalo",
+              "placeholder": "Nhập Zalo",
+              "required": "Zalo không được phép để trống.",
+              "invalid": "Zalo không hợp lệ."
+            },
+            "email": {
+              "label": "Thư điện tử",
+              "placeholder": "Nhập địa chỉ thư điện tử"
+            },
+            "avatar": {
+              "label": "Ảnh đại diện",
+              "placeholder": "Chọn ảnh đại diện",
+              "required": "Ảnh đại diện không được phép để trống."
+            }
+          }
+        },
+        "delete": {
+          "title": "Xóa liên hệ",
+          "message": {
+            "contactWillBeDeleted": "Liên hệ này sẽ bị xóa vĩnh viển, sau đó",
+            "cannotCreateNewPost": "Bạn sẽ không thể tạo bài viết sử dụng liên hệ này.",
+            "oldPostWillBeUnpublished": "Tất cả bài đã xuất bản có liên hệ này sẽ chuyển sang trạng thái nháp.",
+            "oldDraftWillBeDeleted": "Tất cả bài nháp có liên hệ này sẽ bị xóa vĩnh viển.",
+            "areYouSure": "Bạn có chắc muốn tiếp tục không?"
+          }
+        }
+      },
+      "notification": {
+        "error": "Thất bại.",
+        "success": "Thành công.",
+        "contactCreated": "Đã tạo liên hệ mới.",
+        "contactUpdated": "Liên hệ đã được cập nhật.",
+        "contactDeleted": "Liên hệ đã bị xóa vĩnh viễn.",
+        "contactDeleteFailed": "Đã xảy ra lỗi khi xóa liên hệ.",
+        "contactUpdateFailed": "Đã xảy ra lỗi khi cập nhật liên hệ.",
+        "contactCreateFailed": "Đã xảy ra lỗi khi tạo liên hệ."
+      }
+    },
+    "location": {
+      "province": {
+        "title": "Quản lý tỉnh/thành phố",
+        "header": {
+          "create": "Thêm tỉnh/thành phố"
+        },
+        "table": {
+          "column": {
+            "code": "Mã",
+            "name": "Tên"
+          }
+        },
+        "modal": {
+          "delete": {
+            "title": "Xóa tỉnh/thành phố",
+            "message": {
+              "provinceWillBeDeleted": "Tỉnh/thành phốphố này sẽ bị xóa vĩnh viển, sau đó",
+              "cannotCreateNewPost": "Bạn sẽ không thể tạo bài viết sử dụng tỉnh/thành phố này.",
+              "oldPostWillBeUnpublished": "Tất cả bài đã xuất bản có tỉnh/thành phố này sẽ chuyển sang trạng thái nháp.",
+              "oldDraftWillBeDeleted": "Tất cả bài nháp có tỉnh/thành phố này sẽ bị xóa vĩnh viển.",
+              "areYouSure": "Bạn có chắc muốn tiếp tục không?"
+            }
+          },
+          "modification": {
+            "title": "Thêm tỉnh/thành phố",
+            "form": {
+              "id": {
+                "label": "Tỉnh/thành phố",
+                "placeholder": "Chọn tỉnh/thành phố",
+                "required": "Tỉnh/thành phố không được phép để trống.",
+                "provinceAlreadyExists": "Tỉnh/thành phố đã tồn tại."
+              }
+            }
+          }
+        },
+        "notification": {
+          "delete": {
+            "provinceDeleted": "Tỉnh/thành phố đã bị xóa vĩnh viễn.",
+            "provinceDeleteFailed": "Đã xảy ra lỗi khi xóa tỉnh/thành phố."
+          },
+          "modify": {
+            "provinceCreated": "Đã tạo tỉnh/thành phố mới.",
+            "provinceCreateFailed": "Đã xảy ra lỗi khi thêm tỉnh/thành phố."
+          }
+        }
+      },
+      "district": {
+        "title": "Quản lý quận/huyện",
+        "header": {
+          "create": "Thêm quận/huyện"
+        },
+        "table": {
+          "column": {
+            "code": "Mã",
+            "name": "Tên",
+            "provinceName": "Tỉnh/thành phố"
+          }
+        },
+        "modal": {
+          "delete": {
+            "title": "Xóa quận/huyện",
+            "message": {
+              "districtWillBeDeleted": "Quận/huyện này sẽ bị xóa vĩnh viển, sau đó",
+              "cannotCreateNewPost": "Bạn sẽ không thể tạo bài viết sử dụng quận/huyện này.",
+              "oldPostWillBeUnpublished": "Tất cả bài đã xuất bản có quận/huyện này sẽ chuyển sang trạng thái nháp.",
+              "oldDraftWillBeDeleted": "Tất cả bài nháp có quận/huyện này sẽ bị xóa vĩnh viển.",
+              "areYouSure": "Bạn có chắc muốn tiếp tục không?"
+            }
+          },
+          "modification": {
+            "title": "Thêm quận/huyện",
+            "form": {
+              "id": {
+                "label": "Quận/huyện",
+                "placeholder": "Chọn quận/huyện",
+                "required": "Tỉnh/thành phố không được phép để trống.",
+                "districtAlreadyExists": "quận/huyện đã tồn tại."
+              },
+              "provinceCode": {
+                "required": "Tỉnh/thành phố không được phép để trống."
+              }
+            }
+          }
+        },
+        "notification": {
+          "delete": {
+            "districtDeleted": "Quận/huyện đã bị xóa vĩnh viễn.",
+            "districtDeleteFailed": "Đã xảy ra lỗi khi xóa quận/huyện."
+          },
+          "modify": {
+            "districtCreated": "Đã thêm quận/huyện mới.",
+            "districtCreateFailed": "Đã xảy ra lỗi khi thêm quận/huyện."
+          }
+        }
+      },
+      "ward": {
+        "title": "Quản lý xã/phường/thị trấn",
+        "header": {
+          "create": "Thêm xã/phường/thị trấn"
+        },
+        "table": {
+          "column": {
+            "code": "Mã",
+            "name": "Tên",
+            "districtName": "Quận/huyện",
+            "provinceName": "Tỉnh/thành phố"
+          }
+        },
+        "modal": {
+          "delete": {
+            "title": "Xóa xã/phường/thị trấn",
+            "message": {
+              "willBeDeleted": "Xã/phường/thị trấn này sẽ bị xóa vĩnh viển, sau đó",
+              "cannotCreateNewPost": "Bạn sẽ không thể tạo bài viết sử dụng xã/phường/thị trấn này.",
+              "oldPostWillBeUnpublished": "Tất cả bài đã xuất bản có xã/phường/thị trấn này sẽ chuyển sang trạng thái nháp.",
+              "oldDraftWillBeDeleted": "Tất cả bài nháp có xã/phường/thị trấn này sẽ bị xóa vĩnh viển.",
+              "areYouSure": "Bạn có chắc muốn tiếp tục không?"
+            }
+          },
+          "modification": {
+            "title": "Thêm xã/phường/thị trấn",
+            "form": {
+              "id": {
+                "label": "Xã/phường/thị trấn",
+                "placeholder": "Chọn xã/phường/thị trấn",
+                "required": "Tỉnh/thành phố không được phép để trống.",
+                "districtAlreadyExists": "xã/phường/thị trấn đã tồn tại."
+              },
+              "provinceId": {
+                "required": "Tỉnh/thành phố không được phép để trống."
+              }
+            }
+          }
+        },
+        "notification": {
+          "delete": {
+            "deleted": "Xã/phường/thị trấn đã bị xóa vĩnh viễn.",
+            "deleteFailed": "Đã xảy ra lỗi khi xóa xã/phường/thị trấn."
+          },
+          "modify": {
+            "created": "Đã thêm xã/phường/thị trấn mới.",
+            "createFailed": "Đã xảy ra lỗi khi thêm xã/phường/thị trấn."
+          }
+        }
+      },
+      "addressBook": {
+        "title": "Sổ địa chỉ",
+        "table": {
+          "column": {
+            "id": "Mã",
+            "address": "Địa chỉ",
+            "wardName": "Xã/phường/thị trấn",
+            "districtName": "Quận/huyện",
+            "provinceName": "Tỉnh/thành phố"
+          }
+        },
+        "modal": {
+          "delete": {
+            "title": "Xóa địa chỉ",
+            "message": "Thao tác này sẽ không tác động đến những bài viết đã được xuất bản. Bạn có chắc muốn tiếp tục không?"
+          }
+        },
+        "notification": {
+          "delete": {
+            "deleted": "Địa chỉ đã bị xóa vĩnh viễn.",
+            "deleteFailed": "Đã xảy ra lỗi khi xóa địa chỉ."
+          }
+        }
+      },
+      "modal": {
+        "modification": {
+          "form": {
+            "provinceCode": {
+              "label": "Tỉnh/thành phố",
+              "placeholder": "Chọn tỉnh/thành phố",
+              "required": "Tỉnh/thành phố không được phép để trống."
+            },
+            "districtCode": {
+              "label": "Quận/huyện",
+              "placeholder": "Chọn quận/huyện",
+              "required": "Quận/huyện không được phép để trống."
+            }
+          }
+        }
+      }
+    },
+    "estate": {
+      "property": {
+        "title": "Thiết lập thuộc tính bất động sản",
+        "header": {
+          "create": "Thêm thuộc tính"
+        },
+        "table": {
+          "column": {
+            "id": "Mã",
+            "name": "Tên",
+            "categoryName": "Danh mục"
+          }
+        },
+        "modal": {
+          "modification": {
+            "title": {
+              "create": "Thêm thuộc tính",
+              "edit": "Chỉnh sửa thuộc tính"
+            },
+            "form": {
+              "name": {
+                "label": "Tên thuộc tính",
+                "placeholder": "Nhập tên thuộc tính",
+                "required": "Tên thuộc tính không được phép để trống."
+              }
+            }
+          },
+          "delete": {
+            "title": "Xóa thuộc tính",
+            "message": "Danh mục có thể được xóa một cách an toàn mà không ảnh hưởng đến bất kỳ bài viết nào. Bạn có muốn tiếp tục không?"
+          }
+        },
+        "notification": {
+          "created": "Đã thêm thuộc tính mới.",
+          "fetchError": "Đã xảy ra lỗi khi lấy thông tin thuộc tính. Vui lòng thử lại sau.",
+          "createFailed": "Đã xảy ra lỗi khi thêm thuộc tính.",
+          "updated": "Đã cập nhật thuộc tính.",
+          "updateFailed": "Đã xảy ra lỗi khi cập nhật thuộc tính.",
+          "deleted": "Đã xóa thuộc tính.",
+          "deleteFailed": "Đã xảy ra lỗi khi xóa thuộc tính."
+        }
+      },
+      "modification": {
+        "title": {
+          "create": "Thêm bất động sản",
+          "edit": "Chỉnh sửa bất động sản",
+          "draft": "Bài viết nháp"
+        },
+        "header": {
+          "backToEstateList": "Danh sách bất động sản"
+        },
+        "form": {
+          "general": {
+            "title": "Thông tin chung",
+            "form": {
+              "title": {
+                "label": "Tiêu đề",
+                "placeholder": "Nhập tiêu đề",
+                "required": "Tiêu đề không được phép để trống.",
+                "requiredInDraft": "Tiêu đề không được phép để trống khi lưu nháp."
+              },
+              "customId": {
+                "label": "Mã bất động sản",
+                "placeholder": "Nhập mã bất động sản"
+              },
+              "price": {
+                "label": "Giá bán",
+                "placeholder": "Nhập giá bán",
+                "required": "Giá bán không được phép để trống."
+              },
+              "area": {
+                "label": "Diện tích",
+                "placeholder": "Nhập diện tích",
+                "required": "Diện tích không được phép để trống."
+              }
+            }
+          },
+          "location": {
+            "title": "Thông tin vị trí",
+            "form": {
+              "address": {
+                "label": "Địa chỉ",
+                "placeholder": "Nhập địa chỉ",
+                "required": "Địa chỉ không được phép để trống."
+              },
+              "addressNote": {
+                "label": "Chi tiết vị trí",
+                "placeholder": "Nhập chi tiết hoặc ghi chú về vị trí"
+              },
+              "pickOnMap": "Chọn từ bản đồ"
+            }
+          },
+          "detail": {
+            "title": "Thông tin chi tiết",
+            "form": {
+              "quarter": {
+                "label": "Hướng",
+                "placeholder": "Chọn hướng"
+              },
+              "property": {
+                "placeholder": "Nhập số {{name}}"
+              },
+              "addProperty": "Thêm thuộc tính",
+              "description": {
+                "label": "Mô tả",
+                "placeholder": "Nhập mô tả",
+                "required": "Mô tả không được phép để trống."
+              }
+            }
+          },
+          "contact": {
+            "title": "Thông tin liên hệ",
+            "phone": "Số điện thoại",
+            "zalo": "Zalo",
+            "email": "Thư điện tử",
+            "change": "Thay đổi",
+            "picker": {
+              "title": "Chọn thông tin liên hệ"
+            },
+            "pick": "Nhấn để chọn thông tin liên hệ",
+            "required": "Thông tin liên hệ không được phép để trống."
+          },
+          "media": {
+            "title": "Thông tin khác",
+            "form": {
+              "avatar": {
+                "label": "Ảnh đại diện",
+                "placeholder": "Chọn ảnh đại diện",
+                "required": "Ảnh đại diện không được phép để trống."
+              },
+              "youtube": {
+                "label": "Youtube",
+                "placeholder": "Nhập đường dẫn từ Youtube"
+              },
+              "image": {
+                "label": "Hình ảnh khác",
+                "placeholder": "Chọn ảnh",
+                "required": "Ảnh không được phép để trống."
+              }
+            }
+          },
+          "action": {
+            "saveDraft": "Lưu nháp",
+            "publish": "Lưu và xuất bản",
+            "save": "Lưu"
+          }
+        },
+        "modal": {
+          "publishing": {
+            "title": "Xuất bản bài viết '{{title}}'",
+            "message": "Bài viết đang được xuất bản. Quá trình này có thể mất vài phút, vui lòng không đóng của sổ cho đến khi hoàn tất",
+            "save": "Lưu thông tin bài viết",
+            "publish": "Xuất bản bài viết",
+            "published": "Thành công. Bài viết hiện đã được xuất bản công khai trên trang của bạn.",
+            "action": {
+              "tryAgain": "Thử lại",
+              "goToManageEstate": "Quản lý bất động sản",
+              "viewEstate": "Xem bài viết",
+              "close": "Đóng"
+            }
+          }
+        },
+        "notification": {
+          "savedDraft": "Bài viết đã được lưu nháp.",
+          "saveDraftFailed": "Đã xảy ra lỗi khi lưu nháp.",
+          "getEstateFailed": "Không thể lấy thông tin bài viết. Vui lòng kiểm tra đường dẫn hoặc thử lại sau.",
+          "updatedEstate": "Bài viết đã được cập nhật.",
+          "updateEstateFailed": "Cập nhật bài viết không thành công. Vui lòng kiểm tra lại biểu mẫu và thử lại sau."
+        }
+      },
+      "list": {
+        "title": "Quản lý bất động sản",
+        "header": {
+          "create": "Thêm bất động sản"
+        },
+        "tab": {
+          "completed": "Đã hoàn thiện",
+          "draft": "Nháp"
+        },
+        "table": {
+          "column": {
+            "status": "Trạng thái",
+            "avatar": "Ảnh đại diện",
+            "province": "Tỉnh/thành phố",
+            "district": "Quận/huyện",
+            "ward": "Xã/phường/thị trấn",
+            "updatedAt": "Cập nhật vào {{date}}"
+          },
+          "action": {
+            "edit": "Chỉnh sửa",
+            "delete": "Xóa",
+            "moveToTop": "Đưa lên đầu",
+            "unPublish": "Huỷ xuất bản",
+            "publish": "Xuất bản"
+          }
+        },
+        "notification": {
+          "unPublished": "Bài viết đã bị huỷ xuất bản.",
+          "unPublishFailed": "Hiện không thể huỷ xuất bản bài viết. Vui lòng thử lại sau.",
+          "published": "Bài viết đã được xuất bản.",
+          "publishFailed": "Hiện không thể xuất bản bài viết. Vui lòng thử lại sau.",
+          "movedToTop": "Bài viết đã được đưa lên đầu.",
+          "moveToTopFailed": "Hiện không thể đưa bài viết lên đầu. Vui lòng thử lại sau.",
+          "emptyDescription": "Bài viết không có mô tả.",
+          "deletedDraft": "Bài viết nháp đã được xóa.",
+          "deleteDraftFailed": "Hiện không thể xóa bài viết nháp. Vui lòng thử lại sau.",
+          "deletedCompleted": "Bài viết đã được xóa.",
+          "deleteCompletedFailed": "Hiện không thể xóa bài viết. Vui lòng thử lại sau."
+        },
+        "publication": {
+          "title": {
+            "publish": "Xuất bản bài viết '{{title}}'?",
+            "unPublish": "Huỷ xuất bản bài viết '{{title}}'?"
+          },
+          "message": {
+            "unPublish": "Bạn có chắc muốn huỷ xuất bản bài viết này? Bài viết sẽ bị ẩn khỏi mọi kết quả tìm kiếm. Bạn có thể tiếp tục chỉnh sửa bài viết và xuất bản lại sau.",
+            "publish": "Bạn có chắc muốn xuất bản bài viết này? Bài viết sẽ hiển thị công khai trên trang và mọi người có thể tìm thấy bài viết này, bằng bất kỳ cách nào."
+          }
+        },
+        "deletion": {
+          "title": "Xóa bài viết '{{title}}'?",
+          "message": "Bạn có chắc muốn xóa bài viết này? Bài viết sẽ bị xóa vĩnh viễn khỏi hệ thống. Thao tác này không thể hoàn tác.",
+          "warning": {
+            "message": {
+              "published": "Tất cả tài nguyên khác thuộc bài viết này cũng sẽ bị xóa vĩnh viễn khỏi hệ thống. Nếu chỉ muốn ẩn bài viết khỏi các trang công khai của bạn, hãy chọn <strong>Huỷ xuất bản</strong>",
+              "unpublished": "Tất cả tài nguyên khác thuộc bài viết này cũng sẽ bị xóa vĩnh viễn khỏi hệ thống."
+            },
+            "title": "Cảnh báo"
+          }
+        }
+      },
+      "form": {
+        "category": {
+          "label": "Danh mục",
+          "placeholder": "Chọn danh mục",
+          "required": "Danh mục không được phép để trống."
+        }
+      },
+      "status": {
+        "draft": "Nháp",
+        "unpublished": "Chưa xuất bản",
+        "published": "Đã xuất bản"
+      }
+    }
+  },
+  "form": {
+    "location": {
+      "provinceCode": {
+        "label": "Tỉnh/thành phố",
+        "placeholder": "Chọn tỉnh/thành phố",
+        "required": "Tỉnh/thành phố không được phép để trống."
+      },
+      "districtCode": {
+        "label": "Quận/huyện",
+        "placeholder": "Chọn quận/huyện",
+        "required": "Quận/huyện không được phép để trống."
+      },
+      "wardCode": {
+        "label": "Xã/phường/thị trấn",
+        "placeholder": "Chọn xã/phường/thị trấn",
+        "required": "Xã/phường/thị trấn không được phép để trống."
       }
     },
     "contact": {

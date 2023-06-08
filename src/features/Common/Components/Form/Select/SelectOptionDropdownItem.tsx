@@ -1,11 +1,11 @@
-import { useCallback } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { useCallback } from "react";
+import { twMerge } from "tailwind-merge";
 
-import { SelectOptionItemType } from '@interfaces/Common/elementTypes';
+import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
 
 interface SelectOptionDropdownItemProps extends SelectOptionItemType {
   isSelected?: boolean;
-  onClick: (value: SelectOptionItemType['value']) => void;
+  onClick: (value: SelectOptionItemType["value"]) => void;
 }
 
 const SelectOptionDropdownItem = ({
@@ -30,8 +30,8 @@ const SelectOptionDropdownItem = ({
   return (
     <div
       className={twMerge(
-        'px-4 py-2 hover:bg-gray-100',
-        isSelected && 'bg-teal-500 text-white hover:bg-teal-500',
+        "px-4 py-2 hover:bg-gray-100",
+        isSelected && "encacap-select-option-selected bg-teal-500 text-white hover:bg-teal-500",
       )}
       tabIndex={-1}
       role="button"

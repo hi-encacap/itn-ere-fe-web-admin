@@ -1,14 +1,14 @@
-import { useCallback } from 'react';
-import { FiTrash2 } from 'react-icons/fi';
-import { twMerge } from 'tailwind-merge';
+import { useCallback } from "react";
+import { FiTrash2 } from "react-icons/fi";
+import { twMerge } from "tailwind-merge";
 
-import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
+import { FormImageInputDataType } from "@interfaces/Common/elementTypes";
 
 interface ImageInputItemPreviewProps {
   image: FormImageInputDataType;
   isUploading?: boolean;
   isDisabled?: boolean;
-  onRemove?: (id: FormImageInputDataType['id']) => void;
+  onRemove?: (id: FormImageInputDataType["id"]) => void;
 }
 
 const ImageInputItemPreview = ({ image, isUploading, isDisabled, onRemove }: ImageInputItemPreviewProps) => {
@@ -19,8 +19,8 @@ const ImageInputItemPreview = ({ image, isUploading, isDisabled, onRemove }: Ima
   return (
     <div
       className={twMerge(
-        'group relative h-full w-full overflow-hidden rounded-lg p-3',
-        isUploading && 'opacity-20',
+        "group relative h-full w-full overflow-hidden rounded-lg p-3",
+        isUploading && "opacity-20",
       )}
     >
       <div className="h-full w-full rounded-lg">

@@ -1,7 +1,13 @@
-import { FormImageInputDataType } from '@interfaces/Common/elementTypes';
-import { ImageDataType } from '@interfaces/Common/imageTypes';
+import {
+  DEFAULT_CLOUDFLARE_VARIANT_ENUM,
+  ICloudflareImageResponse,
+  getImageURL,
+} from "@encacap-group/common/dist/re";
+import { nanoid } from "@reduxjs/toolkit";
 
-import { getImageURL, randomStringPrefix } from './helpers';
+import { FormImageInputDataType } from "@interfaces/Common/elementTypes";
+
+import { randomStringPrefix } from "./helpers";
 
 const convertToImageDataFromFiles = (files: FileList): FormImageInputDataType[] => {
   return Array.from(files).map((file) => ({
@@ -11,26 +17,36 @@ const convertToImageDataFromFiles = (files: FileList): FormImageInputDataType[] 
   }));
 };
 
-const generateImageFormData = (data: ImageDataType): FormImageInputDataType => {
+const generateImageFormData = (
+  data: ICloudflareImageResponse,
+  variant = DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL,
+): FormImageInputDataType => {
   return {
-    id: data.id,
-    preview: getImageURL(data),
+    id: data.id ?? nanoid(),
+    preview: getImageURL(data, variant),
     file: null,
   };
 };
 
+const generateImagesFormData = (
+  data: ICloudflareImageResponse[],
+  variant = DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL,
+): FormImageInputDataType[] => {
+  return data.map((image) => generateImageFormData(image, variant));
+};
+
 const mapImageDataToResponseData = <T>(data: T, key: string): T => {
-  if (typeof data !== 'object' || data === null) {
+  if (typeof data !== "object" || data === null) {
     return data;
   }
 
   if (key in data) {
-    const image = data[key as keyof T] as ImageDataType | ImageDataType[];
+    const image = data[key as keyof T] as ICloudflareImageResponse | ICloudflareImageResponse[];
 
     if (Array.isArray(image)) {
       return {
         ...data,
-        [key]: image.map(generateImageFormData),
+        [key]: image.map((item) => generateImageFormData(item)),
       };
     }
 
@@ -43,4 +59,9 @@ const mapImageDataToResponseData = <T>(data: T, key: string): T => {
   return data;
 };
 
-export { convertToImageDataFromFiles, mapImageDataToResponseData, generateImageFormData };
+export {
+  convertToImageDataFromFiles,
+  generateImageFormData,
+  generateImagesFormData,
+  mapImageDataToResponseData,
+};

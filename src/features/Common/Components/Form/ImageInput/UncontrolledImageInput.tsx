@@ -1,109 +1,126 @@
-import { useCallback, useEffect, useState } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { random } from "lodash";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { twMerge } from "tailwind-merge";
 
-import { FormElementBaseProps, FormImageInputDataType } from '@interfaces/Common/elementTypes';
-import { uploadService } from '@services/index';
+import useToast from "@hooks/useToast";
+import { FormElementBaseProps, FormImageInputDataType } from "@interfaces/Common/elementTypes";
+import { uploadService } from "@services/index";
+import { convertToImageDataFromFiles } from "@utils/image";
 
-import { convertToImageDataFromFiles } from '@utils/image';
+import FormElementLabel from "../FormElementLabel";
+import ImageInputItem from "./ImageInputItem";
 
-import ImageInputItem from './ImageInputItem';
-
-export interface UncontrolledImageInputProps extends FormElementBaseProps {
-  value?: FormImageInputDataType | FormImageInputDataType[];
-  isMultiple?: boolean;
+interface BaseUncontrolledImageInputProps extends FormElementBaseProps {
+  isRequired?: boolean;
   disabled?: boolean;
-  onChange?: (images: FormImageInputDataType | FormImageInputDataType[]) => void;
 }
+
+interface UncontrolledSingleImageInputProps {
+  isMultiple?: never;
+  value?: FormImageInputDataType;
+  onChange?: (image: FormImageInputDataType) => void;
+}
+
+interface UncontrolledMultipleImageInputProps {
+  isMultiple: true;
+  value?: FormImageInputDataType[];
+  onChange?: (images: FormImageInputDataType[]) => void;
+}
+
+export type UncontrolledImageInputProps = BaseUncontrolledImageInputProps &
+  (UncontrolledMultipleImageInputProps | UncontrolledSingleImageInputProps);
 
 const UncontrolledImageInput = ({
   label,
   error,
-  isMultiple = false,
+  className,
+  isMultiple,
+  isRequired = false,
   disabled = false,
   value,
   onChange,
 }: UncontrolledImageInputProps) => {
+  const { t } = useTranslation("common");
+  const toast = useToast();
+
   const [images, setImages] = useState<FormImageInputDataType[]>([]);
   const [uploadingImageIds, setUploadingImageIds] = useState<string[]>([]);
-  const [uploadedImages, setUploadedImages] = useState<FormImageInputDataType[]>([]);
-  const [allowForceSetImages, setAllowForceSetImages] = useState(true);
+  const [handledImages, setHandledImages] = useState<FormImageInputDataType[]>([]);
+
+  const inputId = useMemo(() => `image-input-${random()}`, []);
+  const isTouchRef = useRef(false);
 
   const uploadImage = useCallback(
-    (file: FormImageInputDataType) => {
+    async (file: FormImageInputDataType) => {
       if (!file.file) {
-        return;
+        return null;
       }
 
       setUploadingImageIds((prev) => [...prev, file.id]);
 
-      uploadService
-        .uploadImage(file.file)
-        .then((response) => {
-          const newFileData = { ...file, id: response.data.id };
-          if (isMultiple) {
-            const newUploadedImages = [...uploadedImages, newFileData];
-            onChange?.(newUploadedImages);
-            setUploadedImages(newUploadedImages);
-            return;
-          }
-          onChange?.(newFileData);
-        })
-        .catch((responseError) => {
-          // #skipcq: JS-0002
-          console.log(responseError);
-          setImages((prev) => prev.filter((image) => image.id !== file.id));
-        })
-        .finally(() => {
-          setUploadingImageIds((prev) => prev.filter((id) => id !== file.id));
-        });
+      try {
+        const response = await uploadService.uploadImage(file.file);
+        return response;
+      } catch (error) {
+        toast.error(t("uploadImageError"));
+        return null;
+      } finally {
+        setUploadingImageIds((prev) => prev.filter((id) => id !== file.id));
+      }
     },
-    [isMultiple],
+    [isMultiple, t, toast],
   );
 
-  const handleChooseImage = useCallback((files: FileList) => {
+  const handleChooseImage = useCallback(async (files: FileList) => {
     const formattedImages = convertToImageDataFromFiles(files);
 
-    formattedImages.forEach((image) => {
-      uploadImage(image);
-    });
     setImages((prev) => [...prev, ...formattedImages]);
+
+    const uploadedImages = await Promise.all(formattedImages.map(uploadImage));
+    const filteredUploadedImages = uploadedImages.filter(Boolean) as FormImageInputDataType[];
+
+    isTouchRef.current = true;
+    setHandledImages((prev) => [...prev, ...filteredUploadedImages]);
   }, []);
 
-  const handleRemoveImage = useCallback(
-    (id: FormImageInputDataType['id']) => {
-      const newUploadedImages = uploadedImages.filter((image) => image.id !== id);
-      setImages((prev) => prev.filter((image) => image.id !== id));
-      setUploadedImages(newUploadedImages);
-      onChange?.(newUploadedImages);
-    },
-    [uploadedImages],
-  );
+  const handleRemoveImage = useCallback((id: FormImageInputDataType["id"]) => {
+    isTouchRef.current = true;
+    setHandledImages((prev) => prev.filter((image) => image.id !== id));
+    setImages((prev) => prev.filter((image) => image.id !== id));
+  }, []);
 
   useEffect(() => {
-    if (!allowForceSetImages || !value) {
+    if (isTouchRef.current || !value) {
       return;
     }
 
-    setImages(Array.isArray(value) ? value : [value]);
-    setAllowForceSetImages(false);
+    const correctValue = Array.isArray(value) ? value : [value];
+
+    setHandledImages(correctValue);
+    setImages(correctValue);
   }, [value]);
+
+  useEffect(() => {
+    if (!isTouchRef.current) {
+      return;
+    }
+
+    if (isMultiple) {
+      onChange?.(handledImages);
+      return;
+    }
+
+    onChange?.(handledImages[0]);
+  }, [handledImages, isMultiple, onChange]);
 
   return (
     <div>
-      {label && (
-        <label
-          htmlFor="image_input"
-          className={twMerge(
-            'relative mb-2 -mt-2 flex items-center text-sm font-semibold text-gray-400',
-            error && 'text-red-500',
-          )}
-        >
-          {label}
-        </label>
-      )}
-      <div className="grid grid-cols-4 gap-4">
+      {label && <FormElementLabel label={label} id={inputId} isRequired={isRequired} error={error} />}
+      <div className={twMerge("grid grid-cols-4 gap-4", className)}>
         {images.map((image) => (
           <ImageInputItem
+            inputId={inputId}
             key={image.id}
             image={image}
             error={Boolean(error)}
@@ -113,8 +130,9 @@ const UncontrolledImageInput = ({
             onRemove={handleRemoveImage}
           />
         ))}
-        {!isMultiple && images.length === 0 && (
+        {((!isMultiple && images.length === 0) || isMultiple) && (
           <ImageInputItem
+            inputId={inputId}
             isMultiple={isMultiple}
             error={Boolean(error)}
             isDisabled={disabled}

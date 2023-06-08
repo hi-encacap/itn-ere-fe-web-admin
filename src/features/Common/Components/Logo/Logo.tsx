@@ -1,4 +1,4 @@
-import logo from '../../Assets/Images/encacap_logo.svg';
+import logo from "../../Assets/Images/encacap_logo.svg";
 
 export interface LogoProps extends React.HTMLAttributes<HTMLDivElement> {
   imageClassName?: string;

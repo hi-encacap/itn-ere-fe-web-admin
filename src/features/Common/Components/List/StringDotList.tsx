@@ -1,5 +1,5 @@
-import { BsDot } from 'react-icons/bs';
-import { twMerge } from 'tailwind-merge';
+import { BsDot } from "react-icons/bs";
+import { twMerge } from "tailwind-merge";
 
 export interface StringDotListProps {
   className?: string;
@@ -8,7 +8,7 @@ export interface StringDotListProps {
 
 const StringDotList = ({ strings, className }: StringDotListProps) => {
   return (
-    <div className={twMerge('flex flex-col space-y-1.5', className)}>
+    <div className={twMerge("flex flex-col space-y-1.5", className)}>
       {strings.map((string, index) => (
         // #skipcq: JS-0437
         <div className="flex" key={index}>

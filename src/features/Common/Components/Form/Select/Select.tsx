@@ -1,34 +1,38 @@
-import { omit } from 'lodash';
-import { Control, useController } from 'react-hook-form';
+import { omit } from "lodash";
+import { useController } from "react-hook-form";
 
-import UncontrolledSelect, { UncontrolledSelectProps } from './UncontrolledSelect';
+import { HookFormControl } from "@interfaces/Common/commonTypes";
+
+import UncontrolledSelect, { UncontrolledSelectProps } from "./UncontrolledSelect";
 
 export interface SelectProps extends UncontrolledSelectProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  control?: Control<any>;
+  control?: HookFormControl;
+  errorFactory?: (error: string) => string | undefined;
 }
 
-const Select = ({ control, name, ...inputProps }: SelectProps) => {
+const Select = ({ control, name, errorFactory, ...inputProps }: SelectProps) => {
   if (!control) {
     return <UncontrolledSelect name={name} {...inputProps} />;
   }
 
   const {
-    field: { onChange, onBlur, value = '' },
+    field: { onChange, onBlur, value = "" },
     formState: { errors },
   } = useController({
     name,
     control,
   });
 
+  const errorMessage = errors[name]?.message as string;
+
   return (
     <UncontrolledSelect
       name={name}
       onChange={onChange}
       onBlur={onBlur}
-      error={errors[name]?.message as string}
+      error={errorFactory ? errorFactory(errorMessage) : errorMessage}
       {...(!(value === undefined || value === null) && { value })}
-      {...omit(inputProps, ['value', 'onChange', 'onBlur'])}
+      {...omit(inputProps, ["value", "onChange", "onBlur"])}
     />
   );
 };

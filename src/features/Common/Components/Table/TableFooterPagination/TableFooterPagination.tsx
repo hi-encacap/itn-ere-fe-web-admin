@@ -1,8 +1,8 @@
-import { useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
-import { BiChevronRight } from 'react-icons/bi';
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { BiChevronRight } from "react-icons/bi";
 
-import { TablePaginationType } from '@interfaces/Common/commonTypes';
+import { TablePaginationType } from "@interfaces/Common/commonTypes";
 
 export interface TableFooterPaginationProps extends Partial<TablePaginationType> {
   onChangePageIndex: (page: number) => void;
@@ -13,8 +13,8 @@ const TableFooterPagination = ({
   totalPages = 1,
   onChangePageIndex,
 }: TableFooterPaginationProps) => {
-  const { t } = useTranslation(['common'], {
-    keyPrefix: 'table.pagination',
+  const { t } = useTranslation(["common"], {
+    keyPrefix: "table.pagination",
   });
 
   const handleChangePage = useCallback((newPage: number) => {
@@ -37,15 +37,15 @@ const TableFooterPagination = ({
         type="button"
         onClick={handleClickPrevButton}
       >
-        <span className="sr-only">{t('previous')}</span>
+        <span className="sr-only">{t("previous")}</span>
         <BiChevronRight size={20} className="rotate-180" />
       </button>
       {Array.from({ length: totalPages }).map((_, index) => (
         <div
           className={`relative inline-flex cursor-pointer items-center border px-4 py-2 text-sm font-medium ${
             index === page
-              ? 'relative z-10 border-teal-500 bg-teal-50 text-teal-500'
-              : 'border-gray-100 bg-white text-gray-500 hover:bg-gray-50'
+              ? "relative z-10 border-teal-500 bg-teal-50 text-teal-500"
+              : "border-gray-100 bg-white text-gray-500 hover:bg-gray-50"
           }`}
           // # skipcq: JS-0437
           key={index}
@@ -64,7 +64,7 @@ const TableFooterPagination = ({
         type="button"
         onClick={handleClickNextButton}
       >
-        <span className="sr-only">{t('next')}</span>
+        <span className="sr-only">{t("next")}</span>
         <BiChevronRight size={20} />
       </button>
     </nav>

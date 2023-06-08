@@ -1,8 +1,8 @@
-import { RefObject, useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
-import { twMerge } from 'tailwind-merge';
+import { RefObject, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
+import { twMerge } from "tailwind-merge";
 
-import { TableRowActionDropdownItemType } from '@interfaces/Common/elementTypes';
+import { TableRowActionDropdownItemType } from "@interfaces/Common/elementTypes";
 
 export interface TableRowActionDropdownMenuProps {
   id: string | number;
@@ -12,7 +12,7 @@ export interface TableRowActionDropdownMenuProps {
 
 const TableRowActionDropdownMenu = ({ id, items, parentRef }: TableRowActionDropdownMenuProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
-  const dropdownContainer = window.document.querySelector('.encacap-dropdown-container');
+  const dropdownContainer = window.document.querySelector(".encacap-dropdown-container");
 
   const setDropdownPosition = () => {
     const parentElement = parentRef.current;
@@ -26,12 +26,12 @@ const TableRowActionDropdownMenu = ({ id, items, parentRef }: TableRowActionDrop
   useEffect(() => {
     setDropdownPosition();
 
-    window.addEventListener('scroll', setDropdownPosition);
-    window.addEventListener('resize', setDropdownPosition);
+    window.addEventListener("scroll", setDropdownPosition);
+    window.addEventListener("resize", setDropdownPosition);
 
     return () => {
-      window.removeEventListener('scroll', setDropdownPosition);
-      window.removeEventListener('resize', setDropdownPosition);
+      window.removeEventListener("scroll", setDropdownPosition);
+      window.removeEventListener("resize", setDropdownPosition);
     };
   }, [parentRef.current]);
 
@@ -43,7 +43,7 @@ const TableRowActionDropdownMenu = ({ id, items, parentRef }: TableRowActionDrop
       {items.map((item) => (
         <div
           key={item.key}
-          className={twMerge('flex items-center justify-start py-1.5 px-4 hover:bg-gray-100', item.className)}
+          className={twMerge("flex items-center justify-start py-1.5 px-4 hover:bg-gray-100", item.className)}
           role="button"
           tabIndex={0}
           onClick={() => item.onClick(id)}
