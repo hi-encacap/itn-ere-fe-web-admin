@@ -1453,10 +1453,10 @@
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.7.4.tgz#19bf0f5af19149111c40d98bb0cf82119f5d9eeb"
   integrity sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==
 
-"@encacap-group/common@^1.7.2":
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/@encacap-group/common/-/common-1.7.2.tgz#076896d8090d6ac692afee29c857e76a5e44dbc0"
-  integrity sha512-IFEBCFBQTHhe32/QLl1rvJ77hAOlV520mZrgAmqOnwfKuGUrfH3qJt3krfq169sEqMhu20CTm7xAZt6kJZVvCw==
+"@encacap-group/common@^1.7.3":
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/@encacap-group/common/-/common-1.7.3.tgz#75edd93da7861634fac658454b1f0254af63f8ec"
+  integrity sha512-c38RrxElM7JNCZyFGAzja6Je7YB4l5N8MRV+ylo2tu5Hjdzk2wcWREEP3X5ar18upcfYfAygYotGObsnshjPfw==
   dependencies:
     axios "^1.4.0"
     react-hook-form "^7.43.9"

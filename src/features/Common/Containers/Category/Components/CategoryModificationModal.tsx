@@ -7,12 +7,12 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import RootWebsiteSelector from "src/features/Root/Website/Components/RootWebsiteSelector";
 
-import { CategoryFormDataType } from "@interfaces/Admin/categoryTypes";
-import { ServiceAddFunctionType, ServiceUpdateFunctionType } from "@interfaces/Common/commonTypes";
 import { Input } from "@components/Form";
 import ImageInput from "@components/Form/ImageInput/ImageInput";
 import Modal, { ModalProps } from "@components/Modal/Modal";
 import useSelector from "@hooks/useSelector";
+import { CategoryFormDataType } from "@interfaces/Admin/categoryTypes";
+import { ServiceAddFunctionType, ServiceUpdateFunctionType } from "@interfaces/Common/commonTypes";
 import { generateImageFormData } from "@utils/image";
 
 import { categoryFormSchema } from "../Schemas/categoryFormSchema";
@@ -68,9 +68,10 @@ const CategoryModificationModal = ({
 
       onUpdate(category?.id, data).finally(() => {
         setIsLoading(false);
+        reset();
       });
     },
-    [category, onClose],
+    [category, reset],
   );
 
   const createCategory = useCallback(
@@ -79,9 +80,10 @@ const CategoryModificationModal = ({
 
       onCreate(data).finally(() => {
         setIsLoading(false);
+        reset();
       });
     },
-    [onCreate, onClose],
+    [onCreate, reset],
   );
 
   const handleSubmit = useFormSubmit((data) => {

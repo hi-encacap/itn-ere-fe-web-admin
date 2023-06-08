@@ -9,9 +9,9 @@ import {
 import { Key, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { FormImageInputDataType } from "@interfaces/Common/elementTypes";
 import { Button } from "@components/Form";
 import ImageInput from "@components/Form/ImageInput/ImageInput";
+import { FormImageInputDataType } from "@interfaces/Common/elementTypes";
 import { generateImagesFormData } from "@utils/image";
 
 import SiteConfigBlockContainer from "./BlockContainer";
@@ -51,7 +51,11 @@ const SiteConfigHomeSlider = ({ data, onChange }: SiteConfigHomeSliderProps) => 
       title={t("homeSliderImage")}
       subtitle={t("homeSliderImageDescription")}
       isLoading={isSubmitting}
-      websites={[WEBSITE_DOMAIN_ENUM.ACBUILDING_DEV, WEBSITE_DOMAIN_ENUM.BAOLOCRE_DEV]}
+      websites={[
+        WEBSITE_DOMAIN_ENUM.ACBUILDING,
+        WEBSITE_DOMAIN_ENUM.BAOLOCRE_DEV,
+        WEBSITE_DOMAIN_ENUM.ACBUILDING_DEV,
+      ]}
     >
       <ImageInput
         name="homeSlider"

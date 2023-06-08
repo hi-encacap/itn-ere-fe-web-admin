@@ -15,6 +15,8 @@ const ADMIN_CATEGORY_API_PATH = {
 const ROOT_CATEGORY_API_PATH = {
   CATEGORIES_PATH: "v1/root/categories",
   CATEGORY_PATH: (id: Key) => `v1/root/categories/${id}`,
+  CATEGORY_GROUPS_PATH: "v1/root/category-groups",
+  CATEGORY_GROUP_PATH: (id: Key) => `v1/root/category-groups/${id}`,
 };
 
 const ADMIN_CATEGORY_GROUP_API_PATH = {
