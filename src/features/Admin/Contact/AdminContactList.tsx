@@ -5,14 +5,14 @@ import { isEqual, keys } from "lodash";
 import { Key, useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import LayoutContent from "@common/Layout/Components/LayoutContent";
+import Table from "@components/Table/Table";
 import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
 import { TABLE_ROW_SELECTION_TYPE_ENUM } from "@constants/enums";
+import useToast from "@hooks/useToast";
 import { TablePaginationType } from "@interfaces/Common/commonTypes";
 import { TableColumnFilterState } from "@interfaces/Common/elementTypes";
 import { adminContactService } from "@services/index";
-import Table from "@components/Table/Table";
-import LayoutContent from "@common/Layout/Components/LayoutContent";
-import useToast from "@hooks/useToast";
 import { generateColumnFilterObject, setDocumentTitle } from "@utils/helpers";
 
 import createContactTableColumns from "./Columns/adminContactTableColumn";

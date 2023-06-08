@@ -21,11 +21,6 @@ const ADMIN_CATEGORY_GROUP_API_PATH = {
   CATEGORY_GROUPS_PATH: "v1/admin/category-groups",
 };
 
-const ADMIN_CONTACT_API_PATH = {
-  CONTACTS_PATH: "v1/admin/contacts",
-  CONTACT_PATH: (id: number) => `v1/admin/contacts/${id}`,
-};
-
 const ADMIN_LOCATION_API_PATH = {
   PROVINCES_PATH: "v1/admin/locations/provinces",
   PROVINCE_PATH: (code: string) => `v1/admin/locations/provinces/${code}`,
@@ -71,6 +66,11 @@ const LOCATION_API_PATH = {
   GHN_PROVINCES_PATH: "v1/locations/ghn/provinces",
   GHN_DISTRICTS_PATH: "v1/locations/ghn/districts",
   GHN_WARDS_PATH: "v1/locations/ghn/wards",
+};
+
+const ADMIN_CONTACT_API_PATH = {
+  CONTACTS_PATH: "/admin/contacts",
+  CONTACT_PATH: (id: number) => `/admin/contacts/${id}`,
 };
 
 const UPLOAD_API_PATH = {

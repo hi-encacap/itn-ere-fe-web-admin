@@ -103,3 +103,9 @@ h6 {
     height: calc(100vh - 80px) !important;
   }
 }
+
+.scroll-hidden {
+  &::-webkit-scrollbar {
+    @apply hidden;
+  }
+}
