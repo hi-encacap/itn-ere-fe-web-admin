@@ -43,4 +43,17 @@ const deleteCategoryByCode = async (id: Key): Promise<void> => {
   await axiosInstance.delete(ROOT_CATEGORY_API_PATH.CATEGORY_PATH(id));
 };
 
-export { createCategory, deleteCategoryByCode, getAllCategories, getCategories, updateCategoryByCode };
+const getCategoryGroups = async (): Promise<ICategory[]> => {
+  const response = await axiosInstance.get(ROOT_CATEGORY_API_PATH.CATEGORY_GROUPS_PATH);
+
+  return response.data.data;
+};
+
+export {
+  createCategory,
+  deleteCategoryByCode,
+  getAllCategories,
+  getCategories,
+  getCategoryGroups,
+  updateCategoryByCode,
+};

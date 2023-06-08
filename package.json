@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@encacap-group/common": "^1.7.2",
+    "@encacap-group/common": "^1.7.3",
     "@headlessui/react": "^1.7.4",
     "@hookform/resolvers": "^2.9.10",
     "@reduxjs/toolkit": "^1.9.0",
