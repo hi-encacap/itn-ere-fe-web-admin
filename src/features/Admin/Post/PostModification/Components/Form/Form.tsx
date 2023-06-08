@@ -84,6 +84,7 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
 
   const getData = useCallback(async () => {
     if (!postIdParam) {
+      setIsLoading(false);
       return;
     }
 
@@ -206,7 +207,7 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
           setFocus={setFocus}
           {...formProps}
         >
-          <AdminPostModificationFormGeneral />
+          <AdminPostModificationFormGeneral isEditMode={Boolean(postIdParam)} />
           <AdminPostModificationFormDetail />
         </FormProvider>
         {isDisabled && <div className="absolute -inset-6 z-10 bg-white opacity-50" />}
