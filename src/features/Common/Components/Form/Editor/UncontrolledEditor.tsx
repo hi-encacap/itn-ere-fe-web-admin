@@ -150,7 +150,8 @@ const UncontrolledEditor = ({
                 "bold italic forecolor | alignleft aligncenter " +
                 "alignright alignjustify | bullist numlist outdent indent | " +
                 "image | " +
-                "table tableprops | ",
+                "table tableprops | " +
+                "removeformat | help",
               content_style:
                 "body { font-family: Source Sans Pro,sans-serif; font-size: 14px } img { max-width: 100%; }",
               quickbars_insert_toolbar: false,
