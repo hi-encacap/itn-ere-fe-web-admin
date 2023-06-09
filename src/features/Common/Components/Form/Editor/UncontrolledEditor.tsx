@@ -1,5 +1,5 @@
 import { Editor } from "@tinymce/tinymce-react";
-import { HTMLAttributes, useCallback, useRef, useState } from "react";
+import { HTMLAttributes, useCallback, useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { Editor as TinyMCEEditor } from "tinymce";
 
@@ -7,6 +7,7 @@ import FormElementError from "@components/Form/FormElementError";
 
 import FormElementLabel from "../FormElementLabel";
 import EditorInsertImageModal from "./EditorInsertImageModal";
+import UncontrolledEditorFullscreenHeader from "./UncontrolledEditorFullscreenHeader";
 
 export interface UncontrolledEditorProps extends Omit<HTMLAttributes<HTMLInputElement>, "onChange"> {
   isRequired?: boolean;
@@ -15,6 +16,7 @@ export interface UncontrolledEditorProps extends Omit<HTMLAttributes<HTMLInputEl
   error?: string;
   label?: string | null;
   value?: string;
+  fullScreenTitle?: string | null;
   onChange?: (value: string) => void;
 }
 
@@ -23,13 +25,16 @@ const UncontrolledEditor = ({
   label,
   error,
   value,
+  fullScreenTitle,
   onChange,
 }: UncontrolledEditorProps) => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [isFocusing, setIsFocusing] = useState(false);
   const [isOpenInsertImageModal, setIsOpenInsertImageModal] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   const tinyEditorRef = useRef<TinyMCEEditor | null>(null);
+  const rawEditorRef = useRef<Editor | null>(null);
 
   const handleChange = useCallback((editorValue: string) => {
     onChange?.(editorValue);
@@ -54,6 +59,8 @@ const UncontrolledEditor = ({
     }
 
     tinyEditorRef.current.execCommand("mceInsertContent", false, html);
+    tinyEditorRef.current.execCommand("mceInsertNewLine");
+
     handleCloseModal();
   }, []);
 
@@ -78,14 +85,49 @@ const UncontrolledEditor = ({
 
   const handleBlur = useCallback(() => {
     setIsFocusing(false);
+    setIsFullScreen(false);
   }, []);
+
+  const handleEnterFullscreen = useCallback(() => {
+    if (!tinyEditorRef.current) {
+      return;
+    }
+
+    tinyEditorRef.current.execCommand("mceFullScreen");
+    setIsFullScreen(true);
+  }, []);
+
+  const handleExitFullscreen = useCallback(() => {
+    if (!tinyEditorRef.current) {
+      return;
+    }
+
+    tinyEditorRef.current.execCommand("mceFullScreen");
+
+    const formSubmitButton: HTMLButtonElement | null = document.querySelector("form button[type=submit]");
+
+    if (formSubmitButton) {
+      formSubmitButton.focus();
+    }
+
+    setIsFullScreen(false);
+  }, []);
+
+  useEffect(() => {
+    if (isFocusing) {
+      handleEnterFullscreen();
+    }
+  }, [isFocusing]);
 
   return (
     <>
-      <div>
+      <div className="tiny-mce-editor">
         {label && <FormElementLabel label={label} isRequired={isRequired} error={error} />}
         {!isInitialized && (
           <div className="h-72 animate-pulse rounded-lg border-2 border-gray-100 bg-gray-100" />
+        )}
+        {isFullScreen && (
+          <UncontrolledEditorFullscreenHeader title={fullScreenTitle} onClose={handleExitFullscreen} />
         )}
         <div
           className={twMerge(
@@ -97,13 +139,13 @@ const UncontrolledEditor = ({
         >
           <Editor
             apiKey={process.env.REACT_APP_RE_DASH_APP_TINY_API_KEY ?? ""}
+            ref={rawEditorRef}
             value={value}
             init={{
               height: 288,
               menubar: false,
               plugins: ["fullscreen", "lists", "table", "quickbars"],
               toolbar:
-                "fullscreen | " +
                 "undo redo | formatselect | " +
                 "bold italic forecolor | alignleft aligncenter " +
                 "alignright alignjustify | bullist numlist outdent indent | " +

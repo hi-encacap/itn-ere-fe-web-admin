@@ -197,7 +197,10 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
 
   return (
     <>
-      <div className={twMerge(className, "relative flex flex-col space-y-6")}>
+      <form
+        className={twMerge(className, "relative flex flex-col space-y-6")}
+        onSubmit={handleSaveAndPublish}
+      >
         <FormProvider
           handleSubmit={useFormSubmit}
           getValues={getValues}
@@ -211,7 +214,7 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
           <AdminPostModificationFormDetail />
         </FormProvider>
         {isDisabled && <div className="absolute -inset-6 z-10 bg-white opacity-50" />}
-        <div className="flex space-x-6">
+        <div className="mt-6 flex space-x-6">
           {!postIdParam && (
             <PostModificationFormButtonNew
               isSubmitting={isSubmitting}
@@ -237,7 +240,7 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
             <PostModificationFormButtonPublished isSubmitting={isSubmitting} onSubmit={handleUpdatePost} />
           )}
         </div>
-      </div>
+      </form>
       <PostPublishingModal
         data={formData}
         isOpen={isShowPublishingModal}

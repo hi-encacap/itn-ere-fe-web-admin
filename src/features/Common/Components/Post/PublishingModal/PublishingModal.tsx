@@ -3,12 +3,12 @@ import { AxiosError } from "axios";
 import { Key, ReactElement, cloneElement, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { Modal } from "@components/Modal";
+import { ModalProps } from "@components/Modal/Modal";
 import { ESTATE_PUBLISHING_STEP_ENUM } from "@constants/enums";
 import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
 import { PostFormDataType } from "@interfaces/Admin/postTypes";
 import { adminEstateService } from "@services/index";
-import { Modal } from "@components/Modal";
-import { ModalProps } from "@components/Modal/Modal";
 
 import PostPublishingModalStep from "./Step";
 
@@ -38,17 +38,10 @@ const PostPublishingModal = ({
   const [publishStepError, setPublishStepError] = useState<string | null>(null);
   const [savedEstateId, setSavedEstateId] = useState<number | null>(null);
 
-  const isAllowCloseModal = useMemo(() => {
-    if (step > ESTATE_PUBLISHING_STEP_ENUM.SAVE_ERROR) {
-      return false;
-    }
-
-    if (step === ESTATE_PUBLISHING_STEP_ENUM.SAVING) {
-      return false;
-    }
-
-    return true;
-  }, [step]);
+  const isAllowCloseModal = useMemo(
+    () => step <= ESTATE_PUBLISHING_STEP_ENUM.SAVE_ERROR || step !== ESTATE_PUBLISHING_STEP_ENUM.SAVING,
+    [step],
+  );
 
   const publishEstate = useCallback(
     async (id: number) => {
