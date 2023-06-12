@@ -4,6 +4,7 @@
     "source.fixAll.eslint": true,
     "source.organizeImports": true
   },
+  "prettier.prettierPath": "./node_modules/prettier",
   "workbench.colorCustomizations": {
     "titleBar.activeBackground": "#534449",
     "titleBar.activeForeground": "#e7e7e7",
