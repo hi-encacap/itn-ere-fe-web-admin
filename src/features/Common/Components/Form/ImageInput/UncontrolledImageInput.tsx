@@ -1,5 +1,5 @@
 import { random } from "lodash";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 
@@ -46,6 +46,7 @@ const UncontrolledImageInput = ({
 
   const [images, setImages] = useState<FormImageInputDataType[]>([]);
   const [uploadingImageIds, setUploadingImageIds] = useState<string[]>([]);
+  const [errorImageIds, setErrorImageIds] = useState<string[]>([]);
   const [handledImages, setHandledImages] = useState<FormImageInputDataType[]>([]);
 
   const inputId = useMemo(() => `image-input-${random()}`, []);
@@ -64,6 +65,8 @@ const UncontrolledImageInput = ({
         return response;
       } catch (error) {
         toast.error(t("uploadImageError"));
+        console.log({ error });
+        setErrorImageIds((prev) => [...prev, file.id]);
         return null;
       } finally {
         setUploadingImageIds((prev) => prev.filter((id) => id !== file.id));
@@ -123,7 +126,7 @@ const UncontrolledImageInput = ({
             inputId={inputId}
             key={image.id}
             image={image}
-            error={Boolean(error)}
+            error={Boolean(error) || errorImageIds.includes(image.id)}
             isUploading={uploadingImageIds.includes(image.id)}
             isDisabled={disabled}
             onChooseImage={handleChooseImage}
@@ -145,4 +148,4 @@ const UncontrolledImageInput = ({
   );
 };
 
-export default UncontrolledImageInput;
+export default memo(UncontrolledImageInput);

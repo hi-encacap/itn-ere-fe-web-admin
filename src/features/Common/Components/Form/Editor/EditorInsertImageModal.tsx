@@ -1,21 +1,21 @@
 import { ICloudflareImageResponse, getImageURL } from "@encacap-group/common/dist/re";
-import { useCallback, useEffect } from "react";
+import { memo, useCallback, useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { FormImageInputDataType } from "@interfaces/Common/elementTypes";
 import { Modal } from "@components/Modal";
 import { BaseModalProps } from "@components/Modal/Modal";
+import { FormImageInputDataType } from "@interfaces/Common/elementTypes";
 
 import ImageInput from "../ImageInput/ImageInput";
 import Input from "../Input/Input";
 
 interface EditorInsertImageModalProps extends Omit<BaseModalProps, "onConfirm"> {
-  onConfirm: (image: string, caption: string) => void;
+  onConfirm: (image: string[], caption: string) => void;
 }
 
 interface EditorInsertImageModalFormValue {
-  image: FormImageInputDataType | null;
+  images: FormImageInputDataType[] | null;
   caption: string | null;
 }
 
@@ -23,16 +23,35 @@ const EditorInsertImageModal = ({ isOpen, onClose, onConfirm }: EditorInsertImag
   const { t } = useTranslation();
 
   const defaultValues: EditorInsertImageModalFormValue = {
-    image: null,
+    images: null,
     caption: null,
   };
 
-  const { control, getValues, reset } = useForm<EditorInsertImageModalFormValue>();
+  const { control, getValues, reset, watch } = useForm<EditorInsertImageModalFormValue>();
+  const images = watch("images");
+
+  const isDisableCaptionInput = useMemo(() => {
+    if (!images) {
+      return true;
+    }
+
+    if (Array.isArray(images)) {
+      return images.length !== 1;
+    }
+
+    return false;
+  }, [images]);
 
   const handleConfirm = useCallback(() => {
-    const { image, caption } = getValues();
+    const { images, caption } = getValues();
 
-    onConfirm(getImageURL(image as unknown as ICloudflareImageResponse), caption ?? "");
+    if (!images) {
+      return;
+    }
+
+    const imageUrls = images.map((image) => getImageURL(image as unknown as ICloudflareImageResponse));
+
+    onConfirm(imageUrls, caption ?? "");
   }, [getValues]);
 
   useEffect(() => {
@@ -44,17 +63,18 @@ const EditorInsertImageModal = ({ isOpen, onClose, onConfirm }: EditorInsertImag
   return (
     <Modal isOpen={isOpen} title={t("insertImage")} onClose={onClose} onConfirm={handleConfirm}>
       <div className="grid gap-6">
-        <ImageInput name="image" label={t("pickImage")} control={control} isRequired />
+        <ImageInput name="images" label={t("pickImage")} control={control} isRequired isMultiple />
         <Input
           name="caption"
           label={t("caption")}
           placeholder={t("enterCaption")}
           className="block"
           control={control}
+          disabled={isDisableCaptionInput}
         />
       </div>
     </Modal>
   );
 };
 
-export default EditorInsertImageModal;
+export default memo(EditorInsertImageModal);
