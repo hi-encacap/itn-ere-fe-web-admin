@@ -44,12 +44,14 @@ const UncontrolledEditor = ({
     setIsOpenInsertImageModal(false);
   }, []);
 
-  const handleInsetImage = useCallback((image: string, caption?: string) => {
+  const handleInsetImage = useCallback((images: string[], caption?: string) => {
     if (!tinyEditorRef.current) {
       return;
     }
 
-    const imageHtml = `<img class="w-full aspect-video" src="${image}" alt="${caption ?? ""}" />`;
+    const imageHtml = images
+      .map((image) => `<img class="w-full aspect-video" src="${image}" alt="${caption ?? ""}" />`)
+      .join("");
     let html = "";
 
     if (caption) {
