@@ -22,7 +22,7 @@ const PostList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [totalRows, setTotalRows] = useState(0);
 
-  const { tabId = ESTATE_LIST_TAB_ENUM.COMPLETED } = useParams();
+  const { tabId = ESTATE_LIST_TAB_ENUM.COMPLETED, categoryId } = useParams();
 
   const tabItems = useMemo<LayoutContentTabItemType[]>(
     () => [
@@ -40,12 +40,26 @@ const PostList = () => {
 
   const navigate = useNavigate();
 
-  const handleChangeTab = useCallback((tabId: string) => {
-    navigate(tabId === ESTATE_LIST_TAB_ENUM.DRAFT ? ADMIN_PATH.POST_DRAFT_PATH : ADMIN_PATH.POST_PATH);
-  }, []);
+  const handleChangeTab = useCallback(
+    (tabId: string) => {
+      let navigatePath = ADMIN_PATH.POST_TAB_PATH(tabId);
+
+      if (categoryId) {
+        navigatePath = ADMIN_PATH.POST_CATEGORY_TAB_PATH(categoryId, tabId);
+      }
+
+      navigate(navigatePath);
+    },
+    [tabId, categoryId],
+  );
 
   const getData = useCallback(async (queryParams: IBaseListQuery) => {
     setIsLoading(true);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
 
     try {
       let service = adminPostService.getPosts;
