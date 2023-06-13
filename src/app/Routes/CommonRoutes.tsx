@@ -3,15 +3,15 @@ import { Route, Routes, matchPath, useLocation, useNavigate } from "react-router
 import HomeRoutes from "src/features/Home/Routes/HomeRoutes";
 import RootRoutes from "src/features/Root/Routes/RootRoutes";
 
-import { USER_ROLE_ENUM } from "@constants/enums";
-import { AUTHENTICATION_PATH, ERROR_PATH } from "@constants/urls";
-import { authService } from "@services/index";
-import { setUser } from "@slices/commonSlice";
-import { LoadingOverlay } from "@components/Loading";
 import AuthRoutes from "@common/Auth/Routes/AuthRoutes";
 import ErrorRoutes from "@common/Errors/Routes/ErrorRoutes";
+import { LoadingOverlay } from "@components/Loading";
+import { USER_ROLE_ENUM } from "@constants/enums";
+import { AUTHENTICATION_PATH, ERROR_PATH } from "@constants/urls";
 import useDispatch from "@hooks/useDispatch";
 import useSelector from "@hooks/useSelector";
+import { authService } from "@services/index";
+import { setUser } from "@slices/commonSlice";
 
 import AdminRoutes from "@admin/Routes/AdminRoutes";
 

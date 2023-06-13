@@ -1,18 +1,15 @@
 import { cloneElement } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 
 import { SidebarItemType } from "@interfaces/Common/commonTypes";
 
 interface LayoutSidebarItemChildrenItemProps {
   item: SidebarItemType;
+  isActive: boolean;
 }
 
-const LayoutSidebarItemChildrenItem = ({ item }: LayoutSidebarItemChildrenItemProps) => {
-  const { pathname } = useLocation();
-
-  const isActive = pathname === item.to;
-
+const LayoutSidebarItemChildrenItem = ({ item, isActive = false }: LayoutSidebarItemChildrenItemProps) => {
   return (
     <Link
       to={item.to}

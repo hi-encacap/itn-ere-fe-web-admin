@@ -33,7 +33,7 @@ const LayoutContentTab = ({ tabs, defaultTab, onChangeTab }: LayoutContentTabPro
   }, [defaultTab, selectedTab, tabs]);
 
   return (
-    <div className="relative z-10 -mb-px flex items-center justify-start space-x-2 border-b-2 border-gray-100 bg-white">
+    <div className="relative z-10 -mb-px flex items-center justify-start space-x-2 rounded-t-lg border-2 border-gray-100 bg-gray-100">
       {tabs.map(({ id, label }) => (
         <LayoutContentTabItem
           key={id}

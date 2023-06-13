@@ -7,6 +7,7 @@ module.exports = {
         "source-sans-pro": ["Source Sans Pro", "sans-serif"],
       },
       width: {
+        4.5: "1.125rem",
         120: "30rem",
         layout: "calc(100% - 18rem)",
       },
@@ -15,6 +16,7 @@ module.exports = {
       },
       height: {
         layout: "calc(100vh - 5rem)",
+        4.5: "1.125rem",
         18: "4.5rem",
       },
       minHeight: {

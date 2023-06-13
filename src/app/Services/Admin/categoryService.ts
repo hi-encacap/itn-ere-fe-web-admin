@@ -21,6 +21,10 @@ const getAllCategories = async (params?: IBaseListQuery): Promise<ICategory[]> =
   return response.data;
 };
 
+const getAllRootCategories = async (): Promise<ICategory[]> => {
+  return await getAllCategories({ parentId: null });
+};
+
 const createCategory = async (data: CategoryFormDataType): Promise<ICategory> => {
   const response = await axiosInstance.post(ADMIN_CATEGORY_API_PATH.CATEGORIES_PATH, {
     ...data,
@@ -43,4 +47,11 @@ const deleteCategoryByCode = async (id: Key): Promise<void> => {
   await axiosInstance.delete(`${ADMIN_CATEGORY_API_PATH.CATEGORIES_PATH}/${id}`);
 };
 
-export { createCategory, deleteCategoryByCode, getAllCategories, getCategories, updateCategoryByCode };
+export {
+  createCategory,
+  deleteCategoryByCode,
+  getAllCategories,
+  getAllRootCategories,
+  getCategories,
+  updateCategoryByCode,
+};
