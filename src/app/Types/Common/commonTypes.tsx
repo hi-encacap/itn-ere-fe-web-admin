@@ -1,6 +1,6 @@
 import { IBaseListQuery, IResponseWithMeta } from "@encacap-group/common/dist/base";
 import { PaginationState } from "@tanstack/react-table";
-import { Key } from "react";
+import { Key, ReactElement } from "react";
 import { Control } from "react-hook-form";
 
 export interface TablePaginationType extends Omit<PaginationState, "pageIndex" | "pageSize"> {
@@ -17,11 +17,13 @@ export interface FormGenericErrorType {
 }
 
 export interface SidebarItemType {
+  children?: SidebarItemType[];
+  icon: ReactElement;
+  isLoading?: boolean;
   key: string;
-  icon: JSX.Element;
   label: string;
   to: string;
-  children?: SidebarItemType[];
+  pathPattern?: string;
 }
 
 export type Nullable<T> = {

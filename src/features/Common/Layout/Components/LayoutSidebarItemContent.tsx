@@ -2,9 +2,12 @@ import { cloneElement, ReactElement } from "react";
 import { BiChevronRight } from "react-icons/bi";
 import { twMerge } from "tailwind-merge";
 
+import LoadingSpinner from "@components/Loading/LoadingSpinner";
+
 interface LayoutSidebarItemContentProps {
   icon: ReactElement;
   isActive: boolean;
+  isLoading?: boolean;
   isShowChildren: boolean;
   hasChildren: boolean;
   label: string;
@@ -12,6 +15,7 @@ interface LayoutSidebarItemContentProps {
 
 const LayoutSidebarItemContent = ({
   isActive,
+  isLoading,
   isShowChildren,
   icon,
   label,
@@ -30,7 +34,7 @@ const LayoutSidebarItemContent = ({
           className: twMerge("w-5 h-5 block flex-shrink-0", (isActive || isShowChildren) && "text-teal-500"),
         })}
         <div className={twMerge("flex-1", (isActive || isShowChildren) && "text-teal-500")}>{label}</div>
-        {hasChildren && (
+        {hasChildren && !isLoading && (
           <div
             className={twMerge(
               "absolute right-3 flex flex-shrink-0 items-center justify-center duration-100",
@@ -39,6 +43,11 @@ const LayoutSidebarItemContent = ({
             )}
           >
             <BiChevronRight size={20} />
+          </div>
+        )}
+        {isLoading && (
+          <div className="absolute right-3">
+            <LoadingSpinner className="h-4 w-4 border-teal-500" />
           </div>
         )}
       </div>

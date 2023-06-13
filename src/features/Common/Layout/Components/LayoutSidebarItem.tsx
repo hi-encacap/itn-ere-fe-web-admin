@@ -1,5 +1,5 @@
-import { MouseEventHandler, ReactElement, useCallback, useMemo, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { MouseEventHandler, ReactElement, useCallback, useEffect, useMemo, useState } from "react";
+import { Link, matchRoutes, useLocation } from "react-router-dom";
 
 import { SidebarItemType } from "@interfaces/Common/commonTypes";
 
@@ -8,40 +8,54 @@ import LayoutSidebarItemContent from "./LayoutSidebarItemContent";
 
 interface LayoutSidebarItemProps {
   icon: ReactElement;
+  isLoading?: boolean;
   label: string;
   to: string;
   childrenItems?: SidebarItemType[];
 }
 
-const LayoutSidebarItem = ({ icon, label, to, childrenItems }: LayoutSidebarItemProps) => {
+const LayoutSidebarItem = ({ icon, isLoading, label, to, childrenItems }: LayoutSidebarItemProps) => {
   const { pathname } = useLocation();
 
   const [isShowChildren, setIsShowChildren] = useState(false);
 
-  const isActive = useMemo(() => {
-    const isChildrenActive = childrenItems?.some((item) => item.to === pathname) ?? false;
+  const childPaths = useMemo(() => childrenItems?.map((item) => item.to) ?? [], [childrenItems]);
+  const childActivePath = useMemo(() => {
+    const matchedRoutes = matchRoutes(
+      childPaths.map((item) => ({
+        path: `${item}/*`,
+      })),
+      pathname,
+    );
 
-    if (isChildrenActive) {
-      setIsShowChildren(true);
-    } else {
-      setIsShowChildren(false);
+    if (!matchedRoutes) {
+      return "";
     }
 
-    if (pathname === to) {
-      return true;
-    }
+    return matchedRoutes[0].pathnameBase;
+  }, [childPaths, pathname]);
+  const isActive = useMemo(
+    () => pathname === to || Boolean(childActivePath),
+    [pathname, to, childActivePath],
+  );
 
-    if (childrenItems?.length) {
-      return isChildrenActive;
-    }
+  const handleClick = useCallback<MouseEventHandler<HTMLDivElement>>(
+    (e) => {
+      e.preventDefault();
+      setIsShowChildren((prevState) => {
+        if (isActive) {
+          return true;
+        }
 
-    return false;
-  }, [pathname, to, setIsShowChildren]);
+        return !prevState;
+      });
+    },
+    [isActive],
+  );
 
-  const handleClick = useCallback<MouseEventHandler<HTMLDivElement>>((e) => {
-    e.preventDefault();
-    setIsShowChildren((prevState) => !prevState);
-  }, []);
+  useEffect(() => {
+    setIsShowChildren(isActive);
+  }, [isActive]);
 
   if (!childrenItems?.length) {
     return (
@@ -51,9 +65,9 @@ const LayoutSidebarItem = ({ icon, label, to, childrenItems }: LayoutSidebarItem
           label={label}
           hasChildren={Boolean(childrenItems?.length)}
           isActive={isActive}
+          isLoading={isLoading}
           isShowChildren={isShowChildren}
         />
-        {childrenItems?.length && <LayoutSidebarItemChildren items={childrenItems} isShow={isShowChildren} />}
       </Link>
     );
   }
@@ -65,9 +79,16 @@ const LayoutSidebarItem = ({ icon, label, to, childrenItems }: LayoutSidebarItem
         label={label}
         hasChildren={Boolean(childrenItems?.length)}
         isActive={isActive}
+        isLoading={isLoading}
         isShowChildren={isShowChildren}
       />
-      {childrenItems?.length && <LayoutSidebarItemChildren items={childrenItems} isShow={isShowChildren} />}
+      {Boolean(childrenItems?.length) && (
+        <LayoutSidebarItemChildren
+          items={childrenItems}
+          isShow={isShowChildren}
+          activePath={childActivePath}
+        />
+      )}
     </div>
   );
 };

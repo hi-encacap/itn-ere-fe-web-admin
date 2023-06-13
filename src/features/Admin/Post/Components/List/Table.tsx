@@ -1,19 +1,19 @@
 import { IBaseListQuery } from "@encacap-group/common/dist/base";
 import { IPost } from "@encacap-group/common/dist/re";
 import { SortingState, createColumnHelper } from "@tanstack/react-table";
-import { isEqual } from "lodash";
+import { debounce, isEqual, omit } from "lodash";
 import { Key, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
-import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
-import { TablePaginationType } from "@interfaces/Common/commonTypes";
-import { ColumnDef, TableColumnFilterState } from "@interfaces/Common/elementTypes";
-import { adminCategoryService, adminEstateService, adminPostService } from "@services/index";
 import { ConfirmationModal } from "@components/Modal";
 import { PostDeleteConfirmationModal, PostTableBody } from "@components/Post";
 import Table from "@components/Table/Table";
+import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
 import useToast from "@hooks/useToast";
+import { TablePaginationType } from "@interfaces/Common/commonTypes";
+import { ColumnDef, TableColumnFilterState } from "@interfaces/Common/elementTypes";
+import { adminCategoryService, adminEstateService, adminPostService } from "@services/index";
 import { generateColumnFilterObject } from "@utils/helpers";
 
 import { ESTATE_LIST_TAB_ENUM } from "@admin/Estate/Constants/enums";
@@ -22,7 +22,7 @@ interface AdminPostListTableProps {
   data: IPost[];
   isLoading: boolean;
   totalRows: number;
-  onChangeQueryParams?: (queryParams: IBaseListQuery) => void;
+  onChangeQueryParams: (queryParams: IBaseListQuery) => void;
   onMoveToTop: (id: Key) => Promise<void>;
   onPublish: (id: Key) => Promise<void>;
   onUnPublish: (id: Key) => Promise<void>;
@@ -54,7 +54,7 @@ const AdminPostListTable = ({
   const [isShowDeleteConfirmModal, setIsShowDeleteConfirmModal] = useState(false);
   const [selectedEstateId, setSelectedEstateId] = useState<Key | null>(null);
 
-  const { tabId = ESTATE_LIST_TAB_ENUM.COMPLETED } = useParams();
+  const { tabId = ESTATE_LIST_TAB_ENUM.COMPLETED, categoryId } = useParams();
 
   const selectedEstate = useMemo(
     () => data.find((estate) => estate.id === selectedEstateId) ?? null,
@@ -91,9 +91,13 @@ const AdminPostListTable = ({
     [columnHelper, t],
   );
 
+  const handleChangeQueryParamsDebounced = useCallback(debounce(onChangeQueryParams, 500), [
+    onChangeQueryParams,
+  ]);
+
   const handleInteraction = useCallback(() => {
-    onChangeQueryParams?.(queryParams);
-  }, [onChangeQueryParams, queryParams]);
+    handleChangeQueryParamsDebounced?.(queryParams);
+  }, [handleChangeQueryParamsDebounced, queryParams]);
 
   const handleClickUnPublish = useCallback((id: Key) => {
     setIsShowUnPublishConfirmModal(true);
@@ -125,7 +129,7 @@ const AdminPostListTable = ({
     try {
       await onUnPublish(selectedEstateId);
       toast.success(t("unPublishSuccess"));
-      onChangeQueryParams?.(queryParams);
+      handleChangeQueryParamsDebounced?.(queryParams);
     } catch (error) {
       toast.error(t("unPublishError"));
     } finally {
@@ -141,7 +145,7 @@ const AdminPostListTable = ({
     try {
       await onPublish(selectedEstateId);
       toast.success(t("publishSuccess"));
-      onChangeQueryParams?.(queryParams);
+      handleChangeQueryParamsDebounced?.(queryParams);
     } catch (error) {
       toast.error(t("publishError"));
     } finally {
@@ -151,9 +155,11 @@ const AdminPostListTable = ({
 
   useEffect(() => {
     const newQueryParams: IBaseListQuery = {
-      ...queryParams,
+      ...omit(queryParams, "categoryId"),
       ...generateColumnFilterObject(columnFilters),
       tab: tabId,
+      ...(categoryId && { categoryId: Number(categoryId) }),
+      page: pagination.page,
     };
 
     if (isEqual(newQueryParams, queryParams)) {
@@ -161,10 +167,10 @@ const AdminPostListTable = ({
     }
 
     setQueryParams(newQueryParams);
-  }, [columnFilters, pagination, queryParams, tabId]);
+  }, [columnFilters, pagination, queryParams, tabId, categoryId]);
 
   useEffect(() => {
-    onChangeQueryParams?.(queryParams);
+    handleChangeQueryParamsDebounced?.(queryParams);
   }, [queryParams]);
 
   return (

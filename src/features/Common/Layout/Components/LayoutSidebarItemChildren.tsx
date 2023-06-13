@@ -8,9 +8,10 @@ import LayoutSidebarItemChildrenItem from "./LayoutSidebarItemChildrenItem";
 interface LayoutSidebarItemChildrenProps {
   items: SidebarItemType[];
   isShow: boolean;
+  activePath: string | null;
 }
 
-const LayoutSidebarItemChildren = ({ items, isShow = false }: LayoutSidebarItemChildrenProps) => {
+const LayoutSidebarItemChildren = ({ items, isShow = false, activePath }: LayoutSidebarItemChildrenProps) => {
   return (
     <motion.div
       animate={isShow ? "show" : "hide"}
@@ -31,7 +32,7 @@ const LayoutSidebarItemChildren = ({ items, isShow = false }: LayoutSidebarItemC
       className={twMerge(isShow && "mt-1")}
     >
       {items.map((item) => (
-        <LayoutSidebarItemChildrenItem key={item.key} item={item} />
+        <LayoutSidebarItemChildrenItem key={item.key} item={item} isActive={activePath === item.to} />
       ))}
     </motion.div>
   );

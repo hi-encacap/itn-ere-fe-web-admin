@@ -1,7 +1,6 @@
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import { DropdownProvider } from "@components/Dropdown";
 
@@ -11,11 +10,16 @@ import { store } from "./app/store";
 import "./locales/config";
 
 const App = () => {
+  const router = createBrowserRouter([
+    {
+      path: "/*",
+      element: <CommonRoutes />,
+    },
+  ]);
+
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <CommonRoutes />
-      </BrowserRouter>
+      <RouterProvider router={router} />
       <DropdownProvider />
       <ToastContainer />
       <div className="fixed inset-0 z-70 flex items-center justify-center bg-white px-20 text-center lg:hidden">

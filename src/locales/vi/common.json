@@ -164,5 +164,6 @@
   "viewPost": "Xem bài viết",
   "ward": "Xã/Phường/Thị trấn",
   "website": "Website",
-  "websiteRequired": "Website không được phép để trống."
+  "websiteRequired": "Website không được phép để trống.",
+  "allPosts": "Tất cả bài viết"
 }

@@ -1,11 +1,13 @@
 import { ESTATE_STATUS_ENUM, IEstate, IPost, getImageURL } from "@encacap-group/common/dist/re";
 import dayjs from "dayjs";
+import { decode } from "html-entities";
 import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FiEdit2, FiTrash2, FiUpload } from "react-icons/fi";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { MdAccessTime } from "react-icons/md";
 import striptags from "striptags";
+import { twMerge } from "tailwind-merge";
 
 import DropdownContainerV2 from "@components/Dropdown/DropdownContainerV2";
 import { DropdownMenuItemType } from "@components/Dropdown/DropdownContainerV2MenuItem";
@@ -46,11 +48,11 @@ const PostTableBodyItem = ({
 
   const content = useMemo(() => {
     if ("content" in data && data.content) {
-      return striptags(data.content);
+      return decode(striptags(data.content)).trim();
     }
 
     if ("description" in data && data.description) {
-      return striptags(data.description);
+      return decode(striptags(data.description).trim());
     }
 
     return null;
@@ -165,15 +167,14 @@ const PostTableBodyItem = ({
             </span>
           </div>
         </div>
-        {content && (
-          <div
-            // #skipcq: JS-0440
-            dangerouslySetInnerHTML={{
-              __html: content,
-            }}
-            className="mt-3 flex-1 overflow-hidden border-t-2 border-gray-100 pt-2 line-clamp-3"
-          />
-        )}
+        <div
+          className={twMerge(
+            "flex-1 overflow-hidden border-gray-100 line-clamp-3",
+            content && "mt-3 border-t-2 pt-2",
+          )}
+        >
+          {content}
+        </div>
         <div className="mt-3 flex items-center space-x-4 border-t-2 border-gray-100 pt-4">
           <DropdownContainerV2 menu={dropdownMenu}>
             <Button className="rounded-sm py-2.5" color="light" size="sm" disabled={isLoading}>

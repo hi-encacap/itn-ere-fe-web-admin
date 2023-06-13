@@ -8,6 +8,8 @@ const AdminPostRoutes = () => {
     <Routes>
       <Route path="/" element={<PostList />} />
       <Route path=":tabId" element={<PostList />} />
+      <Route path="/categories/:categoryId" element={<PostList />} />
+      <Route path="/categories/:categoryId/:tabId" element={<PostList />} />
       <Route path="/add" element={<AdminPostModification />} />
       <Route path="/edit" element={<AdminPostModification />} />
     </Routes>
