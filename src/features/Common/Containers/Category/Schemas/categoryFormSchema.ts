@@ -8,7 +8,7 @@ const categoryFormSchema = (t: TFunction, role: Record<string, boolean>) =>
   generateFormSchema<CategoryFormDataType>({
     name: string().required(t("form.name.required")),
     categoryGroupCode: string().required(t("form.categoryGroupCode.required")),
-    thumbnail: object().required(t("form.thumbnail.required")).nullable(),
+    avatar: object().required(t("form.thumbnail.required")).nullable(),
     parentId: number().when([], () =>
       role.isRoot ? number().nullable() : number().required(t("form.parentId.required")),
     ),

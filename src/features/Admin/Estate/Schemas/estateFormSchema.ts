@@ -5,7 +5,7 @@ import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
 import { generateFormSchema } from "@utils/schema";
 
 const estateFormSchema = (t: TFunction) =>
-  generateFormSchema<EstateFormDataType>({
+  generateFormSchema<Omit<EstateFormDataType, "category">>({
     title: string().required(t("form.general.form.title.required")).nullable(),
     customId: string()
       .nullable()

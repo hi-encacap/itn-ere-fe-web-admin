@@ -2,11 +2,10 @@ import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 
-import { Input } from "@components/Form";
+import { CategorySelector, Input } from "@components/Form";
 import FormGroupTitle from "@components/Form/GroupTitle";
 import { PostFormDataType } from "@interfaces/Admin/postTypes";
-
-import AdminCategorySelector from "@admin/Estate/Components/AdminCategorySelector";
+import { adminCategoryService } from "@services/index";
 
 interface AdminPostModificationFormGeneralProps {
   isEditMode?: boolean;
@@ -39,7 +38,14 @@ const AdminPostModificationFormGeneral = ({ isEditMode }: AdminPostModificationF
               placeholder={t("enterCode")}
             />
           )}
-          <AdminCategorySelector control={control} />
+          <CategorySelector
+            className="block"
+            control={control}
+            name="categoryId"
+            label={t("category")}
+            placeholder={t("selectCategory")}
+            onGet={adminCategoryService.getAllCategories}
+          />
         </div>
       </div>
     </div>

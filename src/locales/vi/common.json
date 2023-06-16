@@ -4,6 +4,7 @@
   "address": "Địa chỉ",
   "addressBook": "Sổ địa chỉ",
   "addressRequired": "Địa chỉ không được phép để trống.",
+  "allPosts": "Tất cả bài viết",
   "avatar": "Ảnh đại diện",
   "avatarRequired": "Ảnh đại diện không được phép để trống.",
   "bank": "Ngân hàng",
@@ -62,6 +63,7 @@
   "moveToTopError": "Đưa bài viết lên đầu không thành công.",
   "moveToTopSuccess": "Đưa bài viết lên đầu thành công.",
   "name": "Tên",
+
   "other": "Khác",
   "page": {
     "auth": {
@@ -165,5 +167,7 @@
   "ward": "Xã/Phường/Thị trấn",
   "website": "Website",
   "websiteRequired": "Website không được phép để trống.",
-  "allPosts": "Tất cả bài viết"
+  "enterName": "Nhập tên",
+  "addCategory": "Thêm danh mục",
+  "editCategory": "Chỉnh sửa danh mục"
 }

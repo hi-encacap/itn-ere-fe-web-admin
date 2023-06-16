@@ -1,4 +1,4 @@
-import { ICloudflareImageResponse, getImageURL } from "@encacap-group/common/dist/re";
+import { IImageResponse, getImageURL } from "@encacap-group/common/dist/re";
 import { memo, useCallback, useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -49,7 +49,7 @@ const EditorInsertImageModal = ({ isOpen, onClose, onConfirm }: EditorInsertImag
       return;
     }
 
-    const imageUrls = images.map((image) => getImageURL(image as unknown as ICloudflareImageResponse));
+    const imageUrls = images.map((image) => getImageURL(image as unknown as IImageResponse));
 
     onConfirm(imageUrls, caption ?? "");
   }, [getValues]);

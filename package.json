@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@encacap-group/common": "^1.7.3",
+    "@encacap-group/common": "^1.8.0",
     "@headlessui/react": "^1.7.4",
     "@hookform/resolvers": "^2.9.10",
     "@reduxjs/toolkit": "^1.9.0",
@@ -24,6 +24,7 @@
     "http-status": "^1.5.3",
     "i18next": "^22.0.6",
     "lodash": "^4.17.21",
+    "nanoid": "^4.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.39.5",
