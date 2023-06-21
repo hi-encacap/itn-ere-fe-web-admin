@@ -44,41 +44,53 @@ declare module "@tanstack/table-core" {
 
 type TableRowActionNameType = `on${string}`;
 
-export interface CustomTableBodyProps<TData = TableDataType> {
+export interface CustomTableBodyProps<TData = unknown> {
   data: TData[];
   isLoading: boolean;
   [key: TableRowActionNameType]: TableRowActionClickHandlerType;
   [key: string]: unknown;
 }
 
-export interface TableProps<TData = TableDataType> {
-  data: TData[];
+interface TableBaseProps<TData = TableDataType> {
   columns: Array<ColumnDef<TData, unknown>>;
   hiddenColumns?: Array<keyof TData | boolean>;
   pagination?: TablePaginationType;
-  sorting?: SortingState;
-  isLoading?: boolean;
   rowSelection?: RowSelectionState;
   rowSelectionType?: TABLE_ROW_SELECTION_TYPE_ENUM;
-  tableBodyProps?: Omit<CustomTableBodyProps, "data" | "isLoading">;
-  renderTableBody?: (props: CustomTableBodyProps) => ReactElement;
   onChangePagination?: OnChangeFn<TablePaginationType>;
   onChangeSorting?: OnChangeFn<SortingState>;
   onChangeFilters?: OnChangeFn<TableColumnFilterState[]>;
   onChangeRowSelection?: OnChangeFn<RowSelectionState>;
 }
 
+interface TableWithChildrenProps<TData = TableDataType> extends TableBaseProps<TData> {
+  children: ReactElement<CustomTableBodyProps<TData>>;
+  data?: never;
+  isLoading?: never;
+  sorting?: never;
+}
+
+interface TableWithoutChildrenProps<TData = TableDataType> extends TableBaseProps<TData> {
+  data: TData[];
+  children?: never;
+  isLoading?: boolean;
+  sorting?: SortingState;
+}
+
+export type TableProps<TData = TableDataType> =
+  | TableWithChildrenProps<TData>
+  | TableWithoutChildrenProps<TData>;
+
 const Table = ({
   data,
   columns: columnsProp,
+  children,
   hiddenColumns = [],
   pagination,
   sorting,
   isLoading = false,
   rowSelection = {},
   rowSelectionType = TABLE_ROW_SELECTION_TYPE_ENUM.MULTIPLE,
-  tableBodyProps = {},
-  renderTableBody,
   onChangePagination,
   onChangeSorting,
   onChangeFilters,
@@ -98,7 +110,7 @@ const Table = ({
   const columns = useMemo(() => [selectorColumn, ...columnsProp], [columnsProp]);
 
   const table = useReactTable({
-    data,
+    data: data ?? [],
     columns: normalizeTableColumns(columns),
     pageCount: totalPages,
     manualPagination: true,
@@ -180,13 +192,8 @@ const Table = ({
     <div>
       <TableHeader headerGroups={tableHeaderGroup} onChangeFilters={onChangeFilters} />
       <div className="overflow-auto">
-        {renderTableBody ? (
-          renderTableBody({
-            data,
-            isLoading,
-            ...tableBodyProps,
-          })
-        ) : (
+        {children && children}
+        {!children && (
           <table className="relative min-w-full">
             <TableContentHeader headerGroups={tableHeaderGroup} />
             <TableContentBody rows={tableRows} headers={tableHeaderGroup[0].headers} isLoading={isLoading} />

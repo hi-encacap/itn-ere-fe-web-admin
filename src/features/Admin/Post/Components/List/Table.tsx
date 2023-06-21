@@ -1,6 +1,6 @@
 import { IBaseListQuery } from "@encacap-group/common/dist/base";
 import { IPost } from "@encacap-group/common/dist/re";
-import { SortingState, createColumnHelper } from "@tanstack/react-table";
+import { createColumnHelper } from "@tanstack/react-table";
 import { debounce, isEqual, omit } from "lodash";
 import { Key, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -44,7 +44,6 @@ const AdminPostListTable = ({
     page: 1,
     limit: DEFAULT_PAGE_SIZE,
   });
-  const [columnSorting, setColumnSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
   const [queryParams, setQueryParams] = useState<IBaseListQuery>({
     ...pagination,
@@ -65,6 +64,8 @@ const AdminPostListTable = ({
 
   const columns: Array<ColumnDef<IPost>> = useMemo(
     () => [
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
+      // @ts-ignore
       columnHelper.accessor((row) => row.status, {
         id: "status",
         header: String(t("status")),
@@ -176,26 +177,24 @@ const AdminPostListTable = ({
   return (
     <>
       <Table
-        data={data}
         columns={columns}
         pagination={{
           ...pagination,
           totalRows,
         }}
-        sorting={columnSorting}
-        isLoading={isLoading}
-        tableBodyProps={{
-          onClickUnPublish: handleClickUnPublish,
-          onClickPublish: handleClickPublish,
-          onMoveToTop,
-          onInteraction: handleInteraction,
-          onClickDelete: handleClickDelete,
-        }}
-        renderTableBody={PostTableBody}
         onChangePagination={setPagination}
-        onChangeSorting={setColumnSorting}
         onChangeFilters={setColumnFilters}
-      />
+      >
+        <PostTableBody
+          data={data}
+          isLoading={isLoading}
+          onClickUnPublish={handleClickUnPublish}
+          onClickPublish={handleClickPublish}
+          onMoveToTop={onMoveToTop}
+          onInteraction={handleInteraction}
+          onClickDelete={handleClickDelete}
+        />
+      </Table>
       <ConfirmationModal
         title={t("unPublishPost", {
           title: selectedEstate?.title,
