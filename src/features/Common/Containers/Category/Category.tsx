@@ -5,7 +5,9 @@ import { isEqual } from "lodash";
 import { Key, useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import LayoutContent from "@common/Layout/Components/LayoutContent";
 import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
+import useToast from "@hooks/useToast";
 import { CategoryFormDataType } from "@interfaces/Admin/categoryTypes";
 import {
   ServiceDeleteFunctionType,
@@ -14,8 +16,6 @@ import {
   TablePaginationType,
 } from "@interfaces/Common/commonTypes";
 import { TableColumnFilterState } from "@interfaces/Common/elementTypes";
-import LayoutContent from "@common/Layout/Components/LayoutContent";
-import useToast from "@hooks/useToast";
 import { generateColumnFilterObject, setDocumentTitle } from "@utils/helpers";
 
 import CategoryDeleteConfirmationModal from "./Components/CategoryDeleteConfirmationModal";
@@ -199,6 +199,7 @@ const Category = ({ onGetMany, onCreate, onUpdate, onDelete, onGetAll }: Categor
         onClose={handleCloseModal}
         onCreate={handleCreateCategory}
         onUpdate={handleUpdateCategory}
+        onGetAll={onGetAll}
       />
     </LayoutContent>
   );

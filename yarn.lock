@@ -1453,10 +1453,10 @@
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.7.4.tgz#19bf0f5af19149111c40d98bb0cf82119f5d9eeb"
   integrity sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==
 
-"@encacap-group/common@^1.7.3":
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/@encacap-group/common/-/common-1.7.3.tgz#75edd93da7861634fac658454b1f0254af63f8ec"
-  integrity sha512-c38RrxElM7JNCZyFGAzja6Je7YB4l5N8MRV+ylo2tu5Hjdzk2wcWREEP3X5ar18upcfYfAygYotGObsnshjPfw==
+"@encacap-group/common@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@encacap-group/common/-/common-1.8.0.tgz#468e20cde42fade0ff3333e0c55e762d14fbebca"
+  integrity sha512-342E8XS61G1FeJ10kj5nIBaArVENOg8QnrWXolFZu5XTLEhCdudPNmO8yMHRvzneoXQbyyYo21tQ8tAX8A7Igg==
   dependencies:
     axios "^1.4.0"
     react-hook-form "^7.43.9"
@@ -8614,6 +8614,11 @@ nanoid@^3.3.4:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.4.tgz#730b67e3cd09e2deacf03c027c81c9d9dbc5e8ab"
   integrity sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==
+
+nanoid@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-4.0.2.tgz#140b3c5003959adbebf521c170f282c5e7f9fb9e"
+  integrity sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==
 
 nanomatch@^1.2.9:
   version "1.2.13"

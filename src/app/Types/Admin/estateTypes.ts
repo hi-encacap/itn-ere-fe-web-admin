@@ -9,7 +9,7 @@ export interface EstatePropertyFormDataType {
 }
 
 export interface EstateFormDataType
-  extends Partial<Nullable<Omit<IEstate, "avatar" | "images" | "properties">>> {
+  extends Omit<Partial<Nullable<Omit<IEstate, "avatar" | "images" | "properties" | "category">>>, "parent"> {
   priceUnitId: number | null;
   areaUnitId: number | null;
   provinceCode: string;
@@ -22,6 +22,7 @@ export interface EstateFormDataType
   avatar: FormImageInputDataType;
   images: FormImageInputDataType[];
   draftId?: number;
+  category: Omit<IEstate["category"], "parent"> | null;
 }
 
 export interface EstateDraftDataType extends Nullable<Partial<IEstate>> {

@@ -1,9 +1,11 @@
 {
+  "addCategory": "Thêm danh mục",
   "addCategorySuccess": "Thêm danh mục thành công.",
   "addPost": "Thêm bài viết",
   "address": "Địa chỉ",
   "addressBook": "Sổ địa chỉ",
   "addressRequired": "Địa chỉ không được phép để trống.",
+  "allPosts": "Tất cả bài viết",
   "avatar": "Ảnh đại diện",
   "avatarRequired": "Ảnh đại diện không được phép để trống.",
   "bank": "Ngân hàng",
@@ -33,6 +35,7 @@
   "district": "Quận/Huyện",
   "draft": "Nháp",
   "edit": "Chỉnh sửa",
+  "editCategory": "Chỉnh sửa danh mục",
   "editCategorySuccess": "Chỉnh sửa danh mục thành công.",
   "editPost": "Chỉnh sửa bài viết",
   "editPostError": "Chỉnh sửa bài viết không thành công.",
@@ -42,6 +45,7 @@
   "emailRequired": "Email không được phép để trống.",
   "enterCaption": "Nhập chú thích cho hình ảnh này",
   "enterCode": "Nhập mã",
+  "enterName": "Nhập tên",
   "enterTitle": "Nhập tiêu đề",
   "error": "Lỗi!",
   "errorCode": "Mã lỗi",
@@ -109,6 +113,8 @@
   "pickImage": "Chọn ảnh",
   "post": "Bài viết",
   "postManagement": "Quản lý bài viết",
+  "product": "Sản phẩm",
+  "project": "Dự án",
   "province": "Tỉnh/Thành phố",
   "publish": "Xuất bản",
   "published": "Đã xuất bản",
@@ -123,6 +129,7 @@
   "selectCategoryGroup": "Chọn nhóm danh mục",
   "selectParentCategory": "Chọn danh mục cha",
   "selectWebsite": "Chọn website",
+  "service": "Dịch vụ",
   "siteConfig": "Thiết lập trang",
   "siteConfigManagement": "Quản lý thiết lập trang",
   "status": "Trạng thái",
@@ -164,6 +171,5 @@
   "viewPost": "Xem bài viết",
   "ward": "Xã/Phường/Thị trấn",
   "website": "Website",
-  "websiteRequired": "Website không được phép để trống.",
-  "allPosts": "Tất cả bài viết"
+  "websiteRequired": "Website không được phép để trống."
 }

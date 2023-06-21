@@ -25,7 +25,7 @@ const createCategory = async (data: CategoryFormDataType): Promise<ICategory> =>
   const response = await axiosInstance.post(ROOT_CATEGORY_API_PATH.CATEGORIES_PATH, {
     ...data,
     code: data.name,
-    thumbnailId: data.thumbnail?.id,
+    avatarId: data.avatar?.id,
   });
 
   return response.data.data;
@@ -33,7 +33,7 @@ const createCategory = async (data: CategoryFormDataType): Promise<ICategory> =>
 
 const updateCategoryByCode = async (id: Key, data: CategoryFormDataType): Promise<ICategory> => {
   const response = await axiosInstance.put(ROOT_CATEGORY_API_PATH.CATEGORY_PATH(id), {
-    thumbnailId: data.thumbnail?.id,
+    avatarId: data.avatar?.id,
   });
 
   return response.data.data;

@@ -1,4 +1,4 @@
-import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, IContact, getImageURL } from "@encacap-group/common/dist/re";
+import { IContact, IMAGE_VARIANT_ENUM, getImageURL } from "@encacap-group/common/dist/re";
 import { useTranslation } from "react-i18next";
 
 import { Button } from "@components/Form";
@@ -20,7 +20,7 @@ const AdminEstateModificationFormContactDetail = ({
     <>
       <div className="h-14 w-14 flex-shrink-0 overflow-hidden rounded-full bg-gray-50">
         <img
-          src={getImageURL(data.avatar, DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL)}
+          src={getImageURL(data.avatar, IMAGE_VARIANT_ENUM.SMALL)}
           alt="avatar"
           className="h-full w-full object-cover object-center"
         />

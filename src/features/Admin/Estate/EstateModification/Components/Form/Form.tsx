@@ -1,4 +1,4 @@
-import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, ESTATE_STATUS_ENUM, IEstate } from "@encacap-group/common/dist/re";
+import { ESTATE_STATUS_ENUM, IEstate, IMAGE_VARIANT_ENUM } from "@encacap-group/common/dist/re";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AxiosError } from "axios";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -6,16 +6,16 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import { ADMIN_PATH } from "@constants/urls";
-import { EstateDraftDataType, EstateFormDataType } from "@interfaces/Admin/estateTypes";
-import { adminEstateService } from "@services/index";
 import {
   PostModificationFormButtonDraft,
   PostModificationFormButtonNew,
   PostModificationFormButtonPublished,
   PostModificationFormButtonUnPublished,
 } from "@components/Post";
+import { ADMIN_PATH } from "@constants/urls";
 import useToast from "@hooks/useToast";
+import { EstateDraftDataType, EstateFormDataType } from "@interfaces/Admin/estateTypes";
+import { adminEstateService } from "@services/index";
 import { setFormError } from "@utils/error";
 import { generateImageFormData, generateImagesFormData } from "@utils/image";
 
@@ -89,11 +89,11 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
       setValue("status", data.status);
 
       if (data.avatar) {
-        setValue("avatar", generateImageFormData(data.avatar, DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL));
+        setValue("avatar", generateImageFormData(data.avatar, IMAGE_VARIANT_ENUM.SMALL));
       }
 
       if (data.images) {
-        setValue("images", generateImagesFormData(data.images, DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL));
+        setValue("images", generateImagesFormData(data.images, IMAGE_VARIANT_ENUM.SMALL));
       }
     },
     [setValue],

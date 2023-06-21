@@ -2,7 +2,7 @@ import { ICategory } from "@encacap-group/common/dist/re";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { userRoleSelector } from "@selectors/commonSliceSelectors";
 import { omit } from "lodash";
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import RootWebsiteSelector from "src/features/Root/Website/Components/RootWebsiteSelector";
@@ -12,17 +12,22 @@ import ImageInput from "@components/Form/ImageInput/ImageInput";
 import Modal, { ModalProps } from "@components/Modal/Modal";
 import useSelector from "@hooks/useSelector";
 import { CategoryFormDataType } from "@interfaces/Admin/categoryTypes";
-import { ServiceAddFunctionType, ServiceUpdateFunctionType } from "@interfaces/Common/commonTypes";
+import {
+  ServiceAddFunctionType,
+  ServiceGetAllFunctionType,
+  ServiceUpdateFunctionType,
+} from "@interfaces/Common/commonTypes";
 import { generateImageFormData } from "@utils/image";
 
+import CategorySelector from "../../../Components/Form/Select/CategorySelector/CategorySelector";
 import { categoryFormSchema } from "../Schemas/categoryFormSchema";
 import CategoryGroupSelector from "./CategoryGroupSelector";
-import ParentCategorySelector from "./CategoryParentSelector";
 
 export interface CategoryModificationModalProps extends ModalProps {
   category: ICategory | null;
   onCreate: ServiceAddFunctionType<CategoryFormDataType>;
   onUpdate: ServiceUpdateFunctionType<CategoryFormDataType>;
+  onGetAll: ServiceGetAllFunctionType<ICategory>;
 }
 
 const CategoryModificationModal = ({
@@ -30,11 +35,10 @@ const CategoryModificationModal = ({
   onClose,
   onCreate,
   onUpdate,
+  onGetAll,
   ...props
 }: CategoryModificationModalProps) => {
-  const { t } = useTranslation("admin", {
-    keyPrefix: "admin:page.category.modal.modification",
-  });
+  const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -43,7 +47,7 @@ const CategoryModificationModal = ({
   const defaultValues: CategoryFormDataType = {
     name: "",
     categoryGroupCode: "",
-    thumbnail: null,
+    avatar: null,
     parentId: null,
     websiteId: null,
   };
@@ -99,12 +103,16 @@ const CategoryModificationModal = ({
     onClose();
   }, [onClose, reset]);
 
+  const handleSelectCategory = useCallback((value: ICategory) => {
+    setValue("categoryGroupCode", value.categoryGroupCode);
+  }, []);
+
   useEffect(() => {
     if (category !== null) {
       setValue("name", category.name);
       setValue("categoryGroupCode", category.categoryGroupCode);
-      setValue("thumbnail", generateImageFormData(category.thumbnail));
-      setValue("parentId", category.parentId);
+      setValue("avatar", generateImageFormData(category.avatar));
+      setValue("parentId", category.parent?.id ?? null);
       setValue("websiteId", category.websiteId);
       return;
     }
@@ -114,7 +122,7 @@ const CategoryModificationModal = ({
 
   return (
     <Modal
-      title={category ? t("title.edit") : t("title.create")}
+      title={category ? t("editCategory") : t("addCategory")}
       isLoading={isLoading}
       onConfirm={handleSubmit}
       onClose={handleClose}
@@ -124,19 +132,28 @@ const CategoryModificationModal = ({
         {role.isRoot && <RootWebsiteSelector control={control} />}
         <Input
           name="name"
-          label={t("form.name.label")}
-          placeholder={t("form.name.placeholder")}
+          label={t("name")}
+          placeholder={t("enterName")}
           className="block"
           autoComplete="off"
           control={control}
         />
         {role.isRoot && <CategoryGroupSelector control={control} />}
-        {!role.isRoot && <ParentCategorySelector control={control} onChange={setValue} />}
-        <ImageInput name="thumbnail" label={t("form.thumbnail.label")} control={control} />
+        {!role.isRoot && (
+          <CategorySelector
+            control={control}
+            label={t("parentCategory")}
+            name="parentId"
+            placeholder={t("selectParentCategory")}
+            onGet={onGetAll}
+            onSelect={handleSelectCategory}
+          />
+        )}
+        <ImageInput name="avatar" label={t("avatar")} control={control} />
         <button type="submit" className="hidden" />
       </form>
     </Modal>
   );
 };
 
-export default CategoryModificationModal;
+export default memo(CategoryModificationModal);

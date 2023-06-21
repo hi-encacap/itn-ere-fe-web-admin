@@ -2,8 +2,8 @@ import {
   ACBUILDING_SITE_CONFIG_CODE_ENUM,
   CONFIG_GROUP_ENUM,
   CONFIG_TYPE_ENUM,
-  ICloudflareImageResponse,
   IConfig,
+  IImageResponse,
   WEBSITE_DOMAIN_ENUM,
 } from "@encacap-group/common/dist/re";
 import { Key, useCallback, useState } from "react";
@@ -57,7 +57,7 @@ const SiteConfigHomeIntroduceImage = ({ data, onChange }: SiteConfigHomeIntroduc
         name="homeIntroduce"
         className="grid-cols-3 xl:grid-cols-5"
         isMultiple
-        value={generateImagesFormData((data?.value as unknown as ICloudflareImageResponse[]) ?? [])}
+        value={generateImagesFormData((data?.value as unknown as IImageResponse[]) ?? [])}
         onChange={handleChangeImage}
       />
       <Button

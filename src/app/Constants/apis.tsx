@@ -8,6 +8,7 @@ const AUTHENTICATION_API_PATH = {
 
 const ADMIN_CATEGORY_API_PATH = {
   CATEGORIES_PATH: "v1/admin/categories",
+  ROOT_CATEGORIES_PATH: "v1/admin/categories/roots",
   CATEGORY_PATH: (id: Key) => `v1/admin/categories/${id}`,
   DELETE_CATEGORY_PATH: (id: number) => `v1/admin/categories/${id}`,
 };
@@ -76,7 +77,7 @@ const ADMIN_CONTACT_API_PATH = {
 };
 
 const UPLOAD_API_PATH = {
-  UPLOAD_IMAGE_PATH: "v1/admin/cloudflare/images/single",
+  UPLOAD_IMAGE_PATH: "v1/images/single",
 };
 
 const UNIT_PRICE_API_PATH = {
