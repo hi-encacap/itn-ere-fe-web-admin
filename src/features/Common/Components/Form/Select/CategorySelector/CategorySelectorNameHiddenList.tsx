@@ -16,6 +16,7 @@ const CategorySelectorNameHiddenList = ({ names }: CategorySelectorNameHiddenLis
       tooltip={
         <div className="flex items-center justify-center space-x-1">
           {names.map((name, index) => (
+            // #skipcq: JS-0437
             <div key={index} className="flex items-center justify-center space-x-1 text-white">
               <span>{name}</span>
               {index < length - 1 && <BiChevronRight />}

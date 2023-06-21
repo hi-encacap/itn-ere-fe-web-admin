@@ -1,4 +1,4 @@
-import { Key } from "react";
+import { Key, useCallback } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { TableRowActionClickHandlerType, TableRowActionStatusType } from "@interfaces/Common/elementTypes";
@@ -11,6 +11,10 @@ export interface TableRowActionProps {
 }
 
 const TableRowAction = ({ id, children, status = "normal", onClick }: TableRowActionProps) => {
+  const handleClick = useCallback(() => {
+    onClick?.(id);
+  }, [id, onClick]);
+
   return (
     <div
       className={twMerge(
@@ -19,7 +23,7 @@ const TableRowAction = ({ id, children, status = "normal", onClick }: TableRowAc
       )}
       role="button"
       tabIndex={0}
-      onClick={() => onClick?.(id)}
+      onClick={handleClick}
     >
       {children}
     </div>
