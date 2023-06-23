@@ -137,7 +137,7 @@ const PostTableBodyItem = ({
   }, [handleClickDelete]);
 
   return (
-    <div className="relative flex flex-col overflow-hidden rounded-lg">
+    <div className="relative flex flex-col overflow-hidden rounded-xl">
       {isLoading && (
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-white bg-opacity-50" />
       )}
@@ -150,7 +150,7 @@ const PostTableBodyItem = ({
           />
         )}
       </div>
-      <div className="flex flex-1 flex-col rounded-b-lg border-2 border-t-0 border-gray-100 px-4 py-4">
+      <div className="flex flex-1 flex-col rounded-b-xl border-2 border-t-0 border-gray-100 px-4 py-4">
         <div className="flex flex-wrap items-center justify-start">
           <PostTableBodyItemBadge status={data.status} title={tEstate(`status.${String(data.status)}`)} />
           {"customId" in data && data.customId && <PostTableBodyItemBadge title={`#${data.customId}`} />}
@@ -177,27 +177,22 @@ const PostTableBodyItem = ({
         </div>
         <div className="mt-3 flex items-center space-x-4 border-t-2 border-gray-100 pt-4">
           <DropdownContainerV2 menu={dropdownMenu}>
-            <Button className="rounded-sm py-2.5" color="light" size="sm" disabled={isLoading}>
+            <Button className="py-2.5" color="light" size="sm" disabled={isLoading}>
               <HiDotsHorizontal size={20} />
             </Button>
           </DropdownContainerV2>
           {data.status === ESTATE_STATUS_ENUM.UNPUBLISHED && (
-            <Button className="flex-1 rounded-sm" size="sm" disabled={isLoading} onClick={handleClickPublish}>
+            <Button className="flex-1" size="sm" disabled={isLoading} onClick={handleClickPublish}>
               {t("publish")}
             </Button>
           )}
           {data.status === ESTATE_STATUS_ENUM.DRAFT && (
-            <Button className="flex-1 rounded-sm" size="sm" disabled={isLoading} onClick={handleClickEdit}>
+            <Button className="flex-1" size="sm" disabled={isLoading} onClick={handleClickEdit}>
               {t("edit")}
             </Button>
           )}
           {data.status === ESTATE_STATUS_ENUM.PUBLISHED && (
-            <Button
-              className="flex-1 rounded-sm"
-              size="sm"
-              disabled={isLoading}
-              onClick={handleClickUnPublish}
-            >
+            <Button className="flex-1" size="sm" disabled={isLoading} onClick={handleClickUnPublish}>
               {t("unPublish")}
             </Button>
           )}

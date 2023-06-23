@@ -58,7 +58,7 @@ const Button = (
       break;
 
     case "sm":
-      sizeClassNames += "px-4 py-2 rounded-md shadow-none drop-shadow-none";
+      sizeClassNames += "px-4 py-2 shadow-none drop-shadow-none";
       break;
 
     default:
