@@ -5,6 +5,7 @@ import { twMerge } from "tailwind-merge";
 import LoadingSpinner from "@components/Loading/LoadingSpinner";
 
 interface LayoutSidebarItemContentProps {
+  className?: string;
   icon: ReactElement;
   isActive: boolean;
   isLoading?: boolean;
@@ -14,6 +15,7 @@ interface LayoutSidebarItemContentProps {
 }
 
 const LayoutSidebarItemContent = ({
+  className,
   isActive,
   isLoading,
   isShowChildren,
@@ -25,6 +27,7 @@ const LayoutSidebarItemContent = ({
     <div
       className={twMerge(
         "relative cursor-pointer rounded-md px-5 py-2.5 duration-100 hover:bg-gray-100",
+        className,
         (isActive || isShowChildren) && "bg-gray-100",
       )}
     >

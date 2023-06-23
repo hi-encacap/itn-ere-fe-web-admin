@@ -6,6 +6,7 @@ import { LayoutContentTabItemType } from "./LayoutContentTabItem";
 
 interface LayoutContentProps {
   title: string;
+  subtitle?: string;
   children: ReactNode;
   action?: ReactNode;
   defaultSelectedTab?: LayoutContentTabItemType["id"];
@@ -18,6 +19,7 @@ interface LayoutContentProps {
 
 const LayoutContent = ({
   title,
+  subtitle,
   children,
   className,
   action,
@@ -30,7 +32,10 @@ const LayoutContent = ({
   return (
     <div className={twMerge("px-8", className)}>
       <div className={twMerge("flex h-18 items-center justify-between", headerClassName)}>
-        <div className="font-semibold">{title}</div>
+        <div>
+          <div className="font-semibold">{title}</div>
+          {subtitle && <div className="text-gray-500">{subtitle}</div>}
+        </div>
         {action}
       </div>
       {tabs?.length && (

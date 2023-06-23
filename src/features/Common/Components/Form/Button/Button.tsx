@@ -69,7 +69,7 @@ const Button = (
     <button
       type="button"
       className={twMerge(
-        "rounded-md",
+        "rounded-full",
         sizeClassNames,
         "duration-100s font-semibold outline-none ring-2 transition-colors",
         colorClassNames,

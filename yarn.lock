@@ -1453,13 +1453,12 @@
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.7.4.tgz#19bf0f5af19149111c40d98bb0cf82119f5d9eeb"
   integrity sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==
 
-"@encacap-group/common@^1.8.0":
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/@encacap-group/common/-/common-1.8.0.tgz#468e20cde42fade0ff3333e0c55e762d14fbebca"
-  integrity sha512-342E8XS61G1FeJ10kj5nIBaArVENOg8QnrWXolFZu5XTLEhCdudPNmO8yMHRvzneoXQbyyYo21tQ8tAX8A7Igg==
+"@encacap-group/common@^1.8.7":
+  version "1.8.7"
+  resolved "https://registry.yarnpkg.com/@encacap-group/common/-/common-1.8.7.tgz#8362ff5b4455fb75b4027b8cda0eeb49c8864f94"
+  integrity sha512-nsTJeIr5g/a/1N4GPkcWIdF4eUaBA9/Ick9xR9Q4dSxpNaAFM5xPb79QYhic5kOXBXzPumGsCySTY6EK6oBddg==
   dependencies:
     axios "^1.4.0"
-    react-hook-form "^7.43.9"
 
 "@eslint/eslintrc@^1.3.3":
   version "1.3.3"
@@ -10022,6 +10021,11 @@ queue-microtask@^1.2.2:
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
+queue@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/queue/-/queue-7.0.0.tgz#2f43841ac492a4848007089810702704f5b2c4ae"
+  integrity sha512-sphwS7HdfQnvrJAXUNAUgpf9H/546IE3p/5Lf2jr71O4udEYlqAhkevykumas2FYuMkX/29JMOgrRdRoYZ/X9w==
+
 quick-lru@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-4.0.1.tgz#5b8878f113a58217848c6482026c73e1ba57727f"
@@ -10128,11 +10132,6 @@ react-hook-form@^7.39.5:
   version "7.39.5"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.39.5.tgz#a4272b60288ef5e1bb42bbb6ba3b36d243ab2879"
   integrity sha512-OE0HKyz5IPc6svN2wd+e+evidZrw4O4WZWAWYzQVZuHi+hYnHFSLnxOq0ddjbdmaLIsLHut/ab7j72y2QT3+KA==
-
-react-hook-form@^7.43.9:
-  version "7.43.9"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.43.9.tgz#84b56ac2f38f8e946c6032ccb760e13a1037c66d"
-  integrity sha512-AUDN3Pz2NSeoxQ7Hs6OhQhDr6gtF9YRuutGDwPQqhSUAHJSgGl2VeY3qN19MG0SucpjgDiuMJ4iC5T5uB+eaNQ==
 
 react-i18next@^12.0.0:
   version "12.0.0"
