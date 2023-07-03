@@ -1,5 +1,6 @@
 import { HTMLAttributes, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { BiHomeCircle } from "react-icons/bi";
 import { TbListDetails } from "react-icons/tb";
 import { twMerge } from "tailwind-merge";
 
@@ -19,6 +20,12 @@ const AdminConfigWebsiteSidebar = ({ className }: AdminConfigWebsiteSidebarProps
         icon: <TbListDetails size={20} />,
         label: t("detailInfo"),
         to: ADMIN_PATH.CONFIG_WEBSITE_PATH,
+      },
+      {
+        key: "home",
+        icon: <BiHomeCircle size={20} />,
+        label: t("home"),
+        to: ADMIN_PATH.CONFIG_WEBSITE_HOME_PATH,
       },
     ],
     [],

@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 
 import { ConfirmationModal } from "@components/Modal";
 import { PostDeleteConfirmationModal, PostTableBody } from "@components/Post";
+import { PostTableBodyItemProps } from "@components/Post/Table/TableBodyItem";
 import Table from "@components/Table/Table";
 import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
 import useToast from "@hooks/useToast";
@@ -18,24 +19,29 @@ import { generateColumnFilterObject } from "@utils/helpers";
 
 import { ESTATE_LIST_TAB_ENUM } from "@admin/Estate/Constants/enums";
 
-interface AdminPostListTableProps {
+export interface AdminPostListTableProps extends Pick<PostTableBodyItemProps, "mode"> {
   data: IPost[];
   isLoading: boolean;
   totalRows: number;
+  defaultSelection?: string[];
   onChangeQueryParams: (queryParams: IBaseListQuery) => void;
   onMoveToTop: (id: Key) => Promise<void>;
   onPublish: (id: Key) => Promise<void>;
   onUnPublish: (id: Key) => Promise<void>;
+  onChangeSelection?: (selected: string[]) => void;
 }
 
 const AdminPostListTable = ({
   data,
-  totalRows,
+  defaultSelection,
   isLoading,
+  mode,
+  totalRows,
   onChangeQueryParams,
   onUnPublish,
   onPublish,
   onMoveToTop,
+  onChangeSelection,
 }: AdminPostListTableProps) => {
   const { t } = useTranslation();
   const toast = useToast();
@@ -52,6 +58,7 @@ const AdminPostListTable = ({
   const [isShowPublishConfirmModal, setIsShowPublishConfirmModal] = useState(false);
   const [isShowDeleteConfirmModal, setIsShowDeleteConfirmModal] = useState(false);
   const [selectedEstateId, setSelectedEstateId] = useState<Key | null>(null);
+  const [selectedRowIds, setSelectedRowIds] = useState<string[]>([]);
 
   const { tabId = ESTATE_LIST_TAB_ENUM.COMPLETED, categoryId } = useParams();
 
@@ -154,6 +161,19 @@ const AdminPostListTable = ({
     }
   }, [selectedEstateId, queryParams]);
 
+  const handleSelectRow = useCallback(
+    (rowId: Key) => {
+      setSelectedRowIds((prev) => {
+        if (prev.includes(String(rowId))) {
+          return prev.filter((id) => id !== String(rowId));
+        }
+
+        return [String(rowId)];
+      });
+    },
+    [setSelectedRowIds],
+  );
+
   useEffect(() => {
     const newQueryParams: IBaseListQuery = {
       ...omit(queryParams, "categoryId"),
@@ -174,10 +194,23 @@ const AdminPostListTable = ({
     handleChangeQueryParamsDebounced?.(queryParams);
   }, [queryParams]);
 
+  useEffect(() => {
+    if (!defaultSelection?.length || selectedRowIds.length > 0) {
+      return;
+    }
+
+    setSelectedRowIds(defaultSelection.map((item) => String(item)));
+  }, [defaultSelection]);
+
+  useEffect(() => {
+    onChangeSelection?.(selectedRowIds);
+  }, [selectedRowIds]);
+
   return (
     <>
       <Table
         columns={columns}
+        data={data}
         pagination={{
           ...pagination,
           totalRows,
@@ -186,13 +219,15 @@ const AdminPostListTable = ({
         onChangeFilters={setColumnFilters}
       >
         <PostTableBody
-          data={data}
           isLoading={isLoading}
+          mode={mode}
           onClickUnPublish={handleClickUnPublish}
           onClickPublish={handleClickPublish}
           onMoveToTop={onMoveToTop}
           onInteraction={handleInteraction}
           onClickDelete={handleClickDelete}
+          rowSelection={selectedRowIds}
+          onSelectRow={handleSelectRow}
         />
       </Table>
       <ConfirmationModal

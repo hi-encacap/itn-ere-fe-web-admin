@@ -1,3 +1,4 @@
+import { IBaseListQuery } from "@encacap-group/common/dist/base";
 import { ACB_CONFIG_CODE_ENUM, CONFIG_TYPE_ENUM, IWebsiteConfig } from "@encacap-group/common/dist/re";
 import { camelCase, kebabCase } from "lodash";
 import Queue from "queue";
@@ -9,6 +10,14 @@ import axiosInstance from "@utils/Http/axiosInstance";
 
 const updateWebsiteConfigByKey = async (key: Key, data: Partial<IWebsiteConfig>) => {
   const response = await axiosInstance.put(ADMIN_CONFIG_WEBSITE_API_PATH.CONFIG_WEBSITE_PATH(key), data);
+
+  return response.data;
+};
+
+const bulkUpdateWebsiteConfig = async (data: Array<Partial<IWebsiteConfig>>) => {
+  const response = await axiosInstance.put(ADMIN_CONFIG_WEBSITE_API_PATH.BULK_CONFIG_WEBSITE_PATH, {
+    items: data,
+  });
 
   return response.data;
 };
@@ -58,4 +67,25 @@ const getWebsiteContact = async (): Promise<WebsiteConfigFormDataType> => {
   }, {});
 };
 
-export { getWebsiteContact, updateWebsiteConfigByKey, updateWebsiteContact };
+const getConfigByKey = async (key: Key) => {
+  const response = await axiosInstance.get(ADMIN_CONFIG_WEBSITE_API_PATH.CONFIG_WEBSITE_PATH(key));
+
+  return response.data.data;
+};
+
+const getConfigs = async (query: IBaseListQuery) => {
+  const response = await axiosInstance.get(ADMIN_CONFIG_WEBSITE_API_PATH.CONFIG_WEBSITES_PATH, {
+    params: query,
+  });
+
+  return response.data;
+};
+
+export {
+  bulkUpdateWebsiteConfig,
+  getConfigByKey,
+  getConfigs,
+  getWebsiteContact,
+  updateWebsiteConfigByKey,
+  updateWebsiteContact,
+};

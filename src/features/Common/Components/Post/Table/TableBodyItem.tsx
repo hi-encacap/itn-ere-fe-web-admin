@@ -12,6 +12,7 @@ import { twMerge } from "tailwind-merge";
 import DropdownContainerV2 from "@components/Dropdown/DropdownContainerV2";
 import { DropdownMenuItemType } from "@components/Dropdown/DropdownContainerV2MenuItem";
 import { Button } from "@components/Form";
+import Checkbox, { CheckboxProps } from "@components/Form/Checkbox/Checkbox";
 import { DROPDOWN_MENU_TYPE_ENUM } from "@constants/enums";
 import useToast from "@hooks/useToast";
 import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
@@ -19,24 +20,31 @@ import { PostDraftDataType } from "@interfaces/Admin/postTypes";
 
 import PostTableBodyItemBadge from "./TableBodyItemBadge";
 
-interface PostTableBodyItemProps {
+export interface PostTableBodyItemProps {
   data: IEstate | EstateDraftDataType | IPost | PostDraftDataType;
+  isSelected?: boolean;
+  mode?: "selection" | "normal";
   onClickDelete?: (id: number) => void;
   onMoveToTop?: (id: number) => Promise<void>;
   onClickUnPublish?: (id: number) => void;
   onClickPublish?: (id: number) => void;
   onInteraction?: () => void;
   onClickEdit: (data: IEstate | EstateDraftDataType | IPost | PostDraftDataType) => void;
+  onToggleSelect?: CheckboxProps["onChange"];
+  onSelectRow?: (id: number) => void;
 }
 
 const PostTableBodyItem = ({
   data,
+  isSelected = false,
+  mode,
   onClickDelete,
   onMoveToTop,
   onClickUnPublish,
   onClickPublish,
   onInteraction,
   onClickEdit,
+  onSelectRow,
 }: PostTableBodyItemProps) => {
   const { t } = useTranslation();
   const { t: tEstate } = useTranslation("admin", {
@@ -57,6 +65,7 @@ const PostTableBodyItem = ({
 
     return null;
   }, [data, t]);
+  const isNormalMode = useMemo(() => mode === "normal" || !mode, [mode]);
 
   const handleClickDelete = useCallback(() => {
     onClickDelete?.(data.id);
@@ -136,29 +145,54 @@ const PostTableBodyItem = ({
     ];
   }, [handleClickDelete]);
 
+  const handleChangeSelect = useCallback(() => {
+    onSelectRow?.(data.id);
+  }, [data, onSelectRow]);
+
   return (
-    <div className="relative flex flex-col overflow-hidden rounded-xl">
+    <div
+      className={twMerge(
+        "group relative flex flex-col rounded-xl",
+        !isNormalMode &&
+          !isLoading &&
+          "cursor-pointer ring-2 ring-transparent ring-offset-2 hover:ring-teal-500",
+        isSelected && "ring-teal-500",
+      )}
+    >
+      {!isNormalMode && (
+        <label htmlFor={`select-post-${data.id}`} className="absolute inset-0 z-10 p-4">
+          <Checkbox name={`select-post-${data.id}`} checked={isSelected} onChange={handleChangeSelect} />
+        </label>
+      )}
       {isLoading && (
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-white bg-opacity-50" />
       )}
-      <div className="aspect-video w-full flex-shrink-0 overflow-hidden bg-gray-100">
-        {data.avatar && (
-          <img
-            src={getImageURL(data.avatar)}
-            alt={data.title}
-            className="h-full w-full object-cover object-center"
-          />
-        )}
-      </div>
-      <div className="flex flex-1 flex-col rounded-b-xl border-2 border-t-0 border-gray-100 px-4 py-4">
+      {isNormalMode && (
+        <div className="aspect-video w-full flex-shrink-0 overflow-hidden rounded-t-xl bg-gray-100">
+          {data.avatar && (
+            <img
+              src={getImageURL(data.avatar)}
+              alt={data.title}
+              className="h-full w-full object-cover object-center"
+            />
+          )}
+        </div>
+      )}
+      {!isNormalMode && <div className="h-9 w-full rounded-t-xl border-2 border-b-0 border-gray-100"></div>}
+      <div className="flex flex-1 flex-col rounded-b-xl border-2 border-t-0 border-gray-100 px-4 py-4 group-hover:border-gray-200">
         <div className="flex flex-wrap items-center justify-start">
           <PostTableBodyItemBadge status={data.status} title={tEstate(`status.${String(data.status)}`)} />
           {"customId" in data && data.customId && <PostTableBodyItemBadge title={`#${data.customId}`} />}
           {data.category && <PostTableBodyItemBadge title={data.category.name} />}
         </div>
-        <div>
-          <div className="font-semibold">{data.title}</div>
-          <div className="mt-1 flex items-center justify-start space-x-2">
+        <div className={twMerge(!isNormalMode && "flex flex-1 flex-col")}>
+          <div className="flex-1 font-semibold">{data.title}</div>
+          <div
+            className={twMerge(
+              "mt-1 flex items-center justify-start space-x-2",
+              !isNormalMode && "mt-3 border-t-2 border-gray-100 pt-4",
+            )}
+          >
             <MdAccessTime />
             <span className="text-sm">
               {t("updatedAtDate", {
@@ -167,36 +201,40 @@ const PostTableBodyItem = ({
             </span>
           </div>
         </div>
-        <div
-          className={twMerge(
-            "flex-1 overflow-hidden border-gray-100 line-clamp-3",
-            content && "mt-3 border-t-2 pt-2",
-          )}
-        >
-          {content}
-        </div>
-        <div className="mt-3 flex items-center space-x-4 border-t-2 border-gray-100 pt-4">
-          <DropdownContainerV2 menu={dropdownMenu}>
-            <Button className="py-2.5" color="light" size="sm" disabled={isLoading}>
-              <HiDotsHorizontal size={20} />
-            </Button>
-          </DropdownContainerV2>
-          {data.status === ESTATE_STATUS_ENUM.UNPUBLISHED && (
-            <Button className="flex-1" size="sm" disabled={isLoading} onClick={handleClickPublish}>
-              {t("publish")}
-            </Button>
-          )}
-          {data.status === ESTATE_STATUS_ENUM.DRAFT && (
-            <Button className="flex-1" size="sm" disabled={isLoading} onClick={handleClickEdit}>
-              {t("edit")}
-            </Button>
-          )}
-          {data.status === ESTATE_STATUS_ENUM.PUBLISHED && (
-            <Button className="flex-1" size="sm" disabled={isLoading} onClick={handleClickUnPublish}>
-              {t("unPublish")}
-            </Button>
-          )}
-        </div>
+        {isNormalMode && (
+          <div
+            className={twMerge(
+              "flex-1 overflow-hidden border-gray-100 line-clamp-3",
+              content && "mt-3 border-t-2 pt-2",
+            )}
+          >
+            {content}
+          </div>
+        )}
+        {isNormalMode && (
+          <div className="mt-3 flex items-center space-x-4 border-t-2 border-gray-100 pt-4">
+            <DropdownContainerV2 menu={dropdownMenu}>
+              <Button className="py-2.5" color="light" size="sm" disabled={isLoading}>
+                <HiDotsHorizontal size={20} />
+              </Button>
+            </DropdownContainerV2>
+            {data.status === ESTATE_STATUS_ENUM.UNPUBLISHED && (
+              <Button className="flex-1" size="sm" disabled={isLoading} onClick={handleClickPublish}>
+                {t("publish")}
+              </Button>
+            )}
+            {data.status === ESTATE_STATUS_ENUM.DRAFT && (
+              <Button className="flex-1" size="sm" disabled={isLoading} onClick={handleClickEdit}>
+                {t("edit")}
+              </Button>
+            )}
+            {data.status === ESTATE_STATUS_ENUM.PUBLISHED && (
+              <Button className="flex-1" size="sm" disabled={isLoading} onClick={handleClickUnPublish}>
+                {t("unPublish")}
+              </Button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

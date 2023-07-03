@@ -67,8 +67,8 @@
   "getError": "Đã xảy ra lỗi khi tải dữ liệu mà bạn cần. Vui lòng thử lại sau.",
   "getPostError": "Lấy thông tin bài viết không thành công! Vui lòng thử lại sau.",
   "getSiteConfigError": "Đã xảy ra lỗi khi tải thiết lập trang. Vui lòng thử lại sau.",
-  "homeSliderImage": "Ảnh trình chiếu trang chủ",
-  "homeSliderImageDescription": "Hình ảnh được sử dụng để trình chiếu ở đầu trang chủ. Chọn từ 4 đến 6 hình tỷ lệ 16:9 để đảm bảo trải nghiệm tốt trên mọi thiết bị.",
+  "homeHero": "Ảnh trình chiếu",
+  "homeHeroSubtitle": "Hình ảnh được sử dụng để trình chiếu ở đầu trang chủ. Chọn từ 4 đến 6 hình tỷ lệ 16:9 để đảm bảo trải nghiệm tốt trên mọi thiết bị.",
   "insertImage": "Chèn ảnh",
   "introduceImage": "Ảnh giới thiệu",
   "introduceImageDescription": "Hình ảnh được sử dụng để giới thiệu về trang của bạn. Chọn hình tỷ lệ 16:9 để đảm bảo trải nghiệm tốt trên mọi thiết bị.",
@@ -166,7 +166,6 @@
     }
   },
   "tax": "Mã số thuế",
-  "taxRequired": "Mã số thuế không được phép để trống.",
   "title": "Tiêu đề",
   "titleRequired": "Tiêu đề không được phép để trống.",
   "unPublish": "Huỷ xuất bản",
@@ -189,5 +188,15 @@
   "websiteNameRequired": "Tên trang không được phép để trống.",
   "websiteRequired": "Website không được phép để trống.",
   "enterTax": "Nhập mã số thuế",
-  "taxRequired": "Mã số thuế không được phép để trống."
+  "taxRequired": "Mã số thuế không được phép để trống.",
+  "home": "Trang chủ",
+  "homeIntroduce": "Giới thiệu",
+  "homeIntroduceSubtitle": "Thiết lập bài viết và hình ảnh xuất hiện trên trang chủ tại mục 'Về cúng tôi'. Hình ảnh sẽ được thay đổi về kích thước phù hợp với nội dung hiển thị và loại thiết bị.",
+  "image": "Hình ảnh",
+  "imageRequired": "Hình ảnh không được phép để trống.",
+  "postRequired": "Bài viết không được phép để trống.",
+  "clickToChoosePost": "Nhấn để chọn bài viết",
+  "pickPost": "Chọn bài viết",
+  "getWebsiteConfigError": "Lấy thông tin thiết lập trang không thành công. Vui lòng thử lại sau.",
+  "change": "Thay đổi"
 }

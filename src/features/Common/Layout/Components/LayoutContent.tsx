@@ -11,6 +11,7 @@ interface LayoutContentProps {
   action?: ReactNode;
   defaultSelectedTab?: LayoutContentTabItemType["id"];
   isBlank?: boolean;
+  isShowHeader?: boolean;
   tabs?: LayoutContentTabItemType[];
   className?: string;
   headerClassName?: string;
@@ -24,6 +25,7 @@ const LayoutContent = ({
   className,
   action,
   isBlank = false,
+  isShowHeader = true,
   tabs,
   defaultSelectedTab,
   headerClassName,
@@ -31,13 +33,15 @@ const LayoutContent = ({
 }: LayoutContentProps) => {
   return (
     <div className={twMerge("px-8", className)}>
-      <div className={twMerge("flex h-18 items-center justify-between", headerClassName)}>
-        <div>
-          <div className="font-semibold">{title}</div>
-          {subtitle && <div className="text-gray-500">{subtitle}</div>}
+      {isShowHeader && (
+        <div className={twMerge("flex h-18 items-center justify-between", headerClassName)}>
+          <div>
+            <div className="font-semibold">{title}</div>
+            {subtitle && <div className="text-gray-500">{subtitle}</div>}
+          </div>
+          {action}
         </div>
-        {action}
-      </div>
+      )}
       {tabs?.length && (
         <LayoutContentTab tabs={tabs} defaultTab={defaultSelectedTab} onChangeTab={onChangeTab} />
       )}

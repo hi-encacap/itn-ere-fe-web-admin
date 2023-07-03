@@ -5,6 +5,7 @@ import LayoutContent from "@common/Layout/Components/LayoutContent";
 
 import AdminConfigWebsiteSidebar from "../Components/AdminConfigWebsiteSidebar";
 import AdminConfigWebsiteDetail from "../ConfigWebsiteDetail/AdminConfigWebsiteDetail";
+import AdminConfigWebsiteHome from "../ConfigWebsiteHome/AdminConfigWebsiteHome";
 
 const AdminConfigWebsiteRoutes = () => {
   const { t } = useTranslation();
@@ -16,6 +17,7 @@ const AdminConfigWebsiteRoutes = () => {
         <div className="col-span-9 flex flex-col space-y-8">
           <Routes>
             <Route path="*" element={<AdminConfigWebsiteDetail />} />
+            <Route path="homes" element={<AdminConfigWebsiteHome />} />
           </Routes>
         </div>
       </div>

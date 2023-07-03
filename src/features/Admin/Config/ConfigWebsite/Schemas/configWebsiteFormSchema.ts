@@ -1,5 +1,6 @@
+import { ACB_CONFIG_CODE_ENUM } from "@encacap-group/common/dist/re";
 import { TFunction } from "i18next";
-import { string } from "yup";
+import { array, number, object, string } from "yup";
 
 import { WebsiteConfigFormDataType } from "@interfaces/Admin/websiteConfigTypes";
 import { WebsiteFormDataType } from "@interfaces/Admin/websiteTypes";
@@ -20,4 +21,20 @@ const configWebsiteContactFormSchema = (t: TFunction) =>
     taxNumber: string().required(t("taxRequired")),
   });
 
-export { configWebsiteContactFormSchema, configWebsiteGeneralFormSchema };
+const configWebsiteHomeHeroFormSchema = (t: TFunction) =>
+  generateFormSchema({
+    [ACB_CONFIG_CODE_ENUM.HOMEPAGE_HERO_IMAGE]: array(object()).required(t("imageRequired")),
+  });
+
+const configWebsiteHomeIntroduceFormSchema = (t: TFunction) =>
+  generateFormSchema({
+    [ACB_CONFIG_CODE_ENUM.HOMEPAGE_INTRODUCE_IMAGE]: array(object()).required(t("imageRequired")),
+    [ACB_CONFIG_CODE_ENUM.HOMEPAGE_INTRODUCE_POST]: number().required(t("postRequired")),
+  });
+
+export {
+  configWebsiteContactFormSchema,
+  configWebsiteGeneralFormSchema,
+  configWebsiteHomeHeroFormSchema,
+  configWebsiteHomeIntroduceFormSchema,
+};

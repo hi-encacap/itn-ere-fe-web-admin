@@ -100,6 +100,7 @@ const ADMIN_WEBSITE_API_PATH = {
 const ADMIN_CONFIG_WEBSITE_API_PATH = {
   CONFIG_WEBSITES_PATH: "v1/admin/configs/websites",
   CONFIG_WEBSITE_PATH: (id: Key) => `v1/admin/configs/websites/${id}`,
+  BULK_CONFIG_WEBSITE_PATH: "v1/admin/configs/websites/bulk",
 };
 
 export {

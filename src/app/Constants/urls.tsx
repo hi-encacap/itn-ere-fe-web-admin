@@ -37,6 +37,7 @@ const ADMIN_PATH = {
 
   CONFIG_PATH: "/admin/configs",
   CONFIG_WEBSITE_PATH: "/admin/configs/websites",
+  CONFIG_WEBSITE_HOME_PATH: "/admin/configs/websites/homes",
 };
 
 const ROOT_PATH = {
