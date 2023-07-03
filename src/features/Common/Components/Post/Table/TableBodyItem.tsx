@@ -178,7 +178,7 @@ const PostTableBodyItem = ({
           )}
         </div>
       )}
-      {!isNormalMode && <div className="h-9 w-full rounded-t-xl border-2 border-b-0 border-gray-100"></div>}
+      {!isNormalMode && <div className="h-9 w-full rounded-t-xl border-2 border-b-0 border-gray-100" />}
       <div className="flex flex-1 flex-col rounded-b-xl border-2 border-t-0 border-gray-100 px-4 py-4 group-hover:border-gray-200">
         <div className="flex flex-wrap items-center justify-start">
           <PostTableBodyItemBadge status={data.status} title={tEstate(`status.${String(data.status)}`)} />

@@ -56,7 +56,6 @@ const AdminConfigWebsiteHomeIntroduce = () => {
         },
       ]);
       toast.success(t("updateConfigWebsiteSuccess"), t("mayTakeAWhileToEffectConfigWebsite"));
-      console.log(imageIds, postId);
     } catch (error) {
       toast.error(t("updateConfigWebsiteError"));
     } finally {

@@ -72,7 +72,7 @@ const AdminConfigWebsitePostInputPlaceholder = ({
 
   return (
     <div className="relative flex w-full items-center justify-start space-x-4 p-4">
-      {isDisabled && <div className="absolute inset-0 z-10 bg-gray-100 bg-opacity-50"></div>}
+      {isDisabled && <div className="absolute inset-0 z-10 bg-gray-100 bg-opacity-50" />}
       <Avatar
         alt={postData.title}
         className="h-16 w-16"

@@ -31,8 +31,7 @@ const AdminConfigWebsiteDetailGeneral = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await adminWebsiteService.updateMyWebsite(data);
-      console.log(response);
+      await adminWebsiteService.updateMyWebsite(data);
       toast.success(t("updateConfigWebsiteSuccess"), t("mayTakeAWhileToEffectConfigWebsite"));
     } catch (error) {
       toast.error(t("updateConfigWebsiteError"));
@@ -75,6 +74,7 @@ const AdminConfigWebsiteDetailGeneral = () => {
               i18nKey="descriptionWillBeUsedForSEO"
               components={{
                 span: (
+                  // #skip-cq: JS-0738
                   <a
                     className="underline underline-offset-4 hover:text-teal-500"
                     href="https://developers.google.com/search/docs/appearance/snippet?hl=vi"
