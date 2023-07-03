@@ -198,5 +198,7 @@
   "clickToChoosePost": "Nhấn để chọn bài viết",
   "pickPost": "Chọn bài viết",
   "getWebsiteConfigError": "Lấy thông tin thiết lập trang không thành công. Vui lòng thử lại sau.",
-  "change": "Thay đổi"
+  "change": "Thay đổi",
+  "homeService": "Dịch vụ",
+  "homeServiceSubtitle": "Thiết lập bài viết hoặc danh mục hiển thị trên trang chủ tại mục 'Dịch vụ của chúng tôi'. Tối đa 4 bài viết hoặc danh mục sẽ được hiển thị."
 }
