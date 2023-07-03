@@ -133,7 +133,7 @@ const AdminSidebar = () => {
             key: "site_config",
             icon: <MdDisplaySettings size={18} />,
             label: t("siteConfig"),
-            to: ADMIN_PATH.CONFIG_SITE_PATH,
+            to: ADMIN_PATH.CONFIG_WEBSITE_PATH,
           },
         ],
       },

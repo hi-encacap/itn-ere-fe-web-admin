@@ -9,6 +9,7 @@ module.exports = {
       width: {
         4.5: "1.125rem",
         120: "30rem",
+        256: "64rem",
         layout: "calc(100% - 18rem)",
       },
       padding: {

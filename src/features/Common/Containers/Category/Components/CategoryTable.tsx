@@ -42,8 +42,8 @@ const CategoryTable = ({
         <TableImageColumn src={getImageURL(props.row.original.avatar, IMAGE_VARIANT_ENUM.SMALL)} />
       ),
     }),
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
+    // @ts-ignore
     columnHelper.accessor((row) => row.website.name, {
       id: "websiteDomain",
       header: String(t("website")),

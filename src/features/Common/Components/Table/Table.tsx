@@ -7,10 +7,11 @@ import {
   RowData,
   RowSelectionState,
   SortingState,
+  Table as TableCore,
   useReactTable,
 } from "@tanstack/react-table";
 import { keys } from "lodash";
-import { ReactElement, useCallback, useEffect, useMemo, useState } from "react";
+import { cloneElement, ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 
 import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
 import { TABLE_ROW_SELECTION_TYPE_ENUM } from "@constants/enums";
@@ -45,14 +46,16 @@ declare module "@tanstack/table-core" {
 type TableRowActionNameType = `on${string}`;
 
 export interface CustomTableBodyProps<TData = unknown> {
-  data: TData[];
+  table?: TableCore<TData>;
   isLoading: boolean;
+  rowSelection?: string[];
   [key: TableRowActionNameType]: TableRowActionClickHandlerType;
   [key: string]: unknown;
 }
 
 interface TableBaseProps<TData = TableDataType> {
   columns: Array<ColumnDef<TData, unknown>>;
+  data: TData[];
   hiddenColumns?: Array<keyof TData | boolean>;
   pagination?: TablePaginationType;
   rowSelection?: RowSelectionState;
@@ -65,13 +68,11 @@ interface TableBaseProps<TData = TableDataType> {
 
 interface TableWithChildrenProps<TData = TableDataType> extends TableBaseProps<TData> {
   children: ReactElement<CustomTableBodyProps<TData>>;
-  data?: never;
   isLoading?: never;
   sorting?: never;
 }
 
 interface TableWithoutChildrenProps<TData = TableDataType> extends TableBaseProps<TData> {
-  data: TData[];
   children?: never;
   isLoading?: boolean;
   sorting?: SortingState;
@@ -191,15 +192,17 @@ const Table = ({
   return (
     <div>
       <TableHeader headerGroups={tableHeaderGroup} onChangeFilters={onChangeFilters} />
-      <div className="overflow-auto">
-        {children && children}
-        {!children && (
-          <table className="relative min-w-full">
-            <TableContentHeader headerGroups={tableHeaderGroup} />
-            <TableContentBody rows={tableRows} headers={tableHeaderGroup[0].headers} isLoading={isLoading} />
-          </table>
-        )}
-      </div>
+      {children &&
+        cloneElement(children, {
+          ...children.props,
+          table,
+        })}
+      {!children && (
+        <table className="relative min-w-full">
+          <TableContentHeader headerGroups={tableHeaderGroup} />
+          <TableContentBody rows={tableRows} headers={tableHeaderGroup[0].headers} isLoading={isLoading} />
+        </table>
+      )}
       {(Boolean(tableRows.length) || isLoading) && (
         <TableFooter
           isLoading={isLoading}

@@ -101,7 +101,7 @@ const Modal = (
                   <div className="px-10">
                     {isShowHeader && (
                       <div>
-                        <div className="h-fit w-fit pb-2 text-lg font-semibold">{title}</div>
+                        <div className="h-fit w-fit pb-2 font-semibold">{title}</div>
                         <div className="mt-2 h-1 w-16 rounded-md bg-gray-100" />
                       </div>
                     )}

@@ -41,3 +41,5 @@ export type ServiceUpdateFunctionType<T> = (id: Key, data: T) => Promise<unknown
 export type ServiceDeleteFunctionType = (id: Key) => Promise<unknown>;
 
 export type TableOnclickFunctionType = (id: Key) => void;
+
+export type StatusType = "normal" | "danger" | "warning" | "success" | "disabled";

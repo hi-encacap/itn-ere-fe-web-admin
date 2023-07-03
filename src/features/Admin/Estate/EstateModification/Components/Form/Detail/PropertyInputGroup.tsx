@@ -4,9 +4,9 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { MdAdd } from "react-icons/md";
 
+import { Button, Input } from "@components/Form";
 import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
 import { adminEstatePropertyService } from "@services/index";
-import { Button, Input } from "@components/Form";
 
 const AdminEstateModificationFormDetailPropertyInputGroup = () => {
   const { t } = useTranslation("admin", {
@@ -17,11 +17,15 @@ const AdminEstateModificationFormDetailPropertyInputGroup = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const { control, watch } = useFormContext<EstateFormDataType>();
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
+  // @ts-ignore
   const { fields, append, remove } = useFieldArray({
     control,
     name: "properties" as never,
   });
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
+  // @ts-ignore
   const categoryId = watch("categoryId");
 
   const getPropertyByCategoryId = useCallback(() => {

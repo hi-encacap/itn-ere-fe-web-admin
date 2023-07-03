@@ -4,9 +4,9 @@ import { useController, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 
+import FormElementError from "@components/Form/FormElementError";
 import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
 import { adminContactService } from "@services/index";
-import FormElementError from "@components/Form/FormElementError";
 
 import FormGroupTitle from "../../../../../../Common/Components/Form/GroupTitle";
 import AdminEstateModificationFormContactDetail from "./ContactDetail";
@@ -30,6 +30,8 @@ const AdminEstateModificationFormContact = () => {
 
   const {
     field: { value },
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
+    // @ts-ignore
   } = useController({
     name: "contactId",
     control,

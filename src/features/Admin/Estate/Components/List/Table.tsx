@@ -210,6 +210,7 @@ const AdminEstateListTable = ({
     <>
       <Table
         columns={columns}
+        data={data}
         pagination={{
           ...pagination,
           totalRows,

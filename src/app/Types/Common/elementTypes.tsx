@@ -47,6 +47,7 @@ export type FormElementSizeType = "xs" | "sm" | "normal";
 export interface FormElementBaseProps {
   name: string;
   className?: string;
+  itemContainerClassName?: string;
   error?: string;
   label?: string;
   placeholder?: string;

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useController } from "react-hook-form";
 
 import { HookFormControl } from "@interfaces/Common/commonTypes";
@@ -32,4 +33,4 @@ const ImageInput = ({ control, name, ...inputProps }: InputProps) => {
   );
 };
 
-export default ImageInput;
+export default memo(ImageInput);
