@@ -68,7 +68,6 @@ const UncontrolledImageInput = ({
         return response;
       } catch (error) {
         toast.error(t("uploadImageError"));
-        console.log({ error });
         setErrorImageIds((prev) => [...prev, file.id]);
         return null;
       } finally {
