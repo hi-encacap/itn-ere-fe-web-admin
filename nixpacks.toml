@@ -1,3 +1,3 @@
 # Override the default install target to use pnpm install --no-frozen-lockfile
-[phares.install]
+[phases.build]
 cmds = ["pnpm install --no-frozen-lockfile"]
