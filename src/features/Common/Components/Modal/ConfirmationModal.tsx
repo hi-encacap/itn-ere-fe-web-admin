@@ -88,7 +88,7 @@ const ConfirmationModal = ({
           </div>
         </div>
       </div>
-      <div className="-mx-10 mt-9 -mb-8 flex items-center justify-end space-x-6 rounded-b-lg bg-gray-50 px-8 py-6">
+      <div className="-mx-10 -mb-8 mt-9 flex items-center justify-end space-x-6 rounded-b-lg bg-gray-50 px-8 py-6">
         <Button
           type="button"
           size="sm"

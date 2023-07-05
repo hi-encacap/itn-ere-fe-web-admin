@@ -70,7 +70,7 @@ const AdminConfigWebsiteDetailContact = () => {
 
   return (
     <AdminConfigWebsiteContainer title={t("contactInformation")}>
-      <form className="grid grid-cols-2 gap-y-6 gap-x-5" onSubmit={handleSubmit}>
+      <form className="grid grid-cols-2 gap-x-5 gap-y-6" onSubmit={handleSubmit}>
         <Input
           className="block"
           control={control}

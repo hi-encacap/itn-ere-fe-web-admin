@@ -71,7 +71,7 @@ const AdminConfigWebsiteHomeHero = () => {
 
   return (
     <AdminConfigWebsiteContainer title={t("homeHero")} subtitle={t("homeHeroSubtitle")}>
-      <form className="grid gap-y-6 gap-x-5 lg:grid-cols-2" onSubmit={handleSubmit}>
+      <form className="grid gap-x-5 gap-y-6 lg:grid-cols-2" onSubmit={handleSubmit}>
         <ImageInput
           name={ACB_CONFIG_CODE_ENUM.HOMEPAGE_HERO_IMAGE}
           control={control}

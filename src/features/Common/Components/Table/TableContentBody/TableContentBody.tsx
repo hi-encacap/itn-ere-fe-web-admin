@@ -31,7 +31,7 @@ const TableContentBody = ({ rows, headers, isLoading = false }: TableContentProp
               <td
                 key={cell.id}
                 className={twMerge(
-                  "border-b border-gray-100 bg-white py-4 px-4 text-center",
+                  "border-b border-gray-100 bg-white px-4 py-4 text-center",
                   cell.column.id === "selector" && "sticky left-0",
                   cell.column.id === "actions" && "sticky right-0",
                   isLoading && "opacity-50",

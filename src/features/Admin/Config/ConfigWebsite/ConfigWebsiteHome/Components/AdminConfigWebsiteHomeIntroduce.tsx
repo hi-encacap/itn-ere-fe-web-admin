@@ -99,7 +99,7 @@ const AdminConfigWebsiteHomeIntroduce = () => {
 
   return (
     <AdminConfigWebsiteContainer title={t("homeIntroduce")} subtitle={t("homeIntroduceSubtitle")}>
-      <form className="grid gap-y-6 gap-x-5" onSubmit={handleSubmit}>
+      <form className="grid gap-x-5 gap-y-6" onSubmit={handleSubmit}>
         <ImageInput
           name={ACB_CONFIG_CODE_ENUM.HOMEPAGE_INTRODUCE_IMAGE}
           control={control}
