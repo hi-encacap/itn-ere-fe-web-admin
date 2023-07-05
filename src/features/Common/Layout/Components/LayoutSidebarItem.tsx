@@ -12,9 +12,17 @@ interface LayoutSidebarItemProps {
   label: string;
   to: string;
   childrenItems?: SidebarItemType[];
+  itemClassName?: string;
 }
 
-const LayoutSidebarItem = ({ icon, isLoading, label, to, childrenItems }: LayoutSidebarItemProps) => {
+const LayoutSidebarItem = ({
+  itemClassName,
+  icon,
+  isLoading,
+  label,
+  to,
+  childrenItems,
+}: LayoutSidebarItemProps) => {
   const { pathname } = useLocation();
 
   const [isShowChildren, setIsShowChildren] = useState(false);
@@ -67,6 +75,7 @@ const LayoutSidebarItem = ({ icon, isLoading, label, to, childrenItems }: Layout
           isActive={isActive}
           isLoading={isLoading}
           isShowChildren={isShowChildren}
+          className={itemClassName}
         />
       </Link>
     );
@@ -81,6 +90,7 @@ const LayoutSidebarItem = ({ icon, isLoading, label, to, childrenItems }: Layout
         isActive={isActive}
         isLoading={isLoading}
         isShowChildren={isShowChildren}
+        className={itemClassName}
       />
       {Boolean(childrenItems?.length) && (
         <LayoutSidebarItemChildren

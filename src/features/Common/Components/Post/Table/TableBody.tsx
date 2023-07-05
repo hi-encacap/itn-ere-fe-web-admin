@@ -1,5 +1,5 @@
 import { IEstate, IPost } from "@encacap-group/common/dist/re";
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import LoadingSpinner from "@components/Loading/LoadingSpinner";
@@ -9,14 +9,18 @@ import { ADMIN_PATH } from "@constants/urls";
 import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
 import { PostDraftDataType } from "@interfaces/Admin/postTypes";
 
-import PostTableBodyItem from "./TableBodyItem";
+import PostTableBodyItem, { PostTableBodyItemProps } from "./TableBodyItem";
 import PostTableBodyLoading from "./TableBodyLoading";
 
 const PostTableBody = ({
-  data,
+  table,
   isLoading,
+  mode,
+  rowSelection,
   ...props
-}: CustomTableBodyProps<IEstate | EstateDraftDataType>) => {
+}: CustomTableBodyProps<IEstate | EstateDraftDataType> & Pick<PostTableBodyItemProps, "mode">) => {
+  const tableRows = table?.getRowModel().rows ?? [];
+
   const navigate = useNavigate();
 
   const handleClickEdit = useCallback(
@@ -26,9 +30,9 @@ const PostTableBody = ({
     [navigate],
   );
 
-  if (isLoading && !data.length) return <PostTableBodyLoading />;
+  if (isLoading && !tableRows.length) return <PostTableBodyLoading />;
 
-  if (!data.length) return <TableContentBodyEmptyContent />;
+  if (!tableRows.length) return <TableContentBodyEmptyContent />;
 
   return (
     <div className="relative grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -37,11 +41,18 @@ const PostTableBody = ({
           <LoadingSpinner className="h-8 w-8 border-teal-500" />
         </div>
       )}
-      {data.map((item) => (
-        <PostTableBodyItem key={item.id} data={item} onClickEdit={handleClickEdit} {...props} />
+      {tableRows.map((row) => (
+        <PostTableBodyItem
+          key={row.id}
+          data={row.original}
+          mode={mode}
+          isSelected={rowSelection?.includes(String(row.id))}
+          onClickEdit={handleClickEdit}
+          {...props}
+        />
       ))}
     </div>
   );
 };
 
-export default PostTableBody;
+export default memo(PostTableBody);

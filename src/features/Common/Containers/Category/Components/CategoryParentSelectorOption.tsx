@@ -7,9 +7,9 @@ interface CategoryParentSelectorOptionProps {
 
 const CategoryParentSelectorOption = ({ data }: CategoryParentSelectorOptionProps) => {
   return (
-    <div className="flex items-center justify-start">
+    <div className="flex items-center justify-start whitespace-nowrap">
       {Boolean(data.parent) && (
-        <div className="mr-1 flex items-center space-x-1">
+        <div className="mr-1 line-clamp-1 flex max-w-[72px] items-center space-x-1 whitespace-normal break-all">
           <CategoryParentSelectorOption data={data.parent as ICategory} />
           <BiChevronRight size={18} />
         </div>

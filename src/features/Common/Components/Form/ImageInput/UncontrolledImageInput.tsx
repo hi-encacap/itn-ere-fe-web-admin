@@ -14,6 +14,7 @@ import ImageInputItem from "./ImageInputItem";
 interface BaseUncontrolledImageInputProps extends FormElementBaseProps {
   isRequired?: boolean;
   disabled?: boolean;
+  onUploading?: (isUploading: boolean) => void;
 }
 
 interface UncontrolledSingleImageInputProps {
@@ -35,11 +36,13 @@ const UncontrolledImageInput = ({
   label,
   error,
   className,
+  itemContainerClassName,
   isMultiple,
   isRequired = false,
   disabled = false,
   value,
   onChange,
+  onUploading,
 }: UncontrolledImageInputProps) => {
   const { t } = useTranslation("common");
   const toast = useToast();
@@ -65,7 +68,6 @@ const UncontrolledImageInput = ({
         return response;
       } catch (error) {
         toast.error(t("uploadImageError"));
-        console.log({ error });
         setErrorImageIds((prev) => [...prev, file.id]);
         return null;
       } finally {
@@ -80,7 +82,12 @@ const UncontrolledImageInput = ({
 
     setImages((prev) => [...prev, ...formattedImages]);
 
+    onUploading?.(true);
+
     const uploadedImages = await Promise.all(formattedImages.map(uploadImage));
+
+    onUploading?.(false);
+
     const filteredUploadedImages = uploadedImages.filter(Boolean) as FormImageInputDataType[];
 
     isTouchRef.current = true;
@@ -118,9 +125,9 @@ const UncontrolledImageInput = ({
   }, [handledImages, isMultiple, onChange]);
 
   return (
-    <div>
+    <div className={className}>
       {label && <FormElementLabel label={label} id={inputId} isRequired={isRequired} error={error} />}
-      <div className={twMerge("grid grid-cols-4 gap-4", className)}>
+      <div className={twMerge("grid grid-cols-4 gap-4", itemContainerClassName)}>
         {images.map((image) => (
           <ImageInputItem
             inputId={inputId}

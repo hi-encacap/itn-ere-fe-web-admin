@@ -1,4 +1,4 @@
-import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, ESTATE_STATUS_ENUM, IPost } from "@encacap-group/common/dist/re";
+import { ESTATE_STATUS_ENUM, IMAGE_VARIANT_ENUM, IPost } from "@encacap-group/common/dist/re";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AxiosError } from "axios";
 import { HTMLAttributes, Key, useCallback, useEffect, useMemo, useState } from "react";
@@ -68,7 +68,7 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
       setValue("status", data.status);
 
       if (data.avatar) {
-        setValue("avatar", generateImageFormData(data.avatar, DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL));
+        setValue("avatar", generateImageFormData(data.avatar, IMAGE_VARIANT_ENUM.SMALL));
       }
     },
     [setValue],

@@ -9,7 +9,7 @@ interface FormElementErrorProps {
 const FormElementError = ({ error: errorProp }: FormElementErrorProps) => {
   return (
     <AnimatePresence>
-      <motion.div className="relative mt-1.5 -mb-2 overflow-hidden text-sm">
+      <motion.div className="relative -mb-2 mt-1.5 overflow-hidden text-sm">
         <motion.div
           key={slugify(errorProp ?? "")}
           initial={{ y: 12 }}

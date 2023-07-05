@@ -1,19 +1,19 @@
 import { IBaseListQuery } from "@encacap-group/common/dist/base";
 import { IEstate } from "@encacap-group/common/dist/re";
-import { SortingState, createColumnHelper } from "@tanstack/react-table";
+import { createColumnHelper } from "@tanstack/react-table";
 import { isEqual } from "lodash";
 import { Key, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 
-import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
-import { TablePaginationType } from "@interfaces/Common/commonTypes";
-import { ColumnDef, TableColumnFilterState } from "@interfaces/Common/elementTypes";
-import { adminEstateService, adminLocationService } from "@services/index";
 import { ConfirmationModal } from "@components/Modal";
 import { PostDeleteConfirmationModal } from "@components/Post";
 import Table from "@components/Table/Table";
+import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
 import useToast from "@hooks/useToast";
+import { TablePaginationType } from "@interfaces/Common/commonTypes";
+import { ColumnDef, TableColumnFilterState } from "@interfaces/Common/elementTypes";
+import { adminEstateService, adminLocationService } from "@services/index";
 import { generateColumnFilterObject } from "@utils/helpers";
 
 import { ESTATE_LIST_TAB_ENUM } from "@admin/Estate/Constants/enums";
@@ -51,7 +51,6 @@ const AdminEstateListTable = ({
     page: 1,
     limit: DEFAULT_PAGE_SIZE,
   });
-  const [columnSorting, setColumnSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
   const [queryParams, setQueryParams] = useState<IBaseListQuery>({
     ...pagination,
@@ -77,6 +76,8 @@ const AdminEstateListTable = ({
 
   const columns: Array<ColumnDef<IEstate>> = useMemo(
     () => [
+      // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       columnHelper.accessor((row) => row.ward, {
         id: "status",
         header: String(t("table.column.status")),
@@ -85,7 +86,7 @@ const AdminEstateListTable = ({
           filterValueBy: "name",
           filterSearchBy: "name",
           getFilterOptions: adminEstateService.getEstateStatuses,
-          filterLabelFormatter: (value) => tEstate(`status.${value as string}`),
+          filterLabelFormatter: (value: string) => tEstate(`status.${value}`),
         },
       }),
       columnHelper.accessor((row) => row.province, {
@@ -208,27 +209,25 @@ const AdminEstateListTable = ({
   return (
     <>
       <Table
-        data={data}
         columns={columns}
+        data={data}
         pagination={{
           ...pagination,
           totalRows,
         }}
-        sorting={columnSorting}
-        isLoading={isLoading}
-        tableBodyProps={{
-          onClickUnPublish: handleClickUnPublish,
-          onClickPublish: handleClickPublish,
-          onMoveToTop,
-          onInteraction: handleInteraction,
-          onClickDelete: handleClickDelete,
-        }}
-        // #skipcq: JS-0417
-        renderTableBody={(props) => <PostTableBody {...props} />}
         onChangePagination={setPagination}
-        onChangeSorting={setColumnSorting}
         onChangeFilters={setColumnFilters}
-      />
+      >
+        <PostTableBody
+          data={data}
+          isLoading={isLoading}
+          onClickUnPublish={handleClickUnPublish}
+          onClickPublish={handleClickPublish}
+          onMoveToTop={onMoveToTop}
+          onInteraction={handleInteraction}
+          onClickDelete={handleClickDelete}
+        />
+      </Table>
       <ConfirmationModal
         title={t("publication.title.unPublish", {
           title: selectedEstate?.title,

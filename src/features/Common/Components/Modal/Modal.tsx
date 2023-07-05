@@ -101,11 +101,11 @@ const Modal = (
                   <div className="px-10">
                     {isShowHeader && (
                       <div>
-                        <div className="h-fit w-fit pb-2 text-lg font-semibold">{title}</div>
+                        <div className="h-fit w-fit pb-2 font-semibold">{title}</div>
                         <div className="mt-2 h-1 w-16 rounded-md bg-gray-100" />
                       </div>
                     )}
-                    <div className={twMerge("w-[400px] pt-8 pb-8", contentContainerClassName)}>
+                    <div className={twMerge("w-[400px] pb-8 pt-8", contentContainerClassName)}>
                       {children}
                     </div>
                   </div>

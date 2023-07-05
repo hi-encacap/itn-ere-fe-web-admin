@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import LayoutContent from "@common/Layout/Components/LayoutContent";
 import { LayoutContentTabItemType } from "@common/Layout/Components/LayoutContentTabItem";
+import { PostTableBodyItemProps } from "@components/Post/Table/TableBodyItem";
 import { ADMIN_PATH } from "@constants/urls";
 import { adminPostService } from "@services/index";
 import { setDocumentTitle } from "@utils/helpers";
@@ -13,9 +14,23 @@ import { setDocumentTitle } from "@utils/helpers";
 import { ESTATE_LIST_TAB_ENUM } from "@admin/Estate/Constants/enums";
 
 import PostListHeaderAction from "./Components/List/HeaderAction";
-import AdminPostListTable from "./Components/List/Table";
+import AdminPostListTable, { AdminPostListTableProps } from "./Components/List/Table";
 
-const PostList = () => {
+interface PostListProps extends Pick<AdminPostListTableProps, "defaultSelection" | "onChangeSelection"> {
+  isResetScroll?: boolean;
+  layoutClassName?: string;
+  mode?: "normal" | "modal";
+  tableMode?: PostTableBodyItemProps["mode"];
+}
+
+const AdminPostList = ({
+  isResetScroll,
+  layoutClassName,
+  mode = "normal",
+  tableMode,
+  defaultSelection,
+  onChangeSelection,
+}: PostListProps) => {
   const { t } = useTranslation();
 
   const [postData, setPostData] = useState<IPost[]>([]);
@@ -24,8 +39,13 @@ const PostList = () => {
 
   const { tabId = ESTATE_LIST_TAB_ENUM.COMPLETED, categoryId } = useParams();
 
-  const tabItems = useMemo<LayoutContentTabItemType[]>(
-    () => [
+  const isNormalMode = useMemo(() => mode === "normal", [mode]);
+  const tabItems = useMemo<LayoutContentTabItemType[] | undefined>(() => {
+    if (!isNormalMode) {
+      return undefined;
+    }
+
+    return [
       {
         id: ESTATE_LIST_TAB_ENUM.COMPLETED,
         label: t("completed"),
@@ -34,9 +54,8 @@ const PostList = () => {
         id: ESTATE_LIST_TAB_ENUM.DRAFT,
         label: t("draft"),
       },
-    ],
-    [t],
-  );
+    ];
+  }, [t, isNormalMode]);
 
   const navigate = useNavigate();
 
@@ -55,11 +74,6 @@ const PostList = () => {
 
   const getData = useCallback(async (queryParams: IBaseListQuery) => {
     setIsLoading(true);
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
 
     try {
       let service = adminPostService.getPosts;
@@ -90,22 +104,28 @@ const PostList = () => {
   const handleMoveToTop = useCallback(adminPostService.movePostToTopById, []);
 
   useEffect(() => {
-    setDocumentTitle(t("postManagement"));
-  }, [t]);
+    setDocumentTitle(t("postManagement"), isResetScroll !== false);
+  }, [t, isResetScroll]);
 
   return (
     <LayoutContent
-      title={t("postManagement")}
-      defaultSelectedTab={tabId}
       action={<PostListHeaderAction />}
+      className={layoutClassName}
+      defaultSelectedTab={tabId}
+      title={t("postManagement")}
+      isBlank={!isNormalMode}
+      isShowHeader={isNormalMode}
       tabs={tabItems}
       onChangeTab={handleChangeTab}
     >
       <AdminPostListTable
         data={postData}
+        defaultSelection={defaultSelection}
         isLoading={isLoading}
+        mode={tableMode}
         totalRows={totalRows}
         onChangeQueryParams={getData}
+        onChangeSelection={onChangeSelection}
         onUnPublish={handleUnPublish}
         onPublish={handlePublish}
         onMoveToTop={handleMoveToTop}
@@ -114,4 +134,4 @@ const PostList = () => {
   );
 };
 
-export default PostList;
+export default AdminPostList;

@@ -70,7 +70,7 @@ const TableHeaderFilterDropdown = ({
         value={filterSearchValue}
         onChange={handleChangeFilterSearchValue}
       />
-      <div className="relative pt-2 pb-2.5">
+      <div className="relative pb-2.5 pt-2">
         {!isLoading &&
           filterOptions?.map((option) => (
             <TableHeaderFilterDropdownOptionItem
@@ -88,7 +88,7 @@ const TableHeaderFilterDropdown = ({
         ) : (
           <button
             type="button"
-            className="pt-1.5 pb-2 text-left font-semibold disabled:cursor-not-allowed disabled:opacity-50"
+            className="pb-2 pt-1.5 text-left font-semibold disabled:cursor-not-allowed disabled:opacity-50"
             disabled={isLoading}
             onClick={handleClearSelectedFilters}
           >

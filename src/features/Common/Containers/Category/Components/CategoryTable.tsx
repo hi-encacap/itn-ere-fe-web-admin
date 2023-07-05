@@ -1,13 +1,14 @@
-import { DEFAULT_CLOUDFLARE_VARIANT_ENUM, ICategory, getImageURL } from "@encacap-group/common/dist/re";
+import { ICategory, IMAGE_VARIANT_ENUM, getImageURL } from "@encacap-group/common/dist/re";
 import { userRoleSelector } from "@selectors/commonSliceSelectors";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { ServiceGetAllFunctionType, TableOnclickFunctionType } from "@interfaces/Common/commonTypes";
+import CategorySelectorName from "@components/Form/Select/CategorySelector/CategorySelectorName";
 import Table, { TableProps } from "@components/Table/Table";
 import TableImageColumn from "@components/Table/TableImageColumn/TableImageColumn";
 import useSelector from "@hooks/useSelector";
+import { ServiceGetAllFunctionType, TableOnclickFunctionType } from "@interfaces/Common/commonTypes";
 
 import CategoryTableRowAction from "./CategoryTableRowAction";
 
@@ -36,13 +37,13 @@ const CategoryTable = ({
   const columnHelper = useMemo(() => createColumnHelper<ICategory>(), []);
   const categoryColumns: Array<ColumnDef<ICategory, string>> = [
     columnHelper.display({
-      id: "thumbnail",
+      id: "avatar",
       cell: (props) => (
-        <TableImageColumn
-          src={getImageURL(props.row.original.thumbnail, DEFAULT_CLOUDFLARE_VARIANT_ENUM.SMALL)}
-        />
+        <TableImageColumn src={getImageURL(props.row.original.avatar, IMAGE_VARIANT_ENUM.SMALL)} />
       ),
     }),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
+    // @ts-ignore
     columnHelper.accessor((row) => row.website.name, {
       id: "websiteDomain",
       header: String(t("website")),
@@ -55,6 +56,7 @@ const CategoryTable = ({
     columnHelper.accessor((row) => row.name, {
       id: "name",
       header: String(t("name")),
+      cell: (info) => <CategorySelectorName data={info.row.original} />,
     }),
     columnHelper.accessor((row) => row.categoryGroupCode as string, {
       id: "categoryGroupCode",
@@ -96,4 +98,4 @@ const CategoryTable = ({
   );
 };
 
-export default CategoryTable;
+export default memo(CategoryTable);

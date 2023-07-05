@@ -9,7 +9,10 @@ import axiosInstance from "@utils/Http/axiosInstance";
 
 const getCategories = async (params?: IBaseListQuery): Promise<IResponseWithMeta<ICategory[]>> => {
   const response = await axiosInstance.get(ADMIN_CATEGORY_API_PATH.CATEGORIES_PATH, {
-    params,
+    params: {
+      expand: "categoryGroup, website, avatar, parent",
+      ...params,
+    },
   });
 
   return response.data;
@@ -21,15 +24,25 @@ const getAllCategories = async (params?: IBaseListQuery): Promise<ICategory[]> =
   return response.data;
 };
 
-const getAllRootCategories = async (): Promise<ICategory[]> => {
-  return await getAllCategories({ parentId: null });
+const getRootCategories = async (query: IBaseListQuery): Promise<IResponseWithMeta<ICategory[]>> => {
+  const response = await axiosInstance.get(ADMIN_CATEGORY_API_PATH.ROOT_CATEGORIES_PATH, {
+    params: query,
+  });
+
+  return response.data;
+};
+
+const getAllRootCategories = async (query?: IBaseListQuery): Promise<ICategory[]> => {
+  const response = await getRootCategories(omit(query, "page", "limit"));
+
+  return response.data;
 };
 
 const createCategory = async (data: CategoryFormDataType): Promise<ICategory> => {
   const response = await axiosInstance.post(ADMIN_CATEGORY_API_PATH.CATEGORIES_PATH, {
     ...data,
     code: data.name,
-    thumbnailId: data.thumbnail?.id,
+    avatarId: data.avatar?.id,
   });
 
   return response.data.data;
@@ -37,7 +50,7 @@ const createCategory = async (data: CategoryFormDataType): Promise<ICategory> =>
 
 const updateCategoryByCode = async (id: Key, data: CategoryFormDataType): Promise<ICategory> => {
   const response = await axiosInstance.put(ADMIN_CATEGORY_API_PATH.CATEGORY_PATH(id), {
-    thumbnailId: data.thumbnail?.id,
+    avatarId: data.avatar?.id,
   });
 
   return response.data.data;
@@ -53,5 +66,6 @@ export {
   getAllCategories,
   getAllRootCategories,
   getCategories,
+  getRootCategories,
   updateCategoryByCode,
 };

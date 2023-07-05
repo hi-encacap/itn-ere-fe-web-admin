@@ -64,7 +64,7 @@ const TableHeader = ({ headerGroups, onChangeFilters }: TableHeaderProps) => {
   return (
     <div className="relative mb-2">
       <div className="flex flex-wrap items-center justify-start">
-        <div className="mr-4 mb-4 flex-shrink-0">
+        <div className="mb-4 mr-4 flex-shrink-0">
           <Input
             name="tableGlobalFilter"
             className="z-0 w-full bg-gray-50 duration-100 hover:bg-gray-100"

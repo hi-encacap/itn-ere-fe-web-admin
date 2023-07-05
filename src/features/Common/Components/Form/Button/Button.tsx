@@ -58,7 +58,7 @@ const Button = (
       break;
 
     case "sm":
-      sizeClassNames += "px-4 py-2 rounded-md shadow-none drop-shadow-none";
+      sizeClassNames += "px-4 py-2 shadow-none drop-shadow-none";
       break;
 
     default:
@@ -69,7 +69,7 @@ const Button = (
     <button
       type="button"
       className={twMerge(
-        "rounded-md",
+        "rounded-full",
         sizeClassNames,
         "duration-100s font-semibold outline-none ring-2 transition-colors",
         colorClassNames,

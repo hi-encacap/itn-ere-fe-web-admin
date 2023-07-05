@@ -1,6 +1,6 @@
 import { IBaseListQuery } from "@encacap-group/common/dist/base";
 import { IPost } from "@encacap-group/common/dist/re";
-import { SortingState, createColumnHelper } from "@tanstack/react-table";
+import { createColumnHelper } from "@tanstack/react-table";
 import { debounce, isEqual, omit } from "lodash";
 import { Key, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 
 import { ConfirmationModal } from "@components/Modal";
 import { PostDeleteConfirmationModal, PostTableBody } from "@components/Post";
+import { PostTableBodyItemProps } from "@components/Post/Table/TableBodyItem";
 import Table from "@components/Table/Table";
 import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
 import useToast from "@hooks/useToast";
@@ -18,24 +19,29 @@ import { generateColumnFilterObject } from "@utils/helpers";
 
 import { ESTATE_LIST_TAB_ENUM } from "@admin/Estate/Constants/enums";
 
-interface AdminPostListTableProps {
+export interface AdminPostListTableProps extends Pick<PostTableBodyItemProps, "mode"> {
   data: IPost[];
   isLoading: boolean;
   totalRows: number;
+  defaultSelection?: string[];
   onChangeQueryParams: (queryParams: IBaseListQuery) => void;
   onMoveToTop: (id: Key) => Promise<void>;
   onPublish: (id: Key) => Promise<void>;
   onUnPublish: (id: Key) => Promise<void>;
+  onChangeSelection?: (selected: string[]) => void;
 }
 
 const AdminPostListTable = ({
   data,
-  totalRows,
+  defaultSelection,
   isLoading,
+  mode,
+  totalRows,
   onChangeQueryParams,
   onUnPublish,
   onPublish,
   onMoveToTop,
+  onChangeSelection,
 }: AdminPostListTableProps) => {
   const { t } = useTranslation();
   const toast = useToast();
@@ -44,7 +50,6 @@ const AdminPostListTable = ({
     page: 1,
     limit: DEFAULT_PAGE_SIZE,
   });
-  const [columnSorting, setColumnSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
   const [queryParams, setQueryParams] = useState<IBaseListQuery>({
     ...pagination,
@@ -53,6 +58,7 @@ const AdminPostListTable = ({
   const [isShowPublishConfirmModal, setIsShowPublishConfirmModal] = useState(false);
   const [isShowDeleteConfirmModal, setIsShowDeleteConfirmModal] = useState(false);
   const [selectedEstateId, setSelectedEstateId] = useState<Key | null>(null);
+  const [selectedRowIds, setSelectedRowIds] = useState<string[]>([]);
 
   const { tabId = ESTATE_LIST_TAB_ENUM.COMPLETED, categoryId } = useParams();
 
@@ -65,6 +71,8 @@ const AdminPostListTable = ({
 
   const columns: Array<ColumnDef<IPost>> = useMemo(
     () => [
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
+      // @ts-ignore
       columnHelper.accessor((row) => row.status, {
         id: "status",
         header: String(t("status")),
@@ -153,6 +161,19 @@ const AdminPostListTable = ({
     }
   }, [selectedEstateId, queryParams]);
 
+  const handleSelectRow = useCallback(
+    (rowId: Key) => {
+      setSelectedRowIds((prev) => {
+        if (prev.includes(String(rowId))) {
+          return prev.filter((id) => id !== String(rowId));
+        }
+
+        return [String(rowId)];
+      });
+    },
+    [setSelectedRowIds],
+  );
+
   useEffect(() => {
     const newQueryParams: IBaseListQuery = {
       ...omit(queryParams, "categoryId"),
@@ -173,29 +194,42 @@ const AdminPostListTable = ({
     handleChangeQueryParamsDebounced?.(queryParams);
   }, [queryParams]);
 
+  useEffect(() => {
+    if (!defaultSelection?.length || selectedRowIds.length > 0) {
+      return;
+    }
+
+    setSelectedRowIds(defaultSelection.map((item) => String(item)));
+  }, [defaultSelection]);
+
+  useEffect(() => {
+    onChangeSelection?.(selectedRowIds);
+  }, [selectedRowIds]);
+
   return (
     <>
       <Table
-        data={data}
         columns={columns}
+        data={data}
         pagination={{
           ...pagination,
           totalRows,
         }}
-        sorting={columnSorting}
-        isLoading={isLoading}
-        tableBodyProps={{
-          onClickUnPublish: handleClickUnPublish,
-          onClickPublish: handleClickPublish,
-          onMoveToTop,
-          onInteraction: handleInteraction,
-          onClickDelete: handleClickDelete,
-        }}
-        renderTableBody={PostTableBody}
         onChangePagination={setPagination}
-        onChangeSorting={setColumnSorting}
         onChangeFilters={setColumnFilters}
-      />
+      >
+        <PostTableBody
+          isLoading={isLoading}
+          mode={mode}
+          onClickUnPublish={handleClickUnPublish}
+          onClickPublish={handleClickPublish}
+          onMoveToTop={onMoveToTop}
+          onInteraction={handleInteraction}
+          onClickDelete={handleClickDelete}
+          rowSelection={selectedRowIds}
+          onSelectRow={handleSelectRow}
+        />
+      </Table>
       <ConfirmationModal
         title={t("unPublishPost", {
           title: selectedEstate?.title,

@@ -2,9 +2,9 @@ import { IEstateProperty } from "@encacap-group/common/dist/re";
 import { createColumnHelper } from "@tanstack/react-table";
 import { TFunction } from "i18next";
 
+import TableRowActionSkeleton from "@components/Table/TableRowActionSkeleton";
 import { ColumnDef, TableRowActionClickHandlerType } from "@interfaces/Common/elementTypes";
 import { adminEstatePropertyService } from "@services/index";
-import TableRowActionSkeleton from "@components/Table/TableRowActionSkeleton";
 
 import AdminEstatePropertyTableRowActions from "../Components/AdminEstatePropertyTableRowActions";
 
@@ -17,6 +17,8 @@ const createEstatePropertyTableColumns = (t: TFunction, { onClickDelete, onClick
   const columnHelper = createColumnHelper<IEstateProperty>();
 
   const tableExampleColumns: Array<ColumnDef<IEstateProperty>> = [
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
+    // @ts-ignore
     columnHelper.accessor((row) => row.id, {
       id: "id",
       header: String(t("table.column.id")),

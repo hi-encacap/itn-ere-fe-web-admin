@@ -8,6 +8,7 @@ const AUTHENTICATION_API_PATH = {
 
 const ADMIN_CATEGORY_API_PATH = {
   CATEGORIES_PATH: "v1/admin/categories",
+  ROOT_CATEGORIES_PATH: "v1/admin/categories/roots",
   CATEGORY_PATH: (id: Key) => `v1/admin/categories/${id}`,
   DELETE_CATEGORY_PATH: (id: number) => `v1/admin/categories/${id}`,
 };
@@ -76,7 +77,7 @@ const ADMIN_CONTACT_API_PATH = {
 };
 
 const UPLOAD_API_PATH = {
-  UPLOAD_IMAGE_PATH: "v1/admin/cloudflare/images/single",
+  UPLOAD_IMAGE_PATH: "v1/images/single",
 };
 
 const UNIT_PRICE_API_PATH = {
@@ -92,15 +93,27 @@ const ROOT_WEBSITE_API_PATH = {
   WEBSITE_PATH: (id: Key) => `v1/root/websites/${id}`,
 };
 
+const ADMIN_WEBSITE_API_PATH = {
+  WEBSITE_ME_PATH: "v1/admin/websites/me",
+};
+
+const ADMIN_CONFIG_WEBSITE_API_PATH = {
+  CONFIG_WEBSITES_PATH: "v1/admin/configs/websites",
+  CONFIG_WEBSITE_PATH: (id: Key) => `v1/admin/configs/websites/${id}`,
+  BULK_CONFIG_WEBSITE_PATH: "v1/admin/configs/websites/bulk",
+};
+
 export {
   ADMIN_CATEGORY_API_PATH,
   ADMIN_CATEGORY_GROUP_API_PATH,
   ADMIN_CONFIG_API_PATH,
+  ADMIN_CONFIG_WEBSITE_API_PATH,
   ADMIN_CONTACT_API_PATH,
   ADMIN_ESTATE_API_PATH,
   ADMIN_ESTATE_PROPERTY_API_PATH,
   ADMIN_LOCATION_API_PATH,
   ADMIN_POST_API_PATH,
+  ADMIN_WEBSITE_API_PATH,
   AUTHENTICATION_API_PATH,
   ESTATE_QUARTER_API_PATH,
   LOCATION_API_PATH,

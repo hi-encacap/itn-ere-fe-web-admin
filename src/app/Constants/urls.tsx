@@ -36,7 +36,8 @@ const ADMIN_PATH = {
   LOCATION_ADDRESS_BOOK_PATH: "/admin/locations/address-books",
 
   CONFIG_PATH: "/admin/configs",
-  CONFIG_SITE_PATH: "/admin/configs/site",
+  CONFIG_WEBSITE_PATH: "/admin/configs/websites",
+  CONFIG_WEBSITE_HOME_PATH: "/admin/configs/websites/homes",
 };
 
 const ROOT_PATH = {
