@@ -64,7 +64,7 @@ const AdminEstateModificationDraftItem = ({
       <div className="col-span-4 flex flex-col justify-center rounded-r-md border-2 border-l-0 border-gray-100 px-4 py-3">
         <div
           className={twMerge(
-            "font-semibold duration-100 line-clamp-2 group-hover:text-teal-500",
+            "line-clamp-2 font-semibold duration-100 group-hover:text-teal-500",
             isShowDropdownMenu && "text-teal-500",
           )}
         >

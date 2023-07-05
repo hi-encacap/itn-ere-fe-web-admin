@@ -61,7 +61,7 @@ const Alert = ({
           {trackingCode && (
             <div className="mb-1.5 mt-3 flex items-center space-x-2 text-sm font-normal">
               <span className="flex-shrink-0 font-semibold">{t("errorCode")}: </span>
-              <span className="inline-block overflow-hidden break-all text-right line-clamp-1">
+              <span className="line-clamp-1 inline-block overflow-hidden break-all text-right">
                 {trackingCode}
               </span>
             </div>

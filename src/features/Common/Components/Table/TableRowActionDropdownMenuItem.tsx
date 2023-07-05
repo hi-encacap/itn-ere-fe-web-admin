@@ -26,7 +26,7 @@ const TableRowActionDropdownMenuItem = ({
       onClick={handleClick}
     >
       <div className="mr-3">{icon}</div>
-      <div className="break-all line-clamp-1">{label}</div>
+      <div className="line-clamp-1 break-all">{label}</div>
     </div>
   );
 };
