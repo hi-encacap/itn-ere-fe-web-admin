@@ -3,8 +3,6 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-console.log(process.env.REACT_APP_RE_DASH_APP_NAME);
-
 module.exports = {
   webpack: {
     alias: {
