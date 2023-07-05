@@ -4,4 +4,3 @@ cmds = ["pnpm install --no-frozen-lockfile"]
 
 [variables]
 NODE_ENV = "production"
-REACT_APP_RE_DASH_APP_NAME = "Encacap RE - Dashboard"
