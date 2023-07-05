@@ -19,7 +19,7 @@ const AdminPostModificationFormGeneral = ({ isEditMode }: AdminPostModificationF
   return (
     <div>
       <FormGroupTitle title={t("generalInfo")} />
-      <div className={twMerge("mt-5 grid grid-cols-1 gap-y-6 gap-x-6 pt-0.5", isEditMode && "grid-cols-2")}>
+      <div className={twMerge("mt-5 grid grid-cols-1 gap-x-6 gap-y-6 pt-0.5", isEditMode && "grid-cols-2")}>
         <Input
           className="col-span-full block"
           control={control}

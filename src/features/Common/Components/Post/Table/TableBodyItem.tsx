@@ -204,7 +204,7 @@ const PostTableBodyItem = ({
         {isNormalMode && (
           <div
             className={twMerge(
-              "flex-1 overflow-hidden border-gray-100 line-clamp-3",
+              "line-clamp-3 flex-1 overflow-hidden border-gray-100",
               content && "mt-3 border-t-2 pt-2",
             )}
           >

@@ -14,7 +14,7 @@ const CategorySelectorNameItem = ({ name, tooltip }: CategorySelectorNameProps) 
   return (
     <>
       <div className="flex items-center text-slate-400">
-        <span className="max-w-[72px] whitespace-normal break-all line-clamp-1" data-tooltip-id={id}>
+        <span className="line-clamp-1 max-w-[72px] whitespace-normal break-all" data-tooltip-id={id}>
           {name}
         </span>
         <BiChevronRight className="ml-1.5 flex-shrink-0" />

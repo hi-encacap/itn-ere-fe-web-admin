@@ -12,7 +12,7 @@ const FormElementLabel = ({ id, label, isRequired, error }: FormElementLabelProp
     <label
       htmlFor={id}
       className={twMerge(
-        "relative mb-2 -mt-2 flex items-center text-sm text-stone-700",
+        "relative -mt-2 mb-2 flex items-center text-sm text-stone-700",
         error && "text-red-500",
       )}
     >

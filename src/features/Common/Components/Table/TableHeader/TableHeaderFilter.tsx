@@ -84,7 +84,10 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
         let filterLabel = "";
 
         if (Array.isArray(originalFilterBy)) {
-          filterValue = originalFilterBy.reduce((acc, filter) => `${acc} ${rawOption[filter]}`, "");
+          filterValue = originalFilterBy.reduce(
+            (acc: string, filter: string) => `${acc} ${rawOption[filter]}`,
+            "",
+          );
         } else {
           filterValue = _.get(rawOption, filterValueBy ?? filterLabelBy ?? filterBy);
         }
@@ -121,7 +124,7 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
             return;
           }
           if (Array.isArray(options)) {
-            setFilterOptions(formatFilterOptions(options));
+            setFilterOptions(formatFilterOptions(options as TableFilterOptionItemType[]));
           }
         })
         .finally(() => {
@@ -186,7 +189,7 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
   }, [filterSearchValue]);
 
   return (
-    <div className="relative z-20 mr-4 mb-4 h-10 rounded-lg last:mr-0" ref={containerRef}>
+    <div className="relative z-20 mb-4 mr-4 h-10 rounded-lg last:mr-0" ref={containerRef}>
       <div
         className={twMerge(
           "flex h-full w-full cursor-pointer items-center justify-center space-x-2 rounded-lg border-2 border-gray-100 bg-gray-50 pl-4 pr-2.5 duration-100 hover:border-gray-200 hover:bg-gray-100",

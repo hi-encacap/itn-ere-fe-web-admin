@@ -43,14 +43,14 @@ const Alert = ({
 
   return (
     <div
-      className={twMerge("w-full rounded-md px-5 pt-4 pb-3 font-semibold", generalColors[type], className)}
+      className={twMerge("w-full rounded-md px-5 pb-3 pt-4 font-semibold", generalColors[type], className)}
       role="button"
       tabIndex={-1}
       aria-hidden="true"
       onClick={handleClick}
     >
       <div className="flex">
-        <div className="mt-1 mr-4 flex-shrink-0 text-lg">
+        <div className="mr-4 mt-1 flex-shrink-0 text-lg">
           <AlertIcon type={type} />
         </div>
         <div className="text-base">
@@ -61,7 +61,7 @@ const Alert = ({
           {trackingCode && (
             <div className="mb-1.5 mt-3 flex items-center space-x-2 text-sm font-normal">
               <span className="flex-shrink-0 font-semibold">{t("errorCode")}: </span>
-              <span className="inline-block overflow-hidden break-all text-right line-clamp-1">
+              <span className="line-clamp-1 inline-block overflow-hidden break-all text-right">
                 {trackingCode}
               </span>
             </div>

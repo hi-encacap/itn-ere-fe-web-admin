@@ -14,10 +14,10 @@ const LayoutSidebarWebsite = () => {
     <div className="group -mx-4 mb-4 flex items-center justify-start space-x-4 border-b-2 border-gray-100 px-8 pb-6">
       <AiOutlineGlobal size={26} className="flex-shrink-0" />
       <div className="flex-1 space-y-0.5">
-        <div className="break-all font-semibold line-clamp-1">{website.name}</div>
+        <div className="line-clamp-1 break-all font-semibold">{website.name}</div>
         <a
           href={`https://www.${website.url}`}
-          className="relative block break-all text-sm duration-100 line-clamp-1 group-hover:underline"
+          className="relative line-clamp-1 block break-all text-sm duration-100 group-hover:underline"
           target="_blank"
           rel="noreferrer"
         >

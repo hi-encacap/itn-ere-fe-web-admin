@@ -20,13 +20,13 @@ const TableRowActionDropdownMenuItem = ({
 
   return (
     <div
-      className={twMerge("flex items-center justify-start py-1.5 px-4 hover:bg-gray-100", className)}
+      className={twMerge("flex items-center justify-start px-4 py-1.5 hover:bg-gray-100", className)}
       role="button"
       tabIndex={0}
       onClick={handleClick}
     >
       <div className="mr-3">{icon}</div>
-      <div className="break-all line-clamp-1">{label}</div>
+      <div className="line-clamp-1 break-all">{label}</div>
     </div>
   );
 };

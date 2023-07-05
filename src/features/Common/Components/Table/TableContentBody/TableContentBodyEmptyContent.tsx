@@ -7,7 +7,7 @@ const TableContentBodyEmptyContent = () => {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center pt-24 pb-20 text-center text-gray-500">
+    <div className="flex flex-col items-center justify-center pb-20 pt-24 text-center text-gray-500">
       <BsFolder2Open size={40} className="text-gray-200" />
       <div className="mt-2 text-gray-300">{t("emptyData")}</div>
     </div>
