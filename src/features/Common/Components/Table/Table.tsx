@@ -1,10 +1,8 @@
-import { IBaseListQuery } from "@encacap-group/common/dist/base";
 import {
   ColumnDef,
   getCoreRowModel,
   OnChangeFn,
   PaginationState,
-  RowData,
   RowSelectionState,
   SortingState,
   Table as TableCore,
@@ -28,20 +26,6 @@ import TableContentBody from "./TableContentBody/TableContentBody";
 import TableContentHeader from "./TableContentHeader/TableContentHeader";
 import TableFooter from "./TableFooter";
 import TableHeader from "./TableHeader/TableHeader";
-
-declare module "@tanstack/table-core" {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-  interface ColumnMeta<TData extends RowData, TValue> {
-    skeleton?: JSX.Element;
-    filterBy?: string | string[];
-    filterValueBy?: string;
-    filterLabelBy?: string;
-    filterLabel?: string;
-    filterSearchBy?: string;
-    getFilterOptions?: (params?: IBaseListQuery) => Promise<unknown[]>;
-    filterLabelFormatter?: (value: unknown) => string;
-  }
-}
 
 type TableRowActionNameType = `on${string}`;
 

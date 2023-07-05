@@ -86,7 +86,7 @@ const AdminEstateListTable = ({
           filterValueBy: "name",
           filterSearchBy: "name",
           getFilterOptions: adminEstateService.getEstateStatuses,
-          filterLabelFormatter: (value) => tEstate(`status.${value as string}`),
+          filterLabelFormatter: (value: string) => tEstate(`status.${value}`),
         },
       }),
       columnHelper.accessor((row) => row.province, {

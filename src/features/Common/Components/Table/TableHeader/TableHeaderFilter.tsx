@@ -84,7 +84,10 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
         let filterLabel = "";
 
         if (Array.isArray(originalFilterBy)) {
-          filterValue = originalFilterBy.reduce((acc, filter) => `${acc} ${rawOption[filter]}`, "");
+          filterValue = originalFilterBy.reduce(
+            (acc: string, filter: string) => `${acc} ${rawOption[filter]}`,
+            "",
+          );
         } else {
           filterValue = _.get(rawOption, filterValueBy ?? filterLabelBy ?? filterBy);
         }
@@ -121,7 +124,7 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
             return;
           }
           if (Array.isArray(options)) {
-            setFilterOptions(formatFilterOptions(options));
+            setFilterOptions(formatFilterOptions(options as TableFilterOptionItemType[]));
           }
         })
         .finally(() => {
