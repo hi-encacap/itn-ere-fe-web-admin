@@ -1,0 +1,6 @@
+# Override the default install target to use pnpm install --no-frozen-lockfile
+[phases.install]
+cmds = ["pnpm install --no-frozen-lockfile"]
+
+[variables]
+NODE_ENV = "production"
