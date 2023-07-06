@@ -55,7 +55,7 @@ const loginWithEmailAndPassword = async (
   return response.data.data;
 };
 
-const logOut = async () =>
+const logOut = () =>
   new Promise((resolve) => {
     setTimeout(() => resolve({}), 1000);
   });

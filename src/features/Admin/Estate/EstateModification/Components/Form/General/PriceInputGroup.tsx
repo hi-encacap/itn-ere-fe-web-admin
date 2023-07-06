@@ -23,7 +23,7 @@ const AdminEstateModificationFormGeneralPriceInputGroup = () => {
       })
       .then(({ data }) => {
         setUnitPriceOptions(data);
-        // @ts-ignore
+        // @ts-ignore: due to react-hook-form issue with self-ref interface.
         setValue("priceUnitId", data[0].id);
       })
       .catch(() => {
@@ -48,7 +48,7 @@ const AdminEstateModificationFormGeneralPriceInputGroup = () => {
       />
       <select
         className="absolute right-3.5 top-6 h-10 w-fit cursor-pointer rounded-r-md px-1 outline-none"
-        // @ts-ignore
+        // @ts-ignore: due to react-hook-form issue with self-ref interface.
         {...register("priceUnitId")}
       >
         {unitPriceOptions.map((option) => (

@@ -72,7 +72,7 @@ const AdminPostListTable = ({
   const columns: Array<ColumnDef<IPost>> = useMemo(
     () => [
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-      // @ts-ignore
+      // @ts-ignore: due to react-hook-form issue with self-ref interface.
       columnHelper.accessor((row) => row.status, {
         id: "status",
         header: String(t("status")),

@@ -30,12 +30,12 @@ axiosInstance.interceptors.request.use(
     }
     return request;
   },
-  async (error) => Promise.reject(error),
+  (error) => Promise.reject(error),
 );
 
 axiosInstance.interceptors.response.use(
   (response) => response,
-  async (error) => errorHandler(error, axiosInstance),
+  (error) => errorHandler(error, axiosInstance),
 );
 
 export default axiosInstance;

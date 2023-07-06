@@ -108,7 +108,7 @@ const updateEstateById = async (id: Key, estate: EstateFormDataType): Promise<IE
   return response.data.data;
 };
 
-const getEstateStatuses = async (): Promise<Array<Record<"name", string>>> => {
+const getEstateStatuses = (): Promise<Array<Record<"name", string>>> => {
   return Promise.resolve([
     {
       name: ESTATE_STATUS_ENUM.PUBLISHED,

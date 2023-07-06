@@ -18,7 +18,7 @@ const createEstatePropertyTableColumns = (t: TFunction, { onClickDelete, onClick
 
   const tableExampleColumns: Array<ColumnDef<IEstateProperty>> = [
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-    // @ts-ignore
+    // @ts-ignore: due to react-hook-form issue with self-ref interface.
     columnHelper.accessor((row) => row.id, {
       id: "id",
       header: String(t("table.column.id")),

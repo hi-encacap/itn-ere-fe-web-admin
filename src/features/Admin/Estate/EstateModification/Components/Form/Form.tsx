@@ -70,7 +70,7 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
   const setFormValue = useCallback(
     (data: IEstate | EstateDraftDataType) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-      // @ts-ignore
+      // @ts-ignore: due to react-hook-form issue with self-ref interface.
       setValue("id", data.id);
       setValue("title", data.title);
       setValue("customId", data.customId);
@@ -174,7 +174,7 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
     } finally {
       setIsSubmitting(false);
     }
-    // @ts-ignore
+    // @ts-ignore: due to react-hook-form issue with self-ref interface.
   }, [getValues, navigate, setError, setFocus, t, toast]);
 
   const handleCloseModal = useCallback(() => {

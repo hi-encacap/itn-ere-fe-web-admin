@@ -47,7 +47,7 @@ const AdminEstateModificationFormGeneralAreaInputGroup = () => {
       />
       <select
         className="absolute right-3.5 top-6 h-10 w-fit cursor-pointer rounded-r-md px-1 outline-none"
-        // @ts-ignore
+        // @ts-ignore: due to react-hook-form issue with self-ref interface.
         {...register("areaUnitId")}
       >
         {unitPriceOptions.map((option) => (

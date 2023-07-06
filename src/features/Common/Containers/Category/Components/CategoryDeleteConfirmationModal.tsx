@@ -22,12 +22,12 @@ const CategoryDeleteConfirmationModal = ({
 }: CategoryDeleteConfirmationModalProps) => {
   const { t } = useTranslation();
 
-  const handleConfirmDeleteCategory = useCallback(() => {
+  const handleConfirmDeleteCategory = useCallback(async () => {
     if (!category) {
       return;
     }
 
-    onDelete(category.id);
+    await onDelete(category.id);
   }, [category, onDelete]);
 
   return (

@@ -76,8 +76,7 @@ const AdminEstateListTable = ({
 
   const columns: Array<ColumnDef<IEstate>> = useMemo(
     () => [
-      // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // @ts-ignore: due to react-hook-form issue with self-ref interface.
       columnHelper.accessor((row) => row.ward, {
         id: "status",
         header: String(t("table.column.status")),

@@ -61,7 +61,7 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
 
   const setFormValue = useCallback(
     (data: IPost | PostDraftDataType) => {
-      // @ts-ignore
+      // @ts-ignore: due to react-hook-form issue with self-ref interface.
       setValue("id", data.id);
       setValue("title", data.title);
       setValue("categoryId", data.category?.id ?? null);
@@ -123,12 +123,12 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
   });
 
   const handleCreate = useCallback(
-    async (data: unknown) => adminPostService.createPost(data as PostFormDataType),
+    (data: unknown) => adminPostService.createPost(data as PostFormDataType),
     [],
   );
 
   const handleUpdate = useCallback(
-    async (id: Key, data: unknown) => adminPostService.updatePostById(Number(id), data as PostFormDataType),
+    (id: Key, data: unknown) => adminPostService.updatePostById(Number(id), data as PostFormDataType),
     [],
   );
 
@@ -165,7 +165,7 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
     } finally {
       setIsSubmitting(false);
     }
-    // @ts-ignore
+    // @ts-ignore: due to react-hook-form issue with self-ref interface.
   }, [getValues, navigate, setError, setFocus, t, toast]);
 
   const handleUpdatePost = useFormSubmit(async (data) => {
