@@ -1,5 +1,5 @@
 import { omit } from "lodash";
-import { RefObject, useEffect, useRef } from "react";
+import { RefObject, useCallback, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 import { TableRowActionDropdownItemType } from "@interfaces/Common/elementTypes";
@@ -16,14 +16,14 @@ const TableRowActionDropdownMenu = ({ id, items, parentRef }: TableRowActionDrop
   const menuRef = useRef<HTMLDivElement>(null);
   const dropdownContainer = window.document.querySelector(".encacap-dropdown-container");
 
-  const setDropdownPosition = () => {
+  const setDropdownPosition = useCallback(() => {
     const parentElement = parentRef.current;
     const menuElement = menuRef.current;
     if (!parentElement || !menuElement) return;
     const parentElementRect = parentElement.getBoundingClientRect();
     menuElement.style.top = `${parentElementRect.top + parentElementRect.height + 8}px`;
     menuElement.style.right = `${window.innerWidth - parentElementRect.right - 16}px`;
-  };
+  }, [parentRef]);
 
   useEffect(() => {
     setDropdownPosition();
@@ -35,7 +35,7 @@ const TableRowActionDropdownMenu = ({ id, items, parentRef }: TableRowActionDrop
       window.removeEventListener("scroll", setDropdownPosition);
       window.removeEventListener("resize", setDropdownPosition);
     };
-  }, [parentRef.current]);
+  }, [setDropdownPosition]);
 
   return createPortal(
     <div

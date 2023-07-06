@@ -66,7 +66,7 @@ const UncontrolledImageInput = ({
       try {
         const response = await uploadService.uploadImage(file.file);
         return response;
-      } catch (error) {
+      } catch (uploadError) {
         toast.error(t("uploadImageError"));
         setErrorImageIds((prev) => [...prev, file.id]);
         return null;
@@ -74,25 +74,28 @@ const UncontrolledImageInput = ({
         setUploadingImageIds((prev) => prev.filter((id) => id !== file.id));
       }
     },
-    [isMultiple, t, toast],
+    [t, toast],
   );
 
-  const handleChooseImage = useCallback(async (files: FileList) => {
-    const formattedImages = convertToImageDataFromFiles(files);
+  const handleChooseImage = useCallback(
+    async (files: FileList) => {
+      const formattedImages = convertToImageDataFromFiles(files);
 
-    setImages((prev) => [...prev, ...formattedImages]);
+      setImages((prev) => [...prev, ...formattedImages]);
 
-    onUploading?.(true);
+      onUploading?.(true);
 
-    const uploadedImages = await Promise.all(formattedImages.map(uploadImage));
+      const uploadedImages = await Promise.all(formattedImages.map(uploadImage));
 
-    onUploading?.(false);
+      onUploading?.(false);
 
-    const filteredUploadedImages = uploadedImages.filter(Boolean) as FormImageInputDataType[];
+      const filteredUploadedImages = uploadedImages.filter(Boolean) as FormImageInputDataType[];
 
-    isTouchRef.current = true;
-    setHandledImages((prev) => [...prev, ...filteredUploadedImages]);
-  }, []);
+      isTouchRef.current = true;
+      setHandledImages((prev) => [...prev, ...filteredUploadedImages]);
+    },
+    [onUploading, uploadImage],
+  );
 
   const handleRemoveImage = useCallback((id: FormImageInputDataType["id"]) => {
     isTouchRef.current = true;

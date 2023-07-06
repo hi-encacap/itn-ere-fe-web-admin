@@ -5,15 +5,15 @@ import { FieldValues, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { AUTH_ERROR_CODES } from "@constants/errors";
-import { ADMIN_PATH } from "@constants/urls";
-import { FormGenericErrorType } from "@interfaces/Common/commonTypes";
-import { authService } from "@services/index";
-import { setUser } from "@slices/commonSlice";
 import Alert from "@components/Alert/Alert";
 import { Button, Input } from "@components/Form";
 import { Logo } from "@components/Logo";
+import { AuthErrorEnum } from "@constants/errors";
+import { ADMIN_PATH } from "@constants/urls";
 import useDispatch from "@hooks/useDispatch";
+import { FormGenericErrorType } from "@interfaces/Common/commonTypes";
+import { authService } from "@services/index";
+import { setUser } from "@slices/commonSlice";
 import { setDocumentTitle } from "@utils/helpers";
 
 import { authLoginFormSchema } from "../Schemas/authLoginFormSchema";
@@ -48,14 +48,14 @@ const Login = () => {
 
         if (!response) {
           setGenericError({
-            code: AUTH_ERROR_CODES.UNKNOWN_ERROR,
+            code: AuthErrorEnum.UNKNOWN_ERROR,
             message: t("errors.unknown"),
           });
           return;
         }
 
         setGenericError({
-          code: AUTH_ERROR_CODES.UNAUTHORIZED,
+          code: AuthErrorEnum.UNAUTHORIZED,
           message: t("errors.invalidCredentials"),
           trackingCode: response.data.code,
         });

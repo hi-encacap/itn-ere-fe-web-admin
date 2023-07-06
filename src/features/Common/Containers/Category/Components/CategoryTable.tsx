@@ -35,53 +35,58 @@ const CategoryTable = ({
   const role = useSelector(userRoleSelector);
 
   const columnHelper = useMemo(() => createColumnHelper<ICategory>(), []);
-  const categoryColumns: Array<ColumnDef<ICategory, string>> = [
-    columnHelper.display({
-      id: "avatar",
-      cell: (props) => (
-        <TableImageColumn src={getImageURL(props.row.original.avatar, IMAGE_VARIANT_ENUM.SMALL)} />
-      ),
-    }),
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-    // @ts-ignore
-    columnHelper.accessor((row) => row.website.name, {
-      id: "websiteDomain",
-      header: String(t("website")),
-      cell: (info) => info.getValue(),
-    }),
-    columnHelper.accessor((row) => row.code, {
-      id: "code",
-      header: String(t("code")),
-    }),
-    columnHelper.accessor((row) => row.name, {
-      id: "name",
-      header: String(t("name")),
-      cell: (info) => <CategorySelectorName data={info.row.original} />,
-    }),
-    columnHelper.accessor((row) => row.categoryGroupCode as string, {
-      id: "categoryGroupCode",
-      header: String(t("categoryGroup")),
-      cell: (info) => t(info.getValue()),
-      meta: {
-        filterBy: "categoryGroupCodes",
-        filterValueBy: "categoryGroupCode",
-        filterLabel: String(t("categoryGroup")),
-        filterSearchBy: "categoryGroupName",
-        filterLabelFormatter: (label) => t(String(label)),
-        getFilterOptions: onGetAll,
-      },
-    }),
-    columnHelper.display({
-      id: "actions",
-      cell: (props) => (
-        <CategoryTableRowAction
-          id={props.row.original.id}
-          onClickEdit={onClickEdit}
-          onClickDelete={onClickDelete}
-        />
-      ),
-    }),
-  ];
+  /* eslint-disable react/no-unstable-nested-components */
+  const categoryColumns: Array<ColumnDef<ICategory, string>> = useMemo(
+    () => [
+      columnHelper.display({
+        id: "avatar",
+        cell: (props) => (
+          <TableImageColumn src={getImageURL(props.row.original.avatar, IMAGE_VARIANT_ENUM.SMALL)} />
+        ),
+      }),
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
+      // @ts-ignore
+      columnHelper.accessor((row) => row.website.name, {
+        id: "websiteDomain",
+        header: String(t("website")),
+        cell: (info) => info.getValue(),
+      }),
+      columnHelper.accessor((row) => row.code, {
+        id: "code",
+        header: String(t("code")),
+      }),
+      columnHelper.accessor((row) => row.name, {
+        id: "name",
+        header: String(t("name")),
+        cell: (info) => <CategorySelectorName data={info.row.original} />,
+      }),
+      columnHelper.accessor((row) => row.categoryGroupCode as string, {
+        id: "categoryGroupCode",
+        header: String(t("categoryGroup")),
+        cell: (info) => t(info.getValue()),
+        meta: {
+          filterBy: "categoryGroupCodes",
+          filterValueBy: "categoryGroupCode",
+          filterLabel: String(t("categoryGroup")),
+          filterSearchBy: "categoryGroupName",
+          filterLabelFormatter: (label) => t(String(label)),
+          getFilterOptions: onGetAll,
+        },
+      }),
+      columnHelper.display({
+        id: "actions",
+        cell: (props) => (
+          <CategoryTableRowAction
+            id={props.row.original.id}
+            onClickEdit={onClickEdit}
+            onClickDelete={onClickDelete}
+          />
+        ),
+      }),
+    ],
+    [columnHelper, onClickDelete, onClickEdit, onGetAll, t],
+  );
+  /* eslint-enable react/no-unstable-nested-components */
 
   return (
     <Table

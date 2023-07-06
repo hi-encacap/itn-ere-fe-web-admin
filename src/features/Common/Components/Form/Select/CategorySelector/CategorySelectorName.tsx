@@ -16,8 +16,8 @@ const CategorySelectorName = ({ data }: CategorySelectorNameProps) => {
   const lastParentName = useMemo(() => (parentNames.length > 1 ? parentNames.at(-1) : null), [parentNames]);
   const restParentNames = useMemo(() => parentNames.slice(1, -1), [parentNames]);
 
-  const getParentNames = useCallback((data: ICategory): string[] => {
-    const { parent } = data;
+  const getParentNames = useCallback((category: ICategory): string[] => {
+    const { parent } = category;
     const result: string[] = [];
 
     if (!parent) {

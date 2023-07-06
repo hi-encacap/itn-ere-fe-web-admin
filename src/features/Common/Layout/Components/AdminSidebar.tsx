@@ -40,7 +40,7 @@ const AdminSidebar = () => {
         to: ADMIN_PATH.POST_CATEGORY_PATH(category.id),
       })),
     ],
-    [rootCategories],
+    [rootCategories, t],
   );
 
   const items: SidebarItemType[] = useMemo(
@@ -152,10 +152,10 @@ const AdminSidebar = () => {
     } finally {
       setIsGettingRootCategories(false);
     }
-  }, []);
+  }, [t, toast]);
 
   useEffect(() => {
-    void getRootCategories();
+    getRootCategories();
   }, [getRootCategories]);
 
   return (

@@ -5,7 +5,7 @@ import adminVi from "./vi/admin.json";
 import commonVi from "./vi/common.json";
 import featureVi from "./vi/feature.json";
 
-export const resources = {
+const resources = {
   vi: {
     common: commonVi,
     feature: featureVi,

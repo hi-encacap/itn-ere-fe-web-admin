@@ -1,25 +1,25 @@
-export enum USER_ROLE_ENUM {
+export enum UserRoleSlugEnum {
   ADMIN = "admin",
   USER = "user",
   ROOT = "root",
 }
 
-export enum ESTATE_PROXY_ACTION_ENUM {
+export enum EstateProxyActionEnum {
   CREATE = "create",
   MODIFY = "modify",
 }
 
-export enum TABLE_ROW_SELECTION_TYPE_ENUM {
+export enum TableRowSelectionTypeEnum {
   SINGLE = "single",
   MULTIPLE = "multiple",
 }
 
-export enum DROPDOWN_MENU_TYPE_ENUM {
+export enum DropdownMenuTypeEnum {
   NORMAL = "normal",
   DIVIDER = "divider",
 }
 
-export enum ESTATE_PUBLISHING_STEP_ENUM {
+export enum EstatePublishingStepEnum {
   SAVING = 1,
   SAVE_ERROR = 2,
   PUBLISHING = 3,

@@ -1,11 +1,11 @@
 import { Key, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
-import { PostDraftDataType } from "@interfaces/Admin/postTypes";
 import { ConfirmationModal } from "@components/Modal";
 import { ModalProps } from "@components/Modal/Modal";
 import useToast from "@hooks/useToast";
+import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
+import { PostDraftDataType } from "@interfaces/Admin/postTypes";
 
 interface PostDeleteConfirmationModalDraftProps extends Omit<ModalProps, "title" | "message" | "onConfirm"> {
   data: EstateDraftDataType | PostDraftDataType | null;
@@ -41,7 +41,7 @@ const PostDeleteConfirmationModalDraft = ({
     } finally {
       onClose();
     }
-  }, [onSuccess, onConfirm, data, toast, t]);
+  }, [data, onClose, onConfirm, onSuccess, t, toast]);
 
   return (
     <ConfirmationModal

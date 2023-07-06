@@ -40,7 +40,7 @@ const CategoryGroupSelector = ({
       .catch(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [isRoot, t]);
 
   useEffect(() => {
     getOptions();

@@ -12,8 +12,8 @@ import { twMerge } from "tailwind-merge";
 import DropdownContainerV2 from "@components/Dropdown/DropdownContainerV2";
 import { DropdownMenuItemType } from "@components/Dropdown/DropdownContainerV2MenuItem";
 import { Button } from "@components/Form";
-import Checkbox, { CheckboxProps } from "@components/Form/Checkbox/Checkbox";
-import { DROPDOWN_MENU_TYPE_ENUM } from "@constants/enums";
+import Checkbox from "@components/Form/Checkbox/Checkbox";
+import { DropdownMenuTypeEnum } from "@constants/enums";
 import useToast from "@hooks/useToast";
 import { EstateDraftDataType } from "@interfaces/Admin/estateTypes";
 import { PostDraftDataType } from "@interfaces/Admin/postTypes";
@@ -30,7 +30,6 @@ export interface PostTableBodyItemProps {
   onClickPublish?: (id: number) => void;
   onInteraction?: () => void;
   onClickEdit: (data: IEstate | EstateDraftDataType | IPost | PostDraftDataType) => void;
-  onToggleSelect?: CheckboxProps["onChange"];
   onSelectRow?: (id: number) => void;
 }
 
@@ -64,7 +63,7 @@ const PostTableBodyItem = ({
     }
 
     return null;
-  }, [data, t]);
+  }, [data]);
   const isNormalMode = useMemo(() => mode === "normal" || !mode, [mode]);
 
   const handleClickDelete = useCallback(() => {
@@ -87,7 +86,7 @@ const PostTableBodyItem = ({
     } finally {
       setIsLoading(false);
     }
-  }, [data, onClickDelete]);
+  }, [data, onInteraction, onMoveToTop, t, toast]);
 
   const handleClickUnPublish = useCallback(() => {
     onClickUnPublish?.(data.id);
@@ -104,7 +103,7 @@ const PostTableBodyItem = ({
       label: t("moveToTop"),
       onClick: handleClickMoveToTop,
     }),
-    [handleClickMoveToTop],
+    [handleClickMoveToTop, t],
   );
 
   const editOption: DropdownMenuItemType = useMemo(
@@ -114,7 +113,7 @@ const PostTableBodyItem = ({
       label: t("edit"),
       onClick: handleClickEdit,
     }),
-    [handleClickEdit],
+    [handleClickEdit, t],
   );
 
   const deleteOption: DropdownMenuItemType = useMemo(
@@ -125,12 +124,12 @@ const PostTableBodyItem = ({
       label: t("delete"),
       onClick: handleClickDelete,
     }),
-    [handleClickDelete],
+    [handleClickDelete, t],
   );
 
   const dropdownMenu = useMemo<DropdownMenuItemType[]>(() => {
     if (data.status === ESTATE_STATUS_ENUM.UNPUBLISHED) {
-      return [editOption, { id: "divider", type: DROPDOWN_MENU_TYPE_ENUM.DIVIDER }, deleteOption];
+      return [editOption, { id: "divider", type: DropdownMenuTypeEnum.DIVIDER }, deleteOption];
     }
 
     if (data.status === ESTATE_STATUS_ENUM.DRAFT) {
@@ -140,10 +139,10 @@ const PostTableBodyItem = ({
     return [
       moveTopTopOption,
       editOption,
-      { id: "divider", type: DROPDOWN_MENU_TYPE_ENUM.DIVIDER },
+      { id: "divider", type: DropdownMenuTypeEnum.DIVIDER },
       deleteOption,
     ];
-  }, [handleClickDelete]);
+  }, [data.status, deleteOption, editOption, moveTopTopOption]);
 
   const handleChangeSelect = useCallback(() => {
     onSelectRow?.(data.id);
@@ -160,6 +159,7 @@ const PostTableBodyItem = ({
       )}
     >
       {!isNormalMode && (
+        // eslint-disable-next-line jsx-a11y/label-has-associated-control
         <label htmlFor={`select-post-${data.id}`} className="absolute inset-0 z-10 p-4">
           <Checkbox name={`select-post-${data.id}`} checked={isSelected} onChange={handleChangeSelect} />
         </label>

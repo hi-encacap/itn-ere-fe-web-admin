@@ -91,10 +91,10 @@ const AdminConfigWebsiteHomeIntroduce = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [toast, t]);
+  }, [setValue, t, toast]);
 
   useEffect(() => {
-    void getData();
+    getData();
   }, [getData]);
 
   return (

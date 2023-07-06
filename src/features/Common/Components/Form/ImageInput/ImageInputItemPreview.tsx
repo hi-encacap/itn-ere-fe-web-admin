@@ -14,7 +14,7 @@ interface ImageInputItemPreviewProps {
 const ImageInputItemPreview = ({ image, isUploading, isDisabled, onRemove }: ImageInputItemPreviewProps) => {
   const handleClickRemove = useCallback(() => {
     onRemove?.(image.id);
-  }, [image.id]);
+  }, [image.id, onRemove]);
 
   return (
     <div

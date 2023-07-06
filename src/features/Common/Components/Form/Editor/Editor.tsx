@@ -5,11 +5,11 @@ import { HookFormControl } from "@interfaces/Common/commonTypes";
 
 import UncontrolledEditor, { UncontrolledEditorProps } from "./UncontrolledEditor";
 
-export interface InputProps extends UncontrolledEditorProps {
+export interface EditorProps extends UncontrolledEditorProps {
   control?: HookFormControl;
 }
 
-const Editor = ({ control, name, ...inputProps }: InputProps) => {
+const Editor = ({ control, name, ...inputProps }: EditorProps) => {
   if (!control) {
     return <UncontrolledEditor name={name} {...inputProps} />;
   }

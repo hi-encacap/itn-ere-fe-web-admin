@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 
-import { ESTATE_PROXY_ACTION_ENUM } from "@constants/enums";
+import { EstateProxyActionEnum } from "@constants/enums";
 
 import AdminEstateList from "../AdminEstateList";
 import AdminEstateModification from "../EstateModification/AdminEstateModification";
@@ -11,11 +11,11 @@ const AdminEstateProxy = () => {
   const action = searchParams.get("action");
   const id = searchParams.get("id");
 
-  if (action === ESTATE_PROXY_ACTION_ENUM.CREATE) {
+  if (action === EstateProxyActionEnum.CREATE) {
     return <AdminEstateModification />;
   }
 
-  if (action === ESTATE_PROXY_ACTION_ENUM.MODIFY && id) {
+  if (action === EstateProxyActionEnum.MODIFY && id) {
     return <AdminEstateModification id={Number(id)} />;
   }
 

@@ -46,7 +46,7 @@ const AdminConfigWebsiteHomeHero = () => {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [setValue, t, toast]);
 
   const handleSubmit = useFormSubmit(async (data) => {
     setIsSubmitting(true);
@@ -66,7 +66,7 @@ const AdminConfigWebsiteHomeHero = () => {
   });
 
   useEffect(() => {
-    void getData();
+    getData();
   }, [getData]);
 
   return (

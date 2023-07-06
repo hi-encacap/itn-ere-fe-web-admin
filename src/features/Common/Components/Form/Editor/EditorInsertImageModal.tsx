@@ -22,10 +22,13 @@ interface EditorInsertImageModalFormValue {
 const EditorInsertImageModal = ({ isOpen, onClose, onConfirm }: EditorInsertImageModalProps) => {
   const { t } = useTranslation();
 
-  const defaultValues: EditorInsertImageModalFormValue = {
-    images: null,
-    caption: null,
-  };
+  const defaultValues: EditorInsertImageModalFormValue = useMemo(
+    () => ({
+      images: null,
+      caption: null,
+    }),
+    [],
+  );
 
   const { control, getValues, reset, watch } = useForm<EditorInsertImageModalFormValue>();
   const images = watch("images");
@@ -43,22 +46,22 @@ const EditorInsertImageModal = ({ isOpen, onClose, onConfirm }: EditorInsertImag
   }, [images]);
 
   const handleConfirm = useCallback(() => {
-    const { images, caption } = getValues();
+    const { images: selectedImages, caption } = getValues();
 
-    if (!images) {
+    if (!selectedImages) {
       return;
     }
 
-    const imageUrls = images.map((image) => getImageURL(image as unknown as IImageResponse));
+    const imageUrls = selectedImages.map((image) => getImageURL(image as unknown as IImageResponse));
 
     onConfirm(imageUrls, caption ?? "");
-  }, [getValues]);
+  }, [getValues, onConfirm]);
 
   useEffect(() => {
     if (!isOpen) {
       reset(defaultValues);
     }
-  }, [isOpen]);
+  }, [defaultValues, isOpen, reset]);
 
   return (
     <Modal isOpen={isOpen} title={t("insertImage")} onClose={onClose} onConfirm={handleConfirm}>

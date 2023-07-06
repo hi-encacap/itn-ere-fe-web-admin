@@ -51,12 +51,15 @@ const AdminEstateModificationFormContact = () => {
     }
   }, [value, selectedContact]);
 
-  const handlePickContact = useCallback((contact: IContact) => {
-    setSelectedContact(contact);
-    setIsShowContactPickerModal(false);
-    setValue("contactId", contact.id);
-    clearErrors("contactId");
-  }, []);
+  const handlePickContact = useCallback(
+    (contact: IContact) => {
+      setSelectedContact(contact);
+      setIsShowContactPickerModal(false);
+      setValue("contactId", contact.id);
+      clearErrors("contactId");
+    },
+    [clearErrors, setValue],
+  );
 
   const handleClosePicker = useCallback(() => {
     setIsShowContactPickerModal(false);
@@ -67,12 +70,12 @@ const AdminEstateModificationFormContact = () => {
   }, []);
 
   useEffect(() => {
-    void getContactData();
+    getContactData();
   }, [getContactData]);
 
   return (
     <>
-      <div className={"border-gray-100 pt-6"}>
+      <div className="border-gray-100 pt-6">
         <FormGroupTitle title={t("title")} />
         <div
           className={twMerge(

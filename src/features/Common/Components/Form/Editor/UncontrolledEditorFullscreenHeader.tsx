@@ -16,6 +16,7 @@ const UncontrolledEditorFullscreenHeader = ({ title, onClose }: UncontrolledEdit
     <div className="fixed inset-x-0 top-0 z-70 flex h-20 items-center justify-between border-b-2 border-gray-100 bg-white px-5">
       <div className="flex items-center justify-center space-x-5">
         <button
+          type="button"
           className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2 border-gray-100 duration-100 hover:bg-gray-50"
           onClick={onClose}
         >

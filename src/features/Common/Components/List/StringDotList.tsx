@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { BsDot } from "react-icons/bs";
 import { twMerge } from "tailwind-merge";
 

@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import LayoutContent from "@common/Layout/Components/LayoutContent";
 import Table from "@components/Table/Table";
 import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
-import { TABLE_ROW_SELECTION_TYPE_ENUM } from "@constants/enums";
+import { TableRowSelectionTypeEnum } from "@constants/enums";
 import useToast from "@hooks/useToast";
 import { TablePaginationType } from "@interfaces/Common/commonTypes";
 import { TableColumnFilterState } from "@interfaces/Common/elementTypes";
@@ -107,33 +107,33 @@ const AdminContactList = ({
   const handleUpdatedContact = useCallback(() => {
     toast.success(t("notification.success"), t("notification.contactUpdated"));
     getContactData();
-  }, [getContactData]);
+  }, [getContactData, t, toast]);
 
   const handleUpdateContactFailed = useCallback(() => {
     toast.error(t("notification.error"), t("notification.contactUpdateFailed"));
-  }, []);
+  }, [t, toast]);
 
   const handleCreatedContact = useCallback(() => {
     toast.success(t("notification.success"), t("notification.contactCreated"));
     getContactData();
-  }, [getContactData]);
+  }, [getContactData, t, toast]);
 
   const handleCreateContactFailed = useCallback(() => {
     toast.error(t("notification.error"), t("notification.contactCreateFailed"));
-  }, []);
+  }, [t, toast]);
 
   const handleDeletedContact = useCallback(() => {
     toast.success(t("notification.success"), t("notification.contactDeleted"));
     getContactData();
-  }, [getContactData]);
+  }, [getContactData, t, toast]);
 
   const handleDeleteContactFailed = useCallback(() => {
     toast.error(t("notification.error"), t("notification.contactDeleteFailed"));
-  }, []);
+  }, [t, toast]);
 
   useEffect(() => {
     getContactData();
-  }, [queryParams]);
+  }, [getContactData]);
 
   useEffect(() => {
     const newQueryParams: IBaseListQuery = {
@@ -148,11 +148,11 @@ const AdminContactList = ({
     }
 
     setQueryParams(newQueryParams);
-  }, [columnFilters, pagination]);
+  }, [columnFilters, pagination.limit, pagination.page, queryParams]);
 
   useEffect(() => {
     onChangeSelection?.(contactData.filter((item) => rowSelection[item.id]));
-  }, [rowSelection]);
+  }, [contactData, onChangeSelection, rowSelection]);
 
   useEffect(() => {
     if (keys(rowSelection).length) {
@@ -166,7 +166,7 @@ const AdminContactList = ({
     });
 
     setRowSelection(newSelection);
-  }, [defaultSelection]);
+  }, [defaultSelection, rowSelection]);
 
   useLayoutEffect(() => {
     setDocumentTitle(t("title"), !isShowTableOnly);
@@ -184,7 +184,7 @@ const AdminContactList = ({
         sorting={columnSorting}
         pagination={pagination}
         rowSelection={rowSelection}
-        rowSelectionType={TABLE_ROW_SELECTION_TYPE_ENUM.SINGLE}
+        rowSelectionType={TableRowSelectionTypeEnum.SINGLE}
         onChangePagination={setPagination}
         onChangeSorting={setColumnSorting}
         onChangeFilters={setColumnFilters}

@@ -59,7 +59,7 @@ const AdminEstateModificationFormDetailPropertyInputGroup = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [categoryId]);
+  }, [append, categoryId, remove]);
 
   useEffect(() => {
     getPropertyByCategoryId();

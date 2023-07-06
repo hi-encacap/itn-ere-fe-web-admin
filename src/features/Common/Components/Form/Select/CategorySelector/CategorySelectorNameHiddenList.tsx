@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { memo, useMemo } from "react";
 import { BiChevronRight } from "react-icons/bi";
 

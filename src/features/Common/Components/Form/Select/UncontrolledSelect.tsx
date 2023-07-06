@@ -1,5 +1,5 @@
 import { random } from "lodash";
-import { HTMLAttributes, useCallback, useMemo, useRef, useState } from "react";
+import { HTMLAttributes, memo, useCallback, useMemo, useRef, useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { twMerge } from "tailwind-merge";
 
@@ -43,13 +43,13 @@ const UncontrolledSelect = ({
       return null;
     }
 
-    const { label } = selectedOption;
+    const { label: selectedLabel } = selectedOption;
 
-    if (typeof label === "string") {
-      return label;
+    if (typeof selectedLabel === "string") {
+      return selectedLabel;
     }
 
-    return label.props.data.name;
+    return selectedLabel.props.data.name;
   }, [value, options]);
 
   const inputId = useMemo(() => `select_${random(100000, 999999)}`, []);
@@ -74,11 +74,14 @@ const UncontrolledSelect = ({
     setIsFocusingDropdown(false);
   }, []);
 
-  const handleChange = useCallback((newValue: SelectOptionItemType["value"]) => {
-    onChange?.(newValue);
-    setIsShowOptions(false);
-    setIsFocusingDropdown(false);
-  }, []);
+  const handleChange = useCallback(
+    (newValue: SelectOptionItemType["value"]) => {
+      onChange?.(newValue);
+      setIsShowOptions(false);
+      setIsFocusingDropdown(false);
+    },
+    [onChange],
+  );
 
   return (
     <div>
@@ -135,4 +138,4 @@ const UncontrolledSelect = ({
   );
 };
 
-export default UncontrolledSelect;
+export default memo(UncontrolledSelect);

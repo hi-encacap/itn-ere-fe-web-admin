@@ -1,7 +1,7 @@
 /// <reference types="@tanstack/react-table" />
 
 declare module "@tanstack/react-table" {
-  export interface ColumnMeta<TData extends RowData, TValue> {
+  export interface ColumnMeta {
     skeleton?: JSX.Element;
     filterBy?: string | string[];
     filterValueBy?: string;

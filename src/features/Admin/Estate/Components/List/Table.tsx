@@ -16,7 +16,7 @@ import { ColumnDef, TableColumnFilterState } from "@interfaces/Common/elementTyp
 import { adminEstateService, adminLocationService } from "@services/index";
 import { generateColumnFilterObject } from "@utils/helpers";
 
-import { ESTATE_LIST_TAB_ENUM } from "@admin/Estate/Constants/enums";
+import { EstateListTabEnum } from "@admin/Estate/Constants/enums";
 
 import PostTableBody from "../../../../Common/Components/Post/Table/TableBody";
 
@@ -54,7 +54,7 @@ const AdminEstateListTable = ({
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
   const [queryParams, setQueryParams] = useState<IBaseListQuery>({
     ...pagination,
-    tab: ESTATE_LIST_TAB_ENUM.COMPLETED,
+    tab: EstateListTabEnum.COMPLETED,
   });
   const [isShowUnPublishConfirmModal, setIsShowUnPublishConfirmModal] = useState(false);
   const [isShowPublishConfirmModal, setIsShowPublishConfirmModal] = useState(false);
@@ -63,7 +63,7 @@ const AdminEstateListTable = ({
   const [searchParams] = useSearchParams();
 
   const selectedTabIdParam = useMemo(
-    () => searchParams.get("tab_id") ?? ESTATE_LIST_TAB_ENUM.COMPLETED,
+    () => searchParams.get("tab_id") ?? EstateListTabEnum.COMPLETED,
     [searchParams],
   );
 
@@ -120,7 +120,7 @@ const AdminEstateListTable = ({
         },
       }),
     ],
-    [columnHelper, t],
+    [columnHelper, t, tEstate],
   );
 
   const handleInteraction = useCallback(() => {
@@ -163,7 +163,7 @@ const AdminEstateListTable = ({
     } finally {
       handleCloseModal();
     }
-  }, [selectedEstateId, queryParams]);
+  }, [handleCloseModal, onChangeQueryParams, onUnPublish, queryParams, selectedEstateId, t, toast]);
 
   const handleConfirmPublish = useCallback(async () => {
     if (!selectedEstateId) {
@@ -179,7 +179,7 @@ const AdminEstateListTable = ({
     } finally {
       handleCloseModal();
     }
-  }, [selectedEstateId, queryParams]);
+  }, [handleCloseModal, onChangeQueryParams, onPublish, queryParams, selectedEstateId, t, toast]);
 
   useEffect(() => {
     const newQueryParams: IBaseListQuery = {
@@ -204,7 +204,7 @@ const AdminEstateListTable = ({
 
   useEffect(() => {
     onChangeQueryParams?.(queryParams);
-  }, [queryParams]);
+  }, [onChangeQueryParams, queryParams]);
 
   return (
     <>

@@ -6,7 +6,7 @@ import { ADMIN_PATH, AUTHENTICATION_PATH, ROOT_PATH } from "@constants/urls";
 import useSelector from "@hooks/useSelector";
 
 const Home = () => {
-  const { isAuth, isAdmin, isRoot } = useSelector(userRoleSelector);
+  const { isAdmin, isRoot } = useSelector(userRoleSelector);
 
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const Home = () => {
     }
 
     navigate(AUTHENTICATION_PATH.LOGIN_PATH);
-  }, [isAuth, navigate]);
+  }, [isAdmin, isRoot, navigate]);
 
   return (
     <div className="flex h-screen w-full items-center justify-center">

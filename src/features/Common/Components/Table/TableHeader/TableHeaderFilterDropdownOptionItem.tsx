@@ -18,10 +18,13 @@ const TableHeaderFilterDropdownOptionItem = ({
   isSelected = false,
   onChange,
 }: TableHeaderFilterDropdownOptionItemProps) => {
-  const handleChangeCheckbox = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const isChecked = e.target.checked;
-    onChange(value, isChecked);
-  }, []);
+  const handleChangeCheckbox = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const isChecked = e.target.checked;
+      onChange(value, isChecked);
+    },
+    [onChange, value],
+  );
 
   return (
     <label htmlFor={value} className="group flex items-center justify-start space-x-3 py-1">

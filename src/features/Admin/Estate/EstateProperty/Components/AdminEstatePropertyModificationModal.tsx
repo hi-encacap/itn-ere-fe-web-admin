@@ -2,15 +2,15 @@ import { IAxiosError } from "@encacap-group/common/dist/base";
 import { IEstateProperty } from "@encacap-group/common/dist/re";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { keys, omit, pick } from "lodash";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { EstatePropertyFormDataType } from "@interfaces/Admin/estateTypes";
-import { adminEstatePropertyService } from "@services/index";
 import { Input } from "@components/Form";
 import Modal, { ModalProps } from "@components/Modal/Modal";
 import useToast from "@hooks/useToast";
+import { EstatePropertyFormDataType } from "@interfaces/Admin/estateTypes";
+import { adminEstatePropertyService } from "@services/index";
 import { formatErrorMessage, setFormError } from "@utils/error";
 
 import AdminCategorySelector from "@admin/Estate/Components/AdminCategorySelector";
@@ -34,10 +34,13 @@ const AdminEstatePropertyModificationModal = ({
     keyPrefix: "admin:page.estate.property.notification",
   });
   const toast = useToast();
-  const defaultValues: EstatePropertyFormDataType = {
-    name: "",
-    categoryId: null,
-  };
+  const defaultValues: EstatePropertyFormDataType = useMemo(
+    () => ({
+      name: "",
+      categoryId: null,
+    }),
+    [],
+  );
 
   const {
     handleSubmit: useFormSubmit,
@@ -72,7 +75,7 @@ const AdminEstatePropertyModificationModal = ({
           setIsSubmitting(false);
         });
     },
-    [onCreated, handleClose, setError, t, tNoti],
+    [handleClose, onCreated, setError, t, tNoti, toast],
   );
 
   const handleUpdate = useCallback(
@@ -91,7 +94,7 @@ const AdminEstatePropertyModificationModal = ({
           setIsSubmitting(false);
         });
     },
-    [estateProperty, onCreated, handleClose, setError, t, tNoti],
+    [estateProperty?.id, handleClose, onCreated, setError, t, tNoti, toast],
   );
 
   const handleSubmit = useFormSubmit((data) => {
@@ -109,7 +112,7 @@ const AdminEstatePropertyModificationModal = ({
     } else {
       reset(defaultValues);
     }
-  }, [estateProperty, reset]);
+  }, [defaultValues, estateProperty, reset]);
 
   return (
     <Modal
@@ -130,7 +133,6 @@ const AdminEstatePropertyModificationModal = ({
           isRequired
           disabled={isSubmitting}
         />
-        <button type="submit" className="hidden" />
       </form>
     </Modal>
   );

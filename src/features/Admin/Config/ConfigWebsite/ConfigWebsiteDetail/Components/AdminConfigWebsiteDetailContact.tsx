@@ -62,10 +62,10 @@ const AdminConfigWebsiteDetailContact = () => {
     } catch (error) {
       toast.error(t("fetchConfigWebsiteError"));
     }
-  }, [defaultValues, toast, t]);
+  }, [reset, t, toast]);
 
   useEffect(() => {
-    void getContactData();
+    getContactData();
   }, [getContactData]);
 
   return (

@@ -21,7 +21,7 @@ const AdminPostModification = () => {
 
   useLayoutEffect(() => {
     setDocumentTitle(title);
-  }, [t]);
+  }, [title]);
 
   return (
     <LayoutContent title={title} action={<PostModificationHeaderAction />}>

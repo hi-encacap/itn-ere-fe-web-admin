@@ -57,9 +57,12 @@ const AdminContactModificationModal = ({
     defaultValues,
   });
 
-  const formatErrorMessage = useCallback((key: string, value: string) => {
-    return t(`form.${key}.${value}`);
-  }, []);
+  const formatErrorMessage = useCallback(
+    (key: string, value: string) => {
+      return t(`form.${key}.${value}`);
+    },
+    [t],
+  );
 
   const updateCategory = useCallback(
     (data: ContactFormDataType) => {
@@ -87,30 +90,33 @@ const AdminContactModificationModal = ({
           setIsLoading(false);
         });
     },
-    [contact],
+    [contact, formatErrorMessage, onClose, onUpdateFailed, onUpdated, setError],
   );
 
-  const createContact = useCallback((data: ContactFormDataType) => {
-    setIsLoading(true);
+  const createContact = useCallback(
+    (data: ContactFormDataType) => {
+      setIsLoading(true);
 
-    adminContactService
-      .createContact(data)
-      .then(() => {
-        onCreated();
-        onClose();
-      })
-      .catch((error: IAxiosError) => {
-        setFormError<ContactFormDataType>({
-          error,
-          setError,
-          formatMessage: formatErrorMessage,
-          otherwise: onCreateFailed,
+      adminContactService
+        .createContact(data)
+        .then(() => {
+          onCreated();
+          onClose();
+        })
+        .catch((error: IAxiosError) => {
+          setFormError<ContactFormDataType>({
+            error,
+            setError,
+            formatMessage: formatErrorMessage,
+            otherwise: onCreateFailed,
+          });
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
+    },
+    [formatErrorMessage, onClose, onCreateFailed, onCreated, setError],
+  );
 
   const handleSubmit = useFormSubmit((data) => {
     if (contact) {
@@ -132,7 +138,7 @@ const AdminContactModificationModal = ({
       setValue("zalo", contact.zalo || "");
       setValue("avatar", generateImageFormData(contact.avatar));
     }
-  }, [contact]);
+  }, [contact, setValue]);
 
   return (
     <Modal
@@ -173,7 +179,6 @@ const AdminContactModificationModal = ({
           disabled={isLoading}
         />
         <ImageInput name="avatar" label={t("form.avatar.label")} control={control} disabled={isLoading} />
-        <button type="submit" className="hidden" />
       </form>
     </Modal>
   );

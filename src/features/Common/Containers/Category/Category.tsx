@@ -74,20 +74,17 @@ const Category = ({ onGetMany, onCreate, onUpdate, onDelete, onGetAll }: Categor
       .finally(() => {
         setIsLoading(false);
       });
-  }, [queryParams, onGetMany]);
+  }, [onGetMany, queryParams, t, toast]);
 
   const handleClickDeleteButton = useCallback((id: Key) => {
     setSelectedCategoryId(id ?? null);
     setIsShowDeleteConfirmationModal(true);
   }, []);
 
-  const handleClickEditButton = useCallback(
-    (code?: Key) => {
-      setSelectedCategoryId(code ?? null);
-      setIsShowModificationModal(true);
-    },
-    [categoryData],
-  );
+  const handleClickEditButton = useCallback((code?: Key) => {
+    setSelectedCategoryId(code ?? null);
+    setIsShowModificationModal(true);
+  }, []);
 
   const handleClickAddButton = useCallback(() => {
     setSelectedCategoryId(null);
@@ -104,7 +101,7 @@ const Category = ({ onGetMany, onCreate, onUpdate, onDelete, onGetAll }: Categor
     toast.success(t("editCategorySuccess"));
     handleCloseModal();
     getCategoryData();
-  }, [getCategoryData, handleCloseModal]);
+  }, [getCategoryData, handleCloseModal, t, toast]);
 
   const handleCreatedCategory = useCallback(() => {
     toast.success(t("addCategorySuccess"));
@@ -121,17 +118,20 @@ const Category = ({ onGetMany, onCreate, onUpdate, onDelete, onGetAll }: Categor
         toast.error(t("performActionError"));
       }
     },
-    [onCreate],
+    [handleCreatedCategory, onCreate, t, toast],
   );
 
-  const handleUpdateCategory = useCallback(async (id: Key, data: CategoryFormDataType) => {
-    try {
-      await onUpdate(id, data);
-      handleUpdatedCategory();
-    } catch (err) {
-      toast.error(t("performActionError"));
-    }
-  }, []);
+  const handleUpdateCategory = useCallback(
+    async (id: Key, data: CategoryFormDataType) => {
+      try {
+        await onUpdate(id, data);
+        handleUpdatedCategory();
+      } catch (err) {
+        toast.error(t("performActionError"));
+      }
+    },
+    [handleUpdatedCategory, onUpdate, t, toast],
+  );
 
   const handleConfirmDeleteCategory = useCallback(async () => {
     setIsShowDeleteConfirmationModal(false);
@@ -145,11 +145,11 @@ const Category = ({ onGetMany, onCreate, onUpdate, onDelete, onGetAll }: Categor
     } finally {
       handleCloseModal();
     }
-  }, [selectedCategoryId]);
+  }, [getCategoryData, handleCloseModal, onDelete, selectedCategoryId, t, toast]);
 
   useEffect(() => {
     getCategoryData();
-  }, [queryParams]);
+  }, [getCategoryData]);
 
   useEffect(() => {
     const newQueryParams: IBaseListQuery = {
@@ -164,7 +164,7 @@ const Category = ({ onGetMany, onCreate, onUpdate, onDelete, onGetAll }: Categor
     }
 
     setQueryParams(newQueryParams);
-  }, [columnFilters, pagination]);
+  }, [columnFilters, pagination.limit, pagination.page, queryParams]);
 
   useLayoutEffect(() => {
     setDocumentTitle(t("categoryManagement"));

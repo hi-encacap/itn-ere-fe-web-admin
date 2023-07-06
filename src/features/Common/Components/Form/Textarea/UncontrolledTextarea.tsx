@@ -22,7 +22,6 @@ const UncontrolledTextarea = (
     id,
     className,
     label,
-    size = "normal",
     error,
     isRequired,
     disabled,

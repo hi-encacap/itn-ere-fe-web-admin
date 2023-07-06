@@ -3,9 +3,9 @@ import { useCallback, useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
+import { Input } from "@components/Form";
 import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
 import { unitPriceService } from "@services/index";
-import { Input } from "@components/Form";
 
 const AdminEstateModificationFormGeneralAreaInputGroup = () => {
   const { t } = useTranslation("admin", {
@@ -28,7 +28,7 @@ const AdminEstateModificationFormGeneralAreaInputGroup = () => {
       .catch(() => {
         setUnitPriceOptions([]);
       });
-  }, []);
+  }, [setValue]);
 
   useEffect(() => {
     getUnitPriceOptions();
@@ -47,6 +47,7 @@ const AdminEstateModificationFormGeneralAreaInputGroup = () => {
       />
       <select
         className="absolute right-3.5 top-6 h-10 w-fit cursor-pointer rounded-r-md px-1 outline-none"
+        // @ts-ignore
         {...register("areaUnitId")}
       >
         {unitPriceOptions.map((option) => (

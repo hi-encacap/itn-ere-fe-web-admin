@@ -2,10 +2,10 @@ import { omit } from "lodash";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import { adminLocationService } from "@services/index";
 import { ConfirmationModal } from "@components/Modal";
 import { ConfirmationModalProps } from "@components/Modal/ConfirmationModal";
 import useToast from "@hooks/useToast";
+import { adminLocationService } from "@services/index";
 
 import AdminLocationProvinceDeleteConfirmationModalContent from "./AdminLocationProvinceDeleteConfirmationModalContent";
 
@@ -46,7 +46,7 @@ const AdminLocationProvinceDeleteConfirmationModal = ({
       .finally(() => {
         onClose();
       });
-  }, [provinceCode, onClose, onDeleted, onDeleteFailed]);
+  }, [onClose, onDeleteFailed, onDeleted, provinceCode, t, toast]);
 
   return (
     <ConfirmationModal

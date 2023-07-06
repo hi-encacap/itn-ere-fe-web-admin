@@ -1,6 +1,6 @@
 import { pick } from "lodash";
 import { useCallback, useMemo } from "react";
-import { Id, toast as originalToast, ToastOptions, TypeOptions } from "react-toastify";
+import { Id, ToastOptions, TypeOptions, toast as originalToast } from "react-toastify";
 
 import ToastMessage from "@components/Toast/ToastMessage";
 
@@ -34,7 +34,7 @@ const useToast = (defaultOptions?: ToastOptions) => {
         ...overriddenOptions,
         ...options,
       }),
-    [defaultOptions],
+    [overriddenOptions],
   );
 
   const result: ToastReturnType = useMemo(
