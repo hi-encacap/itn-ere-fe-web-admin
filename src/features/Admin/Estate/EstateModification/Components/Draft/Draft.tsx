@@ -60,7 +60,7 @@ const AdminEstateModificationDraft = ({ onGetMany, onConfirmDelete }: AdminEstat
   }, []);
 
   useEffect(() => {
-    void getData();
+    getData();
   }, [getData]);
 
   return (

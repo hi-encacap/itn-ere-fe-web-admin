@@ -31,9 +31,8 @@ const updateWebsiteContact = async (data: WebsiteConfigFormDataType) => {
   const queue = new Queue({ concurrency: 1 });
 
   submitData.forEach((item) =>
-    queue.push(
-      async () =>
-        await updateWebsiteConfigByKey(item.code, { value: item.value, type: CONFIG_TYPE_ENUM.PRIMITIVE }),
+    queue.push(() =>
+      updateWebsiteConfigByKey(item.code, { value: item.value, type: CONFIG_TYPE_ENUM.PRIMITIVE }),
     ),
   );
 

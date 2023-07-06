@@ -18,14 +18,14 @@ const AdminEstateModificationFormDetailPropertyInputGroup = () => {
 
   const { control, watch } = useFormContext<EstateFormDataType>();
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-  // @ts-ignore
+  // @ts-ignore: due to react-hook-form issue with self-ref interface.
   const { fields, append, remove } = useFieldArray({
     control,
     name: "properties" as never,
   });
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-  // @ts-ignore
+  // @ts-ignore: due to react-hook-form issue with self-ref interface.
   const categoryId = watch("categoryId");
 
   const getPropertyByCategoryId = useCallback(() => {
@@ -59,7 +59,7 @@ const AdminEstateModificationFormDetailPropertyInputGroup = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [categoryId]);
+  }, [append, categoryId, remove]);
 
   useEffect(() => {
     getPropertyByCategoryId();

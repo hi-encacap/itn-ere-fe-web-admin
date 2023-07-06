@@ -9,10 +9,10 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { keys } from "lodash";
-import { cloneElement, ReactElement, useCallback, useEffect, useMemo, useState } from "react";
+import { cloneElement, memo, ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 
 import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
-import { TABLE_ROW_SELECTION_TYPE_ENUM } from "@constants/enums";
+import { TableRowSelectionTypeEnum } from "@constants/enums";
 import { TablePaginationType } from "@interfaces/Common/commonTypes";
 import {
   TableColumnFilterState,
@@ -43,7 +43,7 @@ interface TableBaseProps<TData = TableDataType> {
   hiddenColumns?: Array<keyof TData | boolean>;
   pagination?: TablePaginationType;
   rowSelection?: RowSelectionState;
-  rowSelectionType?: TABLE_ROW_SELECTION_TYPE_ENUM;
+  rowSelectionType?: TableRowSelectionTypeEnum;
   onChangePagination?: OnChangeFn<TablePaginationType>;
   onChangeSorting?: OnChangeFn<SortingState>;
   onChangeFilters?: OnChangeFn<TableColumnFilterState[]>;
@@ -75,7 +75,7 @@ const Table = ({
   sorting,
   isLoading = false,
   rowSelection = {},
-  rowSelectionType = TABLE_ROW_SELECTION_TYPE_ENUM.MULTIPLE,
+  rowSelectionType = TableRowSelectionTypeEnum.MULTIPLE,
   onChangePagination,
   onChangeSorting,
   onChangeFilters,
@@ -129,7 +129,7 @@ const Table = ({
         return;
       }
 
-      if (rowSelectionType === TABLE_ROW_SELECTION_TYPE_ENUM.MULTIPLE) {
+      if (rowSelectionType === TableRowSelectionTypeEnum.MULTIPLE) {
         onChangeRowSelection?.(state);
         return;
       }
@@ -150,8 +150,8 @@ const Table = ({
     getRowId: (row) => row.id || row.code || Math.random().toString(36).substr(2, 9),
   });
 
-  const tableRows = useMemo(() => table.getRowModel().rows, [data]);
-  const tableHeaderGroup = useMemo(() => table.getHeaderGroups(), [data]);
+  const tableRows = useMemo(() => table.getRowModel().rows, [table]);
+  const tableHeaderGroup = useMemo(() => table.getHeaderGroups(), [table]);
 
   const handleChangePageSize = useCallback(
     (pageSize: number) => {
@@ -161,7 +161,7 @@ const Table = ({
         pageIndex: 0,
       });
     },
-    [pagination],
+    [pagination, table],
   );
 
   useEffect(() => {
@@ -171,7 +171,7 @@ const Table = ({
     };
     const newTotalPages = Math.ceil(paginationOptions.totalRows / paginationOptions.limit) || 1;
     setTotalPages(newTotalPages);
-  }, [pagination]);
+  }, [defaultPagination, pagination]);
 
   return (
     <div>
@@ -204,4 +204,4 @@ const Table = ({
   );
 };
 
-export default Table;
+export default memo(Table);

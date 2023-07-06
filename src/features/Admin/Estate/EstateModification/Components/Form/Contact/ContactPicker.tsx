@@ -41,14 +41,14 @@ const AdminEstateModificationFormContactPicker = ({
     }
 
     onPick(selectedContact);
-  }, [selectedContact]);
+  }, [onPick, selectedContact]);
 
   useEffect(() => {
     if (data && !selectedContact) {
       setSelectedContact(data);
       setIsAllowSubmit(true);
     }
-  }, [data]);
+  }, [data, selectedContact]);
 
   return (
     <Modal

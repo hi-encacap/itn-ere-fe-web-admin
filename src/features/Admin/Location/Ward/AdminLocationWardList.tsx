@@ -4,13 +4,13 @@ import { isEqual } from "lodash";
 import { Key, useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import LayoutContent from "@common/Layout/Components/LayoutContent";
+import Table from "@components/Table/Table";
 import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
 import { LocationWardWebsiteDataType } from "@interfaces/Admin/locationTypes";
 import { TablePaginationType } from "@interfaces/Common/commonTypes";
 import { TableColumnFilterState } from "@interfaces/Common/elementTypes";
 import { adminLocationService } from "@services/index";
-import Table from "@components/Table/Table";
-import LayoutContent from "@common/Layout/Components/LayoutContent";
 import { generateColumnFilterObject, setDocumentTitle } from "@utils/helpers";
 
 import createLocationWardTableColumns from "./Columns/adminLocationWardTableColumn";
@@ -78,7 +78,7 @@ const AdminLocationWardList = () => {
 
   useEffect(() => {
     getWardData();
-  }, [queryParams]);
+  }, [getWardData]);
 
   useEffect(() => {
     const newQueryParams: IBaseListQuery = {
@@ -93,7 +93,7 @@ const AdminLocationWardList = () => {
     }
 
     setQueryParams(newQueryParams);
-  }, [columnFilters, pagination]);
+  }, [columnFilters, pagination.limit, pagination.page, queryParams]);
 
   useLayoutEffect(() => {
     setDocumentTitle(t("title"));

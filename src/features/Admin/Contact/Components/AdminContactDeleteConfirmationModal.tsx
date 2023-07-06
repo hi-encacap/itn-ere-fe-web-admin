@@ -39,7 +39,7 @@ const AdminContactDeleteConfirmationModal = ({
       .finally(() => {
         onClose();
       });
-  }, [contactId, onClose, onDeleted]);
+  }, [contactId, onClose, onDeleteFailed, onDeleted]);
 
   return (
     <ConfirmationModal

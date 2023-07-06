@@ -1,1 +1,1 @@
-export { default } from "./TableFooterPagination";
+export { default as TableFooterPagination } from "./TableFooterPagination";

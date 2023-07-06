@@ -11,7 +11,7 @@ import { ADMIN_PATH } from "@constants/urls";
 import { adminPostService } from "@services/index";
 import { setDocumentTitle } from "@utils/helpers";
 
-import { ESTATE_LIST_TAB_ENUM } from "@admin/Estate/Constants/enums";
+import { EstateListTabEnum } from "@admin/Estate/Constants/enums";
 
 import PostListHeaderAction from "./Components/List/HeaderAction";
 import AdminPostListTable, { AdminPostListTableProps } from "./Components/List/Table";
@@ -37,7 +37,7 @@ const AdminPostList = ({
   const [isLoading, setIsLoading] = useState(true);
   const [totalRows, setTotalRows] = useState(0);
 
-  const { tabId = ESTATE_LIST_TAB_ENUM.COMPLETED, categoryId } = useParams();
+  const { tabId = EstateListTabEnum.COMPLETED, categoryId } = useParams();
 
   const isNormalMode = useMemo(() => mode === "normal", [mode]);
   const tabItems = useMemo<LayoutContentTabItemType[] | undefined>(() => {
@@ -47,11 +47,11 @@ const AdminPostList = ({
 
     return [
       {
-        id: ESTATE_LIST_TAB_ENUM.COMPLETED,
+        id: EstateListTabEnum.COMPLETED,
         label: t("completed"),
       },
       {
-        id: ESTATE_LIST_TAB_ENUM.DRAFT,
+        id: EstateListTabEnum.DRAFT,
         label: t("draft"),
       },
     ];
@@ -60,16 +60,16 @@ const AdminPostList = ({
   const navigate = useNavigate();
 
   const handleChangeTab = useCallback(
-    (tabId: string) => {
-      let navigatePath = ADMIN_PATH.POST_TAB_PATH(tabId);
+    (selectedTab: string) => {
+      let navigatePath = ADMIN_PATH.POST_TAB_PATH(selectedTab);
 
       if (categoryId) {
-        navigatePath = ADMIN_PATH.POST_CATEGORY_TAB_PATH(categoryId, tabId);
+        navigatePath = ADMIN_PATH.POST_CATEGORY_TAB_PATH(categoryId, selectedTab);
       }
 
       navigate(navigatePath);
     },
-    [tabId, categoryId],
+    [categoryId, navigate],
   );
 
   const getData = useCallback(async (queryParams: IBaseListQuery) => {
@@ -78,11 +78,12 @@ const AdminPostList = ({
     try {
       let service = adminPostService.getPosts;
 
-      if (queryParams.tab === ESTATE_LIST_TAB_ENUM.DRAFT) {
+      if (queryParams.tab === EstateListTabEnum.DRAFT) {
         service = adminPostService.getPostDrafts;
       }
 
-      if (queryParams.tab === ESTATE_LIST_TAB_ENUM.COMPLETED && !queryParams.statuses) {
+      if (queryParams.tab === EstateListTabEnum.COMPLETED && !queryParams.statuses) {
+        // eslint-disable-next-line no-param-reassign
         queryParams.statuses = [ESTATE_STATUS_ENUM.PUBLISHED, ESTATE_STATUS_ENUM.UNPUBLISHED];
       }
 
@@ -97,11 +98,11 @@ const AdminPostList = ({
     }
   }, []);
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   const handleUnPublish = useCallback(adminPostService.unPublishPostById, []);
-
   const handlePublish = useCallback(adminPostService.publishPostById, []);
-
   const handleMoveToTop = useCallback(adminPostService.movePostToTopById, []);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   useEffect(() => {
     setDocumentTitle(t("postManagement"), isResetScroll !== false);

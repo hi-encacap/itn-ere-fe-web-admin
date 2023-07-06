@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import { Modal } from "@components/Modal";
 import { ModalProps } from "@components/Modal/Modal";
-import { ESTATE_PUBLISHING_STEP_ENUM } from "@constants/enums";
+import { EstatePublishingStepEnum } from "@constants/enums";
 import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
 import { PostFormDataType } from "@interfaces/Admin/postTypes";
 import { adminEstateService } from "@services/index";
@@ -33,19 +33,19 @@ const PostPublishingModal = ({
     keyPrefix: "admin:page.estate.modification.modal.publishing",
   });
 
-  const [step, setStep] = useState<ESTATE_PUBLISHING_STEP_ENUM>(ESTATE_PUBLISHING_STEP_ENUM.SAVING);
+  const [step, setStep] = useState<EstatePublishingStepEnum>(EstatePublishingStepEnum.SAVING);
   const [saveStepError, setSaveStepError] = useState<string | null>(null);
   const [publishStepError, setPublishStepError] = useState<string | null>(null);
   const [savedEstateId, setSavedEstateId] = useState<number | null>(null);
 
   const isAllowCloseModal = useMemo(
-    () => step <= ESTATE_PUBLISHING_STEP_ENUM.SAVE_ERROR || step !== ESTATE_PUBLISHING_STEP_ENUM.SAVING,
+    () => step <= EstatePublishingStepEnum.SAVE_ERROR || step !== EstatePublishingStepEnum.SAVING,
     [step],
   );
 
   const publishEstate = useCallback(
     async (id: number) => {
-      setStep(ESTATE_PUBLISHING_STEP_ENUM.PUBLISHING);
+      setStep(EstatePublishingStepEnum.PUBLISHING);
       setPublishStepError(null);
 
       try {
@@ -54,9 +54,9 @@ const PostPublishingModal = ({
         } else {
           await adminEstateService.publishEstateById(id);
         }
-        setStep(ESTATE_PUBLISHING_STEP_ENUM.PUBLISHED);
+        setStep(EstatePublishingStepEnum.PUBLISHED);
       } catch (error) {
-        setStep(ESTATE_PUBLISHING_STEP_ENUM.PUBLISH_ERROR);
+        setStep(EstatePublishingStepEnum.PUBLISH_ERROR);
 
         if (error instanceof AxiosError) {
           setPublishStepError(error.response?.data?.error?.message || error.message);
@@ -68,7 +68,7 @@ const PostPublishingModal = ({
 
   const saveEstate = useCallback(
     async (body: EstateFormDataType | PostFormDataType) => {
-      setStep(ESTATE_PUBLISHING_STEP_ENUM.SAVING);
+      setStep(EstatePublishingStepEnum.SAVING);
       setSaveStepError(null);
 
       try {
@@ -83,20 +83,18 @@ const PostPublishingModal = ({
             const { id: newId } = await adminEstateService.createEstate(body as EstateFormDataType);
             estateId = newId;
           }
+        } else if (onUpdate) {
+          await onUpdate(estateId, body);
         } else {
-          if (onUpdate) {
-            await onUpdate(estateId, body);
-          } else {
-            await adminEstateService.updateEstateById(estateId, body as EstateFormDataType);
-          }
+          await adminEstateService.updateEstateById(estateId, body as EstateFormDataType);
         }
 
         setSavedEstateId(estateId as number);
-        setStep(ESTATE_PUBLISHING_STEP_ENUM.PUBLISHING);
+        setStep(EstatePublishingStepEnum.PUBLISHING);
 
         return estateId;
       } catch (error) {
-        setStep(ESTATE_PUBLISHING_STEP_ENUM.SAVE_ERROR);
+        setStep(EstatePublishingStepEnum.SAVE_ERROR);
 
         if (error instanceof AxiosError) {
           setSaveStepError(error.response?.data?.error?.message || error.message);
@@ -124,11 +122,11 @@ const PostPublishingModal = ({
       return;
     }
 
-    if (step === ESTATE_PUBLISHING_STEP_ENUM.SAVE_ERROR) {
+    if (step === EstatePublishingStepEnum.SAVE_ERROR) {
       await processEstate(data);
     }
 
-    if (step === ESTATE_PUBLISHING_STEP_ENUM.PUBLISH_ERROR && savedEstateId) {
+    if (step === EstatePublishingStepEnum.PUBLISH_ERROR && savedEstateId) {
       await publishEstate(savedEstateId);
     }
   }, [step, data, savedEstateId, processEstate, publishEstate]);
@@ -138,8 +136,7 @@ const PostPublishingModal = ({
       return;
     }
 
-    // #skipcq: JS-0098
-    void processEstate(data);
+    processEstate(data);
   }, [isOpen, data, processEstate]);
 
   return (
@@ -148,27 +145,27 @@ const PostPublishingModal = ({
       footer={cloneElement(footer, {
         ...footer.props,
         isAllowCloseModal,
-        isDisabled: step < ESTATE_PUBLISHING_STEP_ENUM.PUBLISHED,
+        isDisabled: step < EstatePublishingStepEnum.PUBLISHED,
         onClickClose: props.onClose,
       })}
       isOpen={isOpen}
       title={t("title", { title: data?.title })}
       {...props}
     >
-      {step <= ESTATE_PUBLISHING_STEP_ENUM.PUBLISHING && <div className="mb-6">{t("message")}</div>}
+      {step <= EstatePublishingStepEnum.PUBLISHING && <div className="mb-6">{t("message")}</div>}
       <div className="flex flex-col space-y-4">
         <PostPublishingModalStep
-          isCompleted={step > ESTATE_PUBLISHING_STEP_ENUM.SAVING}
-          isPending={step < ESTATE_PUBLISHING_STEP_ENUM.SAVING}
-          isWorking={step === ESTATE_PUBLISHING_STEP_ENUM.SAVING}
+          isCompleted={step > EstatePublishingStepEnum.SAVING}
+          isPending={step < EstatePublishingStepEnum.SAVING}
+          isWorking={step === EstatePublishingStepEnum.SAVING}
           error={saveStepError}
           text={t("save")}
           onTryAgain={handleTryAgain}
         />
         <PostPublishingModalStep
-          isCompleted={step > ESTATE_PUBLISHING_STEP_ENUM.PUBLISHING}
-          isPending={step < ESTATE_PUBLISHING_STEP_ENUM.PUBLISHING}
-          isWorking={step === ESTATE_PUBLISHING_STEP_ENUM.PUBLISHING}
+          isCompleted={step > EstatePublishingStepEnum.PUBLISHING}
+          isPending={step < EstatePublishingStepEnum.PUBLISHING}
+          isWorking={step === EstatePublishingStepEnum.PUBLISHING}
           completedText={t("published")}
           error={publishStepError}
           text={t("publish")}

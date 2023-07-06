@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { LoadingSkeleton } from "@components/Loading";
 
 export interface TableRowActionSkeletonProps {

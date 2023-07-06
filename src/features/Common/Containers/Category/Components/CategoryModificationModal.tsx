@@ -75,7 +75,7 @@ const CategoryModificationModal = ({
         reset();
       });
     },
-    [category, reset],
+    [category, onUpdate, reset],
   );
 
   const createCategory = useCallback(
@@ -103,9 +103,12 @@ const CategoryModificationModal = ({
     onClose();
   }, [onClose, reset]);
 
-  const handleSelectCategory = useCallback((value: ICategory) => {
-    setValue("categoryGroupCode", value.categoryGroupCode);
-  }, []);
+  const handleSelectCategory = useCallback(
+    (value: ICategory) => {
+      setValue("categoryGroupCode", value.categoryGroupCode);
+    },
+    [setValue],
+  );
 
   useEffect(() => {
     if (category !== null) {
@@ -118,7 +121,7 @@ const CategoryModificationModal = ({
     }
 
     reset();
-  }, [category]);
+  }, [category, reset, setValue]);
 
   return (
     <Modal
@@ -150,7 +153,9 @@ const CategoryModificationModal = ({
           />
         )}
         <ImageInput name="avatar" label={t("avatar")} control={control} />
-        <button type="submit" className="hidden" />
+        <button type="submit" className="hidden">
+          {t("submit")}
+        </button>
       </form>
     </Modal>
   );

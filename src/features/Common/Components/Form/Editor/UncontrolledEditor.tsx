@@ -1,5 +1,5 @@
 import { Editor } from "@tinymce/tinymce-react";
-import { HTMLAttributes, useCallback, useEffect, useRef, useState } from "react";
+import { HTMLAttributes, memo, useCallback, useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { Editor as TinyMCEEditor } from "tinymce";
 
@@ -11,12 +11,11 @@ import UncontrolledEditorFullscreenHeader from "./UncontrolledEditorFullscreenHe
 
 export interface UncontrolledEditorProps extends Omit<HTMLAttributes<HTMLInputElement>, "onChange"> {
   isRequired?: boolean;
-  name: string;
-  className?: string;
   error?: string;
   label?: string | null;
   value?: string;
   fullScreenTitle?: string | null;
+  name: string;
   onChange?: (value: string) => void;
 }
 
@@ -24,6 +23,7 @@ const UncontrolledEditor = ({
   isRequired = false,
   label,
   error,
+  name,
   value,
   fullScreenTitle,
   onChange,
@@ -36,35 +36,41 @@ const UncontrolledEditor = ({
   const tinyEditorRef = useRef<TinyMCEEditor | null>(null);
   const rawEditorRef = useRef<Editor | null>(null);
 
-  const handleChange = useCallback((editorValue: string) => {
-    onChange?.(editorValue);
-  }, []);
+  const handleChange = useCallback(
+    (editorValue: string) => {
+      onChange?.(editorValue);
+    },
+    [onChange],
+  );
 
   const handleCloseModal = useCallback(() => {
     setIsOpenInsertImageModal(false);
   }, []);
 
-  const handleInsetImage = useCallback((images: string[], caption?: string) => {
-    if (!tinyEditorRef.current) {
-      return;
-    }
+  const handleInsetImage = useCallback(
+    (images: string[], caption?: string) => {
+      if (!tinyEditorRef.current) {
+        return;
+      }
 
-    const imageHtml = images
-      .map((image) => `<img class="w-full aspect-video" src="${image}" alt="${caption ?? ""}" />`)
-      .join("");
-    let html = "";
+      const imageHtml = images
+        .map((image) => `<img class="w-full aspect-video" src="${image}" alt="${caption ?? ""}" />`)
+        .join("");
+      let html = "";
 
-    if (caption) {
-      html = `<p><figure>${imageHtml}<figcaption>${caption}</figcaption></figure></p>`;
-    } else {
-      html = imageHtml;
-    }
+      if (caption) {
+        html = `<p><figure>${imageHtml}<figcaption>${caption}</figcaption></figure></p>`;
+      } else {
+        html = imageHtml;
+      }
 
-    tinyEditorRef.current.execCommand("mceInsertContent", false, html);
-    tinyEditorRef.current.execCommand("mceInsertNewLine");
+      tinyEditorRef.current.execCommand("mceInsertContent", false, html);
+      tinyEditorRef.current.execCommand("mceInsertNewLine");
 
-    handleCloseModal();
-  }, []);
+      handleCloseModal();
+    },
+    [handleCloseModal],
+  );
 
   const handleSetup = useCallback((editor: unknown) => {
     const editorInstance = editor as TinyMCEEditor;
@@ -119,11 +125,11 @@ const UncontrolledEditor = ({
     if (isFocusing) {
       handleEnterFullscreen();
     }
-  }, [isFocusing]);
+  }, [handleEnterFullscreen, isFocusing]);
 
   return (
     <>
-      <div className="tiny-mce-editor">
+      <div className="tiny-mce-editor" key={name}>
         {label && <FormElementLabel label={label} isRequired={isRequired} error={error} />}
         {!isInitialized && (
           <div className="h-72 animate-pulse rounded-lg border-2 border-gray-100 bg-gray-100" />
@@ -179,4 +185,4 @@ const UncontrolledEditor = ({
   );
 };
 
-export default UncontrolledEditor;
+export default memo(UncontrolledEditor);

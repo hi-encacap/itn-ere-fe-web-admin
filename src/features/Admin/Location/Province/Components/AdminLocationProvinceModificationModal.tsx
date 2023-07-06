@@ -5,13 +5,13 @@ import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { LocationProvinceWebsiteFormDataType } from "@interfaces/Admin/locationTypes";
-import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
-import { adminLocationService, locationService } from "@services/index";
 import { Select } from "@components/Form";
 import { Modal } from "@components/Modal";
 import { ModalProps } from "@components/Modal/Modal";
 import useToast from "@hooks/useToast";
+import { LocationProvinceWebsiteFormDataType } from "@interfaces/Admin/locationTypes";
+import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
+import { adminLocationService, locationService } from "@services/index";
 import { formatErrorMessage, setFormError } from "@utils/error";
 
 import { locationProvinceFormSchema } from "../../Schemas/locationFormSchema";
@@ -102,7 +102,7 @@ const AdminLocationProvinceModificationModal = ({
     if (isOpen) {
       getProvinces();
     }
-  }, [isOpen]);
+  }, [getProvinces, isOpen]);
 
   return (
     <Modal
@@ -124,7 +124,6 @@ const AdminLocationProvinceModificationModal = ({
           control={control}
           disabled={isLoading || isSubmitting}
         />
-        <button type="submit" className="hidden" />
       </form>
     </Modal>
   );

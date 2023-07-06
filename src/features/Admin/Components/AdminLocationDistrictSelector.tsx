@@ -1,10 +1,10 @@
 import { memo, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { Select } from "@components/Form";
 import { HookFormControl } from "@interfaces/Common/commonTypes";
 import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
 import { adminLocationService } from "@services/index";
-import { Select } from "@components/Form";
 import { commonFormErrorFactory } from "@utils/error";
 
 interface AdminLocationDistrictSelectorProps {
@@ -50,7 +50,7 @@ const AdminLocationDistrictSelector = ({
       .catch(() => {
         setOptions([]);
       });
-  }, [provinceCode]);
+  }, [options.length, provinceCode]);
 
   useEffect(() => {
     getData();

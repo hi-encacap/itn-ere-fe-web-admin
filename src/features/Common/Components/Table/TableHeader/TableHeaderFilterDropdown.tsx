@@ -49,14 +49,17 @@ const TableHeaderFilterDropdown = ({
     [selectedFilters, onChangeFilters],
   );
 
-  const handleChangeFilterSearchValue = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    onChangeFilterSearchValue(value);
-  }, []);
+  const handleChangeFilterSearchValue = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+      onChangeFilterSearchValue(value);
+    },
+    [onChangeFilterSearchValue],
+  );
 
   const handleClearSelectedFilters = useCallback(() => {
     onClearSelectedFilters?.();
-  }, []);
+  }, [onClearSelectedFilters]);
 
   return (
     <div className="absolute top-12 z-10 flex max-w-xs flex-col overflow-hidden rounded-lg border-2 border-gray-100 bg-white px-4 text-slate-700 shadow-lg shadow-gray-100">

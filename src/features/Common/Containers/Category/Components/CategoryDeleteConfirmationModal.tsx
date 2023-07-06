@@ -3,9 +3,9 @@ import { omit } from "lodash";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import { ServiceDeleteFunctionType } from "@interfaces/Common/commonTypes";
 import { ConfirmationModal } from "@components/Modal";
 import { ConfirmationModalProps } from "@components/Modal/ConfirmationModal";
+import { ServiceDeleteFunctionType } from "@interfaces/Common/commonTypes";
 
 interface CategoryDeleteConfirmationModalProps
   extends Omit<ConfirmationModalProps, "title" | "message" | "onConfirm"> {
@@ -22,12 +22,12 @@ const CategoryDeleteConfirmationModal = ({
 }: CategoryDeleteConfirmationModalProps) => {
   const { t } = useTranslation();
 
-  const handleConfirmDeleteCategory = useCallback(() => {
+  const handleConfirmDeleteCategory = useCallback(async () => {
     if (!category) {
       return;
     }
 
-    void onDelete(category.id);
+    await onDelete(category.id);
   }, [category, onDelete]);
 
   return (

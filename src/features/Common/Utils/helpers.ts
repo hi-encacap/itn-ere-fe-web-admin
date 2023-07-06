@@ -41,8 +41,10 @@ const slugify = (text: string): string => {
 const generateColumnFilterObject = (filters: TableColumnFilterState[]) => {
   return filters.reduce<Record<string, string | string[]>>((filterObject, { filterBy, values }) => {
     if (filterBy === TABLE_FILTER_GLOBAL_FILTER_ID) {
+      // eslint-disable-next-line no-param-reassign
       filterObject[filterBy] = first(values) as string;
     } else {
+      // eslint-disable-next-line no-param-reassign
       filterObject[filterBy] = values;
     }
 

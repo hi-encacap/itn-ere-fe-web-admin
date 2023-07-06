@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { BiChevronDown } from "react-icons/bi";
 
 import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
@@ -14,18 +14,18 @@ const TableFooterPageSizeSelector = ({
   pageSize: pageSizeProp = DEFAULT_PAGE_SIZE,
   onChangePageSize,
 }: TableFooterPageSizeSelectorProps) => {
-  const pageSizeOptions = [10, 25, 50, 100];
+  const pageSizeOptions = useMemo(() => [10, 25, 50, 100], []);
 
   const pageSize = useMemo(() => {
     if (pageSizeOptions.includes(pageSizeProp)) {
       return pageSizeProp;
     }
     return DEFAULT_PAGE_SIZE;
-  }, [pageSizeProp]);
+  }, [pageSizeOptions, pageSizeProp]);
 
   const handleChangePageSize = useCallback(() => {
     onChangePageSize(pageSizeOptions.at(1) as number);
-  }, [pageSizeOptions]);
+  }, [onChangePageSize, pageSizeOptions]);
 
   return (
     <div
@@ -40,4 +40,4 @@ const TableFooterPageSizeSelector = ({
   );
 };
 
-export default TableFooterPageSizeSelector;
+export default memo(TableFooterPageSizeSelector);

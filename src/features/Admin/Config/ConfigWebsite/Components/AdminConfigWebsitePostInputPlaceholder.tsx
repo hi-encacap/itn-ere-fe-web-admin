@@ -40,27 +40,30 @@ const AdminConfigWebsitePostInputPlaceholder = ({
     name,
   });
 
-  const getPostData = useCallback(async (postId: number) => {
-    if (!postId) {
-      setIsLoading(false);
-      return;
-    }
+  const getPostData = useCallback(
+    async (id: number) => {
+      if (!id) {
+        setIsLoading(false);
+        return;
+      }
 
-    setIsLoading(true);
+      setIsLoading(true);
 
-    try {
-      const post = await adminPostService.getPostById(postId);
-      setPostData(post);
-    } catch (error) {
-      toast.error(t("getPostError"));
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+      try {
+        const post = await adminPostService.getPostById(id);
+        setPostData(post);
+      } catch (error) {
+        toast.error(t("getPostError"));
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [t, toast],
+  );
 
   useEffect(() => {
-    void getPostData(postId);
-  }, [postId]);
+    getPostData(postId);
+  }, [getPostData, postId]);
 
   if (isLoading) {
     return <LoadingSkeleton className="h-24 w-full" />;

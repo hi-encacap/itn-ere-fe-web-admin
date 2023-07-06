@@ -1,4 +1,5 @@
-import { useCallback } from "react";
+/* eslint-disable react/no-array-index-key */
+import { memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { BiChevronRight } from "react-icons/bi";
 
@@ -17,17 +18,20 @@ const TableFooterPagination = ({
     keyPrefix: "table.pagination",
   });
 
-  const handleChangePage = useCallback((newPage: number) => {
-    onChangePageIndex(newPage);
-  }, []);
+  const handleChangePage = useCallback(
+    (newPage: number) => {
+      onChangePageIndex(newPage);
+    },
+    [onChangePageIndex],
+  );
 
   const handleClickPrevButton = useCallback(() => {
     handleChangePage(page - 1);
-  }, [page]);
+  }, [handleChangePage, page]);
 
   const handleClickNextButton = useCallback(() => {
     handleChangePage(Number(page) + 1);
-  }, [page]);
+  }, [handleChangePage, page]);
 
   return (
     <nav className="relative z-0 mx-auto inline-flex rounded-md shadow-sm">
@@ -71,4 +75,4 @@ const TableFooterPagination = ({
   );
 };
 
-export default TableFooterPagination;
+export default memo(TableFooterPagination);

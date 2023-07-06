@@ -4,14 +4,14 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from "reac
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 
-import { adminEstateService } from "@services/index";
 import LayoutContent from "@common/Layout/Components/LayoutContent";
 import { LayoutContentTabItemType } from "@common/Layout/Components/LayoutContentTabItem";
+import { adminEstateService } from "@services/index";
 import { setDocumentTitle } from "@utils/helpers";
 
 import AdminEstateListHeaderAction from "./Components/List/HeaderAction";
 import AdminEstateListTable from "./Components/List/Table";
-import { ESTATE_LIST_TAB_ENUM } from "./Constants/enums";
+import { EstateListTabEnum } from "./Constants/enums";
 
 const AdminEstateList = () => {
   const { t } = useTranslation("admin", {
@@ -24,18 +24,18 @@ const AdminEstateList = () => {
   const [totalRows, setTotalRows] = useState(0);
 
   const selectedTabIdParam = useMemo(
-    () => searchParams.get("tab_id") ?? ESTATE_LIST_TAB_ENUM.COMPLETED,
+    () => searchParams.get("tab_id") ?? EstateListTabEnum.COMPLETED,
     [searchParams],
   );
 
   const tabItems = useMemo<LayoutContentTabItemType[]>(
     () => [
       {
-        id: ESTATE_LIST_TAB_ENUM.COMPLETED,
+        id: EstateListTabEnum.COMPLETED,
         label: t("list.tab.completed"),
       },
       {
-        id: ESTATE_LIST_TAB_ENUM.DRAFT,
+        id: EstateListTabEnum.DRAFT,
         label: t("list.tab.draft"),
       },
     ],
@@ -48,11 +48,12 @@ const AdminEstateList = () => {
     try {
       let service = adminEstateService.getEstates;
 
-      if (queryParams.tab === ESTATE_LIST_TAB_ENUM.DRAFT) {
+      if (queryParams.tab === EstateListTabEnum.DRAFT) {
         service = adminEstateService.getEstateDrafts as unknown as typeof service;
       }
 
-      if (queryParams.tab === ESTATE_LIST_TAB_ENUM.COMPLETED && !queryParams.statuses) {
+      if (queryParams.tab === EstateListTabEnum.COMPLETED && !queryParams.statuses) {
+        // eslint-disable-next-line no-param-reassign
         queryParams.statuses = [ESTATE_STATUS_ENUM.PUBLISHED, ESTATE_STATUS_ENUM.UNPUBLISHED];
       }
 
@@ -73,14 +74,14 @@ const AdminEstateList = () => {
 
       setSearchParams(searchParams);
     },
-    [searchParams],
+    [searchParams, setSearchParams],
   );
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   const handleUnPublish = useCallback(adminEstateService.unPublishEstateById, []);
-
   const handlePublish = useCallback(adminEstateService.publishEstateById, []);
-
   const handleMoveToTop = useCallback(adminEstateService.moveEstateToTopById, []);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   useLayoutEffect(() => {
     setDocumentTitle(t("list.title"));

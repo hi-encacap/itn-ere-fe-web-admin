@@ -43,7 +43,7 @@ const PostDeleteConfirmationModalCompleted = ({
     } finally {
       onClose();
     }
-  }, [onSuccess, onConfirm, data, toast, t]);
+  }, [data, onClose, onConfirm, onSuccess, t, toast]);
 
   return (
     <ConfirmationModal

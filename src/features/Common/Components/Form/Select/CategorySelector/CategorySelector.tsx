@@ -49,10 +49,10 @@ const CategorySelector = ({ control, name, onGet, onSelect, ...props }: Category
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [onGet]);
 
   useEffect(() => {
-    void getOptions();
+    getOptions();
   }, [getOptions]);
 
   useEffect(() => {

@@ -52,7 +52,7 @@ const createEstateDraft = async (estate: EstateFormDataType): Promise<EstateDraf
   const response = await axiosInstance.post(
     ADMIN_ESTATE_API_PATH.ESTATE_DRAFTS_PATH,
     // Remove all empty, undefined values from the object.
-    Object.fromEntries(Object.entries(estate).filter(([_, v]) => v !== "" && v !== undefined)),
+    Object.fromEntries(Object.entries(estate).filter(([, v]) => v !== "" && v !== undefined)),
   );
 
   return response.data.data;
@@ -78,7 +78,7 @@ const updateEstateDraftById = async (id: Key, estate: EstateFormDataType): Promi
   const response = await axiosInstance.put(
     ADMIN_ESTATE_API_PATH.ESTATE_DRAFT_PATH(id),
     // Remove all empty, undefined values from the object.
-    Object.fromEntries(Object.entries(estate).filter(([_, v]) => v !== "" && v !== undefined)),
+    Object.fromEntries(Object.entries(estate).filter(([, v]) => v !== "" && v !== undefined)),
   );
 
   return response.data.data;
@@ -108,8 +108,8 @@ const updateEstateById = async (id: Key, estate: EstateFormDataType): Promise<IE
   return response.data.data;
 };
 
-const getEstateStatuses = async (): Promise<Array<Record<"name", string>>> => {
-  return await Promise.resolve([
+const getEstateStatuses = (): Promise<Array<Record<"name", string>>> => {
+  return Promise.resolve([
     {
       name: ESTATE_STATUS_ENUM.PUBLISHED,
     },

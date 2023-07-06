@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useCallback, useEffect, useState } from "react";
+import { InputHTMLAttributes, memo, useCallback, useEffect, useState } from "react";
 import { BsCheck } from "react-icons/bs";
 import { HiMinusSm } from "react-icons/hi";
 import { twMerge } from "tailwind-merge";
@@ -39,12 +39,15 @@ const UncontrolledCheckbox = ({
     iconTouchedClassName,
   );
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    if (checked === undefined || checked === null || !onChange) {
-      setIsChecked(e.target.checked);
-    }
-    onChange?.(e);
-  }, []);
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (checked === undefined || checked === null || !onChange) {
+        setIsChecked(e.target.checked);
+      }
+      onChange?.(e);
+    },
+    [checked, onChange],
+  );
 
   useEffect(() => {
     if (checked !== undefined && checked !== null) {
@@ -89,4 +92,4 @@ const UncontrolledCheckbox = ({
   );
 };
 
-export default UncontrolledCheckbox;
+export default memo(UncontrolledCheckbox);

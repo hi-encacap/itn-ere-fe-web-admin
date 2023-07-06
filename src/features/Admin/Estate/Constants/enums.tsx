@@ -1,4 +1,4 @@
-export enum ESTATE_LIST_TAB_ENUM {
+export enum EstateListTabEnum {
   COMPLETED = "completed",
   DRAFT = "draft",
 }

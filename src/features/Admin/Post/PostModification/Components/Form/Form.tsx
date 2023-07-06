@@ -1,7 +1,7 @@
 import { ESTATE_STATUS_ENUM, IMAGE_VARIANT_ENUM, IPost } from "@encacap-group/common/dist/re";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AxiosError } from "axios";
-import { HTMLAttributes, Key, useCallback, useEffect, useMemo, useState } from "react";
+import { HTMLAttributes, Key, memo, useCallback, useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -61,6 +61,7 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
 
   const setFormValue = useCallback(
     (data: IPost | PostDraftDataType) => {
+      // @ts-ignore: due to react-hook-form issue with self-ref interface.
       setValue("id", data.id);
       setValue("title", data.title);
       setValue("categoryId", data.category?.id ?? null);
@@ -109,7 +110,7 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
     } finally {
       setIsLoading(false);
     }
-  }, [postIdParam, postStatusParam, setFormValue]);
+  }, [postIdParam, postStatusParam, setFormValue, t, toast]);
 
   const handleCloseModal = useCallback(() => {
     setIsShowPublishingModal(false);
@@ -122,13 +123,12 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
   });
 
   const handleCreate = useCallback(
-    async (data: unknown) => await adminPostService.createPost(data as PostFormDataType),
+    (data: unknown) => adminPostService.createPost(data as PostFormDataType),
     [],
   );
 
   const handleUpdate = useCallback(
-    async (id: Key, data: unknown) =>
-      await adminPostService.updatePostById(Number(id), data as PostFormDataType),
+    (id: Key, data: unknown) => adminPostService.updatePostById(Number(id), data as PostFormDataType),
     [],
   );
 
@@ -165,7 +165,8 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
     } finally {
       setIsSubmitting(false);
     }
-  }, [getValues]);
+    // @ts-ignore: due to react-hook-form issue with self-ref interface.
+  }, [getValues, navigate, setError, setFocus, t, toast]);
 
   const handleUpdatePost = useFormSubmit(async (data) => {
     if (!data.id) {
@@ -192,7 +193,7 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
   });
 
   useEffect(() => {
-    void getData();
+    getData();
   }, [getData]);
 
   return (
@@ -254,4 +255,4 @@ const AdminPostModificationForm = ({ className }: HTMLAttributes<HTMLDivElement>
   );
 };
 
-export default AdminPostModificationForm;
+export default memo(AdminPostModificationForm);

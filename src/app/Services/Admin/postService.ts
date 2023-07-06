@@ -40,7 +40,7 @@ const updatePostById = async (id: number, data: PostFormDataType) => {
 const createPostDraft = async (data: PostFormDataType): Promise<PostDraftDataType> => {
   const response = await axiosInstance.post(
     ADMIN_POST_API_PATH.POST_DRAFTS_PATH,
-    Object.fromEntries(Object.entries(data).filter(([_, v]) => v !== "" && v !== undefined)),
+    Object.fromEntries(Object.entries(data).filter(([, v]) => v !== "" && v !== undefined)),
   );
 
   return response.data.data;

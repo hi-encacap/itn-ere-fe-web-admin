@@ -1,4 +1,4 @@
-export enum AUTH_ERROR_CODES {
+export enum AuthErrorEnum {
   UNKNOWN_ERROR = "UNKNOWN_ERROR",
   UNAUTHORIZED = "UNAUTHORIZED",
 }

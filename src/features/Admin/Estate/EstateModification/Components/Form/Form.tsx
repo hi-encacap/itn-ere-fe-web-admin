@@ -70,7 +70,7 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
   const setFormValue = useCallback(
     (data: IEstate | EstateDraftDataType) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-      // @ts-ignore
+      // @ts-ignore: due to react-hook-form issue with self-ref interface.
       setValue("id", data.id);
       setValue("title", data.title);
       setValue("customId", data.customId);
@@ -116,7 +116,7 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
     } catch (error) {
       toast.error(t("notification.getEstateFailed"));
     }
-  }, [id, toast, t]);
+  }, [id, setFormValue, t, toast]);
 
   const getDraftData = useCallback(async () => {
     if (!id) {
@@ -133,7 +133,7 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
     } catch (error) {
       toast.error(t("notification.getEstateFailed"));
     }
-  }, [id, toast, t]);
+  }, [id, setFormValue, t, toast]);
 
   const handleSubmit = useFormSubmit((data) => {
     setFormData(data);
@@ -166,15 +166,16 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
         return;
       }
 
-      const { id } = await adminEstateService.createEstateDraft(data);
+      const { id: newId } = await adminEstateService.createEstateDraft(data);
       toast.success(t("notification.savedDraft"));
-      navigate(ADMIN_PATH.ESTATE_MODIFICATION_PATH(id, ESTATE_STATUS_ENUM.DRAFT));
+      navigate(ADMIN_PATH.ESTATE_MODIFICATION_PATH(newId, ESTATE_STATUS_ENUM.DRAFT));
     } catch (error) {
       toast.error(t("notification.saveDraftFailed"));
     } finally {
       setIsSubmitting(false);
     }
-  }, [getValues]);
+    // @ts-ignore: due to react-hook-form issue with self-ref interface.
+  }, [getValues, navigate, setError, setFocus, t, toast]);
 
   const handleCloseModal = useCallback(() => {
     setIsShowPublishingModal(false);
@@ -225,11 +226,11 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
     }
 
     if (statusParam === ESTATE_STATUS_ENUM.DRAFT) {
-      void getDraftData();
+      getDraftData();
       return;
     }
 
-    void getData();
+    getData();
   }, [statusParam, getData, getDraftData]);
 
   return (
