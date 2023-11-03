@@ -19,7 +19,7 @@ const AdminEstateModificationFormLocation = () => {
 
   const { control, watch } = useFormContext<EstateFormDataType>();
 
-  // @ts-ignore
+  // @ts-ignore Due to the react-hook-form type issues.
   const provinceCode = watch("provinceCode", "");
   const districtCode = watch("districtCode", "");
 
