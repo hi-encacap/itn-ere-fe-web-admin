@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { BsCheck } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
@@ -74,4 +75,4 @@ const PostPublishingModalStep = ({
   );
 };
 
-export default PostPublishingModalStep;
+export default memo(PostPublishingModalStep);

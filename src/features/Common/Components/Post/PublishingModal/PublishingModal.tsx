@@ -1,6 +1,6 @@
 import { ESTATE_STATUS_ENUM } from "@encacap-group/common/dist/re";
 import { AxiosError } from "axios";
-import { Key, ReactElement, cloneElement, useCallback, useEffect, useMemo, useState } from "react";
+import { Key, ReactElement, cloneElement, memo, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Modal } from "@components/Modal";
@@ -176,4 +176,4 @@ const PostPublishingModal = ({
   );
 };
 
-export default PostPublishingModal;
+export default memo(PostPublishingModal);

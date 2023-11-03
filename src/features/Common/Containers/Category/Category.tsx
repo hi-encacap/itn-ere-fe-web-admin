@@ -2,7 +2,7 @@ import { IBaseListQuery } from "@encacap-group/common/dist/base";
 import { ICategory } from "@encacap-group/common/dist/re";
 import { SortingState } from "@tanstack/react-table";
 import { isEqual } from "lodash";
-import { Key, useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
+import { Key, memo, useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import LayoutContent from "@common/Layout/Components/LayoutContent";
@@ -205,4 +205,4 @@ const Category = ({ onGetMany, onCreate, onUpdate, onDelete, onGetAll }: Categor
   );
 };
 
-export default Category;
+export default memo(Category);

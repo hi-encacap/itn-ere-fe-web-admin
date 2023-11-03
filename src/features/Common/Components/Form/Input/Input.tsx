@@ -1,4 +1,5 @@
 import { omit } from "lodash";
+import { memo } from "react";
 import { useController } from "react-hook-form";
 
 import { HookFormControl } from "@interfaces/Common/commonTypes";
@@ -35,4 +36,4 @@ const Input = ({ control, name, ...inputProps }: InputProps) => {
   );
 };
 
-export default Input;
+export default memo(Input);

@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { Select } from "@components/Form";
 import { HookFormControl } from "@interfaces/Common/commonTypes";
 import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
 import { adminCategoryService } from "@services/index";
-import { Select } from "@components/Form";
 import { commonFormErrorFactory } from "@utils/error";
 
 interface AdminCategorySelectorProps {
@@ -56,4 +56,4 @@ const AdminCategorySelector = ({ control, disabled }: AdminCategorySelectorProps
   );
 };
 
-export default AdminCategorySelector;
+export default memo(AdminCategorySelector);

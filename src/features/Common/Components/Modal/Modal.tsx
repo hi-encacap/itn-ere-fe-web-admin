@@ -1,6 +1,6 @@
 import { Dialog } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
-import { HTMLAttributes, ReactNode, forwardRef, useRef } from "react";
+import { HTMLAttributes, ReactNode, forwardRef, memo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 
@@ -147,4 +147,4 @@ const Modal = (
   );
 };
 
-export default forwardRef(Modal);
+export default memo(forwardRef(Modal));

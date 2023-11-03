@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
+import { Select } from "@components/Form";
 import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
 import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
 import { estateQuarterService } from "@services/index";
-import { Select } from "@components/Form";
 
 interface AdminEstateModificationFormDetailQuarterSelectProps {
   disabled?: boolean;
@@ -58,4 +58,4 @@ const AdminEstateModificationFormDetailQuarterSelector = ({
   );
 };
 
-export default AdminEstateModificationFormDetailQuarterSelector;
+export default memo(AdminEstateModificationFormDetailQuarterSelector);

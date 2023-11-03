@@ -46,8 +46,8 @@ const getDistricts = async (
   return response.data;
 };
 
-const getAllDistricts = async (): Promise<ILocationDistrict[]> => {
-  const response = await getDistricts();
+const getAllDistricts = async (query?: LocationDistrictGetListQueryType): Promise<ILocationDistrict[]> => {
+  const response = await getDistricts(query);
   return response.data;
 };
 
