@@ -1,7 +1,7 @@
 import { ESTATE_STATUS_ENUM, IEstate, IPost, getImageURL } from "@encacap-group/common/dist/re";
 import dayjs from "dayjs";
 import { decode } from "html-entities";
-import { useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FiEdit2, FiTrash2, FiUpload } from "react-icons/fi";
 import { HiDotsHorizontal } from "react-icons/hi";
@@ -46,9 +46,6 @@ const PostTableBodyItem = ({
   onSelectRow,
 }: PostTableBodyItemProps) => {
   const { t } = useTranslation();
-  const { t: tEstate } = useTranslation("admin", {
-    keyPrefix: "admin:page.estate",
-  });
   const toast = useToast();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -181,7 +178,7 @@ const PostTableBodyItem = ({
       {!isNormalMode && <div className="h-9 w-full rounded-t-xl border-2 border-b-0 border-gray-100" />}
       <div className="flex flex-1 flex-col rounded-b-xl border-2 border-t-0 border-gray-100 px-4 py-4 group-hover:border-gray-200">
         <div className="flex flex-wrap items-center justify-start">
-          <PostTableBodyItemBadge status={data.status} title={tEstate(`status.${String(data.status)}`)} />
+          <PostTableBodyItemBadge status={data.status} title={t(data.status)} />
           {"customId" in data && data.customId && <PostTableBodyItemBadge title={`#${data.customId}`} />}
           {data.category && <PostTableBodyItemBadge title={data.category.name} />}
         </div>
@@ -240,4 +237,4 @@ const PostTableBodyItem = ({
   );
 };
 
-export default PostTableBodyItem;
+export default memo(PostTableBodyItem);

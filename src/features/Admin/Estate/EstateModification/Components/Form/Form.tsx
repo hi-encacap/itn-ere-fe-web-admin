@@ -1,7 +1,7 @@
 import { ESTATE_STATUS_ENUM, IEstate, IMAGE_VARIANT_ENUM } from "@encacap-group/common/dist/re";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AxiosError } from "axios";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -289,4 +289,4 @@ const AdminEstateModificationForm = ({ id }: AdminEstateModificationFormProps) =
   );
 };
 
-export default AdminEstateModificationForm;
+export default memo(AdminEstateModificationForm);

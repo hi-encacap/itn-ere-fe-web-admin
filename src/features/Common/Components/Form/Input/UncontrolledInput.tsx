@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, Ref, forwardRef, useMemo } from "react";
+import { InputHTMLAttributes, Ref, forwardRef, memo, useMemo } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { FormElementSizeType } from "@interfaces/Common/elementTypes";
@@ -80,4 +80,4 @@ const UncontrolledInput = (
   );
 };
 
-export default forwardRef(UncontrolledInput);
+export default memo(forwardRef(UncontrolledInput));

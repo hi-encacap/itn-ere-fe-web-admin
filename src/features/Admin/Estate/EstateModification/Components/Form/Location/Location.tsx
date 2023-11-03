@@ -1,9 +1,10 @@
+import { memo } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { FiMapPin } from "react-icons/fi";
 
-import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
 import { Button, Input } from "@components/Form";
+import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
 
 import AdminLocationDistrictSelector from "@admin/Components/AdminLocationDistrictSelector";
 import AdminLocationProvinceSelector from "@admin/Components/AdminLocationProvinceSelector";
@@ -18,6 +19,7 @@ const AdminEstateModificationFormLocation = () => {
 
   const { control, watch } = useFormContext<EstateFormDataType>();
 
+  // @ts-ignore
   const provinceCode = watch("provinceCode", "");
   const districtCode = watch("districtCode", "");
 
@@ -52,4 +54,4 @@ const AdminEstateModificationFormLocation = () => {
   );
 };
 
-export default AdminEstateModificationFormLocation;
+export default memo(AdminEstateModificationFormLocation);

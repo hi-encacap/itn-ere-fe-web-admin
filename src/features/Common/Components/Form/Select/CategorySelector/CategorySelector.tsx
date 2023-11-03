@@ -41,7 +41,7 @@ const CategorySelector = ({ control, name, onGet, onSelect, ...props }: Category
 
     try {
       const response = await onGet({
-        expand: "parent",
+        expands: ["parent"],
       });
       setCategories(response);
     } catch (error) {

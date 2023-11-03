@@ -3,9 +3,9 @@ import {
   getCoreRowModel,
   OnChangeFn,
   PaginationState,
+  Row,
   RowSelectionState,
   SortingState,
-  Table as TableCore,
   useReactTable,
 } from "@tanstack/react-table";
 import { keys } from "lodash";
@@ -30,7 +30,7 @@ import TableHeader from "./TableHeader/TableHeader";
 type TableRowActionNameType = `on${string}`;
 
 export interface CustomTableBodyProps<TData = unknown> {
-  table?: TableCore<TData>;
+  rows?: Row<TData>[];
   isLoading: boolean;
   rowSelection?: string[];
   [key: TableRowActionNameType]: TableRowActionClickHandlerType;
@@ -150,7 +150,8 @@ const Table = ({
     getRowId: (row) => row.id || row.code || Math.random().toString(36).substr(2, 9),
   });
 
-  const tableRows = useMemo(() => table.getRowModel().rows, [table]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const tableRows = useMemo(() => table.getRowModel().rows, [table, data]);
   const tableHeaderGroup = useMemo(() => table.getHeaderGroups(), [table]);
 
   const handleChangePageSize = useCallback(
@@ -179,7 +180,7 @@ const Table = ({
       {children &&
         cloneElement(children, {
           ...children.props,
-          table,
+          rows: tableRows,
         })}
       {!children && (
         <table className="relative min-w-full">

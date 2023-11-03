@@ -1,4 +1,5 @@
 import { IEstate, IPost } from "@encacap-group/common/dist/re";
+import { cloneDeep } from "lodash";
 import { memo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,14 +14,12 @@ import PostTableBodyItem, { PostTableBodyItemProps } from "./TableBodyItem";
 import PostTableBodyLoading from "./TableBodyLoading";
 
 const PostTableBody = ({
-  table,
+  rows = [],
   isLoading,
   mode,
   rowSelection,
   ...props
 }: CustomTableBodyProps<IEstate | EstateDraftDataType> & Pick<PostTableBodyItemProps, "mode">) => {
-  const tableRows = table?.getRowModel().rows ?? [];
-
   const navigate = useNavigate();
 
   const handleClickEdit = useCallback(
@@ -30,9 +29,9 @@ const PostTableBody = ({
     [navigate],
   );
 
-  if (isLoading && !tableRows.length) return <PostTableBodyLoading />;
+  if (isLoading && !rows.length) return <PostTableBodyLoading />;
 
-  if (!tableRows.length) return <TableContentBodyEmptyContent />;
+  if (!rows.length) return <TableContentBodyEmptyContent />;
 
   return (
     <div className="relative grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -41,10 +40,10 @@ const PostTableBody = ({
           <LoadingSpinner className="h-8 w-8 border-teal-500" />
         </div>
       )}
-      {tableRows.map((row) => (
+      {rows.map((row) => (
         <PostTableBodyItem
           key={row.id}
-          data={row.original}
+          data={cloneDeep(row.original)}
           mode={mode}
           isSelected={rowSelection?.includes(String(row.id))}
           onClickEdit={handleClickEdit}

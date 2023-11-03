@@ -2,7 +2,7 @@ import { IBaseListQuery } from "@encacap-group/common/dist/base";
 import { IEstateProperty } from "@encacap-group/common/dist/re";
 import { SortingState } from "@tanstack/react-table";
 import { isEqual } from "lodash";
-import { Key, useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { Key, memo, useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import LayoutContent from "@common/Layout/Components/LayoutContent";
@@ -151,4 +151,4 @@ const AdminEstatePropertyList = () => {
   );
 };
 
-export default AdminEstatePropertyList;
+export default memo(AdminEstatePropertyList);

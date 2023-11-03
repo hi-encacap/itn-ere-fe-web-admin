@@ -25,32 +25,30 @@ const AdminLocationDistrictSelector = ({
   const [options, setOptions] = useState<SelectOptionItemType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getData = useCallback(() => {
+  const getData = useCallback(async () => {
     if (!provinceCode) {
       return;
     }
 
-    if (options.length === 0) {
-      setIsLoading(true);
-    }
+    setIsLoading(true);
 
-    adminLocationService
-      .getDistricts({
+    try {
+      const data = await adminLocationService.getAllDistricts({
         provinceCode,
-      })
-      .then(({ data }) => {
-        setOptions(
-          data.map((item) => ({
-            value: String(item.code),
-            label: String(item.name),
-          })),
-        );
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setOptions([]);
       });
-  }, [options.length, provinceCode]);
+
+      setOptions(
+        data.map((item) => ({
+          value: String(item.code),
+          label: String(item.name),
+        })),
+      );
+    } catch (error) {
+      setOptions([]);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [provinceCode]);
 
   useEffect(() => {
     getData();

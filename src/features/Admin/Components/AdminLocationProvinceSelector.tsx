@@ -20,26 +20,24 @@ const AdminLocationProvinceSelector = ({ control, disabled }: AdminLocationProvi
   const [locationProvinceOptions, setLocationProvinceOptions] = useState<SelectOptionItemType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getProvinces = useCallback(() => {
-    if (locationProvinceOptions.length === 0) {
-      setIsLoading(true);
-    }
+  const getProvinces = useCallback(async () => {
+    setIsLoading(true);
 
-    adminLocationService
-      .getProvinces()
-      .then(({ data }) => {
-        setLocationProvinceOptions(
-          data.map((item) => ({
-            value: String(item.code),
-            label: String(item.name),
-          })),
-        );
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setLocationProvinceOptions([]);
-      });
-  }, [locationProvinceOptions]);
+    try {
+      const data = await adminLocationService.getAllProvinces();
+
+      setLocationProvinceOptions(
+        data.map((item) => ({
+          value: String(item.code),
+          label: String(item.name),
+        })),
+      );
+    } catch (error) {
+      setLocationProvinceOptions([]);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     getProvinces();

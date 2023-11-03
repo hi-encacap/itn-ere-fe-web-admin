@@ -1,5 +1,5 @@
 import { IContact } from "@encacap-group/common/dist/re";
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
@@ -104,4 +104,4 @@ const AdminEstateModificationFormContact = () => {
   );
 };
 
-export default AdminEstateModificationFormContact;
+export default memo(AdminEstateModificationFormContact);

@@ -1,5 +1,5 @@
 import { IUnitPrice, UNIT_PRICE_TYPE_ENUM } from "@encacap-group/common/dist/re";
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -61,4 +61,4 @@ const AdminEstateModificationFormGeneralPriceInputGroup = () => {
   );
 };
 
-export default AdminEstateModificationFormGeneralPriceInputGroup;
+export default memo(AdminEstateModificationFormGeneralPriceInputGroup);

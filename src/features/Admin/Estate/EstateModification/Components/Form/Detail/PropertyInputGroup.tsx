@@ -1,5 +1,5 @@
 import { IEstateProperty } from "@encacap-group/common/dist/re";
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { MdAdd } from "react-icons/md";
@@ -80,8 +80,8 @@ const AdminEstateModificationFormDetailPropertyInputGroup = () => {
         />
       ))}
       <Button
-        className="mx-0.5 mt-[22px] h-[43px]"
-        color="primary-light"
+        className="mx-0.5 h-[43px]"
+        color="light"
         disabled={!categoryId || isLoading}
         isLoading={isLoading}
       >
@@ -92,4 +92,4 @@ const AdminEstateModificationFormDetailPropertyInputGroup = () => {
   );
 };
 
-export default AdminEstateModificationFormDetailPropertyInputGroup;
+export default memo(AdminEstateModificationFormDetailPropertyInputGroup);

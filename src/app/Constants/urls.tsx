@@ -42,8 +42,11 @@ const ADMIN_PATH = {
 
 const ROOT_PATH = {
   HOME_PATH: "/root",
-
   CATEGORY_PATH: "/root/categories",
+  USER_AND_PERMISSION_PATH: "/root/users-and-permissions",
+  USER_AND_PERMISSION_USER_PATH: "/root/users-and-permissions/users",
+  USER_AND_PERMISSION_ROLE_PATH: "/root/users-and-permissions/roles",
+  USER_AND_PERMISSION_PERMISSION_PATH: "/root/users-and-permissions/permissions",
 };
 
 const ERROR_PATH = {

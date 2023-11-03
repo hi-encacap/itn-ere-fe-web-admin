@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { twMerge } from "tailwind-merge";
 
 export interface LoadingSkeletonProps {
@@ -9,4 +9,4 @@ const LoadingSkeleton: FC<LoadingSkeletonProps> = ({ className }) => {
   return <div className={twMerge("background-gray-100 animate-pulse rounded-lg bg-gray-100", className)} />;
 };
 
-export default LoadingSkeleton;
+export default memo(LoadingSkeleton);
