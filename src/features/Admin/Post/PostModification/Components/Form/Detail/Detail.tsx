@@ -11,7 +11,7 @@ const AdminPostModificationFormDetail = () => {
 
   const { control, watch } = useFormContext<PostFormDataType>();
 
-  // @ts-ignore
+  // @ts-ignore Due to react-hook-form type issues.
   const title = watch("title");
 
   return (
