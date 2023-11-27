@@ -17,7 +17,7 @@ const CategoryTableRowAction = ({ id, onClickEdit, onClickDelete }: CategoryTabl
       <TableRowAction id={id} onClick={onClickEdit}>
         <MdEdit />
       </TableRowAction>
-      <TableRowAction id={id} status={"danger"} onClick={onClickDelete}>
+      <TableRowAction id={id} status="danger" onClick={onClickDelete}>
         <FiTrash2 />
       </TableRowAction>
     </div>

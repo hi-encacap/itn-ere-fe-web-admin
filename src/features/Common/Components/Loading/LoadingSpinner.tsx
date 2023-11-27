@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { twMerge } from "tailwind-merge";
 
 export interface LoadingSpinnerProps {
@@ -16,4 +17,4 @@ const LoadingSpinner = ({ className }: LoadingSpinnerProps) => {
   );
 };
 
-export default LoadingSpinner;
+export default memo(LoadingSpinner);

@@ -1,5 +1,5 @@
 import { IContact } from "@encacap-group/common/dist/re";
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { useController, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
@@ -31,7 +31,7 @@ const AdminEstateModificationFormContact = () => {
   const {
     field: { value },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-    // @ts-ignore
+    // @ts-ignore: due to react-hook-form issue with self-ref interface.
   } = useController({
     name: "contactId",
     control,
@@ -51,12 +51,15 @@ const AdminEstateModificationFormContact = () => {
     }
   }, [value, selectedContact]);
 
-  const handlePickContact = useCallback((contact: IContact) => {
-    setSelectedContact(contact);
-    setIsShowContactPickerModal(false);
-    setValue("contactId", contact.id);
-    clearErrors("contactId");
-  }, []);
+  const handlePickContact = useCallback(
+    (contact: IContact) => {
+      setSelectedContact(contact);
+      setIsShowContactPickerModal(false);
+      setValue("contactId", contact.id);
+      clearErrors("contactId");
+    },
+    [clearErrors, setValue],
+  );
 
   const handleClosePicker = useCallback(() => {
     setIsShowContactPickerModal(false);
@@ -67,12 +70,12 @@ const AdminEstateModificationFormContact = () => {
   }, []);
 
   useEffect(() => {
-    void getContactData();
+    getContactData();
   }, [getContactData]);
 
   return (
     <>
-      <div className={"border-gray-100 pt-6"}>
+      <div className="border-gray-100 pt-6">
         <FormGroupTitle title={t("title")} />
         <div
           className={twMerge(
@@ -101,4 +104,4 @@ const AdminEstateModificationFormContact = () => {
   );
 };
 
-export default AdminEstateModificationFormContact;
+export default memo(AdminEstateModificationFormContact);

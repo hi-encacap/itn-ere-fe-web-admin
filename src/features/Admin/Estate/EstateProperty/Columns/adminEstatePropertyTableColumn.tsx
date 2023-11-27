@@ -1,4 +1,4 @@
-import { IEstateProperty } from "@encacap-group/common/dist/re";
+import { ICategoryProperty } from "@encacap-group/common/dist/re";
 import { createColumnHelper } from "@tanstack/react-table";
 import { TFunction } from "i18next";
 
@@ -14,11 +14,11 @@ interface OnClickHandlers {
 }
 
 const createEstatePropertyTableColumns = (t: TFunction, { onClickDelete, onClickEdit }: OnClickHandlers) => {
-  const columnHelper = createColumnHelper<IEstateProperty>();
+  const columnHelper = createColumnHelper<ICategoryProperty>();
 
-  const tableExampleColumns: Array<ColumnDef<IEstateProperty>> = [
+  const tableExampleColumns: Array<ColumnDef<ICategoryProperty>> = [
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-    // @ts-ignore
+    // @ts-ignore: due to react-hook-form issue with self-ref interface.
     columnHelper.accessor((row) => row.id, {
       id: "id",
       header: String(t("table.column.id")),
@@ -27,7 +27,7 @@ const createEstatePropertyTableColumns = (t: TFunction, { onClickDelete, onClick
       id: "name",
       header: String(t("table.column.name")),
     }),
-    columnHelper.accessor((row) => row.categoryProperty.category.name, {
+    columnHelper.accessor((row) => row.category.name, {
       id: "categoryName",
       header: String(t("table.column.categoryName")),
       meta: {

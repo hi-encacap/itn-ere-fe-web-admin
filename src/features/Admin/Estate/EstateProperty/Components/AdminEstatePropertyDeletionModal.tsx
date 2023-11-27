@@ -2,10 +2,10 @@ import { omit } from "lodash";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import { adminEstatePropertyService } from "@services/index";
 import { ConfirmationModal } from "@components/Modal";
 import { ConfirmationModalProps } from "@components/Modal/ConfirmationModal";
 import useToast from "@hooks/useToast";
+import { adminEstatePropertyService } from "@services/index";
 
 interface ComponentProps extends Omit<ConfirmationModalProps, "id" | "title" | "message" | "onConfirm"> {
   id: number | null;
@@ -41,7 +41,7 @@ const AdminEstatePropertyDeletionModal = ({
       .finally(() => {
         onClose();
       });
-  }, [id, onClose, onDeleted, onDeleteFailed]);
+  }, [id, onClose, onDeleteFailed, onDeleted, t, toast]);
 
   return (
     <ConfirmationModal

@@ -1,10 +1,10 @@
 import { memo, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { Select } from "@components/Form";
 import { HookFormControl } from "@interfaces/Common/commonTypes";
 import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
 import { adminLocationService } from "@services/index";
-import { Select } from "@components/Form";
 import { commonFormErrorFactory } from "@utils/error";
 
 interface AdminLocationDistrictSelectorProps {
@@ -25,31 +25,29 @@ const AdminLocationDistrictSelector = ({
   const [options, setOptions] = useState<SelectOptionItemType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getData = useCallback(() => {
+  const getData = useCallback(async () => {
     if (!provinceCode) {
       return;
     }
 
-    if (options.length === 0) {
-      setIsLoading(true);
-    }
+    setIsLoading(true);
 
-    adminLocationService
-      .getDistricts({
+    try {
+      const data = await adminLocationService.getAllDistricts({
         provinceCode,
-      })
-      .then(({ data }) => {
-        setOptions(
-          data.map((item) => ({
-            value: String(item.code),
-            label: String(item.name),
-          })),
-        );
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setOptions([]);
       });
+
+      setOptions(
+        data.map((item) => ({
+          value: String(item.code),
+          label: String(item.name),
+        })),
+      );
+    } catch (error) {
+      setOptions([]);
+    } finally {
+      setIsLoading(false);
+    }
   }, [provinceCode]);
 
   useEffect(() => {

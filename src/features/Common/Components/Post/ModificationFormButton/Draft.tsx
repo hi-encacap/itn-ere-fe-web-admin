@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button } from "@components/Form";
@@ -40,4 +41,4 @@ const PostModificationFormButtonDraft = ({
   );
 };
 
-export default PostModificationFormButtonDraft;
+export default memo(PostModificationFormButtonDraft);

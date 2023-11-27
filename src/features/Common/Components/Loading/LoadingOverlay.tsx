@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface LoadingOverlayProps {
@@ -18,4 +18,4 @@ const LoadingOverlay: FC<LoadingOverlayProps> = ({ className }) => {
   );
 };
 
-export default LoadingOverlay;
+export default memo(LoadingOverlay);

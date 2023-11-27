@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { Select } from "@components/Form";
 import { HookFormControl } from "@interfaces/Common/commonTypes";
 import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
 import { locationService } from "@services/index";
-import { Select } from "@components/Form";
 
 interface AdminLocationWardModificationWardSelectorProps {
   control: HookFormControl;
@@ -51,7 +51,7 @@ const AdminLocationWardModificationWardSelector = ({
 
   useEffect(() => {
     getDistricts();
-  }, [districtCode]);
+  }, [getDistricts]);
 
   return (
     <Select

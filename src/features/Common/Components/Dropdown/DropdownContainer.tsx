@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 
 export interface DropdownContainerProps {
@@ -28,7 +28,7 @@ const DropdownContainer = ({ children, className, parentRef, onClickOutside }: D
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, [parentRef.current]);
+  }, [onClickOutside, parentRef]);
 
   return (
     <div
@@ -39,4 +39,4 @@ const DropdownContainer = ({ children, className, parentRef, onClickOutside }: D
   );
 };
 
-export default DropdownContainer;
+export default memo(DropdownContainer);

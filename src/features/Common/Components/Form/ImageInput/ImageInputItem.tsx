@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { FormImageInputDataType } from "@interfaces/Common/elementTypes";
@@ -13,7 +14,6 @@ interface ImageInputItemProps {
   isMultiple?: boolean;
   isDisabled?: boolean;
   error?: boolean;
-  onChange?: (image: FormImageInputDataType) => void;
   onRemove?: (id: FormImageInputDataType["id"]) => void;
   onChooseImage: (files: FileList) => void;
 }
@@ -58,4 +58,4 @@ const ImageInputItem = ({
   );
 };
 
-export default ImageInputItem;
+export default memo(ImageInputItem);

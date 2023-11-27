@@ -1,5 +1,5 @@
 import { SortDirection } from "@tanstack/react-table";
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 import { twMerge } from "tailwind-merge";
 
 import TableContentHeaderSortIcon from "./TableContentHeaderSortIcon";
@@ -24,7 +24,7 @@ const TableContentHeaderColumn = ({
       const newSortDirection = isSorted === "asc" ? "desc" : "asc";
       toggleSorting(newSortDirection === "desc");
     }
-  }, [isSorted, isSortable]);
+  }, [isSortable, isSorted, toggleSorting]);
 
   return (
     <th
@@ -64,4 +64,4 @@ const TableContentHeaderColumn = ({
   );
 };
 
-export default TableContentHeaderColumn;
+export default memo(TableContentHeaderColumn);

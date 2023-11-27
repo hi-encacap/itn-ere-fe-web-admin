@@ -41,7 +41,7 @@ const CategorySelector = ({ control, name, onGet, onSelect, ...props }: Category
 
     try {
       const response = await onGet({
-        expand: "parent",
+        expands: ["parent"],
       });
       setCategories(response);
     } catch (error) {
@@ -49,10 +49,10 @@ const CategorySelector = ({ control, name, onGet, onSelect, ...props }: Category
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [onGet]);
 
   useEffect(() => {
-    void getOptions();
+    getOptions();
   }, [getOptions]);
 
   useEffect(() => {

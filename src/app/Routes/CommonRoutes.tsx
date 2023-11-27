@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useMemo, useState } from "react";
 import { Route, Routes, matchPath, useLocation, useNavigate } from "react-router-dom";
 import HomeRoutes from "src/features/Home/Routes/HomeRoutes";
 import RootRoutes from "src/features/Root/Routes/RootRoutes";
@@ -6,7 +6,7 @@ import RootRoutes from "src/features/Root/Routes/RootRoutes";
 import AuthRoutes from "@common/Auth/Routes/AuthRoutes";
 import ErrorRoutes from "@common/Errors/Routes/ErrorRoutes";
 import { LoadingOverlay } from "@components/Loading";
-import { USER_ROLE_ENUM } from "@constants/enums";
+import { UserRoleSlugEnum } from "@constants/enums";
 import { AUTHENTICATION_PATH, ERROR_PATH } from "@constants/urls";
 import useDispatch from "@hooks/useDispatch";
 import useSelector from "@hooks/useSelector";
@@ -23,9 +23,9 @@ const CommonRoutes = () => {
   const user = useSelector((state) => state.common.user);
   const location = useLocation();
 
-  const excludeRedirectPaths = ["error/*", "auth/*"];
-  const excludeGetUserPaths = ["auth/*"];
-  const ignoreLoadingPaths = ["error/*"];
+  const excludeRedirectPaths = useMemo(() => ["error/*", "auth/*"], []);
+  const excludeGetUserPaths = useMemo(() => ["auth/*"], []);
+  const ignoreLoadingPaths = useMemo(() => ["error/*"], []);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -75,24 +75,32 @@ const CommonRoutes = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [location, user]);
+  }, [
+    dispatch,
+    excludeGetUserPaths,
+    excludeRedirectPaths,
+    ignoreLoadingPaths,
+    location.pathname,
+    navigate,
+    user?.id,
+  ]);
 
   return isLoading ? (
     <LoadingOverlay />
   ) : (
     <Routes>
       <Route
-        path={`${USER_ROLE_ENUM.ROOT}/*`}
+        path={`${UserRoleSlugEnum.ROOT}/*`}
         element={
-          <PrivateRoutes requiredRoles={[USER_ROLE_ENUM.ROOT]}>
+          <PrivateRoutes requiredRoles={[UserRoleSlugEnum.ROOT]}>
             <RootRoutes />
           </PrivateRoutes>
         }
       />
       <Route
-        path={`${USER_ROLE_ENUM.ADMIN}/*`}
+        path={`${UserRoleSlugEnum.ADMIN}/*`}
         element={
-          <PrivateRoutes requiredRoles={[USER_ROLE_ENUM.ADMIN]}>
+          <PrivateRoutes requiredRoles={[UserRoleSlugEnum.ADMIN]}>
             <AdminRoutes />
           </PrivateRoutes>
         }

@@ -33,7 +33,7 @@ const TableRowActionDropdown = ({ id, items }: TableRowActionDropdownProps) => {
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, [toggleButtonRef.current]);
+  }, []);
 
   return (
     <div className="relative" ref={toggleButtonRef}>

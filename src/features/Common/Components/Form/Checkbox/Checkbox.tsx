@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback } from "react";
+import { ChangeEvent, memo, useCallback } from "react";
 import { Control, useController } from "react-hook-form";
 
 import UncontrolledCheckbox, { UncontrolledCheckboxProps } from "./UncontrolledCheckbox";
@@ -19,11 +19,14 @@ const Checkbox = ({ control, name, ...props }: CheckboxProps) => {
     control,
   });
 
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.checked);
-  }, []);
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      onChange(e.target.checked);
+    },
+    [onChange],
+  );
 
   return <UncontrolledCheckbox name={name} checked={value} onChange={handleChange} {...props} />;
 };
 
-export default Checkbox;
+export default memo(Checkbox);

@@ -9,7 +9,10 @@ import axiosInstance from "@utils/Http/axiosInstance";
 
 const getCategories = async (params?: IBaseListQuery): Promise<IResponseWithMeta<ICategory[]>> => {
   const response = await axiosInstance.get(ROOT_CATEGORY_API_PATH.CATEGORIES_PATH, {
-    params,
+    params: {
+      expands: ["categoryGroup", "website", "avatar", "parent"],
+      ...params,
+    },
   });
 
   return response.data;

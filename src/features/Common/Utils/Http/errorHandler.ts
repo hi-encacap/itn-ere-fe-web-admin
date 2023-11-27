@@ -21,7 +21,7 @@ const errorHandler = async (
 
     if (autoRefreshToken !== false) {
       if (status === UNAUTHORIZED) {
-        const refreshToken = authService.getAuthTokens().refreshToken;
+        const { refreshToken } = authService.getAuthTokens();
         if (refreshToken !== null) {
           try {
             const newTokens = await authService.refreshAccessToken(refreshToken);
@@ -59,7 +59,7 @@ const errorHandler = async (
     }
   }
 
-  return await Promise.reject(error);
+  return Promise.reject(error);
 };
 
 export default errorHandler;

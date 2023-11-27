@@ -3,16 +3,16 @@ import {
   getCoreRowModel,
   OnChangeFn,
   PaginationState,
+  Row,
   RowSelectionState,
   SortingState,
-  Table as TableCore,
   useReactTable,
 } from "@tanstack/react-table";
 import { keys } from "lodash";
-import { cloneElement, ReactElement, useCallback, useEffect, useMemo, useState } from "react";
+import { cloneElement, memo, ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 
 import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
-import { TABLE_ROW_SELECTION_TYPE_ENUM } from "@constants/enums";
+import { TableRowSelectionTypeEnum } from "@constants/enums";
 import { TablePaginationType } from "@interfaces/Common/commonTypes";
 import {
   TableColumnFilterState,
@@ -30,7 +30,7 @@ import TableHeader from "./TableHeader/TableHeader";
 type TableRowActionNameType = `on${string}`;
 
 export interface CustomTableBodyProps<TData = unknown> {
-  table?: TableCore<TData>;
+  rows?: Row<TData>[];
   isLoading: boolean;
   rowSelection?: string[];
   [key: TableRowActionNameType]: TableRowActionClickHandlerType;
@@ -43,7 +43,7 @@ interface TableBaseProps<TData = TableDataType> {
   hiddenColumns?: Array<keyof TData | boolean>;
   pagination?: TablePaginationType;
   rowSelection?: RowSelectionState;
-  rowSelectionType?: TABLE_ROW_SELECTION_TYPE_ENUM;
+  rowSelectionType?: TableRowSelectionTypeEnum;
   onChangePagination?: OnChangeFn<TablePaginationType>;
   onChangeSorting?: OnChangeFn<SortingState>;
   onChangeFilters?: OnChangeFn<TableColumnFilterState[]>;
@@ -75,7 +75,7 @@ const Table = ({
   sorting,
   isLoading = false,
   rowSelection = {},
-  rowSelectionType = TABLE_ROW_SELECTION_TYPE_ENUM.MULTIPLE,
+  rowSelectionType = TableRowSelectionTypeEnum.MULTIPLE,
   onChangePagination,
   onChangeSorting,
   onChangeFilters,
@@ -129,7 +129,7 @@ const Table = ({
         return;
       }
 
-      if (rowSelectionType === TABLE_ROW_SELECTION_TYPE_ENUM.MULTIPLE) {
+      if (rowSelectionType === TableRowSelectionTypeEnum.MULTIPLE) {
         onChangeRowSelection?.(state);
         return;
       }
@@ -150,8 +150,9 @@ const Table = ({
     getRowId: (row) => row.id || row.code || Math.random().toString(36).substr(2, 9),
   });
 
-  const tableRows = useMemo(() => table.getRowModel().rows, [data]);
-  const tableHeaderGroup = useMemo(() => table.getHeaderGroups(), [data]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const tableRows = useMemo(() => table.getRowModel().rows, [table, data]);
+  const tableHeaderGroup = useMemo(() => table.getHeaderGroups(), [table]);
 
   const handleChangePageSize = useCallback(
     (pageSize: number) => {
@@ -161,7 +162,7 @@ const Table = ({
         pageIndex: 0,
       });
     },
-    [pagination],
+    [pagination, table],
   );
 
   useEffect(() => {
@@ -171,7 +172,7 @@ const Table = ({
     };
     const newTotalPages = Math.ceil(paginationOptions.totalRows / paginationOptions.limit) || 1;
     setTotalPages(newTotalPages);
-  }, [pagination]);
+  }, [defaultPagination, pagination]);
 
   return (
     <div>
@@ -179,7 +180,7 @@ const Table = ({
       {children &&
         cloneElement(children, {
           ...children.props,
-          table,
+          rows: tableRows,
         })}
       {!children && (
         <table className="relative min-w-full">
@@ -204,4 +205,4 @@ const Table = ({
   );
 };
 
-export default Table;
+export default memo(Table);

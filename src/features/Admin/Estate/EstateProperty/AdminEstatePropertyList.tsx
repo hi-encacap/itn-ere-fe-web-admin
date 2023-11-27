@@ -2,15 +2,15 @@ import { IBaseListQuery } from "@encacap-group/common/dist/base";
 import { IEstateProperty } from "@encacap-group/common/dist/re";
 import { SortingState } from "@tanstack/react-table";
 import { isEqual } from "lodash";
-import { Key, useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { Key, memo, useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import LayoutContent from "@common/Layout/Components/LayoutContent";
+import Table from "@components/Table/Table";
 import { DEFAULT_PAGE_SIZE } from "@constants/defaultValues";
 import { TablePaginationType } from "@interfaces/Common/commonTypes";
 import { TableColumnFilterState } from "@interfaces/Common/elementTypes";
 import { adminEstatePropertyService } from "@services/index";
-import Table from "@components/Table/Table";
-import LayoutContent from "@common/Layout/Components/LayoutContent";
 import { generateColumnFilterObject, setDocumentTitle } from "@utils/helpers";
 
 import createEstatePropertyTableColumns from "./Columns/adminEstatePropertyTableColumn";
@@ -96,7 +96,7 @@ const AdminEstatePropertyList = () => {
 
   useEffect(() => {
     getEstateProvinceData();
-  }, [queryParams]);
+  }, [getEstateProvinceData]);
 
   useEffect(() => {
     const newQueryParams: IBaseListQuery = {
@@ -111,7 +111,7 @@ const AdminEstatePropertyList = () => {
     }
 
     setQueryParams(newQueryParams);
-  }, [columnFilters, pagination]);
+  }, [columnFilters, pagination, queryParams]);
 
   useLayoutEffect(() => {
     setDocumentTitle(t("title"));
@@ -151,4 +151,4 @@ const AdminEstatePropertyList = () => {
   );
 };
 
-export default AdminEstatePropertyList;
+export default memo(AdminEstatePropertyList);

@@ -1,7 +1,7 @@
 import { ESTATE_STATUS_ENUM } from "@encacap-group/common/dist/re";
 import { Key } from "react";
 
-import { ESTATE_PROXY_ACTION_ENUM } from "./enums";
+import { EstateProxyActionEnum } from "./enums";
 
 const AUTHENTICATION_PATH = {
   LOGIN_PATH: "/auth/login",
@@ -11,6 +11,7 @@ const ADMIN_PATH = {
   HOME_PATH: "/admin",
   CATEGORY_PATH: "/admin/categories",
   CONTACT_PATH: "/admin/contacts",
+  PRODUCT_PATH: "/admin/products",
 
   POST_PATH: "/admin/posts",
   POST_TAB_PATH: (tabId: Key) => `/admin/posts/${tabId}`,
@@ -27,7 +28,7 @@ const ADMIN_PATH = {
   ESTATE_CREATE_PATH: "/admin/estates?action=create",
   ESTATE_PROPERTY_PATH: "/admin/estates/properties",
   ESTATE_MODIFICATION_PATH: (id: number, status = ESTATE_STATUS_ENUM.DRAFT) =>
-    `/admin/estates?action=${ESTATE_PROXY_ACTION_ENUM.MODIFY}&id=${id}&status=${status}`,
+    `/admin/estates?action=${EstateProxyActionEnum.MODIFY}&id=${id}&status=${status}`,
 
   LOCATION_PATH: "/admin/locations",
   LOCATION_PROVINCE_PATH: "/admin/locations/provinces",
@@ -42,8 +43,11 @@ const ADMIN_PATH = {
 
 const ROOT_PATH = {
   HOME_PATH: "/root",
-
   CATEGORY_PATH: "/root/categories",
+  USER_AND_PERMISSION_PATH: "/root/users-and-permissions",
+  USER_AND_PERMISSION_USER_PATH: "/root/users-and-permissions/users",
+  USER_AND_PERMISSION_ROLE_PATH: "/root/users-and-permissions/roles",
+  USER_AND_PERMISSION_PERMISSION_PATH: "/root/users-and-permissions/permissions",
 };
 
 const ERROR_PATH = {

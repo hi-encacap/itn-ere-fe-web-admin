@@ -3,9 +3,9 @@ import { debounce } from "lodash";
 import { memo, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { Input } from "@components/Form";
 import { TABLE_FILTER_GLOBAL_FILTER_ID } from "@constants/defaultValues";
 import { TableColumnFilterState, TableDataType } from "@interfaces/Common/elementTypes";
-import { Input } from "@components/Form";
 
 import TableHeaderFilterGroup from "./TableHeaderFilterGroup";
 
@@ -22,6 +22,7 @@ const TableHeader = ({ headerGroups, onChangeFilters }: TableHeaderProps) => {
   const [columnFilters, setColumnFilters] = useState<TableColumnFilterState[]>([]);
   const [globalFilterValue, setGlobalFilterValue] = useState("");
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleChangeFilterDebounced = useCallback(
     debounce((filters: TableColumnFilterState[]) => {
       onChangeFilters?.(filters);
@@ -49,7 +50,7 @@ const TableHeader = ({ headerGroups, onChangeFilters }: TableHeaderProps) => {
       handleChangeFilterDebounced?.(newFilters);
       setColumnFilters(newFilters);
     },
-    [columnFilters],
+    [columnFilters, handleChangeFilterDebounced],
   );
 
   const handleChangeGlobalFilter = useCallback(

@@ -1,11 +1,11 @@
 import { IUnitPrice, UNIT_PRICE_TYPE_ENUM } from "@encacap-group/common/dist/re";
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
+import { Input } from "@components/Form";
 import { EstateFormDataType } from "@interfaces/Admin/estateTypes";
 import { unitPriceService } from "@services/index";
-import { Input } from "@components/Form";
 
 const AdminEstateModificationFormGeneralPriceInputGroup = () => {
   const { t } = useTranslation("admin", {
@@ -23,12 +23,13 @@ const AdminEstateModificationFormGeneralPriceInputGroup = () => {
       })
       .then(({ data }) => {
         setUnitPriceOptions(data);
+        // @ts-ignore: due to react-hook-form issue with self-ref interface.
         setValue("priceUnitId", data[0].id);
       })
       .catch(() => {
         setUnitPriceOptions([]);
       });
-  }, []);
+  }, [setValue]);
 
   useEffect(() => {
     getUnitPriceOptions();
@@ -47,6 +48,7 @@ const AdminEstateModificationFormGeneralPriceInputGroup = () => {
       />
       <select
         className="absolute right-3.5 top-6 h-10 w-fit cursor-pointer rounded-r-md px-1 outline-none"
+        // @ts-ignore: due to react-hook-form issue with self-ref interface.
         {...register("priceUnitId")}
       >
         {unitPriceOptions.map((option) => (
@@ -59,4 +61,4 @@ const AdminEstateModificationFormGeneralPriceInputGroup = () => {
   );
 };
 
-export default AdminEstateModificationFormGeneralPriceInputGroup;
+export default memo(AdminEstateModificationFormGeneralPriceInputGroup);

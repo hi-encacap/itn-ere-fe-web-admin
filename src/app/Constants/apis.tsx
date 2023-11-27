@@ -72,8 +72,8 @@ const LOCATION_API_PATH = {
 };
 
 const ADMIN_CONTACT_API_PATH = {
-  CONTACTS_PATH: "/admin/contacts",
-  CONTACT_PATH: (id: number) => `/admin/contacts/${id}`,
+  CONTACTS_PATH: "v1/admin/contacts",
+  CONTACT_PATH: (id: number) => `v1/admin/contacts/${id}`,
 };
 
 const UPLOAD_API_PATH = {

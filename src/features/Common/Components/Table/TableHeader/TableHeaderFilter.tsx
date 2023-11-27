@@ -29,7 +29,7 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
     [headerColumnDef, filterBy],
   );
 
-  const filterLabelBy = useMemo(() => headerColumnDef.meta?.filterLabelBy, [headerColumnDef, filterBy]);
+  const filterLabelBy = useMemo(() => headerColumnDef.meta?.filterLabelBy, [headerColumnDef]);
   const filterSearchBy = useMemo(
     () => headerColumnDef.meta?.filterSearchBy ?? filterBy,
     [headerColumnDef, filterBy],
@@ -69,7 +69,7 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
     });
 
     return <TableHeaderFilterLabel label={originalLabel} selectedFilters={filterLabels} />;
-  }, [headerColumnDef, selectedFilters]);
+  }, [filterLabelFormatter, filterOptions, header, headerColumnDef, selectedFilters]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -110,7 +110,7 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
 
       return uniqBy(options, "value");
     },
-    [filterLabelBy],
+    [filterBy, filterLabelBy, filterLabelFormatter, filterValueBy, headerColumnDef],
   );
 
   const getFilterOptions = useCallback(
@@ -131,24 +131,28 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
           setIsLoading(false);
         });
     },
-    [headerColumnDef, queryParams],
+    [formatFilterOptions, headerColumnDef, queryParams],
   );
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getFilterOptionsDebounced = useCallback(_.debounce(getFilterOptions, 500), []);
 
   const handleToggleDropdownMenu = useCallback(() => {
     setIsShowDropdownMenu((prev) => !prev);
   }, []);
 
-  const handleChangeFilters = useCallback((filters: string[]) => {
-    setSelectedFilters(filters);
-    onChangeFilters?.(filterBy, filters);
-  }, []);
+  const handleChangeFilters = useCallback(
+    (filters: string[]) => {
+      setSelectedFilters(filters);
+      onChangeFilters?.(filterBy, filters);
+    },
+    [filterBy, onChangeFilters],
+  );
 
   const handleClearFilters = useCallback(() => {
     setSelectedFilters([]);
     onChangeFilters?.(filterBy, []);
-  }, []);
+  }, [filterBy, onChangeFilters]);
 
   useEffect(() => {
     if (containerRef.current === null) {
@@ -166,7 +170,7 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, [containerRef.current]);
+  }, []);
 
   useEffect(() => {
     if (!isShowDropdownMenu || isInitialMount.current) {
@@ -174,7 +178,7 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
     }
     getFilterOptions();
     isInitialMount.current = true;
-  }, [isShowDropdownMenu]);
+  }, [getFilterOptions, isShowDropdownMenu]);
 
   useEffect(() => {
     const newQueryParams = {
@@ -186,7 +190,7 @@ const TableHeaderFilter = ({ header, onChangeFilters }: TableHeaderFilterProps) 
     }
     setQueryParams(newQueryParams);
     getFilterOptionsDebounced(newQueryParams);
-  }, [filterSearchValue]);
+  }, [filterSearchValue, getFilterOptionsDebounced, queryParams]);
 
   return (
     <div className="relative z-20 mb-4 mr-4 h-10 rounded-lg last:mr-0" ref={containerRef}>

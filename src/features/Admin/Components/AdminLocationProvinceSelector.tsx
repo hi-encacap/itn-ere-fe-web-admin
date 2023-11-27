@@ -1,10 +1,10 @@
 import { memo, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { Select } from "@components/Form";
 import { HookFormControl } from "@interfaces/Common/commonTypes";
 import { SelectOptionItemType } from "@interfaces/Common/elementTypes";
 import { adminLocationService } from "@services/index";
-import { Select } from "@components/Form";
 import { commonFormErrorFactory } from "@utils/error";
 
 interface AdminLocationProvinceSelectorProps {
@@ -20,30 +20,28 @@ const AdminLocationProvinceSelector = ({ control, disabled }: AdminLocationProvi
   const [locationProvinceOptions, setLocationProvinceOptions] = useState<SelectOptionItemType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getProvinces = useCallback(() => {
-    if (locationProvinceOptions.length === 0) {
-      setIsLoading(true);
-    }
+  const getProvinces = useCallback(async () => {
+    setIsLoading(true);
 
-    adminLocationService
-      .getProvinces()
-      .then(({ data }) => {
-        setLocationProvinceOptions(
-          data.map((item) => ({
-            value: String(item.code),
-            label: String(item.name),
-          })),
-        );
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setLocationProvinceOptions([]);
-      });
-  }, [locationProvinceOptions]);
+    try {
+      const data = await adminLocationService.getAllProvinces();
+
+      setLocationProvinceOptions(
+        data.map((item) => ({
+          value: String(item.code),
+          label: String(item.name),
+        })),
+      );
+    } catch (error) {
+      setLocationProvinceOptions([]);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     getProvinces();
-  }, []);
+  }, [getProvinces]);
 
   return (
     <Select

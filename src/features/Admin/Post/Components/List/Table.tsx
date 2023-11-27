@@ -2,7 +2,7 @@ import { IBaseListQuery } from "@encacap-group/common/dist/base";
 import { IPost } from "@encacap-group/common/dist/re";
 import { createColumnHelper } from "@tanstack/react-table";
 import { debounce, isEqual, omit } from "lodash";
-import { Key, useCallback, useEffect, useMemo, useState } from "react";
+import { Key, memo, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
@@ -17,7 +17,7 @@ import { ColumnDef, TableColumnFilterState } from "@interfaces/Common/elementTyp
 import { adminCategoryService, adminEstateService, adminPostService } from "@services/index";
 import { generateColumnFilterObject } from "@utils/helpers";
 
-import { ESTATE_LIST_TAB_ENUM } from "@admin/Estate/Constants/enums";
+import { EstateListTabEnum } from "@admin/Estate/Constants/enums";
 
 export interface AdminPostListTableProps extends Pick<PostTableBodyItemProps, "mode"> {
   data: IPost[];
@@ -60,7 +60,7 @@ const AdminPostListTable = ({
   const [selectedEstateId, setSelectedEstateId] = useState<Key | null>(null);
   const [selectedRowIds, setSelectedRowIds] = useState<string[]>([]);
 
-  const { tabId = ESTATE_LIST_TAB_ENUM.COMPLETED, categoryId } = useParams();
+  const { tabId = EstateListTabEnum.COMPLETED, categoryId } = useParams();
 
   const selectedEstate = useMemo(
     () => data.find((estate) => estate.id === selectedEstateId) ?? null,
@@ -72,7 +72,7 @@ const AdminPostListTable = ({
   const columns: Array<ColumnDef<IPost>> = useMemo(
     () => [
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
-      // @ts-ignore
+      // @ts-ignore: due to react-hook-form issue with self-ref interface.
       columnHelper.accessor((row) => row.status, {
         id: "status",
         header: String(t("status")),
@@ -99,6 +99,7 @@ const AdminPostListTable = ({
     [columnHelper, t],
   );
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleChangeQueryParamsDebounced = useCallback(debounce(onChangeQueryParams, 500), [
     onChangeQueryParams,
   ]);
@@ -143,7 +144,15 @@ const AdminPostListTable = ({
     } finally {
       handleCloseModal();
     }
-  }, [selectedEstateId, queryParams]);
+  }, [
+    handleChangeQueryParamsDebounced,
+    handleCloseModal,
+    onUnPublish,
+    queryParams,
+    selectedEstateId,
+    t,
+    toast,
+  ]);
 
   const handleConfirmPublish = useCallback(async () => {
     if (!selectedEstateId) {
@@ -159,7 +168,15 @@ const AdminPostListTable = ({
     } finally {
       handleCloseModal();
     }
-  }, [selectedEstateId, queryParams]);
+  }, [
+    handleChangeQueryParamsDebounced,
+    handleCloseModal,
+    onPublish,
+    queryParams,
+    selectedEstateId,
+    t,
+    toast,
+  ]);
 
   const handleSelectRow = useCallback(
     (rowId: Key) => {
@@ -192,7 +209,7 @@ const AdminPostListTable = ({
 
   useEffect(() => {
     handleChangeQueryParamsDebounced?.(queryParams);
-  }, [queryParams]);
+  }, [handleChangeQueryParamsDebounced, queryParams]);
 
   useEffect(() => {
     if (!defaultSelection?.length || selectedRowIds.length > 0) {
@@ -200,11 +217,11 @@ const AdminPostListTable = ({
     }
 
     setSelectedRowIds(defaultSelection.map((item) => String(item)));
-  }, [defaultSelection]);
+  }, [defaultSelection, selectedRowIds.length]);
 
   useEffect(() => {
     onChangeSelection?.(selectedRowIds);
-  }, [selectedRowIds]);
+  }, [onChangeSelection, selectedRowIds]);
 
   return (
     <>
@@ -262,4 +279,4 @@ const AdminPostListTable = ({
   );
 };
 
-export default AdminPostListTable;
+export default memo(AdminPostListTable);

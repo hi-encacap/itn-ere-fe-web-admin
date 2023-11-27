@@ -28,7 +28,7 @@ const AdminConfigWebsiteSidebar = ({ className }: AdminConfigWebsiteSidebarProps
         to: ADMIN_PATH.CONFIG_WEBSITE_HOME_PATH,
       },
     ],
-    [],
+    [t],
   );
 
   return (

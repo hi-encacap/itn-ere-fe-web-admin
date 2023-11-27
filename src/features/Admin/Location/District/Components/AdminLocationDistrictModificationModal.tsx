@@ -5,11 +5,11 @@ import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { LocationDistrictWebsiteFormDataType } from "@interfaces/Admin/locationTypes";
-import { adminLocationService } from "@services/index";
 import { Modal } from "@components/Modal";
 import { ModalProps } from "@components/Modal/Modal";
 import useToast from "@hooks/useToast";
+import { LocationDistrictWebsiteFormDataType } from "@interfaces/Admin/locationTypes";
+import { adminLocationService } from "@services/index";
 import { formatErrorMessage, setFormError } from "@utils/error";
 
 import AdminLocationProvinceSelector from "@admin/Components/AdminLocationProvinceSelector";
@@ -96,7 +96,6 @@ const AdminLocationDistrictModificationModal = ({
           provinceCode={provinceCode}
           disabled={isSubmitting}
         />
-        <button type="submit" className="hidden" />
       </form>
     </Modal>
   );

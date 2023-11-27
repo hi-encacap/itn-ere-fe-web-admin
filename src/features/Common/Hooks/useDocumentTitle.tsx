@@ -16,10 +16,6 @@ const useDocumentTitle = (title: ReactNode) => {
   }, [title]);
 
   useEffect(() => {
-    if (typeof title !== "string") {
-      return;
-    }
-
     window.document.title = formattedTitle;
     window.scrollTo({
       top: 0,
