@@ -11,6 +11,7 @@ const AdminPostModificationFormDetail = () => {
 
   const { control, watch } = useFormContext<PostFormDataType>();
 
+  // @ts-ignore Due to react-hook-form type issues.
   const title = watch("title");
 
   return (
@@ -23,6 +24,14 @@ const AdminPostModificationFormDetail = () => {
           isRequired
           label={t("avatar")}
           name="avatar"
+        />
+        <ImageInput
+          control={control}
+          itemContainerClassName="md:grid-cols-5 xl:grid-cols-7"
+          isMultiple
+          isRequired
+          label={t("image")}
+          name="images"
         />
         <Editor label={t("content")} control={control} name="content" isRequired fullScreenTitle={title} />
       </div>

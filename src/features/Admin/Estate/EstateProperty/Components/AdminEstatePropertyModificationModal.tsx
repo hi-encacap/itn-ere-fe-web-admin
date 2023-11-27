@@ -104,7 +104,7 @@ const AdminEstatePropertyModificationModal = ({
     return adminCategoryService.getAllCategories({
       ...query,
       categoryGroupCodes: [CATEGORY_GROUP_ENUM.ESTATE],
-      expands: [...(query?.expands ?? []), "categoryGroup"],
+      expands: [...((query?.expands as string[]) ?? []), "categoryGroup"],
     });
   }, []);
 

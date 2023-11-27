@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import AdminLayout from "@common/Layout/AdminLayout";
@@ -9,6 +10,7 @@ import AdminDashboard from "@admin/Dashboard/AdminDashboard";
 import EstateRoutes from "@admin/Estate/Routes/EstateRoutes";
 import AdminLocationRoutes from "@admin/Location/Routes/AdminLocationRoutes";
 import AdminPostRoutes from "@admin/Post/Routes/AdminPostRoutes";
+import AdminProductRoutes from "@admin/Product/Routes/Routes";
 
 const AdminRoutes = () => {
   return (
@@ -21,9 +23,10 @@ const AdminRoutes = () => {
         <Route path="estates/*" element={<EstateRoutes />} />
         <Route path="locations/*" element={<AdminLocationRoutes />} />
         <Route path="configs/*" element={<AdminConfigRoutes />} />
+        <Route path="products/*" element={<AdminProductRoutes />} />
       </Routes>
     </AdminLayout>
   );
 };
 
-export default AdminRoutes;
+export default memo(AdminRoutes);

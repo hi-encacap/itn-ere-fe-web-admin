@@ -9,6 +9,7 @@ export interface PostFormDataType extends Nullable<Partial<Omit<IPost, "avatar" 
   avatar: FormImageInputDataType;
   status?: ESTATE_STATUS_ENUM;
   category?: Omit<ICategory, "parent"> | null;
+  images: FormImageInputDataType[];
 }
 
 export interface PostDraftDataType extends Nullable<Partial<IPost>> {
