@@ -1,7 +1,4 @@
 const path = require("path");
-const dotenv = require("dotenv");
-
-dotenv.config();
 
 module.exports = {
   webpack: {
@@ -21,12 +18,6 @@ module.exports = {
     },
   },
   devServer: {
-    port: process.env.RE_DASH_APP_PORT,
-    host: process.env.RE_DASH_APP_HOST,
-    client: {
-      webSocketURL: `wss://${process.env.RE_DASH_APP_HOST}/ws`,
-    },
-    http2: true,
-    https: true,
+    port: 3030,
   },
 };

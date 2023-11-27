@@ -11,6 +11,7 @@
     "plugin:react/jsx-runtime",
     "plugin:prettier/recommended"
   ],
+  "ignorePatterns": ["node_modules", "build", "dist", "public", "*.config.js", "*.config.ts"],
   "overrides": [
     {
       "files": ["*Slice.{ts,tsx,js,jsx}"],
@@ -22,6 +23,12 @@
       "files": ["./src/**/Form/**/*.{ts,tsx,js,jsx}"],
       "rules": {
         "react-hooks/rules-of-hooks": "off"
+      }
+    },
+    {
+      "files": ["./src/**/HOCs/**/*.{ts,tsx,js,jsx}"],
+      "rules": {
+        "react/display-name": "off"
       }
     }
   ],

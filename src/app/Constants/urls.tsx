@@ -11,6 +11,7 @@ const ADMIN_PATH = {
   HOME_PATH: "/admin",
   CATEGORY_PATH: "/admin/categories",
   CONTACT_PATH: "/admin/contacts",
+  PRODUCT_PATH: "/admin/products",
 
   POST_PATH: "/admin/posts",
   POST_TAB_PATH: (tabId: Key) => `/admin/posts/${tabId}`,

@@ -1,5 +1,5 @@
 import { TFunction } from "i18next";
-import { number, object, string } from "yup";
+import { array, number, object, string } from "yup";
 
 import { PostFormDataType } from "@interfaces/Admin/postTypes";
 import { generateFormSchema } from "@utils/schema";
@@ -11,6 +11,7 @@ const postFormSchema = (t: TFunction) =>
     id: number().nullable(),
     content: string().required(t("contentRequired")).nullable(),
     avatar: object().required(t("avatarRequired")).nullable(),
+    images: array().min(1).required(t("imageRequired")).nullable(),
   });
 
 export default postFormSchema;

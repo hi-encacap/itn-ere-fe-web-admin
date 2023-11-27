@@ -6,9 +6,8 @@ import useSelector from "./useSelector";
 
 const usePermission = (): Record<keyof typeof PERMISSION_CODE_ENUM, boolean> => {
   const user = useSelector((state) => state.common.user);
-  const userPermissionCodes = useMemo(() => user?.permissions.map((permission) => permission.code), [user]);
-
-  return useMemo(
+  const userPermissionCodes = useMemo(() => user?.permissions?.map((permission) => permission.code), [user]);
+  const permissions = useMemo(
     () =>
       keys(PERMISSION_CODE_ENUM).reduce(
         (acc, key) => ({
@@ -21,6 +20,8 @@ const usePermission = (): Record<keyof typeof PERMISSION_CODE_ENUM, boolean> => 
       ),
     [userPermissionCodes],
   );
+
+  return permissions;
 };
 
 export default usePermission;
