@@ -45,7 +45,9 @@ const TableRowActionDropdown = ({ id, items }: TableRowActionDropdownProps) => {
       >
         <HiMenu />
       </div>
-      {isShowDropdownMenu && <TableRowActionDropdownMenu parentRef={toggleButtonRef} id={id} items={items} />}
+      {isShowDropdownMenu && (
+        <TableRowActionDropdownMenu parentRef={toggleButtonRef} id={id.toString()} items={items} />
+      )}
     </div>
   );
 };
